@@ -2,22 +2,22 @@
 /*
  * Describe what it does!
  *
- * @var $ctrl \bbn\mvc\controller 
+ * @var $ctrl \bbn\Mvc\Controller 
  *
  */
 $success = false;
 if ( $id_media = $ctrl->arguments[0] ){
-  $medias = new \bbn\appui\medias($ctrl->db);
-  $fs = new \bbn\file\system();
-  if ( $media = $medias->get_media($id_media, true) ){
+  $medias = new \bbn\Appui\Medias($ctrl->db);
+  $fs = new \bbn\File\System();
+  if ( $media = $medias->getMedia($id_media, true) ){
     $content = json_decode($media['content'],true);
     $path = $content['path'].$id_media.'/'.$media['name'];
-    $root = \bbn\mvc::get_data_path('appui-note').'media/';
+    $root = \bbn\Mvc::getDataPath('appui-note').'media/';
  	
     if ( $fs->exists($root.$path) ){
       $ctrl->obj->removed = true;
-      if ( !empty($medias->get_thumbs_path($root.$path)) ){
-        $medias->remove_thumbs($root.$path);
+      if ( !empty($medias->getThumbsPath($root.$path)) ){
+        $medias->removeThumbs($root.$path);
       }
       $success = unlink($root.$path);
       $ctrl->obj->success = $success;		

@@ -2,7 +2,7 @@
 
 $parent_cond = empty($model->data['id']) ? 'IS NULL' : ' = '.$model->data['id'];
 //senza il secondo left jpoin per prendere il contenuto dalla tabella bbn_notes_versions
-/*$prove_notes = $model->db->get_rows("
+/*$prove_notes = $model->db->getRows("
   SELECT n1.id, n1.id_parent, n1.private, n1.locked, n1.pinned, n1.creator,
   COUNT(n2.id) AS num_children
   FROM bbn_notes AS n1
@@ -17,8 +17,8 @@ return[
 ];*/
 
 //UFFICIALE
-/*$prove_notes = $model->db->get_rows("
-SELECT n1.id, n1.id_parent, n1.private, n1.locked, n1.pinned, n1.creator, versions.title,
+/*$prove_notes = $model->db->getRows("
+SELECT n1.id, n1.id_parent, n1.private, n1.locked, n1.pinned, n1.creator, Versions.title,
   GROUP_CONCAT(id_media SEPARATOR ',') AS medias,
   COUNT(n2.id) AS num_children,
   COUNT(versions.version) AS num_v
@@ -39,7 +39,7 @@ return [
   'prove_notes' => $prove_notes
 ];*/
 
-$prove_notes = $model->db->get_rows("
+$prove_notes = $model->db->getRows("
 SELECT bbn_notes.id AS myid, bbn_notes.id_parent, bbn_notes.private, bbn_notes.locked, bbn_notes.pinned, bbn_notes
 .creator, 
     IFNULL((
@@ -77,8 +77,8 @@ return[
   'prove_notes' => $prove_notes
 ];
 
-/*$prove_notes = $model->db->get_rows("
-SELECT n1.id, n1.id_parent, n1.private, n1.locked, n1.pinned, n1.creator, versions.title,
+/*$prove_notes = $model->db->getRows("
+SELECT n1.id, n1.id_parent, n1.private, n1.locked, n1.pinned, n1.creator, Versions.title,
 GROUP_CONCAT(id_media SEPARATOR ',') AS medias,
 COUNT(n2.id) AS num_children
 FROM bbn_notes AS n1

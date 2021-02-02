@@ -1,5 +1,5 @@
 <?php
-/** @var \bbn\mvc\controller $ctrl */
+/** @var \bbn\Mvc\Controller $ctrl */
 
 if ( !empty($ctrl->post['title']) || !empty($ctrl->post['content']) && empty($ctrl->arguments[0]) ){
   $ctrl->action();

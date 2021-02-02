@@ -11,7 +11,7 @@ if ( ($model->data['type'] === 'folder') || ( $model->data['url'] ) ){
     
     $bookmarks = json_decode(file_get_contents($file), true);
     if ( !empty ($bookmarks)){
-      $tmp = $model->data['type'] === 'link' ? \bbn\x::get_row($bookmarks, ['url' => $model->data['url']]) : \bbn\x::get_row($bookmarks, ['text' => $model->data['text'],'parent' => $model->data['parent']]);
+      $tmp = $model->data['type'] === 'link' ? \bbn\X::getRow($bookmarks, ['url' => $model->data['url']]) : \bbn\X::getRow($bookmarks, ['text' => $model->data['text'],'parent' => $model->data['parent']]);
     
     }
     if ( empty($tmp) ){
@@ -27,7 +27,7 @@ if ( ($model->data['type'] === 'folder') || ( $model->data['url'] ) ){
         'text' => $model->data['text'],
         'parent' => $model->data['parent']
       ];
-      $success = file_put_contents($file, json_encode($bookmarks,JSON_PRETTY_PRINT)) ;
+      $success = file_put_contents($file, Json_encode($bookmarks,JSON_PRETTY_PRINT)) ;
     }
     else{
       $error = _('The'.' '.$model->data['type'].' '.'already exists');
@@ -47,7 +47,7 @@ if ( ($model->data['type'] === 'folder') || ( $model->data['url'] ) ){
         'text' => $model->data['text'],
         'parent' => $model->data['parent']
       ];
-    $success = file_put_contents($file, json_encode($bookmarks,JSON_PRETTY_PRINT)) ;  
+    $success = file_put_contents($file, Json_encode($bookmarks,JSON_PRETTY_PRINT)) ;  
   }
   
   return [

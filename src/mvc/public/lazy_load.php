@@ -5,8 +5,8 @@
  * Date: 08/02/17
  * Time: 11.06
  *
- * @var $ctrl \bbn\mvc\controller
+ * @var $ctrl \bbn\Mvc\Controller
  */
-$ctrl->data = \bbn\x::merge_arrays($ctrl->data, $ctrl->post);
+$ctrl->data = \bbn\X::mergeArrays($ctrl->data, $ctrl->post);
 
-$ctrl->obj->data = $ctrl->get_model('./prove_notes', $ctrl->data);
+$ctrl->obj->data = $ctrl->getModel('./prove_notes', $ctrl->data);

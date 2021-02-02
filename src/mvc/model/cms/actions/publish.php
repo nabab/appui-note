@@ -4,8 +4,8 @@
  *
  **/
 
-/** @var $this \bbn\mvc\model*/
-$cms = new \bbn\appui\cms($model->db);
+/** @var $this \bbn\Mvc\Model*/
+$cms = new \bbn\Appui\Cms($model->db);
 $res['success'] = false;
 if ( !empty($model->data['id_note']) && !empty($model->data['url']) ){
   $res['success'] = $cms->publish(

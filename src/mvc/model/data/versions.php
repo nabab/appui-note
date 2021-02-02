@@ -1,8 +1,8 @@
 <?php
-/* @var \bbn\mvc\model $model */
+/* @var \bbn\Mvc\Model $model */
 if ( isset($model->data['id']) || isset($model->data['data']['id']) ){
-  $notes = new \bbn\appui\note($model->db);
-  $versions = $notes->get_versions($model->data['id'] ?? $model->data['data']['id']);
+  $notes = new \bbn\Appui\Note($model->db);
+  $versions = $notes->getVersions($model->data['id'] ?? $model->data['data']['id']);
   if ( is_array($versions) ){
     return [
       'success' => true,

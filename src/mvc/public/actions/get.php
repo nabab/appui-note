@@ -4,10 +4,10 @@
  *
  **/
 
-/** @var $this \bbn\mvc\controller */
+/** @var $this \bbn\Mvc\Controller */
 
-if ( $res = $ctrl->get_model($ctrl->data['root'].'note', $ctrl->post) ){
-  $ctrl->obj = \bbn\x::to_object($res);
+if ( $res = $ctrl->getModel($ctrl->data['root'].'note', $ctrl->post) ){
+  $ctrl->obj = \bbn\X::toObject($res);
 }
 else{
   $ctrl->obj->error = _("Impossible to find the note");

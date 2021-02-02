@@ -1,5 +1,5 @@
 <?php
-/** @var $ctrl \bbn\mvc\controller */
+/** @var $ctrl \bbn\Mvc\Controller */
 if ( isset($ctrl->files['fichier']) ){
   $ctrl->files['file'] = $ctrl->files['fichier'];
 }
@@ -8,21 +8,21 @@ elseif ( isset($ctrl->files['attachments']) ){
 }
 if (
   isset($ctrl->files['file'], $ctrl->arguments[0]) &&
-  \bbn\str::is_integer($ctrl->arguments[0])
+  \bbn\Str::isInteger($ctrl->arguments[0])
 ){
   $f =& $ctrl->files['file'];
-  $path = $ctrl->user_tmp_path().$ctrl->arguments[0];
+  $path = $ctrl->userTmpPath().$ctrl->arguments[0];
   $new = !empty($_REQUEST['name']) && ($_REQUEST['name'] !== $f['name']) ?
-    \bbn\str::encode_filename($_REQUEST['name'], \bbn\str::file_ext($_REQUEST['name'])) :
-    \bbn\str::encode_filename($f['name'], \bbn\str::file_ext($f['name']));
+    \bbn\Str::encodeFilename($_REQUEST['name'], \bbn\Str::fileExt($_REQUEST['name'])) :
+    \bbn\Str::encodeFilename($f['name'], \bbn\Str::fileExt($f['name']));
 
-  if ( \bbn\file\dir::create_path($path) &&
+  if ( \bbn\File\Dir::createPath($path) &&
     rename($f['tmp_name'], $path.'/'.$new) ){
     $ctrl->obj->success = 1;
     $ctrl->obj->fichier = [
       'name' => $new,
       'size' => filesize($path.'/'.$new),
-      'extension' => '.'.\bbn\str::file_ext($new)
+      'extension' => '.'.\bbn\Str::fileExt($new)
     ];
   }
 }

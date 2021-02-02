@@ -4,16 +4,16 @@
  *
  **/
 
-/** @var $this \bbn\mvc\model */
+/** @var $this \bbn\Mvc\Model */
 //TAKES THE IMAGES OF THE GALLERY FROM THE TEST FOLDER AND RETURNS IT WELL FORMATTED FOR THE BBN-UPLOAD
-$path = $model->data_path().'poc/images/gallery';
+$path = $model->dataPath().'poc/images/gallery';
 $images = [];
 if ( $gallery = scandir($path) ){
   foreach ( $gallery as $image ){
     if ( strpos($image, '.') !== 0 ){
-      $img = new \bbn\file\image($path.'/'.$image);
-      $extension = '.'.$img->get_extension();
-      $size = $img->get_size($path.'/'.$image);
+      $img = new \bbn\File\Image($path.'/'.$image);
+      $extension = '.'.$img->getExtension();
+      $size = $img->getSize($path.'/'.$image);
     /*  $imagick = new \Imagick($path.'/'.$image);
       die(var_dump($imagick->getImageResolution()));*/
       $images[] = [

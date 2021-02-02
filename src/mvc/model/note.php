@@ -3,9 +3,9 @@
  * Describe what it does!
  *
  **/
-/** @var $this \bbn\mvc\model*/
+/** @var $this \bbn\Mvc\Model*/
 if ( !empty($model->data['id_note']) ){
-  $notes = new \bbn\appui\note($model->db);
+  $notes = new \bbn\Appui\Note($model->db);
   $note = $notes->get($model->data['id_note']);
 
 	if ( !empty($model->data['id_type']) ){

@@ -7,7 +7,7 @@ if ( $folder = $model->data['folder'] ){
   
   /*function remove(&$array, $folder){
     foreach ( $folder['items'] as $i => $val ){
-      $index = \bbn\x::find($array, [
+      $index = \bbn\X::find($array, [
         'text' => $val['text'],
         'parent' => $val['parent'],
         'type' => $val['type']
@@ -28,7 +28,7 @@ if ( $folder = $model->data['folder'] ){
   }
 
   if ( !isset($folder['items']) ){
-    $idx = \bbn\x::find($bookmarks, [
+    $idx = \bbn\X::find($bookmarks, [
       'text' => $folder['text'],
       'parent' => $folder['parent'],
       'type' => 'folder'
@@ -39,7 +39,7 @@ if ( $folder = $model->data['folder'] ){
   }
   else {
     remove($bookmarks, $folder);
-    $idx = \bbn\x::find($bookmarks, [
+    $idx = \bbn\X::find($bookmarks, [
       'text' => $folder['text'],
       'parent' => $folder['parent'],
       'type' => 'folder'
@@ -49,7 +49,7 @@ if ( $folder = $model->data['folder'] ){
     }
     
   }*/
-  $success = file_put_contents($file, json_encode($bookmarks, JSON_PRETTY_PRINT));
+  $success = file_put_contents($file, Json_encode($bookmarks, JSON_PRETTY_PRINT));
   
   return [
     'success' => $success,

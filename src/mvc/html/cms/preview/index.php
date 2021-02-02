@@ -32,7 +32,7 @@
 <meta name="msapplication-TileColor" content="#9f00a7">
 <meta name="msapplication-TileImage" content="<?=$static_path?>img/favicon/mstile-144x144.png">
 <meta name="theme-color" content="#ffffff">
-<meta name="viewport" content="initial-scale=0.66, user-scalable=no">
+<meta name="viewport" content="initial-scale=0.66, User-scalable=no">
 <title><?=BBN_SITE_TITLE?></title>
 <div class="appui-cms-preview bbn-overlay bbn-lpadded bg-fuxia" style="transition: opacity 5s">
   <div class=" bbn-header bbn-flex-width" style="height:60px">

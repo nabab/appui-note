@@ -5,15 +5,15 @@
   ];
 
   if ( !empty($model->data['limit']) ){
-    $notes = new \bbn\appui\note($model->db);
-    $type = $model->inc->options->from_code('pages', 'types', 'note', 'appui');
+    $notes = new \bbn\Appui\Note($model->db);
+    $type = $model->inc->options->fromCode('pages', 'types', 'note', 'appui');
 
     $all['data'] = array_map(function($note)use($model){
       $note['url'] = $model->db->rselect('bbn_notes_url', ['url'], [ 'id_note' => $note['id_note'] ])['url'];
-      $note['content'] = \bbn\str::cut($note['content'], 100);
+      $note['content'] = \bbn\Str::cut($note['content'], 100);
       return $note;
-    }, $notes->get_by_type($type));
+    }, $notes->getByType($type));
 
-    $all['total'] = $notes->count_by_type($type);
+    $all['total'] = $notes->countByType($type);
   }
 return $all;

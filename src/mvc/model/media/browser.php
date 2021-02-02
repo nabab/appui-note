@@ -4,14 +4,14 @@
  *
  **/
 
-/** @var $model \bbn\mvc\model*/
+/** @var $model \bbn\Mvc\Model*/
 if ( !empty($model->data['limit']) && isset($model->data['start'])){
-  $notes = new \bbn\appui\note($model->db);
+  $notes = new \bbn\Appui\Note($model->db);
   
-  $path = $model->content_path('appui-note').'media/';
+  $path = $model->contentPath('appui-note').'media/';
 	$img_extensions = ['jpeg', 'jpg', 'png', 'gif'];	
   $opt = $model->inc->options;
-  $mds = $notes->get_medias_notes($model->data['start'], $model->data['limit']);
+  $mds = $notes->getMediasNotes($model->data['start'], $model->data['limit']);
   
   $res = [];
   foreach( $mds as $i => $a ){

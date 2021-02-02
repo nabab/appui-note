@@ -1,11 +1,11 @@
 <?php
-/** @var $model \bbn\mvc\model */
+/** @var $model \bbn\Mvc\Model */
 $limit = isset($model->data['limit']) && is_int($model->data['limit']) ? $model->data['limit'] : 5;
 $start = isset($model->data['start']) && is_int($model->data['start']) ? $model->data['start'] : 0;
-$type_note = $model->inc->options->from_code('news', 'types', 'note', 'appui');
-$type_event = $model->inc->options->from_code('NEWS', 'evenements');
+$type_note = $model->inc->options->fromCode('news', 'types', 'note', 'appui');
+$type_event = $model->inc->options->fromCode('NEWS', 'evenements');
 
-$grid = new \bbn\appui\grid($model->db, $model->data, [
+$grid = new \bbn\Appui\Grid($model->db, $model->data, [
   'table' => 'bbn_notes',
   'fields' => [
     'versions1.id_note',
@@ -31,7 +31,7 @@ $grid = new \bbn\appui\grid($model->db, $model->data, [
     'on' => [
       'conditions' => [[
         'field' => 'bbn_events.id_type',
-        'value' => $model->inc->options->from_code('NEWS', 'evenements')
+        'value' => $model->inc->options->fromCode('NEWS', 'evenements')
       ], [
         'field' => 'bbn_events.id',
         'exp' => 'bbn_notes_events.id_event'
@@ -113,12 +113,12 @@ $grid = new \bbn\appui\grid($model->db, $model->data, [
   ]
 ]);
 if ( $grid->check() ){
-  $d = $grid->get_datatable();
+  $d = $grid->getDatatable();
   if ( isset($d['data']) ){
     $d['items'] = $d['data'];
     unset($d['data']);
   }
-  $d['id_type'] = $model->inc->options->from_code('news', 'types', 'note', 'appui');
+  $d['id_type'] = $model->inc->options->fromCode('news', 'types', 'note', 'appui');
   return $d;
 }
 return [];

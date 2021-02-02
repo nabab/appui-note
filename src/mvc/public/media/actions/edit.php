@@ -2,7 +2,7 @@
 /*
  * Describe what it does!
  *
- * @var $ctrl \bbn\mvc\controller 
+ * @var $ctrl \bbn\Mvc\Controller 
  *
  */
 
@@ -11,10 +11,10 @@ $img_extensions = ['jpeg', 'jpg', 'png', 'gif'];
 if (!empty($ctrl->post['media']['id']) && !empty($ctrl->post['media']) && ($title = $ctrl->post['media']['title'] ) ){
   $media = [];
   $ctrl->obj->success = true;
-  $medias = new \bbn\appui\medias($ctrl->db);
-  $fs = new \bbn\file\system();
-  $root = bbn\mvc::get_data_path('appui-note').'media/';
-  $path = bbn\x::make_storage_path($root, '', 0, $fs);
+  $medias = new \bbn\Appui\Medias($ctrl->db);
+  $fs = new \bbn\File\System();
+  $root = bbn\Mvc::getDataPath('appui-note').'media/';
+  $path = bbn\X::makeStoragePath($root, '', 0, $fs);
   $full_path = $path.$ctrl->post['media']['id'].'/'.$ctrl->post['media']['name'];
   
   $new_name = $ctrl->post['media']['name'];
@@ -31,11 +31,11 @@ if (!empty($ctrl->post['media']['id']) && !empty($ctrl->post['media']) && ($titl
     }
   }
   else{
-    $media = $medias->update_content($ctrl->post['media']['id'], $ctrl->post['ref'],$old_name, $ctrl->post['media']['name'], $title);
+    $media = $medias->updateContent($ctrl->post['media']['id'], $ctrl->post['ref'],$old_name, $ctrl->post['media']['name'], $title);
   }
   if(!empty($media)){
-    $notes= new \bbn\appui\note($ctrl->db);
-    $media['notes'] = $notes->get_media_notes($media['id']);
+    $notes= new \bbn\Appui\Note($ctrl->db);
+    $media['notes'] = $notes->getMediaNotes($media['id']);
 		$ctrl->obj->media = $media;      
     $ctrl->obj->success = true;
   }

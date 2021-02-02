@@ -1,4 +1,4 @@
 <?php
 if ( !empty($ctrl->post['limit']) ){
-  $ctrl->obj = $ctrl->get_object_model($ctrl->post);
+  $ctrl->obj = $ctrl->getObjectModel($ctrl->post);
 }

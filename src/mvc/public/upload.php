@@ -4,8 +4,8 @@
  *
  **/
 
-/** @var $this \bbn\mvc\controller */
-$fs = new \bbn\file\system();
+/** @var $this \bbn\Mvc\Controller */
+$fs = new \bbn\File\System();
 $all = $fs->scan(BBN_DATA_PATH.'users');
 $tmps = array_filter($all, function($a){
   return substr($a, -4) === '/tmp';
@@ -21,19 +21,19 @@ die(var_dump(
   count($all),
   count($tmps),
   count($all2),
-  $ctrl->get_plugins(),
-  $ctrl->plugin_path(),
-  $ctrl->plugin_url(),
-  $ctrl->plugin_name(),
-  $ctrl->tmp_path(),
-  $ctrl->data_path(),
-  $ctrl->user_tmp_path(),
-  $ctrl->user_data_path(),
+  $ctrl->getPlugins(),
+  $ctrl->pluginPath(),
+  $ctrl->pluginUrl(),
+  $ctrl->pluginName(),
+  $ctrl->tmpPath(),
+  $ctrl->dataPath(),
+  $ctrl->userTmpPath(),
+  $ctrl->userDataPath(),
 ));
 $p = [];
 for ( $i = 0; $i < 10000; $i++ ){
-  $path = \bbn\x::make_storage_path(BBN_DATA_PATH.'test/logs');
-  if ( \bbn\x::indexOf($p, $path) === -1 ){
+  $path = \bbn\X::makeStoragePath(BBN_DATA_PATH.'test/logs');
+  if ( \bbn\X::indexOf($p, $path) === -1 ){
     $p[] = $path;
   }
   file_put_contents($path."/test$i.txt", 'hello world');

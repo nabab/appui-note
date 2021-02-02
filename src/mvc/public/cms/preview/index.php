@@ -2,16 +2,16 @@
 /*
  * Describe what it does!
  *
- * @var $ctrl \bbn\mvc\controller 
+ * @var $ctrl \bbn\Mvc\Controller 
  *
  */
 
 if ( !empty($ctrl->arguments[0]) ) {
-  $ctrl->add_data([
+  $ctrl->addData([
     'url' => implode($ctrl->arguments, '/')
   ]);
-  echo $ctrl->get_view()
-    .$ctrl->get_js(APPUI_NOTES_ROOT.'cms/preview/index', $ctrl->get_model())
-    .PHP_EOL.'<style>'.$ctrl->get_less().'</style>';
+  echo $ctrl->getView()
+    .$ctrl->getJs(APPUI_NOTES_ROOT.'cms/preview/index', $ctrl->getModel())
+    .PHP_EOL.'<style>'.$ctrl->getLess().'</style>';
   //$ctrl->combo('preview', true);
 }

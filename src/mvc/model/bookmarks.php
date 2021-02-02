@@ -4,7 +4,7 @@
  *
  **/
 
-/** @var $this \bbn\mvc\model*/
+/** @var $this \bbn\Mvc\Model*/
 $file = BBN_DATA_PATH.'bookmarksv2.json';
 
 

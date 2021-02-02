@@ -2,23 +2,23 @@
 /*
  * Describe what it does!
  *
- * @var $ctrl \bbn\mvc\controller 
+ * @var $ctrl \bbn\Mvc\Controller 
  *
  */
 
 $success = false;
 if (!empty($ctrl->post['media']['file']) && ($title = $ctrl->post['media']['title'] ) ){
   $files = $ctrl->post['media']['file'];
-	$medias = new \bbn\appui\medias($ctrl->db);
-  $tmp_path = $ctrl->user_tmp_path().$ctrl->post['ref'].'/';
-  $fs = new \bbn\file\system();
+	$medias = new \bbn\Appui\Medias($ctrl->db);
+  $tmp_path = $ctrl->userTmpPath().$ctrl->post['ref'].'/';
+  $fs = new \bbn\File\System();
   $media = [];
   foreach($files as $f){
     if(strpos($f['extension'], '.') > -1){
       $f['extension'] = str_replace('.', '', $f['extension']);
     }
     $_path = $tmp_path.$f['name'];
-    if ( $fs->is_file($_path) ){
+    if ( $fs->isFile($_path) ){
       $content = file_get_contents($_path);
       if (!empty($ctrl->post['media']['name']) && ( $ctrl->post['media']['name'] !== $f['name'])){
         if ( strpos( $ctrl->post['media']['name'], '.') > -1 ){
@@ -38,7 +38,7 @@ if (!empty($ctrl->post['media']['file']) && ($title = $ctrl->post['media']['titl
       }
       unset($f['name']);
       if ( $id_media = $medias->insert($_path,null,$title,'file',false)){
-        $media = $medias->get_media($id_media, true);
+        $media = $medias->getMedia($id_media, true);
         if (!empty($media['content'])){
           $media['content'] = json_decode($media['content']);
         }

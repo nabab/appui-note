@@ -1,7 +1,7 @@
 <?php
 
 if ( !empty($ctrl->post['limit']) ){
-  $ctrl->obj = $ctrl->get_model($ctrl->post);
+  $ctrl->obj = $ctrl->getModel($ctrl->post);
 }
 else{
   //first load

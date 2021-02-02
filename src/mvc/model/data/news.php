@@ -13,7 +13,7 @@ if ( isset($model->data['limit'], $model->data['start']) ){
       $condition['field'] = $table.$condition['field'];     
     }
   } 
-  $grid = new \bbn\appui\grid($model->db, $model->data, [
+  $grid = new \bbn\Appui\Grid($model->db, $model->data, [
     'table' => 'bbn_notes',
     'fields' => [
       'versions1.id_note',
@@ -39,7 +39,7 @@ if ( isset($model->data['limit'], $model->data['start']) ){
       'on' => [
         'conditions' => [[
           'field' => 'bbn_events.id_type',
-          'value' => $model->inc->options->from_code('NEWS', 'evenements')
+          'value' => $model->inc->options->fromCode('NEWS', 'evenements')
         ], [
           'field' => 'bbn_events.id',
           'exp' => 'bbn_notes_events.id_event'
@@ -73,7 +73,7 @@ if ( isset($model->data['limit'], $model->data['start']) ){
     'where' => [
       'conditions' => [[
         'field' => 'bbn_notes.id_type',
-        'value' => $model->inc->options->from_code('news', 'types', 'note', 'appui')
+        'value' => $model->inc->options->fromCode('news', 'types', 'note', 'appui')
       ], [
         'field' => 'bbn_notes.active',
         'value' => 1
@@ -110,7 +110,7 @@ if ( isset($model->data['limit'], $model->data['start']) ){
           'on' => [
             'conditions' => [[
               'field' => 'bbn_events.id_type',
-              'value' => $model->inc->options->from_code('NEWS', 'evenements')
+              'value' => $model->inc->options->fromCode('NEWS', 'evenements')
             ], [
               'field' => 'bbn_events.id',
               'exp' => 'bbn_notes_events.id_event'
@@ -144,7 +144,7 @@ if ( isset($model->data['limit'], $model->data['start']) ){
         'where' => [
           'conditions' => [[
             'field' => 'bbn_notes.id_type',
-            'value' => $model->inc->options->from_code('news', 'types', 'note', 'appui')
+            'value' => $model->inc->options->fromCode('news', 'types', 'note', 'appui')
           ], [
             'field' => 'bbn_notes.active',
             'value' => 1
@@ -168,6 +168,6 @@ if ( isset($model->data['limit'], $model->data['start']) ){
   ]);
 
   if ( $grid->check() ){
-    return $grid->get_datatable();
+    return $grid->getDatatable();
   }
 }

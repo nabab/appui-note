@@ -4,12 +4,12 @@
  *
  **/
 
-/** @var $this \bbn\mvc\model*/
-$masks = new \bbn\appui\masks($model->db);
-$all = $masks->get_all();
+/** @var $this \bbn\Mvc\Model*/
+$masks = new \bbn\Appui\Masks($model->db);
+$all = $masks->getAll();
 $cats = $model->inc->options->options('mask', 'appui');
 return [
-  'is_dev' => $model->inc->user->is_dev(),
+  'is_dev' => $model->inc->user->isDev(),
   'data' => $all,
   'cats' => $cats
 ];

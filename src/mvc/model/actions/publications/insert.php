@@ -7,7 +7,7 @@ if ( isset($model->data['of_import']) ){
 
 $urls = array_map(function($val){  
   return $val['url'];
-},$model->db->rselect_all( [
+},$model->db->rselectAll( [
   'table' => 'bbn_notes_url',
   'fields' => ['url']      
 ]));
@@ -15,15 +15,15 @@ $urls = array_map(function($val){
 
 //no exist more note with the same url
 if ( in_array($model->data['url'], $urls) === false ){  
-  $type = $model->inc->options->from_code('pages', 'types', 'note', 'appui');
-  $type_event = $model->inc->options->from_code('PAGE', 'evenements');
+  $type = $model->inc->options->fromCode('pages', 'types', 'note', 'appui');
+  $type_event = $model->inc->options->fromCode('PAGE', 'evenements');
 
   if ( (!empty($model->data['title']) || !empty($model->data['content'])) &&
     !empty($model->data['start']) &&
     !empty($type) &&
     !empty($type_event)
   ){
-    $note = new \bbn\appui\note($model->db);
+    $note = new \bbn\Appui\Note($model->db);
     if ( $id_note = $note->insert(
       $model->data['title'] ?? '',
       $model->data['content'] ?? '',
@@ -36,7 +36,7 @@ if ( in_array($model->data['url'], $urls) === false ){
           'start' => $model->data['start'],
           'end' => !empty($model->data['end']) ? $model->data['end'] : NULL
         ]) &&
-        ($id_event = $model->db->last_id()) &&
+        ($id_event = $model->db->lastId()) &&
         $model->db->insert('bbn_notes_events', [
           'id_note' => $id_note,
           'id_event' => $id_event

@@ -1,11 +1,11 @@
 <?php
-/** @var $model \bbn\mvc\model */
+/** @var $model \bbn\Mvc\Model */
 $model->db->change('apst_web');
-$columns_wp_posts = $model->db->get_columns('wp_posts');
+$columns_wp_posts = $model->db->getColumns('wp_posts');
 
 $columns_wp_posts = array_map(function($col){      
   return 'wp_posts.'.$col;              
-},array_keys($model->db->get_columns('wp_posts')));
+},array_keys($model->db->getColumns('wp_posts')));
 
 
 $columns_wp_users = ['wp_users.display_name', 'wp_users.user_registered', 'user_status'];
@@ -20,7 +20,7 @@ $fields = array_merge(
   
 
 if ( !empty($fields) ){  
-  $grid = new \bbn\appui\grid($model->db, $model->data, [
+  $grid = new \bbn\Appui\Grid($model->db, $model->data, [
     'table' => 'wp_posts',
     'fields' => $fields,
     'join' => [[
@@ -43,7 +43,7 @@ if ( !empty($fields) ){
   ]);
   
   if ( $grid->check() ){   
-    $dataTable = $grid->get_datatable();
+    $dataTable = $grid->getDatatable();
     $dataTable['data'] = array_map(function($row){    
       if ( $row['post_type'] === 'page' ){
         $part_url = explode('//', $row['guid']);
@@ -57,7 +57,7 @@ if ( !empty($fields) ){
         $row['url_complete'] = null;
         $row['url'] = null;
       }
-      $row['post_content'] = \bbn\str::cut($row['post_content'], 100);
+      $row['post_content'] = \bbn\Str::cut($row['post_content'], 100);
       
       return $row;
     },$dataTable['data']);

@@ -4,9 +4,9 @@
  *
  **/
 
-/** @var $this \bbn\mvc\model*/
+/** @var $this \bbn\Mvc\Model*/
 if ( isset($model->data['title'], $model->data['content'], $model->data['id_type'], $model->data['name']) ){
-  $mask = new \bbn\appui\masks($model->db);
+  $mask = new \bbn\Appui\Masks($model->db);
   if ( !empty($model->data['id_note']) ){
     $model->data['res']['success'] = $mask->update([
       'id_note' => $model->data['id_note'],

@@ -1,7 +1,7 @@
 <?php
-/** @var \bbn\mvc\controller $ctrl */
+/** @var \bbn\Mvc\Controller $ctrl */
 if ( !empty($ctrl->post['limit']) ){
-  $ctrl->obj = $ctrl->get_object_model($ctrl->post);
+  $ctrl->obj = $ctrl->getObjectModel($ctrl->post);
 }
 else{
   $ctrl->combo(_("Notes"));

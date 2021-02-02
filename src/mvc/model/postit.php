@@ -1,5 +1,5 @@
 <?php
-$notes = $model->db->get_rows("
+$notes = $model->db->getRows("
   SELECT bbn_notes_versions.*, COUNT(bbn_notes_medias.id_media) AS num_media
   FROM bbn_notes_versions
     JOIN bbn_notes

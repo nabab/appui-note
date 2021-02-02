@@ -160,7 +160,7 @@
               <div v-if="forum.pinnable"
                    class="bbn-spadded bbn-vmiddle appui-note-forum-hfixed"
                    style="margin-left: 0.5rem"
-                   :title="source.pinned ? '<?=\bbn\str::escape_squotes(_('unpin'))?>' : '<?=\bbn\str::escape_squotes(_('pin'))?>'"
+                   :title="source.pinned ? '<?=\bbn\Str::escapeSquotes(_('unpin'))?>' : '<?=\bbn\Str::escapeSquotes(_('pin'))?>'"
                    >
                 <i :class="'nf nf-mdi-' + (source.pinned ? 'pin_off' : 'pin') + ' bbn-xl bbn-p'"
                    @click="source.pinned = !source.pinned; forum.$emit('pin', source)"

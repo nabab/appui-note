@@ -4,23 +4,23 @@
  *
  **/
 
-/** @var $this \bbn\mvc\model*/
+/** @var $this \bbn\Mvc\Model*/
 
-$db = new \bbn\db();
-$opt = new \bbn\appui\option($db);
-$notes = new \bbn\appui\note($db);
-$cms = new \bbn\appui\cms($model->db);
+$db = new \bbn\Db();
+$opt = new \bbn\Appui\Option($db);
+$notes = new \bbn\Appui\Note($db);
+$cms = new \bbn\Appui\Cms($model->db);
 
 $all = [
   'data' => [],
   'total' => 0,
 ];
 
-$notes = $cms->get_all();
+$notes = $cms->getAll();
 if(isset($model->data['start']) && isset($model->data['limit'])){
 	$all['data'] = array_slice($notes, $model->data['start'], $model->data['limit']);
 }
 $all['total'] = count($notes);
 
-//$content_path = \bbn\mvc::get_content_path();
+//$content_path = \bbn\Mvc::getContentPath();
 return $all;
