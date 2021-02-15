@@ -14,12 +14,14 @@ if (  $ctrl->arguments[0] ){
 	if ( empty($ctrl->arguments[1]) ){
 		//case of previews in block, I want the thumbnails 60 x 60
 		$img = $medias->getThumbs($medias->getMediaPath($ctrl->arguments[0]));
+    die(var_dump($medias->getMedia($ctrl->arguments[0], true), file_exists($medias->getMedia($ctrl->arguments[0]))));
 	}
 	else{
 		//case of showing full picture
 		$img = $medias->getMediaPath($ctrl->arguments[0]);
 	}
-	$image= new \bbn\File\Image($img);
+
+  $image = new \bbn\File\Image($img);
 	die(var_dump($image->display()));
 }
 

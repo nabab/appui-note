@@ -102,7 +102,6 @@
           title: m.title,
           source: m,
           component: this.$options.components['info'],
-          height: 350,
           width: 400,
         })
       }
@@ -299,7 +298,7 @@
     <div v-text="formatBytes(source.content.size)"></div>
     <div>Extension:</div>
     <div v-text="source.content.extension"></div>
-    <div class="bbn-grid-full bbn-bordered" v-for="n in source.notes">
+    <div class="bbn-grid-full bbn-bordered bbn-radius bbn-spadded bbn-vmargin" v-for="n in source.notes">
       <div class="bbn-grid-fields">
         <div>Note title:</div>
         <div v-text="n.title"></div>

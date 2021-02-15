@@ -1,4 +1,4 @@
-<div class="bbn-flex-height bbn-backgraund bbn-lpadded bbn-h-100" ref="browser">
+<div class="bbn-flex-height bbn-background bbn-lpadded bbn-overlay" ref="browser">
   <div class="bbn-line-breaker bbn-middle bbn-c bbn-padded">
     <bbn-input placeholder="Search in media"
                v-model="searchMedia"

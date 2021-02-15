@@ -31,12 +31,15 @@
       ></bbn-dropdown>-->
     </div>
     <div>
-      <component :is="editorType"
-                 ref="editor"
-                 v-model="source.row.text"
-                 style="min-height: 450px; width: 100%;"
-                 required="required"
-      ></component>
+      <div class="bbn-w-100">
+        <component :is="editorType"
+                  ref="editor"
+                  v-model="source.row.text"
+                  style="min-height: 450px; width: 100%;"
+                  required="required"
+                  class="bbn-w-100"
+        ></component>
+      </div>
     </div>
 
     <label v-if="fileSave && fileRemove"><?=_("Files")?></label>

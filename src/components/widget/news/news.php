@@ -58,8 +58,8 @@
       </div>
     </bbn-form>
   </div>
-  <div v-else>
-    <ul>
+  <div v-else class="bbn-padded">
+    <ul class="bbn-no-padding bbn-no-margin">
       <div v-for="item in source.items"
            style="padding: 0.4em 0.6em"
            class="bbn-vmiddle"
