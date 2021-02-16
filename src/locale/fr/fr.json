@@ -1,28 +1,30 @@
 {
-    "components\/bookmarks\/folder\/folder": {
+    "components\/bookmarks\/folder": {
         "The name of the folder cannot be 'ROOT'": "Le dossier ne peut pas s'appeler 'ROOT'",
         "The name of the folder cannot be an empty string": "Le nom du dossier ne peut pas \u00eatre vide"
     },
-    "components\/bookmarks\/link\/link": {
+    "components\/bookmarks\/link": {
         "Insert the link in the folder": "Cr\u00e9er le lien dans le dossier",
         "Edit this link": "Modifier ce lien",
         "Are you sure you want to save changes?": "\u00cates-vous s\u00fbr de vouloir sauvegarder les modifications?",
         "Are you sure you want to remove this link?": "\u00cates-vous s\u00fbr de vouloir supprimer ce lien?"
     },
-    "components\/forum\/form\/form": {
+    "components\/forum\/form": {
         "Are you sure you want to remove this link?": "\u00cates-vous s\u00fbr de vouloir supprimer ce lien?",
         "Simple text": "Texte simple",
         "Rich text": "Texte riche (HTML)",
+        "Markdown": "Texte riche (Markdown)",
         "PHP code": "Code PHP",
         "JavaScript code": "Code JavaScript",
         "CSS code": "Code CSS"
     },
-    "components\/forum\/forum": {
+    "components\/forum": {
         "Unknown": "Inconnu",
         "Error while updating the data": "Erreur pendant la mise \u00e0 jour des donn\u00e9es"
     },
-    "components\/postit\/postit": {
+    "components\/postit": {
         "Delete": "Supprimer",
+        "Saved": "Sauvegard\u00e9",
         "No changes": "Pas de changement",
         "Error while deleting": "Erreur pendant la suppression"
     },
@@ -82,7 +84,7 @@
         "Media correctly added to the note": "M\u00e9dia ajout\u00e9 \u00e0 la note",
         "Something went wrong while adding the media to the note": "Quelque chose n'a pas fonctionn\u00e9 lors de l'ajout du m\u00e9dia \u00e0 la note"
     },
-    "components\/media\/browser\/browser": {
+    "components\/media\/browser": {
         "Edit media": "Modifier le m\u00e9dia",
         "Add new media": "Ajouter un nouveau m\u00e9dia",
         "The media you're going to delete is linked to a note, are you sure you want to remove it?": "Le m\u00e9dia que vous \u00eates sur le point de supprimer est li\u00e9 \u00e0 une note, \u00eates-vous s\u00fbr de vouloir continuer?",
@@ -100,6 +102,13 @@
         "Delete media": "Supprimer le m\u00e9dia",
         "Yes": "Oui",
         "No": "Non"
+    },
+    "components\/widget\/news": {
+        "Saved": "Sauvegard\u00e9",
+        "Enter a title for the note": "Entrer un titre pour la note"
+    },
+    "components\/widget\/personal": {
+        "Saved": "Sauvegard\u00e9"
     },
     "mvc\/form_markdown": {
         "Saved": "Sauvegard\u00e9"

@@ -1,28 +1,30 @@
 {
-    "components\/bookmarks\/folder\/folder": {
+    "components\/bookmarks\/folder": {
         "The name of the folder cannot be 'ROOT'": "The name of the folder cannot be 'ROOT'",
         "The name of the folder cannot be an empty string": "The name of the folder cannot be an empty string"
     },
-    "components\/bookmarks\/link\/link": {
+    "components\/bookmarks\/link": {
         "Insert the link in the folder": "Insert the link in the folder",
         "Edit this link": "Edit this link",
         "Are you sure you want to save changes?": "Are you sure you want to save changes?",
         "Are you sure you want to remove this link?": "Are you sure you want to remove this link?"
     },
-    "components\/forum\/form\/form": {
+    "components\/forum\/form": {
         "Are you sure you want to remove this link?": "Are you sure you want to remove this link?",
         "Simple text": "Simple text",
         "Rich text": "Rich text",
+        "Markdown": "Markdown",
         "PHP code": "PHP code",
         "JavaScript code": "JavaScript code",
         "CSS code": "CSS code"
     },
-    "components\/forum\/forum": {
+    "components\/forum": {
         "Unknown": "Unknown",
         "Error while updating the data": "Error while updating the data"
     },
-    "components\/postit\/postit": {
+    "components\/postit": {
         "Delete": "Delete",
+        "Saved": "Saved",
         "No changes": "No changes",
         "Error while deleting": "Error while deleting"
     },
@@ -82,7 +84,7 @@
         "Media correctly added to the note": "Media correctly added to the note",
         "Something went wrong while adding the media to the note": "Something went wrong while adding the media to the note"
     },
-    "components\/media\/browser\/browser": {
+    "components\/media\/browser": {
         "Edit media": "Edit media",
         "Add new media": "Add new media",
         "The media you're going to delete is linked to a note, are you sure you want to remove it?": "The media you're going to delete is linked to a note, are you sure you want to remove it?",
@@ -100,6 +102,13 @@
         "Delete media": "Delete media",
         "Yes": "Yes",
         "No": "No"
+    },
+    "components\/widget\/news": {
+        "Saved": "Saved",
+        "Enter a title for the note": "Enter a title for the note"
+    },
+    "components\/widget\/personal": {
+        "Saved": "Saved"
     },
     "mvc\/form_markdown": {
         "Saved": "Saved"

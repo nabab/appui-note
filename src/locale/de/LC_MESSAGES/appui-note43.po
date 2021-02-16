@@ -3,269 +3,278 @@ msgstr ""
 "Project-Id-Version: 1\n"
 "Report-Msgid-Bugs-To: info@bbn.so\n"
 "last-Translator: BBN Solutions <support@bbn.solutions>\n"
-"Language-Team: EN <EN@li.org>\n"
+"Language-Team: DE <DE@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-02-16 05:17+0100\n"
-"POT-Revision-Date: 2021-02-16 05:17+0100\n"
-"Language: en\n"
+"POT-Creation-Date: 2021-02-16 15:11+0100\n"
+"POT-Revision-Date: 2021-02-16 15:11+0100\n"
+"Language: de\n"
 "X-Domain: appui-note\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.js
 msgid "The name of the folder cannot be 'ROOT'"
-msgstr "The name of the folder cannot be 'ROOT'"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.js
 msgid "The name of the folder cannot be an empty string"
-msgstr "The name of the folder cannot be an empty string"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 msgid "Create the link at root"
-msgstr "Create the link at root"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
 msgid "Create the folder in"
-msgstr "Create the folder in"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
 msgid "Create the folder at root or select a folder from the tree"
-msgstr "Create the folder at root or select a folder from the tree"
+msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/bookmarks.php
 msgid "New folder"
-msgstr "New folder"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/news/news.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/personal/personal.php
 msgid "Cancel"
-msgstr "Cancel"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
 msgid "Create folder"
-msgstr "Create folder"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/link/link.js
 msgid "Insert the link in the folder"
-msgstr "Insert the link in the folder"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/link/link.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Edit this link"
-msgstr "Edit this link"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/link/link.js
 msgid "Are you sure you want to save changes?"
-msgstr "Are you sure you want to save changes?"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/link/link.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.js
 msgid "Are you sure you want to remove this link?"
-msgstr "Are you sure you want to remove this link?"
+msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/news.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Text"
-msgstr "Text"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 msgid "Link title"
-msgstr "Link title"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Description"
-msgstr "Description"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Url"
-msgstr "URL"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.php
 msgid "Type or paste your URL and press Enter to valid"
-msgstr "Type or paste your URL and press Enter to valid"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.php
 msgid "Remove"
-msgstr "Remove"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 msgid "Save"
-msgstr "Save"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Delete this link"
-msgstr "Delete this link"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Delete this"
-msgstr "Delete this"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Edit this"
-msgstr "Edit this"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Path"
-msgstr "Path"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "This folder is empty"
-msgstr "This folder is empty"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Folder name"
-msgstr "Folder name"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Parent"
-msgstr "Parent"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.js
 msgid "Unknown"
-msgstr "Unknown"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.js
 msgid "Error while updating the data"
-msgstr "Error while updating the data"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Replies"
-msgstr "Replies"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Show full text"
-msgstr "Show full text"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Hidden full text"
-msgstr "Hidden full text"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Links:"
-msgstr "Links:"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Files:"
-msgstr "Files:"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "unpin"
-msgstr "Unpin"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "pin"
-msgstr "Pin"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/postit/postit.js
 msgid "Delete"
-msgstr "Delete"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Edit"
-msgstr "Edit"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Reply"
-msgstr "Reply"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Created"
-msgstr "Created"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Edited"
-msgstr "Edited"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "LOADING"
-msgstr "LOADING"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "deleted"
-msgstr "Deleted"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Go to the first page"
-msgstr "Go to the first page"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Go to the previous page"
-msgstr "Go to the previous page"
+msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Page"
-msgstr "Page"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "of"
-msgstr "of"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Go to the next page"
-msgstr "Go to the next page"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Go to the last page"
-msgstr "Go to the last page"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "items per page"
-msgstr "items per page"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Display items"
-msgstr "Display items"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Total"
-msgstr "Total"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "items"
-msgstr "items"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "No item"
-msgstr "No item"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Refresh"
-msgstr "Refresh"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.js
 msgid "Simple text"
-msgstr "Simple text"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.js
 msgid "Rich text"
-msgstr "Rich text"
+msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Markdown"
-msgstr "Markdown"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.js
 msgid "PHP code"
-msgstr "PHP code"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.js
 msgid "JavaScript code"
-msgstr "JavaScript code"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.js
 msgid "CSS code"
-msgstr "CSS code"
+msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.php
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/news/news.php
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/personal/personal.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/news.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/publications.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
@@ -273,590 +282,589 @@ msgstr "CSS code"
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Title"
-msgstr "Title"
+msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Category"
-msgstr "Category"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.php
 msgid "Files"
-msgstr "Files"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.php
 msgid "Links"
-msgstr "Links"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.php
 msgid "Locked"
-msgstr "Locked"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "Edit media"
-msgstr "Edit media"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "Add new media"
-msgstr "Add new media"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid ""
 "The media you're going to delete is linked to a note, are you sure you want to "
 "remove it?"
 msgstr ""
-"The media you're going to delete is linked to a note, are you sure you want to "
-"remove it?"
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "Are you sure you want to delete this media?"
-msgstr "Are you sure you want to delete this media?"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "Media successfully deleted :)"
-msgstr "Media successfully deleted :)"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "Something went wrong while deleting the media :("
-msgstr "Something went wrong while deleting the media :("
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid ""
 "The extension in the title or in the filename doesn't match with the extension "
 "of the file you inserted!"
 msgstr ""
-"The extension in the title or in the filename doesn't match with the extension "
-"of the file you inserted!"
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "The title must contain the extension of the file"
-msgstr "The title must contain the extension of the file"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "Media successfully added to media browser"
-msgstr "Media successfully added to media browser"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "Media successfully updated"
-msgstr "Media successfully updated"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "Something went wrong while adding the media to the media broser"
-msgstr "Something went wrong while adding the media to the media broser"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "Media title successfully changed!"
-msgstr "Media title successfully changed!"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "Something went wrong while changing the media title"
-msgstr "Something went wrong while changing the media title"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "The title must end with the same extension of the file"
-msgstr "The title must end with the same extension of the file"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "Delete media"
-msgstr "Delete media"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "Yes"
-msgstr "Yes"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "No"
-msgstr "No"
+msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/postit/postit.js
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/news/news.js
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/personal/personal.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/form_markdown.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/news.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Saved"
-msgstr "Saved"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/postit/postit.js
 msgid "No changes"
-msgstr "No changes"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/postit/postit.js
 msgid "Error while deleting"
-msgstr "Error while deleting"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/postit/postit.php
 msgid "Update Note"
-msgstr "Update Note"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/postit/postit.php
 msgid "Remove Note"
-msgstr "Remove Note"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/postit/postit.php
 msgid "Choose Color"
-msgstr "Choose Color"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/postit/postit.php
 msgid "Edit Title"
-msgstr "Edit Title"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/postit/postit.php
 msgid "Edit Content"
-msgstr "Edit Content"
+msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/toolbar/version/version.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Version"
-msgstr "Version"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/toolbar/version/version.php
 msgid "Versions"
-msgstr "Versions"
+msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/news/news.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Enter a title for the note"
-msgstr "Enter a title for the note"
+msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/news/news.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/publications.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/cms/list.php
 msgid "Pub. date"
-msgstr "Pub. date"
+msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/news/news.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/news.php
 msgid "End date"
-msgstr "End date"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/news/news.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/personal/personal.php
 msgid "Add"
-msgstr "Add"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/bookmarks.php
 msgid "New bookmark"
-msgstr "New bookmark"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/form_markdown.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/form_rte.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Are you sure you want to leave this form without saving your changes?"
-msgstr "Are you sure you want to leave this form without saving your changes?"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/news.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/news.js
 msgid "New message"
-msgstr "New message"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/news.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Author"
-msgstr "Author"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/news.php
 msgid "Creation date"
-msgstr "Creation date"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/news.php
 msgid "Start date"
-msgstr "Start date"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/news.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Actions"
-msgstr "Actions"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/news.php
 msgid "See"
-msgstr "See"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/news.php
 msgid "Mod."
-msgstr "Mod."
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/news.php
 msgid "Publication date"
-msgstr "Publication date"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/notes.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/post-it.php
 msgid "Search"
-msgstr "Search"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/publications.php
 msgid "Publications' management"
-msgstr "Publications' management"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Creator"
-msgstr "Creator"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Last version user"
-msgstr "Last version user"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Creation"
-msgstr "Creation"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Last edit"
-msgstr "Last edit"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Blocked"
-msgstr "Blocked"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/cms/list.php
 msgid "Cms management"
-msgstr "Cms management"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/cms/list.php
 msgid "Publish"
-msgstr "Publish"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/cms/preview/index.php
 msgid "All rights reserved."
-msgstr "All rights reserved."
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 msgid "Post Type"
-msgstr "Post Type"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 msgid "Post Name"
-msgstr "Post Name"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 msgid "Page url"
-msgstr "Page url"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Post title"
-msgstr "Post title"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 msgid "Post Content"
-msgstr "Post Content"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Date"
-msgstr "Date"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Date GMT"
-msgstr "Date GMT"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 msgid "Post modified"
-msgstr "Post modified"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Post Status"
-msgstr "Post Status"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/bookmarks.js
 msgid "Folder"
-msgstr "Folder"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/bookmarks.js
 msgid "Link"
-msgstr "Link"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/bookmarks.js
 msgid "correctly inserted"
-msgstr "correctly inserted"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/bookmarks.js
 msgid "Are you sure you want to delete this folder"
-msgstr "Are you sure you want to delete this folder"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/bookmarks.js
 msgid "and all it's content?"
-msgstr "and all it's content?"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/bookmarks.js
 msgid "Folder successfully deleted"
-msgstr "Folder successfully deleted"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/bookmarks.js
 msgid "Something went wrong while deleting the folder"
-msgstr "Something went wrong while deleting the folder"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/bookmarks.js
 msgid "Are you sure you want to delete this link?"
-msgstr "Are you sure you want to delete this link?"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/bookmarks.js
 msgid "Link successfully deleted"
-msgstr "Link successfully deleted"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/bookmarks.js
 msgid "Something went wrong while deleting the link"
-msgstr "Something went wrong while deleting the link"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid "Modification of the standard letter"
-msgstr "Modification of the standard letter"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid "Are you sure you want to delete this standard letter?"
-msgstr "Are you sure you want to delete this standard letter?"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid "Creation of a standard letter"
-msgstr "Creation of a standard letter"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid "Warning on standard letters"
-msgstr "Warning on standard letters"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid ""
 "Here you can modify the standard letters but they use a system of \"templates\" "
 "with which you have to be very cautious."
 msgstr ""
-"Here you can modify the standard letters but they use a system of \"templates\" "
-"with which you have to be very cautious."
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid "The best is to duplicate an existing standard letter and modify it."
-msgstr "The best is to duplicate an existing standard letter and modify it."
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid ""
 "Once finished, put it in default if it is used on a feature without choice (eg "
 "certificates), and will test it in context."
 msgstr ""
-"Once finished, put it in default if it is used on a feature without choice (eg "
-"certificates), and will test it in context."
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid ""
 "Then you can erase the old one or else redo it if your modification returns an "
 "error."
 msgstr ""
-"Then you can erase the old one or else redo it if your modification returns an "
-"error."
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid "Creation of a standard letter for"
-msgstr "Creation of a standard letter for"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid "Add a standard letter"
-msgstr "Add a standard letter"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/news.js
 msgid "Edit message"
-msgstr "Edit message"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/news.js
 msgid "Error"
-msgstr "Error"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "New"
-msgstr "New"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Show"
-msgstr "Show"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Find"
-msgstr "Find"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Tools"
-msgstr "Tools"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Import"
-msgstr "Import"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Export"
-msgstr "Export"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Content"
-msgstr "Content"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/table_notes.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "New Note"
-msgstr "New Note"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Type"
-msgstr "Type"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Post name"
-msgstr "Post Name"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Modified"
-msgstr "Modified"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Are you sure you import the posts?"
-msgstr "Are you sure you import the posts?"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Import performed"
-msgstr "Import performed"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Error Import"
-msgstr "Error Import"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/table_notes.js
 msgid "Click on the first column of this row to view full content"
-msgstr "Click on the first column of this row to view full content"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/table_notes.js
 msgid "Editing a mailing"
-msgstr "Editing a mailing"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Post"
-msgstr "Post"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Pub. Start"
-msgstr "Pub. Start"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Pub. End"
-msgstr "Pub. End"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "media"
-msgstr "media"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Media browser"
-msgstr "Media browser"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Edit Note"
-msgstr "Edit Note"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Publish Note"
-msgstr "Publish Note"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Are you sure to remove the publication from this note?"
-msgstr "Are you sure to remove the publication from this note?"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Successfully deleted"
-msgstr "Successfully deleted"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Error in deleting"
-msgstr "Error in deleting"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Are you sure to delete this note?"
-msgstr "Are you sure to delete this note?"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Media correctly added to the note"
-msgstr "Media correctly added to the note"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Something went wrong while adding the media to the note"
-msgstr "Something went wrong while adding the media to the note"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/square.js
 msgid "Add a new block to this row"
-msgstr "Add a new block to this row"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/square.js
 msgid "Edit blocks in this row"
-msgstr "Edit blocks in this row"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/preview/index.js
 msgid "Published"
-msgstr "Published"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/preview/index.js
 msgid "Draft"
-msgstr "Draft"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/model/actions/bookmarks/insert.php
 msgid "The "
-msgstr "The"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/public/form_markdown.php
 msgid "Markdown editor"
-msgstr "Markdown editor"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/public/form_rte.php
 msgid "Note Editor (Markdown)"
-msgstr "Note Editor (Markdown)"
+msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/public/news.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/plugins/appui-dashboard/model/news.php
 msgid "News"
-msgstr "News"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/public/notes.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/public/post-it.php
 msgid "My post-it"
-msgstr "My post-it"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/public/prove_notes.php
 msgid "Notes' tree"
-msgstr "Notes' tree"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/public/publications.php
 msgid "Publications"
-msgstr "Publications"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/public/table_notes.php
 msgid "Notes"
-msgstr "Notes"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/public/actions/get.php
 msgid "Impossible to find the note"
-msgstr "Impossible to find the note"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/public/cms/list.php
 msgid "Cms"
-msgstr "Cms"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/public/editor/index.php
 msgid "Rich Text Editor frame"
-msgstr "Rich Text Editor frame"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/public/media/browser.php
 msgid "Medias browser"
-msgstr "Medias browser"
+msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/plugins/appui-dashboard/model/personal.php
 msgid "Personal notes"
-msgstr "Personal notes"
+msgstr ""

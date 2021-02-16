@@ -3,13 +3,13 @@ msgstr ""
 "Project-Id-Version: 1\n"
 "Report-Msgid-Bugs-To: info@bbn.so\n"
 "last-Translator: BBN Solutions <support@bbn.solutions>\n"
-"Language-Team: DE <DE@li.org>\n"
+"Language-Team: IT <IT@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-02-16 05:17+0100\n"
-"POT-Revision-Date: 2021-02-16 05:17+0100\n"
-"Language: de\n"
+"POT-Creation-Date: 2021-02-16 15:11+0100\n"
+"POT-Revision-Date: 2021-02-16 15:11+0100\n"
+"Language: it\n"
 "X-Domain: appui-note\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
@@ -34,6 +34,7 @@ msgstr ""
 msgid "Create the folder at root or select a folder from the tree"
 msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/bookmarks.php
 msgid "New folder"
 msgstr ""
@@ -67,6 +68,9 @@ msgstr ""
 msgid "Are you sure you want to remove this link?"
 msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/news.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Text"
@@ -79,7 +83,7 @@ msgstr ""
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
@@ -201,6 +205,7 @@ msgstr ""
 msgid "Go to the previous page"
 msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/forum.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Page"
@@ -250,6 +255,7 @@ msgstr ""
 msgid "Rich text"
 msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Markdown"
 msgstr ""
@@ -266,6 +272,9 @@ msgstr ""
 msgid "CSS code"
 msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.php
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/news/news.php
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/personal/personal.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/news.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/publications.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
@@ -275,6 +284,7 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/forum/form/form.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Category"
 msgstr ""
@@ -363,6 +373,9 @@ msgstr ""
 msgid "No"
 msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/postit/postit.js
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/news/news.js
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/personal/personal.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/form_markdown.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/news.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
@@ -398,6 +411,7 @@ msgstr ""
 msgid "Edit Content"
 msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/toolbar/version/version.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
@@ -408,16 +422,19 @@ msgstr ""
 msgid "Versions"
 msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/news/news.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/cms/list.js
 msgid "Enter a title for the note"
 msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/news/news.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/publications.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/cms/list.php
 msgid "Pub. date"
 msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/components/widget/news/news.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/news.php
 msgid "End date"
 msgstr ""
@@ -477,7 +494,7 @@ msgstr ""
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/notes.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/post-it.php
 msgid "Search"
-msgstr ""
+msgstr "Ricerca"
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/publications.php
 msgid "Publications' management"
@@ -522,7 +539,7 @@ msgstr ""
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 msgid "Post Type"
@@ -548,7 +565,7 @@ msgstr ""
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
@@ -656,7 +673,7 @@ msgstr ""
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/news.js
 msgid "Error"
-msgstr ""
+msgstr "Errore"
 
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "New"
@@ -810,6 +827,7 @@ msgstr ""
 msgid "Note Editor (Markdown)"
 msgstr ""
 
+#: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/mvc/public/news.php
 #: /home/thomas/domains/apstapp.thomas.lan/_appui/vendor/bbn/appui-note/src/plugins/appui-dashboard/model/news.php
 msgid "News"
 msgstr ""
