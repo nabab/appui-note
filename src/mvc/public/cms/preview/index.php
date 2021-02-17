@@ -11,7 +11,7 @@ if ( !empty($ctrl->arguments[0]) ) {
     'url' => implode($ctrl->arguments, '/')
   ]);
   echo $ctrl->getView()
-    .$ctrl->getJs(APPUI_NOTES_ROOT.'cms/preview/index', $ctrl->getModel())
+    .$ctrl->getJs(APPUI_NOTE_ROOT.'cms/preview/index', $ctrl->getModel())
     .PHP_EOL.'<style>'.$ctrl->getLess().'</style>';
   //$ctrl->combo('preview', true);
 }
