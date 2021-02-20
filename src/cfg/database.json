@@ -3,7 +3,7 @@
         "keys": {
             "PRIMARY": {
                 "columns": [
-                    "id"
+                    "id",
                 ],
                 "ref_db": null,
                 "ref_table": null,
@@ -17,10 +17,10 @@
                 "columns": [
                     "creator"
                 ],
-                "ref_db": null,
+                "ref_db": "poc2",
                 "ref_table": "bbn_users",
                 "ref_column": "id",
-                "constraint": "bbn_notes_ibfk_3",
+                "constraint": "bbn_constraint_p65n_78",
                 "update": "CASCADE",
                 "delete": "RESTRICT",
                 "unique": 0
@@ -29,10 +29,10 @@
                 "columns": [
                     "id_parent"
                 ],
-                "ref_db": null,
+                "ref_db": "poc2",
                 "ref_table": "bbn_notes",
                 "ref_column": "id",
-                "constraint": "bbn_notes_ibfk_2",
+                "constraint": "bbn_constraint_p65n_79",
                 "update": "CASCADE",
                 "delete": "CASCADE",
                 "unique": 0
@@ -41,10 +41,10 @@
                 "columns": [
                     "id_type"
                 ],
-                "ref_db": null,
+                "ref_db": "poc2",
                 "ref_table": "bbn_options",
                 "ref_column": "id",
-                "constraint": "bbn_notes_ibfk_4",
+                "constraint": "bbn_constraint_p65n_80",
                 "update": "CASCADE",
                 "delete": "CASCADE",
                 "unique": 0
@@ -53,12 +53,24 @@
                 "columns": [
                     "id_alias"
                 ],
-                "ref_db": null,
+                "ref_db": "poc2",
                 "ref_table": "bbn_notes",
                 "ref_column": "id",
-                "constraint": "bbn_notes_ibfk_5",
+                "constraint": "bbn_constraint_p65n_81",
                 "update": "CASCADE",
                 "delete": "CASCADE",
+                "unique": 0
+            },
+            "excerpt": {
+                "columns": [
+                    "excerpt"
+                ],
+                "ref_db": null,
+                "ref_table": null,
+                "ref_column": null,
+                "constraint": null,
+                "update": null,
+                "delete": null,
                 "unique": 0
             }
         },
@@ -77,6 +89,9 @@
             ],
             "id_alias": [
                 "id_alias"
+            ],
+            "excerpt": [
+                "excerpt"
             ]
         },
         "fields": {
@@ -127,19 +142,17 @@
                 "default": "NULL",
                 "maxlength": 16
             },
-            "private": {
+            "excerpt": {
                 "position": 5,
-                "type": "tinyint",
+                "type": "text",
                 "null": 0,
-                "key": null,
+                "key": "MUL",
                 "extra": "",
-                "signed": false,
+                "signed": true,
                 "virtual": false,
-                "generation": "",
-                "default": 0,
-                "maxlength": 1
+                "generation": ""
             },
-            "locked": {
+            "private": {
                 "position": 6,
                 "type": "tinyint",
                 "null": 0,
@@ -151,7 +164,7 @@
                 "default": 0,
                 "maxlength": 1
             },
-            "pinned": {
+            "locked": {
                 "position": 7,
                 "type": "tinyint",
                 "null": 0,
@@ -163,8 +176,20 @@
                 "default": 0,
                 "maxlength": 1
             },
-            "creator": {
+            "pinned": {
                 "position": 8,
+                "type": "tinyint",
+                "null": 0,
+                "key": null,
+                "extra": "",
+                "signed": false,
+                "virtual": false,
+                "generation": "",
+                "default": 0,
+                "maxlength": 1
+            },
+            "creator": {
+                "position": 9,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -175,7 +200,7 @@
                 "maxlength": 16
             },
             "active": {
-                "position": 9,
+                "position": 10,
                 "type": "int",
                 "null": 0,
                 "key": null,
@@ -441,10 +466,10 @@
                 "columns": [
                     "id_note"
                 ],
-                "ref_db": null,
+                "ref_db": "poc2",
                 "ref_table": "bbn_notes",
                 "ref_column": "id",
-                "constraint": "bbn_notes_url_ibfk_1",
+                "constraint": "bbn_constraint_p65n_88",
                 "update": "CASCADE",
                 "delete": "CASCADE",
                 "unique": 0
@@ -468,7 +493,7 @@
             ],
             "url": [
                 "url"
-            ]
+            ],
         },
         "fields": {
             "id_note": {
@@ -633,10 +658,10 @@
                 "columns": [
                     "id_user"
                 ],
-                "ref_db": null,
+                "ref_db": "poc2",
                 "ref_table": "bbn_users",
                 "ref_column": "id",
-                "constraint": "bbn_medias_ibfk_2",
+                "constraint": "bbn_constraint_p65n_92",
                 "update": "CASCADE",
                 "delete": "RESTRICT",
                 "unique": 0
@@ -645,12 +670,24 @@
                 "columns": [
                     "type"
                 ],
-                "ref_db": null,
+                "ref_db": "poc2",
                 "ref_table": "bbn_options",
                 "ref_column": "id",
-                "constraint": "bbn_medias_ibfk_3",
+                "constraint": "bbn_constraint_p65n_93",
                 "update": "CASCADE",
                 "delete": "RESTRICT",
+                "unique": 0
+            },
+            "editor": {
+                "columns": [
+                    "editor"
+                ],
+                "ref_db": "poc2",
+                "ref_table": "bbn_users",
+                "ref_column": "id",
+                "constraint": "bbn_medias_ibfk_1",
+                "update": "RESTRICT",
+                "delete": "SET NULL",
                 "unique": 0
             }
         },
@@ -663,6 +700,9 @@
             ],
             "type": [
                 "type"
+            ],
+            "editor": [
+                "editor"
             ]
         },
         "fields": {
@@ -699,20 +739,8 @@
                 "generation": "",
                 "maxlength": 16
             },
-            "name": {
+            "mimetype": {
                 "position": 4,
-                "type": "varchar",
-                "null": 0,
-                "key": null,
-                "extra": "",
-                "signed": true,
-                "virtual": false,
-                "generation": "",
-                "default": "",
-                "maxlength": 255
-            },
-            "title": {
-                "position": 5,
                 "type": "varchar",
                 "null": 1,
                 "key": null,
@@ -721,10 +749,45 @@
                 "virtual": false,
                 "generation": "",
                 "default": "NULL",
-                "maxlength": 255
+                "maxlength": 30
+            },
+            "name": {
+                "position": 5,
+                "type": "varchar",
+                "null": 0,
+                "key": null,
+                "extra": "",
+                "signed": true,
+                "virtual": false,
+                "generation": "",
+                "default": "",
+                "maxlength": 1000,
+            },
+            "title": {
+                "position": 6,
+                "type": "varchar",
+                "null": 1,
+                "key": null,
+                "extra": "",
+                "signed": true,
+                "virtual": false,
+                "generation": "",
+                "default": "NULL",
+                "maxlength": 1000
+            },
+            "excerpt": {
+                "position": 7,
+                "type": "text",
+                "null": 1,
+                "key": null,
+                "extra": "",
+                "signed": true,
+                "virtual": false,
+                "generation": "",
+                "default": "NULL"
             },
             "content": {
-                "position": 6,
+                "position": 8,
                 "type": "mediumtext",
                 "null": 1,
                 "key": null,
@@ -735,7 +798,7 @@
                 "default": "NULL"
             },
             "private": {
-                "position": 7,
+                "position": 9,
                 "type": "tinyint",
                 "null": 0,
                 "key": null,
@@ -745,6 +808,39 @@
                 "generation": "",
                 "default": 0,
                 "maxlength": 1
+            },
+            "created": {
+                "position": 10,
+                "type": "datetime",
+                "null": 0,
+                "key": null,
+                "extra": "",
+                "signed": true,
+                "virtual": false,
+                "generation": ""
+            },
+            "edited": {
+                "position": 11,
+                "type": "datetime",
+                "null": 1,
+                "key": null,
+                "extra": "",
+                "signed": true,
+                "virtual": false,
+                "generation": "",
+                "default": "NULL"
+            },
+            "editor": {
+                "position": 12,
+                "type": "binary",
+                "null": 1,
+                "key": "MUL",
+                "extra": "",
+                "signed": true,
+                "virtual": false,
+                "generation": "",
+                "default": "NULL",
+                "maxlength": 16
             }
         }
     },
@@ -985,7 +1081,7 @@
             ],
             "id_tag": [
                 "id_tag"
-            ]
+            ],
         },
         "fields": {
             "id_note": {
@@ -1014,12 +1110,25 @@
     },
     "bbn_medias_tags": {
         "keys": {
+            "PRIMARY": {
+                "columns": [
+                    "id_media",
+                    "id_tag"
+                ],
+                "ref_db": null,
+                "ref_table": null,
+                "ref_column": null,
+                "constraint": "bbn_medias_tags_ibfk_1",
+                "update": "CASCADE",
+                "delete": "CASCADE",
+                "unique": 1
+            },
             "id_note": {
                 "columns": [
-                    "id_note"
+                    "id_media"
                 ],
                 "ref_db": "poc2",
-                "ref_table": "bbn_notes",
+                "ref_table": "bbn_medias",
                 "ref_column": "id",
                 "constraint": "bbn_medias_tags_ibfk_1",
                 "update": "CASCADE",
@@ -1033,26 +1142,28 @@
                 "ref_db": "poc2",
                 "ref_table": "bbn_options",
                 "ref_column": "id",
-                "constraint": "bbn_medias_tags_ibfk_2",
+                "constraint": "he0ha72",
                 "update": "CASCADE",
                 "delete": "CASCADE",
                 "unique": 0
             }
         },
         "cols": {
-            "id_note": [
+            "id_media": [
+                "PRIMARY",
                 "id_note"
             ],
             "id_tag": [
+                "PRIMARY",
                 "id_tag"
             ]
         },
         "fields": {
-            "id_note": {
+            "id_media": {
                 "position": 1,
                 "type": "binary",
                 "null": 0,
-                "key": "MUL",
+                "key": "PRI",
                 "extra": "",
                 "signed": true,
                 "virtual": false,
@@ -1063,12 +1174,84 @@
                 "position": 2,
                 "type": "binary",
                 "null": 0,
+                "key": "PRI",
+                "extra": "",
+                "signed": true,
+                "virtual": false,
+                "generation": "",
+                "maxlength": 16
+            }
+        }
+    },
+    "bbn_medias_url": {
+        "keys": {
+            "url": {
+                "columns": [
+                    "url"
+                ],
+                "ref_db": null,
+                "ref_table": null,
+                "ref_column": null,
+                "constraint": null,
+                "update": null,
+                "delete": null,
+                "unique": 1
+            },
+            "id_media": {
+                "columns": [
+                    "id_media"
+                ],
+                "ref_db": "poc2",
+                "ref_table": "bbn_medias",
+                "ref_column": "id",
+                "constraint": "bbn_medias_url_ibfk_1",
+                "update": "CASCADE",
+                "delete": "CASCADE",
+                "unique": 0
+            }
+        },
+        "cols": {
+            "url": [
+                "url"
+            ],
+            "id_media": [
+                "id_media"
+            ]
+        },
+        "fields": {
+            "id_media": {
+                "position": 1,
+                "type": "binary",
+                "null": 0,
                 "key": "MUL",
                 "extra": "",
                 "signed": true,
                 "virtual": false,
                 "generation": "",
                 "maxlength": 16
+            },
+            "url": {
+                "position": 2,
+                "type": "varchar",
+                "null": 0,
+                "key": "PRI",
+                "extra": "",
+                "signed": true,
+                "virtual": false,
+                "generation": "",
+                "maxlength": 1000
+            },
+            "shared": {
+                "position": 3,
+                "type": "tinyint",
+                "null": 0,
+                "key": null,
+                "extra": "",
+                "signed": true,
+                "virtual": false,
+                "generation": "",
+                "default": 0,
+                "maxlength": 1
             }
         }
     }
