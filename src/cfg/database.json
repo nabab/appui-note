@@ -3,7 +3,7 @@
         "keys": {
             "PRIMARY": {
                 "columns": [
-                    "id",
+                    "id"
                 ],
                 "ref_db": null,
                 "ref_table": null,
