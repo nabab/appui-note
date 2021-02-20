@@ -14,7 +14,6 @@
       selectedType() {
         return bookmarks.selectedType;
       },
-      
     },
     methods: {
       edit(){
@@ -33,7 +32,7 @@
           if (this.source.showLink.url.indexOf('http') === 0) {
             return this.source.showLink.url;
           } else {
-            return 'www.' + this.source.showLink.url;
+            return 'https://' + this.source.showLink.url;
           }
         }
        //return bookmarks.renderUrl(url)

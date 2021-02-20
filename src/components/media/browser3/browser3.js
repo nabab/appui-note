@@ -1,15 +1,8 @@
 // Javascript Document
 (()=>{
   return{
+    mixins: [bbn.vue.basicComponent, bbn.vue.listComponent],
     props: {
-      'select': {
-        default: false,
-        type: Boolean,
-      },
-      limit: {
-      	type: Number,
-        default: 50
-      },
       mediaType: {
         type: String,
         default: null
@@ -17,30 +10,11 @@
     },
     data(){
       return {
+        cp: this,
         searchMedia: '',
-        medias: [],
-        currentMedias: [],
         current: {},
         showList: false,
-        selected: false,
-      }
-    },
-    beforeMount(){
-      this.post(
-        appui.plugins['appui-note'] + '/media/browser',
-        {
-          start: 0,
-          limit: this.limit
-        },
-        (d) => {
-          this.medias = d.medias
-          //need a copy of medias to manipulate it during the search 
-          this.currentMedias = d.medias
-	      }
-      );
-      /** @todo WTF?? */
-      if (this.closest('bbn-router').selectingMedia) {
-        this.select = true;
+        isPicker: false
       }
     },
     computed: {
@@ -54,6 +28,9 @@
     },
     methods: {
       editMedia(m, a){
+        if(bbn.fn.isString(m.content)){
+          m.content = JSON.parse(m.content)
+        }
         this.getPopup().open({
           title: bbn._('Edit media'),
           component: this.$options.components['form'],
@@ -94,10 +71,9 @@
               m,
               (d) => {
                 if (d.success){
-                  let idx = bbn.fn.search(this.medias, 'id', m.id),
-                      cIdx = bbn.fn.search(this.currentMedias, 'id', m.id);
-                  if ( (idx > -1) && (cIdx > -1) ){
-                    this.medias.splice(idx, 1);
+                  let idx = bbn.fn.search(this.currentData, {id: m.id});
+                  if (idx > -1) {
+                    this.currentData.splice(idx, 1);
                   }
                   appui.success(bbn._('Media successfully deleted :)'))
                 }
@@ -128,6 +104,15 @@
         })
       }
     },
+    beforeMount(){
+      /** @todo WTF?? */
+      if (this.closest('bbn-router').selectingMedia) {
+        this.isPicker = true;
+      }
+    },
+    mounted(){
+      this.ready = true;
+    },
     watch: {
       select(val){
         let rSelect = this.closest('bbn-router').selectingMedia
@@ -136,7 +121,7 @@
         }
       },
       searchMedia(val){
-        this.medias = bbn.fn.filter(this.currentMedias, (a) => {
+        this.medias = bbn.fn.filter(this.currentData, (a) => {
           return a.title.toLowerCase().indexOf(val.toLowerCase()) > -1
         })
       }
@@ -188,7 +173,8 @@
             content: [],
             //the idx of the media in medias of the container
             removedFile: false,
-            mediaIdx:false
+            mediaIdx:false,
+            
           }
         },
 			  methods: {
@@ -217,10 +203,10 @@
             ) {
               return true;
             }
-            else{
+            /*else{
               this.alert(bbn._("The extension in the title or in the filename doesn't match the extension of the file inserted!"))
               return false;
-            }
+            }*/
           },
           uploadSuccess(){
             this.$nextTick(() => {
@@ -256,13 +242,13 @@
           success(d){
             if(d.success && d.media){
               if ( !this.source.edit ){
-                this.browser.medias.push(d.media);
+                this.browser.add(d.media);
                 appui.success(bbn._('Media successfully added to media browser'));
               }
               else{
-                this.browser.medias[this.mediaIdx].content['name'] = d.media.name
+                this.browser.currentData[this.mediaIdx].content['name'] = d.media.name
                 if (d.media.is_image ){
-                  this.browser.medias[this.mediaIdx].isImage = d.media.isImage
+                  this.browser.currentData[this.mediaIdx].isImage = d.media.isImage
                 }
                 if ( this.removedFile ){
                   if(bbn.fn.isString(d.media.content)){
@@ -271,9 +257,9 @@
                   bbn.fn.log('before',this.mediaIdx)
                   let thatMediaIdx = this.mediaIdx
                   //the block has to disappear to show the new picture uploaded
-                  this.browser.medias.splice(this.mediaIdx, 1);
+                  this.browser.currentData.splice(this.mediaIdx, 1);
                   setTimeout(() => {
-                    this.browser.medias.splice(thatMediaIdx, 0, d.media);
+                    this.browser.currentData.splice(thatMediaIdx, 0, d.media);
                     bbn.fn.log('after',thatMediaIdx, d.media, JSON.stringify(d.media))
                   }, 50);
                 }
@@ -286,20 +272,20 @@
           }
         },
         mounted(){
-          this.browser = this.closest('bbn-container').find('appui-note-media-browser')
-          this.mediaIdx =  bbn.fn.search(this.browser.medias, 'id', this.source.media.id);
+          this.browser = this.closest('bbn-container').find('appui-note-media-browser2')
+          this.mediaIdx =  bbn.fn.search(this.browser.currentData, 'id', this.source.media.id);
           this.setContent();
           this.source.edit ? (this.source.oldName = this.source.media.content.name) : ''
         },
         watch: {
-          content(val, oldVal){
+          /*content(val, oldVal){
             if(val){
               let tmp = JSON.parse(val)
               if(tmp[0]){
                 this.source.media.content = tmp[0];
               }
             }
-          }
+          }*/
         }
       },
       'info': {
@@ -354,7 +340,7 @@
         }
       },
       'block': {
-        template: '#block',
+        template: '#appui-note-media-browser-block',
         props: ['source', 'data'],
         data(){
           return {
@@ -370,7 +356,7 @@
             canShow: false,
             editinline:false,
             initialTitle: '',
-            root: 'notes/media',
+            root: appui.plugins['appui-note'] + '/',
             select: '',
             removedFile: false,
           }
@@ -396,14 +382,14 @@
             }
           },
           addMediaToNote(m){
-            this.closest('appui-note-media-browser').selected = m;
-            this.closest('appui-note-media-browser').$emit('select',m)
+            this.closest('appui-note-media-browser2').currentSelected = m;
+            this.closest('appui-note-media-browser2').$emit('select',m)
           },
           showFileInfo(m){
-            this.closest('appui-note-media-browser').showFileInfo(m)
+            this.closest('appui-note-media-browser2').showFileInfo(m)
           },
           editMedia(m){
-            this.closest('appui-note-media-browser').editMedia(m, this.dataIdx)
+            this.closest('appui-note-media-browser2').editMedia(m, this.dataIdx)
           },
           deleteMedia(m){
             this.closest('bbn-container').getComponent().deleteMedia(m)
@@ -437,7 +423,7 @@
               let title = this.data.media.title,
               	ext_title = title.substr(title.lastIndexOf('.') + 1, title.length - 1 );
        			  if ( ext_title === this.data.media.content.extension ){
-                this.post('notes/media/actions/edit_title', {
+                this.post(this.root + 'media/actions/edit_title', {
                   id: this.data.media.id,
                   title: this.data.media.title
                 }, (d) => {
@@ -458,10 +444,11 @@
           }
         },
         mounted(){
-          this.cp = this.closest('appui-note-media-browser');
+          this.cp = this.closest('appui-note-media-browser2');
           this.select = this.cp.select
           this.initialTitle = this.data.media.title
           this.data.media.removedFile = false;
+          this.ready = true;
         },
         watch: {
           isMobile(val){
@@ -521,21 +508,21 @@
         },
        	methods:{
           showFileInfo(m){
-            this.closest('appui-note-media-browser').showFileInfo(m)
+            this.closest('appui-note-media-browser2').showFileInfo(m)
           },
           editMedia(m){
-            this.closest('appui-note-media-browser').editMedia(m)
+            this.closest('appui-note-media-browser2').editMedia(m)
           },
           deleteMedia(m){
-            this.closest('appui-note-media-browser').deleteMedia(m)
+            this.closest('appui-note-media-browser2').deleteMedia(m)
           }
         },
         mounted(){
-          if ( this.closest('appui-note-media-browser').select ){
-            this.closest('appui-note-media-browser').selected = false
+          if ( this.closest('appui-note-media-browser2').select ){
+            this.closest('appui-note-media-browser2').currentSelected = false
           }
           if (this.data.media.id){
-            this.mediaIdx = bbn.fn.search(this.closest('appui-note-media-browser').medias, 'id', this.data.media.id)
+            this.mediaIdx = this.closest('appui-note-media-browser2').getIndex({id: this.data.media.id})
           }
         }
       }

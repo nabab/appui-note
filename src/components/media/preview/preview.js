@@ -27,7 +27,7 @@
         this.getPopup().open({
           title: ' '/*img.name*/,
           source: img,
-          content: '<div class="bbn-overlay bbn-middle"><img src="notes/media/image/' + img.id + '/' + img.content.path + '" style="max-width: 100%; max-height: 100%"></div>',
+          content: '<div class="bbn-overlay bbn-middle"><img src="' + appui.plugins['appui-note'] + '/media/image/' + img.id + '/' + img.content.path + '" style="max-width: 100%; max-height: 100%"></div>',
           height: '70%',
           width: '70%',
           scrollable: false
