@@ -60,18 +60,6 @@
                 "update": "CASCADE",
                 "delete": "CASCADE",
                 "unique": 0
-            },
-            "excerpt": {
-                "columns": [
-                    "excerpt"
-                ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "constraint": null,
-                "update": null,
-                "delete": null,
-                "unique": 0
             }
         },
         "cols": {
@@ -89,9 +77,6 @@
             ],
             "id_alias": [
                 "id_alias"
-            ],
-            "excerpt": [
-                "excerpt"
             ]
         },
         "fields": {
@@ -145,12 +130,13 @@
             "excerpt": {
                 "position": 5,
                 "type": "text",
-                "null": 0,
-                "key": "MUL",
+                "null": 1,
+                "key": null,
                 "extra": "",
                 "signed": true,
                 "virtual": false,
-                "generation": ""
+                "generation": "",
+                "default": "NULL"
             },
             "private": {
                 "position": 6,
@@ -493,7 +479,7 @@
             ],
             "url": [
                 "url"
-            ],
+            ]
         },
         "fields": {
             "id_note": {
@@ -761,7 +747,7 @@
                 "virtual": false,
                 "generation": "",
                 "default": "",
-                "maxlength": 1000,
+                "maxlength": 1000
             },
             "title": {
                 "position": 6,
@@ -1081,7 +1067,7 @@
             ],
             "id_tag": [
                 "id_tag"
-            ],
+            ]
         },
         "fields": {
             "id_note": {
