@@ -1,7 +1,7 @@
 // Javascript Document
 (()=>{
   return{
-    //mixins: [bbn.vue.basicComponent, bbn.vue.listComponent],
+    mixins: [bbn.vue.basicComponent],
     props: {
       mediaType: {
         type: String,
@@ -13,6 +13,18 @@
       limit: {
         type: Number,
         default: 25
+      },
+      upload: {
+        type: [Boolean, String],
+        default: true
+      },
+      download: {
+        type: [Boolean, String],
+        default: true
+      },
+      remove: {
+        type: [Boolean, String],
+        default: true
       },
       pageable: {
         type: Boolean,
@@ -26,7 +38,31 @@
         type: Boolean,
         default: true
       },
+      info: {
+        type: Boolean,
+        default: true
+      },
       pathName: {
+        type: String
+      },
+      overlay: {
+        type: Boolean,
+        default: true
+      },
+      overlayName: {
+        type: String
+      },
+      selection: {
+        type: Boolean,
+        default: true
+      },
+      buttonMenu: {
+        type: [Array, Function]
+      },
+      buttonMenuComponent: {
+        type: [String, Object, Vue]
+      },
+      url: {
         type: String
       }
     },
@@ -40,6 +76,36 @@
       }
     },
     computed: {
+      currentButtonMenu(){
+        if (this.buttonMenu) {
+          return this.buttonMenu;
+        }
+        let res = [];
+        if (this.downloadEnabled) {
+          res.push({
+            text: bbn._('Download'),
+            icon: 'nf nf-fa-download',
+            action: this.downloadMedia
+          })
+        }
+        if (this.removeEnabled) {
+          res.push({
+            text: bbn._('Delete'),
+            icon: 'nf nf-fa-trash',
+            action: this.removeMedia
+          })
+        }
+        return res;
+      },
+      downloadEnabled(){
+        return !!this.download && (!!this.url || bbn.fn.isString(this.download));
+      },
+      uploadEnabled(){
+        return !!this.upload && (!!this.url || bbn.fn.isString(this.upload));
+      },
+      removeEnabled(){
+        return !!this.remove && (!!this.url || bbn.fn.isString(this.remove));
+      },
       extensions() {
         let res = [];
         bbn.fn.each(bbn.opt.extensions, (v, i) => {
@@ -82,7 +148,7 @@
         })
       },
       formatBytes: bbn.fn.formatBytes,
-      deleteMedia(m){
+      removeMedia(m){
         this.confirm(
           m.notes.length ?
 	          bbn._("The media you're going to delete is linked to a note, are you sure you want to remove it?") :
@@ -107,7 +173,10 @@
           }
         )
       },
-      downloadMedia(){
+      downloadMedia(a, b){
+        bbn.fn.warning('mirko', a, b)
+      },
+      selectMedia(){
         
       },
       showImage(img){
@@ -139,12 +208,6 @@
       this.ready = true;
     },
     watch: {
-      select(val){
-        let rSelect = this.closest('bbn-router').selectingMedia
-        if (!val && rSelect){
-          delete(this.closest('bbn-router').selectingMedia )
-        }
-      },
       searchMedia(val){
         this.medias = bbn.fn.filter(this.currentData, (a) => {
           return a.title.toLowerCase().indexOf(val.toLowerCase()) > -1
@@ -152,7 +215,7 @@
       }
     },
     components: {
-      'form': {
+      form: {
         props: ['source'],
         template: `
 <div class="bbn-padded">
@@ -416,8 +479,8 @@
           editMedia(m){
             this.closest('appui-note-media-browser2').editMedia(m, this.dataIdx)
           },
-          deleteMedia(m){
-            this.closest('bbn-container').getComponent().deleteMedia(m)
+          removeMedia(m){
+            this.closest('bbn-container').getComponent().removeMedia(m)
           },
           focusInput(){
             this.$nextTick(()=>{
@@ -525,7 +588,7 @@
              icon: 'nf nf-fa-trash_o',
              title: bbn._('Delete media'),
              action: () => {
-             	 this.deleteMedia(this.data.media)
+             	 this.removeMedia(this.data.media)
              }
             }];
             return res;
@@ -538,8 +601,8 @@
           editMedia(m){
             this.closest('appui-note-media-browser2').editMedia(m)
           },
-          deleteMedia(m){
-            this.closest('appui-note-media-browser2').deleteMedia(m)
+          removeMedia(m){
+            this.closest('appui-note-media-browser2').removeMedia(m)
           }
         },
         mounted(){

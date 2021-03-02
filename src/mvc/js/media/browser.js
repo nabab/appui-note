@@ -1,10 +1,9 @@
-(()=>{
+(() => {
   return {
-    props: [{
-      'select': {
-      	type: Boolean,
-        default: true
+    data(){
+      return {
+        root: appui.plugins['appui-note'] + '/'
       }
-    }]
+    }
   }
-})()
+})();
