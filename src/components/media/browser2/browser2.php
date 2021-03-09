@@ -1,5 +1,6 @@
 <div class="bbn-flex-height bbn-background bbn-overlay" ref="browser">
   <bbn-gallery :source="source"
+               :searchName="searchName" 
                :pageable="pageable"
                :filterable="filterable"
                :limit="limit"

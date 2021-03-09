@@ -42,6 +42,25 @@ if (!empty($ctrl->post['media']['file']) && ($title = $ctrl->post['media']['titl
         if (!empty($media['content'])){
           $media['content'] = json_decode($media['content']);
         }
+        if($id_note = $ctrl->post['id_note']){
+          \bbn\x::log($id_note, 'lore');
+          $notes = new \bbn\Appui\Note($ctrl->db);
+          $note = $notes->get($id_note);
+        
+          $notes->addMediaToNote($id_media, $id_note, $note['version']);
+          //to remove when an action ad hoc will be done for poc
+          if($photographer = $ctrl->db->rselect('photographers', [], ['id_note' => $id_note])){
+            
+            $cfg = json_decode($photographer['cfg'],true);
+            if(empty( count($cfg))){
+              $cfg = [];
+            }
+            
+            array_push($cfg, $id_media);
+            $num_media = count($cfg);
+            $ctrl->db->update('photographers', ['cfg'=> json_encode($cfg), 'num_media'=> $num_media], ['id'=> $photographer['id']] );
+          }
+        }
         $success = true;
       }
     }

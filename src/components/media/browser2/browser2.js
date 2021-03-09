@@ -3,6 +3,10 @@
   return{
     mixins: [bbn.vue.basicComponent],
     props: {
+      searchName: {
+        type: String,
+        default: 'title'
+      },
       mediaType: {
         type: String,
         default: null
@@ -209,7 +213,10 @@
     },
     watch: {
       searchMedia(val){
+        bbn.fn.error('watch')
+        bbn.fn.happy(a.title.toLowerCase().indexOf(val.toLowerCase()))
         this.medias = bbn.fn.filter(this.currentData, (a) => {
+         
           return a.title.toLowerCase().indexOf(val.toLowerCase()) > -1
         })
       }
@@ -219,7 +226,7 @@
         props: ['source'],
         template: `
 <div class="bbn-padded">
-	<bbn-form :validation="validation" :source="source" :data="{ref:ref}" :action="root + (source.edit ? 'media/actions/edit' : 'media/actions/save')" @success="success">
+	<bbn-form :validation="validation" :source="source" :data="{ref:ref, id_note:id_note}" :action="root + (source.edit ? 'media/actions/edit' : 'media/actions/save')" @success="success">
 		<div class="bbn-grid-fields">
 			<div>Title: </div>
 			<bbn-input v-model="source.media.title" @blur="checkTitle"
@@ -262,7 +269,7 @@
             //the idx of the media in medias of the container
             removedFile: false,
             mediaIdx:false,
-            
+            id_note:false
           }
         },
 			  methods: {
@@ -329,8 +336,11 @@
           },
           success(d){
             if(d.success && d.media){
+              bbn.fn.log('oooo',this.source.edit, this.browser, this.browser.source)
               if ( !this.source.edit ){
-                this.browser.add(d.media);
+                this.browser.source.push(d.media);
+                // this.browser.add does not exist!
+                //this.browser.add(d.media);
                 appui.success(bbn._('Media successfully added to media browser'));
               }
               else{
@@ -361,9 +371,17 @@
         },
         mounted(){
           this.browser = this.closest('bbn-container').find('appui-note-media-browser2')
-          this.mediaIdx =  bbn.fn.search(this.browser.currentData, 'id', this.source.media.id);
+          if(this.browser && this.browser.source.length){
+            this.mediaIdx =  bbn.fn.search(this.browser.source, 'id', this.source.media.id);
+          }
+          
           this.setContent();
-          this.source.edit ? (this.source.oldName = this.source.media.content.name) : ''
+          this.source.edit ? (this.source.oldName = this.source.media.content.name) : '';
+          if(this.browser && this.browser.$parent.source.id_note){
+            this.$nextTick(()=>{
+              this.id_note = this.browser.$parent.source.id_note;
+            })
+          }
         },
         watch: {
           /*content(val, oldVal){
