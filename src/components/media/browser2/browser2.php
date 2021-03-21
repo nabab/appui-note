@@ -15,7 +15,7 @@
                :deletable="removeEnabled"
                @upload="addMedia"
                @download="downloadMedia"
-               @remove="removeMedia"
+               @delete="removeMedia"
                @selection="selectMedia"
                :buttons-no-text="true"
                :buttonMenu="currentButtonMenu"

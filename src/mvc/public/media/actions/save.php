@@ -7,7 +7,7 @@
  */
 
 $success = false;
-if (!empty($ctrl->post['media']['file']) && ($title = $ctrl->post['media']['title'] ) ){
+if (!empty($ctrl->post['media']['file'])  ){
   $files = $ctrl->post['media']['file'];
 	$medias = new \bbn\Appui\Medias($ctrl->db);
   $tmp_path = $ctrl->userTmpPath().$ctrl->post['ref'].'/';
@@ -26,24 +26,20 @@ if (!empty($ctrl->post['media']['file']) && ($title = $ctrl->post['media']['titl
           $name = $ctrl->post['media']['name'];
         }
         else {
-          $name = $ctrl->post['media']['name'].'.'.$f['extension'];
+          $name = $f['name'].'.'.$f['extension'];
         }
       }
       else{
         $name = $f['name'];
       }
-			if ( strpos( $title, '.') < 0 ){
-        //if the title does not contains extension
-        $title = $title.'.'.$f['extension'];
-      }
-      unset($f['name']);
-      if ( $id_media = $medias->insert($_path,null,$title,'file',false)){
+			unset($f['name']);
+      if ( $id_media = $medias->insert($_path,null,$name,'file',false)){
         $media = $medias->getMedia($id_media, true);
         if (!empty($media['content'])){
           $media['content'] = json_decode($media['content']);
         }
+        //case of table photographers
         if($id_note = $ctrl->post['id_note']){
-          \bbn\x::log($id_note, 'lore');
           $notes = new \bbn\Appui\Note($ctrl->db);
           $note = $notes->get($id_note);
         
@@ -60,11 +56,14 @@ if (!empty($ctrl->post['media']['file']) && ($title = $ctrl->post['media']['titl
             $num_media = count($cfg);
             $ctrl->db->update('photographers', ['cfg'=> json_encode($cfg), 'num_media'=> $num_media], ['id'=> $photographer['id']] );
           }
+          else if ( $product = $ctrl->db->rselect('poc_products', [], ['id_note' => $id_note ])){
+            $ctrl->db->insert('poc_products_media', ['id_media' => $id_media, 'id_product' => $product['id']]);
+          }
         }
+        $ctrl->obj->media = $notes->getMedias($id_note, true);
         $success = true;
       }
     }
   }
 }
 $ctrl->obj->success = $success;
-$ctrl->obj->media = $media;

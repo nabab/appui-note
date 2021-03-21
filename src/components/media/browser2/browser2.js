@@ -14,6 +14,9 @@
       source: {
         type: [String, Array]
       },
+      data: {
+        type: Object
+      },
       limit: {
         type: Number,
         default: 25
@@ -68,7 +71,11 @@
       },
       url: {
         type: String
-      }
+      },
+      single: {
+        type: Boolean,
+        default: false
+      },
     },
     data(){
       return {
@@ -76,7 +83,8 @@
         searchMedia: '',
         current: {},
         showList: false,
-        isPicker: false
+        isPicker: false,
+         root: appui.plugins['appui-note'] + '/',
       }
     },
     computed: {
@@ -153,11 +161,13 @@
       },
       formatBytes: bbn.fn.formatBytes,
       removeMedia(m){
-        this.confirm(
-          m.notes.length ?
+        this.$emit('delete', {'id_note':this.data.id_note, 'media': m} );
+        /*this.confirm(
+          (m.notes && m.notes.length) ?
 	          bbn._("The media you're going to delete is linked to a note, are you sure you want to remove it?") :
           	bbn._("Are you sure you want to delete this media?"),
           () => {
+            this.$emit('delete', {'id_note':this.data.id_note, 'id': m.id} );
             this.post(
               appui.plugins['appui-note'] + '/media/actions/delete',
               m,
@@ -175,13 +185,21 @@
               }
             )
           }
-        )
+        )*/
       },
       downloadMedia(a, b){
-        bbn.fn.warning('mirko', a, b)
+        this.$emit('download', a)
+       /* this.post(this.root + 'media/actions/file/download', a, (d) => { 
+          if(d.success){
+            appui.success(a.name +' '+ bbn._( +'downloaded'))
+          }
+          else{
+            appui.error(bbn._('Something went wrong while downloading the file'))
+          }
+        })*/
       },
-      selectMedia(){
-        
+      selectMedia(a){
+        this.$emit('selection', a)
       },
       showImage(img){
         this.getPopup().open({
@@ -228,13 +246,15 @@
 <div class="bbn-padded">
 	<bbn-form :validation="validation" :source="source" :data="{ref:ref, id_note:id_note}" :action="root + (source.edit ? 'media/actions/edit' : 'media/actions/save')" @success="success">
 		<div class="bbn-grid-fields">
-			<div>Title: </div>
+			<div v-if="browser.single">Title: </div>
 			<bbn-input v-model="source.media.title" @blur="checkTitle"
-								 :disabled="source.edit ? false : (!source.media.file.length ?true : false )"
+                 v-if="browser.single" 
+                 :disabled="source.edit ? false : (!source.media.file.length ?true : false )"
 			></bbn-input>
 
-			<div>Filename: </div>
-			<bbn-input v-model="source.media.name"
+			<div v-if="browser.single">Filename: </div>
+			<bbn-input v-if="browser.single"
+                 v-model="source.media.name"
 								 :disabled="source.edit ? false : (!source.media.file.length ?true : false )"
 			></bbn-input>
 
@@ -336,7 +356,6 @@
           },
           success(d){
             if(d.success && d.media){
-              bbn.fn.log('oooo',this.source.edit, this.browser, this.browser.source)
               if ( !this.source.edit ){
                 this.browser.source.push(d.media);
                 // this.browser.add does not exist!
@@ -352,7 +371,6 @@
                   if(bbn.fn.isString(d.media.content)){
                     d.media.content = JSON.parse(d.media.content)
                   }
-                  bbn.fn.log('before',this.mediaIdx)
                   let thatMediaIdx = this.mediaIdx
                   //the block has to disappear to show the new picture uploaded
                   this.browser.currentData.splice(this.mediaIdx, 1);
@@ -363,6 +381,7 @@
                 }
                 appui.success(bbn._('Media successfully updated'));
               }
+              this.browser.$emit('added', d.media);
             }
             else{
               appui.error(bbn._('Something went wrong while adding the media to the media broser'))
