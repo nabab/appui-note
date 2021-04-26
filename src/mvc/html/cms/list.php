@@ -1,7 +1,7 @@
 <!-- HTML Document -->
 <div class="bbn-overlay appui-note-cms">
   <bbn-table ref="table"
-             :source="source.root + 'cms/list'"
+             :source="root + 'cms/list'"
              :columns="cols"
              :limit="25"
              :info="true"
@@ -20,8 +20,8 @@
                   :action="insertNote"
       ></bbn-button>
       
-      <div class="bbn-xl bbn-b bbn-flex-fill bbn-r">
-        <?=_("Cms management")?>
+      <div class="bbn-xl bbn-b bbn-flex-fill bbn-r bbn-white">
+        <?=_("CMS management")?>
       </div>
     </div>
   </bbn-toolbar>

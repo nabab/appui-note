@@ -3,6 +3,7 @@
   return {
     data(){
       return {
+        root: appui.plugins['appui-note'] + '/',
         types: [{
           text: bbn._('Page'),
           value: 'pages'
@@ -163,7 +164,7 @@
       },
       unpublishNote(row){
         appui.confirm(bbn._('Are you sure to remove the publication from this note?'), () => {
-          bbn.fn.post(this.source.root + 'cms/actions/unpublish',{id: row.id_note }, d =>{
+          bbn.fn.post(this.root + 'cms/actions/unpublish',{id: row.id_note }, d =>{
             if ( d.success ){
               this.getRef('table').reload();
               appui.success(bbn._('Successfully deleted'));
@@ -176,7 +177,7 @@
       },
       deleteNote(row){
         appui.confirm(bbn._('Are you sure to delete this note?'), () => {
-          bbn.fn.post(this.source.root + "cms/actions/delete",{id: row.id_note }, (d) =>{
+          bbn.fn.post(this.root + "cms/actions/delete",{id: row.id_note }, (d) =>{
             if ( d.success ){
               this.getRef('table').reload();
               appui.success(bbn._('Successfully deleted'));
@@ -205,7 +206,7 @@
       // function of render
       renderUrl(row){
         if ( row.url !== null ){
-          return '<a href="' + this.source.root + 'cms/preview/' + row.url +'" target="_blank">' + row.url + '</a>';
+          return '<a href="' + this.root + 'cms/preview/' + row.url +'" target="_blank">' + row.url + '</a>';
         }
         return '-';
       },
@@ -222,7 +223,7 @@
         template: '<appui-note-media-browser @select="insertMedia" :select="true"></appui-note-media-browser>',
         data(){
           return {
-            root: this.closest('bbn-container').getComponent().source.root
+            root: this.closest('bbn-container').getComponent().root
           }
         },
         computed:{
@@ -280,8 +281,8 @@
         data(){
           return {
             medias: [],
-            url: this.closest('bbn-container').getComponent().source.root + "cms/actions/"+this.source.action,
-            root: this.closest('bbn-container').getComponent().source.root,
+            url: this.closest('bbn-container').getComponent().root + "cms/actions/"+this.source.action,
+            root: this.closest('bbn-container').getComponent().root,
             cp: appui.getRegistered('publications'),
             publish: false, 
           }

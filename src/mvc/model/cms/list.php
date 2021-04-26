@@ -11,6 +11,7 @@ $opt = new \bbn\Appui\Option($db);
 $notes = new \bbn\Appui\Note($db);
 $cms = new \bbn\Appui\Cms($model->db);
 
+
 $all = [
   'data' => [],
   'total' => 0,
