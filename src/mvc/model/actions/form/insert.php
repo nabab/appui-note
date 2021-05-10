@@ -9,20 +9,14 @@ if (($note = new \bbn\Appui\Note($model->db))
     $model->data['content'],
     $model->data['id_type'],
     $model->data['private'],
-    $model->data['locked']
+    $model->data['locked'],
+    null,
+    null,
+    $model->hasData('mime', true) ? $model->data['mime'] : '',
+    $model->hasData('lang', true) ? $model->data['lang'] : ''
   ))
 ) {
   $succ = true;
-  if (($model->hasData('mime', true) || $model->hasData('lang', true))
-    && !$model->db->update('bbn_notes', [
-      'mime' => $model->data['mime'],
-      'lang' => $model->data['lang']
-    ], [
-      'id' => $idNote
-    ])
-  ) {
-    $succ = false;
-  }
   if ($model->hasData('url', true)
     && !$model->db->insert('bbn_notes_url', [
       'id_note' => $idNote,
@@ -31,9 +25,9 @@ if (($note = new \bbn\Appui\Note($model->db))
   ) {
     $succ = false;
   }
-  if ($model->hasData('star', true)) {
+  if ($model->hasData('start', true)) {
     $event = new \bbn\Appui\Event($model->db);
-    if (($typeEvent = $model->inc->option->fromCode('publication', 'event', 'appui'))
+    if (($typeEvent = $model->inc->options->fromCode('publication', 'event', 'appui'))
       && ($idEvent = $event->insert([
         'id_type' => $typeEvent,
         'start' => $model->data['start'],
