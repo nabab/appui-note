@@ -14,9 +14,7 @@
                      action: markdown
                      }]"
 
-           :expander="$options.components['apst-notes-content']"
-          
->
+           :expander="$options.components['apst-notes-content']">
   <bbns-column field="id_note"
                :hidden="true"
   ></bbns-column>
@@ -57,7 +55,7 @@
                cls="bbn-c"
                :width="100"
   ></bbns-column>
-  
+
   <bbns-column field="version"
                title="<?=_("Version")?>"
                :width="70"
@@ -99,7 +97,7 @@
     <div class="bbn-padded bbn-w-100" style="min-height: 500px">
 
 
-      <label class="bbn-form-label" >
+      <label class="bbn-form-label">
         <?=_("Category")?>
       </label>
       <div class="bbn-form-field">
