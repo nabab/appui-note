@@ -42,11 +42,8 @@
       },
       title(row){
         //return row.title
-        if (!row.title || (row.title === '') && row.content) {
-          if ( bbn.fn.isNumber(row.content) ){
-            row.content = row.content.toString();
-          }
-          return row.content.substr(0,50)+ this.span;
+        if (!row.title || (row.title === '') && row.excerpt) {
+          return row.excerpt.substr(0,50) + this.span;
         }
         else{
           return row.title
