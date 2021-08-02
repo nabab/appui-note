@@ -21,6 +21,17 @@
                :hidden="true"
   ></bbns-column>
 
+  <bbns-column field="title"
+               title="<?=_("Title")?>"
+               :render="title"
+  ></bbns-column>
+
+  <bbns-column field="id_type"
+               title="<?=_("Type")?>"
+               :source="source.options"
+               :width="120"
+  ></bbns-column>
+
   <bbns-column field="creator"
                title="<?=_("Creator")?>"
                :render="creator"
@@ -51,12 +62,6 @@
                title="<?=_("Version")?>"
                :width="70"
                cls="bbn-c"
-  ></bbns-column>
-
-  <bbns-column field="title"
-               title="<?=_("Title")?>"
-               :render="title"
-               class="bbn-c"
   ></bbns-column>
 
   <bbns-column :width="220"
