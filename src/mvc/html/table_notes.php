@@ -14,11 +14,20 @@
                      action: markdown
                      }]"
 
-           :expander="$options.components['apst-notes-content']"
-          
->
+           :expander="$options.components['apst-notes-content']">
   <bbns-column field="id_note"
                :hidden="true"
+  ></bbns-column>
+
+  <bbns-column field="title"
+               title="<?=_("Title")?>"
+               :render="title"
+  ></bbns-column>
+
+  <bbns-column field="id_type"
+               title="<?=_("Type")?>"
+               :source="source.options"
+               :width="120"
   ></bbns-column>
 
   <bbns-column field="creator"
@@ -46,17 +55,11 @@
                cls="bbn-c"
                :width="100"
   ></bbns-column>
-  
+
   <bbns-column field="version"
                title="<?=_("Version")?>"
                :width="70"
                cls="bbn-c"
-  ></bbns-column>
-
-  <bbns-column field="title"
-               title="<?=_("Title")?>"
-               :render="title"
-               class="bbn-c"
   ></bbns-column>
 
   <bbns-column :width="220"
@@ -94,7 +97,7 @@
     <div class="bbn-padded bbn-w-100" style="min-height: 500px">
 
 
-      <label class="bbn-form-label" >
+      <label class="bbn-form-label">
         <?=_("Category")?>
       </label>
       <div class="bbn-form-field">
