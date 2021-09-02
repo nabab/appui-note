@@ -6,11 +6,9 @@
 
 /** @var $model \bbn\Mvc\Model*/
 
-return [
-  'total' => 3,
-  'data' => [
-    ['text' => 'hello1', 'id' => 1],
-    ['text' => 'hello2', 'id' => 2],
-    ['text' => 'hello3', 'id' => 3]
-  ]
-];
+use bbn\Appui\Cms;
+
+$cms = new Cms($model->db);
+
+
+return $cms->getLatest($model->data['limit'] ?? 10, $model->data['start'] ?? 0);
