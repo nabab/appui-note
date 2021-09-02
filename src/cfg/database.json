@@ -46,7 +46,19 @@
                 "ref_column": "id",
                 "constraint": "bbn_constraint_p65n_80",
                 "update": "CASCADE",
-                "delete": "CASCADE",
+                "delete": "RESTRICT",
+                "unique": 0
+            },
+            "id_option": {
+                "columns": [
+                    "id_options"
+                ],
+                "ref_db": "poc2",
+                "ref_table": "bbn_options",
+                "ref_column": "id",
+                "constraint": "bbn_constraint_p65n_80",
+                "update": "CASCADE",
+                "delete": "RESTRICT",
                 "unique": 0
             },
             "id_alias": {
@@ -74,6 +86,9 @@
             ],
             "id_type": [
                 "id_type"
+            ],
+            "id_option": [
+                "id_option"
             ],
             "id_alias": [
                 "id_alias"
@@ -127,8 +142,20 @@
                 "default": "NULL",
                 "maxlength": 16
             },
-            "excerpt": {
+            "id_option": {
                 "position": 5,
+                "type": "binary",
+                "null": 1,
+                "key": "MUL",
+                "extra": "",
+                "signed": true,
+                "virtual": false,
+                "generation": "",
+                "default": "NULL",
+                "maxlength": 16
+            },
+            "excerpt": {
+                "position": 6,
                 "type": "text",
                 "null": 1,
                 "key": null,
@@ -139,18 +166,6 @@
                 "default": "NULL"
             },
             "private": {
-                "position": 6,
-                "type": "tinyint",
-                "null": 0,
-                "key": null,
-                "extra": "",
-                "signed": false,
-                "virtual": false,
-                "generation": "",
-                "default": 0,
-                "maxlength": 1
-            },
-            "locked": {
                 "position": 7,
                 "type": "tinyint",
                 "null": 0,
@@ -162,7 +177,7 @@
                 "default": 0,
                 "maxlength": 1
             },
-            "pinned": {
+            "locked": {
                 "position": 8,
                 "type": "tinyint",
                 "null": 0,
@@ -174,8 +189,20 @@
                 "default": 0,
                 "maxlength": 1
             },
-            "creator": {
+            "pinned": {
                 "position": 9,
+                "type": "tinyint",
+                "null": 0,
+                "key": null,
+                "extra": "",
+                "signed": false,
+                "virtual": false,
+                "generation": "",
+                "default": 0,
+                "maxlength": 1
+            },
+            "creator": {
+                "position": 10,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -186,7 +213,7 @@
                 "maxlength": 16
             },
             "active": {
-                "position": 10,
+                "position": 11,
                 "type": "int",
                 "null": 0,
                 "key": null,
