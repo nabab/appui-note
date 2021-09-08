@@ -1,25 +1,24 @@
+<!-- HTML Document -->
 
-<div :class="[componentClass, 'bbn-flex-height', 'bbn-background', 'bbn-overlay']" ref="browser">
+<div class="bbn-flex-height bbn-background bbn-overlay" ref="browser">
   <bbn-gallery :source="source"
-               :searchName="searchName"
+               :searchName="searchName" 
                :pageable="pageable"
                :filterable="filterable"
                :limit="limit"
-               :zoomable="zoomable"
+               :zoomable="false"
                :info="info"
                :path-name="pathName"
                :overlay-name="overlayName"
                :overlay="overlay"
                :toolbar="true"
                :uploadable="uploadEnabled"
-               :downloadable="downloadEnabled"
                :deletable="removeEnabled"
                @upload="addMedia"
                @download="downloadMedia"
                @delete="removeMedia"
-               @selection="selectMedia"
+               @clickItem="emitClickItem"
                :buttons-no-text="true"
                :buttonMenu="currentButtonMenu"
-               :buttonMenuComponent="buttonMenuComponent"
-               :selection="selection"/>
+               :buttonMenuComponent="buttonMenuComponent"/>
 </div>

@@ -161,7 +161,7 @@
               name: ''
         		}
           }
-        })
+        });
       },
       formatBytes: bbn.fn.formatBytes,
       removeMedia(m){
@@ -192,7 +192,7 @@
         )*/
       },
       downloadMedia(a, b){
-        this.$emit('download', a)
+        this.$emit('download', a);
        /* this.post(this.root + 'media/actions/file/download', a, (d) => { 
           if(d.success){
             appui.success(a.name +' '+ bbn._( +'downloaded'))
@@ -203,10 +203,11 @@
         })*/
       },
       selectMedia(a){
-        this.$emit('selection', a)
+        this.$emit('selection', a);
       },
       emitClickItem(item) {
-        this.$emit('clickItem', item)
+        bbn.fn.log("EMITTING CLICKITEM");
+        this.$emit('clickItem', item);
       },
       showImage(img){
         this.getPopup().open({
@@ -216,7 +217,7 @@
           height: '70%',
           width: '70%',
           scrollable: false
-        })
+        });
       },
       showFileInfo(m){
         this.getPopup().open({
@@ -224,7 +225,7 @@
           source: m,
           component: 'appui-note-media-info',
           width: 400,
-        })
+        });
       },
     },
     beforeMount(){
@@ -238,9 +239,11 @@
     },
     watch: {
       searchMedia(val){
+        bbn.fn.error('watch');
+        bbn.fn.happy(a.title.toLowerCase().indexOf(val.toLowerCase()));
         this.medias = bbn.fn.filter(this.currentData, (a) => {
           return a.title.toLowerCase().indexOf(val.toLowerCase()) > -1;
-        });
+        })
       }
     }
   }
