@@ -1,8 +1,8 @@
 <!-- HTML Document -->
 
-<div class="bbn-flex-height bbn-background bbn-overlay" ref="browser">
+<div :class="[componentClass, 'bbn-flex-height', 'bbn-background', 'bbn-overlay']" ref="browser">
   <bbn-gallery :source="source"
-               :searchName="searchName" 
+               :searchName="searchName"
                :pageable="pageable"
                :filterable="filterable"
                :limit="limit"

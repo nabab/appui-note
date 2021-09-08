@@ -1,4 +1,4 @@
-<div :class="classComponent">
+<div :class="componentClass">
 	<div class="bbn-grid-fields bbn-padded">
 		<div>Title:</div>
 		<div v-text="source.title"></div>
