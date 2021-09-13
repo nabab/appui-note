@@ -51,7 +51,7 @@
             },
             "id_option": {
                 "columns": [
-                    "id_options"
+                    "id_option"
                 ],
                 "ref_db": "poc2",
                 "ref_table": "bbn_options",
