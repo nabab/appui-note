@@ -2,6 +2,7 @@
 
 (() => {
   return {
+    mixins: [bbn.vue.basicComponent],
     props: ['source'],
     data(){
       return {
