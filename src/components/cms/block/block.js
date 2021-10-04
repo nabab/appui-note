@@ -4,7 +4,7 @@
   if (!appui.mixins) {
     appui.mixins = {};
   }
-  let borderStyle = [
+  let borderStyles = [
     {text: bbn._("hidden"), value: "hidden"},
     {text: bbn._("dotted"), value: "dotted"},
     {text: bbn._("dashed"), value: "dashed"},
@@ -27,7 +27,7 @@
           align: '',
           image: [],
           tinyNumbers: [{text: '1', value: 1}, {text: '2', value: 2},{text: '3', value: 3},{text: '4', value: 4}],
-          borderStyle:  borderStyle,
+          borderStyles:  borderStyles,
           ref: (new Date()).getTime(),
           show: true,
           currentCarouselIdx: 0
@@ -110,7 +110,7 @@
           align: '',
           image: [],
           tinyNumbers: [{text: '1', value: 1}, {text: '2', value: 2},{text: '3', value: 3},{text: '4', value: 4}],
-          borderStyle: borderStyle,
+          borderStyles: borderStyles,
           ref: (new Date()).getTime(),
           show: true,
           currentCarouselIdx: 0
