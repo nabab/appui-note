@@ -9,6 +9,7 @@
 $success = false;
 if (!empty($ctrl->post['media']['file'])  ){
   $files = $ctrl->post['media']['file'];
+	$notes = new \bbn\Appui\Note($ctrl->db);
 	$medias = new \bbn\Appui\Medias($ctrl->db);
   $tmp_path = $ctrl->userTmpPath().$ctrl->post['ref'].'/';
   $fs = new \bbn\File\System();
