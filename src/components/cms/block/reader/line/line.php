@@ -1,5 +1,5 @@
 <!-- HTML Document -->
 
-<div class="component-container">
-  <hr :style="style">
+<div :class="[componentClass, 'component-container']">
+  <hr :style="hrStyle">
 </div>

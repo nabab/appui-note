@@ -2,7 +2,7 @@
 
 (() => {
   return {
-    mixins: [bbn.vue.basicComponent, appui.mixins['appui-note-cms-editor']],
+    mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-editor']],
     computed: {
       youtube(){
         return this.source.src.indexOf('youtube') > -1;

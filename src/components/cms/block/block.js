@@ -1,20 +1,45 @@
 // Javascript Document
 
 (() => {
-  if (!appui.mixins) {
-    appui.mixins = {};
+  if (!bbn.vue.mixins) {
+    bbn.vue.mixins = {};
   }
-  let borderStyles = [
-    {text: bbn._("hidden"), value: "hidden"},
-    {text: bbn._("dotted"), value: "dotted"},
-    {text: bbn._("dashed"), value: "dashed"},
-    {text: bbn._("solid"), value: "solid"},
-    {text: bbn._("double"), value: "double"},
-    {text: bbn._("groove"), value: "groove"},
-    {text: bbn._("ridge"), value: "ridge"}
-  ];
 
-  appui.mixins['appui-note-cms-reader'] =
+  let setStyle = function(name, value) {
+    if (this.ready) {
+      let style = this.source.style || {};
+
+      // Checking if the name is not in the CSS form (no camelCase)
+      if (style[name] === undefined) {
+
+        let tmp = bbn.fn.camelToCss(name);
+        if (style[tmp] !== undefined) {
+          name = tmp;
+        }
+        // If none defined prefering the camelCase form
+        else {
+          name = bbn.fn.camelize(name);
+        }
+      }
+
+      // Checking if the value is different
+      if (style[name] !== value) {
+        if (style[name] !== undefined) {
+          this.source.style[name] = value;
+        }
+        else if (value) {
+          if (!this.source.style) {
+            this.$set(this.source, 'style', {});
+          }
+
+          this.$set(this.source.style, name, value);
+          this.$forceUpdate();
+        }
+      }
+    }
+  };
+
+  bbn.vue.mixins['appui-note-cms-reader'] =
     {
       props: {
         source: {},
@@ -27,13 +52,15 @@
           align: '',
           image: [],
           tinyNumbers: [{text: '1', value: 1}, {text: '2', value: 2},{text: '3', value: 3},{text: '4', value: 4}],
-          borderStyles:  borderStyles,
           ref: (new Date()).getTime(),
           show: true,
           currentCarouselIdx: 0
         }
       },
       computed: {
+        isAutoplay(){
+          return this.autoplay === true;
+        },
         edit(){
           return this.$parent.edit
         },
@@ -60,11 +87,15 @@
           }
           return st;
         },
+        styleProps(){
+          return Object.keys(this.source.style || {});
+        },
         currentStyle(){
           let res = {};
-          bbn.fn.iterate(this.source.style || {}, (a, n) => {
-            res[bbn.fn.camelize(n)] = a;
+          bbn.fn.each(this.styleProps, n => {
+            res[bbn.fn.camelize(n)] = this.source.style[n];
           });
+
           return res;
         },
         style(){
@@ -77,28 +108,22 @@
         }
       }, 
       methods: { 
-        decodeURIComponent(st){
-          //the regular expression to match the new line
-          /*let reg = /\r?\n|\r/g;
-                  if(st.match(reg)){
-                    st = st.replace(reg, '');
-                  }*/
-          //var st = bbn.fn.nl2br(st);
-          return decodeURIComponent(this.escape(st));
-        },
-        escape(st){
-          return escape(st)
-        },
-        /** calculates the height of the images in gallery basing on source.columns */
-        setColor(a){
-          this.source.style.color = a;
-          this.$parent.edit = false
-          //this.$forceUpdate()
-        },
+        setStyle: setStyle,
+      },
+      mounted() {
+        this.ready = true;
+      },
+    	watch: {
+        "source.style": {
+          deep: true,
+          handler(){
+            bbn.fn.log("CHANGING SOURCE STYLE");
+          }
+        }
       }
     };
 
-  appui.mixins['appui-note-cms-editor'] =
+  bbn.vue.mixins['appui-note-cms-editor'] =
     {
       props: {
         source: {},
@@ -110,7 +135,6 @@
           align: '',
           image: [],
           tinyNumbers: [{text: '1', value: 1}, {text: '2', value: 2},{text: '3', value: 3},{text: '4', value: 4}],
-          borderStyles: borderStyles,
           ref: (new Date()).getTime(),
           show: true,
           currentCarouselIdx: 0
@@ -126,25 +150,6 @@
         linkURL(){
           return this.$parent.linkURL
         },
-        carouselSource(){
-          if (this.source.source && (this.source.type === 'carousel')){
-            let res = [];
-            var i,j,temparray, chunk = 3;
-            for (i=0,j=this.source.source.length; i<j; i+=chunk) {
-              temparray = this.source.source.slice(i,i+chunk);
-              res.push(temparray);
-              // do whatever
-            }
-            return res;
-          }
-        },
-        mobile(){
-          if ( bbn.env.width <= 640 ){
-            this.$parent.isMobile = true;
-            return true;
-          }
-          return false
-        },
         alignClass(){
           if (this.source.align === 'left') {
             return 'bbn-l'
@@ -155,11 +160,15 @@
 
           return 'bbn-c';
         },
+        styleProps(){
+          return Object.keys(this.source.style || {});
+        },
         currentStyle(){
           let res = {};
-          bbn.fn.iterate(this.source.style || {}, (a, n) => {
-            res[bbn.fn.camelize(n)] = a;
+          bbn.fn.each(this.styleProps, n => {
+            res[bbn.fn.camelize(n)] = this.source.style[n];
           });
+
           return res;
         },
         style(){
@@ -171,52 +180,11 @@
           return st;
         }
       },
-      methods: { 
-        decodeURIComponent(st){
-          //the regular expression to match the new line
-          /*let reg = /\r?\n|\r/g;
-                  if(st.match(reg)){
-                    st = st.replace(reg, '');
-                  }*/
-          //var st = bbn.fn.nl2br(st);
-          return decodeURIComponent(this.escape(st));
-        },
-        escape(st){
-          return escape(st)
-        },
-        /** calculates the height of the images in gallery basing on source.columns */
-        setColor(a){
-          this.source.style.color = a;
-          this.$parent.edit = false
-          //this.$forceUpdate()
-        },
-        /** @todo Seriously these arguments names??  */
-        imageSuccess(a, b, c, d){
-          if (c.success && c.image.src.length ){
-            if ( this.source.type === 'gallery' ){
-              c.image.src = c.image.name;
-              c.image.alt = '';
-              setTimeout(() => {
-                this.show = false;
-                //this.source.content.push(c.image);//
-                this.makeSquareImg();  
-              }, 200);
-            }
-            else{
-              this.source.content = c.image.name; 
-            }
-            appui.success(bbn._('Image correctly uploaded'))
-          }
-          else{
-            appui.error(bbn._('An error occurred while uploading the image'))
-          }
-
-        }
+      methods: {
+        setStyle: setStyle,
       },
-      beforeMount(){
-        if ( bbn.fn.isEmpty(this.source.style) ){
-          this.source.style = {}
-        }
+      mounted() {
+        this.ready = true;
       }
     };
 
@@ -278,6 +246,9 @@
       }
     },
     computed: {
+      isSelected() {
+        return this.selected === true;
+      },
       currentComponent(){
         return this.getComponentName((this.edit ? 'editor' : 'reader') + '/' + this.type);
       },
@@ -286,7 +257,7 @@
       },
       type(){
         return this.source.type || text
-      }, 
+      },
       parent(){
         return this.ready ? this.closest('bbn-container').getComponent() : null;
       }
@@ -391,26 +362,6 @@
       },
     },
     mounted(){
-      if ( bbn.fn.isEmpty(this.source.style) ){
-        bbn.fn.warning(this.source.type)
-        this.source.style = {};
-      }
-      if ( bbn.fn.isEmpty(this.source.style) || !this.source.style.color ){
-        this.source.style.color = '';
-      }
-      if ( !this.source.align ){
-        this.source.align = 'left'
-      }
-      if ( bbn.fn.isEmpty(this.source.style) || !this.source.style.width ){
-        this.source.width = '100%'
-      }
-      //if alignment is already defined as style property
-      if ( this.source.style && this.source.style.align ){
-        this.source.align = this.source.style.align;
-      }
-
-      bbn.fn.log("I AM THE BLOCK! ", this.source);
-      this.initialSource = bbn.fn.extend({}, this.source);
       this.ready = true;
     },
     created(){
@@ -437,22 +388,6 @@
         bbn.fn.log("type")
       },
       edit(val){
-        /*
-        //if adding a new block
-        bbn.fn.error('watch')
-        if ( ( val === false ) && ( this.newBlock === true ) ){
-          this.parent.source.lines.push(this.source)
-          this.parent.lines.push({
-            content: { 
-              data:  '<div>[CONTENT]</div>'
-            },
-            type: ''
-          });
-          appui.success(bbn._('New block ' + this.source.type + ' added!'))
-          this.newBlock = false;
-        }
-        //this._setEvents()
-        */
       }
     }
   };

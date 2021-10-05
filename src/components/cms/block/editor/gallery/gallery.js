@@ -2,7 +2,7 @@
 
 (() => {
   return {
-    mixins: [bbn.vue.basicComponent, appui.mixins['appui-note-cms-editor']],
+    mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-editor']],
     computed: {
       columnsClass(){
         if (this.mobile) {
@@ -60,19 +60,14 @@
       /** @todo Seriously these arguments names??  */
       imageSuccess(a, b, res){
         if (res.success && res.image.src.length ){
-          if ( this.source.type === 'gallery' ){
-            res.image.src = res.image.name;
-            res.image.alt = '';
-            setTimeout(() => {
-              this.show = false;
-              //this.source.content.push(c.image);//
-              this.makeSquareImg();
-            }, 200);
-          }
-          else{
-            this.source.content = res.image.name;
-          }
-          appui.success(bbn._('Image correctly uploaded'));
+          res.image.src = res.image.name;
+          res.image.alt = '';
+          setTimeout(() => {
+            this.show = false;
+            //this.source.content.push(c.image);//
+            this.makeSquareImg();
+            appui.success(bbn._('Image correctly uploaded'));
+          }, 200);
         }
         else{
           appui.error(bbn._('An error occurred while uploading the image'));

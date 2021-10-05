@@ -2,13 +2,12 @@
   return {
     data(){
       return {
-        align: ''
+        align: this.source.align || 'left',
       }
     },
     watch:{
       align(val){
-        this.$parent.source.align = val
-        this.$parent.$parent.$forceUpdate();
+        this.source.align = val;
       },
     }
   };

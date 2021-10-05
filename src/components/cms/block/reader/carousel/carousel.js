@@ -2,7 +2,7 @@
 
 (() => {
   return {
-    mixins: [bbn.vue.basicComponent, appui.mixins['appui-note-cms-reader']],
+    mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-reader']],
     computed: {
       items(){
         if (this.source.source && (this.source.type === 'carousel')){
@@ -66,6 +66,15 @@
           this.show = true;
         }
       },
+      imageSuccess(a, b, res){
+        if (res.success && res.image.src.length ){
+          this.source.content = res.image.name;
+          appui.success(bbn._('Image correctly uploaded'));
+        }
+        else{
+          appui.error(bbn._('An error occurred while uploading the image'));
+        }
+      }
     },
     mounted() {
       this.makeSquareImg();

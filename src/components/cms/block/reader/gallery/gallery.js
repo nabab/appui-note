@@ -2,7 +2,7 @@
 
 (() => {
   return {
-    mixins: [bbn.vue.basicComponent, bbn.vue.resizerComponent, appui.mixins['appui-note-cms-reader']],
+    mixins: [bbn.vue.basicComponent, bbn.vue.resizerComponent, bbn.vue.mixins['appui-note-cms-reader']],
     computed: {
       columnsClass(){
         if (this.mobile) {
@@ -63,7 +63,7 @@
       },
     },
     mounted(){
-      this.onResize();
+//      this.onResize();
       this.makeSquareImg();
     },
     watch: {

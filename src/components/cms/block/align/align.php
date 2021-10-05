@@ -2,20 +2,18 @@
 
 <div>
   <bbn-button icon="nf nf-fa-align_left"
-              :title="_('Align left')" 
+              :text="_('Align left')"
               :notext="true"
-              @click="align = 'left'" 
-              :class="{'bbn-state-active': ($parent.source.align === 'left')}"
-              ></bbn-button>
-  <bbn-button icon="nf nf-fa-align_center" :title="_('Align left')"
-              :notext="true" 
+              @click="align = 'left'"
+              :class="{'bbn-state-active': align === 'left'}"/>
+  <bbn-button icon="nf nf-fa-align_center"
+              :text="_('Align center')"
+              :notext="true"
               @click="align = 'center'"
-              :class="{'bbn-state-active': ($parent.source.align === 'center')}"
-              ></bbn-button>
+              :class="{'bbn-state-active': align === 'center'}"/>
   <bbn-button icon="nf nf-fa-align_right"
-              :title="_('Align left')"
-              :notext="true" 
+              :text="_('Align right')"
+              :notext="true"
               @click="align = 'right'"
-              :class="{'bbn-state-active': ($parent.source.align === 'right')}"
-              ></bbn-button>
+              :class="{'bbn-state-active': align === 'right'}"/>
 </div>

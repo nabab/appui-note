@@ -2,32 +2,43 @@
 
 (() => {
   return {
-    mixins: [bbn.vue.basicComponent, appui.mixins['appui-note-cms-editor']],
-    computed: {
-      data: {
-        get() {
-          return {
-            data: {
-              width: this.currentStyle.width || '100%',
-              borderWidth: this.currentStyle.borderWidth || 1,
-              borderStyle: this.currentStyle.borderStyle || 'solid',
-              borderColor: this.currentStyle.borderColor || 'black',
-              borderStyle: this.currentStyle.borderStyle || 'solid'
-            }
-          };
-        },
-        set(v) {
-          bbn.fn.iterate(v, (a, n) => {
-            let tmp = bbn.fn.camelToCss(n);
-            if (this.source[tmp] !== undefined) {
-              n = tmp;
-            }
-            if (this.source[n] !== a) {
-              this.$set(this.source, n, a);
-            }
-          });
-        }
-      }
+    mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-editor']],
+    data() {
+      return {
+        width: null,
+        borderWidth: null,
+        borderStyle: null,
+        borderColor: null,
+        borderStyles: [
+          {text: "hidden", value: "hidden"},
+          {text: "dotted", value: "dotted"},
+          {text: "dashed", value: "dashed"},
+          {text: "solid", value: "solid"},
+          {text: "double", value: "double"},
+          {text: "groove", value: "groove"},
+          {text: "ridge", value: "ridge"}
+        ]
+      };
+    },
+    beforeMount() {
+      this.width = this.currentStyle.width || '100%';
+      this.borderWidth= this.currentStyle.borderWidth || 1;
+      this.borderStyle = this.currentStyle.borderStyle || 'solid';
+      this.borderColor = this.currentStyle.borderColor || 'black';
+    },
+    watch: {
+      width(v) {
+        this.setStyle("width", v);
+      },
+      borderWidth(v) {
+        this.setStyle("borderWidth", v);
+      },
+      borderStyle(v) {
+        this.setStyle("borderStyle", v);
+      },
+      borderColor(v) {
+        this.setStyle("borderColor", v);
+      },
     }
   }
 })();

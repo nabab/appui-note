@@ -1,7 +1,6 @@
 <!-- HTML Document -->
 
-<div :class="['component-container','bbn-cms-block-edit' ,'bbn-block-title', 'bbn-flex-height', {'has-hr': source.hr}, alignClass]"
-     :style="style">
+<div :class="['component-container','bbn-cms-block-edit' ,'bbn-block-title', 'bbn-flex-height', {'has-hr': source.hr}, alignClass]">
   <div class="edit-title bbn-w-100">
     <bbn-textarea v-model="source.content"
                   style="min-width: 30em"
@@ -18,13 +17,13 @@
 
     <label><?= _('Color') ?></label>
     <div>
-      <bbn-colorpicker v-model="currentStyle.color"/>
+      <bbn-colorpicker v-model="color"/>
     </div>
 
     <label><?= _('Alignment') ?></label>
-    <appui-note-cms-block-align/>
+    <appui-note-cms-block-align :source="source"/>
 
     <label><?= _('Line') ?></label>
-    <bbn-checkbox v-model="source.hr"/>
+		<appui-note-cms-block-line :source ="source"/>
   </div>
 </div>
