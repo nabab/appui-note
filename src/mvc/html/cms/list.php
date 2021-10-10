@@ -2,30 +2,62 @@
 <div class="bbn-overlay appui-note-cms">
   <bbn-table ref="table"
              :source="root + 'cms/list'"
-             :columns="cols"
              :limit="25"
              :info="true"
+             :selection="true"
              :pageable="true"
              :sortable="true"
-             :filterable="false"
-  					 :toolbar="$options.components['toolbar']"
-  ></bbn-table>
+             :filterable="true"
+  					 :toolbar="$options.components['toolbar']">
+    <bbns-column title=" "
+                 :component="$options.components.menu"
+                 :filterable="false"
+                 :sortable="false"
+                 :width="30"
+                 cls="bbn-c"/>
+    <bbns-column field="title"
+                 :min-Width="250"
+                 title="<?= _("Title") ?>"/>
+    <bbns-column field="url"
+                 title="<?= _("URL") ?>"
+                 :min-Width="200"
+                 :render="renderUrl"/>
+    <bbns-column field="id_user"
+                 title="<?= _("Creator") ?>"
+                 :width="200"
+                 :source="users"/>
+    <!--bbns-column field="content"
+                 title="<?= _("Content") ?>"
+                 :filterable="false"
+                 :render="renderContent"/-->
+    <bbns-column field="creation"
+                 type="date"
+                 :width="120"
+                 title="<?= _("Creation") ?>"/>
+    <bbns-column field="start"
+                 type="datetime"
+                 :width="120"
+                 title="<?= _("Publication") ?>"/>
+    <bbns-column field="end"
+                 type="datetime"
+                 :width="120"
+                 title="<?= _("End") ?>"/>
+    <bbns-column :width="80"
+                 field="version"
+                 title="<?= _("Version") ?>"
+                 cls="bbn-c"/>
+    <bbns-column field="num_medias"
+                 :width="50"
+                 title="<i class='nf nf-fa-file_photo_o'> </i>"
+                 ftitle="<?= _("Number of medias associated with this entry") ?>"
+                 type="number"
+                 cls="bbn-c"/>
+    <bbns-column :width="200"
+                 :buttons="getBtns"
+                 title="<?= _("Actions") ?>"
+                 cls="bbn-c"/>
+  </bbn-table>
 </div>
-
-<script type="text/x-template" id="toolbar">
-  <bbn-toolbar class="bbn-header bbn-hspadded bbn-h-100 bg-fuxia">
-    <div class="bbn-flex-width">
-      <bbn-button icon="nf nf-fa-plus"
-                  :text="_('Insert Articles')"
-                  :action="insertNote"
-      ></bbn-button>
-      
-      <div class="bbn-xl bbn-b bbn-flex-fill bbn-r bbn-white">
-        <?=_("CMS management")?>
-      </div>
-    </div>
-  </bbn-toolbar>
-</script>
 
 <!--form for create new pge in note-->
 <script type="text/x-template" id="form">

@@ -29,7 +29,7 @@
     },
     methods: {
       onResize(){
-        bbn.vue.resizerComnponent.methods.onResize.apply(this);
+        bbn.vue.resizerComponent.methods.onResize.apply(this);
         this.makeSquareImg();
       },
       makeSquareImg(){

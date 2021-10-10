@@ -12,9 +12,5 @@ if ($model->hasData(['start', 'limit'])) {
   $opt = new \bbn\Appui\Option($db);
   $notes = new \bbn\Appui\Note($db);
   $cms = new \bbn\Appui\Cms($model->db);
-  $notes = $cms->getAll($model->data['start'], $model->data['limit']);
-  return [
-    'data' => $notes,
-    'total' => count($notes)
-  ];
+  return $cms->getAll(false, $model->data['filters'] ?? [], $model->data['order'] ?? [], $model->data['limit'], $model->data['start']);
 }

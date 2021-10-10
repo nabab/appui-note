@@ -1,5 +1,6 @@
 (() => {
   return {
+    mixins: [bbn.vue.basicComponent],
     props: ['source', 'index'],
     methods:{
       //IMPORTANT TO RENDER CHINESE CHARACTERS
@@ -10,8 +11,7 @@
         return this.$parent.escape(st);
       },
       selectImg(){
-        bbn.fn.log(this.closest('bbn-container'), this.closest('bbn-container').getComponent());
-        return this.closest('bbn-cms-block').selectImg(this.source.href)
+        return this.closest(this.getComponentName('../../../')).selectImg(this.source.href)
       }
     },
     computed: {
@@ -24,7 +24,7 @@
       type(){
         return this.$parent.source.type
       }
-    }, 
+    },
     mounted(){
       bbn.fn.happy(this.source.price)
     }

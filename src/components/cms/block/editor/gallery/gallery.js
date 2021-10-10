@@ -3,15 +3,32 @@
 (() => {
   return {
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-editor']],
+    data(){
+      return {
+        pageSize: 1,
+        currentLimit: 1,
+        limits: [1],
+        pageable: true,
+        filterable: false,
+        start: 0,
+        currentPage: this.source.source && this.source.source.length ? 1 : null,
+        numPages: (this.source.source || []).length,
+        filteredData: this.source.source,
+        total: (this.source.source || []).length,
+        formData: {
+          columns: this.source.columns || 3
+        },
+        cp: this
+      }
+    },
     computed: {
       columnsClass(){
         if (this.mobile) {
-          if (this.source.columns !== 2) {
+          if (this.source.columns > 2) {
             return 'cols-2';
           }
-          else{
-            return 'cols-1';
-          }
+
+          return 'cols-1';
         }
         else {
           if ( this.source.columns === 1 ){
@@ -23,6 +40,7 @@
           else if ( this.source.columns === 4 ){
             return 'cols-4';
           }
+
           return 'cols-3';
         }
       },
@@ -72,6 +90,11 @@
         else{
           appui.error(bbn._('An error occurred while uploading the image'));
         }
+      }
+    },
+    watch: {
+      "formData.columns"(v)  {
+        this.$set(this.source, 'columns', v);
       }
     },
     mounted(){

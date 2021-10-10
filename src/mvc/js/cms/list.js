@@ -12,52 +12,7 @@
           value: 'post'
         }],
         //for table note
-        cols: [{
-          field: 'title',
-          title: bbn._('Title'),
-        },{
-          field: 'id_user',
-          title: bbn._('Creator'),
-          source: appui.app.users
-        },{
-          field: 'url',
-          title: bbn._('URL'),
-          render: this.renderUrl,
-          cls: 'bbn-c'
-        }, {
-          field: 'content',
-          title: bbn._('Content'),
-          filterable: false,
-          render: this.renderContent
-        }, {
-          field: 'creation',
-          type: 'date',
-          title: bbn._('Creation')
-        },{
-          field: 'start',
-          type: 'datetime',
-          title: bbn._('Pub. Start')
-        }, {
-          field: 'end',
-          type: 'datetime',
-          title: bbn._('Pub. End')
-        }, {
-          width : 80,
-          field: 'version',
-          title: bbn._('Version'),
-          cls: 'bbn-c'
-        }, {
-          width : 30,
-          field: 'files',
-          title: '',
-          render: this.renderFiles,
-          cls: 'bbn-c'
-        }, {
-          width : 150,
-          buttons: this.getBtns,
-          title: bbn._('Actions'),
-          cls: 'bbn-c'
-        }]
+        users: appui.app.users
       }
     },
     methods: {
@@ -136,17 +91,7 @@
       },
       // methods each row of the table
       editNote(row){
-        let src =  bbn.fn.extend(row,{
-          action: 'update'
-        });
-        
-        this.getPopup().open({
-          width: 800,
-          height: '80%',
-          title: bbn._('Edit Note'),
-          source: src,
-          component: this.$options.components['form'],
-        })
+        bbn.fn.link(appui.plugins['appui-note'] + '/cms/editor/' + row.id_note);
       },
       publishNote(row){
         let src =  bbn.fn.extend(row,{
@@ -218,7 +163,62 @@
       appui.unregister('publications');
     },
     components: {
-      'browser' :{
+      menu: {
+        template: `
+<bbn-context :source="rowMenu">
+	<span class="bbn-iblock bbn-lg bbn-hspadded">
+  	<i class="nf nf-mdi-dots_vertical"/>
+  </span>
+</bbn-context>`,
+        props: ['source'],
+        data(){
+          return {
+            cp: false,
+            table: false
+          }
+        },
+        computed: {
+          rowMenu(){
+            if (!this.table) {
+              return [];
+            }
+
+            return [{
+              action: this.cp.editNote,
+              icon: 'nf nf-fa-edit',
+              text: bbn._("Edit"),
+              key: 'a'
+            }, {
+              action: this.cp.publishNote,
+              icon: 'nf nf-fa-chain',
+              text: bbn._("Publish"),
+              disabled: this.source.is_published,
+              key: 'b'
+            }, {
+              action: this.cp.unpublishNote,
+              icon: 'nf nf-fa-chain_broken',
+              text: bbn._("Unpublish"),
+              disabled: !this.source.is_published,
+              key: 'c'
+            },{
+              action: this.cp.addMedia,
+              text: bbn._("Add media"),
+              icon: 'nf nf-mdi-attachment',
+              key: 'd'
+            }, {
+              action: this.cp.deleteNote,
+              text: bbn._("Delete"),
+              icon: 'nf nf-fa-trash_o',
+              key: 'e'
+            }];
+          }
+        },
+        beforeMount(){
+          this.table = this.closest('bbn-table');
+          this.cp = this.closest('bbn-container').getComponent();
+        }
+      },
+      browser :{
         props: ['source'],
         template: '<appui-note-media-browser @select="insertMedia" :select="true"></appui-note-media-browser>',
         data(){
@@ -261,8 +261,20 @@
           }
         },
       },
-      'toolbar' : {
-        template: '#toolbar',
+      toolbar: {
+        template: `
+  <bbn-toolbar class="bbn-header bbn-hspadded bbn-h-100 bg-colored">
+    <div class="bbn-flex-width">
+      <bbn-button icon="nf nf-fa-plus"
+                  :text="_('Insert Articles')"
+                  :action="insertNote"
+      ></bbn-button>
+      
+      <div class="bbn-xl bbn-b bbn-flex-fill bbn-r bbn-white">
+        <?=_("The Content Management System")?>
+      </div>
+    </div>
+  </bbn-toolbar>`,
         props: ['source'],
         data(){
           return {

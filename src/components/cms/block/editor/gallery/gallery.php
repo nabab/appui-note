@@ -2,25 +2,26 @@
 
 <div :class="componentClass">
   <div v-if="show"
-       :class="['component-container', 'bbn-block-gallery', alignClass, columnsClass]"
+       :class="['component-container', 'bbn-c']"
        :style="style">
     <!-- GIVE HREF TO VIEW FULL IMAGE -->
-    <bbn-cms-block-gallery-item v-for="(image, idx) in source.content"
-                                :source="image"
-                                :key="idx"
-                                :index="idx"/>
+    <appui-note-cms-block-reader-gallery-item v-if="source.source[currentPage]"
+                                              :source="source.source[currentPage]"
+                                              :index="currentPage"/>
+    <bbn-pager :element="cp"
+               pageName="<?= _("image") ?>"/>
   </div>
   <div class="bbn-grid-fields bbn-padded">
     <label>Columns number</label>
     <div>
-      <bbn-dropdown v-model="source.columns"
+      <bbn-dropdown v-model="formData.columns"
                     :source="tinyNumbers"/>
     </div>
     <label v-text="_('Upload your images')"/>
     <bbn-upload :save-url="'upload/save/' + ref"
                 remove-url="test/remove"
                 :data="{gallery: true}"
-                :paste="true"
+               :paste="true"
                 :multiple="true"
                 v-model="source.content"
                 @success="imageSuccess"/>
