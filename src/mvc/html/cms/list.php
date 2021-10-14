@@ -4,17 +4,24 @@
              :source="root + 'cms/list'"
              :limit="25"
              :info="true"
+             :storage="true"
              :selection="true"
              :pageable="true"
+             :showable="true"
              :sortable="true"
              :filterable="true"
   					 :toolbar="$options.components['toolbar']">
     <bbns-column title=" "
                  :component="$options.components.menu"
                  :filterable="false"
+                 :showable="false"
                  :sortable="false"
                  :width="30"
                  cls="bbn-c"/>
+    <bbns-column field="id"
+                 :hidden="true"
+                 :min-Width="130"
+                 title="<?= _("ID") ?>"/>
     <bbns-column field="title"
                  :min-Width="250"
                  title="<?= _("Title") ?>"/>
@@ -26,6 +33,10 @@
                  title="<?= _("Creator") ?>"
                  :width="200"
                  :source="users"/>
+    <bbns-column field="excerpt"
+                 :hidden="true"
+                 :width="250"
+                 title="<?= _("Excerpt") ?>"/>
     <!--bbns-column field="content"
                  title="<?= _("Content") ?>"
                  :filterable="false"
@@ -35,7 +46,7 @@
                  :width="120"
                  title="<?= _("Creation") ?>"/>
     <bbns-column field="start"
-                 type="datetime"
+                 type="date"
                  :width="120"
                  title="<?= _("Publication") ?>"/>
     <bbns-column field="end"
@@ -51,10 +62,6 @@
                  title="<i class='nf nf-fa-file_photo_o'> </i>"
                  ftitle="<?= _("Number of medias associated with this entry") ?>"
                  type="number"
-                 cls="bbn-c"/>
-    <bbns-column :width="200"
-                 :buttons="getBtns"
-                 title="<?= _("Actions") ?>"
                  cls="bbn-c"/>
   </bbn-table>
 </div>

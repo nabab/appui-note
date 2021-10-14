@@ -13,9 +13,7 @@ if ($model->hasData('id', true)) {
   $cms = new bbn\Appui\Cms($model->db, $note);
   $data['start'] = $cms->getStart($model->data['id']);
   $data['end'] = $cms->getEnd($model->data['id']);
-  $items = $data['content'] ? json_decode($data['content']) : [];
-  return [
-    'items' => $items,
-  	'title' => $data['title']
-  ];
+  $data['items'] = $data['content'] ? json_decode($data['content']) : [];
+  unset($data['content']);
+  return $data;
 }

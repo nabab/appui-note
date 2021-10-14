@@ -5,7 +5,7 @@
         {'<?= $componentName ?>-over': overable && over}
       ]"
       tabindex="0"
-      @click="onClick"
+     	@click="$emit('click', $event)"
       @mouseenter="over = true"
       @mouseleave="over = false">
   <component v-if="ready"
@@ -16,6 +16,8 @@
                     {'<?= $componentName ?>-selected': selectable && selected},
                     ]">
   </component>
+  <div v-if="selectable"
+       class="bbn-overlay bbn-p"/>
   <div v-if="editable"
        class="<?= $componentName ?>-icons bbn-vmiddle">
     <div class="bbn-nowrap bbn-block">

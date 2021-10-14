@@ -9,6 +9,7 @@
                                               :source="source.source[currentPage]"
                                               :index="currentPage"/>
     <bbn-pager :element="cp"
+               :extra-controls="false"
                pageName="<?= _("image") ?>"/>
   </div>
   <div class="bbn-grid-fields bbn-padded">
@@ -25,6 +26,5 @@
                 :multiple="true"
                 v-model="source.content"
                 @success="imageSuccess"/>
-
   </div>
 </div>

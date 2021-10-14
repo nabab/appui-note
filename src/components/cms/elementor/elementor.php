@@ -14,29 +14,18 @@
                                 :ref="'block' + i"
                                 :selectable="true"
                                 :overable="true"
-                                @click="currentEdited = i"/>
+                                :selected="currentEdited === i"
+                                @click="changeEdited(i)"/>
         </div>
       </div>
     </bbn-pane>
     <bbn-pane>
       <div class="bbn-overlay bbn-flex-height">
-        <bbn-toolbar class="bbn-flex-width bbn-hpadded"
-                     ref="toolbar"
-                     :source="toolbarSource">
-          <bbn-context tag="div"
-                       class="bbn-hsmargin"
-                       :source="contextSource">
-            <bbn-button icon="nf nf-mdi-plus_outline"
-                        :notext="true"
-                        secondary="nf nf-fa-caret_down"
-                        text="<?= _("Ajouter un bloc") ?>"/>
-          </bbn-context>
-        </bbn-toolbar>
         <div v-if="currentEdited > -1"
              class="bbn-header bbn-padded bbn-vmiddle bbn-m bbn-b">
           <div class="bbn-block-left bbn-middle">
             <bbn-dropdown :source="types"
-                          v-model="cfgs[this.currentEdited].type"/>
+                          v-model="currentType"/>
           </div>
           <div class="bbn-block-right bbn-middle">
             <?= _("Position of the block") ?>
@@ -45,21 +34,19 @@
           </div>
         </div>
         <div class="bbn-flex-fill">
-          <div v-if="currentEdited === -1"
-               class="bbn-overlay bbn-middle">
-            <div>
-              <?= _("Select an element on the left to edit it here") ?>
-            </div>
+          <div v-if="currentEdited === -1">
+            <slot/>
           </div>
-          <bbn-scroll v-else>
-            <div class="bbn-w-100">
+          <div class="bbn-overlay"
+               v-else>
+            <div class="bbn-w-100 bbn-middle">
               <div class="bbn-block bbn-vlpadded bbn-hxlpadded">
                 <appui-note-cms-block class="bbn-contain"
                                       :source="cfgs[currentEdited]"
                                       mode="edit"/>
               </div>
             </div>
-          </bbn-scroll>
+          </div>
         </div>
       </div>
     </bbn-pane>

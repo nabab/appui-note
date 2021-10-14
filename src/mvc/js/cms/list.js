@@ -85,8 +85,7 @@
           width: '80%',
           component: this.$options.components['browser'], 
           scrollable: false,
-          source: row, 
-          
+          source: row
         })
       },
       // methods each row of the table
@@ -184,29 +183,39 @@
             }
 
             return [{
-              action: this.cp.editNote,
+              action: () => {
+                this.cp.editNote(this.source);
+              },
               icon: 'nf nf-fa-edit',
               text: bbn._("Edit"),
               key: 'a'
             }, {
-              action: this.cp.publishNote,
+              action: () => {
+                this.cp.publishNote(this.source);
+              },
               icon: 'nf nf-fa-chain',
               text: bbn._("Publish"),
-              disabled: this.source.is_published,
+              disabled: !this.source.is_published,
               key: 'b'
             }, {
-              action: this.cp.unpublishNote,
+              action: () => {
+              	this.cp.unpublishNote(this.source);
+              },
               icon: 'nf nf-fa-chain_broken',
               text: bbn._("Unpublish"),
-              disabled: !this.source.is_published,
+              disabled: this.source.is_published,
               key: 'c'
             },{
-              action: this.cp.addMedia,
+              action: () => {
+                this.cp.addMedia(this.source);
+              },
               text: bbn._("Add media"),
               icon: 'nf nf-mdi-attachment',
               key: 'd'
             }, {
-              action: this.cp.deleteNote,
+              action: () => {
+                this.cp.deleteNote(this.source);
+              },
               text: bbn._("Delete"),
               icon: 'nf nf-fa-trash_o',
               key: 'e'

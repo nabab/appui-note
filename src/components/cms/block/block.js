@@ -222,6 +222,10 @@
         type: Boolean,
         default: false
       },
+      selected: {
+        type: Boolean,
+        default: false
+      },
       overable: {
         type: Boolean,
         default: false
@@ -234,7 +238,6 @@
     data(){
       return {
         over: false,
-        selected: false,
         edit: this.mode === 'edit',
         isAdmin: true,
         editing: true,
@@ -263,19 +266,6 @@
       }
     },
     methods: {
-      onClick(e){
-        if (this.selectable) {
-          this.selected = true;
-        }
-
-        this.$emit('click', e);
-      },
-    	onSelectListener(e) {
-        bbn.fn.log('onSelectListener', e);
-        if (this.selected && (e.detail !== this.bbnUid)) {
-          this.selected = false;
-        }
-      },
       selectImg(st){
         bbn.fn.link(st);
       },
@@ -364,23 +354,7 @@
     mounted(){
       this.ready = true;
     },
-    created(){
-      if (this.selectable) {
-        document.addEventListener('selectAppuiNoteCmsBlock', this.onSelectListener)
-      }
-    },
-    beforeDestroy() {
-      if (this.selectable) {
-        document.removeEventListener('selectAppuiNoteCmsBlock', this.onSelectListener);
-      }
-    },
     watch: {
-      selected(v){
-        if (v) {
-					const ev = new CustomEvent('selectAppuiNoteCmsBlock', {detail: this.bbnUid});
-          document.dispatchEvent(ev);
-        }
-      },
       changed(){
         bbn.fn.log("changed")
       },

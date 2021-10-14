@@ -10,6 +10,7 @@
     },
     data(){
       return {
+        currentType: 'html',
         isMoving: false,
         currentEdited: -1,
         nextEdited: -1,
@@ -17,7 +18,11 @@
         types: [
           {
             text: bbn._("Title"),
-            value: 'title'
+            value: 'title',
+            default: {
+            	tag: 'h1',
+              text: ''
+	          }
           }, {
             text: bbn._("Text"),
             value: 'text'
@@ -120,33 +125,6 @@
           */
         return res;
       },
-      contextSource(){
-        return [{
-          text: bbn._("Add a block before"),
-          action: () => {
-            let newBlock = {
-              type: 'text',
-              content: ''
-            };
-            this.cfgs.splice(this.currentEdited, 0, newBlock);
-          }
-        }, {
-          text: bbn._("Add a block after"),
-          action: () => {
-            let newBlock = {
-              type: 'text',
-              content: ''
-            };
-
-            if (this.currentEdited === this.cfgs.length - 1) {
-              this.cfgs.push(newBlock);
-            }
-            else {
-              this.cfgs.splice(this.currentEdited + 1, 0, newBlock);
-            }
-          }
-        }];
-      },
       isEditorOverlay(){
         if (this.currentEdited === -1) {
           return false;
@@ -163,6 +141,30 @@
       }
     },
     methods: {
+      changeEdited(idx) {
+        this.currentEdited = idx;
+      },
+      onClose() {
+        let form = this.getRef('form');
+        if (form.dirty) {
+          if (form.isValid()) {
+            this.confirm(bbn._("Do you want to save your changes?"), () => {
+              form.submit();
+              this.currentEdited = idx;
+            }, () => {
+              this.currentEdited = idx;
+            });
+          }
+          else {
+            this.confirm(bbn._("Do you want to abandon your changes?"), () => {
+              this.currentEdited = idx
+            });
+          }
+        }
+        else {
+          this.currentEdited = idx
+        }
+      },
       move(dir, idx) {
         let isUp = dir.toLowerCase() === 'up';
         if (idx === true) {
@@ -192,6 +194,7 @@
           return;
         }
         if (v === -1) {
+          this.currentType = 'text';
           return;
         }
 
@@ -204,7 +207,18 @@
           this.currentEdited = -1;
           setTimeout(() => {
             this.currentEdited = this.nextEdited;
+            this.currentType = this.cfgs[this.currentEdited].type;
           }, 100)
+        }
+      },
+      currentType(v) {
+        let form = this.getRef('form');
+        if (form.dirty) {
+          this.confirm(bbn._("dsfdfdf"), () => {
+            this.cfgs[this.currentEdited].type = v;
+          }, () => {
+            
+          })
         }
       }
 	  }
