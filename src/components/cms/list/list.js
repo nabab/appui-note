@@ -1,5 +1,6 @@
 // Javascript Document// Javascript Document
 (() => {
+  let componentName;
   return {
     mixins: [bbn.vue.basicComponent],
     props: {
@@ -105,6 +106,9 @@
     },
     created(){
       appui.register('publications', this);
+      if (!componentName) {
+        componentName = this.getComponentName();
+      }
     },
     beforeDestroy(){
       appui.unregister('publications');
@@ -172,7 +176,7 @@
         },
         beforeMount(){
           this.table = this.closest('bbn-table');
-          this.cp = this.closest('bbn-container').getComponent();
+          this.cp = this.closest(componentName);
         }
       },
       browser :{
