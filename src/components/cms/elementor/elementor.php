@@ -8,7 +8,7 @@
               size="50%"
               ref="leftPane">
       <div class="bbn-vlpadded bbn-hlpadded">
-        <div v-for="(cfg, i) in cfgs"
+        <div v-for="(cfg, i) in source"
              class="bbn-w-100 bbn-vspadded">
           <appui-note-cms-block :source="cfg"
                                 :ref="'block' + i"
@@ -27,10 +27,36 @@
             <bbn-dropdown :source="types"
                           v-model="currentType"/>
           </div>
-          <div class="bbn-block-right bbn-middle">
+          <div class="bbn-block-right bbn-middle bbn-nowrap">
             <?= _("Position of the block") ?>
             <span class="bbn-left-space"
                   v-text="currentEdited + 1"/>
+            <bbn-button class="bbn-left-space"
+                        :notext="true"
+                        @click="move('top')"
+                        text="<?= _("Move top") ?>"
+                        :disabled="(this.source.length <= 1) || (currentEdited <= 1)"
+                        icon="nf nf-mdi-arrow_collapse_up"/>
+            <bbn-button :notext="true"
+                        @click="move('up')"
+                        text="<?= _("Move up") ?>"
+                        :disabled="(this.source.length <= 1) || !currentEdited"
+                        icon="nf nf-mdi-arrow_up"/>
+            <bbn-button :notext="true"
+                        @click="move('down')"
+                        text="<?= _("Move down") ?>"
+                        :disabled="(this.source.length <= 1) || (currentEdited === this.source.length - 1)"
+                        icon="nf nf-mdi-arrow_down"/>
+            <bbn-button :notext="true"
+                        @click="move('bottom')"
+                        text="<?= _("Move bottom") ?>"
+                        :disabled="(this.source.length <= 1) || (currentEdited >= this.source.length - 2)"
+                        icon="nf nf-mdi-arrow_collapse_down"/>
+            <bbn-button class="bbn-left-space"
+                        :notext="true"
+                        @click="deleteCurrentSelected"
+                        text="<?= _("Delete this block") ?>"
+                        icon="nf nf-fa-trash"/>
           </div>
         </div>
         <div class="bbn-flex-fill">
@@ -40,9 +66,9 @@
           <div class="bbn-overlay"
                v-else>
             <div class="bbn-w-100 bbn-middle">
-              <div class="bbn-block bbn-vlpadded bbn-hxlpadded">
+              <div class="bbn-w-100 bbn-vlpadded bbn-hxlpadded">
                 <appui-note-cms-block class="bbn-contain"
-                                      :source="cfgs[currentEdited]"
+                                      :source="source[currentEdited]"
                                       mode="edit"/>
               </div>
             </div>

@@ -10,43 +10,79 @@
     },
     data(){
       return {
-        currentType: 'html',
+        currentType: 'text',
         isMoving: false,
         currentEdited: -1,
         nextEdited: -1,
-        cfgs: this.source,
         types: [
           {
             text: bbn._("Title"),
             value: 'title',
             default: {
             	tag: 'h1',
-              text: ''
+              content: '',
+              color: '#000000',
+              align: 'left',
+              decoration: 'none',
+              italic: false,
+              hr: null
 	          }
           }, {
             text: bbn._("Text"),
-            value: 'text'
+            value: 'text',
+            default: {
+              content: ''
+	          }
           }, {
             text: bbn._("Line"),
-            value: 'line'
+            value: 'line',
+            default: {
+	          }
           }, {
             text: bbn._("Space"),
-            value: 'space'
+            value: 'space',
+            default: {
+              size: '1em'
+	          }
           }, {
             text: bbn._("Rich text (HTML)"),
-            value: 'html'
+            value: 'html',
+            default: {
+              content: ''
+	          }
           }, {
             text: bbn._("Image"),
-            value: 'image'
+            value: 'image',
+            default: {
+              src: ''
+            }
           }, {
             text: bbn._("Carousel"),
-            value: 'carousel'
+            value: 'carousel',
+            default: {
+              source: []
+            }
           }, {
             text: bbn._("Gallery"),
-            value: 'gallery'
+            value: 'gallery',
+            default: {
+              source: []
+            }
           }, {
             text: bbn._("Video"),
-            value: 'video'
+            value: 'video',
+            default: {
+              src: '',
+              autoplay: false,
+              muted: false,
+              controls: false,
+              loop: false,
+              style: {
+                width: '100%',
+                height: '100%'
+              },
+              align: 'center'
+            }
           }
         ],
         data: {
@@ -82,7 +118,7 @@
             icon: 'nf nf-mdi-chevron_down',
             notext: true,
             text: bbn._("Move down"),
-            disabled: this.currentEdited >= this.cfgs.length - 1,
+            disabled: this.currentEdited >= this.source.length - 1,
             action: () => {
               this.move('down');
             }
@@ -91,7 +127,7 @@
             icon: 'nf nf-mdi-chevron_double_down',
             notext: true,
             text: bbn._("Move to end"),
-            disabled: this.currentEdited >= this.cfgs.length - 2,
+            disabled: this.currentEdited >= this.source.length - 2,
             action: () => {
               this.move('down', true);
             }
@@ -130,14 +166,14 @@
           return false;
         }
 
-        return ['html', 'markdown', 'gallery'].includes(this.cfgs[this.currentEdited].type);
+        return ['html', 'markdown', 'gallery'].includes(this.source[this.currentEdited].type);
       },
       isEditorScrollable(){
         if (this.currentEdited === -1) {
           return false;
         }
 
-        return ['html', 'markdown', 'gallery'].includes(this.cfgs[this.currentEdited].type);
+        return ['html', 'markdown', 'gallery'].includes(this.source[this.currentEdited].type);
       }
     },
     methods: {
@@ -165,30 +201,53 @@
           this.currentEdited = idx
         }
       },
-      move(dir, idx) {
-        let isUp = dir.toLowerCase() === 'up';
-        if (idx === true) {
-          bbn.fn.move(this.cfgs, this.currentEdited, isUp ? 0 : this.cfgs.length - 1);
-          this.currentEdited = isUp ? 0 : this.cfgs.length - 1;
+      move(dir) {
+        let idx;
+        switch (dir) {
+          case 'top':
+            idx = 0;
+            break;
+          case 'up':
+            idx = this.currentEdited - 1;
+            break;
+          case 'down':
+            idx = this.currentEdited + 1;
+            break;
+          case 'bottom':
+            idx = this.source.length - 1;
+            break;
         }
-        else if (idx === undefined) {
-          bbn.fn.move(this.cfgs, this.currentEdited, isUp ? this.currentEdited - 1 : this.currentEdited + 1);
-          this.currentEdited = isUp ? this.currentEdited - 1 : this.currentEdited + 1;
-        }
-        else if (this.cfgs[idx]) {
-          bbn.fn.move(this.cfgs, this.currentEdited, idx);
+        if (this.source[idx]) {
+          bbn.fn.move(this.source, this.currentEdited, idx);
           this.currentEdited = idx;
         }
+
         setTimeout(() => {
           this.getRef('block' + this.currentEdited).selected = true;
           this.getRef('leftPane').getRef('scroll').scrollTo(null, this.getRef('block' + this.currentEdited).$el);
         }, 500)
+      },
+      deleteCurrentSelected(){
+        this.confirm(bbn._("Are you sure you want to delete this block and its content?"), () => {
+          let idx = this.currentEdited;
+          this.currentEdited = -1;
+          this.source.splice(idx, 1);
+        })
       }
     },
-    mounted(){
-      
-    },
     watch: {
+      currentType(v) {
+        let newCfg = bbn.fn.clone(bbn.fn.getRow(this.types, {value:v}).default);
+        if (newCfg && this.source[this.currentEdited]) {
+          for (let n in newCfg) {
+            if (this.source[this.currentEdited][n] !== undefined) {
+              newCfg[n] = this.source[this.currentEdited][n];
+            }
+          }
+          newCfg.type = v;
+          this.source.splice(this.currentEdited, 1, newCfg)
+        }
+      },
     	currentEdited(v) {
         if (this.isMoving) {
           return;
@@ -200,25 +259,15 @@
 
         if (this.nextEdited === v) {
           this.nextEdited = -1;
-          this.getRef('toolbar').updateSlot();
+          //this.getRef('toolbar').updateSlot();
         }
         else {
           this.nextEdited = v;
           this.currentEdited = -1;
           setTimeout(() => {
             this.currentEdited = this.nextEdited;
-            this.currentType = this.cfgs[this.currentEdited].type;
+            this.currentType = this.source[this.currentEdited].type;
           }, 100)
-        }
-      },
-      currentType(v) {
-        let form = this.getRef('form');
-        if (form.dirty) {
-          this.confirm(bbn._("dsfdfdf"), () => {
-            this.cfgs[this.currentEdited].type = v;
-          }, () => {
-            
-          })
         }
       }
 	  }

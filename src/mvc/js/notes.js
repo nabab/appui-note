@@ -22,12 +22,6 @@
         bbn.fn.log(val);
         return val === this.editedNote;
       },
-    },
-    updated(){
-      bbn.fn.log('updated note');
-      this.$nextTick(function(){
-        bbn.fn.analyzeContent(this.$el, true);
-      });
     }
   }
 })();

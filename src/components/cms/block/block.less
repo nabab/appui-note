@@ -9,10 +9,12 @@
   }
   .@{componentName}-component {
     min-height: 1.8em;
-    border: 0.3em dashed transparent;
     padding: 1em;
     &.@{componentName}-selected {
       border-color: var(--secondary-border) !important;
+    }
+    &.@{componentName}-selectable {
+      border: 0.3em dashed transparent;
     }
   }
   &.@{componentName}-over {
@@ -54,8 +56,9 @@
       }
     }
   }
-
+/*
   .bbn-grid-fields{
     border: none!important;
   }
+*/
 }

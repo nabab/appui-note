@@ -9,12 +9,15 @@
       @mouseenter="over = true"
       @mouseleave="over = false">
   <component v-if="ready"
-            :is="currentComponent"
-            :source="source"
-            :class="[
-                    '<?= $componentName ?>-component',
-                    {'<?= $componentName ?>-selected': selectable && selected},
-                    ]">
+             :is="currentComponent"
+             ref="component"
+             :mode="mode"
+             :source="source"
+             :class="[
+                     '<?= $componentName ?>-component',
+                     {'<?= $componentName ?>-selectable': selectable},
+                     {'<?= $componentName ?>-selected': selectable && selected},
+                     ]">
   </component>
   <div v-if="selectable"
        class="bbn-overlay bbn-p"/>

@@ -80,6 +80,9 @@
         type: Boolean,
         default: false
       },
+      toolbarButtons: {
+        type: Array
+      }
     },
     data(){
       return {
@@ -226,6 +229,9 @@
           width: 400,
         })
       },
+      refresh(){
+        this.getRef('gallery').updateData();
+      }
     },
     beforeMount(){
       /** @todo WTF?? */

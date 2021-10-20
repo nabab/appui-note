@@ -11,6 +11,7 @@
                :overlay-name="overlayName"
                :overlay="overlay"
                :toolbar="true"
+               :toolbar-buttons="toolbarButtons"
                :uploadable="uploadEnabled"
                :downloadable="downloadEnabled"
                :deletable="removeEnabled"
@@ -18,8 +19,12 @@
                @download="downloadMedia"
                @delete="removeMedia"
                @selection="selectMedia"
+               @clickItem="emitClickItem"
                :buttons-no-text="true"
                :buttonMenu="currentButtonMenu"
                :buttonMenuComponent="buttonMenuComponent"
-               :selection="selection"/>
+               :selection="selection"
+               uid="id"
+               :data="data"
+               ref="gallery"/>
 </div>
