@@ -1,112 +1,55 @@
 // Javascript Document
 (() => {
   return {
-    mixins: [bbn.vue.basicComponent, bbn.vue.resizerComponent, bbn.vue.mixins['appui-note-cms-block']],
+    mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
     data(){
       return {
-        pageSize: 1,
-        currentLimit: 1,
-        limits: [1],
-        pageable: true,
-        filterable: false,
-        start: 0,
-        currentPage: this.source.source && this.source.source.length ? 1 : null,
-        numPages: (this.source.source || []).length,
-        filteredData: this.source.source,
-        total: (this.source.source || []).length,
-        formData: {
-          columns: this.source.columns || 3
-        },
-        cp: this
+        gallerySourceUrl: appui.plugins['appui-note'] + '/media/data/groups/medias'
       }
     },
     computed: {
-      columnsClass(){
-        if (this.mobile) {
-          if (this.source.columns > 2) {
-            return 'cols-2';
-          }
-
-          return 'cols-1';
+      galleries(){
+        let cp = this.closest('appui-note-cms-editor');
+        if (cp && !!cp.source.mediasGroups) {
+          return bbn.fn.order(bbn.fn.map(cp.source.mediasGroups, mg => {
+            return {
+              text: mg.text,
+              value: mg.id
+            };
+          }), 'text', 'asc');
         }
-        else {
-          if ( this.source.columns === 1 ){
-            return 'cols-1';
-          }
-          else if ( this.source.columns === 2 ){
-            return 'cols-2';
-          }
-          else if ( this.source.columns === 4 ){
-            return 'cols-4';
-          }
-
-          return 'cols-3';
-        }
+        return [];
       },
     },
     methods: {
-      onResize(){
-        bbn.vue.resizerComponent.methods.onResize.apply(this);
-        this.makeSquareImg();
-      },
-      makeSquareImg(){
-        if ( !this.source.noSquare ){
-          //creates square container for the a
-          var items = this.$el.querySelectorAll('a'),
-              images = this.$el.querySelectorAll('img');
-          this.show = false;
-          if (this.source.columns === 1){
-            for (let i in items ){
-              if ( images[i].tagName === 'IMG' ){
-                this.$nextTick(()=>{
-                  images[i].style.height = 'auto';
-                  images[i].style.width = '100%';
-                })
-              }
-            }
-          }
-          else {
-            for (let i in images ){
-              if ( images[i].tagName === 'IMG' ){
-                this.$nextTick(()=>{
-                  images[i].style.height = items[i].offsetWidth + 'px';
-                })
-              }
-            }
-
-          }
-          this.show = true;
-        }
-      },
-      /** @todo Seriously these arguments names??  */
-      imageSuccess(a, b, res){
-        if (res.success && res.image.src.length ){
-          res.image.src = res.image.name;
-          res.image.alt = '';
-          setTimeout(() => {
-            this.show = false;
-            //this.source.content.push(c.image);//
-            this.makeSquareImg();
-            appui.success(bbn._('Image correctly uploaded'));
-          }, 200);
-        }
-        else{
-          appui.error(bbn._('An error occurred while uploading the image'));
-        }
+      openMediasGroups(){
+        this.getPopup().load({
+          title: bbn._('Medias Groups Management'),
+          url: appui.plugins['appui-note'] + '/media/groups',
+          width: '90%',
+          height: '90%'
+        });
       }
     },
     watch: {
-      "formData.columns"(v)  {
-        this.$set(this.source, 'columns', v);
+      'source.source'(){
+        let gallery = this.getRef('gallery');
+        if (!!gallery) {
+          this.$nextTick(() => {
+            gallery.updateData();
+          });
+        }
       },
-      'source.columns':{
-        handler(val) {
-          this.makeSquareImg();
+      'source.resizable'(val){
+        if (!!val) {
+          this.source.toolbar = 1;
+        }
+      },
+      'source.toolbar'(val){
+        if (!val) {
+          this.source.resizable = 0;
         }
       }
-    },
-    mounted(){
-      this.makeSquareImg();
-    },
+    }
   }
 })();

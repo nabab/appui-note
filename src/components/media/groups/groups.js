@@ -23,6 +23,12 @@
       actionsUrl: {
         type: String,
         required: true
+      },
+      mediasUploadUrl: {
+        type: String
+      },
+      mediasRemoveUrl: {
+        type: String
       }
     },
     data(){
@@ -61,6 +67,30 @@
           });
         }
       },
+      removeMedia(data){
+        if (this.current
+          && this.current.id
+          && !!data.media
+        ) {
+          let post = () => {
+            this.post(this.actionsUrl + 'remove', {
+              idGroup: this.current.id,
+              medias: bbn.fn.isArray(data.media) ? bbn.fn.map(data.media, m => m.id) : [data.media.id]
+            }, d => {
+              if (d.success) {
+                this.getRef('mediaBrowser').refresh();
+                appui.success();
+              }
+            });
+          }
+          if (!bbn.fn.isArray(data.media)) {
+            this.confirm(bbn._('Are you sure you want to remove these medias from this group?'), post);
+          }
+          else {
+            post();
+          }
+        }
+      },
       refresh(){
         return this.getRef('list').updateData();
       },
@@ -82,6 +112,19 @@
     },
     beforeDestroy() {
       appui.unregister('appui-note-media-groups');
+    },
+    watch: {
+      current: {
+        deep: true,
+        handler(){
+          this.$nextTick(() => {
+            let mb = this.getRef('mediaBrowser');
+            if (!!mb) {
+              mb.refresh();
+            }
+          });
+        }
+      }
     },
     components: {
       form: {
@@ -134,7 +177,9 @@
                             @clickItem="onSelection"
                             :zoomable="false"
                             :limit="50"
-                            path-name="path"/>
+                            path-name="path"
+                            :upload="mainComponent.mediasUploadUrl"
+                            :remove="mainComponent.mediasRemoveUrl"/>
         `,
         props: {
           source: {
@@ -152,8 +197,8 @@
             this.source.medias.splice(0);
             if (bbn.fn.isArray(item)) {
               bbn.fn.each(item, i => {
-                if (i.data && i.data.id) {
-                  this.source.medias.push(i.data.id);
+                if (i.id) {
+                  this.source.medias.push(i.id);
                 }
               });
             }

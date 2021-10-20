@@ -3,10 +3,17 @@
 (() => {
   return {
     mixins: [bbn.vue.basicComponent],
-    props: ['source'],
+    props: {
+      source: {
+        type: Object
+      },
+      browser: {
+        type: Vue
+      }
+    },
     data(){
       return {
-        browser: {},
+        //browser: {},
         root: appui.plugins['appui-note'] + '/',
         ref: (new Date()).getTime(),
         validTitle: true,
@@ -76,11 +83,13 @@
         }
       },
       success(d){
-        if(d.success && d.media){
+        if (d.success && d.media) {
           if ( !this.source.edit ){
-            this.browser.source.push(d.media);
-            // this.browser.add does not exist!
-            //this.browser.add(d.media);
+            
+            if (bbn.fn.isArray(this.browser.source)) {
+              this.browser.source.push(d.media);
+            }
+            this.browser.refresh();
             appui.success(bbn._('Media successfully added to media browser'));
           }
           else{
@@ -110,17 +119,23 @@
       }
     },
     mounted(){
-      this.browser = this.closest('bbn-container').find('appui-note-media-browser2');
-      if(this.browser && this.browser.source.length){
-        this.mediaIdx =  bbn.fn.search(this.browser.source, 'id', this.source.media.id);
+      //this.browser = this.closest('bbn-container').find('appui-note-media-browser2');
+      if (this.browser
+        && !!this.browser.source
+        && bbn.fn.isArray(this.browser.source)
+        && this.browser.source.length
+      ) {
+        this.mediaIdx = bbn.fn.search(this.browser.source, 'id', this.source.media.id);
       }
-
       this.setContent();
       if (this.source.edit) {
         this.source.oldName = this.source.media.content.name;
       }
-
-      if (this.browser && this.browser.$parent.source.id_note) {
+      if (this.browser
+        && this.browser.$parent
+        && this.browser.$parent.source
+        && this.browser.$parent.source.id_note
+      ) {
         this.$nextTick(()=>{
           this.id_note = this.browser.$parent.source.id_note;
         });

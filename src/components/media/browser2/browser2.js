@@ -91,31 +91,10 @@
         current: {},
         showList: false,
         isPicker: false,
-         root: appui.plugins['appui-note'] + '/',
+        root: appui.plugins['appui-note'] + '/',
       }
     },
     computed: {
-      currentButtonMenu(){
-        if (this.buttonMenu) {
-          return this.buttonMenu;
-        }
-        let res = [];
-        if (this.downloadEnabled) {
-          res.push({
-            text: bbn._('Download'),
-            icon: 'nf nf-fa-download',
-            action: this.downloadMedia
-          })
-        }
-        if (this.removeEnabled) {
-          res.push({
-            text: bbn._('Delete'),
-            icon: 'nf nf-fa-trash',
-            action: this.removeMedia
-          })
-        }
-        return res;
-      },
       downloadEnabled(){
         return !!this.download && (!!this.url || bbn.fn.isString(this.download));
       },
@@ -134,6 +113,28 @@
       }
     },
     methods: {
+      getButtonMenu(data){
+        let res = [];
+        if (this.downloadEnabled) {
+          res.push({
+            text: bbn._('Download'),
+            icon: 'nf nf-fa-download',
+            action: () => {
+              this.downloadMedia(data);
+            }
+          })
+        }
+        if (this.removeEnabled) {
+          res.push({
+            text: bbn._('Delete'),
+            icon: 'nf nf-fa-trash',
+            action: () => {
+              this.removeMedia(data);
+            } 
+          })
+        }
+        return res;
+      },
       editMedia(m, a){
         if(bbn.fn.isString(m.content)){
           m.content = JSON.parse(m.content)
@@ -141,34 +142,43 @@
         this.getPopup().open({
           title: bbn._('Edit media'),
           component: 'appui-note-media-form',
-          height: '400px',
-          width: '400px',
-          source: {
-            media: m,
-            edit: true,
-            removedFile: false,
-            oldName: ''
+          componentOptions: {
+            source: {
+              media: m,
+              edit: true,
+              removedFile: false,
+              oldName: ''
+            },
+            browser: this
           },
+          height: '400px',
+          width: '400px'
         })
       },
       addMedia(){
         this.getPopup().open({
           title: bbn._('Add new media'),
           component: 'appui-note-media-form',
+          componentOptions: {
+            source: {
+              media: {
+                title: '',
+                file: [],
+                name: ''
+              }
+            },
+            browser: this
+          },
           height: '400px',
-          width: '400px',
-          source: {
-            media: {
-              title: '',
-              file: [],
-              name: ''
-        		}
-          }
+          width: '400px'
         })
       },
       formatBytes: bbn.fn.formatBytes,
       removeMedia(m){
-        this.$emit('delete', {'id_note':this.data.id_note, 'media': m} );
+        this.$emit('delete', {
+          id_note: !!this.data && !!this.data.id_note ? this.data.id_note : false,
+          media: m
+        });
         /*this.confirm(
           (m.notes && m.notes.length) ?
 	          bbn._("The media you're going to delete is linked to a note, are you sure you want to remove it?") :

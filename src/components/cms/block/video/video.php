@@ -8,7 +8,7 @@
     <div>
       <bbn-button :notext="true"
                   :title="_('Mute the video')"
-                  @click="source.muted = !source.muted"
+                  @click="source.muted = !!source.muted ? 0 : 1"
                   :icon="source.muted ? 'nf nf-oct-mute' : 'nf nf-oct-unmute'"
                   :class="['bbn-white', {
                       'bbn-bg-green': !!source.muted,
@@ -19,7 +19,7 @@
     <div>
       <bbn-button :notext="true"
                   :title="_('Autoplay')"
-                  @click="source.autoplay = !source.autoplay"
+                  @click="source.autoplay = !!source.autoplay ? 0 : 1"
                   :icon="source.autoplay ? 'nf nf-fa-pause' : 'nf nf-fa-play'"
                   :class="['bbn-white', {
                       'bbn-bg-green': !!source.autoplay,
@@ -31,7 +31,7 @@
       <div>
         <bbn-button :notext="true"
                     :title="_('Controls')"
-                    @click="source.controls = !source.controls"
+                    @click="source.controls = !!source.controls ? 0 : 1"
                     icon="nf nf-mdi-play_pause"
                     :class="['bbn-white', {
                       'bbn-bg-green': !!source.controls,
@@ -42,7 +42,7 @@
       <div>
         <bbn-button :notext="true"
                     :title="_('Loop')"
-                    @click="source.loop = !source.loop"
+                    @click="source.loop = !!source.loop ? 0 : 1"
                     icon="nf nf-mdi-loop"
                     :class="['bbn-white', {
                       'bbn-bg-green': !!source.loop,
@@ -83,11 +83,11 @@
     <bbn-video :width="source.style.width" 
                :style="style" 
                :height="source.style.height"
-               :autoplay="source.autoplay"
-               :controls="source.controls"
-               :loop="source.loop"
-               :muted="source.muted"
-               :youtube="youtube"
+               :autoplay="!!source.autoplay"
+               :controls="!!source.controls"
+               :loop="!!source.loop"
+               :muted="!!source.muted"
+               :youtube="!!youtube"
                :source="source.src"/>
   </div>     
 </div>

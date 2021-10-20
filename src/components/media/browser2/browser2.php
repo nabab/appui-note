@@ -21,7 +21,7 @@
                @selection="selectMedia"
                @clickItem="emitClickItem"
                :buttons-no-text="true"
-               :buttonMenu="currentButtonMenu"
+               :buttonMenu="buttonMenu || getButtonMenu"
                :buttonMenuComponent="buttonMenuComponent"
                :selection="selection"
                uid="id"

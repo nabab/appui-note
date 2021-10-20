@@ -138,29 +138,35 @@
         this.getPopup().open({
           title: bbn._('Edit media'),
           component: 'appui-note-media-form',
+          componentOptions: {
+            source: {
+              media: m,
+              edit: true,
+              removedFile: false,
+              oldName: ''
+            },
+            browser: this
+          },
           height: '400px',
           width: '400px',
-          source: {
-            media: m,
-            edit: true,
-            removedFile: false,
-            oldName: ''
-          },
         })
       },
       addMedia(){
         this.getPopup().open({
           title: bbn._('Add new media'),
           component: 'appui-note-media-form',
+          componentOptions: {
+            source: {
+              media: {
+                title: '',
+                file: [],
+                name: ''
+              }
+            },
+            browser: this
+          },
           height: '400px',
-          width: '400px',
-          source: {
-            media: {
-              title: '',
-              file: [],
-              name: ''
-        		}
-          }
+          width: '400px'
         });
       },
       formatBytes: bbn.fn.formatBytes,

@@ -2,87 +2,87 @@
 
 (() => {
   return {
+    mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
+    data(){
+      return {
+        slideshowSourceUrl: appui.plugins['appui-note'] + '/media/data/groups/medias',
+        currentItems: [],
+        units: [{
+          text: '%',
+          value: '%'
+        }, {
+          text: 'px',
+          value: 'px'
+        }, {
+          text: 'em',
+          value: 'em'
+        }],
+        currentWidth: this.source.style.width,
+        currentWidthUnit: '%',
+        currentHeight: this.source.style.height,
+        currentHeightUnit: 'px'
+      }
+    },
     computed: {
-      items(){
-        if (this.source.source && (this.source.type === 'carousel')){
-          let res = [];
-          let j = this.source.source.length;
-          let chunk = 3;
-          for (let i = 0; i < j; i += chunk) {
-            let temparray = this.source.source.slice(i, i+chunk);
-            res.push(temparray);
-            // do whatever
-          }
-
-          return res;
+      galleries(){
+        let cp = this.closest('appui-note-cms-editor');
+        if (cp && !!cp.source.mediasGroups) {
+          return bbn.fn.order(bbn.fn.map(cp.source.mediasGroups, mg => {
+            return {
+              text: mg.text,
+              value: mg.id
+            };
+          }), 'text', 'asc');
         }
-      },
-      columnsClass(){
-        if (!this.mobile) {
-          if ( this.source.columns === 1 ){
-            return 'cols-1';
-          }
-          else if ( this.source.columns === 2 ){
-            return 'cols-2';
-          }
-          else if ( this.source.columns === 4 ){
-            return 'cols-4';
-          }
-          return 'cols-3';
-        }
-        else {
-          return 'cols-2';
-        }
+        return [];
       },
     },
     methods: {
-      makeSquareImg(){
-        if ( !this.source.noSquare ){
-          //creates square container for the a
-          var items = this.$el.querySelectorAll('a'),
-              images = this.$el.querySelectorAll('img');
-          this.show = false;
-          if (this.source.columns === 1){
-            for (let i in items ){
-              if ( images[i].tagName === 'IMG' ){
-                this.$nextTick(()=>{
-                  images[i].style.height = 'auto';
-                  images[i].style.width = '100%';
-                })
-              }
-            }
-          }
-          else {
-            for (let i in images ){
-              if ( images[i].tagName === 'IMG' ){
-                this.$nextTick(()=>{
-                  images[i].style.height = items[i].offsetWidth + 'px';
-                })
-              }
-            }
-
-          }
-          this.show = true;
-        }
+      openMediasGroups(){
+        this.getPopup().load({
+          title: bbn._('Medias Groups Management'),
+          url: appui.plugins['appui-note'] + '/media/groups',
+          width: '90%',
+          height: '90%'
+        });
       },
-      imageSuccess(a, b, res){
-        if (res.success && res.image.src.length ){
-          this.source.content = res.image.name;
-          appui.success(bbn._('Image correctly uploaded'));
-        }
-        else{
-          appui.error(bbn._('An error occurred while uploading the image'));
+      updateData(){
+        if (this.source.source) {
+          this.post(this.slideshowSourceUrl, {data: {idGroup: this.source.source}}, d => {
+            if (d.success && d.data) {
+              this.currentItems.splice(0, this.currentItems.length);
+              this.$nextTick(() => {
+                this.currentItems.push(...bbn.fn.map(d.data, data => {
+                  data.type = 'img';
+                  data.content = data.path;
+                  data.mode = 'full';
+                  data.info = data.title;
+                  return data;
+                }));
+              });
+            }
+          });
         }
       }
     },
-    mounted() {
-      this.makeSquareImg();
+    beforeMount(){
+      this.updateData();
     },
     watch: {
-      'source.columns':{
-        handler(val){
-          this.makeSquareImg()
-        }
+      'source.source'(){
+        this.updateData();
+      },
+      currentWidth(val){
+        this.source.style.width = this.currentWidth;
+      },
+      currentWidthUnit(val){
+        this.source.style.width = this.currentWidth + this.currentWidthUnit;
+      },
+      currentHeight(val){
+        this.source.style.height = this.currentHeight;
+      },
+      currentHeightUnit(val){
+        this.source.style.height = this.currentHeight + this.currentHeightUnit;
       }
     }
   }

@@ -1,6 +1,5 @@
 <?php
-if ($model->hasData(['data', 'limit'], true)
-  && $model->hasData('start')
+if ($model->hasData('data', true)
   && !empty($model->data['data']['idGroup'])
 ) {
   $medias = new \bbn\Appui\Medias($model->db);

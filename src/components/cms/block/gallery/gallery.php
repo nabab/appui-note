@@ -1,38 +1,48 @@
 <!-- HTML Document -->
-
 <div :class="componentClass">
   <div v-if="mode === 'edit'"
-       :class="['component-container', 'bbn-c']"
-       :style="style">
-    <!-- GIVE HREF TO VIEW FULL IMAGE -->
-    <appui-note-cms-block-gallery-item v-if="source.source[currentPage]"
-                                       :source="source.source[currentPage]"
-                                       :index="currentPage"/>
-    <bbn-pager :element="cp"
-               :extra-controls="false"
-               pageName="<?= _("image") ?>"/>
-  </div>
-  <div class="bbn-grid-fields bbn-padded">
-    <label>Columns number</label>
-    <div>
-      <bbn-dropdown v-model="formData.columns"
-                    :source="tinyNumbers"/>
+       class="bbn-grid-fields bbn-padded">
+    <label><?=_('Gallery')?></label>
+    <div class="bbn-vmiddle">
+      <bbn-dropdown :source="galleries"
+                    v-model="source.source"/>
+      <bbn-button icon="nf nf-fae-galery"
+                  :notext="true"
+                  @click="openMediasGroups"
+                  class="bbn-left-sspace"/>
     </div>
-    <label v-text="_('Upload your images')"/>
-    <bbn-upload :save-url="'upload/save/' + ref"
-                remove-url="test/remove"
-                :data="{gallery: true}"
-               :paste="true"
-                :multiple="true"
-                v-model="source.content"
-                @success="imageSuccess"/>
+    <label><?=_('Scrollable')?></label>
+    <bbn-checkbox v-model="source.scrollable"
+                  :value="1"
+                  :novalue="0"/>
+    <label><?=_('Pageable')?></label>
+    <bbn-checkbox v-model="source.pageable"
+                  :value="1"
+                  :novalue="0"/>
+    <label><?=_('Zoomable')?></label>
+    <bbn-checkbox v-model="source.zoomable"
+                  :value="1"
+                  :novalue="0"/>
+    <label><?=_('Resizable')?></label>
+    <bbn-checkbox v-model="source.resizable"
+                  :value="1"
+                  :novalue="0"/>
+    <label><?=_('Toolbar')?></label>
+    <bbn-checkbox v-model="source.toolbar"
+                  :value="1"
+                  :novalue="0"/>
   </div>
-  <div :class="['bbn-block-gallery', alignClass, columnsClass]"
-       :style="style"
-       v-else>
-    <appui-note-cms-block-gallery-item v-for="(image, idx) in source.source"
-                                              :source="image"
-                                              :key="idx"
-                                              :index="idx"/>
+  <div v-else>
+    <bbn-gallery :source="gallerySourceUrl"
+                 :data="{
+                   idGroup: source.source
+                 }"
+                 ref="gallery"
+                 :scrollable="!!source.scrollable"
+                 :pageable="!!source.pageable"
+                 :zoomable="!!source.zoomable"
+                 :resizable="!!source.resizable"
+                 :toolbar="!!source.toolbar"
+                 path-name="path"/>
   </div>
 </div>

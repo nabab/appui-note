@@ -30,7 +30,9 @@
                   ref="list"
                   @select="item => current = item"
                   :selection="true"
-                  uid="id"/>
+                  uid="id"
+                  mode="selection"
+                  source-value="id"/>
       </bbn-scroll>
     </div>
   </div>
@@ -49,7 +51,9 @@
                                  action: openAddMediaForm
                                }]"
                                :limit="50"
-                               path-name="path"/>
+                               path-name="path"
+                               :selection="false"
+                               @delete="removeMedia"/>
     <div v-else
          :class="['bbn-middle', {'bbn-overlay': scrollable}]">
       <div class="bbn-vmiddle">

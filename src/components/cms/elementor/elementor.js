@@ -60,23 +60,37 @@
             text: bbn._("Carousel"),
             value: 'carousel',
             default: {
-              source: []
+              source: '',
+              autoplay: 1,
+              arrows: 0,
+              preview: 1,
+              loop: 1,
+              info: 1,
+              style: {
+                width: '100%',
+                height: '300px'
+              }
             }
           }, {
             text: bbn._("Gallery"),
             value: 'gallery',
             default: {
-              source: []
+              source: '',
+              scrollable: 0,
+              pageable: 0,
+              zoomable: 0,
+              resizable: 0,
+              toolbar: 0
             }
           }, {
             text: bbn._("Video"),
             value: 'video',
             default: {
               src: '',
-              autoplay: false,
-              muted: false,
-              controls: false,
-              loop: false,
+              autoplay: 0,
+              muted: 0,
+              controls: 0,
+              loop: 0,
               style: {
                 width: '100%',
                 height: '100%'
