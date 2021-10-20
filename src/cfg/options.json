@@ -71,6 +71,9 @@
       "text": "Post",
       "code": "post"
     }, {
+      "text": "Post-it",
+      "code": "post-it"
+    }, {
       "text": "Tasks",
       "code": "tasks"
     }]
