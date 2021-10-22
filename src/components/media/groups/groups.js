@@ -34,7 +34,8 @@
     data(){
       return {
         current: false,
-        search: ''
+        search: '',
+        listMounted: false
       }
     },
     methods: {

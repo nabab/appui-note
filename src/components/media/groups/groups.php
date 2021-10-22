@@ -46,11 +46,13 @@
                   source-value="id"
                   class="appui-note-media-groups-list"
                   :pageable="true"
-                  :filterable="true"/>
+                  :filterable="true"
+                  @ready="listMounted = true"/>
       </bbn-scroll>
     </div>
     <div class="bbn-top-space">
-      <bbn-pager :element="getRef('list')"
+      <bbn-pager v-if="listMounted"
+                 :element="getRef('list')"
                  :limit="false"
                  :extra-controls="false"/>
     </div>

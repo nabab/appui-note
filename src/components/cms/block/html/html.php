@@ -4,5 +4,6 @@
   <bbn-rte v-if="isEditor"
            v-model="source.content"/>
   <div v-else
-	     v-html="source.content"/>
+	     v-html="source.content"
+       :style="style"/>
 </div>

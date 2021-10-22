@@ -26,30 +26,28 @@
                       'bbn-bg-red': !source.autoplay
                     }]"/>
     </div>
-    <template v-if="youtube">
-      <label><?=_('Controls')?></label>
-      <div>
-        <bbn-button :notext="true"
-                    :title="_('Controls')"
-                    @click="source.controls = !!source.controls ? 0 : 1"
-                    icon="nf nf-mdi-play_pause"
-                    :class="['bbn-white', {
-                      'bbn-bg-green': !!source.controls,
-                      'bbn-bg-red': !source.controls
-                    }]"/>
-      </div>
-      <label><?=_('Loop')?></label>
-      <div>
-        <bbn-button :notext="true"
-                    :title="_('Loop')"
-                    @click="source.loop = !!source.loop ? 0 : 1"
-                    icon="nf nf-mdi-loop"
-                    :class="['bbn-white', {
-                      'bbn-bg-green': !!source.loop,
-                      'bbn-bg-red': !source.loop
-                    }]"/>
-      </div>
-    </template>
+    <label><?=_('Controls')?></label>
+    <div>
+      <bbn-button :notext="true"
+                  :title="_('Controls')"
+                  @click="source.controls = !!source.controls ? 0 : 1"
+                  icon="nf nf-mdi-play_pause"
+                  :class="['bbn-white', {
+                    'bbn-bg-green': !!source.controls,
+                    'bbn-bg-red': !source.controls
+                  }]"/>
+    </div>
+    <label><?=_('Loop')?></label>
+    <div>
+      <bbn-button :notext="true"
+                  :title="_('Loop')"
+                  @click="source.loop = !!source.loop ? 0 : 1"
+                  icon="nf nf-mdi-loop"
+                  :class="['bbn-white', {
+                    'bbn-bg-green': !!source.loop,
+                    'bbn-bg-red': !source.loop
+                  }]"/>
+    </div>
     <label><?=_('Alignment')?></label>
     <div>
       <div class="bbn-block">

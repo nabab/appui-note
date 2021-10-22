@@ -56,7 +56,9 @@
             text: bbn._("Rich text (HTML)"),
             value: 'html',
             default: {
-              content: ''
+              content: '',
+              align: 'left',
+              style: {}
 	          }
           }, {
             text: bbn._("Image"),
