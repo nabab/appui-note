@@ -1,7 +1,16 @@
 /* LESS Document */
-
-@{componentName} {
+.@{componentName} {
   img{
     max-width: 100%;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+  }
+  .@{componentName}-preview {
+    align-items: flex-start;
+    img {
+      width: 150px;
+      height: auto;
+    }
   }
 }

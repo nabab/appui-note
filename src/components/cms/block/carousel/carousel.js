@@ -7,35 +7,25 @@
       return {
         slideshowSourceUrl: appui.plugins['appui-note'] + '/media/data/groups/medias',
         currentItems: [],
-        units: [{
-          text: '%',
-          value: '%'
-        }, {
-          text: 'px',
-          value: 'px'
-        }, {
-          text: 'em',
-          value: 'em'
-        }],
-        currentWidth: this.source.style.width,
-        currentWidthUnit: '%',
-        currentHeight: this.source.style.height,
-        currentHeightUnit: 'px'
+        galleryListUrl: appui.plugins['appui-note'] + '/media/data/groups/list'
       }
     },
     computed: {
-      galleries(){
-        let cp = this.closest('appui-note-cms-editor');
-        if (cp && !!cp.source.mediasGroups) {
-          return bbn.fn.order(bbn.fn.map(cp.source.mediasGroups, mg => {
-            return {
-              text: mg.text,
-              value: mg.id
-            };
-          }), 'text', 'asc');
+      align(){
+        let style = {};
+        switch (this.source.align) {
+          case 'left':
+            style.justifyContent = 'flex-start';
+            break;
+          case 'center':
+            style.justifyContent = 'center';
+            break;
+          case 'right':
+            style.justifyContent = 'flex-end';
+            break;
         }
-        return [];
-      },
+        return style;
+      }
     },
     methods: {
       openMediasGroups(){
@@ -43,7 +33,10 @@
           title: bbn._('Medias Groups Management'),
           url: appui.plugins['appui-note'] + '/media/groups',
           width: '90%',
-          height: '90%'
+          height: '90%',
+          onClose: () => {
+            this.getRef('galleryList').updateData();
+          }
         });
       },
       updateData(){
@@ -71,18 +64,6 @@
     watch: {
       'source.source'(){
         this.updateData();
-      },
-      currentWidth(val){
-        this.source.style.width = this.currentWidth;
-      },
-      currentWidthUnit(val){
-        this.source.style.width = this.currentWidth + this.currentWidthUnit;
-      },
-      currentHeight(val){
-        this.source.style.height = this.currentHeight;
-      },
-      currentHeightUnit(val){
-        this.source.style.height = this.currentHeight + this.currentHeightUnit;
       }
     }
   }

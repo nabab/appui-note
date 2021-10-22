@@ -14,7 +14,7 @@
       </div>
       <label><?=_('Color')?></label>
       <div>
-        <bbn-colorpicker v-model="source.color"/>
+        <bbn-colorpicker v-model="source.style.color"/>
       </div>
       <label><?=_('Alignment')?></label>
       <div>
@@ -36,11 +36,21 @@
                             }]"/>
         </div>
       </div>
+      <label><?=_('Style')?></label>
+      <div>
+        <bbn-button title="<?=_('Italic')?>"
+                    @click="source.style['font-style'] = source.style['font-style'] === 'italic' ? 'normal' : 'italic'"
+                    :notext="true"
+                    icon="nf nf-fa-italic"
+                    :class="['bbn-no-radius', {
+                      'bbn-state-active': source.style['font-style'] === 'italic'
+                    }]"/>
+      </div>
       <label><?=_('Decoration')?></label>
       <div>
         <div class="bbn-block">
           <bbn-radiobuttons :notext="true"
-                            v-model="source.decoration"
+                            v-model="source.style['text-decoration']"
                             :source="[{
                               text: _('Underlined'),
                               value: 'underline',
@@ -56,16 +66,20 @@
                             }]"/>
         </div>
       </div>
-
       <label><?=_('Horizontal rule')?></label>
-      <appui-note-cms-block-line :source="source"
-                                 mode="edit"/>
+      <div>
+        <appui-note-cms-block-line :source="source"
+                                   mode="edit"
+                                   :details="false"/>
+      </div>
+      
     </div>
   </div>
   <div v-else
        class="bbn-w-100">
     <appui-note-cms-block-line :source="source"
-                               mode="read">
+                               mode="read"
+                               :details="false">
       <component :is="source.tag"
                  :style="style"
                  v-html="source.content"/>

@@ -14,7 +14,6 @@ if ($model->hasData('id', true)) {
   $data['start'] = $cms->getStart($model->data['id']);
   $data['end'] = $cms->getEnd($model->data['id']);
   $data['items'] = $data['content'] ? json_decode($data['content']) : [];
-  $data['mediasGroups'] = $model->db->rselectAll('bbn_medias_groups');
   unset($data['content']);
   return $data;
 }

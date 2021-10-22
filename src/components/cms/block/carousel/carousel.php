@@ -4,36 +4,52 @@
        class="bbn-grid-fields bbn-padded">
     <label><?=_('Gallery')?></label>
     <div class="bbn-vmiddle">
-      <bbn-dropdown :source="galleries"
-                    v-model="source.source"/>
+      <bbn-dropdown :source="galleryListUrl"
+                    source-value="id"
+                    v-model="source.source"
+                    ref="galleryList"
+                    :limit="0"/>
       <bbn-button icon="nf nf-fae-galery"
                   :notext="true"
                   @click="openMediasGroups"
-                  class="bbn-left-sspace"/>
+                  class="bbn-left-sspace"
+                  title="<?=_('Open galleries management')?>"/>
     </div>
     <label><?=_('Width')?></label>
-    <div class="bbn-flex-width bbn-vmiddle">
-      <bbn-cursor v-model="currentWidth"
-                  :min="10"
-                  :max="2000" 
-                  :step="10"
-                  class="bbn-flex-fill bbn-right-sspace"
-                  :unit="currentWidthUnit"/>
-      <bbn-dropdown v-model="currentWidthUnit"
-                    :source="units"
-                    style="width: 6em"/>
-    </div>
+    <bbn-range v-model="source.style.width"
+									 :min="10"
+									 :max="2000" 
+									 :step="10"
+									 :show-reset="false"
+									 :show-label="true"
+									 :show-units="true"/>
     <label><?=_('Height')?></label>
-    <div class="bbn-flex-width bbn-vmiddle">
-      <bbn-cursor v-model="currentHeight"
-                  :min="10"
-                  :max="2000" 
-                  :step="10"
-                  class="bbn-flex-fill bbn-right-sspace"
-                  :unit="currentHeightUnit"/>
-      <bbn-dropdown v-model="currentHeightUnit"
-                    :source="units"
-                    style="width: 6em"/>
+    <bbn-range v-model="source.style.height"
+									 :min="10"
+									 :max="2000" 
+									 :step="10"
+									 :show-reset="false"
+									 :show-label="true"
+									 :show-units="true"/>
+    <label><?=_('Alignment')?></label>
+    <div>
+      <div class="bbn-block">
+        <bbn-radiobuttons :notext="true"
+                          v-model="source.align"
+                          :source="[{
+                            text: _('Align left'),
+                            value: 'left',
+                            icon: 'nf nf-fa-align_left'
+                          }, {
+                            text: _('Align center'),
+                            value: 'center',
+                            icon: 'nf nf-fa-align_center'
+                          }, {
+                            text: _('Align right'),
+                            value: 'right',
+                            icon: 'nf nf-fa-align_right'
+                          }]"/>
+      </div>
     </div>
     <label><?=_('Autoplay')?></label>
     <bbn-checkbox v-model="source.autoplay"
@@ -57,15 +73,18 @@
                   :novalue="0"/>
   </div>
   <div v-else
-       class="bbn-rel"
-       :style="source.style">
-    <bbn-slideshow v-if="currentItems.length"
-                   :source="currentItems"
-                   ref="slideshow"
-                   :arrows="!!source.arrows"
-                   :auto-play="!!source.autoplay"
-                   :loop="!!source.loop"
-                   :preview="!!source.preview"
-                   :show-info="!!source.info"/>
+       class="bbn-flex"
+       :style="align">
+    <div class="bbn-block bbn-rel"
+         :style="source.style">
+      <bbn-slideshow v-if="currentItems.length"
+                    :source="currentItems"
+                    ref="slideshow"
+                    :arrows="!!source.arrows"
+                    :auto-play="!!source.autoplay"
+                    :loop="!!source.loop"
+                    :preview="!!source.preview"
+                    :show-info="!!source.info"/>
+    </div>
   </div>
 </div>

@@ -33,7 +33,8 @@
     },
     data(){
       return {
-        current: false
+        current: false,
+        search: ''
       }
     },
     methods: {
@@ -122,6 +123,19 @@
             if (!!mb) {
               mb.refresh();
             }
+          });
+        }
+      },
+      search(val){
+        let list = this.getRef('list').currentFilters.conditions;
+        if (!val) {
+          list.splice(0);
+        }
+        else {
+          list.splice(0, list.length, {
+            field: 'text',
+            operator: 'contains',
+            value: val
           });
         }
       }

@@ -2,27 +2,66 @@
 
 (() => {
   return {
+    mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
     computed: {
-      alignClass(){
-        let st = 'bbn-c';
-        if ( this.source.align === 'left' ){
-          st = 'bbn-l'
+      align(){
+        let style = {};
+        switch (this.source.align) {
+          case 'left':
+            style.justifyContent = 'flex-start';
+            break;
+          case 'center':
+            style.justifyContent = 'center';
+            break;
+          case 'right':
+            style.justifyContent = 'flex-end';
+            break;
         }
-        if ( this.source.align === 'right' ){
-          st = 'bbn-r'
-        }
-        return st;
-      },
+        return style;
+      }
     },
-    beforeMount(){
-      if (this.source.content) {
-        let extension = this.source.content.substr(this.source.content.lastIndexOf('.'), this.source.content.length)
-        //take the correct size
-        this.image.push({
-          "name": this.source.content,
-          "size":574906,
-          "extension": extension
+    methods: {
+      openGallery(){
+        this.getPopup().open({
+          component: this.$options.components.gallery,
+          componentOptions: {
+            onSelection: this.onSelection
+          },
+          title: bbn._('Select an image'),
+          width: '90%',
+          height: '90%'
         });
+      },
+      onSelection(img) {
+        this.source.source = img.data.path;
+        this.getPopup().close();
+      }
+    },
+    components: {
+      gallery: {
+        template: `
+<div>
+  <appui-note-media-browser2 :source="root + 'media/data/browser'"
+                             @selection="onSelection"
+                             @clickItem="onSelection"
+                             :zoomable="false"
+                             :selection="false"
+                             :limit="50"
+                             path-name="path"
+                             :upload="root + 'media/actions/upload'"
+                             :remove="root + 'media/actions/remove'"/>
+</div>
+        `,
+        props: {
+          onSelection: {
+            type: Function
+          }
+        },
+        data(){
+          return {
+            root: appui.plugins['appui-note'] + '/'
+          }
+        }
       }
     }
   }

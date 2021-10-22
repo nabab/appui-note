@@ -3,7 +3,7 @@
   <div v-if="mode === 'edit'"
        class="bbn-grid-fields bbn-vspadded bbn-w-100">
     <label v-text="_('Video source')"/>
-    <bbn-input v-model="source.src"/>
+    <bbn-input v-model="source.source"/>
     <label><?=_('Muted')?></label>
     <div>
       <bbn-button :notext="true"
@@ -50,44 +50,52 @@
                     }]"/>
       </div>
     </template>
-    <label><?=_('Video alignment')?></label>
+    <label><?=_('Alignment')?></label>
     <div>
-      <bbn-block-align-buttons/>
+      <div class="bbn-block">
+        <bbn-radiobuttons :notext="true"
+                          v-model="source.align"
+                          :source="[{
+                            text: _('Align left'),
+                            value: 'left',
+                            icon: 'nf nf-fa-align_left'
+                          }, {
+                            text: _('Align center'),
+                            value: 'center',
+                            icon: 'nf nf-fa-align_center'
+                          }, {
+                            text: _('Align right'),
+                            value: 'right',
+                            icon: 'nf nf-fa-align_right'
+                          }]"/>
+      </div>
     </div>
-    <label><?=_('Video width')?></label>
-    <div class="bbn-flex-width bbn-vmiddle">
-      <bbn-cursor v-model="currentWidth"
-                  :min="10"
-                  :max="2000" 
-                  :step="10"
-                  class="bbn-flex-fill bbn-right-sspace"
-                  :unit="currentWidthUnit"/>
-      <bbn-dropdown v-model="currentWidthUnit"
-                    :source="units"
-                    style="width: 6em"/>
-    </div>
-    <label><?=_('Video height')?></label>
-    <div class="bbn-flex-width bbn-vmiddle">
-      <bbn-cursor v-model="currentHeight"
-                  :min="10"
-                  :max="2000" 
-                  :step="10"
-                  class="bbn-flex-fill bbn-right-sspace"
-                  :unit="currentHeightUnit"/>
-      <bbn-dropdown v-model="currentHeightUnit"
-                    :source="units"
-                    style="width: 6em"/>
-    </div>
+    <label><?=_('Width')?></label>
+    <bbn-range v-model="source.style.width"
+									 :min="10"
+									 :max="2000" 
+									 :step="10"
+									 :show-reset="false"
+									 :show-label="true"
+									 :show-units="true"/>
+    <label><?=_('Height')?></label>
+    <bbn-range v-model="source.style.height"
+									 :min="10"
+									 :max="2000" 
+									 :step="10"
+									 :show-reset="false"
+									 :show-label="true"
+									 :show-units="true"/>
   </div>
-  <div v-else>
-    <bbn-video :width="source.style.width" 
-               :style="style" 
-               :height="source.style.height"
+  <div v-else
+       class="bbn-flex"
+       :style="align">
+    <bbn-video :style="source.style" 
                :autoplay="!!source.autoplay"
                :controls="!!source.controls"
                :loop="!!source.loop"
                :muted="!!source.muted"
                :youtube="!!youtube"
-               :source="source.src"/>
+               :source="source.source"/>
   </div>     
 </div>

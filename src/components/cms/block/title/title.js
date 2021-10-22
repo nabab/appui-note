@@ -15,12 +15,12 @@
     },
     computed: {
       style(){
-        return {
+        return bbn.fn.extend(true, {
           textAlign: this.source.align || 'left',
-          color: this.source.color || undefined,
-          textDecoration: this.source.decoration || undefined,
-          fontStyle: !!this.source.italic ? 'italic' : 'normal'
-        }
+          //color: this.source.color || undefined,
+          //textDecoration: this.source.decoration || undefined,
+          //fontStyle: !!this.source.italic ? 'italic' : 'normal'
+        }, this.source.style)
       }
     }
   }

@@ -21,11 +21,13 @@
             default: {
             	tag: 'h1',
               content: '',
-              color: '#000000',
               align: 'left',
-              decoration: 'none',
-              italic: false,
-              hr: null
+              hr: null,
+              style: {
+                'text-decoration': 'none',
+                'font-style': 'normal',
+                color: '#000000'
+              }
 	          }
           }, {
             text: bbn._("Text"),
@@ -37,6 +39,12 @@
             text: bbn._("Line"),
             value: 'line',
             default: {
+              hr: null,
+              align: 'center',
+              style: {
+                width: '100%',
+                height: '0px'
+              }
 	          }
           }, {
             text: bbn._("Space"),
@@ -54,7 +62,17 @@
             text: bbn._("Image"),
             value: 'image',
             default: {
-              src: ''
+              source: '',
+              alt: '',
+              href: '',
+              caption: '',
+              details_title: '',
+              details: '',
+              style: {
+                width: '100%',
+                height: '100%'
+              },
+              align: 'center'
             }
           }, {
             text: bbn._("Carousel"),
@@ -69,7 +87,8 @@
               style: {
                 width: '100%',
                 height: '300px'
-              }
+              },
+              align: 'center'
             }
           }, {
             text: bbn._("Gallery"),
@@ -78,15 +97,22 @@
               source: '',
               scrollable: 0,
               pageable: 0,
+              pager: 0,
               zoomable: 0,
               resizable: 0,
-              toolbar: 0
+              toolbar: 0,
+              style: {
+                width: '100%',
+                height: '100%'
+              },
+              align: 'center',
+              imageWidth: 150
             }
           }, {
             text: bbn._("Video"),
             value: 'video',
             default: {
-              src: '',
+              source: '',
               autoplay: 0,
               muted: 0,
               controls: 0,

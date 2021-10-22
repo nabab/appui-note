@@ -24,16 +24,35 @@
                     @click="refresh"/>
       </div>
     </div>
+    <div class="bbn-bordered-bottom bbn-bottom-space bbn-spadded bbn-flex-width bbn-vmiddle">
+      <bbn-input v-model="search"
+                 class="bbn-flex-fill bbn-no-border bbn-no-radius"
+                 placeholder="<?=_('Search')?>"/>
+      <i :class="['bbn-lg', 'bbn-p', {
+           'nf nf-fa-close bbn-red': !!search.length,
+           'nf nf-fa-search': !search.length
+         }]"
+         @click="search = ''"/>
+    </div>
     <div :class="['bbn-rel', {'bbn-flex-fill': scrollable}]">
       <bbn-scroll>
         <bbn-list :source="sourceUrl"
                   ref="list"
                   @select="item => current = item"
                   :selection="true"
+                  :limit="50"
                   uid="id"
                   mode="selection"
-                  source-value="id"/>
+                  source-value="id"
+                  class="appui-note-media-groups-list"
+                  :pageable="true"
+                  :filterable="true"/>
       </bbn-scroll>
+    </div>
+    <div class="bbn-top-space">
+      <bbn-pager :element="getRef('list')"
+                 :limit="false"
+                 :extra-controls="false"/>
     </div>
   </div>
   <div class="bbn-flex-fill bbn-rel">
