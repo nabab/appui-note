@@ -5,7 +5,8 @@
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
     computed: {
       youtube(){
-        return this.source.source.indexOf('youtube') > -1;
+        let reg = /^https?:\/\/w{0,3}\.?youtu\.?be(-nocookie)?(\.com)?\//gm;
+        return this.source.source.search(reg) > -1;
       },
       align(){
         let style = {};
