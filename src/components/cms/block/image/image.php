@@ -21,7 +21,7 @@
 									 :max="2000" 
 									 :step="10"
 									 :show-reset="false"
-									 :show-label="true"
+									 :show-numeric="true"
 									 :show-units="true"/>
 				<label><?=_('Height')?></label>
 				<bbn-range v-model="source.style.height"
@@ -29,7 +29,7 @@
 									 :max="2000" 
 									 :step="10"
 									 :show-reset="false"
-									 :show-label="true"
+									 :show-numeric="true"
 									 :show-units="true"/>
         <label v-text="_('Alignment')"></label>
         <div>

@@ -7,7 +7,7 @@
     <bbn-range v-model="source.size"
 						   :max="2000" 
                :show-reset="false"
-               :show-label="true"
+               :show-numeric="true"
                :show-units="true"
                unit="em"/>
   </div>
