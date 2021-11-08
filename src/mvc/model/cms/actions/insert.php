@@ -26,6 +26,7 @@ if ($model->hasData(['title', 'type'], true)) {
       catch ( \Exception $e ){
         return ['error' => $e->getMessage()];
       }
+      
 
       $res['success'] = true;
       $res['data'] = [

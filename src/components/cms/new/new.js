@@ -22,26 +22,15 @@
           url: '',
           lang: bbn.env.lang
         },
-        urlEdited: false,
         root: appui.plugins['appui-note'] + '/'
       };
     },
     computed:{
       date(){
         return moment(moment().toISOString()).unix();
-      },
-      url() {
-        return this.makeURL(this.formData.title);
       }
     },
     methods: {
-      makeURL(st) {
-        if (st) {
-          return bbn.fn.sanitize(st, '-').toLowerCase();
-        }
-
-        return '';
-      },
       afterSubmit(d) {
         if ( d.success && d.data){
           this.closest('bbn-floater').opener.getRef('table').reload();
@@ -50,22 +39,6 @@
       }
     },
     watch: {
-      url(v) {
-        if (!this.urlEdited) {
-          this.formData.url = v;
-        }
-      },
-      "formData.url"(v) {
-        if ((v === null) || (this.makeURL(v) === this.url)) {
-          if (this.urlEdited) {
-            this.urlEdited = false;
-            this.formData.url = this.url;
-          }
-        }
-        else if (!this.urlEdited) {
-          this.urlEdited = true;
-        }
-      },
       publish(val){
         if ( !val ){
           this.source.start = null;

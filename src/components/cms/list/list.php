@@ -10,9 +10,10 @@
              :showable="true"
              :sortable="true"
              :filterable="true"
+             button-mode="menu"
   					 :toolbar="$options.components['toolbar']">
     <bbns-column title=" "
-                 :component="$options.components.menu"
+                 :buttons="rowMenu"
                  :filterable="false"
                  :showable="false"
                  :sortable="false"

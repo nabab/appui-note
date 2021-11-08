@@ -16,10 +16,7 @@
     <label class="bbn-b">
       <?=_('URL')?>
     </label>
-    <bbn-input v-model="formData.url"
-               :nullable="urlEdited"
-               class="bbn-w-100"
-               :required="true"/>
+    <appui-note-cms-url :source="formData"/>
 
     <label class="bbn-b">
       <?=_('Article type')?>

@@ -24,6 +24,46 @@
       };
     },
     methods: {
+      rowMenu(row, col, idx){
+        return [{
+          action: () => {
+            this.editNote(row);
+          },
+          icon: 'nf nf-fa-edit',
+          text: bbn._("Edit"),
+          key: 'a'
+        }, {
+          action: () => {
+            this.publishNote(row);
+          },
+          icon: 'nf nf-fa-chain',
+          text: bbn._("Publish"),
+          disabled: !row.is_published,
+          key: 'b'
+        }, {
+          action: () => {
+            this.unpublishNote(row);
+          },
+          icon: 'nf nf-fa-chain_broken',
+          text: bbn._("Unpublish"),
+          disabled: row.is_published,
+          key: 'c'
+        },{
+          action: () => {
+            this.addMedia(row);
+          },
+          text: bbn._("Add media"),
+          icon: 'nf nf-mdi-attachment',
+          key: 'd'
+        }, {
+          action: () => {
+            this.deleteNote(row);
+          },
+          text: bbn._("Delete"),
+          icon: 'nf nf-fa-trash_o',
+          key: 'e'
+        }];
+      },
       //Methods call of the menu in toolbar
       //FILE
       insertNote(){
@@ -95,7 +135,6 @@
           });
         }
       },
-  
       // function of render
       renderUrl(row){
         if ( row.url !== null ){
@@ -105,80 +144,12 @@
       },
     },
     created(){
-      appui.register('publications', this);
-      if (!componentName) {
-        componentName = this.getComponentName();
-      }
+      appui.register('appuiCmsList', this);
     },
     beforeDestroy(){
-      appui.unregister('publications');
+      appui.unregister('appuiCmsList');
     },
     components: {
-      menu: {
-        template: `
-<bbn-context :source="rowMenu">
-	<span class="bbn-iblock bbn-lg bbn-hspadded">
-  	<i class="nf nf-mdi-dots_vertical"/>
-  </span>
-</bbn-context>`,
-        props: ['source'],
-        data(){
-          return {
-            cp: false,
-            table: false
-          }
-        },
-        computed: {
-          rowMenu(){
-            if (!this.table) {
-              return [];
-            }
-
-            return [{
-              action: () => {
-                this.cp.editNote(this.source);
-              },
-              icon: 'nf nf-fa-edit',
-              text: bbn._("Edit"),
-              key: 'a'
-            }, {
-              action: () => {
-                this.cp.publishNote(this.source);
-              },
-              icon: 'nf nf-fa-chain',
-              text: bbn._("Publish"),
-              disabled: !this.source.is_published,
-              key: 'b'
-            }, {
-              action: () => {
-              	this.cp.unpublishNote(this.source);
-              },
-              icon: 'nf nf-fa-chain_broken',
-              text: bbn._("Unpublish"),
-              disabled: this.source.is_published,
-              key: 'c'
-            },{
-              action: () => {
-                this.cp.addMedia(this.source);
-              },
-              text: bbn._("Add media"),
-              icon: 'nf nf-mdi-attachment',
-              key: 'd'
-            }, {
-              action: () => {
-                this.cp.deleteNote(this.source);
-              },
-              text: bbn._("Delete"),
-              icon: 'nf nf-fa-trash_o',
-              key: 'e'
-            }];
-          }
-        },
-        beforeMount(){
-          this.table = this.closest('bbn-table');
-          this.cp = this.closest(componentName);
-        }
-      },
       browser :{
         props: ['source'],
         template: '<appui-note-media-browser @select="insertMedia" :select="true"></appui-note-media-browser>',
@@ -201,8 +172,8 @@
             //case inserting media during update
 						if ( this.source.id_note ){
               this.post(this.root + '/cms/actions/add_media', {
-                id_note: this.source.id_note, 
-                id_media: m.id, 
+                id_note: this.source.id_note,
+                id_media: m.id,
                 version: this.source.version
               }, (d) => {
                 if ( d.success ){
@@ -211,7 +182,7 @@
                 }
                 else {
                   appui.success(bbn._('Something went wrong while adding the media to the note'));
-                } 
+                }
               })
             }
             //case adding media while inserting note
@@ -230,7 +201,6 @@
                   :text="_('Insert Articles')"
                   :action="insertNote"
       ></bbn-button>
-      
       <div class="bbn-xl bbn-b bbn-flex-fill bbn-r bbn-white">
         <?=_("The Content Management System")?>
       </div>
@@ -239,9 +209,9 @@
         props: ['source'],
         data(){
           return {
-            cp: appui.getRegistered('publications'),
+            cp: appui.getRegistered('appuiCmsList'),
           }
-        }, 
+        },
         methods:{
           insertNote(){
             return this.cp.insertNote();
