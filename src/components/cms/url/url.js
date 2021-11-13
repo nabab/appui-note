@@ -2,6 +2,7 @@
 
 (() => {
   return {
+    mixins: [bbn.vue.basicComponent],
     props: {
     	source: {
         type: Object,
@@ -10,7 +11,7 @@
     },
     data(){
       return {
-        urlEdited: false
+        urlEdited: !!this.source.id
       }
     },
     computed: {
@@ -34,7 +35,7 @@
         }
       },
       "source.url"(v) {
-        if ((v === null) || (this.makeURL(v) === this.url)) {
+        if (!v || (this.makeURL(v) === this.url)) {
           if (this.urlEdited) {
             this.urlEdited = false;
             this.source.url = this.url;

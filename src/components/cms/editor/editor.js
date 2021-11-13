@@ -4,7 +4,13 @@
   return {
     mixins: bbn.vue.basicComponent,
     props: {
-      source: {}
+      source: {
+        type: Object
+      },
+      action: {
+        type: String,
+        default: appui.plugins['appui-note'] + '/' + 'cms/actions/save'
+      }
     },
     data(){
       return {

@@ -26,7 +26,7 @@
     <bbn-form ref="form"
               class="bbn-hidden"
               :source="source"
-              :action="root + 'cms/actions/save'"
+              :action="action"
               :buttons="[]"/>
     <appui-note-cms-elementor :source="source.items"
                               @hook:mounted="ready = true"

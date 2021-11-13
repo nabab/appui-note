@@ -11,10 +11,9 @@
                  :required="true"/>
 
       <label><?= _("Public URL") ?></label>
-      <bbn-input class="bbn-wider"
-                 v-model="source.url"
-                 :readonly="true"
-                 :required="true"/>
+      <appui-note-cms-url :source="source"
+                          class="bbn-wider"
+                          :readonly="true"/>
 
       <label><?= _("Start of publication") ?></label>
       <bbn-datetimepicker class="bbn-wider"

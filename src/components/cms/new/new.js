@@ -14,7 +14,6 @@
       }
     },
     data(){
-      let ct = this.closest('bbn-container').getComponent();
       return {
         formData: {
           title: '',
@@ -32,7 +31,7 @@
     },
     methods: {
       afterSubmit(d) {
-        if ( d.success && d.data){
+        if (d.success && d.data) {
           this.closest('bbn-floater').opener.getRef('table').reload();
           bbn.fn.link(this.root + 'cms/editor/' + d.data.id_note);
         }
