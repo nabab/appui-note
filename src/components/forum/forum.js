@@ -157,15 +157,15 @@
         return this.map ? bbn.fn.map(data, this.map) : data;
       },
       sdate(d){
-        //return moment(d).format('DD/MM/YY')
+        //return dayjs(d).format('DD/MM/YY')
         return bbn.fn.fdate(d, true);
       },
       fdate(d){
-        //return moment(d).format('DD/MM/YY HH:mm:ss');
+        //return dayjs(d).format('DD/MM/YY HH:mm:ss');
         return bbn.fn.fdate(d, true);
       },
       hour(d){
-        return moment(d).format('HH:mm:ss')
+        return dayjs(d).format('HH:mm:ss')
       },
       hasEditUsers(users){
 		    if ( users ){

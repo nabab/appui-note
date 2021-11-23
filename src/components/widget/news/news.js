@@ -57,8 +57,8 @@
           private: 0,
           locked: 0,
           type: this.source.id_type,
-          start: moment().format('YYYY-MM-DD HH:mm:ss'),
-          end: moment().add(10, 'minutes').format('YYYY-MM-DD HH:mm:ss')
+          start: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          end: dayjs().add(10, 'minutes').format('YYYY-MM-DD HH:mm:ss')
         };
         this.$set(this, 'formData', obj);
         this.showForm = !this.showForm;

@@ -43,7 +43,7 @@
         }],
         editorType: 'bbn-rte',
         data: bbn.fn.extend({
-					ref: moment().unix()
+					ref: dayjs().unix()
 				}, this.source.data ? this.source.data : {})
       }
     },

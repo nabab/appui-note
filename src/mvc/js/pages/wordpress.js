@@ -13,13 +13,13 @@
         return '-';
       },
       renderDate(row){
-        return moment(row.post_date).format('DD/MM/YYYY HH:mm');
+        return dayjs(row.post_date).format('DD/MM/YYYY HH:mm');
       },
       renderDateModified(row){
-        return moment(row.post_modified).format('DD/MM/YYYY HH:mm');
+        return dayjs(row.post_modified).format('DD/MM/YYYY HH:mm');
       },
       renderDateGmt(row){
-        return moment(row.post_date_gmt).format('DD/MM/YYYY HH:mm');
+        return dayjs(row.post_date_gmt).format('DD/MM/YYYY HH:mm');
       }
     }    
   }

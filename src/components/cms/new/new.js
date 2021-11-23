@@ -26,7 +26,7 @@
     },
     computed:{
       date(){
-        return moment(moment().toISOString()).unix();
+        return dayjs(dayjs().toISOString()).unix();
       }
     },
     methods: {
@@ -45,7 +45,7 @@
         }
         else{
           if ( !this.source.start ){
-            this.source.start = moment().format("YYYY/MM/DD HH:mm:ss");
+            this.source.start = dayjs().format("YYYY/MM/DD HH:mm:ss");
           }
         }
       }
