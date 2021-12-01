@@ -31,7 +31,9 @@
     <appui-note-cms-elementor :source="source.items"
                               @hook:mounted="ready = true"
                               ref="editor">
-      <slot/>
+      <bbn-scroll>
+        <slot/>
+      </bbn-scroll>
     </appui-note-cms-elementor>
   </div>
 </div>
