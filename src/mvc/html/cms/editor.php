@@ -1,6 +1,6 @@
 <!-- HTML Document -->
 <appui-note-cms-editor :source="source">
-  <div class="bbn-w-100 bbn-middle">
+  <div class="bbn-w-100">
     <div class="bbn-grid-fields bbn-padded">
       <div class="bbn-grid-full bbn-vpadded bbn-xl">
         <?= _("Page's properties") ?>
