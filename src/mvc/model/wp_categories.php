@@ -1,8 +1,4 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
 
 /** @var $this \bbn\Mvc\Model*/
 $model->db->change('apst_web');

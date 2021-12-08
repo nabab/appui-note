@@ -1,8 +1,4 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
 
 /** @var $this \bbn\Mvc\Model */
 //TAKES THE IMAGES OF THE GALLERY FROM THE TEST FOLDER AND RETURNS IT WELL FORMATTED FOR THE BBN-UPLOAD

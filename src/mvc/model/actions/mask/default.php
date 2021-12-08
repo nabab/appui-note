@@ -1,8 +1,4 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
 
 /** @var $this \bbn\Mvc\Model*/
 $masks = new \bbn\Appui\Masks($model->db);

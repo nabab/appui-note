@@ -1,8 +1,4 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
 /** @var $this \bbn\Mvc\Model*/
 if ( !empty($model->data['id_note']) ){
   $notes = new \bbn\Appui\Note($model->db);

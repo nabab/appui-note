@@ -1,8 +1,4 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
 
 /** @var $this \bbn\Mvc\Model*/
 if ( isset($model->data['title'], $model->data['content'], $model->data['id_type'], $model->data['name']) ){

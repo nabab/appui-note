@@ -1,8 +1,4 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
 
 /** @var $this \bbn\Mvc\Model*/
 $file = BBN_DATA_PATH.'bookmarksv2.json';

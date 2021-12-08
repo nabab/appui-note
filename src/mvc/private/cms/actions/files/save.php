@@ -1,8 +1,4 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
 
 
   die(var_dump('lo', $ctrl->arguments[0]));
