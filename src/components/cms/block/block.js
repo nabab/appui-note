@@ -60,9 +60,6 @@
      */
     mixins: [bbn.vue.basicComponent, bbn.vue.resizerComponent],
     props: {
-      /**
-       * The aduio's URL
-       */
       source: {
         type: Object,
         required: true
