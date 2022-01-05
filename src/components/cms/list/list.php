@@ -1,9 +1,10 @@
 <!-- HTML Document -->
 <div :class="['bbn-overlay', componentClass]">
   <bbn-table ref="table"
-             :source="root + 'cms/list'"
+             :source="url"
              :limit="25"
              :info="true"
+             :columns="columns"
              :storage="true"
              :selection="true"
              :pageable="true"

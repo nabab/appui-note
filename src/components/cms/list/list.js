@@ -1,29 +1,89 @@
 // Javascript Document// Javascript Document
 (() => {
   let componentName;
+  let root = appui.plugins['appui-note'] + '/';
+
   return {
     mixins: [bbn.vue.basicComponent],
     props: {
-      source: {
-        type: Object
-      },
       noteName: {
         type:String,
         default: bbn._("Note")
       },
       types: {
+        type: Array,
         required: true,
-        type: Array
+      },
+      columns: {
+        type: Array,
+        default() {
+          return [];
+        }
+      },
+      url: {
+        type: String,
+        default: root + 'cms/list'
+      },
+      previewUrl: {
+      	type: String,
+        default: root + 'cms/preview/'
+      },
+      mediaUrl: {
+        type: String,
+        default: root + '/cms/actions/add_media'
+      },
+      publishUrl: {
+        type: String,
+        default: root + 'cms/actions/publish'
+      },
+      unpublishUrl: {
+        type: String,
+        default: root + 'cms/actions/unpublish'
+      },
+      insertUrl: {
+        type: String,
+        default: root + 'cms/actions/insert'
+      },
+      deleteUrl: {
+        type: String,
+        default: root + 'cms/actions/delete'
+      },
+      editorUrl: {
+        type: String,
+        default: root + 'cms/editor/'
+      },
+      publishComponent: {
+        type: [String, Vue],
+        default: 'appui-note-cms-form-publish'
+      },
+      insertComponent: {
+        type: [String, Vue],
+        default: 'appui-note-cms-form-insert'
+      },
+      root: {
+        type: [String],
+        default: root
+      },
+      actions: {
+        type: [Array, Function]
       }
     },
     data(){
       return {
-        root: appui.plugins['appui-note'] + '/',
-        //for table note
         users: appui.app.users
       };
     },
     methods: {
+      isPublished(row) {
+        if (row.start) {
+          let now = bbn.fn.dateSQL();
+          if (!row.end || (row.end > now)) {
+            return true;
+          }
+        }
+
+        return false;
+      },
       rowMenu(row, col, idx){
         return [{
           action: () => {
@@ -38,7 +98,7 @@
           },
           icon: 'nf nf-fa-chain',
           text: bbn._("Publish"),
-          disabled: !row.is_published,
+          disabled: this.isPublished(row),
           key: 'b'
         }, {
           action: () => {
@@ -46,15 +106,8 @@
           },
           icon: 'nf nf-fa-chain_broken',
           text: bbn._("Unpublish"),
-          disabled: row.is_published,
+          disabled: !this.isPublished(row),
           key: 'c'
-        },{
-          action: () => {
-            this.addMedia(row);
-          },
-          text: bbn._("Add media"),
-          icon: 'nf nf-mdi-attachment',
-          key: 'd'
         }, {
           action: () => {
             this.deleteNote(row);
@@ -70,10 +123,10 @@
         this.getPopup({
           width: 800,
           title: bbn._('New') + ' ' + this.noteName,
-          component: this.getComponentName('../new'),
+          component: this.insertComponent,
           componentOptions: {
             source: {
-              url: this.root + 'cms/actions/insert',
+              url: this.insertUrl,
             },
             types: this.types
           }
@@ -81,36 +134,43 @@
       },
       // methods each row of the table
       editNote(row){
-        bbn.fn.link(this.root + 'cms/editor/' + row.id_note);
+        bbn.fn.link(this.editorUrl + row.id_note);
       },
       publishNote(row){
-        let src =  bbn.fn.extend(row,{
-          action: 'publish'
+        let src =  bbn.fn.extend(row, {
+          action: this.publishUrl
         });
+
         this.getPopup().open({
-          width: 800,
-          height: '80%',
-          title: bbn._('Publish Note'),
+          width: '100%',
+          title: false,
+          scrollable: false,
           source: src,
-          component: this.$options.components.form,
+          modal: true,
+          component: this.publishComponent,
+          componentOptions: {
+            url: this.publishUrl,
+            list: this.getRef('table'),
+            source: src
+          }
         });
       },
       unpublishNote(row){
-        appui.confirm(bbn._('Are you sure to remove the publication from this note?'), () => {
-          bbn.fn.post(this.root + 'cms/actions/unpublish',{id: row.id_note }, d =>{
+        appui.confirm(bbn._('Are you sure you want to cease the publication of this note?'), () => {
+          bbn.fn.post(this.unpublishUrl,{id: row.id_note }, d =>{
             if ( d.success ){
               this.getRef('table').reload();
-              appui.success(bbn._('Successfully deleted'));
+              appui.success(bbn._('Successfully removed from publications'));
             }
             else{
-              appui.error(bbn._('Error in deleting'));
+              appui.error(bbn._('Error in this action'));
             }
           });
         });
       },
       deleteNote(row){
         appui.confirm(bbn._('Are you sure to delete this note?'), () => {
-          bbn.fn.post(this.root + "cms/actions/delete",{id: row.id_note }, (d) =>{
+          bbn.fn.post(this.deleteUrl, {id: row.id_note }, (d) =>{
             if ( d.success ){
               this.getRef('table').reload();
               appui.success(bbn._('Successfully deleted'));
@@ -137,9 +197,10 @@
       },
       // function of render
       renderUrl(row){
-        if ( row.url !== null ){
-          return '<a href="' + this.root + 'cms/preview/' + row.url +'" target="_blank">' + row.url + '</a>';
+        if (row.url !== null) {
+          return '<a href="' + this.previewUrl + row.url + '" target="_blank">' + row.url + '</a>';
         }
+
         return '-';
       },
     },
@@ -171,7 +232,7 @@
             }*/
             //case inserting media during update
 						if ( this.source.id_note ){
-              this.post(this.root + '/cms/actions/add_media', {
+              this.post(this.mediaUrl, {
                 id_note: this.source.id_note,
                 id_media: m.id,
                 version: this.source.version

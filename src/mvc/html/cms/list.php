@@ -1,4 +1,4 @@
 <appui-note-cms-list :source="source"
-                     note-name="<?= _("Artcle") ?>"
-                     :types="source.types">
+                     :types="source.types"
+                     note-name="<?= _("Article") ?>">
 </appui-note-cms-list>
