@@ -1,6 +1,5 @@
 <!-- HTML Document -->
-
-<bbn-form :class="[componentClass]"
+<bbn-form class="<?= $componentName ?>"
           :action="source.url"
           :source="formData"
           @success="afterSubmit"

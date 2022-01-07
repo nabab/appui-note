@@ -30,7 +30,7 @@
       },
       mediaUrl: {
         type: String,
-        default: root + '/cms/actions/add_media'
+        default: root + 'cms/actions/add_media'
       },
       publishUrl: {
         type: String,
@@ -72,6 +72,99 @@
       return {
         users: appui.app.users
       };
+    },
+    computed: {
+      currentColumns() {
+        let defaultColumns = [
+          {
+            title: " ",
+            buttons: this.rowMenu,
+            filterable: false,
+            showable: false,
+            sortable: false,
+            width: 30,
+            cls: "bbn-c"
+          }, {
+            field: "id",
+            hidden: true,
+            minWidth: 130,
+            title: bbn._("ID")
+          }, {
+            field: "version",
+            width: 40,
+            title: "V",
+            ftitle: bbn._("Version"),
+            cls: "bbn-c"
+          }, {
+            field: "title",
+            minWidth: 250,
+            title: bbn._("Title")
+          }, {
+            field: "url",
+            title: bbn._("URL"),
+            minWidth: 200,
+            render: this.renderUrl
+          }, {
+            field: "id_type",
+            title: bbn._("Type"),
+            width: 100,
+            source: this.types,
+          }, {
+            field: "excerpt",
+            hidden: true,
+            width: 250,
+            title: bbn._("Excerpt")
+          }, {
+            field: "start",
+            type: "date",
+            width: 120,
+            title: bbn._("Publication")
+          }, {
+            field: "end",
+            type: "datetime",
+            width: 120,
+            title: bbn._("End")
+          }, {
+            field: "creation",
+            type: "date",
+            width: 120,
+            title: bbn._("Creation")
+          }, {
+            field: "id_user",
+            title: bbn._("Creator"),
+            width: 200,
+            source: this.users,
+          }, {
+            field: "num_medias",
+            width: 50,
+            title: "<i class='nf nf-fa-file_photo_o'> </i>",
+            ftitle: bbn._("Number of medias associated with this entry"),
+            type: "number",
+            cls: "bbn-c"
+          }
+				];
+        let columns = this.columns.slice();
+        bbn.fn.each(this.columns, (c, k) => {
+          let ok = true;
+          if (c.field) {
+            let idx = bbn.fn.search(defaultColumns, {field: c.field});
+            if (idx > -1) {
+              defaultColumns.splice(idx, 1, c);
+              ok = false;
+            }
+          }
+          else if (c.buttons && defaultColumns[0].buttons) {
+            defaultColumns.splice(0, 1, c);
+            ok = false;
+          }
+
+          if (ok) {
+            defaultColumns.push(c);
+          }
+        });
+
+        return defaultColumns;
+			}
     },
     methods: {
       isPublished(row) {

@@ -6,5 +6,6 @@
   <bbns-container url="list"
                   :load="true"
                   :pinned="true"
+                  :closable="false"
                   title="<?= _("Articles' list") ?>"/>
 </bbn-router>

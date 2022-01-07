@@ -56,5 +56,15 @@ use bbn\X;
 if ($model->hasData(['url', 'title'], true)) {
   $cms = new bbn\Appui\Cms($model->db);
   $content = empty($model->data['items']) ? '[]' : json_encode($model->data['items']);
-  return ['success' => $cms->set($model->data['url'], $model->data['title'], $content, $model->data['start'] ?? null, $model->data['end'] ?? null, $model->data['tags'])];
+  return [
+    'success' => $cms->set(
+	    $model->data['url'],
+      $model->data['title'],
+      $content,
+      $model->data['start'] ?? null,
+      $model->data['end'] ?? null,
+      $model->data['tags'],
+      $model->data['id_type']
+    )
+  ];
 }
