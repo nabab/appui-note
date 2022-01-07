@@ -4,7 +4,7 @@
       return {
         url: '',
         text: '',
-        description: '', 
+        description: '',
         link: false,
         linkPreview: appui.plugins['appui-note'] + '/actions/bookmarks/link_preview',
         imageDom: bookmarks.imageDom,
@@ -27,7 +27,7 @@
             return bbn._('Insert the link in the folder') + ' ' + this.parent;
           }
         }
-        else { 
+        else {
           return bbn._('Edit this link');
         }
       },
