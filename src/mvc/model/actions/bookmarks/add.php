@@ -14,8 +14,6 @@ $tree = $my_list ? $model->inc->pref->getTree($my_list['id']) : false;
 $res = ["success" => false];
 $parent = false;
 
-X::ddump(APPUI_OPTION_ROOT);
-
 if (!$my_list) {
   $model->inc->pref->add($id_list, []);
   $my_list = $model->inc->pref->getByOption($id_list);

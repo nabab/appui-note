@@ -26,6 +26,31 @@
       }
     },
     methods: {
+      updateWeb() {
+        this.showGallery = true;
+        bbn.fn.post(
+            this.root + "actions/bookmarks/preview",
+            {
+              url: this.currentData.url,
+            },
+            d => {
+              if (d.success) {
+                if (d.data.images) {
+                  this.currentData.images = bbn.fn.map(d.data.images, (a) => {
+                    return {
+                      content: a,
+                      type: 'img'
+                    }
+                  })
+                }
+              }
+              return false;
+            }
+          );
+      },
+      openUrl() {
+        window.open(this.currentData.url, this.currentData.title);
+      },
       getData () {
         this.currentSource = [];
         bbn.fn.post(this.root + "actions/bookmarks/data", d => {
