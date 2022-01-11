@@ -1,8 +1,8 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
 
-/** @var $this \bbn\Mvc\Controller */
-$ctrl->combo('Bookmarks', true);
+/** @var $ctrl \bbn\Mvc\Controller */
+
+use bbn\X;
+
+$ctrl->setColor("#2597F0", "white");
+$ctrl->combo(_('My bookmarks'), true);
