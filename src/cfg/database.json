@@ -408,8 +408,15 @@
                 "type": "datetime",
                 "null": 0,
                 "key": null,
-                "signed": true,
-                "generation": ""
+                "signed": true
+            },
+            "default_media": {
+                "position": 7,
+                "type": "tinyint",
+                "null": 0,
+                "key": null,
+                "signed": false,
+                "default": 0
             },
             "comment": {
                 "position": 7,
@@ -552,8 +559,7 @@
                 "type": "mediumtext",
                 "null": 0,
                 "key": null,
-                "signed": true,
-                "generation": ""
+                "signed": true
             },
             "id_user": {
                 "position": 5,
@@ -568,8 +574,7 @@
                 "type": "datetime",
                 "null": 0,
                 "key": null,
-                "signed": true,
-                "generation": ""
+                "signed": true
             }
         }
     },
@@ -715,8 +720,7 @@
                 "type": "datetime",
                 "null": 0,
                 "key": null,
-                "signed": true,
-                "generation": ""
+                "signed": true
             },
             "edited": {
                 "position": 11,
@@ -1275,7 +1279,6 @@
                 "extra": "",
                 "signed": true,
                 "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "id_parent": {
@@ -1286,7 +1289,6 @@
                 "extra": "",
                 "signed": true,
                 "virtual": false,
-                "generation": "",
                 "default": "NULL",
                 "maxlength": 16
             },
@@ -1298,7 +1300,6 @@
                 "extra": "",
                 "signed": true,
                 "virtual": false,
-                "generation": "",
                 "default": "NULL",
                 "maxlength": 255
             },
@@ -1310,7 +1311,6 @@
                 "extra": "",
                 "signed": true,
                 "virtual": false,
-                "generation": "",
                 "default": "NULL"
             }
         }
@@ -1361,7 +1361,6 @@
                 "extra": "",
                 "signed": true,
                 "virtual": false,
-                "generation": "",
                 "maxlength": 16
             },
             "id_group": {
@@ -1372,7 +1371,6 @@
                 "extra": "",
                 "signed": true,
                 "virtual": false,
-                "generation": "",
                 "maxlength": 16
             }
         }

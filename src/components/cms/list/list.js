@@ -53,11 +53,11 @@
         default: root + 'cms/editor/'
       },
       publishComponent: {
-        type: [String, Vue],
+        type: [String, Object],
         default: 'appui-note-cms-form-publish'
       },
       insertComponent: {
-        type: [String, Vue],
+        type: [String, Object],
         default: 'appui-note-cms-form-insert'
       },
       root: {
