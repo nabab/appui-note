@@ -419,7 +419,7 @@
                 "default": 0
             },
             "comment": {
-                "position": 7,
+                "position": 8,
                 "type": "text",
                 "null": 1,
                 "key": null,
