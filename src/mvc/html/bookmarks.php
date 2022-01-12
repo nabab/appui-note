@@ -5,6 +5,12 @@
                 :resizable="true">
 
     <bbn-pane :size="300">
+      <div class="bbn-w-100 bbn-padded">
+        <bbn-button class="bbn-w-80 bbn-spadded"
+                    icon="nf nf-fa-plus"
+                    @click="resetform"
+                    text="<?= _('Create a new link') ?>"></bbn-button>
+      </div>
       <bbn-tree :source="currentSource"
                 ref="tree"
                 @select="selectTree"
@@ -12,18 +18,17 @@
                 :draggable="true"
                 @dragEnd="isDragEnd"
                 ></bbn-tree>
+      <label class="bbn-w-100" v-else><?=_("No Bookmarks yet")?></label>
     </bbn-pane>
     <bbn-pane>
-      <div class="bbn-w-100 bbn-padded">
-        <bbn-button class="bbn-w-20 bbn-spadded"
-                    @click="resetform"
-                    text="<?= _('Create a new link') ?>"></bbn-button>
-      </div>
 
-      <div class="bbn-w-100 bbn-left-padded bbn-bottom-spadded bbn-grid-full">
+      <div class="bbn-w-100 bbn-left-padded bbn-top-lpadded bbn-bottom-spadded bbn-grid-full">
         <label class="bbn-w-100"><?=_("URL")?></label>
         <bbn-input v-model="currentData.url"
                    class="bbn-lpadded bbn-w-40"></bbn-input>
+        <bbn-button class="bbn-w-2"
+                    @click="openUrl"
+                    text="Go to"></bbn-button>
       </div>
       <div class="bbn-w-20 bbn-left-padded bbn-bottom-spadded">
         <label class="bbn-w-100"><?=_("In which file ?")?></label>
@@ -69,6 +74,27 @@
                          ></bbn-gallery>
           </bbn-floater>
         </div>
+       <!-- <div>
+          <bbn-button @click="showGallery = true"
+                      class="bbn-flex-fill bbn-bottom-spadded bbn-w-20"
+                      text="update from web"
+                      ></bbn-button>
+          <bbn-floater v-if="showGallery"
+                       :title="_('Pick a cover picture')"
+                       :closable="true"
+                       :width="500"
+                       :height="500"
+                       :scrollable="false"
+                       @close="showGallery = false">
+            <bbn-gallery :source="currentData.images"
+                         class="bbn-overlay"
+                         @clickItem="selectImage"
+                         :selecting-mode="true"
+                         :zoomable="false"
+                         :scrollable="true"
+                         ></bbn-gallery>
+          </bbn-floater>
+        </div> -->
       </div>
       <div>
         <div class="bbn-w-100 bbn-padded" v-if="currentData.id === null">
