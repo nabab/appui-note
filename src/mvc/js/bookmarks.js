@@ -104,7 +104,7 @@
                     }
                   })
                 }
-                bbn.fn.log("d.data.iamges :", this.currentData.images);
+                bbn.fn.log("d.data.images :", this.currentData.images);
               }
               return false;
             },
@@ -117,6 +117,16 @@
       selectTree(node) {
         this.currentNode = node;
       },
+      screenshot() {
+        bbn.fn.post(
+        this.root + "actions/bookmarks/screenshot",
+          {
+            url: this.currentData.url,
+            title: this.currentData.title,
+            id: this.currentData.id
+          },
+        );
+      },
       add() {
         bbn.fn.post(
           this.root + "actions/bookmarks/add",
@@ -128,7 +138,10 @@
             cover: this.currentData.cover
           },  d => {
             if (d.success) {
+              this.currentData.id = d.id_bit;
+              appui.success();
               this.getData();
+              this.screenshot();
             }
           });
       },
