@@ -6,10 +6,11 @@
                     "id"
                 ],
                 "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "update": null,
-                "delete": null,
+                "ref_table": "bbn_history_uids",
+                "ref_column": "bbn_uid",
+                "constraint": "bbn_options_ibfk_4",
+                "update": "CASCADE",
+                "delete": "CASCADE",
                 "unique": 1
             },
             "creator": {
@@ -441,24 +442,24 @@
                 "delete": "CASCADE",
                 "unique": 0
             },
-            "url": {
+            "id_url": {
                 "columns": [
-                    "url"
+                    "id_url"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "update": null,
-                "delete": null,
-                "unique": 0
+                "ref_db": "*",
+                "ref_table": "bbn_url",
+                "ref_column": "id",
+                "update": "CASCADE",
+                "delete": "CASCADE",
+                "unique": 1
             }
         },
         "cols": {
             "id_note": [
                 "id_note"
             ],
-            "url": [
-                "url"
+            "id_url": [
+                "id_url"
             ]
         },
         "fields": {
@@ -470,13 +471,12 @@
                 "signed": true,
                 "maxlength": 16
             },
-            "url": {
+            "id_url": {
                 "position": 2,
-                "type": "varchar",
+                "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
-                "maxlength": 1000
+                "maxlength": 16
             }
         }
     },
@@ -1176,15 +1176,15 @@
     },
     "bbn_medias_url": {
         "keys": {
-            "url": {
+            "id_url": {
                 "columns": [
-                    "url"
+                    "id_url"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "update": null,
-                "delete": null,
+                "ref_db": "*",
+                "ref_table": "bbn_url",
+                "ref_column": "id",
+                "update": "CASCADE",
+                "delete": "CASCADE",
                 "unique": 1
             },
             "id_media": {
@@ -1200,8 +1200,8 @@
             }
         },
         "cols": {
-            "url": [
-                "url"
+            "id_url": [
+                "id_url"
             ],
             "id_media": [
                 "id_media"
@@ -1216,13 +1216,12 @@
                 "signed": true,
                 "maxlength": 16
             },
-            "url": {
+            "id_url": {
                 "position": 2,
-                "type": "varchar",
+                "type": "binary",
                 "null": 0,
-                "key": "PRI",
-                "signed": true,
-                "maxlength": 1000
+                "key": "MUL",
+                "maxlength": 16
             },
             "shared": {
                 "position": 3,
@@ -1374,6 +1373,92 @@
                 "maxlength": 16
             }
         }
+    },
+    "bbn_url": {
+        "keys": {
+            "PRIMARY": {
+                "columns": [
+                    "id"
+                ],
+                "ref_db": "*",
+                "ref_table": "bbn_history_uids",
+                "ref_column": "bbn_uid",
+                "update": "CASCADE",
+                "delete": "CASCADE",
+                "unique": 1
+            },
+            "url": {
+                "columns": [
+                    "url"
+                ],
+                "ref_db": null,
+                "ref_table": null,
+                "ref_column": null,
+                "update": null,
+                "delete": null,
+                "unique": 1
+            },
+            "redirect": {
+                "columns": [
+                    "redirect"
+                ],
+                "ref_db": "*",
+                "ref_table": "bbn_url",
+                "ref_column": "id",
+                "update": "CASCADE",
+                "delete": "CASCADE",
+                "unique": 0
+            }
+        },
+        "cols": {
+            "id": [
+                "PRIMARY"
+            ],
+            "url": [
+                "url"
+            ],
+            "redirect": [
+                "redirect"
+            ]
+        },
+        "fields": {
+            "id": {
+                "position": 1,
+                "type": "binary",
+                "null": 0,
+                "key": "PRI",
+                "maxlength": 16
+            },
+            "url": {
+                "position": 2,
+                "type": "varchar",
+                "null": 0,
+                "key": "MUL",
+                "signed": true,
+                "maxlength": 1000
+            },
+            "num": {
+                "position": 3,
+                "type": "int",
+                "null": 0,
+                "key": null,
+                "signed": false,
+                "maxlength": 10,
+                "default": 0
+            },
+            "type_url": {
+                "position": 4,
+                "type": "varchar",
+                "null": 0,
+                "maxlength": 16
+            },
+            "redirect": {
+                "position": 5,
+                "type": "binary",
+                "null": 1,
+                "key": "MUL",
+                "maxlength": 16
+            }
+        }
     }
-    
 }
