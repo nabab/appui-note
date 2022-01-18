@@ -12,6 +12,7 @@
         idParent: "",
         currentNode: null,
         showGallery: false,
+        visible: false,
         currentData: {
           url: "",
           title: "", //input
@@ -19,34 +20,40 @@
           description: "", //textarea
           id: null,
           images: [],
-          image: ""
+          image: "",
+          path: "",
+          id_screenshot: ""
         },
         currentSource: [],
         drag: true,
       }
     },
     methods: {
+      showScreenshot() {
+        this.getData();
+        this.visible = true;
+      },
       updateWeb() {
         this.showGallery = true;
         bbn.fn.post(
-            this.root + "actions/bookmarks/preview",
-            {
-              url: this.currentData.url,
-            },
-            d => {
-              if (d.success) {
-                if (d.data.images) {
-                  this.currentData.images = bbn.fn.map(d.data.images, (a) => {
-                    return {
-                      content: a,
-                      type: 'img'
-                    }
-                  })
-                }
+          this.root + "actions/bookmarks/preview",
+          {
+            url: this.currentData.url,
+          },
+          d => {
+            if (d.success) {
+              if (d.data.images) {
+                this.currentData.images = bbn.fn.map(d.data.images, (a) => {
+                  return {
+                    content: a,
+                    type: 'img'
+                  }
+                })
               }
-              return false;
             }
-          );
+            return false;
+          }
+        );
       },
       openUrl() {
         window.open(this.currentData.url, this.currentData.title);
@@ -76,7 +83,7 @@
         }
         else {
           bbn.fn.post(this.root + "actions/bookmarks/move", {
-						source: nodeSrc.data.id,
+            source: nodeSrc.data.id,
             dest: nodeDest.data.id
           }, d => {
             bbn.fn.log(nodeSrc, nodeDest, "nodes");
@@ -118,13 +125,20 @@
         this.currentNode = node;
       },
       screenshot() {
+        bbn.fn.log("ici ?");
         bbn.fn.post(
-        this.root + "actions/bookmarks/screenshot",
+          this.root + "actions/bookmarks/screenshot",
           {
             url: this.currentData.url,
             title: this.currentData.title,
             id: this.currentData.id
           },
+          d => {
+            if (d.success) {
+              this.currentData.path = d.data.path;
+              this.currentData.id_screenshot = d.data.id_screenshot;
+            }
+          }
         );
       },
       add() {
@@ -176,7 +190,9 @@
           description: this.currentData.description,
           title: this.currentData.title,
           id: this.currentData.id,
-          cover: this.currentData.cover
+          cover: this.currentData.cover,
+          path: this.currentData.path,
+					id_screenshot: this.currentData.id_screenshot,
         },  d => {
           if (d.success) {
             this.getData();
@@ -216,7 +232,9 @@
             title: v.data.text || "",
             description: v.data.description || "",
             id: v.data.id || "",
-            cover: v.data.cover || null
+            cover: v.data.cover || null,
+            id_screenshot: v.data.id_screenshot || "",
+            path: v.data.path || ""
           };
         }
         else {

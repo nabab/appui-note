@@ -53,8 +53,20 @@ use bbn\X;
 
 // The ID is the URL as it shoudn't be changed in this form
 
-if ($model->hasData(['url', 'title'], true)) {
+if ($model->hasData(['id', 'url', 'title'], true)) {
   $cms = new bbn\Appui\Cms($model->db);
   $content = empty($model->data['items']) ? '[]' : json_encode($model->data['items']);
-  return ['success' => $cms->set($model->data['url'], $model->data['title'], $content, $model->data['start'] ?? null, $model->data['end'] ?? null, $model->data['tags'])];
+  return [
+    'success' => $cms->set([
+      'url' => $model->data['url'],
+      'title' => $model->data['title'],
+      'excerpt' => $model->data['excerpt'] ?? '',
+      'id_note' => $model->data['id_note'],
+      'content' => $content,
+      'start' => $model->data['start'] ?? null,
+      'end' => $model->data['end'] ?? null,
+      'tags' => $model->data['tags'],
+      'id_type' => $model->data['id_type']
+    ])
+  ];
 }

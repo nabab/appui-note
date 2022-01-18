@@ -1,17 +1,13 @@
 <?php
-/** @var \bbn\Mvc\Model $model */
+/** @var bbn\Mvc\Model $model */
+
+use bbn\Appui\Note;
 
 $res = ['success' => false];
 
 if ( !empty($model->data['title']) || !empty($model->data['content']) ){
-  $note = new \bbn\Appui\Note($model->db);
-  if ( $id_note = $note->insert(
-    $model->data['title'] ?? '',
-    $model->data['content'] ?? '',
-    $model->data['type'] ?? NULL,
-    empty($model->data['private']) ? 0 : 1,
-    empty($model->data['locked']) ? 0 : 1
-  ) ){
+  $note = new Note($model->db);
+  if ( $id_note = $note->insert($model->data)) {
     $ok = true;
     if ( 
       !empty($model->data['type']) &&
@@ -35,4 +31,5 @@ if ( !empty($model->data['title']) || !empty($model->data['content']) ){
     $res['success'] = isset($ok2) ? ($ok === $ok2) : $ok;
   }
 }
+
 return $res;

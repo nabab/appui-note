@@ -12,5 +12,5 @@ if ($model->hasData('id', true)) {
   $data = $cms->get($model->data['id']);
   $data['items'] = $data['content'] ? json_decode($data['content']) : [];
   unset($data['content']);
-  return $data;
+  return ['data' => $data, 'types' => $note->getOptions('types'), 'title' => $data['title']];
 }
