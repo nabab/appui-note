@@ -16,14 +16,8 @@ if ( !empty($model->data['title']) || !empty($model->data['content']) ){
       $ok = true;
     }
   }
-  else if ( $id_note = $note->insert(
-    $model->data['title'] ?? '',
-    $model->data['content'] ?? '',
-    $model->data['type'] ?? NULL,
-    empty($model->data['private']) ? 0 : 1,
-    empty($model->data['locked']) ? 0 : 1
-  ) ){
-    if ( $new_note = $note->get($id_note) ){
+  else if ( $id_note = $note->insert($model->data)) {
+    if ($new_note = $note->get($id_note)) {
       $res['note'] = $new_note;
     }
     $ok = true;

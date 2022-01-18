@@ -1,20 +1,12 @@
 <?php
-if (($note = new \bbn\Appui\Note($model->db))
+use bbn\Appui\Note;
+use bbn\Appui\Event;
+if (($note = new Note($model->db))
   && $model->hasData(['title', 'content'], true)
   && array_key_exists('id_type', $model->data)
   && array_key_exists('private', $model->data)
   && array_key_exists('locked', $model->data)
-  && ($idNote = $note->insert(
-    $model->data['title'],
-    $model->data['content'],
-    $model->data['id_type'],
-    $model->data['private'],
-    $model->data['locked'],
-    null,
-    null,
-    $model->hasData('mime', true) ? $model->data['mime'] : '',
-    $model->hasData('lang', true) ? $model->data['lang'] : ''
-  ))
+  && ($idNote = $note->insert($model->data))
 ) {
   $succ = true;
   if ($model->hasData('url', true)
@@ -26,7 +18,7 @@ if (($note = new \bbn\Appui\Note($model->db))
     $succ = false;
   }
   if ($model->hasData('start', true)) {
-    $event = new \bbn\Appui\Event($model->db);
+    $event = new Event($model->db);
     if (($typeEvent = $model->inc->options->fromCode('publication', 'event', 'appui'))
       && ($idEvent = $event->insert([
         'id_type' => $typeEvent,

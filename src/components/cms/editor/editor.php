@@ -25,6 +25,7 @@
   <div class="bbn-flex-fill">
     <bbn-form ref="form"
               class="bbn-hidden"
+              @success="onSave"
               :source="source"
               :action="action"
               :buttons="[]"/>

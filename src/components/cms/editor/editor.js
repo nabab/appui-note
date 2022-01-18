@@ -79,8 +79,9 @@
       }
     },
     methods: {
-      save(){
-
+      onSave(d) {
+        this.oData = JSON.stringify(this.source);
+        appui.success(bbn._("Saved"))
       }
     }
   }

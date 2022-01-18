@@ -10,6 +10,12 @@
                  v-model="source.data.title"
                  :required="true"/>
 
+      <label><?= _("Description") ?></label>
+      <bbn-textarea class="bbn-wider"
+                    v-model="source.data.excerpt"
+                    style="height: 10em"
+                    :required="true"/>
+
       <label><?= _("Type") ?></label>
       <bbn-dropdown class="bbn-wider"
                     v-model="source.data.id_type"

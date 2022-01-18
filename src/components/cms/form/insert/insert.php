@@ -31,5 +31,12 @@
     <bbn-dropdown v-model="formData.lang"
                   :source="['en', 'fr']"
                   :required="true"/>
+
+    <label class="bbn-b">
+      <?=_('Description')?>
+    </label>
+    <bbn-textarea v-model="formData.excerpt"
+                  style="height: 10em; max-height: 20vh"/>
+
   </div>
 </bbn-form>

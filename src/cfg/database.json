@@ -144,7 +144,6 @@
                 "maxlength": 16
             },
             "id_option": {
-                "position": 5,
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
@@ -152,30 +151,19 @@
                 "default": "NULL",
                 "maxlength": 16
             },
-            "excerpt": {
-                "position": 6,
-                "type": "text",
-                "null": 1,
-                "key": null,
-                "signed": true,
-                "default": "NULL"
-            },
             "mime": {
-                "position": 9,
                 "type": "varchar",
                 "null": 0,
                 "key": "MUL",
                 "maxlength": 50
             },
             "lang": {
-                "position": 10,
                 "type": "varchar",
                 "null": 0,
                 "key": "MUL",
                 "maxlength": 2
             },
             "private": {
-                "position": 9,
                 "type": "tinyint",
                 "null": 0,
                 "key": null,
@@ -183,7 +171,6 @@
                 "maxlength": 1
             },
             "locked": {
-                "position": 10,
                 "type": "tinyint",
                 "null": 0,
                 "key": null,
@@ -191,7 +178,6 @@
                 "maxlength": 1
             },
             "pinned": {
-                "position": 11,
                 "type": "tinyint",
                 "null": 0,
                 "key": null,
@@ -199,7 +185,6 @@
                 "maxlength": 1
             },
             "creator": {
-                "position": 12,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -207,7 +192,6 @@
                 "maxlength": 16
             },
             "active": {
-                "position": 13,
                 "type": "int",
                 "null": 0,
                 "key": null,
@@ -531,7 +515,6 @@
         },
         "fields": {
             "id_note": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -539,14 +522,12 @@
                 "maxlength": 16
             },
             "version": {
-                "position": 2,
                 "type": "int",
                 "null": 0,
                 "key": "PRI",
                 "maxlength": 10
             },
             "title": {
-                "position": 3,
                 "type": "varchar",
                 "null": 1,
                 "key": null,
@@ -555,14 +536,19 @@
                 "maxlength": 255
             },
             "content": {
-                "position": 4,
                 "type": "mediumtext",
                 "null": 0,
                 "key": null,
                 "signed": true
             },
+            "excerpt": {
+                "type": "text",
+                "null": 1,
+                "key": null,
+                "signed": true,
+                "default": "NULL"
+            },
             "id_user": {
-                "position": 5,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -570,7 +556,6 @@
                 "maxlength": 16
             },
             "creation": {
-                "position": 6,
                 "type": "datetime",
                 "null": 0,
                 "key": null,
@@ -1437,7 +1422,7 @@
                 "signed": true,
                 "maxlength": 1000
             },
-            "num": {
+            "num_calls": {
                 "position": 3,
                 "type": "int",
                 "null": 0,

@@ -8,12 +8,12 @@ $type_event = $model->inc->options->fromCode('NEWS', 'evenements');
 $grid = new \bbn\Appui\Grid($model->db, $model->data, [
   'table' => 'bbn_notes',
   'fields' => [
-    'versions1.id_note',
-    'versions1.version',
-    'versions1.title',
-    'versions1.content',
-    'versions1.id_user',
-    'versions1.creation',
+    'versions.id_note',
+    'versions.version',
+    'versions.title',
+    'versions.content',
+    'versions.id_user',
+    'versions.creation',
     'bbn_events.start',
     'bbn_events.end'
   ],
@@ -54,25 +54,14 @@ $grid = new \bbn\Appui\Grid($model->db, $model->data, [
   ], [
     'table' => 'bbn_notes_versions',
     'type' => 'left',
-    'alias' => 'versions1',
+    'alias' => 'versions',
     'on' => [
       'conditions' => [[
         'field' => 'bbn_notes.id',
-        'exp' => 'versions1.id_note'
-      ]]
-    ]
-  ], [
-    'table' => 'bbn_notes_versions',
-    'type' => 'left',
-    'alias' => 'versions2',
-    'on' => [
-      'conditions' => [[
-        'field' => 'bbn_notes.id',
-        'exp' => 'versions2.id_note'
+        'exp' => 'versions.id_note'
       ], [
-        'field' => 'versions1.version',
-        'operator' => '<',
-        'exp' => 'versions2.version'
+        'field' => 'latest',
+        'value' => 1
       ]]
     ]
   ]],
@@ -83,17 +72,14 @@ $grid = new \bbn\Appui\Grid($model->db, $model->data, [
     ], [
       'field' => 'bbn_notes.active',
       'value' => 1
-    ], [
-      'field' => 'versions2.version',
-      'operator' => 'isnull'
     ]]
   ],
   'group_by' => 'bbn_notes.id',
   'order' => [[
-    'field' => 'versions1.version',
+    'field' => 'versions.version',
     'dir' => 'DESC'
   ], [
-    'field' => 'versions1.creation',
+    'field' => 'versions.creation',
     'dir' => 'DESC'
   ]],
   'limit' => $limit,
