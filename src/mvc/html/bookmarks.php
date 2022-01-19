@@ -49,14 +49,14 @@
       </div>
       <div v-if="currentData.cover"
            style="max-height: 500px"
-           class="bbn-flex-fill bbn-left-padded bbn-bottom-spadded bbn-w-100">
+           class="bbn-flex-fill bbn-bottom-spadded bbn-w-100">
         <img :src="currentData.cover"
              style="max-width: 300px; max-height: 300px; width: auto; height: auto"
              class="bbn-flex-fill bbn-bottom-spadded bbn-w-100">
-        <div class="bbn-flex-fill bbn-bottom-spadded bbn-w-100">
+        <div class="bbn-flex-fill bbn-bottom-spadded bbn-lpadded bbn-w-100">
           <bbn-button v-if="currentData.images"
                       @click="showGallery = true"
-                      class="bbn-flex-fill bbn-bottom-spadded bbn-w-20"
+                      class="bbn-flex-fill bbn-bottom-spadded bbn-spaded bbn-w-20"
                       text="change cover picture"></bbn-button>
           <bbn-floater v-if="showGallery"
                        :title="_('Pick a cover picture')"
@@ -73,13 +73,14 @@
                          :scrollable="true"
                          ></bbn-gallery>
           </bbn-floater>
-            <bbn-button	@click="showScreenshot"
+            <bbn-button	v-if="currentData.id"
+                        @click="showScreenshot"
                         class="bbn-padded"
                         text="show screenshot"
                         ></bbn-button>
             <bbn-floater v-if="visible"
                          :closable="true"
-                         :width="600"
+                         :width="800"
                          :height="600"
                          :resizable="true"
                          :title="_('a screenshot from the site')"
