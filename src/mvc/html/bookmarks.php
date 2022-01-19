@@ -73,7 +73,7 @@
                          :scrollable="true"
                          ></bbn-gallery>
           </bbn-floater>
-            <bbn-button	v-if="currentData.id"
+            <bbn-button	v-if="currentData.id_screenshot"
                         @click="showScreenshot"
                         class="bbn-padded"
                         text="show screenshot"
