@@ -30,7 +30,7 @@
     </div -->
     <div class="bbn-grid-full">
       <bbn-textarea v-model="source.content"
-                    style="min-height: 20vh; height: 20em; max-height: 100%; max-width: 100%"/>
+                    style="min-height: 20vh; height: 20em; width: 100%"/>
     </div>
   </div>
   <div v-else
