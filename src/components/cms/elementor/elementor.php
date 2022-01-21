@@ -66,8 +66,7 @@
           <div v-if="currentEdited === -1">
             <slot/>
           </div>
-          <div class="bbn-overlay"
-               v-else>
+          <bbn-scroll v-else>
             <div class="bbn-w-100 bbn-middle">
               <div class="bbn-w-100 bbn-vlpadded bbn-hxlpadded">
                 <appui-note-cms-block class="bbn-contain"
@@ -75,7 +74,7 @@
                                       mode="edit"/>
               </div>
             </div>
-          </div>
+          </bbn-scroll>
         </div>
       </div>
     </bbn-pane>
