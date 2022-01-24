@@ -15,7 +15,8 @@ if ($model->data['id'] ||$model->data['title']) {
     'text' => $model->data['title'],
     'url' => $model->data['url'],
     'description' => $model->data['description'],
-    'cover' => $model->data['cover'] ?? null
+    'cover' => $model->data['cover'] ?? null,
+    'count' => $model->data['count'] ?? 0,
   ], []);
   $res['success'] = true;
 }

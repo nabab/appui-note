@@ -26,11 +26,14 @@ if ($tree['items']) {
     'url' => $model->data['url'] ?? null,
     'id_parent' => $model->data['id_parent'] ?: null,
     'cover' => $model->data['cover'] ?? null,
-    'description' => $model->data['description'] ?? null
+    'description' => $model->data['description'] ?? null,
+    'count' => 0
   ]);
   if ($res['id_bit']) {
     $res['success'] = true;
   }
 }
+
+
 
 return $res;
