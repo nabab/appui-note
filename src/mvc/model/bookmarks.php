@@ -47,7 +47,6 @@ $map = function ($ar) use (&$all_id, &$map) {
 $map($tree['items']);
 $mapper($tree['items']);
 
-
 return [
   'parents' => $parents,
   'allId' => $all_id
