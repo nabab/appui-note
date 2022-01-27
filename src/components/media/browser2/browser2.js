@@ -37,6 +37,9 @@
         type: [Boolean, String],
         default: true
       },
+      detail: {
+        type: String
+      },
       pageable: {
         type: Boolean,
         default: true
@@ -122,6 +125,15 @@
     methods: {
       getButtonMenu(data){
         let res = [];
+        if (this.detail) {
+          res.push({
+            text: bbn._('Info'),
+            icon: 'nf nf-fa-info',
+            action: () => {
+              this.openDetail(data);
+            }
+          });
+        }
         if (this.editEnabled) {
           res.push({
             text: bbn._('Edit'),
@@ -152,36 +164,42 @@
         return res;
       },
       editMedia(m){
-        if(bbn.fn.isString(m.content)){
-          m.content = JSON.parse(m.content)
-        }
-        this.getPopup().open({
-          title: bbn._('Edit media'),
-          component: 'appui-note-media-form',
-          componentOptions: {
-            source: m,
-            multiple: false
-          },
-          height: '400px',
-          width: '500px',
-          onOpen: pop => {
-            pop.$on('edited', this.onEdited);
+        if (this.editEnabled) {
+          if(bbn.fn.isString(m.content)){
+            m.content = JSON.parse(m.content)
           }
-        })
+          this.getPopup().open({
+            title: bbn._('Edit media'),
+            component: 'appui-note-media-form',
+            componentOptions: {
+              source: m,
+              multiple: false,
+              url: this.edit || this.url
+            },
+            height: '400px',
+            width: '500px',
+            onOpen: pop => {
+              pop.$on('edited', this.onEdited);
+            }
+          });
+        }
       },
       addMedia(){
-        this.getPopup().open({
-          title: bbn._('Add new media'),
-          component: 'appui-note-media-form',
-          componentOptions: {
-            source: {}
-          },
-          height: '400px',
-          width: '500px',
-          onOpen: pop => {
-            pop.$on('added', this.onAdded);
-          }
-        })
+        if (this.uploadEnabled) {
+          this.getPopup().open({
+            title: bbn._('Add new media'),
+            component: 'appui-note-media-form',
+            componentOptions: {
+              source: {},
+              url: this.upload || this.url
+            },
+            height: '400px',
+            width: '500px',
+            onOpen: pop => {
+              pop.$on('added', this.onAdded);
+            }
+          });
+        }
       },
       onAdded(media){
         let gallery = this.getRef('gallery');
@@ -206,6 +224,11 @@
         }
         gallery.updateData();
         appui.success(bbn._('Media successfully edited'));
+      },
+      openDetail(media){
+        if (media && media.id && this.detail) {
+          bbn.fn.link(this.detail + (this.detail.substr(-1, 1) !== '/' ? '/' : '') + media.id);
+        }
       },
       formatBytes: bbn.fn.formatBytes,
       removeMedia(m){

@@ -1,13 +1,16 @@
 <!-- HTML Document -->
 
-<div :class="[componentClass, 'bbn-padded']">
+<div :class="componentClass">
 	<bbn-form :source="{file: files}"
 						:data="{
 							ref: ref,
-							id: source.id
+							id: source.id,
+							action: isEdit ? 'edit' : 'insert'
 						}"
-						:action="root + (isEdit ? 'media/actions/edit' : 'media/actions/save')"
-						@success="success">
+						:action="url"
+						@success="success"
+						:scrollable="scrollable"
+						:buttons="buttons">
 		<div v-if="files.length && !isEdit"
 				 class="bbn-vmiddle bbn-bottom-space"
 				 style="justify-content: flex-end">
@@ -17,7 +20,7 @@
 									:novalue="false"
 									class="bbn-left-space"/>
 		</div>
-		<div class="bbn-grid-fields">
+		<div class="bbn-grid-fields bbn-padded">
 			<template v-for="(f, i) in files"
 								v-if="showTitles || isEdit">
 				<div><?=_('Filename')?>:</div>
@@ -25,8 +28,8 @@
 				<div><?=_('Title')?>:</div>
 				<bbn-input v-model="f.title"/>
 				<div class="bbn-bottom-space"><?=_('Description')?>:</div>
-				<bbn-input v-model="f.description"
-									 class="bbn-bottom-space"/>
+				<bbn-textarea v-model="f.description"
+									 		class="bbn-bottom-space"/>
 			</template>
 			<div><?=_('Media')?>:</div>
 			<div>

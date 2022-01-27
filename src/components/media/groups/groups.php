@@ -74,7 +74,8 @@
                                :limit="50"
                                path-name="path"
                                :selection="false"
-                               @delete="removeMedia"/>
+                               @delete="removeMedia"
+                               :edit="actionsUrl + 'edit'"/>
     <div v-else
          :class="['bbn-middle', {'bbn-overlay': scrollable}]">
       <div class="bbn-vmiddle">
