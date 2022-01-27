@@ -1,6 +1,25 @@
 // Javascript Document
 
 (()=> {
+  const fn = (arr, res = []) => {
+    bbn.fn.each(arr, a => {
+      if (a.url) {
+        res.push({
+          cover: a.cover ||"",
+          description: a.description || "",
+          id: a.id,
+          id_screenshot: a.id_screenshot || null,
+          screenshot_path: a.screenshot_path || "",
+          text: a.text,
+          url:a.url
+        })
+      }
+      else if (a.items) {
+        fn(a.items, res);
+      }
+    });
+    return res;
+  };
   return {
     props: {
     },
@@ -21,13 +40,22 @@
           id: null,
           images: [],
           image: "",
-          path: "",
+          screenshot_path: "",
           id_screenshot: "",
           count: 0,
         },
         currentSource: [],
         drag: true,
       }
+    },
+    computed: {
+      blockSource() {
+        let res = [];
+        if (this.currentSource.length) {
+					res = fn(this.currentSource);
+        }
+        return res;
+      },
     },
     methods: {
       showScreenshot() {
@@ -57,11 +85,18 @@
         );
       },
       openUrl() {
+        bbn.fn.log(this.currentSource);
         if (this.currentData.id) {
           window.open(this.root + "actions/bookmarks/go/" + this.currentData.id, this.currentData.id);
         }
         else {
-          window.open(this.currentData.url, this.currentData.id);
+          window.open(this.currentData.url, this.currentData.title);
+        }
+      },
+      openUrlSource(source) {
+        bbn.fn.log(source);
+        if (source.url) {
+          window.open(source.url, source.text);
         }
       },
       getData () {
@@ -160,7 +195,7 @@
           },
           d => {
             if (d.success) {
-              this.currentData.path = d.data.path;
+              this.currentData.screenshot_path = d.data.screenshot_path;
               this.currentData.id_screenshot = d.data.id_screenshot;
             }
           }
@@ -218,7 +253,7 @@
           title: this.currentData.title,
           id: this.currentData.id,
           cover: this.currentData.cover,
-          path: this.currentData.path,
+          screenshot_path: this.currentData.screenshot_path,
           id_screenshot: this.currentData.id_screenshot,
         },  d => {
           if (d.success) {
@@ -240,6 +275,7 @@
       },
     },
     mounted() {
+      let sc = this.getRef("scroll");
       this.getData();
     },
     watch: {
@@ -261,7 +297,7 @@
             id: v.data.id || "",
             cover: v.data.cover || null,
             id_screenshot: v.data.id_screenshot || "",
-            path: v.data.path || "",
+            screenshot_path: v.data.screenshot_path || "",
             count: v.data.count || 0
           };
         }

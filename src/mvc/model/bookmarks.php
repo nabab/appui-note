@@ -36,7 +36,8 @@ $map = function ($ar) use (&$all_id, &$map) {
   foreach($ar as $a) {
     $all_id[] = [
       'text' => $a['text'],
-      'value' => $a['id']
+      'value' => $a['id'],
+      'img' => $a['cover']
     ];
     if (!empty($a['items'])) {
       $map($a['items']);
