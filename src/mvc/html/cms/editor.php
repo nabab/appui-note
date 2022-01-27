@@ -26,6 +26,7 @@
       <label><?= _("Public URL") ?></label>
       <appui-note-cms-url :source="source.data"
                           class="bbn-wider"
+                          prefix="post/"
                           :readonly="true"/>
 
       <label><?= _("Start of publication") ?></label>

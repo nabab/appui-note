@@ -10,6 +10,9 @@
       action: {
         type: String,
         default: appui.plugins['appui-note'] + '/' + 'cms/actions/save'
+      },
+      prefix: {
+        type: String
       }
     },
     data(){

@@ -8,6 +8,10 @@
         type: String,
         default: bbn._("Note")
       },
+      prefix: {
+        type: String,
+        default: 'post/'
+      },
       types: {
         required: true,
         type: Array

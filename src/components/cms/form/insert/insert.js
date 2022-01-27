@@ -11,6 +11,10 @@
       types: {
         required: true,
         type: Array
+      },
+      prefix: {
+        type: String,
+        default: ''
       }
     },
     data(){

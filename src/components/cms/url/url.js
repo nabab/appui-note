@@ -7,6 +7,17 @@
     	source: {
         type: Object,
         required: true
+      },
+      prefix: {
+        type: String,
+        default: '',
+        validator(v) {
+          if (v && (v.substr(-1) !== '/')) {
+            throw new Error(bbn._("The prefix must finish with a slash"));
+          }
+
+          return true;
+        }
       }
     },
     data(){
@@ -22,7 +33,7 @@
     methods: {
       makeURL(st) {
         if (st) {
-          return bbn.fn.sanitize(st, '-').toLowerCase();
+          return bbn.fn.sanitize(this.prefix + st, '-').toLowerCase();
         }
 
         return '';
