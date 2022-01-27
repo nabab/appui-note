@@ -33,6 +33,10 @@
         type: [Boolean, String],
         default: true
       },
+      edit: {
+        type: [Boolean, String],
+        default: true
+      },
       pageable: {
         type: Boolean,
         default: true
@@ -104,6 +108,9 @@
       removeEnabled(){
         return !!this.remove && (!!this.url || bbn.fn.isString(this.remove));
       },
+      editEnabled(){
+        return !!this.edit && (!!this.url || bbn.fn.isString(this.edit));
+      },
       extensions() {
         let res = [];
         bbn.fn.each(bbn.opt.extensions, (v, i) => {
@@ -115,6 +122,15 @@
     methods: {
       getButtonMenu(data){
         let res = [];
+        if (this.editEnabled) {
+          res.push({
+            text: bbn._('Edit'),
+            icon: 'nf nf-fa-edit',
+            action: () => {
+              this.editMedia(data);
+            }
+          });
+        }
         if (this.downloadEnabled) {
           res.push({
             text: bbn._('Download'),
@@ -122,7 +138,7 @@
             action: () => {
               this.downloadMedia(data);
             }
-          })
+          });
         }
         if (this.removeEnabled) {
           res.push({
@@ -130,12 +146,12 @@
             icon: 'nf nf-fa-trash',
             action: () => {
               this.removeMedia(data);
-            } 
-          })
+            }
+          });
         }
         return res;
       },
-      editMedia(m, a){
+      editMedia(m){
         if(bbn.fn.isString(m.content)){
           m.content = JSON.parse(m.content)
         }
@@ -143,16 +159,14 @@
           title: bbn._('Edit media'),
           component: 'appui-note-media-form',
           componentOptions: {
-            source: {
-              media: m,
-              edit: true,
-              removedFile: false,
-              oldName: ''
-            },
-            browser: this
+            source: m,
+            multiple: false
           },
           height: '400px',
-          width: '400px'
+          width: '500px',
+          onOpen: pop => {
+            pop.$on('edited', this.onEdited);
+          }
         })
       },
       addMedia(){
@@ -160,18 +174,38 @@
           title: bbn._('Add new media'),
           component: 'appui-note-media-form',
           componentOptions: {
-            source: {
-              media: {
-                title: '',
-                file: [],
-                name: ''
-              }
-            },
-            browser: this
+            source: {}
           },
           height: '400px',
-          width: '400px'
+          width: '500px',
+          onOpen: pop => {
+            pop.$on('added', this.onAdded);
+          }
         })
+      },
+      onAdded(media){
+        let gallery = this.getRef('gallery');
+        if (!gallery.isAjax) {
+          if (bbn.fn.isArray(media)) {
+            gallery.source.push(...media);
+          }
+          else {
+            gallery.source.push(media);
+          }
+        }
+        gallery.updateData();
+        appui.success(bbn._('Media(s) successfully added'));
+      },
+      onEdited(media){
+        let gallery = this.getRef('gallery');
+        if (!gallery.isAjax) {
+          let idx = bbn.fn.search(gallery.source, {id: media.id});
+          if (idx > -1) {
+            gallery.source.splice(idx, 1, media);
+          }
+        }
+        gallery.updateData();
+        appui.success(bbn._('Media successfully edited'));
       },
       formatBytes: bbn.fn.formatBytes,
       removeMedia(m){
