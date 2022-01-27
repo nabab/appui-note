@@ -1,8 +1,9 @@
 <appui-note-media-browser2 :source="root + 'media/data/browser'"
                            :download="root + 'media/actions/download'"
-                           :upload="root + 'media/actions/upload'"
+                           :upload="root + 'media/actions/save'"
                            :remove="root + 'media/actions/remove'"
                            :edit="root + 'media/actions/edit'"
+                           :detail="root + 'media/detail/'"
                            :limit="50"
                            path-name="path"
                            overlay-name="title"/>

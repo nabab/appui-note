@@ -10,6 +10,20 @@
       multiple: {
         type: Boolean,
         default: true
+      },
+      url: {
+        type: String,
+        required: true
+      },
+      scrollable: {
+        type: Boolean,
+        default: false
+      },
+      buttons: {
+        type: Array,
+        default(){
+          return ['cancel', 'submit']
+        }
       }
     },
     data(){
@@ -46,12 +60,11 @@
     methods: {
       success(d){
         if (d.success && d.media) {
-          if (this.isEdit) {
-            this.closest('bbn-floater').$emit('edited', d.media);
+          let floater = this.closest('bbn-floater');
+          if (bbn.fn.isVue(floater)) {
+            floater.$emit(this.isEdit ? 'edited' : 'added', d.media);
           }
-          else {
-            this.closest('bbn-floater').$emit('added', d.media);
-          }
+          this.$emit(this.isEdit ? 'edited' : 'added', d.media);
         }
         else{
           appui.error(bbn._('Something went wrong while saving the media'));
