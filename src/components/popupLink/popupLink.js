@@ -94,21 +94,9 @@
         }
       },
       openUrlSource(source) {
-        bbn.fn.log("source", source);
+        bbn.fn.log(source);
         if (source.url) {
           window.open(source.url, source.text);
-          bbn.fn.post(
-              this.root + "actions/bookmarks/count",
-              {
-                id: source.id,
-              },
-              d => {
-                bbn.fn.log("d", d);
-                if (d.success) {
-                  this.currentData.count = d.count;
-                }
-              }
-            );
         }
       },
       getData () {

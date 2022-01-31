@@ -12,8 +12,9 @@ $res['success'] = false;
 
 
 if ($model->data['id']) {
-  $res['id'] = $model->data['id'];
-	$res['count'] = $model->data['count'] + 1;
+  $model->inc->pref->updateBit($model->data['id'], [
+    'count' => $model->data['count'] + 1 ?? 0,
+  ], true);
   $res['success'] = true;
 }
 
