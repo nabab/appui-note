@@ -14,7 +14,7 @@
     </div>  
     <div class="bbn-padded">
       <bbn-input v-model="text"
-                 @keydown.enter.prevent.stop="submit"" 
+                 @keydown.enter.prevent.stop="submit"
       ></bbn-input>
     </div>
     <bbn-input type="hidden" :value="parent"></bbn-input>

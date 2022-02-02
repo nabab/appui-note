@@ -8,7 +8,7 @@
       <div class="bbn-w-100 bbn-padded">
         <bbn-button class="bbn-w-80 bbn-spadded"
                     icon="nf nf-fa-plus"
-                    @click="resetform"
+                    @click="newform"
                     text="<?= _('Create a new link') ?>"></bbn-button>
       </div>
       <bbn-tree :source="currentSource"
@@ -106,20 +106,23 @@
           <bbn-scroll ref="scroll">
             <div class="appui-note-bookmarks-flex-container">
               <main>
-                <section v-for="source in blockSource" v-if="source.cover">
-                  <div class="url">
-                    <span>
-                      {{source.text}}
-                    </span>
-                  </div>
-                  <div class="urlT">
+                <section v-for="block in blockSource" v-if="block.cover">
+                  <bbn-context :context="true"
+                               :source="contextMenu(block)"
+                               tag="div">
+                    <div class="url">
                       <span>
-                        {{source.text}}
+                        {{block.text}}
                       </span>
                     </div>
-                  <img
-                       :src="source.cover"
-                       @click="openUrlSource(source)"/>
+                    <div class="urlT">
+                      <span>
+                        {{block.text}}
+                      </span>
+                    </div>
+                    <img :src="block.cover"
+                         @click="openUrlSource(block)"/>
+                  </bbn-context>
                 </section>
               </main>
             </div>
