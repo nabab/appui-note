@@ -56,10 +56,76 @@
         }
         return res;
       },
+      formAction() {
+        if (this.source.id) {
+          this.currentData.url = this.source.url;
+          this.currentData.title = this.source.text;
+          this.currentData.id_screenshot = this.source.id_screenshot;
+          this.currentData.screenshot_path = this.source.screenshot_path;
+          this.currentData.id = this.source.id;
+          this.currentData.description = this.source.description;
+          this.currentData.cover = this.source.cover;
+        }
+        bbn.fn.log("path", this.root + "actions/bookmarks/" + (this.currentData.id ? "modify" : "add"));
+        /*if (this.currentData.id) {
+          this.modify();
+          return;
+        }
+        this.add();*/
+        return (this.root + "actions/bookmarks/" + (this.currentData.id ? "modify" : "add"));
+      },
     },
     methods: {
+      checkUrl() {
+        if (!this.currentData.id && bbn.fn.isURL(this.currentData.url)) {
+          bbn.fn.post(
+            this.root + "actions/bookmarks/preview",
+            {
+              url: this.currentData.url,
+            },
+            d => {
+              if (d.success) {
+                this.currentData.title = d.data.title;
+                this.currentData.description = d.data.description;
+                this.currentData.cover = d.data.cover ||null;
+                if (d.data.images) {
+                  this.currentData.images = bbn.fn.map(d.data.images, (a) => {
+                    return {
+                      content: a,
+                      type: 'img'
+                    }
+                  })
+                }
+                bbn.fn.log("d.data.images :", this.currentData.images);
+              }
+              return false;
+            }
+          );
+        }
+      },
+      updateWeb() {
+        this.showGallery = true;
+        bbn.fn.post(
+          this.root + "actions/bookmarks/preview",
+          {
+            url: this.currentData.url,
+          },
+          d => {
+            if (d.success) {
+              if (d.data.images) {
+                this.currentData.images = bbn.fn.map(d.data.images, (a) => {
+                  return {
+                    content: a,
+                    type: 'img'
+                  }
+                })
+              }
+            }
+            return false;
+          }
+        );
+      },
       openUrl() {
-        bbn.fn.log("SOURCE", this.currentSource);
         if (this.currentData.id) {
           window.open(this.root + "actions/bookmarks/go/" + this.currentData.id, this.currentData.id);
         }
@@ -90,7 +156,6 @@
         bbn.fn.post(this.root + "actions/bookmarks/data", d => {
           this.currentSource = d.data;
         });
-        bbn.fn.log("currentSource : ", this.$emit.dragOver);
       },
       resetform() {
         this.currentData = {
@@ -106,91 +171,50 @@
         this.idParent = "";
       },
       add() {
-        bbn.fn.log(this, "this")
         bbn.fn.post(
           this.root + "actions/bookmarks/add",
           {
-            url: this.source.url,
-            description: this.source.description,
-            title: this.source.title,
-            id_parent:  this.source.idParent,
-            cover: this.source.cover,
+            url: this.currentData.url,
+            description: this.currentData.description,
+            title: this.currentData.title,
+            id_parent:  this.currentData.idParent,
+            cover: this.currentData.cover,
           },  d => {
             if (d.success) {
-              bbn.fn.log(d);
-              this.source.id = d.id_bit;
-              this.source.count = 0;
+              this.currentData.id = d.id_bit;
+              this.currentData.count = 0;
               appui.success();
-              this.getData();
               this.screenshot();
             }
           });
       },
-      deletePreference() {
-        bbn.fn.post(
-          this.root + "actions/bookmarks/delete",
-          {
-            id: this.currentData.id
-          },  d => {
-            if (d.success) {
-              this.getData();
-            }
-          });
-        return;
+      selectImage(img) {
+        this.currentData.cover = img.data.content;
+        this.showGallery = false;
       },
       modify() {
+        bbn.fn.log("test", this.currentData);
         bbn.fn.post(this.root + "actions/bookmarks/modify", {
-          url: this.source.url,
-          description: this.source.description,
-          title: this.source.title,
-          id: this.source.id,
-          cover: this.source.cover,
-          screenshot_path: this.source.screenshot_path,
-          id_screenshot: this.source.id_screenshot,
+          url: this.currentData.url,
+          description: this.currentData.description,
+          title: this.currentData.title,
+          id: this.currentData.id,
+          cover: this.currentData.cover,
+          screenshot_path: this.currentData.screenshot_path,
+          id_screenshot: this.currentData.id_screenshot,
         },  d => {
           if (d.success) {
-            this.getData();
           }
         });
       },
-      contextMenu(bookmark) {
-        return [
-          {
-            text: bbn._("Edit"),
-            icon: "nf nf-fa-edit",
-            action: () => {
-              this.getPopup({
-                component: "appui-note-bookmarks-form",
-                componentOptions: {
-                  source: bookmark
-                }
-              });
-            }
-          }
-        ];
-      },
-    },
-    mounted() {
-      let sc = this.getRef("scroll");
-      this.getData();
     },
     watch: {
-      currentNode(v) {
-        if (v) {
-          bbn.fn.log("v", v);
-          this.currentData = {
-            url: v.data.url || "",
-            title: v.data.text || "",
-            description: v.data.description || "",
-            id: v.data.id || "",
-            cover: v.data.cover || null,
-            id_screenshot: v.data.id_screenshot || "",
-            screenshot_path: v.data.screenshot_path || "",
-            count: v.data.count || 0
-          };
-        }
-        else {
-          this.resetForm();
+      'currentData.url'() {
+        if (!this.currentData.id) {
+          clearTimeout(this.checkTimeout);
+          this.checkTimeout = setTimeout(() => {
+            this.checkUrl();
+          }, 250);
         }
       },
     }

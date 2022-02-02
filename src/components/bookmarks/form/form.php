@@ -1,44 +1,66 @@
 <!-- HTML Document -->
 
-<div class="bbn-w-100 bbn-flex-height">
-  <div class="bbn-w-100 bbn-left-padded bbn-top-lpadded bbn-bottom-spadded bbn-grid-full">
-    <label class="bbn-w-100"><?=_("URL")?></label>
-    <bbn-input v-model="source.url"
-               :source="currentData.url"
-               class="bbn-lpadded bbn-w-40"></bbn-input>
-    <bbn-button class="bbn-w-2"
-                @click="openUrl"
-                text="Go to"></bbn-button>
-  </div>
-  <div class="bbn-w-20 bbn-left-padded bbn-bottom-spadded">
-    <label class="bbn-w-100"><?=_("In which file ?")?></label>
-    <bbn-dropdown :source="idParent"
-                  v-model="source.parents"
-                  class="bbn-lpadded"
+<bbn-form :action="formAction"
+          :source="currentData"
+          v-model="currentData">
+  <div class="bbn-padded bbn-grid-fields" :required="true">
+    <label><?=_("URL")?></label>
+    <div>
+      <bbn-input v-model="currentData.url"></bbn-input>
+      <bbn-button class="bbn-w-2"
+                  @click="openUrl"
+                  text="Go to"></bbn-button>
+    </div>
+
+<!--     <label><?=_("In which file ?")?></label>
+   <bbn-dropdown  :source="parents"
+                  v-model="idParent"
                   placeholder="Is there a parent ?"
-                  ></bbn-dropdown>
-  </div>
-  <div class="bbn-w-50 bbn-left-padded bbn-bottom-spadded">
-    <label class="bbn-l bbn-w-100"><?=_("Title")?></label>
-    <bbn-input v-model="source.text"
-               :source="currentData.title"
+                  ></bbn-dropdown>-->
+
+    <label><?=_("Title")?></label>
+    <bbn-input v-model="currentData.title"
                placeholder="Name of the URL"></bbn-input>
-  </div>
-  <div class="bbn-left-padded bbn-bottom-lpadded bbn-w-100">
-    <label class="bbn-l bbn-w-100"><?=_("URL's description")?></label>
-    <bbn-textarea class="bbn-w-40"
-                  v-model="source.description"
-                  :source="currentData.description"></bbn-textarea>
-  </div>
-  <div>
-    <div class="bbn-w-100 bbn-padded" v-if="source.id === null">
-      <bbn-button class="bbn-padded " text="<?= _('Add Link') ?>" @click="add"></bbn-button>
+
+    <label><?=_("URL's description")?></label>
+    <bbn-textarea v-model="currentData.description"></bbn-textarea>
     </div>
-    <div class="bbn-w-100 bbn-lpadded" v-else>
-      <bbn-button class="bbn-lpadded " text="<?= _('Modify Link') ?>" @click="modify"></bbn-button>
-      <bbn-button class="bbn-lpadded"
-                  text="<?= _('Delete Link') ?>"
-                  @click="deletePreference"></bbn-button>
+    <div v-if="currentData.cover"
+         class="bbn-grid-fields">
+      <img :src="currentData.cover"
+           style="max-width: 200px; height: 200px; width: auto; height: auto">
+      <bbn-button v-if="source.images"
+                  @click="showGallery = true"
+                  class="bbn-w-20"
+                  text="change cover picture"></bbn-button>
+      <bbn-floater v-if="showGallery"
+                   :title="_('Pick a cover picture')"
+                   :closable="true"
+                   :width="500"
+                   :height="500"
+                   :scrollable="false"
+                   @close="showGallery = false">
+        <bbn-gallery :source="currentData.images"
+                     class="bbn-overlay"
+                     @clickItem="selectImage"
+                     :selecting-mode="true"
+                     :zoomable="false"
+                     :scrollable="true"
+                     ></bbn-gallery>
+      </bbn-floater>
+      <bbn-button	v-if="currentData.id_screenshot"
+                  @click="showScreenshot"
+                  class="bbn-padded"
+                  text="show screenshot"
+                  ></bbn-button>
+      <bbn-floater v-if="visible"
+                   :closable="true"
+                   :width="800"
+                   :height="600"
+                   :resizable="true"
+                   :title="_('a screenshot from the site')"
+                   @close="visible = false">
+        <img :src="root + 'media/image/' + currentData.id_screenshot">
+      </bbn-floater>
     </div>
-  </div>
-</div>
+</bbn-form>

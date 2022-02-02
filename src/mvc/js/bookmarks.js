@@ -85,7 +85,6 @@
         );
       },
       openUrl() {
-        bbn.fn.log(this.currentSource);
         if (this.currentData.id) {
           window.open(this.root + "actions/bookmarks/go/" + this.currentData.id, this.currentData.id);
         }
@@ -116,20 +115,30 @@
         bbn.fn.post(this.root + "actions/bookmarks/data", d => {
           this.currentSource = d.data;
         });
-        bbn.fn.log("currentSource : ", this.$emit.dragOver);
       },
-      newform() {
-        bbn.fn.log(this.currentData, "c t data")
-        this.resetform();
-        this.getPopup({
+      openEditor(bookmark) {
+         this.getPopup({
                 component: "appui-note-bookmarks-form",
                 componentOptions: {
-                  source: this.currentData
+                  source: bookmark
                 },
-                width: 500,
-                height: 500,
-               	title: "New link"
+               	title: bookmark.id ? bbn._("Edit Form") : bbn._("New Form")
               });
+      },
+      newform() {
+        this.openEditor({});
+      },
+      contextMenu(bookmark) {
+        bbn.fn.log(bookmark);
+        return [
+          {
+            text: bbn._("Edit"),
+            icon: "nf nf-fa-edit",
+            action: () => {
+              this.openEditor(bookmark)
+            }
+          }
+        ];
       },
       resetform() {
         this.currentData = {
@@ -181,9 +190,6 @@
                 bbn.fn.log("d.data.images :", this.currentData.images);
               }
               return false;
-            },
-            e => {
-              bbn.fn.log(e);
             }
           );
         }
@@ -298,26 +304,6 @@
           });
         return;
       },
-      contextMenu(bookmark) {
-        bbn.fn.log("book : ", bookmark);
-        return [
-          {
-            text: bbn._("Edit"),
-            icon: "nf nf-fa-edit",
-            action: () => {
-              this.getPopup({
-                component: "appui-note-bookmarks-form",
-                componentOptions: {
-                  source: bookmark
-                },
-                width: 500,
-                height: 500,
-               	title: "Edit Form"
-              });
-            }
-          }
-        ];
-      },
     },
     mounted() {
       let sc = this.getRef("scroll");
@@ -334,7 +320,6 @@
       },
       currentNode(v) {
         if (v) {
-          bbn.fn.log("v", v);
           this.currentData = {
             url: v.data.url || "",
             title: v.data.text || "",
