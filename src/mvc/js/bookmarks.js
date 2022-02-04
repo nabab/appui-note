@@ -118,6 +118,19 @@
         });
         bbn.fn.log("currentSource : ", this.$emit.dragOver);
       },
+      newform() {
+        bbn.fn.log(this.currentData, "c t data")
+        this.resetform();
+        this.getPopup({
+                component: "appui-note-bookmarks-form",
+                componentOptions: {
+                  source: this.currentData
+                },
+                width: 500,
+                height: 500,
+               	title: "New link"
+              });
+      },
       resetform() {
         this.currentData = {
           url: "",
@@ -284,6 +297,26 @@
             }
           });
         return;
+      },
+      contextMenu(bookmark) {
+        bbn.fn.log("book : ", bookmark);
+        return [
+          {
+            text: bbn._("Edit"),
+            icon: "nf nf-fa-edit",
+            action: () => {
+              this.getPopup({
+                component: "appui-note-bookmarks-form",
+                componentOptions: {
+                  source: bookmark
+                },
+                width: 500,
+                height: 500,
+               	title: "Edit Form"
+              });
+            }
+          }
+        ];
       },
     },
     mounted() {

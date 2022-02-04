@@ -17,7 +17,7 @@ if ($model->data['id'] ||$model->data['title']) {
     'description' => $model->data['description'],
     'cover' => $model->data['cover'] ?? null,
     'count' => $model->data['count'] ?? 0,
-  ], []);
+  ], true);
   $res['success'] = true;
 }
 
