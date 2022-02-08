@@ -11,7 +11,8 @@
           id_screenshot: a.id_screenshot || null,
           screenshot_path: a.screenshot_path || "",
           text: a.text,
-          url:a.url
+          url: a.url,
+          clicked: a.clicked || 0
         })
       }
       else if (a.items) {
@@ -42,7 +43,7 @@
           image: "",
           screenshot_path: "",
           id_screenshot: "",
-          count: 0,
+          clicked: 0,
         },
         currentSource: [],
         drag: true,
@@ -104,7 +105,7 @@
               d => {
                 bbn.fn.log("d", d);
                 if (d.success) {
-                  this.currentData.count = d.count;
+                  this.currentData.clicked++;
                 }
               }
             );
@@ -129,7 +130,6 @@
         this.openEditor({});
       },
       contextMenu(bookmark) {
-        bbn.fn.log(bookmark);
         return [
           {
             text: bbn._("Edit"),
@@ -187,7 +187,6 @@
                     }
                   })
                 }
-                bbn.fn.log("d.data.images :", this.currentData.images);
               }
               return false;
             }
@@ -199,7 +198,6 @@
         bbn.fn.log("node :", this.currentNode.data);
         if (this.currentNode.data.id) {
           this.$nextTick(() => {
-            bbn.fn.log("ça marche", this.currentNode, this.currentNode.data.count);
             bbn.fn.post(
               this.root + "actions/bookmarks/count",
               {
@@ -208,11 +206,10 @@
               d => {
                 bbn.fn.log("d", d);
                 if (d.success) {
-                  this.currentData.count = d.count;
+                  this.currentData.clicked++;
                 }
               }
             );
-            bbn.fn.log("count + 1", this.currentData.count);
           });
         }
       },
@@ -245,7 +242,7 @@
             if (d.success) {
               bbn.fn.log(d);
               this.currentData.id = d.id_bit;
-              this.currentData.count = 0;
+              this.currentData.clicked++;
               appui.success();
               this.getData();
               this.screenshot();
@@ -328,7 +325,7 @@
             cover: v.data.cover || null,
             id_screenshot: v.data.id_screenshot || "",
             screenshot_path: v.data.screenshot_path || "",
-            count: v.data.count || 0
+            clicked: v.data.clicked || 0
           };
         }
         else {

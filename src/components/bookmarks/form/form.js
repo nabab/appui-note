@@ -46,6 +46,7 @@
         },
         currentSource: [],
         drag: true,
+        bookmarkCp: null,
       }
     },
     computed: {
@@ -74,6 +75,12 @@
         this.add();*/
         return (this.root + "actions/bookmarks/" + (this.currentData.id ? "modify" : "add"));
       },
+      treeParents() {
+        if (this.bookmarkCp) {
+          return this.bookmarkCp.parents;
+        }
+        return null;
+      }
     },
     methods: {
       checkUrl() {
@@ -207,6 +214,9 @@
           }
         });
       },
+    },
+    beforeMount() {
+      this.bookmarkCp = this.closest('bbn-container').getComponent();
     },
     watch: {
       'currentData.url'() {

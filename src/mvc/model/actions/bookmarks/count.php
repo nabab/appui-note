@@ -11,12 +11,12 @@ use bbn\X;
 $res['success'] = false;
 
 
-/*if ($model->data['id']) {
+if ($model->data['id']) {
   $model->inc->pref->updateBit($model->data['id'], [
-    'count' => $model->data['count'] + 1 ?? 0,
+    'clicked' => ($model->data['clicked'] ?? 0) + 1,
   ], true);
   $res['success'] = true;
-}*/
+}
 
 //X::ddump($res, $model->data['count'], $model->data['id']);
 

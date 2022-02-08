@@ -33,29 +33,7 @@
                       @click="deletePreference"></bbn-button>
         </div>
       </div>-->
-
-      <div class="appui-note-bookmarks-flex-container">
-        <main>
-          <section v-for="block in blockSource" v-if="block.cover">
-            <bbn-context :context="true"
-                         :source="contextMenu(block)"
-                         tag="div">
-              <div class="url bbn-xspadded">
-                <span>
-                  {{block.text}}
-                </span>
-              </div>
-              <div class="urlT bbn-xspadded">
-                <span>
-                  {{block.text}}
-                </span>
-              </div>
-              <img :src="block.cover"
-                   @click="openUrlSource(block)"/>
-            </bbn-context>
-          </section>
-        </main>
-      </div>
+			<appui-note-bookmarks-block :source="blockSource"></appui-note-bookmarks-block>
     </bbn-pane>
   </bbn-splitter>
 </div>
