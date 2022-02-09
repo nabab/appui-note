@@ -8,7 +8,6 @@
     <label><?=_("URL")?></label>
     <div class="bbn-flex-width">
       <bbn-input v-model="currentData.url"
-                 :required="true"
                  class="bbn-flex-fill bbn-right-space"></bbn-input>
       <bbn-button class="bbn-w-2"
                   @click="openUrl"
@@ -16,7 +15,7 @@
     </div>
 
     <label><?=_("In which file ?")?></label>
-    <bbn-dropdown :source="parents"
+    <bbn-dropdown :source="bookmarkCp.parents"
                   class="bbn-wider"
                   v-model="idParent"
                   placeholder="Is there a parent ?"

@@ -20,10 +20,12 @@
         </div>
         <img v-if="block.cover"
              :src="block.cover"
-             @click="openUrlSource(block)"/>
+             @click="openUrlSource(block)"
+             :text="_('Open the link')"/>
         <div v-else
              class="default-image"
              @click="openUrlSource(block)"
+              :text="_('Open the link')"
              />
       </bbn-context>
     </section>

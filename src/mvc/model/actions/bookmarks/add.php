@@ -33,6 +33,4 @@ if ($tree['items'] || $tree['id']) {
   }
 }
 
-
-
 return $res;
