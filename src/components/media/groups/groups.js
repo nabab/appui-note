@@ -29,6 +29,9 @@
       },
       mediasRemoveUrl: {
         type: String
+      },
+      mediasDetailUrl: {
+        type: String
       }
     },
     data(){

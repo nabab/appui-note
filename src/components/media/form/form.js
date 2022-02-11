@@ -7,138 +7,87 @@
       source: {
         type: Object
       },
-      browser: {
-        type: Vue
+      multiple: {
+        type: Boolean,
+        default: true
+      },
+      url: {
+        type: String,
+        required: true
+      },
+      scrollable: {
+        type: Boolean,
+        default: false
+      },
+      buttons: {
+        type: Array,
+        default(){
+          return ['cancel', 'submit']
+        }
       }
     },
     data(){
+      let files = [];
+      if (!!this.source
+        && !!this.source.id &&
+        !!this.source.id.length
+      ) {
+        files.push({
+          name: this.source.name,
+          title: this.source.title,
+          description: this.source.description,
+          extension: this.source.content.extension,
+          size: this.source.content.size
+        });
+      }
       return {
-        //browser: {},
         root: appui.plugins['appui-note'] + '/',
         ref: (new Date()).getTime(),
-        validTitle: true,
-        content: [],
-        //the idx of the media in medias of the container
-        removedFile: false,
-        mediaIdx:false,
-        id_note:false
+        files: files,
+        showTitles: false,
+        oldTitle: '',
+        oldDescription: '',
       };
     },
-    methods: {
-      setRemovedFile(){
-        this.source.removedFile = true;
-        this.removedFile = true;
+    computed: {
+      isEdit(){
+        return !!this.source && !!this.source.id && !!this.source.id.length;
       },
-      /** @todo Check it out */
-      validation(a){
-        if (a.media.file &&
-            a.media.file[0] &&
-            a.media.file[0].extension
-           ) {
-          if ((a.media.name.indexOf(a.media.file[0].extension) > -1) &&
-              a.media.name.replace(a.media.file[0].extension, '').length &&
-              (a.media.name.replace(a.media.file[0].extension, '') !== '.')
-             ) {
-            return true;
-          }
-        }
-        else if (a.media.content &&
-                 a.media.content.extension &&
-                 (a.media.name.indexOf(a.media.content.extension) > -1) &&
-                 a.media.name.replace(a.media.content.extension, '').length &&
-                 (a.media.name.replace(a.media.content.extension, '') !== '.')
-                ) {
-          return true;
-        }
-      },
-      uploadSuccess(){
-        this.$nextTick(() => {
-          if(this.source.media.file && this.source.media.file[0]){
-            this.source.media.title = this.source.media.file[0].name;
-            this.source.media.name = this.source.media.file[0].name;
-          }
-        });
-      },
-      setContent(){
-        let res = [];
-        if(this.source.edit){
-          if ( bbn.fn.isObject(this.source.media.content)){
-            this.source.media.content.name = this.source.media.name;
-            res.push(this.source.media.content);
-            this.content = JSON.stringify(res);
-          }
-        }
-      },
-      checkTitle(){
-        if (this.source.media.title.indexOf('.') < 0) {
-          let extension = this.source.edit ? this.source.media.content.extension : this.source.media.file.extension;
-          if ( extension){
-            this.source.media.title += '.' + this.source.media.content.extension;
-          }
-          else{
-            //CASE INSERT
-            this.validTitle = false;
-            this.alert(bbn._('The title must contain the extension of the file'));
-          }
-        }
-      },
-      success(d){
-        if (d.success && d.media) {
-          if ( !this.source.edit ){
-            
-            if (bbn.fn.isArray(this.browser.source)) {
-              this.browser.source.push(d.media);
-            }
-            this.browser.refresh();
-            appui.success(bbn._('Media successfully added to media browser'));
-          }
-          else{
-            this.browser.currentData[this.mediaIdx].content.name = d.media.name;
-            if (d.media.is_image) {
-              this.browser.currentData[this.mediaIdx].isImage = d.media.isImage;
-            }
-            if ( this.removedFile ){
-              if(bbn.fn.isString(d.media.content)) {
-                d.media.content = JSON.parse(d.media.content);
-              }
-              let thatMediaIdx = this.mediaIdx;
-              //the block has to disappear to show the new picture uploaded
-              this.browser.currentData.splice(this.mediaIdx, 1);
-              setTimeout(() => {
-                this.browser.currentData.splice(thatMediaIdx, 0, d.media);
-                bbn.fn.log('after',thatMediaIdx, d.media, JSON.stringify(d.media));
-              }, 50);
-            }
-            appui.success(bbn._('Media successfully updated'));
-          }
-          this.browser.$emit('added', d.media);
-        }
-        else{
-          appui.error(bbn._('Something went wrong while adding the media to the media broser'));
-        }
+      asJson(){
+        return !!this.source && !!this.source.content && bbn.fn.isString(this.source.content);
       }
     },
-    mounted(){
-      //this.browser = this.closest('bbn-container').find('appui-note-media-browser2');
-      if (this.browser
-        && !!this.browser.source
-        && bbn.fn.isArray(this.browser.source)
-        && this.browser.source.length
-      ) {
-        this.mediaIdx = bbn.fn.search(this.browser.source, 'id', this.source.media.id);
+    methods: {
+      success(d){
+        if (d.success && d.media) {
+          let floater = this.closest('bbn-floater');
+          if (bbn.fn.isVue(floater)) {
+            floater.$emit(this.isEdit ? 'edited' : 'added', d.media);
+          }
+          this.$emit(this.isEdit ? 'edited' : 'added', d.media);
+        }
+        else{
+          appui.error(bbn._('Something went wrong while saving the media'));
+        }
+      },
+      onRemove(ev, file){
+        this.oldTitle = file.data.title;
+        this.oldDescription = file.data.description;
       }
-      this.setContent();
-      if (this.source.edit) {
-        this.source.oldName = this.source.media.content.name;
-      }
-      if (this.browser
-        && this.browser.$parent
-        && this.browser.$parent.source
-        && this.browser.$parent.source.id_note
-      ) {
-        this.$nextTick(()=>{
-          this.id_note = this.browser.$parent.source.id_note;
-        });
+    },
+    watch: {
+      showTitles(newVal){
+        if (!this.isEdit && !newVal) {
+          bbn.fn.each(this.files, f => f.title = '');
+        }
+      },
+      files(newVal, oldVal){
+        if (this.isEdit && !oldVal.length) {
+          newVal[0].title = this.oldTitle;
+          newVal[0].description = this.oldDescription;
+          this.oldTitle = '';
+          this.oldDescription = '';
+        }
       }
     }
   };

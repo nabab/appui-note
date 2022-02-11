@@ -94,21 +94,9 @@
         }
       },
       openUrlSource(source) {
-        bbn.fn.log("source", source);
+        bbn.fn.log(source);
         if (source.url) {
           window.open(source.url, source.text);
-          bbn.fn.post(
-              this.root + "actions/bookmarks/count",
-              {
-                id: source.id,
-              },
-              d => {
-                bbn.fn.log("d", d);
-                if (d.success) {
-                  this.currentData.count = d.count;
-                }
-              }
-            );
         }
       },
       getData () {
@@ -117,19 +105,6 @@
           this.currentSource = d.data;
         });
         bbn.fn.log("currentSource : ", this.$emit.dragOver);
-      },
-      newform() {
-        bbn.fn.log(this.currentData, "c t data")
-        this.resetform();
-        this.getPopup({
-                component: "appui-note-bookmarks-form",
-                componentOptions: {
-                  source: this.currentData
-                },
-                width: 500,
-                height: 500,
-               	title: "New link"
-              });
       },
       resetform() {
         this.currentData = {
@@ -297,26 +272,6 @@
             }
           });
         return;
-      },
-      contextMenu(bookmark) {
-        bbn.fn.log("book : ", bookmark);
-        return [
-          {
-            text: bbn._("Edit"),
-            icon: "nf nf-fa-edit",
-            action: () => {
-              this.getPopup({
-                component: "appui-note-bookmarks-form",
-                componentOptions: {
-                  source: bookmark
-                },
-                width: 500,
-                height: 500,
-               	title: "Edit Form"
-              });
-            }
-          }
-        ];
       },
     },
     mounted() {

@@ -33,6 +33,13 @@
         type: [Boolean, String],
         default: true
       },
+      edit: {
+        type: [Boolean, String],
+        default: true
+      },
+      detail: {
+        type: String
+      },
       pageable: {
         type: Boolean,
         default: true
@@ -104,6 +111,9 @@
       removeEnabled(){
         return !!this.remove && (!!this.url || bbn.fn.isString(this.remove));
       },
+      editEnabled(){
+        return !!this.edit && (!!this.url || bbn.fn.isString(this.edit));
+      },
       extensions() {
         let res = [];
         bbn.fn.each(bbn.opt.extensions, (v, i) => {
@@ -115,6 +125,24 @@
     methods: {
       getButtonMenu(data){
         let res = [];
+        if (this.detail) {
+          res.push({
+            text: bbn._('Info'),
+            icon: 'nf nf-fa-info',
+            action: () => {
+              this.openDetail(data);
+            }
+          });
+        }
+        if (this.editEnabled) {
+          res.push({
+            text: bbn._('Edit'),
+            icon: 'nf nf-fa-edit',
+            action: () => {
+              this.editMedia(data);
+            }
+          });
+        }
         if (this.downloadEnabled) {
           res.push({
             text: bbn._('Download'),
@@ -122,7 +150,7 @@
             action: () => {
               this.downloadMedia(data);
             }
-          })
+          });
         }
         if (this.removeEnabled) {
           res.push({
@@ -130,48 +158,77 @@
             icon: 'nf nf-fa-trash',
             action: () => {
               this.removeMedia(data);
-            } 
-          })
+            }
+          });
         }
         return res;
       },
-      editMedia(m, a){
-        if(bbn.fn.isString(m.content)){
-          m.content = JSON.parse(m.content)
-        }
-        this.getPopup().open({
-          title: bbn._('Edit media'),
-          component: 'appui-note-media-form',
-          componentOptions: {
-            source: {
-              media: m,
-              edit: true,
-              removedFile: false,
-              oldName: ''
+      editMedia(m){
+        if (this.editEnabled) {
+          if(bbn.fn.isString(m.content)){
+            m.content = JSON.parse(m.content)
+          }
+          this.getPopup().open({
+            title: bbn._('Edit media'),
+            component: 'appui-note-media-form',
+            componentOptions: {
+              source: m,
+              multiple: false,
+              url: this.edit || this.url
             },
-            browser: this
-          },
-          height: '400px',
-          width: '400px'
-        })
+            height: '400px',
+            width: '500px',
+            onOpen: pop => {
+              pop.$on('edited', this.onEdited);
+            }
+          });
+        }
       },
       addMedia(){
-        this.getPopup().open({
-          title: bbn._('Add new media'),
-          component: 'appui-note-media-form',
-          componentOptions: {
-            source: {
-              media: {
-                title: '',
-                file: [],
-                name: ''
-              }
+        if (this.uploadEnabled) {
+          this.getPopup().open({
+            title: bbn._('Add new media'),
+            component: 'appui-note-media-form',
+            componentOptions: {
+              source: {},
+              url: this.upload || this.url
             },
-            browser: this
-          },
-          height: '400px',
-          width: '400px'
-        })
+            height: '400px',
+            width: '500px',
+            onOpen: pop => {
+              pop.$on('added', this.onAdded);
+            }
+          });
+        }
+      },
+      onAdded(media){
+        let gallery = this.getRef('gallery');
+        if (!gallery.isAjax) {
+          if (bbn.fn.isArray(media)) {
+            gallery.source.push(...media);
+          }
+          else {
+            gallery.source.push(media);
+          }
+        }
+        gallery.updateData();
+        appui.success(bbn._('Media(s) successfully added'));
+      },
+      onEdited(media){
+        let gallery = this.getRef('gallery');
+        if (!gallery.isAjax) {
+          let idx = bbn.fn.search(gallery.source, {id: media.id});
+          if (idx > -1) {
+            gallery.source.splice(idx, 1, media);
+          }
+        }
+        gallery.updateData();
+        appui.success(bbn._('Media successfully edited'));
+      },
+      openDetail(media){
+        if (media && media.id && this.detail) {
+          bbn.fn.link(this.detail + (this.detail.substr(-1, 1) !== '/' ? '/' : '') + media.id);
+        }
       },
       formatBytes: bbn.fn.formatBytes,
       removeMedia(m){
