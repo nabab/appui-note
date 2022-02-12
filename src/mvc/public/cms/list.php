@@ -1,6 +1,6 @@
 <?php
 if ( !empty($ctrl->post['limit']) ){
-  $ctrl->obj = $ctrl->getModel($ctrl->post);
+  $ctrl->action();
 }
 else{
   $ctrl->setIcon('nf nf-fa-list')
