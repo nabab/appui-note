@@ -16,7 +16,7 @@
     computed: {
       cutted(){
         if(this.data.title.length > 20){
-          return this.data.title.substr(0,20);
+          return this.data.title.substring(0, 20);
         }
         return this.data.title;
       },

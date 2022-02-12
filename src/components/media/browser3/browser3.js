@@ -365,7 +365,7 @@
           isMobile: bbn.fn.isMobile,
           cutted(){
             if(this.data.media.title.length > 20){
-              return this.data.media.title.substr(0,20);
+              return this.data.media.title.substr(0, 20);
             }
             return this.data.media.title;
           },
@@ -420,9 +420,9 @@
           exitEdit(){
             this.editinline = false;
             if( this.data.media.title !== this.initialTitle ){
-              let title = this.data.media.title,
-              	ext_title = title.substr(title.lastIndexOf('.') + 1, title.length - 1 );
-       			  if ( ext_title === this.data.media.content.extension ){
+              let title = this.data.media.title;
+              let ext_title = bbn.fn.substr(title, title.lastIndexOf('.') + 1, title.length - 1 );
+       			  if (ext_title === this.data.media.content.extension) {
                 this.post(this.root + 'media/actions/edit_title', {
                   id: this.data.media.id,
                   title: this.data.media.title

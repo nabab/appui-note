@@ -227,7 +227,7 @@
       },
       openDetail(media){
         if (media && media.id && this.detail) {
-          bbn.fn.link(this.detail + (this.detail.substr(-1, 1) !== '/' ? '/' : '') + media.id);
+          bbn.fn.link(this.detail + (bbn.fn.substr(this.detail, -1, 1) !== '/' ? '/' : '') + media.id);
         }
       },
       formatBytes: bbn.fn.formatBytes,

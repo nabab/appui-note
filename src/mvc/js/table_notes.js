@@ -43,7 +43,7 @@
       title(row){
         //return row.title
         if (!row.title || (row.title === '') && row.excerpt) {
-          return row.excerpt.substr(0,50) + this.span;
+          return row.excerpt.substring(0, 50) + this.span;
         }
         else{
           return row.title
