@@ -291,7 +291,7 @@
       // function of render
       renderUrl(row){
         if (row.url !== null) {
-          return '<a href="' + this.previewUrl + row.url + '" target="_blank">' + row.url + '</a>';
+          return '<a href="' + row.url + '" target="_blank">' + row.url + '</a>';
         }
 
         return '-';
