@@ -21,7 +21,7 @@ class import
       $this->pref->add($id_list, []);
       $my_list = $this->pref->getByOption($id_list);
     }
-		$this->id_option = $my_list['id'];
+    $this->id_option = $my_list['id'];
 
     if ($this->fp != null)
     {
@@ -85,12 +85,11 @@ class import
       $this->name_folder = $this->untitled;
       $this->untitled++;
     }
-    if ($my_list) {
-        $id_bit = $this->pref->addBit($this->id_option, [
-        'text' =>  $this->name_folder,
-        'id_parent' => $this->current_folder ?: null
-      ]);
-      }
+    $id_bit = $this->pref->addBit($this->id_option, [
+      'text' =>  $this->name_folder,
+      'id_parent' => $this->current_folder ?: null
+    ]);
+
     $this->parent = $this->current_folder;
     $this->current_folder = $id_bit;
     array_push($this->folder_depth, $this->current_folder);
