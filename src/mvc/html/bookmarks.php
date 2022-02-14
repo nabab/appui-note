@@ -21,7 +21,7 @@
       <label class="bbn-w-100" v-else><?=_("No Bookmarks yet")?></label>
     </bbn-pane>
 
-    <bbn-pane>
+    <bbn-pane :scrollable="true" class="bbn-flex-height">
       <!--<div>
         <div class="bbn-w-100 bbn-padded" v-if="currentData.id === null">
           <bbn-button class="bbn-padded " text="<?= _('Add Link') ?>" @click="add"></bbn-button>
@@ -33,31 +33,11 @@
                       @click="deletePreference"></bbn-button>
         </div>
       </div>-->
-      <div class="bbn-flex-fill">
-        <bbn-scroll ref="scroll">
-          <div class="appui-note-bookmarks-flex-container">
-            <main>
-              <section v-for="block in blockSource" v-if="block.cover">
-                <bbn-context :context="true"
-                             :source="contextMenu(block)"
-                             tag="div">
-                  <div class="url">
-                    <span>
-                      {{block.text}}
-                    </span>
-                  </div>
-                  <div class="urlT">
-                    <span>
-                      {{block.text}}
-                    </span>
-                  </div>
-                  <img :src="block.cover"
-                       @click="openUrlSource(block)"/>
-                </bbn-context>
-              </section>
-            </main>
-          </div>
-        </bbn-scroll>
+      <div class="bbn-w-100 bbn-padded">
+        <appui-note-bookmarks-search></appui-note-bookmarks-search>
+      </div>
+      <div>
+        <appui-note-bookmarks-block :source="blockSource" ></appui-note-bookmarks-block>
       </div>
     </bbn-pane>
   </bbn-splitter>

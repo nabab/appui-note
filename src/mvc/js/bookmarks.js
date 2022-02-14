@@ -11,7 +11,8 @@
           id_screenshot: a.id_screenshot || null,
           screenshot_path: a.screenshot_path || "",
           text: a.text,
-          url:a.url
+          url: a.url,
+          clicked: a.clicked || 0
         })
       }
       else if (a.items) {
@@ -42,7 +43,7 @@
           image: "",
           screenshot_path: "",
           id_screenshot: "",
-          count: 0,
+          clicked: 0,
         },
         currentSource: [],
         drag: true,
@@ -85,7 +86,6 @@
         );
       },
       openUrl() {
-        bbn.fn.log(this.currentSource);
         if (this.currentData.id) {
           window.open(this.root + "actions/bookmarks/go/" + this.currentData.id, this.currentData.id);
         }
@@ -105,7 +105,7 @@
               d => {
                 bbn.fn.log("d", d);
                 if (d.success) {
-                  this.currentData.count = d.count;
+                  this.currentData.clicked++;
                 }
               }
             );
@@ -116,20 +116,29 @@
         bbn.fn.post(this.root + "actions/bookmarks/data", d => {
           this.currentSource = d.data;
         });
-        bbn.fn.log("currentSource : ", this.$emit.dragOver);
       },
-      newform() {
-        bbn.fn.log(this.currentData, "c t data")
-        this.resetform();
-        this.getPopup({
+      openEditor(bookmark) {
+         this.getPopup({
                 component: "appui-note-bookmarks-form",
                 componentOptions: {
-                  source: this.currentData
+                  source: bookmark
                 },
-                width: 500,
-                height: 500,
-               	title: "New link"
+               	title: bookmark.id ? bbn._("Edit Form") : bbn._("New Form")
               });
+      },
+      newform() {
+        this.openEditor({});
+      },
+      contextMenu(bookmark) {
+        return [
+          {
+            text: bbn._("Edit"),
+            icon: "nf nf-fa-edit",
+            action: () => {
+              this.openEditor(bookmark)
+            }
+          }
+        ];
       },
       resetform() {
         this.currentData = {
@@ -178,12 +187,8 @@
                     }
                   })
                 }
-                bbn.fn.log("d.data.images :", this.currentData.images);
               }
               return false;
-            },
-            e => {
-              bbn.fn.log(e);
             }
           );
         }
@@ -193,7 +198,6 @@
         bbn.fn.log("node :", this.currentNode.data);
         if (this.currentNode.data.id) {
           this.$nextTick(() => {
-            bbn.fn.log("ça marche", this.currentNode, this.currentNode.data.count);
             bbn.fn.post(
               this.root + "actions/bookmarks/count",
               {
@@ -202,11 +206,10 @@
               d => {
                 bbn.fn.log("d", d);
                 if (d.success) {
-                  this.currentData.count = d.count;
+                  this.currentData.clicked++;
                 }
               }
             );
-            bbn.fn.log("count + 1", this.currentData.count);
           });
         }
       },
@@ -239,7 +242,7 @@
             if (d.success) {
               bbn.fn.log(d);
               this.currentData.id = d.id_bit;
-              this.currentData.count = 0;
+              this.currentData.clicked++;
               appui.success();
               this.getData();
               this.screenshot();
@@ -298,26 +301,6 @@
           });
         return;
       },
-      contextMenu(bookmark) {
-        bbn.fn.log("book : ", bookmark);
-        return [
-          {
-            text: bbn._("Edit"),
-            icon: "nf nf-fa-edit",
-            action: () => {
-              this.getPopup({
-                component: "appui-note-bookmarks-form",
-                componentOptions: {
-                  source: bookmark
-                },
-                width: 500,
-                height: 500,
-               	title: "Edit Form"
-              });
-            }
-          }
-        ];
-      },
     },
     mounted() {
       let sc = this.getRef("scroll");
@@ -334,7 +317,6 @@
       },
       currentNode(v) {
         if (v) {
-          bbn.fn.log("v", v);
           this.currentData = {
             url: v.data.url || "",
             title: v.data.text || "",
@@ -343,7 +325,7 @@
             cover: v.data.cover || null,
             id_screenshot: v.data.id_screenshot || "",
             screenshot_path: v.data.screenshot_path || "",
-            count: v.data.count || 0
+            clicked: v.data.clicked || 0
           };
         }
         else {
