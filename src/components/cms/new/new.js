@@ -8,10 +8,6 @@
         type: String,
         default: bbn._("Note")
       },
-      prefix: {
-        type: String,
-        default: 'post/'
-      },
       types: {
         required: true,
         type: Array
@@ -21,9 +17,10 @@
       return {
         formData: {
           title: '',
-          type: this.types[0].value,
+          type: '',
           url: '',
-          lang: bbn.env.lang
+          lang: bbn.env.lang,
+          prefix: ''
         },
         root: appui.plugins['appui-note'] + '/'
       };
@@ -31,9 +28,13 @@
     computed:{
       date(){
         return dayjs(dayjs().toISOString()).unix();
-      }
+      },
     },
     methods: {
+      updatePrefix() {
+        bbn.fn.log("UPDATING PREFIX", this.formData.type)
+        this.prefix = this.formData.type ? bbn.fn.getField(this.types, 'prefix', {value: this.formData.type}) : '';
+      },
       afterSubmit(d) {
         if (d.success && d.data) {
           this.closest('bbn-floater').opener.getRef('table').reload();
@@ -42,6 +43,9 @@
       }
     },
     watch: {
+      "formData.type"() {
+        this.updatePrefix();
+      },
       publish(val){
         if ( !val ){
           this.source.start = null;
