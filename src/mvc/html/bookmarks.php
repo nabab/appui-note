@@ -4,24 +4,26 @@
   <bbn-splitter orientation="horizontal"
                 :resizable="true">
 
-    <bbn-pane :size="300">
-      <div class="bbn-w-100 bbn-padded">
+    <bbn-pane :size="300" class="bbn-flex-height">
+      <div class="bbn-padded">
         <bbn-button class="bbn-w-80 bbn-spadded"
                     icon="nf nf-fa-plus"
                     @click="newform"
                     text="<?= _('Create a new link') ?>"></bbn-button>
       </div>
-      <bbn-tree :source="currentSource"
-                ref="tree"
-                @select="selectTree"
-                v-if="currentSource.length"
-                :draggable="true"
-                @dragEnd="isDragEnd"
-                ></bbn-tree>
-      <label class="bbn-w-100" v-else><?=_("No Bookmarks yet")?></label>
+      <div class="bbn-flex-fill">
+        <bbn-tree :source="currentSource"
+                  ref="tree"
+                  @select="selectTree"
+                  v-if="currentSource.length"
+                  :draggable="true"
+                  @dragEnd="isDragEnd"
+                  ></bbn-tree>
+        <label class="bbn-w-100" v-else><?=_("No Bookmarks yet")?></label>
+      </div>
     </bbn-pane>
 
-    <bbn-pane :scrollable="true" class="bbn-flex-height">
+    <bbn-pane>
       <!--<div>
         <div class="bbn-w-100 bbn-padded" v-if="currentData.id === null">
           <bbn-button class="bbn-padded " text="<?= _('Add Link') ?>" @click="add"></bbn-button>
@@ -33,12 +35,7 @@
                       @click="deletePreference"></bbn-button>
         </div>
       </div>-->
-      <div class="bbn-w-100 bbn-padded">
-        <appui-note-bookmarks-search></appui-note-bookmarks-search>
-      </div>
-      <div>
-        <appui-note-bookmarks-block :source="blockSource" ></appui-note-bookmarks-block>
-      </div>
+      <appui-note-bookmarks-block :source="blockSource" ></appui-note-bookmarks-block>
     </bbn-pane>
   </bbn-splitter>
 </div>

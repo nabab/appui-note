@@ -1,33 +1,31 @@
 <!-- HTML Document -->
 
-<div class="appui-note-bookmarks-flex-container"
-     :source="source">
-  <main>
-    <section v-for="block in source" >
-      <bbn-context :context="true"
-                   :source="contextMenu(block)"
-                   tag="div"
-                   class="bbn-overlay">
-        <div class="url bbn-xspadded">
-          <span>
-            {{block.text}}
-          </span>
-        </div>
-        <div class="urlT bbn-xspadded">
-          <span>
-            {{block.text}}
-          </span>
-        </div>
-        <img v-if="block.cover"
-             :src="block.cover"
-             @click="openUrlSource(block)"
-             :text="_('Open the link')"/>
-        <div v-else
-             class="default-image"
-             @click="openUrlSource(block)"
-              :text="_('Open the link')"
-             />
-      </bbn-context>
-    </section>
-  </main>
+<div class="bbn-overlay bbn-flex-height appui-note-bookmarks-block">
+  <div class="bbn-padded bbn-b">
+    <bbn-input placeholder="Search a link"
+               class="bbn-w-50"
+               v-model="search"></bbn-input>
+    <span>
+      {{source.length}}
+    </span>
+    <label><?=_("links")?></label>
+  </div>
+
+  <div class="bbn-flex-fill" >
+    <bbn-scroll ref="scroll"
+                @scroll="scrolling"
+                @resize="resize"
+                @ready="update"
+                @reachBottom="addItems">
+      <appui-note-bookmarks-item v-for="block in currentItems"
+                                 :source="block"
+                                 :key="block.id"
+                                 :scroll-size="scrollSize"
+                                 :container-size="containerSize"
+                                 :scroll-top="scrolltop"
+                                 :width="currentWidth"
+                                 :ref="'item-'+ block.id"
+                                 />
+    </bbn-scroll>
+  </div>
 </div>
