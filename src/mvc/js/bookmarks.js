@@ -93,7 +93,6 @@
         }
       },
       openUrlSource(source) {
-        bbn.fn.log("source", source);
         if (source.url) {
           window.open(source.url, source.text);
           bbn.fn.post(
@@ -102,7 +101,6 @@
                 id: source.id,
               },
               d => {
-                bbn.fn.log("d", d);
                 if (d.success) {
                   this.currentData.clicked++;
                 }
@@ -155,10 +153,8 @@
             source: nodeSrc.data.id,
             dest: nodeDest.data.id
           }, d => {
-            bbn.fn.log(nodeSrc, nodeDest, "nodes");
           });
         }
-        bbn.fn.log(event);
       },
       checkUrl() {
         if (!this.currentData.id && bbn.fn.isURL(this.currentData.url)) {
@@ -188,7 +184,6 @@
       },
       selectTree(node) {
         this.currentNode = node;
-        bbn.fn.log("node :", this.currentNode.data);
         if (this.currentNode.data.id) {
           this.$nextTick(() => {
             bbn.fn.post(
@@ -197,7 +192,6 @@
                 id: this.currentNode.data.id,
               },
               d => {
-                bbn.fn.log("d", d);
                 if (d.success) {
                   this.currentData.clicked++;
                 }
@@ -233,7 +227,6 @@
             cover: this.currentData.cover,
           },  d => {
             if (d.success) {
-              bbn.fn.log(d);
               this.currentData.id = d.id_bit;
               this.currentData.clicked++;
               appui.success();

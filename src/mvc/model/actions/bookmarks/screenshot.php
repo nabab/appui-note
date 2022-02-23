@@ -40,10 +40,8 @@ if ($model->data['id'] && ($bit = $model->inc->pref->getBit($model->data['id']))
         if ($id_media = $media->insert($filename, [], $bit['text'] ?: "")) {
           $bit['path'] = $media->getPath($id_media);
           $bit['id_screenshot'] = $id_media;
-          $model->inc->pref->updateBit($bit['id'], $bit, []);
+          $model->inc->pref->updateBit($bit['id'], $bit, true);
           $browser->close();
-          $res['img'] = new bbn\File\Image($bit['path']);
-          $res['img']->display();
           $res['success'] = true;
           $res['data'] = $bit;
         }
@@ -53,6 +51,5 @@ if ($model->data['id'] && ($bit = $model->inc->pref->getBit($model->data['id']))
   catch (\Exception $e) {
     $res['error'] = $e->getMessage();
   }
-  //X::ddump($res['img']->toString(), $bit);
 }
 return $res;

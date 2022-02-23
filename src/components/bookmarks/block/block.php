@@ -1,14 +1,15 @@
 <!-- HTML Document -->
 
 <div class="bbn-overlay bbn-flex-height appui-note-bookmarks-block">
-  <div class="bbn-padded bbn-b">
+  <div class="bbn-padded bbn-b bbn-grid-fields">
     <bbn-input placeholder="Search a link"
-               class="bbn-w-50"
                v-model="search"></bbn-input>
-    <span>
-      {{source.length}}
-    </span>
-    <label><?=_("links")?></label>
+    <div class="bbn-m">
+      <span>
+        {{currentData.length}}
+      </span>
+      <label><?=_("links")?></label>
+    </div>
   </div>
 
   <div class="bbn-flex-fill" >
@@ -17,7 +18,8 @@
                 @resize="resize"
                 @ready="update"
                 @reachBottom="addItems">
-      <appui-note-bookmarks-item v-for="block in currentItems"
+      <appui-note-bookmarks-item v-for="(block, i) in currentData"
+                                 v-if="i < numberShown"
                                  :source="block"
                                  :key="block.id"
                                  :scroll-size="scrollSize"

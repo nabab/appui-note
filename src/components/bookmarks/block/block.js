@@ -13,23 +13,11 @@
     data() {
       return {
         root: appui.plugins['appui-note'] + '/',
-        currentData: {
-          url: "",
-          title: "", //input
-          image: "",
-          description: "", //textarea
-          id: null,
-          images: [],
-          image: "",
-          screenshot_path: "",
-          id_screenshot: "",
-          count: 0,
-        },
         links: 0,
         search: "",
         checkTimeout: 0,
         currentSource: [],
-        currentItems: this.source.length ? this.source.slice(0, this.source.length >= 10 ? 10 : this.source.length) : [],
+        numberShown: this.source.length >= 10 ? 10 : this.source.length,
         currentWidth: 0,
         scrolltop: 0,
         offset: 0,
@@ -39,31 +27,34 @@
         start: 0,
         end: 0,
         isInit: false,
+        isSorted: false,
+        currentData: bbn.fn.order(this.source, 'clicked', 'DESC')
       }
     },
     computed: {
       numLinks() {
         return this.source.length;
-      }
+      },
     },
     methods: {
+      updateData() {
+        this.currentData = bbn.fn.order(this.search ? bbn.fn.filter(this.source,'text', this.search, 'contains') : this.source , 'clicked', 'DESC');
+      },
       addItems() {
-        bbn.fn.log("trest");
         if ( this.source.length){
-          this.start = this.currentItems.length;
+          this.start = this.numberShown;
           this.end = this.start + this.itemsPerPage;
           if ( this.end > this.source.length ){
             this.end = this.source.length;
           }
           for ( let i = this.start; i < this.end; i++ ){
-            this.currentItems.push(this.source[i]);
+            this.numberShown++;
           }
         }
       },
       setItemsPerPage() {
         if (this.source.length) {
-          let firstItem = this.getRef("item-" + this.currentItems[0].id);
-          bbn.fn.log("fitem:", Object.keys(firstItem), firstItem.$el,)
+          let firstItem = this.getRef("item-" + this.currentData[0].id);
           if (!firstItem || !firstItem.$el) {
             return;
           }
@@ -80,7 +71,6 @@
         this.keepCool(
           () => {
             let scroll =  this.getRef('scroll');
-            bbn.fn.log(scroll, "c'était scroll");
             this.currentWidth = scroll.containerWidth;
             this.scrollSize = scroll.contentHeight;
             this.containerSize = scroll.containerHeight;
@@ -153,23 +143,18 @@
             },
             d => {
               if (d.success) {
-                this.currentData.count = d.count;
+                this.source.clicked = d.clicked;
               }
             }
           );
         }
       },
-      checkSearch() {
-        // method to find a link
-      },
     },
     watch: {
       search() {
-        clearTimeout(this.checkTimeout);
-        this.checkTimeout = setTimeout(() => {
-          this.checkSearch();
-        }, 350);
-      }
+        this.numberShown = this.itemsPerPage;
+        this.updateData();
+      },
     }
   }
 })();

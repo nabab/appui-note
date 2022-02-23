@@ -55,6 +55,7 @@
         if (this.currentSource.length) {
           res = fn(this.currentSource);
         }
+        bbn.fn.log(this.currentData, "data");
         return res;
       },
       formAction() {
@@ -83,6 +84,9 @@
       }
     },
     methods: {
+      showScreenshot() {
+        this.visible = true;
+      },
       checkUrl() {
         if (!this.currentData.id && bbn.fn.isURL(this.currentData.url)) {
           bbn.fn.post(

@@ -47,7 +47,8 @@
           image: "",
           screenshot_path: "",
           id_screenshot: "",
-          count: 0,
+          clicked: 0,
+          cover: ""
         },
         links: 0,
         search: "",
@@ -62,7 +63,7 @@
       }
     },
     mounted() {
-			this.updatePosition();
+      this.updatePosition();
     },
     computed: {
       isVisible() {
@@ -97,10 +98,20 @@
             this.root + "actions/bookmarks/count",
             {
               id: source.id,
+              searchCover: !source.cover
             },
             d => {
               if (d.success) {
-                this.currentData.count = d.count;
+                this.source.clicked++;
+                if (d.data) {
+                  if (this.source.cover === undefined) {
+                    this.$set(this.source, 'cover', d.data.path);
+                  }
+                  else {
+                    this.source.cover = d.data.path;
+                  }
+                }
+                this.closest('appui-note-bookmarks-block').updateData();
               }
             }
           );
@@ -116,6 +127,9 @@
             }
           });
         return;
+      },
+      showScreenshot() {
+        this.visible = true;
       },
       contextMenu(bookmark) {
         return [
