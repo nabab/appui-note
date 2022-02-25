@@ -12,6 +12,12 @@
              :sortable="true"
              :filterable="true"
              button-mode="menu"
-  					 :toolbar="$options.components['toolbar']">
+             :search="true"
+             :search-fields="['versions.title', 'bbn_url.url', 'bbn_notes.id', 'versions.excerpt']"
+  					 :toolbar="[{
+                       icon: 'nf nf-fa-plus',
+                       text: _('Insert Articles'),
+                       action: insertNote
+                       }]">
   </bbn-table>
 </div>

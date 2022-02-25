@@ -35,10 +35,13 @@
     methods: {
       makeURL(st) {
         if (st) {
-          return bbn.fn.sanitize(this.prefix + st, '-').toLowerCase();
+          return bbn.fn.sanitize(st, '-').toLowerCase();
         }
 
         return '';
+      },
+      updateURL() {
+        this.source.url = this.prefix + this.makeURL(this.source.title)
       }
     },
     watch: {

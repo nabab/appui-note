@@ -83,6 +83,7 @@
             showable: false,
             sortable: false,
             width: 30,
+            maxWidth: 30,
             cls: "bbn-c"
           }, {
             field: "id",
@@ -90,20 +91,30 @@
             minWidth: 130,
             title: bbn._("ID")
           }, {
+            filterable: false,
+            minWidth: 350,
+            width: 500,
+            title: bbn._("Article"),
+            component: this.$options.components.titleCell
+          }, {
             field: "version",
             width: 40,
+            hidden: true,
             title: "V",
             ftitle: bbn._("Version"),
             cls: "bbn-c"
           }, {
             field: "title",
-            minWidth: 250,
-            title: bbn._("Title")
+            minWidth: 350,
+            width: 500,
+            title: bbn._("Title"),
+            hidden: true,
           }, {
             field: "url",
             title: bbn._("URL"),
             minWidth: 200,
-            render: this.renderUrl
+            render: this.renderUrl,
+            hidden: true
           }, {
             field: "id_type",
             title: bbn._("Type"),
@@ -117,28 +128,35 @@
           }, {
             field: "start",
             type: "date",
-            width: 120,
-            title: bbn._("Publication")
+            width: 100,
+            title: bbn._("Start of publication"),
+            hidden: true
           }, {
             field: "end",
-            type: "datetime",
-            width: 120,
-            title: bbn._("End")
+            type: "date",
+            width: 100,
+            title: bbn._("End of publication"),
+            hidden: true
           }, {
             field: "creation",
             type: "date",
-            width: 120,
-            title: bbn._("Creation")
+            width: 100,
+            hidden: true,
+            title: bbn._("Since")
           }, {
             field: "id_user",
-            title: bbn._("Creator"),
-            width: 200,
-            source: this.users,
+            ftitle: bbn._("Creator"),
+            title: '<<i class="nf nf-fa-user"></i>',
+            cls: 'bbn-c',
+            hidden: true,
+            width: 50,
+            component: this.$options.components.initial
           }, {
             field: "num_medias",
             width: 50,
-            title: "<i class='nf nf-fa-file_photo_o'> </i>",
+            title: "<i class='nf nf-fa-file_photo_o bbn-lg'> </i>",
             ftitle: bbn._("Number of medias associated with this entry"),
+            hidden: true,
             type: "number",
             cls: "bbn-c"
           }
@@ -227,7 +245,7 @@
       },
       // methods each row of the table
       editNote(row){
-        bbn.fn.link(this.editorUrl + row.id_note);
+        bbn.fn.link(this.editorUrl + (row.id || row.id_note));
       },
       publishNote(row){
         let src =  bbn.fn.extend(row, {
@@ -346,6 +364,165 @@
             this.closest('bbn-popup').close()
           }
         },
+      },
+      pubTitle: {
+        template: `
+<span>
+  <span class="bbn-nowrap">
+    <i class="nf nf-mdi-filter_variant bbn-p"
+       @click="showFilter = !showFilter"
+       ref="icon"/> 
+    <i class='nf nf-fa-calendar bbn-lg'
+       title="source.title"/>
+  </span>
+  <bbn-floater v-if="showFilter"
+               :auto-hide="true"
+               @beforeClose="showFilter = false"
+               @close="showFilter = false"
+               :element="$refs.icon">
+    <div class="bbn-padded">
+    	Hello!
+    </div>
+  </bbn-floater>
+</span>`,
+        props: ['source'],
+        data(){
+          return {
+            showFilter: false
+          }
+        }
+      },
+      titleCell: {
+        template: `
+<span class="bbn-nowrap">
+  <a :href="source.url"
+     target="_blank"
+     :title="_('Open the article in a new window')">
+	  <i class="nf nf-mdi-open_in_new"/>
+  </a> 
+  <span class="bbn-lg"
+        v-text="source.title"
+        :title="source.title"/><br>
+
+  <div class="bbn-w-100 bbn-top-xsspace">
+    <div class="bbn-w-50">
+      <span :title="publicationState"
+            class="bbn-right-sspace">
+        <i class="bbn-green bbn-xl nf nf-fa-check_circle_o"
+           v-if="isPublished"/>
+        <i class="bbn-red bbn-xl nf nf-fa-times_circle_o"
+           v-else/>
+      </span>
+      <span class="bbn-alt-text bbn-right-sspace"
+            v-text="'v' + source.version"
+            :title="_('Version') + ' ' + source.version"/> 
+      <span :title="_('Number of medias directly linked to this article')"
+            class="bbn-right-sspace">
+      	<i class="nf nf-fa-file_photo_o bbn-xl"/> 
+        <span v-text="source.num_medias"/>
+      </span> 
+      <span :title="_('Number of variants of this article')"
+            class="bbn-right-sspace">
+      	<i class="nf nf-fa-clone bbn-xl"/> 
+        <span v-text="source.num_variants"/>
+      </span> 
+      <span :title="_('Number of translations for this article')"
+            class="bbn-right-sspace">
+      	<i class="nf nf-mdi-translate bbn-xl"/> 
+        <span v-text="source.num_translations"/>
+      </span> 
+    </div>
+    <div class="bbn-w-50 bbn-r bbn-line-vmiddle">
+      <span v-text="_('Since') + ' ' + fdate(source.creation)"/> 
+      <bbn-initial :user-name="name"
+                   :width="24"
+                   class="bbn-xs"/>
+    </div>
+  </div>
+</span>`,
+        props: ['source'],
+        data(){
+          return {
+            name: bbn.fn.getField(appui.app.users, 'text', {value: this.source.id_user})
+          }
+        },
+        computed: {
+          publicationState(){
+            let st = '';
+            if (this.isPublished) {
+              st += bbn._("Currently published");
+            }
+            else {
+              st += bbn._("Currently not published");
+            }
+
+            st += ".\n";
+            if (this.source.start) {
+              st += bbn._("Publication date") + ': ' + bbn.fn.fdate(this.source.start);
+            }
+            else {
+              st += bbn._("Never published");
+            }
+
+            if (this.source.end) {
+              st += "\n" + bbn._("End of publication") + ': ' + bbn.fn.fdate(this.source.end);
+            }
+
+            return st;
+          },
+          isPublished() {
+            if (this.source.start) {
+              let now = bbn.fn.dateSQL();
+              if (!this.source.end || (this.source.end > now)) {
+                return true;
+              }
+            }
+
+            return false;
+          },
+        },
+        methods: {
+          fdate: bbn.fn.fdate
+        }
+      },
+      publication: {
+        template: `
+<span class="bbn-nowrap">
+  <i class="bbn-green bbn-xl nf nf-fa-check_circle_o"
+  	 v-if="isPublished"/>
+  <i class="bbn-red bbn-xl nf nf-fa-times_circle_o"
+  	 v-else/>
+</span>`,
+        props: ['source'],
+        data(){
+          return {
+            name: bbn.fn.getField(appui.app.users, 'text', {value: this.source.id_user})
+          }
+        },
+        computed: {
+          isPublished() {
+            if (this.source.start) {
+              let now = bbn.fn.dateSQL();
+              if (!this.source.end || (this.source.end > now)) {
+                return true;
+              }
+            }
+
+            return false;
+          },
+        },
+        methods: {
+          fdate: bbn.fn.fdate
+        }
+      },
+      initial: {
+        template: `<bbn-initial :user-name="name"/>`,
+        props: ['source'],
+        data(){
+          return {
+            name: bbn.fn.getField(appui.app.users, 'text', {value: this.source.id_user})
+          }
+        }
       },
       toolbar: {
         template: `
