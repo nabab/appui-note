@@ -41,20 +41,20 @@
         return '';
       },
       updateURL() {
-        this.source.url = this.prefix + this.makeURL(this.source.title)
+        this.source.url = this.prefix + this.url;
       }
     },
     watch: {
       url(v) {
+        bbn.fn.log(v);
         if (!this.urlEdited) {
-          this.source.url = v;
+          this.source.url = this.prefix + v;
         }
       },
       "source.url"(v) {
-        if (!v || (this.makeURL(v) === this.url)) {
+        if (!v || (this.makeURL(v.substr(this.prefix.length)) === this.url)) {
           if (this.urlEdited) {
             this.urlEdited = false;
-            this.source.url = this.url;
           }
         }
         else if (!this.urlEdited) {

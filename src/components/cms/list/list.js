@@ -280,8 +280,38 @@
         });
       },
       deleteNote(row){
-        appui.confirm(bbn._('Are you sure to delete this note?'), () => {
-          bbn.fn.post(this.deleteUrl, {id: row.id_note }, (d) =>{
+        let msg = bbn._('Are you sure to delete this note?');
+        if (row.num_variants) {
+          if (row.num_variants === 1) {
+            msg += '<br>' + bbn._('There is also one variant');
+          }
+          else {
+            msg += '<br>' + bbn._('There are also %d variants', row.num_variants);
+          }
+
+          if (row.num_translations) {
+            if (row.num_translations === 1) {
+              msg += '<br>' + bbn._('and also one translation');
+            }
+            else {
+              msg += '<br>' + bbn._('and also %d translations', row.num_translations);
+            }
+          }
+
+          msg += '<br>' + bbn._("which will be deleted too");
+        }
+        else if (row.num_translations) {
+          if (row.num_translations === 1) {
+            msg += '<br>' + bbn._('There is also one translation');
+          }
+          else {
+            msg += '<br>' + bbn._('There are also %d translations', row.num_translations);
+          }
+
+          msg += '<br>' + bbn._("which will be deleted too");
+        }
+        appui.confirm(msg, () => {
+          bbn.fn.post(this.deleteUrl, {id: row.id || row.id_note }, (d) =>{
             if ( d.success ){
               this.getRef('table').reload();
               appui.success(bbn._('Successfully deleted'));
