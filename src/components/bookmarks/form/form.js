@@ -68,7 +68,6 @@
           this.currentData.description = this.source.description;
           this.currentData.cover = this.source.cover;
         }
-        bbn.fn.log("path", this.root + "actions/bookmarks/" + (this.currentData.id ? "modify" : "add"));
         /*if (this.currentData.id) {
           this.modify();
           return;

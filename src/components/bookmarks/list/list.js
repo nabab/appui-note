@@ -53,12 +53,26 @@
       blockSource() {
         let res = [];
         if (this.source.data.length) {
-					res = fn(this.source.data);
+          res = fn(this.source.data);
         }
         return res;
       },
     },
     methods: {
+      importing() {
+        this.getPopup({
+          component: "appui-note-bookmarks-uploader",
+          componentOptions: null,
+          title: false,
+        });
+      },
+      deleteAllBookmarks() {
+        bbn.fn.post(
+        this.root + "actions/bookmarks/delete_all_preferences",
+        {
+          allId: this.source.allId
+        });
+      },
       showScreenshot() {
         this.visible = true;
       },
@@ -96,27 +110,27 @@
         if (source.url) {
           window.open(source.url, source.text);
           bbn.fn.post(
-              this.root + "actions/bookmarks/count",
-              {
-                id: source.id,
-              },
-              d => {
-                if (d.success) {
-                  this.currentData.clicked++;
-                }
+            this.root + "actions/bookmarks/count",
+            {
+              id: source.id,
+            },
+            d => {
+              if (d.success) {
+                this.currentData.clicked++;
               }
-            );
+            }
+          );
         }
       },
       openEditor(bookmark) {
         bbn.fn.log(bookmark, "bookmark");
-         this.getPopup({
-                component: "appui-note-bookmarks-form",
-                componentOptions: {
-                  source: bookmark
-                },
-               	title: bookmark.id ? bbn._("Edit Form") : bbn._("New Form")
-              });
+        this.getPopup({
+          component: "appui-note-bookmarks-form",
+          componentOptions: {
+            source: bookmark
+          },
+          title: bookmark.id ? bbn._("Edit Form") : bbn._("New Form")
+        });
       },
       newform() {
         this.openEditor({});
@@ -241,26 +255,26 @@
       },
       modify() {
         /*bbn.fn.post(
-              "action/delete",
-              {
-                id: this.currentData.id
-              },  d => {
-                if (d.success) {
-                  bbn.fn.log("d = ", d);
-                }
-              });
-            bbn.fn.post(
-              "action/add",
-              {
-                url: this.currentData.url,
-                description: this.currentData.description,
-                title: this.currentData.title,
-                id_parent:  this.idParent,
-              },  d => {
-                if (d.success) {
-                  this.$refs.tree.reload();
-                }
-              });*/
+                  "action/delete",
+                  {
+                    id: this.currentData.id
+                  },  d => {
+                    if (d.success) {
+                      bbn.fn.log("d = ", d);
+                    }
+                  });
+                bbn.fn.post(
+                  "action/add",
+                  {
+                    url: this.currentData.url,
+                    description: this.currentData.description,
+                    title: this.currentData.title,
+                    id_parent:  this.idParent,
+                  },  d => {
+                    if (d.success) {
+                      this.$refs.tree.reload();
+                    }
+                  });*/
         bbn.fn.post(this.root + "actions/bookmarks/modify", {
           url: this.currentData.url,
           description: this.currentData.description,

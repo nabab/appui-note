@@ -12,6 +12,16 @@
                       @click="newform"
                       text="<?= _('Create a new link') ?>"></bbn-button>
         </div>
+        <div><bbn-button class="bbn-w-80 bbn-spadded"
+                      icon="nf nf-mdi-clipboard_plus"
+                      @click="importing"
+                      text="<?= _('Import bookmarks') ?>"></bbn-button>
+        </div>
+        <div><bbn-button class="bbn-w-80 bbn-spadded"
+                      icon="nf nf-mdi-clipboard_plus"
+                      @click="deleteAllBookmarks"
+                      text="<?= _('Delete all bookmarks') ?>"></bbn-button>
+        </div>
         <div class="bbn-flex-fill">
           <div class="bbn-overlay">
             <bbn-tree :source="source.data"
