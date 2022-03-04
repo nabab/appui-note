@@ -55,6 +55,7 @@
         if (this.currentSource.length) {
           res = fn(this.currentSource);
         }
+        bbn.fn.log(this.currentData, "data");
         return res;
       },
       formAction() {
@@ -67,7 +68,6 @@
           this.currentData.description = this.source.description;
           this.currentData.cover = this.source.cover;
         }
-        bbn.fn.log("path", this.root + "actions/bookmarks/" + (this.currentData.id ? "modify" : "add"));
         /*if (this.currentData.id) {
           this.modify();
           return;
@@ -83,6 +83,9 @@
       }
     },
     methods: {
+      showScreenshot() {
+        this.visible = true;
+      },
       checkUrl() {
         if (!this.currentData.id && bbn.fn.isURL(this.currentData.url)) {
           bbn.fn.post(
