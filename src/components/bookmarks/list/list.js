@@ -123,7 +123,6 @@
         }
       },
       openEditor(bookmark) {
-        bbn.fn.log(bookmark, "bookmark");
         this.getPopup({
           component: "appui-note-bookmarks-form",
           componentOptions: {
@@ -260,7 +259,6 @@
                     id: this.currentData.id
                   },  d => {
                     if (d.success) {
-                      bbn.fn.log("d = ", d);
                     }
                   });
                 bbn.fn.post(

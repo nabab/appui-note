@@ -63,7 +63,7 @@
           let itemsPerColumn = 0;
           for (; itemsPerRow * section < this.currentWidth ; itemsPerRow++);
           for (; itemsPerColumn * section < this.containerSize ; itemsPerColumn++);
-          this.itemsPerPage =itemsPerColumn * itemsPerRow * 2;
+          this.itemsPerPage = itemsPerColumn * itemsPerRow * 2;
         }
         return;
       },

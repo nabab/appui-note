@@ -55,7 +55,6 @@
         if (this.currentSource.length) {
           res = fn(this.currentSource);
         }
-        bbn.fn.log(this.currentData, "data");
         return res;
       },
       formAction() {
@@ -106,7 +105,6 @@
                     }
                   })
                 }
-                bbn.fn.log("d.data.images :", this.currentData.images);
               }
               return false;
             }
@@ -144,7 +142,6 @@
         }
       },
       openUrlSource(source) {
-        bbn.fn.log("source", source);
         if (source.url) {
           window.open(source.url, source.text);
           bbn.fn.post(
@@ -153,7 +150,6 @@
               id: source.id,
             },
             d => {
-              bbn.fn.log("d", d);
               if (d.success) {
                 this.currentData.count = d.count;
               }
@@ -203,7 +199,6 @@
         this.showGallery = false;
       },
       modify() {
-        bbn.fn.log("test", this.currentData);
         bbn.fn.post(this.root + "actions/bookmarks/modify", {
           url: this.currentData.url,
           description: this.currentData.description,
