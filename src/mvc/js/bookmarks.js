@@ -13,7 +13,7 @@
           text: a.text,
           url: a.url,
           clicked: a.clicked || 0
-        })
+        });
       }
       else if (a.items) {
         fn(a.items, res);
@@ -39,15 +39,13 @@
           image: "",
           description: "", //textarea
           id: null,
-          images: [],
-          image: "",
           screenshot_path: "",
           id_screenshot: "",
           clicked: 0,
         },
         currentSource: [],
         drag: true,
-      }
+      };
     },
     computed: {
       blockSource() {
@@ -76,8 +74,8 @@
                   return {
                     content: a,
                     type: 'img'
-                  }
-                })
+                  };
+                });
               }
             }
             return false;
@@ -126,7 +124,7 @@
             text: bbn._("Edit"),
             icon: "nf nf-fa-edit",
             action: () => {
-              this.openEditor(bookmark)
+              this.openEditor(bookmark);
             }
           }
         ];
@@ -173,8 +171,8 @@
                     return {
                       content: a,
                       type: 'img'
-                    }
-                  })
+                    };
+                  });
                 }
               }
               return false;
@@ -245,7 +243,6 @@
                 id: this.currentData.id
               },  d => {
                 if (d.success) {
-                  bbn.fn.log("d = ", d);
                 }
               });
             bbn.fn.post(
@@ -315,5 +312,5 @@
         }
       },
     }
-  }
+  };
 })();

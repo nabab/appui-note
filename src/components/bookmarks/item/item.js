@@ -70,7 +70,6 @@
         if (this.containerSize && this.scrollSize && (this.position !== null)) {
           this.viewMin = this.scrollTop - this.containerSize;
           this.viewMax = this.scrollTop + (2 * this.containerSize);
-          //bbn.fn.log("bbn : ", this.viewMax, this.viewMin, tmp, this.visibleSize);
           if ((this.viewMin < this.position) && (this.position < this.viewMax)) {
             return true;
           }

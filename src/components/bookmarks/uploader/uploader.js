@@ -7,6 +7,9 @@
     },
     data() {
       return {
+        title: {
+          title: "Upload your bookmarks",
+        },
         root: appui.plugins['appui-note'] + '/',
         bookmarksName: "bookmarks.html",
       };
