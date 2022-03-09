@@ -47,6 +47,26 @@
         },
         currentSource: [],
         drag: true,
+        toolbarSource: [
+          {
+            icon: "nf nf-fa-plus",
+            text: "Create a new link",
+            notext: true,
+            action: this.newform,
+          },
+          {
+            icon: "nf nf-mdi-clipboard_plus",
+            text: "Import bookmarks",
+            notext: true,
+            action: this.importing,
+          },
+          {
+            icon: "nf nf-fa-trash",
+            text: "Delete all bookmarks",
+            notext: true,
+            action: this.deleteAllBookmarks,
+          }
+        ]
       }
     },
     computed: {
@@ -67,10 +87,12 @@
         });
       },
       deleteAllBookmarks() {
-        bbn.fn.post(
-        this.root + "actions/bookmarks/delete_all_preferences",
-        {
-          allId: this.source.allId
+        this.confirm(bbn._("Are you sure you want to delete all your bookmarks ?"), () => {
+          bbn.fn.post(
+          this.root + "actions/bookmarks/delete_all_preferences",
+          {
+            allId: this.source.allId
+          });
         });
       },
       showScreenshot() {
@@ -198,21 +220,7 @@
       },
       selectTree(node) {
         this.currentNode = node;
-        if (this.currentNode.data.id) {
-          this.$nextTick(() => {
-            bbn.fn.post(
-              this.root + "actions/bookmarks/count",
-              {
-                id: this.currentNode.data.id,
-              },
-              d => {
-                if (d.success) {
-                  this.currentData.clicked++;
-                }
-              }
-            );
-          });
-        }
+        this.openEditor(node.data);
       },
       screenshot() {
         bbn.fn.post(

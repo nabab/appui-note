@@ -8,15 +8,8 @@
 
 use bbn\X;
 
-$res['success'] = false;
-
-//$model->inc->pref->deleteBits($model->data['allId']);
-
-foreach($model->data['allId'] as $bit) {
-  if $bit['value'] {
-	  $model->inc->pref->deleteBit($bit['value']);
-  }
-  $res['success'] = true;
-}
+$id_list = $model->inc->options->fromCode("list", "bookmarks", "note", "appui");
+$my_list = $model->inc->pref->getByOption($id_list);
+$res['success'] = $model->inc->pref->deleteBits($my_list['id']);
 
 return $res;

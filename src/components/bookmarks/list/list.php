@@ -6,22 +6,8 @@
 
     <bbn-pane :size="300">
       <div class="bbn-flex-height bbn-overlay">
-        <div class="bbn-padded">
-          <bbn-button class="bbn-w-80 bbn-spadded"
-                      icon="nf nf-fa-plus"
-                      @click="newform"
-                      text="<?= _('Create a new link') ?>"></bbn-button>
-        </div>
-        <div><bbn-button class="bbn-w-80 bbn-spadded"
-                      icon="nf nf-mdi-clipboard_plus"
-                      @click="importing"
-                      text="<?= _('Import bookmarks') ?>"></bbn-button>
-        </div>
-        <div><bbn-button class="bbn-w-80 bbn-spadded"
-                      icon="nf nf-mdi-clipboard_plus"
-                      @click="deleteAllBookmarks"
-                      text="<?= _('Delete all bookmarks') ?>"></bbn-button>
-        </div>
+        <bbn-toolbar :source="toolbarSource">
+          </bbn-toolbar>
         <div class="bbn-flex-fill">
           <div class="bbn-overlay">
             <bbn-tree :source="source.data"
