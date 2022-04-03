@@ -1,81 +1,207 @@
-{
-  "text": "Notes",
-  "code": "notes",
-  "id_parent": "appui",
-  "icon": "nf nf-fa-pencil_square_o",
-  "cfg": {
-    "show_code": 1,
-    "allow_children": 1,
-    "write": true
-  },
-  "items": [{
-    "text": "Media types",
-    "code": "media",
-    "cfg": {
-        "show_code": 1
-    },
-    "items": [{
-      "text": "File",
-      "code": "file"
-    }, {
-      "text": "HTML code",
-      "code": "html"
-    }, {
-      "text": "JavaScript code",
-      "code": "js"
-    }, {
-      "text": "Link (hypertext)",
-      "code": "link"
-    }, {
-      "text": "PHP code",
-      "code": "php"
-    }, {
-      "text": "Rich text",
-      "code": "rich"
-    }, {
-      "text": "Simple text",
-      "code": "text"
-    }]
-  }, {
-    "text": "Notes types",
-    "code": "types",
+[
+  {
     "cfg": {
       "show_code": 1,
-      "write": true
+      "show_icon": 1,
+      "allow_children": 1,
+      "i18n": "en"
     },
-    "items": [{
-      "text": "Events",
-      "code": "events"
-    }, {
-      "text": "Helps",
-      "code": "helps"
-    }, {
-      "text": "Internal messages",
-      "code": "imessages"
-    }, {
-      "text": "Mailings",
-      "code": "mailings"
-    }, {
-      "text": "Masks",
-      "code": "masks"
-    }, {
-      "text": "News",
-      "code": "news"
-    }, {
-      "text": "Personal",
-      "code": "personal"
-    }, {
-      "text": "Pages",
-      "code": "pages"
-    }, {
-      "text": "Post",
-      "code": "post"
-    }, {
-      "text": "Post-it",
-      "code": "post-it"
-    }, {
-      "text": "Tasks",
-      "code": "tasks"
-    }]
-  }]
-}
+    "id_parent": ["appui"],
+    "text": "Masks",
+    "code": "masks",
+    "id_alias": ["plugin", "list", "templates", "option", "appui"],
+    "icon": "nf nf-mdi-guy_fawkes_mask",
+    "plugin": true,
+    "tekname": "ltypes"
+  },
+  {
+    "cfg": {
+      "show_code": 1,
+      "allow_children": 1,
+      "write": true,
+      "show_icon": 1,
+      "i18n": "en"
+    },
+    "id_parent": ["appui"],
+    "text": "Notes",
+    "code": "note",
+    "id_alias": ["plugin", "list", "templates", "option", "appui"],
+    "icon": "nf nf-fa-pencil_square_o",
+    "plugin": true,
+    "items": [
+      {
+        "cfg": {
+          "show_code": 1
+        },
+        "text": "Media types",
+        "code": "media",
+        "items": [
+          {
+            "text": "File",
+            "code": "file"
+          },
+          {
+            "text": "HTML code",
+            "code": "html"
+          },
+          {
+            "text": "JavaScript code",
+            "code": "js"
+          },
+          {
+            "text": "Link (hypertext)",
+            "code": "link"
+          },
+          {
+            "text": "PHP code",
+            "code": "php"
+          },
+          {
+            "text": "Rich text",
+            "code": "rich"
+          },
+          {
+            "text": "Simple text",
+            "code": "text"
+          }
+        ]
+      },
+      {
+        "cfg": {
+          "show_code": 1,
+          "write": true
+        },
+        "text": "Notes types",
+        "code": "types",
+        "items": [
+          {
+            "text": "Events",
+            "code": "events"
+          },
+          {
+            "text": "Helps",
+            "code": "helps"
+          },
+          {
+            "text": "Internal messages",
+            "code": "imessages"
+          },
+          {
+            "text": "Mailings",
+            "code": "mailings"
+          },
+          {
+            "text": "Masks",
+            "code": "masks"
+          },
+          {
+            "text": "News",
+            "code": "news"
+          },
+          {
+            "text": "Pages",
+            "code": "pages"
+          },
+          {
+            "text": "Personal",
+            "code": "personal"
+          },
+          {
+            "text": "Post",
+            "code": "post"
+          },
+          {
+            "text": "Products",
+            "code": "products"
+          },
+          {
+            "text": "Tasks",
+            "code": "tasks"
+          }
+        ]
+      },
+      {
+        "cfg": {
+          "show_code": 1,
+          "allow_children": 1
+        },
+        "text": "Bookmarks",
+        "code": "bookmarks",
+        "icon": "nf nf-oct-bookmark",
+        "items": [
+          {
+            "cfg": {
+              "show_code": 1,
+              "allow_children": 1
+            },
+            "text": "Bookmarks list",
+            "code": "list"
+          }
+        ]
+      },
+      {
+        "cfg": {
+          "show_code": 1,
+          "allow_children": 1
+        },
+        "text": "Plugins",
+        "code": "plugins",
+        "items": [
+          {
+            "text": "Dashboard",
+            "code": "appui-dashboard",
+            "id_alias": ["dashboard", "appui"],
+            "items": [
+              {
+                "text": "Widgets",
+                "code": "widgets",
+                "id_alias": ["widgets", "dashboard", "appui"],
+                "icon": "nf nf-mdi-widgets",
+                "items": [
+                  {
+                    "text": "News",
+                    "code": "news",
+                    "limit":5,
+                    "closable":false,
+                    "component": "appui-note-widget-news",
+                    "buttonsRight": [
+                      {
+                        "icon": "nf nf-fa-sticky_note",
+                        "text": "Create a news",
+                        "action": "toggleForm"
+                      },
+                      {
+                        "icon": "nf nf-fa-list_ul",
+                        "text": "News",
+                        "action": "openNews"
+                      }
+                    ]
+                  },
+                  {
+                    "text": "My notes",
+                    "code": "personal",
+                    "limit": 5,
+                    "closable": false,
+                    "component": "appui-note-widget-personal",
+                    "buttonsRight": [
+                      {
+                        "icon": "nf nf-fa-sticky_note",
+                        "text": "New note",
+                        "action": "toggleForm"
+                      },
+                      {
+                        "icon": "nf nf-fa-list_ul",
+                        "text": "Post-it",
+                        "action": "openPostit"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

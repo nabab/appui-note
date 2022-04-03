@@ -134,7 +134,7 @@
       },
       /**
        * adds the events listener when edit = true
-       * @param {boolean} edit 
+       * @param {boolean} edit
        */
       _setEvents(){
         bbn.fn.log("setEvent")

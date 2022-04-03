@@ -2,13 +2,28 @@
 (() => {
   return {
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
+    props: {
+      settings: {
+        type: Boolean,
+        default: false
+      },
+      config: {
+        type: Object,
+        default(){
+          return {};
+        }
+      }
+    },
     data(){
       return {
         galleryListUrl: appui.plugins['appui-note'] + '/media/data/groups/list',
-        gallerySourceUrl: appui.plugins['appui-note'] + '/media/data/groups/medias'
-      }
+        gallerySourceUrl: appui.plugins['appui-note'] + '/media/data/groups/medias',
+      };
     },
     computed: {
+      isConfig() {
+        return this.settings;
+      },
       align(){
         let style = {};
         switch (this.source.align) {
@@ -26,6 +41,9 @@
       }
     },
     methods: {
+      isInConfig(fieldName) {
+        return this.config[fieldName] !== undefined;
+      },
       openMediasGroups(){
         this.getPopup().load({
           title: bbn._('Medias Groups Management'),

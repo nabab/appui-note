@@ -2,8 +2,9 @@
 <div :class="componentClass">
   <div v-if="mode === 'edit'"
        class="bbn-grid-fields bbn-padded">
-    <label><?=_('Gallery')?></label>
-    <div class="bbn-vmiddle">
+    <label v-if="!isConfig"><?=_('Gallery')?></label>
+    <div v-if="!isConfig"
+         class="bbn-vmiddle">
       <bbn-dropdown :source="galleryListUrl"
                     source-value="id"
                     v-model="source.source"
@@ -15,71 +16,93 @@
                   class="bbn-left-sspace"
                   title="<?=_('Open galleries management')?>"/>
     </div>
-    <label><?=_('Width')?></label>
-    <bbn-range v-model="source.style.width"
-              :min="10"
-              :max="2000" 
-              :step="10"
-              :show-reset="false"
-              :show-numeric="true"
-              :show-units="true"/>
-    <label><?=_('Height')?></label>
-    <bbn-range v-model="source.style.height"
-              :min="10"
-              :max="2000" 
-              :step="10"
-              :show-reset="false"
-              :show-numeric="true"
-              :show-units="true"/>
-    <label><?=_('Image width')?></label>
-    <bbn-range v-model="source.imageWidth"
-              :min="10"
-              :max="2000" 
-              :step="10"
-              :show-reset="false"
-              :show-numeric="true"/>
-    <label><?=_('Alignment')?></label>
-    <div>
+
+    <label v-if="isConfig || !isInConfig('style')"><?=_('Width')?></label>
+    <bbn-range v-if="isConfig || !isInConfig('style')"
+               v-model="source.style.width"
+               :min="10"
+               :max="2000"
+               :step="10"
+               :show-reset="false"
+               :show-numeric="true"
+               :show-units="true"/>
+    <label v-if="isConfig || !isInConfig('style')"><?=_('Height')?></label>
+    <bbn-range v-if="isConfig || !isInConfig('style')"
+               v-model="source.style.height"
+               :min="10"
+               :max="2000"
+               :step="10"
+               :show-reset="false"
+               :show-numeric="true"
+               :show-units="true"/>
+
+    <label v-if="isConfig || !isInConfig('imageWidth')"><?=_('Image width')?></label>
+    <bbn-range v-if="isConfig || !isInConfig('imageWidth')"
+               v-model="source.imageWidth"
+               :min="10"
+               :max="2000"
+               :step="10"
+               :show-reset="false"
+               :show-numeric="true"/>
+
+    <label v-if="isConfig || !isInConfig('align')"><?=_('Alignment')?></label>
+    <div v-if="isConfig || !isInConfig('align')">
       <div class="bbn-block">
         <bbn-radiobuttons :notext="true"
                           v-model="source.align"
                           :source="[{
-                            text: _('Align left'),
-                            value: 'left',
-                            icon: 'nf nf-fa-align_left'
-                          }, {
-                            text: _('Align center'),
-                            value: 'center',
-                            icon: 'nf nf-fa-align_center'
-                          }, {
-                            text: _('Align right'),
-                            value: 'right',
-                            icon: 'nf nf-fa-align_right'
-                          }]"/>
+                                   text: _('Align left'),
+                                   value: 'left',
+                                   icon: 'nf nf-fa-align_left'
+                                   }, {
+                                   text: _('Align center'),
+                                   value: 'center',
+                                   icon: 'nf nf-fa-align_center'
+                                   }, {
+                                   text: _('Align right'),
+                                   value: 'right',
+                                   icon: 'nf nf-fa-align_right'
+                                   }, {
+                                   text: _('No value'),
+                                   value: null,
+                                   icon: 'nf nf-fa-times'
+                                   }]"/>
       </div>
     </div>
-    <label><?=_('Scrollable')?></label>
-    <bbn-checkbox v-model="source.scrollable"
+
+    <label v-if="isConfig || !isInConfig('scrollable')"><?=_('Scrollable')?></label>
+    <bbn-checkbox v-if="isConfig || !isInConfig('acrollable')"
+                  v-model="source.scrollable"
                   :value="1"
                   :novalue="0"/>
-    <label><?=_('Pageable')?></label>
-    <bbn-checkbox v-model="source.pageable"
+
+    <label v-if="isConfig || !isInConfig('pageable')"><?=_('Pageable')?></label>
+    <bbn-checkbox v-if="isConfig || !isInConfig('pageable')"
+                  v-model="source.pageable"
                   :value="1"
                   :novalue="0"/>
-    <label><?=_('Footer')?></label>
-    <bbn-checkbox v-model="source.pager"
+
+    <label v-if="isConfig || !isInConfig('footer')"><?=_('Footer')?></label>
+    <bbn-checkbox v-if="isConfig || !isInConfig('footer')"
+                  v-model="source.pager"
                   :value="1"
                   :novalue="0"/>
-    <label><?=_('Zoomable')?></label>
-    <bbn-checkbox v-model="source.zoomable"
+
+    <label v-if="isConfig || !isInConfig('zoomable')"><?=_('Zoomable')?></label>
+    <bbn-checkbox v-if="isConfig || !isInConfig('zoomable')"
+                  v-model="source.zoomable"
                   :value="1"
                   :novalue="0"/>
-    <label><?=_('Resizable')?></label>
-    <bbn-checkbox v-model="source.resizable"
+
+    <label v-if="isConfig || !isInConfig('resizable')"><?=_('Resizable')?></label>
+    <bbn-checkbox v-if="isConfig || !isInConfig('resizable')"
+                  v-model="source.resizable"
                   :value="1"
                   :novalue="0"/>
-    <label><?=_('Toolbar')?></label>
-    <bbn-checkbox v-model="source.toolbar"
+
+    <label v-if="isConfig || !isInConfig('toolbar')"><?=_('Toolbar')?></label>
+    <bbn-checkbox v-if="isConfig || !isInConfig('toolbar')"
+                  v-model="source.toolbar"
                   :value="1"
                   :novalue="0"/>
   </div>
@@ -89,18 +112,18 @@
     <div class="bbn-block"
          :style="source.style">
       <bbn-gallery :source="gallerySourceUrl"
-                  :data="{
-                    idGroup: source.source
-                  }"
-                  ref="gallery"
-                  :scrollable="!!source.scrollable"
-                  :pageable="!!source.pageable"
-                  :zoomable="!!source.zoomable"
-                  :resizable="!!source.resizable"
-                  :toolbar="!!source.toolbar"
-                  path-name="path"
-                  :itemWidth="source.imageWidth"
-                  :pager="!!source.pager"/>
+                   :data="{
+                          idGroup: source.source
+                          }"
+                   ref="gallery"
+                   :scrollable="!!source.scrollable"
+                   :pageable="!!source.pageable"
+                   :zoomable="!!source.zoomable"
+                   :resizable="!!source.resizable"
+                   :toolbar="!!source.toolbar"
+                   path-name="path"
+                   :itemWidth="source.imageWidth"
+                   :pager="!!source.pager"/>
     </div>
   </div>
 </div>
