@@ -76,7 +76,11 @@ class import
         $res =& $this->folder_close();
       }
     }
-    return $this->res;
+    return [
+      'id' => $this->current_folder,
+      'text' => $this->res[0]['text'],
+      'num_children' => count($this->res[0]['items'])
+    ];
   }
   function folder_new()
   {
@@ -138,7 +142,7 @@ class import
       $this->current_folder = $this->folder_depth[count($this->folder_depth) - 1];
       $this->folder =& $this->folders[count($this->folders) - 1];
     }
-    return $res;
+    return $this->current_folder;
   }
 }
 
@@ -294,9 +298,9 @@ var_dump($dom->childNodes[2]->childNodes[1]->childNodes[2]->childNodes[2]);*/
 }*/
 //$html = file_get_contents();
 
-$importer = new import($ctrl->inc->pref, BBN_DATA_PATH."bookmarks.html");
+$importer = new import($ctrl->inc->pref, $ctrl->files['file']['tmp_name']);
 
-X::hdump($importer->import_netscape());
+X::ddump($importer->import_netscape());
 
 //X::hdump($res);
 //var_dump($dom);

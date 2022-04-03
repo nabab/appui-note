@@ -1,11 +1,31 @@
-<div class="bbn-overlay">
-  <bbn-list style="height:70%" :source="currentFolder" @click="selectList" @select="selectList">
+<!-- HTML Document -->
 
-  </bbn-list>
+<div class="bbn-overlay appui-note-bookmarks-list">
+  <bbn-splitter orientation="horizontal"
+                :resizable="true">
 
-   <appui-note-bookmarks-show v-if="showLink"
-                               :source="showLink"
-                               :style="topContent ? 'top:0' : 'bottom:0'"
-   >
-  </appui-note-bookmarks-show>
+    <bbn-pane :size="300">
+      <div class="bbn-flex-height bbn-overlay">
+        <bbn-toolbar :source="toolbarSource">
+          </bbn-toolbar>
+        <div class="bbn-flex-fill">
+          <div class="bbn-overlay">
+            <bbn-tree :source="source.data"
+                      ref="tree"
+                      @select="selectTree"
+                      v-if="source.data.length"
+                      :draggable="true"
+                      @dragEnd="isDragEnd"
+                      ></bbn-tree>
+            <label class="bbn-w-100" v-else><?=_("No Bookmarks yet")?></label>
+          </div>
+        </div>
+      </div>
+    </bbn-pane>
+
+    <bbn-pane>
+
+      <appui-note-bookmarks-block :source="blockSource" ></appui-note-bookmarks-block>
+    </bbn-pane>
+  </bbn-splitter>
 </div>

@@ -26,7 +26,7 @@ if ($tree['items'] || $tree['id']) {
     'id_parent' => $model->data['id_parent'] ?: null,
     'cover' => $model->data['cover'] ?? null,
     'description' => $model->data['description'] ?? null,
-    'count' => 0
+    'clicked' => 0
   ]);
   if ($res['id_bit']) {
     $res['success'] = true;

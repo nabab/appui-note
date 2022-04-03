@@ -38,23 +38,26 @@
                   @click="showGallery = true"
                   text="change cover picture"></bbn-button>
     </div>
+    <div>
+      <bbn-floater v-if="showGallery"
+                   :title="_('Pick a cover picture')"
+                   :closable="true"
+                   :width="500"
+                   :height="500"
+                   :scrollable="false"
+                   @close="showGallery = false">
+        <bbn-gallery :source="currentData.images"
+                     class="bbn-overlay"
+                     @clickItem="selectImage"
+                     :selecting-mode="true"
+                     :zoomable="false"
+                     :scrollable="true"
+                     ></bbn-gallery>
+      </bbn-floater>
+    </div>
 
-    <bbn-floater v-if="showGallery"
-                 :title="_('Pick a cover picture')"
-                 :closable="true"
-                 :width="500"
-                 :height="500"
-                 :scrollable="false"
-                 @close="showGallery = false">
-      <bbn-gallery :source="currentData.images"
-                   class="bbn-overlay"
-                   @clickItem="selectImage"
-                   :selecting-mode="true"
-                   :zoomable="false"
-                   :scrollable="true"
-                   ></bbn-gallery>
-    </bbn-floater>
-    <bbn-button	v-if="currentData.id_screenshot"
+		<div>
+      <bbn-button	v-if="currentData.id_screenshot"
                 @click="showScreenshot"
                 class="bbn-padded"
                 text="show screenshot"
@@ -68,5 +71,6 @@
                  @close="visible = false">
       <img :src="root + 'media/image/' + currentData.id_screenshot">
     </bbn-floater>
+    </div>
   </div>
 </bbn-form>
