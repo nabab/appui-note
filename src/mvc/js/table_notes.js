@@ -5,6 +5,7 @@
       return {
         action: '',
         root: appui.plugins['appui-note'] + '/',
+        users: bbn.fn.order(appui.app.users, {text: 'asc'}),
         span: '<span title="' + bbn._('Click on the first column of this row to view full content') + '">...</span>'
       }
     },

@@ -32,13 +32,13 @@
 
   <bbns-column field="creator"
                title="<?=_("Creator")?>"
-               :render="creator"
+               :source="users"
                :width="160"
   ></bbns-column>
 
   <bbns-column field="id_user"
                title="<?=_("Last version user")?>"
-               :render="last_mod_user"
+               :source="users"
                :width="160"
   ></bbns-column>
 
