@@ -353,12 +353,6 @@
                 "key": "MUL",
                 "maxlength": 16
             },
-            "latest": {
-                "type": "tinyint",
-                "null": 0,
-                "signed": false,
-                "default": 0
-            },
             "version": {
                 "type": "int",
                 "null": 0,
@@ -502,6 +496,12 @@
                 "null": 0,
                 "key": "PRI",
                 "maxlength": 10
+            },
+            "latest": {
+                "type": "tinyint",
+                "null": 0,
+                "signed": false,
+                "default": 0
             },
             "title": {
                 "type": "varchar",
