@@ -109,7 +109,6 @@
         },
         "fields": {
             "id": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -117,7 +116,6 @@
                 "maxlength": 16
             },
             "id_parent": {
-                "position": 2,
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
@@ -126,7 +124,6 @@
                 "maxlength": 16
             },
             "id_alias": {
-                "position": 3,
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
@@ -135,7 +132,6 @@
                 "maxlength": 16
             },
             "id_type": {
-                "position": 4,
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
@@ -249,7 +245,6 @@
         },
         "fields": {
             "id_note": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -257,7 +252,6 @@
                 "maxlength": 16
             },
             "id_type": {
-                "position": 2,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -265,7 +259,6 @@
                 "maxlength": 16
             },
             "name": {
-                "position": 3,
                 "type": "varchar",
                 "null": 1,
                 "key": null,
@@ -274,7 +267,6 @@
                 "maxlength": 100
             },
             "def": {
-                "position": 4,
                 "type": "tinyint",
                 "null": 0,
                 "key": null,
@@ -350,65 +342,52 @@
         },
         "fields": {
             "id": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
                 "maxlength": 16
             },
             "id_note": {
-                "position": 2,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
                 "maxlength": 16
             },
-            "version": {
-                "position": 3,
-                "type": "int",
-                "null": 0,
-                "key": null,
-                "maxlength": 10
-            },
-            "id_media": {
-                "position": 4,
-                "type": "binary",
-                "null": 0,
-                "key": "MUL",
-                "signed": true,
-                "maxlength": 16
-            },
-            "id_user": {
-                "position": 5,
-                "type": "binary",
-                "null": 0,
-                "key": "MUL",
-                "signed": true,
-                "maxlength": 16
-            },
-            "creation": {
-                "position": 6,
-                "type": "datetime",
-                "null": 0,
-                "key": null,
-                "signed": true
-            },
-            "default_media": {
-                "position": 7,
+            "latest": {
                 "type": "tinyint",
                 "null": 0,
-                "key": null,
                 "signed": false,
                 "default": 0
             },
+            "version": {
+                "type": "int",
+                "null": 0,
+                "maxlength": 10
+            },
+            "id_media": {
+                "type": "binary",
+                "null": 0,
+                "key": "MUL",
+                "maxlength": 16
+            },
+            "id_user": {
+                "type": "binary",
+                "null": 0,
+                "key": "MUL",
+                "maxlength": 16
+            },
+            "creation": {
+                "type": "datetime",
+                "null": 0
+            },
+            "default_media": {
+                "type": "tinyint",
+                "null": 0,
+                "default": 0
+            },
             "comment": {
-                "position": 8,
                 "type": "text",
                 "null": 1,
-                "key": null,
-                "signed": true,
                 "default": "NULL"
             }
         }
@@ -448,15 +427,12 @@
         },
         "fields": {
             "id_note": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
                 "maxlength": 16
             },
             "id_url": {
-                "position": 2,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -626,101 +602,79 @@
         },
         "fields": {
             "id": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
                 "maxlength": 16
             },
             "id_user": {
-                "position": 2,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
                 "maxlength": 16
             },
             "type": {
-                "position": 3,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
                 "maxlength": 16
             },
             "mimetype": {
-                "position": 4,
                 "type": "varchar",
                 "null": 1,
                 "key": null,
-                "signed": true,
                 "default": "NULL",
                 "maxlength": 30
             },
             "name": {
-                "position": 5,
                 "type": "varchar",
                 "null": 0,
                 "key": null,
-                "signed": true,
                 "default": "",
                 "maxlength": 1000
             },
             "title": {
-                "position": 6,
                 "type": "varchar",
                 "null": 1,
                 "key": null,
-                "signed": true,
                 "default": "NULL",
                 "maxlength": 1000
             },
             "description": {
-                "position": 7,
                 "type": "text",
                 "null": 1,
                 "key": null,
-                "signed": true,
                 "default": "NULL"
             },
             "content": {
-                "position": 8,
                 "type": "mediumtext",
                 "null": 1,
                 "key": null,
-                "signed": true,
                 "default": "NULL"
             },
             "private": {
-                "position": 9,
                 "type": "tinyint",
                 "null": 0,
                 "key": null,
                 "default": 0,
+                "signed": false,
                 "maxlength": 1
             },
             "created": {
-                "position": 10,
                 "type": "datetime",
                 "null": 0,
-                "key": null,
-                "signed": true
+                "key": null
             },
             "edited": {
-                "position": 11,
                 "type": "datetime",
                 "null": 1,
                 "key": null,
-                "signed": true,
                 "default": "NULL"
             },
             "editor": {
-                "position": 12,
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
-                "signed": true,
                 "default": "NULL",
                 "maxlength": 16
             }
@@ -775,7 +729,6 @@
         },
         "fields": {
             "id": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -783,7 +736,6 @@
                 "maxlength": 16
             },
             "id_parent": {
-                "position": 2,
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
@@ -792,7 +744,6 @@
                 "maxlength": 16
             },
             "id_type": {
-                "position": 3,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -800,7 +751,6 @@
                 "maxlength": 16
             },
             "start": {
-                "position": 4,
                 "type": "datetime",
                 "null": 1,
                 "key": null,
@@ -808,7 +758,6 @@
                 "default": "NULL"
             },
             "end": {
-                "position": 5,
                 "type": "datetime",
                 "null": 1,
                 "key": null,
@@ -816,7 +765,6 @@
                 "default": "NULL"
             },
             "name": {
-                "position": 6,
                 "type": "varchar",
                 "null": 1,
                 "key": null,
@@ -825,7 +773,6 @@
                 "maxlength": 255
             },
             "recurring": {
-                "position": 7,
                 "type": "tinyint",
                 "null": 0,
                 "key": null,
@@ -833,7 +780,6 @@
                 "maxlength": 1
             },
             "cfg": {
-                "position": 8,
                 "type": "mediumtext",
                 "null": 1,
                 "key": null,
@@ -877,7 +823,6 @@
         },
         "fields": {
             "id_note": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -885,7 +830,6 @@
                 "maxlength": 16
             },
             "id_event": {
-                "position": 2,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -929,7 +873,6 @@
         },
         "fields": {
             "id_note": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -937,7 +880,6 @@
                 "maxlength": 16
             },
             "id_tag": {
-                "position": 2,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -984,7 +926,6 @@
         },
         "fields": {
             "id": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -992,7 +933,6 @@
                 "maxlength": 16
             },
             "tag": {
-                "position": 2,
                 "type": "varchar",
                 "null": 0,
                 "key": "MUL",
@@ -1000,7 +940,6 @@
                 "maxlength": 64
             },
             "lang": {
-                "position": 3,
                 "type": "varchar",
                 "null": 0,
                 "key": null,
@@ -1009,14 +948,12 @@
                 "maxlength": 2
             },
             "description": {
-                "position": 4,
                 "type": "text",
                 "null": 0,
                 "key": null,
                 "signed": true
             },
             "url": {
-                "position": 5,
                 "type": "varchar",
                 "null": 1,
                 "key": "UNI",
@@ -1063,7 +1000,6 @@
         },
         "fields": {
             "id_tag_orig": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -1071,7 +1007,6 @@
                 "maxlength": 16
             },
             "id_tag_dest": {
-                "position": 2,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -1079,7 +1014,6 @@
                 "maxlength": 16
             },
             "relationship": {
-                "position": 3,
                 "type": "enum",
                 "null": 0,
                 "key": null,
@@ -1142,7 +1076,6 @@
         },
         "fields": {
             "id_media": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -1150,7 +1083,6 @@
                 "maxlength": 16
             },
             "id_tag": {
-                "position": 2,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -1194,7 +1126,6 @@
         },
         "fields": {
             "id_media": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
@@ -1202,14 +1133,12 @@
                 "maxlength": 16
             },
             "id_url": {
-                "position": 2,
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
                 "maxlength": 16
             },
             "shared": {
-                "position": 3,
                 "type": "tinyint",
                 "null": 0,
                 "key": null,
@@ -1256,7 +1185,6 @@
         },
         "fields": {
             "id": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -1266,7 +1194,6 @@
                 "maxlength": 16
             },
             "id_parent": {
-                "position": 2,
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
@@ -1277,7 +1204,6 @@
                 "maxlength": 16
             },
             "text": {
-                "position": 3,
                 "type": "varchar",
                 "null": 1,
                 "key": null,
@@ -1288,7 +1214,6 @@
                 "maxlength": 255
             },
             "cfg": {
-                "position": 4,
                 "type": "json",
                 "null": 1,
                 "key": null,
@@ -1338,7 +1263,6 @@
         },
         "fields": {
             "id_media": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -1348,7 +1272,6 @@
                 "maxlength": 16
             },
             "id_group": {
-                "position": 2,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
@@ -1408,14 +1331,12 @@
         },
         "fields": {
             "id": {
-                "position": 1,
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
                 "maxlength": 16
             },
             "url": {
-                "position": 2,
                 "type": "varchar",
                 "null": 0,
                 "key": "MUL",
@@ -1423,7 +1344,6 @@
                 "maxlength": 1000
             },
             "num_calls": {
-                "position": 3,
                 "type": "int",
                 "null": 0,
                 "key": null,
@@ -1432,13 +1352,11 @@
                 "default": 0
             },
             "type_url": {
-                "position": 4,
                 "type": "varchar",
                 "null": 0,
                 "maxlength": 16
             },
             "redirect": {
-                "position": 5,
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
