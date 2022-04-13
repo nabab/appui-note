@@ -155,7 +155,7 @@
                   <i :class="['bbn-xl', 'bbn-p', tbtn.icon]"
                      @click="tbtn.action ? tbtn.action(source, _self) : false"
                   ></i>
-                </div>  
+                </div>
               </template>
               <div v-if="forum.pinnable"
                    class="bbn-spadded bbn-vmiddle appui-note-forum-hfixed"
@@ -195,11 +195,11 @@
 
               <div class="bbn-spadded bbn-vmiddle appui-note-forum-hfixed"
                    :title="'<?=_('Created')?>: ' + forum.fdate(source.creation) + ((source.creation !== source.last_edit) ? ('\n<?=_('Edited')?>: ' + forum.fdate(source.last_edit)) : '')"
-                   style="margin-left: 0.5rem; width"
-              >
-                <i :class="['nf nf-fa-calendar', {'bbn-orange': source.creation !== source.last_edit}]"></i>
-                <div class="bbn-c bbn-s" style="width: 10em">
-                  <div v-text="(source.creation !== source.last_edit) ? forum.sdate(source.last_edit) : forum.sdate(source.creation)"></div>
+                   style="margin-left: 0.5rem;">
+                <div class="bbn-middle" style="width: 10em">
+                  <i :class="['nf nf-fa-calendar', {'bbn-orange': source.creation !== source.last_edit}]"/>
+                  <div class="bbn-s bbn-left-sspace"
+                       v-text="(source.creation !== source.last_edit) ? forum.sdate(source.last_edit) : forum.sdate(source.creation)"/>
                 </div>
               </div>
             </div>
@@ -319,7 +319,7 @@
                         <i :class="['bbn-xl', 'bbn-p', rbtn.icon]"
                            @click="rbtn.action ? rbtn.action(source, topic.source, _self) : false"
                         ></i>
-                      </div>  
+                      </div>
                     </template>
                     <div v-if="!source.locked && !source.num_replies"
                          class="bbn-spadded bbn-vmiddle appui-note-forum-hfixed"
