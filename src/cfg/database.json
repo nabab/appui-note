@@ -312,8 +312,7 @@
             },
             "id_note": {
                 "columns": [
-                    "id_note",
-                    "version"
+                    "id_note"
                 ],
                 "ref_db": null,
                 "ref_table": null,
@@ -335,9 +334,6 @@
             ],
             "id_note": [
                 "id_note"
-            ],
-            "version": [
-                "id_note"
             ]
         },
         "fields": {
@@ -352,11 +348,6 @@
                 "null": 0,
                 "key": "MUL",
                 "maxlength": 16
-            },
-            "version": {
-                "type": "int",
-                "null": 0,
-                "maxlength": 10
             },
             "id_media": {
                 "type": "binary",

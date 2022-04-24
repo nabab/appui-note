@@ -66,7 +66,8 @@ if ($model->hasData(['id', 'url', 'title'], true)) {
       'start' => $model->data['start'] ?? null,
       'end' => $model->data['end'] ?? null,
       'tags' => $model->data['tags'],
-      'id_type' => $model->data['id_type']
+      'id_type' => $model->data['id_type'],
+      'id_media' => $model->data['id_media']
     ])
   ];
 }

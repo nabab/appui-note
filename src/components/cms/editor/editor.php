@@ -32,8 +32,74 @@
     <appui-note-cms-elementor :source="source.items"
                               @hook:mounted="ready = true"
                               ref="editor">
-      <bbn-scroll>
+      <bbn-scroll v-if="$slots.default">
         <slot/>
+      </bbn-scroll>
+      <bbn-scroll v-else>
+        <div class="bbn-w-100">
+          <div class="bbn-grid-fields bbn-padded">
+            <div class="bbn-grid-full bbn-vpadded bbn-xl">
+              <?= _("Page's properties") ?>
+            </div>
+            <label><?= _("Title") ?></label>
+            <bbn-input class="bbn-wider"
+                       v-model="source.title"
+                       :required="true"/>
+
+            <label><?= _("Description") ?></label>
+            <bbn-textarea class="bbn-wider"
+                          v-model="source.excerpt"
+                          style="height: 10em"
+                          :required="true"/>
+
+            <label v-if="source.id"
+                   style="margin-top:10px">
+              <?=_('Front Image')?>
+            </label>
+            <div v-if="source.id">
+              <div class="appui-note-cms-block-image-preview bbn-flex">
+                <div>
+                  <bbn-button icon="nf nf-fae-galery"
+                              :notext="false"
+                              @click="openGallery"
+                              title="<?=_('Select an image')?>"
+                              class="bbn-right-sspace"/>
+                </div>
+                <div>
+                  <img v-if="source.id_media"
+                       class="bbn-bordered bbn-radius"
+                       style="max-height: 12em; width: auto; max-width: 100%"
+                       :src="root + 'media/image/' + source.id_media + '?w=200'">
+                </div>
+              </div>
+            </div>
+
+            <label><?= _("Type") ?></label>
+            <bbn-dropdown class="bbn-wider"
+                          v-model="source.id_type"
+                          source-value="id"
+                          :source="source.types"
+                          :required="true"/>
+
+            <label><?= _("Public URL") ?></label>
+            <appui-note-cms-url :source="source"
+                                class="bbn-wider"
+                                prefix="post/"
+                                :readonly="true"/>
+
+            <label><?= _("Start of publication") ?></label>
+            <bbn-datetimepicker class="bbn-wider"
+                                v-model="source.start"/>
+
+            <label><?= _("End of publication") ?></label>
+            <bbn-datetimepicker class="bbn-wider"
+                                v-model="source.end"/>
+
+            <label><?= _("Tags") ?></label>
+            <bbn-values class="bbn-wider"
+                        v-model="source.tags"/>
+          </div>
+        </div>
       </bbn-scroll>
     </appui-note-cms-elementor>
   </div>
