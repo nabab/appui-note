@@ -5,7 +5,6 @@
                 "columns": [
                     "id"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_history_uids",
                 "ref_column": "bbn_uid",
                 "constraint": "bbn_options_ibfk_4",
@@ -203,18 +202,12 @@
                     "id_note",
                     "id_type"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "update": "CASCADE",
-                "delete": "CASCADE",
                 "unique": 1
             },
             "id_note": {
                 "columns": [
                     "id_note"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_notes",
                 "ref_column": "id",
                 "update": "CASCADE",
@@ -225,7 +218,6 @@
                 "columns": [
                     "id_type"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_options",
                 "ref_column": "id",
                 "update": "CASCADE",
@@ -281,18 +273,12 @@
                 "columns": [
                     "id"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "update": null,
-                "delete": null,
                 "unique": 1
             },
             "id_media": {
                 "columns": [
                     "id_media"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_medias",
                 "ref_column": "id",
                 "update": "CASCADE",
@@ -303,7 +289,6 @@
                 "columns": [
                     "id_user"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_users",
                 "ref_column": "id",
                 "update": "CASCADE",
@@ -314,12 +299,14 @@
                 "columns": [
                     "id_note"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "update": "CASCADE",
-                "delete": "RESTRICT",
                 "unique": 0
+            },
+            "id_note2": {
+                "columns": [
+                    "id_note",
+                    "id_media"
+                ],
+                "unique": 1
             }
         },
         "cols": {
@@ -432,18 +419,12 @@
                     "id_note",
                     "version"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "update": "CASCADE",
-                "delete": "CASCADE",
                 "unique": 1
             },
             "id_user": {
                 "columns": [
                     "id_user"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_users",
                 "ref_column": "id",
                 "update": "CASCADE",
@@ -454,7 +435,6 @@
                 "columns": [
                     "id_note"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_notes",
                 "ref_column": "id",
                 "update": "CASCADE",
@@ -536,18 +516,12 @@
                 "columns": [
                     "id"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "update": null,
-                "delete": null,
                 "unique": 1
             },
             "id_user": {
                 "columns": [
                     "id_user"
                 ],
-                "ref_db": "*",
                 "ref_table": "bbn_users",
                 "ref_column": "id",
                 "update": "CASCADE",
@@ -558,7 +532,6 @@
                 "columns": [
                     "type"
                 ],
-                "ref_db": "*",
                 "ref_table": "bbn_options",
                 "ref_column": "id",
                 "update": "CASCADE",
@@ -569,7 +542,6 @@
                 "columns": [
                     "editor"
                 ],
-                "ref_db": "*",
                 "ref_table": "bbn_users",
                 "ref_column": "id",
                 "update": "RESTRICT",
@@ -677,7 +649,6 @@
                 "columns": [
                     "id"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_history_uids",
                 "ref_column": "bbn_uid",
                 "update": "CASCADE",
@@ -688,7 +659,6 @@
                 "columns": [
                     "id_type"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_options",
                 "ref_column": "id",
                 "update": "CASCADE",
@@ -699,7 +669,6 @@
                 "columns": [
                     "id_parent"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_events",
                 "ref_column": "id",
                 "update": "CASCADE",
@@ -785,7 +754,6 @@
                 "columns": [
                     "id_note"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_notes",
                 "ref_column": "id",
                 "update": "CASCADE",
@@ -796,7 +764,6 @@
                 "columns": [
                     "id_event"
                 ],
-                "ref_db": null,
                 "ref_table": "bbn_events",
                 "ref_column": "id",
                 "update": "CASCADE",
@@ -1025,18 +992,12 @@
                     "id_media",
                     "id_tag"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "update": "CASCADE",
-                "delete": "CASCADE",
                 "unique": 1
             },
             "id_note": {
                 "columns": [
                     "id_media"
                 ],
-                "ref_db": "*",
                 "ref_table": "bbn_medias",
                 "ref_column": "id",
                 "update": "CASCADE",
@@ -1047,7 +1008,6 @@
                 "columns": [
                     "id_tag"
                 ],
-                "ref_db": "*",
                 "ref_table": "bbn_options",
                 "ref_column": "id",
                 "update": "CASCADE",
@@ -1145,19 +1105,12 @@
                 "columns": [
                     "id"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "constraint": null,
-                "update": null,
-                "delete": null,
                 "unique": 1
             },
             "id_parent": {
                 "columns": [
                     "id_parent"
                 ],
-                "ref_db": "*",
                 "ref_table": "bbn_medias_groups",
                 "ref_column": "id",
                 "constraint": "bbn_medias_groups_ibfk_1",
@@ -1279,7 +1232,6 @@
                 "columns": [
                     "id"
                 ],
-                "ref_db": "*",
                 "ref_table": "bbn_history_uids",
                 "ref_column": "bbn_uid",
                 "update": "CASCADE",
@@ -1290,18 +1242,12 @@
                 "columns": [
                     "url"
                 ],
-                "ref_db": null,
-                "ref_table": null,
-                "ref_column": null,
-                "update": null,
-                "delete": null,
                 "unique": 1
             },
             "redirect": {
                 "columns": [
                     "redirect"
                 ],
-                "ref_db": "*",
                 "ref_table": "bbn_url",
                 "ref_column": "id",
                 "update": "CASCADE",

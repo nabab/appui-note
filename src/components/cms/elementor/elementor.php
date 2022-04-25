@@ -7,7 +7,8 @@
     <bbn-pane :scrollable="true"
               size="50%"
               ref="leftPane">
-      <div class="bbn-vlpadded bbn-hlpadded bbn-w-100">
+      <div class="bbn-vlpadded bbn-hlpadded bbn-w-100"
+           @click="currentEdited = -1">
         <div v-for="(cfg, i) in source"
              class="bbn-w-100 bbn-vspadded">
           <appui-note-cms-block :source="cfg"
@@ -15,7 +16,7 @@
                                 :selectable="true"
                                 :overable="true"
                                 :selected="currentEdited === i"
-                                @click="changeEdited(i)"/>
+                                @click.stop="changeEdited(i)"/>
         </div>
       </div>
     </bbn-pane>

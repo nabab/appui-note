@@ -42,13 +42,11 @@
               <?= _("Page's properties") ?>
             </div>
             <label><?= _("Title") ?></label>
-            <bbn-input class="bbn-wider"
-                       v-model="source.title"
+            <bbn-input v-model="source.title"
                        :required="true"/>
 
             <label><?= _("Description") ?></label>
-            <bbn-textarea class="bbn-wider"
-                          v-model="source.excerpt"
+            <bbn-textarea v-model="source.excerpt"
                           style="height: 10em"
                           :required="true"/>
 
@@ -75,29 +73,24 @@
             </div>
 
             <label><?= _("Type") ?></label>
-            <bbn-dropdown class="bbn-wider"
-                          v-model="source.id_type"
+            <bbn-dropdown v-model="source.id_type"
                           source-value="id"
                           :source="source.types"
                           :required="true"/>
 
             <label><?= _("Public URL") ?></label>
             <appui-note-cms-url :source="source"
-                                class="bbn-wider"
                                 prefix="post/"
                                 :readonly="true"/>
 
             <label><?= _("Start of publication") ?></label>
-            <bbn-datetimepicker class="bbn-wider"
-                                v-model="source.start"/>
+            <bbn-datetimepicker v-model="source.start"/>
 
             <label><?= _("End of publication") ?></label>
-            <bbn-datetimepicker class="bbn-wider"
-                                v-model="source.end"/>
+            <bbn-datetimepicker v-model="source.end"/>
 
             <label><?= _("Tags") ?></label>
-            <bbn-values class="bbn-wider"
-                        v-model="source.tags"/>
+            <bbn-values v-model="source.tags"/>
           </div>
         </div>
       </bbn-scroll>
