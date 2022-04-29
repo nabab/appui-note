@@ -2,4 +2,4 @@
 
 /** @var $ctrl \bbn\Mvc\Controller */
 
-$ctrl->setIcon("nf nf-fa-home")->combo(_("CMS Dashboard"), true);
+$ctrl->setIcon("nf nf-fa-home")->combo(_("Articles dashboard"));

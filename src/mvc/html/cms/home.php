@@ -1,3 +1,3 @@
 <!-- HTML Document -->
 
-<bbn-dashboard :source="source.types_notes"></bbn-dashboard>
+<bbn-dashboard :source="types_notes"></bbn-dashboard>
