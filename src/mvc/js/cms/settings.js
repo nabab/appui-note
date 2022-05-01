@@ -4,6 +4,7 @@
   return {
     data() {
       return {
+        root: appui.plugins['appui-note'] + '/',
       	id_type: null,
         blocktype: null,
         currentSource: {}
@@ -30,11 +31,16 @@
         if (this.blocktype) {
           return bbn.fn.getField(this.blocks, 'cfg', {code: this.blocktype});
         }
-        
+
         return false;
       }
     },
     methods: {
+      selectDefault() {
+        this.$nextTick(() => {
+          this.getRef('list').select(0);
+        })
+      },
       blockCfg(block) {
         return bbn.fn.getRow(this.blocks, {code: block});
       }

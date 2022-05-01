@@ -6,7 +6,7 @@
 
 /** @var $model \bbn\Mvc\Model*/
 use bbn\Appui\Grid;
-if ($model->hasData('id') && $model->inc->options->exists($model->data['id'])) {
+if ($model->hasData('id') && ($option = $model->inc->options->option($model->data['id']))) {
   $grid = new Grid($model->db, $model->data, [
     'tables' => ['bbn_notes'],
     'fields' => [
@@ -31,10 +31,14 @@ if ($model->hasData('id') && $model->inc->options->exists($model->data['id'])) {
     'where' => [
       'id_type' => $model->data['id']
     ],
-    'group_by' => ['id_note'],
+    'group_by' => ['bbn_notes.id'],
     'order' => [
       'creation' => 'DESC'
     ]
   ]);
-  return $grid->getDatatable();
+  $data = $grid->getDatatable();
+  array_walk($data['data'], function (&$a) use (&$option){
+    $a['code'] = $option['code'];
+  });
+  return $data;
 }

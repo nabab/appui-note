@@ -1,3 +1,4 @@
 <!-- HTML Document -->
 
-<a :href="root + source.url" v-text="source.title"></a>
+<a :href="root + 'cms/cat/' + source.code + '/editor/' + source.id_note"
+   v-text="source.title"></a>

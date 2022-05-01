@@ -12,6 +12,7 @@ if ($ctrl->hasArguments()) {
   }
   else{
     $ctrl->setIcon('nf nf-fa-list')
+      ->setColor('#063B69', '#FFF')
       ->combo(_("Articles' List"), true);
     //$ctrl->combo(_("Publications"), $ctrl->getCachedModel('notes/wp_categories'));
   }

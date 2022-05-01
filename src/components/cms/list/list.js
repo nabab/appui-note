@@ -6,9 +6,16 @@
   return {
     mixins: [bbn.vue.basicComponent],
     props: {
+      source: {
+        type: Object,
+        required: true
+      },
       noteName: {
         type:String,
         default: bbn._("Note")
+      },
+      id_type: {
+        type: String
       },
       types: {
         type: Array,
@@ -110,6 +117,13 @@
             title: bbn._("Title"),
             hidden: true,
           }, {
+            field: "id_media",
+            title: bbn._("Cover image"),
+            render: this.renderFrontImg,
+            editable: false,
+            cls: "bbn-middle",
+            width: 100
+          }, {
             field: "url",
             title: bbn._("URL"),
             minWidth: 200,
@@ -120,6 +134,8 @@
             title: bbn._("Type"),
             width: 100,
             source: this.types,
+            hidden: true,
+            default: this.source.id_type
           }, {
             field: "excerpt",
             hidden: true,
@@ -185,6 +201,13 @@
 			}
     },
     methods: {
+      renderFrontImg(a) {
+        if (a.id_media) {
+          return '<img src="' + appui.plugins['appui-note'] + '/media/image/' + a.id_media + '?w=100">';
+        }
+
+        return '';
+      },
       isPublished(row) {
         if (row.start) {
           let now = bbn.fn.dateSQL();
@@ -236,6 +259,7 @@
           title: bbn._('New') + ' ' + this.noteName,
           component: this.insertComponent,
           componentOptions: {
+            id_type: this.source.id_type || '',
             source: {
               url: this.insertUrl,
             },

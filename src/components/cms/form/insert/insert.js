@@ -12,20 +12,19 @@
         required: true,
         type: Array
       },
-      prefix: {
-        type: String,
-        default: ''
+      id_type: {
+        type: String
       }
     },
     data(){
       return {
         formData: {
           title: '',
-          type: '',
+          type: this.id_type || '',
           url: '',
           lang: bbn.env.lang
         },
-        prefix: '',
+        prefix: this.id_type ? bbn.fn.getField(this.types, 'prefix', {value: this.id_type}) : '',
         root: appui.plugins['appui-note'] + '/'
       };
     },
