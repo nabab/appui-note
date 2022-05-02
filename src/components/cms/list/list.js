@@ -14,9 +14,6 @@
         type:String,
         default: bbn._("Note")
       },
-      id_type: {
-        type: String
-      },
       types: {
         type: Array,
         required: true,
@@ -122,6 +119,7 @@
             render: this.renderFrontImg,
             editable: false,
             cls: "bbn-middle",
+            hidden: !this.currentType.front_img,
             width: 100
           }, {
             field: "url",
@@ -136,6 +134,11 @@
             source: this.types,
             hidden: true,
             default: this.source.id_type
+          }, {
+            field: "id_option",
+            hidden: !this.currentType.option,
+            width: 250,
+            title: this.currentType.option_title
           }, {
             field: "excerpt",
             hidden: true,
@@ -198,7 +201,10 @@
         });
 
         return defaultColumns;
-			}
+			},
+      currentType() {
+        return bbn.fn.getRow(this.source.types, {id: this.source.id_type});
+      }
     },
     methods: {
       renderFrontImg(a) {

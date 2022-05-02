@@ -30,6 +30,59 @@
     "plugin": true,
     "items": [
       {
+        "text": "Editors",
+        "code": "editors",
+        "icon": "nf nf-fa-edit",
+        "items": [
+            {
+                "text": "CMS content",
+                "code": "bbn-cms",
+                "mime": "json\/bbn-cms",
+                "component": "appui-note-cms-editor"
+            },
+            {
+                "text": "JSON",
+                "code": "json",
+                "mime": "application\/json",
+                "component": "bbn-json-editor"
+            },
+            {
+                "text": "Markdown",
+                "code": "markdown",
+                "mime": "text\/markdown",
+                "component": "bbn-markdown"
+            },
+            {
+                "text": "Rich text",
+                "code": "rich",
+                "mime": "text\/html",
+                "component": "bbn-rte"
+            },
+            {
+                "text": "Simple text",
+                "code": "multilines",
+                "mime": "text\/plain",
+                "component": "bbn-textarea"
+            }
+        ],
+        "cfg": {
+            "show_code": 1,
+            "allow_children": 1,
+            "schema": [
+                {
+                    "title": "Component",
+                    "field": "component",
+                    "required": true
+                },
+                {
+                    "title": "MIME type",
+                    "field": "mime",
+                    "required": true
+                }
+            ]
+        }
+    },
+    {
         "cfg": {
           "show_code": 1
         },
@@ -67,30 +120,57 @@
         ]
       },
       {
-        "cfg": {
-          "show_code": 1,
-          "write": true
-        },
         "text": "Notes types",
         "code": "types",
         "items": [
           {
+            "id_alias": [
+              "multilines",
+              "editors",
+              "note",
+              "appui"
+            ],
             "text": "Events",
-            "code": "events"
+            "code": "events",
+            "prefix": "event\/"
           },
           {
+            "id_alias": [
+              "markdown",
+              "editors",
+              "note",
+              "appui"
+            ],
             "text": "Helps",
             "code": "helps"
           },
           {
+            "id_alias": [
+              "rich",
+              "editors",
+              "note",
+              "appui"
+            ],
             "text": "Internal messages",
             "code": "imessages"
           },
           {
+            "id_alias": [
+              "rich",
+              "editors",
+              "note",
+              "appui"
+            ],
             "text": "Mailings",
             "code": "mailings"
           },
           {
+            "id_alias": [
+              "rich",
+              "editors",
+              "note",
+              "appui"
+            ],
             "text": "Masks",
             "code": "masks"
           },
@@ -99,26 +179,79 @@
             "code": "news"
           },
           {
+            "id_alias": [
+              "bbn-cms",
+              "editors",
+              "note",
+              "appui"
+            ],
             "text": "Pages",
-            "code": "pages"
+            "code": "pages",
+            "prefix": "page\/"
           },
           {
+            "id_alias": [
+              "markdown",
+              "editors",
+              "note",
+              "appui"
+            ],
             "text": "Personal",
             "code": "personal"
           },
           {
+            "id_alias": [
+              "bbn-cms",
+              "editors",
+              "note",
+              "appui"
+            ],
             "text": "Post",
-            "code": "post"
-          },
-          {
-            "text": "Products",
-            "code": "products"
+            "code": "post",
+            "prefix": "post\/",
+            "front_img": 1
           },
           {
             "text": "Tasks",
             "code": "tasks"
           }
-        ]
+        ],
+        "cfg": {
+          "show_code": 1,
+          "show_alias": 1,
+          "allow_children": 1,
+          "schema": [
+            {
+              "field": "prefix",
+              "title": "URL prefix",
+              "width": "20em"
+            },
+            {
+              "field": "front_img",
+              "title": "Front image",
+              "type": "bool"
+            },
+            {
+              "title": "Option",
+              "field": "option",
+              "type": "bool"
+            },
+            {
+              "field": "option_title",
+              "title": "Option's title"
+            },
+            {
+              "field": "id_root_alias",
+              "title": "Option's root"
+            }
+          ],
+          "alias_name": "Editor",
+          "id_root_alias": [
+            "editors",
+            "note",
+            "appui"
+          ]
+        }
       },
       {
         "cfg": {

@@ -29,18 +29,16 @@
 
           <label><?= _("Use main image") ?></label>
           <div>
-            <bbn-checkbox v-model="currentType.id_media"
+            <bbn-checkbox v-model="currentType.front_img"
                           :value="1"
-                          :novalue="0">
-            </bbn-checkbox>
+                          :novalue="0"/>
           </div>
 
           <label><?= _("Use option column") ?></label>
           <div>
             <bbn-checkbox v-model="currentType.option"
                           :value="1"
-                          :novalue="0">
-            </bbn-checkbox>
+                          :novalue="0"/>
           </div>
 
           <template v-if="currentType.option">
@@ -48,8 +46,7 @@
             <bbn-input v-model="currentType.option_title"/>
 
             <label><?= _("Option root") ?></label>
-            <bbn-input v-model="currentType.option_root"/>
-
+            <appui-option-input-picker v-model="currentType.id_root_alias"/>
           </template>
 
           <label><?= _("Editor type") ?></label>
