@@ -16,7 +16,7 @@
                  fcolor="#FFF"
                  bcolor="#063B69"
                  :closable="false"
-                 title="<?= $t['title'] ?>">
+                 title="<?= $t['text'] ?>">
     <bbn-router :nav="true"
                 :storage="true"
                 base-url="cat/<?= $t['code'] ?>/">

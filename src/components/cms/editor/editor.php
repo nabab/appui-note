@@ -50,11 +50,11 @@
                           style="height: 10em"
                           :required="true"/>
 
-            <label v-if="source.id"
+            <label v-if="typeNote && typeNote.front_img"
                    style="margin-top:10px">
               <?=_('Front Image')?>
             </label>
-            <div v-if="source.id">
+            <div v-if="typeNote && typeNote.front_img">
               <div class="appui-note-cms-block-image-preview bbn-flex">
                 <div>
                   <bbn-button icon="nf nf-fae-galery"
@@ -72,11 +72,15 @@
               </div>
             </div>
 
-            <label><?= _("Type") ?></label>
-            <bbn-dropdown v-model="source.id_type"
-                          source-value="id"
-                          :source="source.types"
-                          :required="true"/>
+            <label v-if="typeNote && typeNote.option"
+                   v-text="typeNote.option_title || _('Category')"/>
+            <div v-if="typeNote && typeNote.option">
+              <bbn-dropdown v-if="typeNote.options"
+                            :source="typeNote.options"
+                            v-model="source.id_option"/>
+              <appui-option-input-picker v-else
+                                         v-model="source.id_option"/>
+            </div>
 
             <label><?= _("Public URL") ?></label>
             <appui-note-cms-url :source="source"

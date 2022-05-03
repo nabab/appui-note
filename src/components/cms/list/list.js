@@ -14,10 +14,6 @@
         type:String,
         default: bbn._("Note")
       },
-      types: {
-        type: Array,
-        required: true,
-      },
       columns: {
         type: Array,
         default() {
@@ -74,10 +70,14 @@
     },
     data(){
       return {
+        cms: appui.getRegistered('cms'),
         users: appui.app.users
       };
     },
     computed: {
+      types(){
+        return this.cms.source.types_notes;
+      },
       currentColumns() {
         let defaultColumns = [
           {
@@ -138,7 +138,8 @@
             field: "id_option",
             hidden: !this.currentType.option,
             width: 250,
-            title: this.currentType.option_title
+            source: this.currentType.options || [],
+            title: this.currentType.option_title || bbn._("Category")
           }, {
             field: "excerpt",
             hidden: true,
@@ -203,7 +204,7 @@
         return defaultColumns;
 			},
       currentType() {
-        return bbn.fn.getRow(this.source.types, {id: this.source.id_type});
+        return bbn.fn.getRow(this.types, {id: this.source.id_type});
       }
     },
     methods: {

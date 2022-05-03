@@ -16,13 +16,23 @@
       }
     },
     data(){
+      let cms = appui.getRegistered('cms');
       return {
+        cms: cms,
+        types: cms.source.types_notes,
         oData: JSON.stringify(this.source),
         ready: false,
         root: appui.plugins['appui-note'] + '/'
       };
     },
     computed: {
+      typeNote() {
+        if (this.source.id_type) {
+          return bbn.fn.getRow(this.types, {id: this.source.id_type});
+        }
+
+        return {};
+      },
       isChanged(){
         return JSON.stringify(this.source) !== this.oData;
       },
