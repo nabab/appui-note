@@ -105,6 +105,7 @@
       },
       changeVersion(d){
         if ( d ){
+          bbn.fn.log("changer versoin ok");
           if ( 
             (this.source.row.category !== undefined) &&
             (d.category !== undefined)
@@ -120,6 +121,9 @@
           }
           this.$set(this.source.row, 'files', d.files);
           this.$set(this.source.row, 'links', d.links);
+          bbn.fn.log("set everything");
+          this.$forceUpdate();
+          bbn.fn.log("set everything");
         }
       }
     },
