@@ -2,7 +2,7 @@
 
 (() => {
   return {
-    mixins: [bbn.vue.basicComponent],
+    mixins: [bbn.vue.basicComponent, bbn.vue.inputComponent],
     props: {
     	source: {
         type: Object,
@@ -41,17 +41,17 @@
         return '';
       },
       updateURL() {
-        this.source.url = this.prefix + this.url;
+        this.emitInput(this.prefix + this.url);
       }
     },
     watch: {
       url(v) {
         bbn.fn.log(v);
         if (!this.urlEdited) {
-          this.source.url = this.prefix + v;
+          this.emitInput(this.prefix + v);
         }
       },
-      "source.url"(v) {
+      value(v) {
         if (!v || (this.makeURL(v.substr(this.prefix.length)) === this.url)) {
           if (this.urlEdited) {
             this.urlEdited = false;

@@ -3,39 +3,52 @@ if ($model->hasData(['id', 'ref', 'file'], true)) {
 
   $id = $model->data['id'];
   $medias = new \bbn\Appui\Medias($model->db);
-  $oldMedia = $medias->getMedia($id, true);
-  $file = $model->data['file'][0];
-  if (!empty($file['name'])) {
+  if ($model->hasData('tags')) {
+    $cms = new \bbn\Appui\Cms($model->db);
+  }
+  else {
+    $cms =& $medias;
+  }
+
+  $oldMedia = $cms->getMedia($id, true);
+  if (!empty($model->data['name'])) {
     $res = [
       'success' => true,
       'media' => false
     ];
     $tmpPath = $model->userTmpPath() . $model->data['ref'] . '/';
-    if (($oldMedia['name'] !== $file['name'])
-      && is_file($tmpPath . $file['name'])
+    if (($oldMedia['name'] !== $model->data['name'])
+      && is_file($tmpPath . $model->data['name'])
     ) {
-      $res['media'] = $medias->replaceContent($id, $tmpPath . $file['name']);
+      $res['media'] = $medias->replaceContent($id, $tmpPath . $model->data['name']);
       if (empty($res['media'])) {
         throw new Error(_('Error while replacing the media'));
       }
     }
-    if ($oldMedia['title'] !== $file['title']) {
-      if (empty($file['title'])) {
-        $ext = \bbn\Str::fileExt($file['name']);
-        $file['title'] = trim(str_replace(['-', '_', '+'], ' ', \bbn\X::basename($file['name'], ".$ext")));
+    if ($oldMedia['title'] !== $model->data['title']) {
+      if (empty($model->data['title'])) {
+        $ext = \bbn\Str::fileExt($model->data['name']);
+        $model->data['title'] = trim(str_replace(['-', '_', '+'], ' ', \bbn\X::basename($model->data['name'], ".$ext")));
       }
-      if (!$medias->setTitle($id, $file['title'])) {
+      if (!$medias->setTitle($id, $model->data['title'])) {
         throw new Error(_('Error while replacing the media title'));
       }
     }
-    if ($oldMedia['description'] !== $file['description']) {
-      if (!$medias->setDescription($id, $file['description'])) {
+    if ($oldMedia['description'] !== $model->data['description']) {
+      if (!$medias->setDescription($id, $model->data['description'])) {
         throw new Error(_('Error while replacing the media description'));
       }
     }
-    if (empty($res['media'])) {
-      $res['media'] = $medias->getMedia($id, true);
+
+    if ($model->hasData('tags')) {
+      if ($oldMedia['tags'] !== $model->data['tags']) {
+        $medias->setTags($id, $model->data['tags']);
+      }
+
     }
+
+    $res['media'] = $cms->getMedia($id, true);
+
     return $res;
   }
 }

@@ -9,7 +9,6 @@
       setOn(){
         this.getRef('form').$on('edited', () => {
           appui.success();
-          this.closest('bbn-container').reload();
         });
       }
     }

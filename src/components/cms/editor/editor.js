@@ -92,51 +92,9 @@
       }
     },
     methods: {
-      openGallery(){
-        this.getPopup({
-          component: this.$options.components.gallery,
-          componentOptions: {
-            onSelection: this.onSelection
-          },
-          title: bbn._('Select an image'),
-          width: '90%',
-          height: '90%'
-        });
-      },
-      onSelection(img) {
-        this.$set(this.source, 'id_media',  img.data.id);
-        this.getPopup().close();
-      },
       onSave(d) {
         this.oData = JSON.stringify(this.source);
         appui.success(bbn._("Saved"))
-      }
-    },
-    components: {
-      gallery: {
-        template: `
-<div>
-  <appui-note-media-browser2 :source="root + '/media/data/browser'"
-                             @selection="onSelection"
-                             @clickItem="onSelection"
-                             :zoomable="false"
-                             :selection="false"
-                             :limit="50"
-                             path-name="path"
-                             :upload="root + 'media/actions/upload'"
-                             :remove="root + 'media/actions/remove'"/>
-</div>
-        `,
-        methods: {
-          onSelection() {
-            this.closest('bbn-floater').opener.onSelection(...arguments)
-          }
-        },
-        data(){
-          return {
-            root: appui.plugins['appui-note'] + '/'
-          }
-        }
       }
     }
   }

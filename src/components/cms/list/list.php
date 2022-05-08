@@ -1,7 +1,7 @@
 <!-- HTML Document -->
 <div :class="['bbn-overlay', componentClass]">
   <bbn-table ref="table"
-             :source="url"
+             :source="url + id_type"
              :limit="25"
              :info="true"
              :columns="currentColumns"

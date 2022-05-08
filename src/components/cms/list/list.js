@@ -1,14 +1,15 @@
 // Javascript Document// Javascript Document
 (() => {
-  let componentName;
   let root = appui.plugins['appui-note'] + '/';
 
   return {
     mixins: [bbn.vue.basicComponent],
     props: {
       source: {
-        type: Object,
-        required: true
+        type: Object
+      },
+      id_type: {
+        type: String
       },
       noteName: {
         type:String,
@@ -22,7 +23,7 @@
       },
       url: {
         type: String,
-        default: root + 'cms/list'
+        default: root + 'cms/cat/'
       },
       previewUrl: {
       	type: String,
@@ -49,8 +50,7 @@
         default: root + 'cms/actions/delete'
       },
       editorUrl: {
-        type: String,
-        default: root + 'cms/editor/'
+        type: String
       },
       publishComponent: {
         type: [String, Object],
@@ -66,17 +66,16 @@
       },
       actions: {
         type: [Array, Function]
-      }
+      },
     },
     data(){
       return {
-        cms: appui.getRegistered('cms'),
         users: appui.app.users
       };
     },
     computed: {
       types(){
-        return this.cms.source.types_notes;
+        return this.source.types_notes;
       },
       currentColumns() {
         let defaultColumns = [
@@ -133,7 +132,7 @@
             width: 100,
             source: this.types,
             hidden: true,
-            default: this.source.id_type
+            default: this.id_type
           }, {
             field: "id_option",
             hidden: !this.currentType.option,
@@ -204,7 +203,7 @@
         return defaultColumns;
 			},
       currentType() {
-        return bbn.fn.getRow(this.types, {id: this.source.id_type});
+        return bbn.fn.getRow(this.types, {id: this.id_type});
       }
     },
     methods: {
@@ -266,7 +265,7 @@
           title: bbn._('New') + ' ' + this.noteName,
           component: this.insertComponent,
           componentOptions: {
-            id_type: this.source.id_type || '',
+            id_type: this.id_type || '',
             source: {
               url: this.insertUrl,
             },
@@ -275,8 +274,9 @@
         });
       },
       // methods each row of the table
-      editNote(row){
-        bbn.fn.link(this.editorUrl + (row.id || row.id_note));
+      editNote(row) {
+        let url = this.editorUrl || (this.root + 'cms/cat/' + this.currentType.code + '/editor/');
+        bbn.fn.link(url + (row.id || row.id_note));
       },
       publishNote(row){
         let src =  bbn.fn.extend(row, {

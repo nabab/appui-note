@@ -54,23 +54,9 @@
                    style="margin-top:10px">
               <?=_('Front Image')?>
             </label>
-            <div v-if="typeNote && typeNote.front_img">
-              <div class="appui-note-cms-block-image-preview bbn-flex">
-                <div>
-                  <bbn-button icon="nf nf-fae-galery"
-                              :notext="false"
-                              @click="openGallery"
-                              title="<?=_('Select an image')?>"
-                              class="bbn-right-sspace"/>
-                </div>
-                <div>
-                  <img v-if="source.id_media"
-                       class="bbn-bordered bbn-radius"
-                       style="max-height: 12em; width: auto; max-width: 100%"
-                       :src="root + 'media/image/' + source.id_media + '?w=200'">
-                </div>
-              </div>
-            </div>
+            <appui-note-media-field v-if="typeNote && typeNote.front_img"
+                                    v-model="source.id_media"
+                                    :source="source.medias"/>
 
             <label v-if="typeNote && typeNote.option"
                    v-text="typeNote.option_title || _('Category')"/>
@@ -83,9 +69,10 @@
             </div>
 
             <label><?= _("Public URL") ?></label>
-            <appui-note-cms-url :source="source"
-                                prefix="post/"
-                                :readonly="true"/>
+            <appui-note-field-url :source="source"
+                                  prefix="post/"
+                                  v-model="source.url"
+                                  :readonly="true"/>
 
             <label><?= _("Start of publication") ?></label>
             <bbn-datetimepicker v-model="source.start"/>
