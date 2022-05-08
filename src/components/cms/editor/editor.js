@@ -2,7 +2,7 @@
 
 (() => {
   return {
-    mixins: bbn.vue.basicComponent,
+    mixins: [bbn.vue.basicComponent],
     props: {
       source: {
         type: Object
@@ -16,16 +16,17 @@
       }
     },
     data(){
-      let cms = appui.getRegistered('cms');
       return {
-        cms: cms,
-        types: cms.source.types_notes,
+        data: null,
         oData: JSON.stringify(this.source),
         ready: false,
         root: appui.plugins['appui-note'] + '/'
       };
     },
     computed: {
+      types() {
+        return this.data ? this.data.types_notes : [];
+      },
       typeNote() {
         if (this.source.id_type) {
           return bbn.fn.getRow(this.types, {id: this.source.id_type});
@@ -96,6 +97,9 @@
         this.oData = JSON.stringify(this.source);
         appui.success(bbn._("Saved"))
       }
+    },
+    mounted() {
+      this.data = this.closest('bbn-router').closest('bbn-container').source;
     }
   }
 })();

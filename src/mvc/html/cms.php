@@ -13,6 +13,7 @@
                  title="<?= _("Home") ?>"/>
   <?php foreach ($types_notes as $t) { ?>
   <bbn-container url="cat/<?= $t['code'] ?>"
+                 :source="source"
                  :pinned="true"
                  fcolor="#FFF"
                  bcolor="#063B69"
