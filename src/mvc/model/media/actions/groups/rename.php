@@ -1,7 +1,7 @@
 <?php
-if ($model->hasData(['id', 'text'], true)
-  && $model->db->update('bbn_medias_groups', ['text' => $model->data['text']], ['id' => $model->data['id']])
-) {
-  return ['success' => true];
+if ($model->hasData(['id', 'text'], true)) {
+  $medias = new bbn\Appui\Medias($model->db);
+  return ['success' => $medias->renameGroup($model->data['id'], $model->data['text'])];
 }
+
 return ['success' => false];

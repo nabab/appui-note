@@ -5,10 +5,7 @@
     mixins: [bbn.vue.basicComponent, bbn.vue.inputComponent],
     props: {
       source: {
-        type: Array,
-        default() {
-          return [];
-        }
+        type: Array
       }
     },
     data() {

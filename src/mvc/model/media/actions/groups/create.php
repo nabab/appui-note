@@ -1,12 +1,14 @@
 <?php
-if ($model->hasData('text', true)
-  && $model->db->insert('bbn_medias_groups', ['text' => $model->data['text']])
-) {
-  return [
-    'success' => true,
-    'data' => [
-      'id' => $model->db->lastId()
-    ]
-  ];
+if ($model->hasData('text', true)) {
+  $medias = new bbn\Appui\Medias($model->db);
+  if ($id_group = $medias->createGroup($model->data['text'])) {
+    return [
+      'success' => true,
+      'data' => [
+        'id' => $id_group
+      ]
+    ];
+  }
 }
+
 return ['success' => false];
