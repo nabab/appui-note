@@ -76,6 +76,9 @@ class import
         $res =& $this->folder_close();
       }
     }
+    if (!is_array($this->res[0]['items'])) {
+      throw new \Exception(_("Invalid File"));
+    }
     return [
       'id' => $this->current_folder,
       'text' => $this->res[0]['text'],
@@ -300,7 +303,11 @@ var_dump($dom->childNodes[2]->childNodes[1]->childNodes[2]->childNodes[2]);*/
 
 $importer = new import($ctrl->inc->pref, $ctrl->files['file']['tmp_name']);
 
-X::ddump($importer->import_netscape());
+try {
+  $ctrl->obj->success = $importer->import_netscape();
+} catch (\Exception $e) {
+  $ctrl->obj->error = $e->getMessage();
+}
 
 //X::hdump($res);
 //var_dump($dom);
