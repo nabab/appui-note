@@ -23,10 +23,11 @@
 
     <label><?=_('File')?></label>
     <div>
-      <div>
-        <span v-text="source.name"/>
-         (<span v-text="formattedSize"/>)
-      </div>
+      <span v-text="source.name"/>
+      (<span v-text="formattedSize"/>)
+      <span v-text="source.mimetype"
+            class="bbn-left-space"/>
+
       <!--bbn-upload :json="asJson"
                   :paste="true"
                   v-model="currentFiles"

@@ -5,10 +5,23 @@
                              @hook:mounted="setOn"
                              ref="form"/>
   </div>
-  <div class="bbn-flex-fill">
+  <div class="bbn-flex-fill bbn-padded">
     <div class="bbn-100 bbn-middle">
-      <div class="bbn-block">
-        <img :src="source.media.path">
+      <div class="bbn-block bbn-nowrap">
+        <span class="bbn-bottom-space"
+              v-text="source.media.dimensions.w + ' px x ' + source.media.dimensions.h + ' px'"/><br>
+        <div class="bbn-block">
+          <img :src="source.media.path">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bbn-w-100">
+    <div class="bbn-flex-items">
+      <div v-for="t in source.media.thumbs"
+           class="bbn-c">
+        <span v-text="t + ' px'"/><br>
+        <img :src="root + 'media/image/' + source.media.id + '?w=' + t">
       </div>
     </div>
   </div>

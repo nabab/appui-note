@@ -24,12 +24,13 @@
     methods: {
       //make a post to take the content of the img??
       showImage(img){
-        this.getPopup().open({
-          title: ' '/*img.name*/,
-          source: img,
-          content: '<div class="bbn-overlay bbn-middle"><img src="' + appui.plugins['appui-note'] + '/media/image/' + img.id + '/' + img.content.path + '" style="max-width: 100%; max-height: 100%"></div>',
-          height: '70%',
-          width: '70%',
+        appui.getPopup({
+          title: false,
+          content: '<div class="bbn-overlay bbn-middle"><img src="' + appui.plugins['appui-note'] + '/media/image/' + img.id + '/' + img.content.path + '" style="max-width: 100%; max-height: 100%; width: auto; height: auto"></div>',
+          width: '100%',
+          modal: true,
+          height: '100%',
+          closable: true,
           scrollable: false
         })
       },

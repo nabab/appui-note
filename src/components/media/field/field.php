@@ -19,7 +19,8 @@
     </div>
     <div>
       <img v-if="value"
-           class="bbn-bordered bbn-radius"
+           class="bbn-bordered bbn-radius bbn-p"
+           @click="showImage()"
            style="max-height: 8em; width: min(auto, 100%); max-width: 8em; height: min(auto, 100%)"
            :src="root + 'media/image/' + value + '?w=200'">
     </div>
@@ -42,7 +43,7 @@
              v-show="overImg === img.id"
              @click.stop>
           <div class="bbn-iblock bbn-xspadded bbn-p bbn-text-reactive"
-               @click="() => {}">
+               @click="showImage(img)">
             <i class="nf nf-mdi-magnify_plus_outline"/>
           </div>
           <div class="bbn-iblock bbn-xspadded bbn-p bbn-text-reactive"

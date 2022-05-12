@@ -11,6 +11,17 @@
       };
     },
     computed: {
+      hasImage() {
+        return this.source.is_image && this.source.thumbs && this.source.thumbs.length && (this.source.thumbs[0] < 200);
+      },
+      imageSrc() {
+        if (this.hasImage) {
+          let thumbs = this.source.thumbs.filter(a => a < 200);
+          return this.root + 'media/image/' + this.source.id + '?w=' + thumbs.pop();
+        }
+
+        return '';
+      },
       type() {
         if (!this.source.type || !appui.options.media_types) {
           return '';
@@ -21,12 +32,21 @@
       }
     },
     methods: {
+      copyPath() {
+        bbn.fn.copy(this.source.path);
+      },
+      copyId() {
+        bbn.fn.copy(this.source.id);
+      },
+      copyFile() {
+        bbn.fn.copy(this.source.file);
+      },
       openDetails() {
         this.getPopup({
           title: false,
           url: this.root + 'media/detail/' + this.source.id,
-          width: '90%',
-          height: '90%'
+          width: '100%',
+          height: '100%'
         }).then(() => {
           let floater = this.closest('bbn-floater');
           if (floater) {

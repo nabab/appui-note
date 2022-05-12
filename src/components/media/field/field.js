@@ -42,6 +42,25 @@
           height: '90%'
         });
       },
+      showImage(img) {
+        if (!img && (this.currentIndex === -1)) {
+          return;
+        }
+        if (!img) {
+          img = this.source[this.currentIndex];
+        }
+
+        appui.getPopup({
+          title: false,
+          component: this.$options.components.viewer,
+          componentOptions: {source: img},
+          width: '100%',
+          modal: true,
+          height: '100%',
+          closable: true,
+          scrollable: false
+        })
+      },
       onSelection(img) {
         this.emitInput(img.data.id);
         if (!bbn.fn.getRow(this.source, {id: img.data.id})) {
@@ -52,6 +71,26 @@
       }
     },
     components: {
+      viewer: {
+        template: `
+<div class="bbn-overlay bbn-middle"
+     @click="close">
+	<img :src="root +  '/media/image/' + source.id"
+       style="max-width: 100%; max-height: 100%; width: auto; height: auto"
+       @click.stop>
+</div>`,
+        props: ['source'],
+        data() {
+          return {
+            root: appui.plugins['appui-note'] + '/'
+          };
+        },
+        methods: {
+          close() {
+            this.closest('bbn-floater').close();
+          }
+        }
+      },
       gallery: {
         template: `
 <div>

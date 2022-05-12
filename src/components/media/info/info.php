@@ -1,25 +1,30 @@
 <!-- HTML Document -->
 
 <div :class="componentClass">
-	<div class="bbn-grid-fields bbn-padded">
-		<div><?= _("Title") ?></div>
-		<div v-text="source.title"></div>
+  <div class="bbn-grid-fields bbn-padded">
+    <div class="bbn-grid-full bbn-c">
+      <h3>
+        <?= _("General Information") ?>
+      </h3>
+    </div>
 
     <div><?= _("Filename") ?>:</div>
-		<div v-text="source.name"></div>
+    <div v-text="source.name"
+         class="bbn-b"/>
+
+    <div style="min-width: 8em"><?= _("Title") ?></div>
+    <div v-text="source.title"
+         class="bbn-b"/>
 
     <div v-if="source.description"><?= _("Description") ?></div>
     <div v-if="source.description"
          v-text="source.description"/>
 
-    <div><?= _("Type") ?></div>
-		<div v-text="type"/>
-
     <div><?= _("MIME type") ?></div>
-		<div v-text="source.mimetype"/>
+    <div v-text="source.mimetype"/>
 
     <div><?= _("User") ?></div>
-		<div v-text="getField(users, 'text', {value: source.id_user})"/>
+    <div v-text="getField(users, 'text', {value: source.id_user})"/>
 
     <div><?= _("Size") ?></div>
     <div v-text="formatBytes(source.content.size)"/>
@@ -27,19 +32,82 @@
     <div><?= _("Extension") ?></div>
     <div v-text="source.content.extension"/>
 
-    <div v-if="source.path"><?= _("URL") ?></div>
-    <div v-if="source.path">
-      <a :href="source.path"
-         target="_blank"
-         v-text="source.path"/>
+    <div class="bbn-grid-full bbn-c">
+      <hr>
+      <h3>
+        <?= _("Internal Information") ?>
+      </h3>
     </div>
 
-    <div> </div>
-    <div>
-    	<a href="javascript:;"
-         @click="openDetails">
-      	<?= _("Show details") ?>
-      </a>
+    <div v-if="source.path"><?= _("URL") ?></div>
+    <div v-if="source.path"
+         class="bbn-nowrap">
+      <a :href="source.path"
+         target="_blank"
+         class="bbn-iblock"
+         style="text-overflow: ellipsis; max-width: 20em; white-space: nowrap; overflow: hidden"
+         :title="source.path"
+         v-text="source.path"/>
+      <bbn-button text="<?= _("Copy") ?>"
+                  icon="nf nf-fa-copy"
+                  :notext="true"
+                  @click="copyPath"/>
+    </div>
+
+    <div><?= _("Real path") ?></div>
+    <div class="bbn-nowrap">
+      <span class="bbn-iblock"
+            style="text-overflow: ellipsis; max-width: 20em; white-space: nowrap; overflow: hidden"
+            :title="source.file"
+            v-text="source.file"/>
+      <bbn-button text="<?= _("Copy") ?>"
+                  icon="nf nf-fa-copy"
+                  :notext="true"
+                  @click="copyFile"/>
+    </div>
+
+    <div><?= _("ID") ?></div>
+    <div class="bbn-nowrap">
+      <span class="bbn-iblock"
+            style="text-overflow: ellipsis; max-width: 20em; white-space: nowrap; overflow: hidden"
+            :title="source.id"
+            v-text="source.id"/>
+      <bbn-button text="<?= _("Copy") ?>"
+                  icon="nf nf-fa-copy"
+                  :notext="true"
+                  @click="copyId"/>
+    </div>
+
+    <template v-if="source.is_image">
+      <div class="bbn-grid-full bbn-c">
+        <hr>
+        <h3>
+          <?= _("Image Information") ?>
+        </h3>
+      </div>
+
+      <div v-if="source.dimensions"><?= _("Dimensions") ?></div>
+      <div v-if="source.dimensions"
+           v-text="source.dimensions.w + ' px x ' + source.dimensions.h + ' px'"/>
+
+      <div v-if="source.thumbs"><?= _("Thumbnails") ?></div>
+      <div v-if="source.thumbs">
+        <span v-for="t in source.thumbs"
+              class="bbn-right-sspace"
+              v-text="t + ' px'"/>
+      </div>
+
+      <div v-if="hasImage"
+           class="bbn-grid-full bbn-c bbn-vpadded">
+        <img :src="imageSrc">
+      </div>
+
+    </template>
+
+    <div class="bbn-grid-full bbn-c">
+      <bbn-button @click="openDetails">
+        <?= _("Show details") ?>
+      </bbn-button>
     </div>
 
     <div class="bbn-grid-full bbn-bordered bbn-radius bbn-spadded bbn-vmargin"
