@@ -4,6 +4,7 @@
            :limit="25"
            :info="true"
            :pageable="true"
+           :url="root + 'table_notes'"
            :sortable="true"
            :filterable="true"
            :editable="true"
@@ -12,68 +13,72 @@
                      icon: 'nf nf-fa-plus',
                      notext: false,
                      action: markdown
-                     }]"
-
-           :expander="$options.components['apst-notes-content']">
+                     }]">
   <bbns-column field="id_note"
-               :hidden="true"
-  ></bbns-column>
+               :editable="false"
+               :hidden="true"/>
 
   <bbns-column field="title"
+               :editable="false"
                title="<?=_("Title")?>"
-               :render="title"
-  ></bbns-column>
+               :render="title"/>
 
-  <bbns-column field="id_type"
-               title="<?=_("Type")?>"
-               :source="source.options"
-               :width="120"
-  ></bbns-column>
+  <bbns-column field="version"
+               title="#"
+               :editable="false"
+               :width="50"
+               cls="bbn-c"/>
+  
+  <bbns-column title="<?= _("Resume") ?>"
+               :editable="false"
+               :render="getResume"/>
 
   <bbns-column field="creator"
+               :editable="false"
                title="<?=_("Creator")?>"
                :source="users"
-               :width="160"
-  ></bbns-column>
+               :hidden="true"
+               :width="160"/>
 
   <bbns-column field="id_user"
+               :editable="false"
                title="<?=_("Last version user")?>"
                :source="users"
-               :width="160"
-  ></bbns-column>
+               :hidden="true"
+               :width="160"/>
 
   <bbns-column field="creation"
+               :editable="false"
                title="<?=_("Creation")?>"
                type="date"
                cls="bbn-c"
-               :width="100"
-  ></bbns-column>
+               :hidden="true"
+               :width="100"/>
 
   <bbns-column field="last_edit"
+               :editable="false"
                title="<?=_("Last edit")?>"
                type="date"
+               :hidden="true"
                cls="bbn-c"
-               :width="100"
-  ></bbns-column>
+               :width="100"/>
 
-  <bbns-column field="version"
-               title="<?=_("Version")?>"
-               :width="70"
-               cls="bbn-c"
-  ></bbns-column>
+  <bbns-column field="id_type"
+               title="<?=_("Type")?>"
+               :render="getType"
+               :source="source.options"
+               :width="120"/>
 
-  <bbns-column :width="220"
+  <bbns-column field="id_option"
+               :editable="false"
+               title="<?=_("Option")?>"
+               :render="getOption"
+               :width="120"/>
+
+  <bbns-column :width="90"
                title="<?=_("Actions")?>"
-               :render="title"
                cls="bbn-c"
-               :buttons="[{
-                text: '<?=_('Markdown')?>',
-                action: markdown
-               }, {
-                text: 'R.T.E.',
-                action: rte
-               }]"
-  ></bbns-column>
+               :buttons="['edit']"/>
 
 </bbn-table>
 
