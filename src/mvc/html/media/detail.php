@@ -16,7 +16,7 @@
       </div>
     </div>
   </div>
-  <div class="bbn-w-100">
+  <div class="bbn-w-100 bbn-middle">
     <div class="bbn-flex-items">
       <div v-for="t in source.media.thumbs"
            class="bbn-c">

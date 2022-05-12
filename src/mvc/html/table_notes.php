@@ -52,7 +52,6 @@
                title="<?=_("Creation")?>"
                type="date"
                cls="bbn-c"
-               :hidden="true"
                :width="100"/>
 
   <bbns-column field="last_edit"
