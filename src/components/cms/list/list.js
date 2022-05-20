@@ -375,6 +375,9 @@
 
         return '-';
       },
+      updateData() {
+        this.getRef('table').updateData();
+      }
     },
     created(){
       appui.register('appuiCmsList', this);

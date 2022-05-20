@@ -22,9 +22,10 @@
           title: '',
           type: this.id_type || '',
           url: '',
-          lang: bbn.env.lang
+          lang: bbn.env.lang,
+          excerpt: ''
         },
-        prefix: this.id_type ? bbn.fn.getField(this.types, 'prefix', {value: this.id_type}) : '',
+        prefix: this.id_type ? bbn.fn.getField(this.types, 'prefix', {id: this.id_type}) : '',
         root: appui.plugins['appui-note'] + '/'
       };
     },
@@ -35,13 +36,16 @@
     },
     methods: {
       updatePrefix() {
-        bbn.fn.log("UPDATING PREFIX", this.formData.type)
-        this.prefix = this.formData.type ? bbn.fn.getField(this.types, 'prefix', {value: this.formData.type}) : '';
+        this.prefix = this.formData.type ? bbn.fn.getField(this.types, 'prefix', {id: this.formData.type}) : '';
       },
       afterSubmit(d) {
         if (d.success && d.data) {
-          this.closest('bbn-floater').opener.getRef('table').reload();
-          bbn.fn.link(this.root + 'cms/editor/' + d.data.id_note);
+          if (d.data.id_note) {
+            let code = bbn.fn.getField(this.types, 'code', {id: this.formData.type});
+            bbn.fn.log("CODE??", code);
+            this.closest('bbn-floater').opener.getRef('table').reload();
+            bbn.fn.link(this.root + 'cms/cat/' + code + '/editor/' + d.data.id_note);
+          }
         }
       }
     },

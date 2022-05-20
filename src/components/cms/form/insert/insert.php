@@ -15,8 +15,9 @@
     <label class="bbn-b">
       <?=_('URL')?>
     </label>
-    <appui-note-cms-url :source="formData"
-                        :prefix="prefix"/>
+    <appui-note-field-url :source="formData"
+                          :prefix="prefix"
+                          v-model="formData.url"/>
 
     <label v-if="!id_type"
            class="bbn-b">
@@ -36,7 +37,7 @@
                   :required="true"/>
 
     <label class="bbn-b">
-      <?=_('Description')?>
+      <?=_('Excerpt')?>
     </label>
     <bbn-textarea v-model="formData.excerpt"
                   style="height: 10em; max-height: 20vh"/>

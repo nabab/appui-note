@@ -39,7 +39,7 @@
         this.showForm = false;
       },
       openNote(note){
-        appui.getRef('router').activeContainer.getPopup().open({
+        this.closest('bbn-container').getPopup({
           title: note.title,
           width: '70%',
           height: '70%',
