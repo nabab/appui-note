@@ -9,14 +9,12 @@ use bbn\X;
 
 $id_list = $model->inc->options->fromCode("list", "bookmarks", "note", "appui");
 //$id_cat = $model->inc->options->fromCode("cat", "bookmarks", "note", "appui");
-$my_list = $model->inc->pref->getByOption($id_list);
-$tree = $my_list ? $model->inc->pref->getTree($my_list['id']) : false;
+$tree = $model->getCachedModel($model->pluginUrl("appui-note")."/data/bookmarks", [], 3600);
 $parents[] = [
   'text' => 'None',
   'value' => ''
 ];
 $all_id = [];
-
 
 $mapper = function ($ar) use (&$parents, &$mapper) {
   foreach ($ar as $a) {
@@ -47,10 +45,7 @@ $map = function ($ar) use (&$all_id, &$map) {
 
 $map($tree['items']);
 $mapper($tree['items']);
-
-$id_list = $model->inc->options->fromCode("list", "bookmarks", "note", "appui");
-$my_list = $model->inc->pref->getByOption($id_list);
-$tree = $my_list ? $model->inc->pref->getTree($my_list['id']) : false;
+$tree = $model->getCachedModel($model->pluginUrl("appui-note")."/data/bookmarks", [], 3600);
 
 return [
   'parents' => $parents,

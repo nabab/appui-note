@@ -37,7 +37,8 @@
                   v-model="source.row.text"
                   style="min-height: 450px; width: 100%;"
                   required="required"
-                  class="bbn-w-100"/>
+                  class="bbn-w-100"
+                  height="450px"/>
       </div>
     </div>
 
