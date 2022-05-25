@@ -3,24 +3,36 @@
 (() => {
   return {
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
+    data(){
+      return {
+        
+      }
+    },
     computed: {
+      sizeClass(){
+        let st = 'bbn-w-';
+        st += Math.floor(100/this.source.elements);
+        return st;
+      },
+      mobileSizeClass(){
+				let st = 'bbn-mobile-w-';
+        st += Math.floor(100/this.source.mobileElements);
+        return st;
+      },
       align(){
         let style = {};
-        switch (this.source.align) {
-          case 'left':
-            style.justifyContent = 'flex-start';
-            break;
-          case 'center':
-            style.justifyContent = 'center';
-            break;
-          case 'right':
-            style.justifyContent = 'flex-end';
-            break;
-        }
+        style['text-align'] = this.source.align
+        
         return style;
       }
     },
     methods: {
+	  	selectDesktopGrid(a){
+        this.source.elements = a[1]
+      },
+      selectMobileGrid(a){
+        this.source.mobileElements = a[1]
+      },
       openGallery(){
         this.getPopup().open({
           component: this.$options.components.gallery,
@@ -37,7 +49,7 @@
         this.getPopup().close();
       }
     },
-    components: {
+        components: {
       gallery: {
         template: `
 <div>
@@ -64,6 +76,15 @@
         }
       }
     },
+
+    beforeMount(){
+      this.source.elements = 3;
+      this.source.mobileElements = 1;
+        if(this.mode === 'read'){
+          this.closest('appui-note-cms-block').currentClass = this.mobileSizeClass + ' ' +this.sizeClass;
+      }
+    },
+
 
   }
 })();

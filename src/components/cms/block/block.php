@@ -1,7 +1,6 @@
 <div :class="[
         componentClass,
-        'bbn-w-100',
-        'bbn-block',
+        currentClass,
         {'<?= $componentName ?>-over': overable && over}
       ]"
       tabindex="0"

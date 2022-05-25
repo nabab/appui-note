@@ -4,6 +4,13 @@
   <div v-if="mode === 'edit'">
     <div class="bbn-padded">
       <div class="bbn-grid-fields bbn-vspadded">
+        <label v-text="_('Columns (Desktop)')"></label>
+        <bbn-grid-configuration :cols="5" :rows="1" @select="selectDesktopGrid"></bbn-grid-configuration>
+                                                                                                 
+        
+        <label v-text="_('Columns (Mobile)')"></label>
+        <bbn-grid-configuration @select="selectMobileGrid" :cols="5" :rows="1"></bbn-grid-configuration>
+        
         <label v-text="_('Image')"></label>
         <div class="appui-note-cms-block-image-preview bbn-flex">
           <bbn-button icon="nf nf-fae-galery"
@@ -26,12 +33,11 @@
 				<label><?=_('Height')?></label>
 				<bbn-range v-model="source.style.height"
 									 :min="10"
-									 :max="2000"
+									 :max="2000" 
 									 :step="10"
 									 :show-reset="false"
 									 :show-numeric="true"
 									 :show-units="true"/>
-
         <label v-text="_('Alignment')"></label>
         <div>
         	<div class="bbn-block">
@@ -75,11 +81,11 @@
       </div> 
     </div>
   </div>          
+  
   <div v-else>
-		<div class="bbn-flex"
+		<div class="bbn-flex image-text-container"
 				 :style="align">
 			<a v-if="!!source.href"
-         :style="source.style"
 				 target="_self"
 				 :href="$parent.linkURL + source.href"
 				 class="bbn-c">
@@ -87,19 +93,18 @@
 						 :alt="source.alt ? source.alt : ''">
 			</a>
 			<img v-else-if="!!source.source"
-           :style="source.style"
+           class="bbn-vsmargin"
 				 	 :src="source.source"
 				 	 :alt="source.alt ? source.alt : ''">
-			<p class="image-caption bbn-l bbn-s bbn-vsmargin"
+			<p class="image-caption bbn-s bbn-vsmargin"
 				 v-if="!!source.caption"
 				 v-html="source.caption"/>
 			<!--error when using decodeuricomponent on details of home image-->
-			<a class="image-details-title bbn-l bbn-vsmargin bbn-w-100"
+			<p class="image-details-title bbn-vsmargin bbn-w-100 bbn-b"
 				 v-if="!!source.details_title"
 				 v-html="(source.details_title)"
-				 :href="source.href"
-				 target="_blank"/>
-			<p class="image-details bbn-l bbn-vsmargin"
+				 />
+			<p class="image-details bbn-vsmargin"
 				 v-if="!!source.details"
 				 v-html="source.details"/>
 		</div>

@@ -154,6 +154,9 @@
             text: bbn._("Image"),
             value: 'image'
           }, {
+            text: bbn._("Image Text"),
+            value: 'image-text'
+          }, {
             text: bbn._("Carousel"),
             value: 'carousel'
           }, {

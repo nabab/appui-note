@@ -26,12 +26,11 @@
 				<label><?=_('Height')?></label>
 				<bbn-range v-model="source.style.height"
 									 :min="10"
-									 :max="2000"
+									 :max="2000" 
 									 :step="10"
 									 :show-reset="false"
 									 :show-numeric="true"
 									 :show-units="true"/>
-
         <label v-text="_('Alignment')"></label>
         <div>
         	<div class="bbn-block">
@@ -75,11 +74,12 @@
       </div> 
     </div>
   </div>          
-  <div v-else>
-		<div class="bbn-flex"
-				 :style="align">
+  <div v-else
+			 class="bbn-flex"
+       :style="align">
+		<div class="bbn-block"
+				 :style="source.style">
 			<a v-if="!!source.href"
-         :style="source.style"
 				 target="_self"
 				 :href="$parent.linkURL + source.href"
 				 class="bbn-c">
@@ -87,7 +87,6 @@
 						 :alt="source.alt ? source.alt : ''">
 			</a>
 			<img v-else-if="!!source.source"
-           :style="source.style"
 				 	 :src="source.source"
 				 	 :alt="source.alt ? source.alt : ''">
 			<p class="image-caption bbn-l bbn-s bbn-vsmargin"
