@@ -120,6 +120,7 @@
                 "key": "MUL",
                 "signed": true,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 16
             },
             "id_alias": {
@@ -128,6 +129,7 @@
                 "key": "MUL",
                 "signed": true,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 16
             },
             "id_type": {
@@ -136,6 +138,7 @@
                 "key": "MUL",
                 "signed": true,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 16
             },
             "id_option": {
@@ -144,6 +147,7 @@
                 "key": "MUL",
                 "signed": true,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 16
             },
             "mime": {
@@ -256,6 +260,7 @@
                 "key": null,
                 "signed": true,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 100
             },
             "def": {
@@ -480,6 +485,7 @@
                 "key": null,
                 "signed": true,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 255
             },
             "content": {
@@ -587,6 +593,7 @@
                 "null": 1,
                 "key": null,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 30
             },
             "name": {
@@ -601,6 +608,7 @@
                 "null": 1,
                 "key": null,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 1000
             },
             "description": {
@@ -639,6 +647,7 @@
                 "null": 1,
                 "key": "MUL",
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 16
             }
         }
@@ -701,6 +710,7 @@
                 "key": "MUL",
                 "signed": true,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 16
             },
             "id_type": {
@@ -730,6 +740,7 @@
                 "key": null,
                 "signed": true,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 255
             },
             "recurring": {
@@ -917,6 +928,7 @@
                 "key": "UNI",
                 "signed": true,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 100
             }
         }
@@ -1145,6 +1157,7 @@
                 "signed": true,
                 "virtual": false,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 16
             },
             "text": {
@@ -1155,6 +1168,7 @@
                 "signed": true,
                 "virtual": false,
                 "default": "NULL",
+                "defaultExpression": 1,
                 "maxlength": 255
             },
             "cfg": {
