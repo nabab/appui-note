@@ -45,9 +45,21 @@
         };
         let res = [{
           text: bbn._("Add a block at the start"),
-          icon: 'nf nf-fa-plus',
+          icon: 'nf nf-mdi-file_document_box',
           action: () => {
             this.source.items.splice(0, 0, newBlock);
+            this.$nextTick(() => {
+              this.getRef('editor').currentEdited = 0;
+            })
+          }
+        }, {
+          text: bbn._("Add a container at the start"),
+          icon: 'nf nf-mdi-table_row',
+          action: () => {
+            this.source.items.splice(0, 0, {
+              type: 'container',
+              items: []
+            });
             this.$nextTick(() => {
               this.getRef('editor').currentEdited = 0;
             })

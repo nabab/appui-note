@@ -1,0 +1,33 @@
+/* LESS Document */
+.@{componentName} {
+  
+  .@{componentName}-icons {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 1.8em;
+  }
+  > .@{componentName}-component {
+    min-height: 1.8em;
+    &.@{componentName}-selected {
+      border-color: var(--tertiary-border) !important;
+    }
+    &.@{componentName}-selectable {
+      border: 0.3em dashed transparent;
+    }
+  }
+  &.@{componentName}-over {
+    .@{componentName}-icons {
+      display: block;
+    }
+    > .@{componentName}-component {
+      border-color: var(--primary-border) !important;
+    }
+  }
+/*
+  .bbn-grid-fields{
+    border: none!important;
+  }
+*/
+}

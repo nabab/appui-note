@@ -7,7 +7,7 @@
     top: 0;
     height: 1.8em;
   }
-  .@{componentName}-component {
+  > .@{componentName}-component {
     min-height: 1.8em;
     padding: 1em;
     &.@{componentName}-selected {
@@ -21,8 +21,8 @@
     .@{componentName}-icons {
       display: block;
     }
-    .@{componentName}-component {
-      border-color: rgb(110, 158, 207);
+    > .@{componentName}-component {
+      border-color: var(--primary-border);
     }
   }
   /*margin: 15px auto;*/

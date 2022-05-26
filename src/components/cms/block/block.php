@@ -14,11 +14,12 @@
              :mode="mode"
              :source="source"
              :class="[
-                     '<?= $componentName ?>-component',
-                     {'<?= $componentName ?>-selectable': selectable},
-                     {'<?= $componentName ?>-selected': selectable && selected},
-                     ]">
-  </component>
+                       '<?= $componentName ?>-component',
+                       {
+                        '<?= $componentName ?>-selectable': selectable,
+                        '<?= $componentName ?>-selected': selectable && selected
+                       }
+                     ]"/>
   <div v-if="selectable"
        class="bbn-overlay bbn-p"/>
   <div v-if="editable"

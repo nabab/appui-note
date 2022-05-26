@@ -216,6 +216,21 @@
         }
 
         return ['html', 'markdown', 'gallery'].includes(this.source[this.currentEdited].type);
+      },
+      editedSource() {
+        if (this.source[this.currentEdited]) {
+          let r = this.source[this.currentEdited];
+          if (r.type === 'container') {
+            let ct = this.getRef('block' + this.currentEdited);
+            if (ct) {
+              return r.items[ct.currentItemSelected];
+            }
+          }
+
+          return r;
+        }
+
+        return null;
       }
     },
     methods: {

@@ -11,7 +11,15 @@
            @click="currentEdited = -1">
         <div v-for="(cfg, i) in source"
              class="bbn-w-100 bbn-vspadded">
-          <appui-note-cms-block :source="cfg"
+          <appui-note-cms-block-container v-if="cfg.type === 'container'"
+                                          :source="cfg"
+                                          :ref="'block' + i"
+                                          :selectable="true"
+                                          :overable="true"
+                                          :selected="currentEdited === i"
+                                          @click.stop="changeEdited(i)"/>
+          <appui-note-cms-block v-else
+                                :source="cfg"
                                 :ref="'block' + i"
                                 :selectable="true"
                                 :overable="true"
@@ -24,9 +32,10 @@
       <div class="bbn-overlay bbn-flex-height">
         <div v-if="currentEdited > -1"
              class="bbn-header bbn-padded bbn-vmiddle bbn-m bbn-b bbn-flex-width">
-          <div class="bbn-middle bbn-flex-fill">
+          <div class="bbn-middle bbn-flex-fill"
+               v-if="editedSource">
             <bbn-dropdown :source="types"
-                          v-model="currentType"/>
+                          v-model="editedSource.type"/>
           </div>
           <div class="bbn-middle bbn-nowrap bbn-flex-fill">
             <?= _("Position of the block") ?>
@@ -36,24 +45,24 @@
                         :notext="true"
                         @click="move('top')"
                         text="<?= _("Move top") ?>"
-                        :disabled="(this.source.length <= 1) || (currentEdited <= 1)"
+                        :disabled="(source.length <= 1) || (currentEdited <= 1)"
                         icon="nf nf-mdi-arrow_collapse_up"/>
             <bbn-button :notext="true"
                         @click="move('up')"
                         text="<?= _("Move up") ?>"
-                        :disabled="(this.source.length <= 1) || !currentEdited"
+                        :disabled="(source.length <= 1) || !currentEdited"
                         icon="nf nf-mdi-arrow_up"
                         class="bbn-left-xsspace"/>
             <bbn-button :notext="true"
                         @click="move('down')"
                         text="<?= _("Move down") ?>"
-                        :disabled="(this.source.length <= 1) || (currentEdited === this.source.length - 1)"
+                        :disabled="(source.length <= 1) || (currentEdited === source.length - 1)"
                         icon="nf nf-mdi-arrow_down"
                         class="bbn-left-xsspace"/>
             <bbn-button :notext="true"
                         @click="move('bottom')"
                         text="<?= _("Move bottom") ?>"
-                        :disabled="(this.source.length <= 1) || (currentEdited >= this.source.length - 2)"
+                        :disabled="(source.length <= 1) || (currentEdited >= source.length - 2)"
                         icon="nf nf-mdi-arrow_collapse_down"
                         class="bbn-left-xsspace"/>
             <bbn-button class="bbn-left-space"
@@ -70,8 +79,9 @@
           <bbn-scroll v-else>
             <div class="bbn-w-100 bbn-middle">
               <div class="bbn-w-100 bbn-vlpadded bbn-hxlpadded">
-                <appui-note-cms-block class="bbn-contain"
-                                      :source="source[currentEdited]"
+                <appui-note-cms-block v-if="editedSource"
+                                      class="bbn-contain"
+                                      :source="editedSource"
                                       mode="edit"/>
               </div>
             </div>

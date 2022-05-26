@@ -1,0 +1,93 @@
+// Javascript Document
+
+(() => {
+  return {
+    /**
+     * @mixin bbn.vue.basicComponent
+     */
+    mixins: [bbn.vue.basicComponent, bbn.vue.resizerComponent],
+    props: {
+      source: {
+        type: Object,
+        required: true
+      },
+      index: {
+        type: Number,
+      },
+      //the path for the index showing the images ('ex: image/')
+      path: {
+        type: String,
+        default: ''
+      },
+      editable: {
+        type: Boolean,
+        default: false
+      },
+      selectable: {
+        type: Boolean,
+        default: false
+      },
+      itemSelected: {
+        type: Number,
+        default: -1
+      },
+      selected: {
+        type: Boolean,
+        default: false
+      },
+      overable: {
+        type: Boolean,
+        default: false
+      },
+      mode: {
+        type: String,
+        default: 'read'
+      },
+    },
+    data(){
+      return {
+        over: false,
+        edit: this.mode === 'edit',
+        isAdmin: true,
+        editing: true,
+        width: '100',
+        height: '100',
+        //ready is important for the component template to be defined
+        ready: true,
+        initialSource: null,
+        currentItemSelected: this.itemSelected
+      }
+    },
+    computed: {
+      isSelected() {
+        return this.selected === true;
+      },
+      currentComponent(){
+        return this.getComponentName(this.type);
+      },
+      changed(){
+        return this.ready && !bbn.fn.isSame(this.initialSource, this.source);
+      },
+      type(){
+        return this.source.type || 'text'
+      },
+      parent(){
+        return this.ready ? this.closest('bbn-container').getComponent() : null;
+      }
+    },
+    methods: {
+      addBlock() {
+        this.source.items.push({
+          type: 'text',
+          text: ''
+        });
+        bbn.fn.log(this.source);
+      }
+    },
+    watch: {
+      itemsSelected(v) {
+        this.currentItemSelected = v;
+      }
+    }
+  };
+})();

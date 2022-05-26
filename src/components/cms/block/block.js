@@ -72,11 +72,6 @@
         type: String,
         default: ''
       },
-      //the path for the links (give a path to a controller to manage the links)
-      linkURL: {
-        type: String,
-        default: ''
-      },
       editable: {
         type: Boolean,
         default: false
