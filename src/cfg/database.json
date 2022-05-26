@@ -111,15 +111,13 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "id_parent": {
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
-                "signed": true,
-                "default": "NULL",
+                        "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 16
             },
@@ -127,8 +125,7 @@
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
-                "signed": true,
-                "default": "NULL",
+                        "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 16
             },
@@ -136,8 +133,7 @@
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
-                "signed": true,
-                "default": "NULL",
+                        "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 16
             },
@@ -145,8 +141,7 @@
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
-                "signed": true,
-                "default": "NULL",
+                        "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 16
             },
@@ -184,13 +179,12 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "active": {
-                "type": "int",
+                "type": "tinyint",
                 "null": 0,
-                        "default": 1,
+                "default": 1,
                 "maxlength": 1
             }
         }
@@ -240,21 +234,18 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "id_type": {
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "name": {
                 "type": "varchar",
                 "null": 1,
-                        "signed": true,
-                "default": "NULL",
+                                "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 100
             },
@@ -459,8 +450,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "version": {
                 "type": "int",
@@ -477,8 +467,7 @@
             "title": {
                 "type": "varchar",
                 "null": 1,
-                        "signed": true,
-                "default": "NULL",
+                                "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 255
             },
@@ -490,16 +479,14 @@
             "excerpt": {
                 "type": "text",
                 "null": 1,
-                        "signed": true,
-                "default": "NULL",
+                                "default": "NULL",
                 "defaultExpression": 1
             },
             "id_user": {
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "creation": {
                 "type": "datetime",
@@ -689,15 +676,13 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "id_parent": {
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
-                "signed": true,
-                "default": "NULL",
+                        "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 16
             },
@@ -705,28 +690,24 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "start": {
                 "type": "datetime",
                 "null": 1,
-                        "signed": true,
-                "default": "NULL",
+                                "default": "NULL",
                 "defaultExpression": 1
             },
             "end": {
                 "type": "datetime",
                 "null": 1,
-                        "signed": true,
-                "default": "NULL",
+                                "default": "NULL",
                 "defaultExpression": 1
             },
             "name": {
                 "type": "varchar",
                 "null": 1,
-                        "signed": true,
-                "default": "NULL",
+                                "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 255
             },
@@ -739,8 +720,7 @@
             "cfg": {
                 "type": "mediumtext",
                 "null": 1,
-                        "signed": true,
-                "default": "NULL",
+                                "default": "NULL",
                 "defaultExpression": 1
             }
         }
@@ -781,15 +761,13 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "id_event": {
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             }
         }
     },
@@ -831,15 +809,13 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "id_tag": {
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             }
         }
     },
@@ -884,21 +860,18 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "tag": {
                 "type": "varchar",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
-                "maxlength": 64
+                        "maxlength": 64
             },
             "lang": {
                 "type": "varchar",
                 "null": 0,
-                        "signed": true,
-                "default": "en",
+                                "default": "en",
                 "maxlength": 2
             },
             "description": {
@@ -910,8 +883,7 @@
                 "type": "varchar",
                 "null": 1,
                 "key": "UNI",
-                "signed": true,
-                "default": "NULL",
+                        "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 100
             }
@@ -957,22 +929,19 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "id_tag_dest": {
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "relationship": {
                 "type": "enum",
                 "null": 0,
                         "extra": "'parent','synonym','translation'",
-                "signed": true,
-                "values": [
+                        "values": [
                     "parent",
                     "synonym",
                     "translation"
@@ -1025,15 +994,13 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "id_tag": {
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             }
         }
     },
@@ -1075,8 +1042,7 @@
                 "type": "binary",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "id_url": {
                 "type": "binary",
@@ -1087,8 +1053,7 @@
             "shared": {
                 "type": "tinyint",
                 "null": 0,
-                        "signed": true,
-                "default": 0,
+                                "default": 0,
                 "maxlength": 1
             }
         }
@@ -1126,31 +1091,27 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "id_parent": {
                 "type": "binary",
                 "null": 1,
                 "key": "MUL",
-                "signed": true,
-                "default": "NULL",
+                        "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 16
             },
             "text": {
                 "type": "varchar",
                 "null": 1,
-                        "signed": true,
-                "default": "NULL",
+                                "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 255
             },
             "cfg": {
                 "type": "json",
                 "null": 1,
-                        "signed": true,
-                "default": "NULL",
+                                "default": "NULL",
                 "defaultExpression": 1
             }
         }
@@ -1197,15 +1158,13 @@
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             },
             "id_group": {
                 "type": "binary",
                 "null": 0,
                 "key": "PRI",
-                "signed": true,
-                "maxlength": 16
+                        "maxlength": 16
             }
         }
     },
@@ -1260,13 +1219,12 @@
                 "type": "varchar",
                 "null": 0,
                 "key": "MUL",
-                "signed": true,
-                "maxlength": 1000
+                        "maxlength": 1000
             },
             "num_calls": {
                 "type": "int",
                 "null": 0,
-                        "signed": false,
+                "signed": false,
                 "maxlength": 10,
                 "default": 0
             },
