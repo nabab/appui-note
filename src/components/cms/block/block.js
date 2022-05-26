@@ -108,7 +108,8 @@
         height: '100',
         //ready is important for the component template to be defined
         ready: true,
-        initialSource: null
+        initialSource: null,
+        currentClass: 'bbn-w-100'
       }
     },
     computed: {

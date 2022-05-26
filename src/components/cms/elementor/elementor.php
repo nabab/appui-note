@@ -9,8 +9,7 @@
               ref="leftPane">
       <div class="bbn-vlpadded bbn-hlpadded bbn-w-100"
            @click="currentEdited = -1">
-        <div v-for="(cfg, i) in source"
-             class="bbn-w-100 bbn-vspadded">
+        <div v-for="(cfg, i) in source">
           <appui-note-cms-block :source="cfg"
                                 :ref="'block' + i"
                                 :selectable="true"
