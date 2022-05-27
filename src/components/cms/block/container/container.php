@@ -21,17 +21,29 @@
                ]">
     <div v-if="source.items.length"
          class="bbn-grid"
-         :style="{gridTemplateCols: 'repeat(' + (source.items.length + 1) + ', 1fr)'}">
-      <appui-note-cms-block v-for="(item, i) in source.items"
-                            @click="currentItemSelected = i"
-                            :key="i"
-                            :path="path"
-                            :editable="editable"
-                            :selectable="selectable"
-                            :selected="currentItemSelected === i"
-                            :overable="overable"
-                            :mode="mode"
-                            :source="item"/>
+         :style="{gridTemplateColumns: 'repeat(' + source.items.length + ', 1fr)'}">
+      <div v-for="(item, i) in source.items"
+           @mouseenter="overItem = i"
+           @mouseleave="overItem = -1"
+           :key="i">
+        <div class="bbn-100">
+          <appui-note-cms-block @click="currentItemSelected = i"
+                                :path="path"
+                                :editable="editable"
+                                :selectable="selectable"
+                                :selected="currentItemSelected === i"
+                                :overable="overable"
+                                :mode="mode"
+                                :source="item"/>
+          <div v-if="overable && (mode === 'read')"
+               :class="['bbn-bottom-right', 'bbn-xspadding', {'bbn-hidden': overItem !== i}]">
+            <bbn-button icon="nf nf-fa-minus"
+                        title="<?= _("Click here to add a new item on this line") ?>"
+                        :notext="true"
+                        @click="removeBlock(i)"/>
+          </div>
+        </div>
+      </div>
     </div>
     <h3 v-else
         class="bbn-p"
@@ -39,10 +51,10 @@
       <?= _("Click here to add a new item on this line") ?>
     </h3>
     <div v-if="overable && (mode === 'read')"
-         class="bbn-spadding <?= $componentName ?>-icons">
-      <bbn-button class="bbn-xl"
-                  icon="nf nf-fa-plus"
+         :class="['bbn-top-right', 'bbn-xspadding', {'bbn-hidden': !over}]">
+      <bbn-button icon="nf nf-fa-plus"
                   title="<?= _("Click here to add a new item on this line") ?>"
+                  :notext="true"
                   @click="addBlock"/>
     </div>
   </div>

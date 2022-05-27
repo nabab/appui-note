@@ -1,152 +1,142 @@
 // Javascript Document
 
 (() => {
+  const types = [
+    {
+      text: bbn._("Title"),
+      value: 'title',
+      default: {
+        tag: 'h1',
+        content: '',
+        align: 'left',
+        hr: null,
+        style: {
+          'text-decoration': 'none',
+          'font-style': 'normal',
+          color: '#000000'
+        }
+      }
+    }, {
+      text: bbn._("Text"),
+      value: 'text',
+      default: {
+        content: ''
+      }
+    }, {
+      text: bbn._("Line"),
+      value: 'line',
+      default: {
+        hr: null,
+        align: 'center',
+        style: {
+          width: '100%',
+          height: '0px'
+        }
+      }
+    }, {
+      text: bbn._("Space"),
+      value: 'space',
+      default: {
+        size: '1em'
+      }
+    }, {
+      text: bbn._("Rich text (HTML)"),
+      value: 'html',
+      default: {
+        content: '',
+        align: 'left',
+        style: {}
+      }
+    }, {
+      text: bbn._("Image"),
+      value: 'image',
+      default: {
+        source: '',
+        alt: '',
+        href: '',
+        caption: '',
+        details_title: '',
+        details: '',
+        style: {
+          width: '100%',
+          height: '100%'
+        },
+        align: 'center'
+      }
+    }, {
+      text: bbn._("Carousel"),
+      value: 'carousel',
+      default: {
+        source: '',
+        autoplay: 1,
+        arrows: 0,
+        preview: 1,
+        loop: 1,
+        info: 1,
+        style: {
+          width: '100%',
+          height: '300px'
+        },
+        align: 'center'
+      }
+    }, {
+      text: bbn._("Gallery"),
+      value: 'gallery',
+      default: {
+        source: '',
+        scrollable: 0,
+        pageable: 0,
+        pager: 0,
+        zoomable: 0,
+        resizable: 0,
+        toolbar: 0,
+        style: {
+          width: '100%',
+          height: '100%'
+        },
+        align: 'center',
+        imageWidth: 150
+      }
+    }, {
+      text: bbn._("Video"),
+      value: 'video',
+      default: {
+        source: '',
+        autoplay: 0,
+        muted: 0,
+        controls: 0,
+        loop: 0,
+        style: {
+          width: '100%',
+          height: '100%'
+        },
+        align: 'center'
+      }
+    }
+  ];
+
   return {
     props: {
       source: {
         type: Array,
-   			required: true
+        required: true
       },
     },
     data(){
       return {
-        currentType: 'text',
+        currentType: '',
         isMoving: false,
         currentEdited: -1,
         nextEdited: -1,
-        types: [
-          {
-            text: bbn._("Title"),
-            value: 'title',
-            default: {
-            	tag: 'h1',
-              content: '',
-              align: 'left',
-              hr: null,
-              style: {
-                'text-decoration': 'none',
-                'font-style': 'normal',
-                color: '#000000'
-              }
-	          }
-          }, {
-            text: bbn._("Text"),
-            value: 'text',
-            default: {
-              content: ''
-	          }
-          }, {
-            text: bbn._("Line"),
-            value: 'line',
-            default: {
-              hr: null,
-              align: 'center',
-              style: {
-                width: '100%',
-                height: '0px'
-              }
-	          }
-          }, {
-            text: bbn._("Space"),
-            value: 'space',
-            default: {
-              size: '1em'
-	          }
-          }, {
-            text: bbn._("Rich text (HTML)"),
-            value: 'html',
-            default: {
-              content: '',
-              align: 'left',
-              style: {}
-	          }
-          }, {
-            text: bbn._("Image"),
-            value: 'image',
-            default: {
-              source: '',
-              alt: '',
-              href: '',
-              caption: '',
-              details_title: '',
-              details: '',
-              style: {
-                width: '100%',
-                height: '100%'
-              },
-              align: 'center'
-            }
-          },{
-            text: bbn._("Image Text"),
-            value: 'image-text',
-            default: {
-              source: '',
-              alt: '',
-              href: '',
-              caption: '',
-              details_title: '',
-              details: '',
-              style: {
-                width: '100%',
-                height: '100%'
-              },
-              align: 'center'
-            }
-          }, {
-            text: bbn._("Carousel"),
-            value: 'carousel',
-            default: {
-              source: '',
-              autoplay: 1,
-              arrows: 0,
-              preview: 1,
-              loop: 1,
-              info: 1,
-              style: {
-                width: '100%',
-                height: '300px'
-              },
-              align: 'center'
-            }
-          }, {
-            text: bbn._("Gallery"),
-            value: 'gallery',
-            default: {
-              source: '',
-              scrollable: 0,
-              pageable: 0,
-              pager: 0,
-              zoomable: 0,
-              resizable: 0,
-              toolbar: 0,
-              style: {
-                width: '100%',
-                height: '100%'
-              },
-              align: 'center',
-              imageWidth: 150
-            }
-          }, {
-            text: bbn._("Video"),
-            value: 'video',
-            default: {
-              source: '',
-              autoplay: 0,
-              muted: 0,
-              controls: 0,
-              loop: 0,
-              style: {
-                width: '100%',
-                height: '100%'
-              },
-              align: 'center'
-            }
-          }
-        ],
+        realRowSelected: -1,
+        realSourceArray: [],
+        editedSource: null,
         data: {
           type: 'text',
           content: ''
-        }
+        },
+        types: types
+
       };
     },
     computed: {
@@ -232,21 +222,6 @@
         }
 
         return ['html', 'markdown', 'gallery'].includes(this.source[this.currentEdited].type);
-      },
-      editedSource() {
-        if (this.source[this.currentEdited]) {
-          let r = this.source[this.currentEdited];
-          if (r.type === 'container') {
-            let ct = this.getRef('block' + this.currentEdited);
-            if (ct) {
-              return r.items[ct.currentItemSelected];
-            }
-          }
-
-          return r;
-        }
-
-        return null;
       }
     },
     methods: {
@@ -306,43 +281,58 @@
           this.currentEdited = -1;
           this.source.splice(idx, 1);
         })
+      },
+      updateSelected() {
+        if (this.source[this.currentEdited]) {
+          let r = this.source[this.currentEdited];
+          if (r.type === 'container') {
+            this.realSourceArray = r.items;
+            let ct = this.getRef('block' + this.currentEdited);
+            this.realRowSelected = ct ? ct.currentItemSelected : -1;
+            this.editedSource = r.items[this.realRowSelected] || null;
+          }
+          else {
+            this.realSourceArray = this.source;
+            this.realRowSelected = this.currentEdited;
+            this.editedSource = this.source[this.currentEdited] || null;
+          }
+        }
+        else {
+          this.realSourceArray = this.source;
+          this.realRowSelected = -1;
+          this.editedSource = null;
+        }
       }
     },
     watch: {
-      currentType(v) {
-        let newCfg = bbn.fn.clone(bbn.fn.getRow(this.types, {value:v}).default);
-        if (newCfg && this.source[this.currentEdited]) {
-          for (let n in newCfg) {
-            if (this.source[this.currentEdited][n] !== undefined) {
-              newCfg[n] = this.source[this.currentEdited][n];
+      'editedSource.type'(v) {
+        let tmp = this.editedSource;
+        if (this.editedSource && this.realSourceArray.length) {
+          let cfg = bbn.fn.getField(types, 'default', {value:v});
+          if (cfg) {
+            for (let n in cfg) {
+              if ((n !== 'type') && (tmp[n] === undefined)) {
+                this.$set(tmp, n, cfg[n]);
+              }
+              else {
+                tmp[n] = cfg[n];
+              }
+            }
+            for (let n in tmp) {
+              if (cfg[n] === undefined && (n !== 'type')) {
+                delete tmp[n];
+              }
             }
           }
-          newCfg.type = v;
-          this.source.splice(this.currentEdited, 1, newCfg)
-        }
-      },
-    	currentEdited(v) {
-        if (this.isMoving) {
-          return;
-        }
-        if (v === -1) {
-          this.currentType = 'text';
-          return;
-        }
-
-        if (this.nextEdited === v) {
-          this.nextEdited = -1;
-          //this.getRef('toolbar').updateSlot();
-        }
-        else {
-          this.nextEdited = v;
-          this.currentEdited = -1;
-          setTimeout(() => {
-            this.currentEdited = this.nextEdited;
-            this.currentType = this.source[this.currentEdited].type;
-          }, 100)
         }
       }
-	  }
-  };
+    },
+    currentEdited(v) {
+      if (this.source[v]) {
+        this.currentType = this.source[v].type || 'text';
+      }
+
+      this.updateSelected();
+    }
+  }
 })();

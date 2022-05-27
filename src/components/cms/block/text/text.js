@@ -11,7 +11,7 @@
     },
     computed: {
       currentContent(){
-        return bbn.fn.nl2br(this.source.content || '&nbsp;');
+        return this.source.content || '&nbsp;';
       },
       content: {
         get() {

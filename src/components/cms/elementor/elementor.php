@@ -17,6 +17,7 @@
                                           :selectable="true"
                                           :overable="true"
                                           :selected="currentEdited === i"
+                                          @select="updateSelected"
                                           @click.stop="changeEdited(i)"/>
           <appui-note-cms-block v-else
                                 :source="cfg"
@@ -73,14 +74,13 @@
           </div>
         </div>
         <div class="bbn-flex-fill">
-          <div v-if="currentEdited === -1">
+          <div v-if="!editedSource">
             <slot/>
           </div>
           <bbn-scroll v-else>
             <div class="bbn-w-100 bbn-middle">
               <div class="bbn-w-100 bbn-vlpadded bbn-hxlpadded">
-                <appui-note-cms-block v-if="editedSource"
-                                      class="bbn-contain"
+                <appui-note-cms-block class="bbn-contain"
                                       :source="editedSource"
                                       mode="edit"/>
               </div>

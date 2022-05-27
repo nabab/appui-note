@@ -42,11 +42,12 @@
       mode: {
         type: String,
         default: 'read'
-      },
+      }
     },
     data(){
       return {
         over: false,
+        overItem: -1,
         edit: this.mode === 'edit',
         isAdmin: true,
         editing: true,
@@ -79,14 +80,21 @@
       addBlock() {
         this.source.items.push({
           type: 'text',
-          text: ''
+          content: ''
         });
-        bbn.fn.log(this.source);
+      },
+      removeBlock(idx) {
+        this.source.items.splice(idx, 1);
       }
     },
     watch: {
       itemsSelected(v) {
         this.currentItemSelected = v;
+      },
+      currentItemSelected(v) {
+        if (v > -1) {
+          this.$emit('select', this.currentItemSelected);
+        }
       }
     }
   };
