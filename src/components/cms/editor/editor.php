@@ -36,9 +36,9 @@
         <slot/>
       </bbn-scroll>
       <bbn-scroll v-else>
-        <div class="bbn-w-100">
-          <div class="bbn-grid-fields bbn-padded">
-            <div class="bbn-grid-full bbn-vpadded bbn-xl">
+        <div class="bbn-w-100 bbn-padded">
+          <div class="bbn-grid-fields">
+            <div class="bbn-grid-full bbn-bottom-padding bbn-xl">
               <?= _("Page's properties") ?>
             </div>
             <label><?= _("Title") ?></label>

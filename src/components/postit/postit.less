@@ -1,16 +1,18 @@
 /*I use display flex on the parent div because bbn-masonry doesn't work*/
 .appui-note-postit {
-  .bbn-postit{
-    height: 250px;
+  .appui-note-postit-buttons {
+    visibility: hidden;
+  }
+  > .appui-note-postit-container {
+    width: 20em;
+    min-height:20em;
+    max-height:20em;
+    height: auto;
     font-family: 'Gloria Hallelujah', cursive;
     font-size: 15px;
     color: #000;
     word-wrap: break-word;
-    padding: 15px 7px 7px 7px;
     overflow-y: auto;
-    box-shadow: 0 4px 6px #333;
-    -moz-box-shadow: 0 4px 6px #333;
-    -webkit-box-shadow: 0 4px 6px #333;
   }
   ::-webkit-scrollbar {
     width: 6px;  /* for vertical scrollbars */
@@ -23,5 +25,11 @@
   ::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.5);
   }
-
+  i {
+  }
+  &:hover, &:focus {
+    .appui-note-postit-buttons {
+      visibility: visible;
+    }
+  }
 }

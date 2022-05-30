@@ -6,13 +6,45 @@
  */
 (() => {
   return {
+    mixins: [bbn.vue.basicComponent],
     props: {
-      content: {},
-      title: {},
-      creation: {},
-      color: {},
-      id_note: {
-        type: String
+      source: {
+        type: Object,
+        required: true
+      },
+      palette: {
+        type: Array,
+        default() {
+          return [
+            '#ff6c89',
+            '#fbae3c',
+            '#3bd7c2',
+            '#fd4db0',
+            '#fad2da',
+            '#fbf7ae',
+            '#dae3ea',
+            '#a9c6e8',
+            '#d6d4df',
+            '#cee2d7',
+            '#73cac4',
+            '#fff9a5',
+            '#f9b8bc',
+            '#b0cdeb',
+            '#ee5f35',
+            '#f37d93',
+            '#ffd938',
+            '#fd4db0',
+            '#1dace6',
+            '#e7f150',
+            '#ffd938'
+          ];
+        }
+      },
+      originalPalette: {
+        type: Array,
+        default() {
+          return ['#FBAE3C', '#FD4DB0', '#1CABE3', '#E7F152', '#FFD93A'];
+        }
       },
       icon:{
         type: Boolean,
@@ -21,69 +53,68 @@
     },
     data(){
       return {
-        showColorPicker: false,
+        showCfg: false,
+        showInfo: false,
         colorIsChanged: false,
-        palette: [
-          '#ff6c89', '#fbae3c', '#3bd7c2', '#fd4db0', '#fad2da', '#fbf7ae', '#dae3ea', '#a9c6e8', '#d6d4df', '#cee2d7', '#73cac4', '#fff9a5', '#f9b8bc', '#b0cdeb', '#ee5f35', '#f37d93', '#ffd938', '#fd4db0', '#1dace6', '#e7f150', '#ffd938', 'FBAE3C', '#FD4DB0', '#1CABE3', '#E7F152', '#FFD93A'],
-        originalPalette: ['#FBAE3C', '#FD4DB0', '#1CABE3', '#E7F152', '#FFD93A'],
-        isMounted: false,
-        actualColor: this.color || false,
-        actualRotation: bbn.fn.randomInt(-15,15),
-        editing: false,
-        isModified: false,
-        newData: {
-          content: this.html2text(this.content),
-          title: this.html2text(this.title)
-        }
+        currentBcolor: this.source.bcolor || '#fbf7ae',
+        currentFcolor: this.source.fcolor || '#000000',
+        currentText: this.source.text || '',
+        currentTitle: this.source.title || '',
+        currentPinned: this.source.pinned || false,
+        currentCreation: this.source.creation || bbn.fn.dateSQL(),
+        actualRotation: bbn.fn.randomInt(-75,75)/10,
+        saveTimeout: false
       }
     },
     computed: {
+      isSaved() {
+        return (this.currentTitle === (this.source.title || '')) &&
+          (this.currentText === (this.source.text || '')) &&
+          (this.currentBcolor === (this.source.bcolor || '#fbf7ae')) &&
+          (this.currentFcolor === (this.source.fcolor || '#000000')) &&
+        	(this.currentPinned === (this.source.pinned || false));
+      },
       getStyle(){
         return '-moz-transform: rotate(' + this.actualRotation + 'deg); ' +
           '-webkit-transform: rotate(' + this.actualRotation + '); ' +
           '-o-transform: rotate(' + this.actualRotation + '); ' +
           '-ms-transform: rotate(' + this.actualRotation + 'deg); ' +
           'transform: rotate(' + this.actualRotation + 'deg); ' +
-          'backgroundColor: ' + this.actualColor;
+          'backgroundColor: ' + this.currentBcolor + '; ' +
+          'color: ' + this.currentFcolor;
       }
     },
     methods: {
       fdate: bbn.fn.fdate,
       html2text: bbn.fn.html2text,
-      edit(){
-        this.$nextTick(() => {
-          if ( this.isModified ){
-            this.post(appui.plugins['appui-note'] + '/actions/update', bbn.fn.extend(true, {}, this.newData, {
-              id_note: this.id_note,
-              color: this.actualColor
-            }), (d) => {
+      save() {
+        if (!this.isSaved) {
+          bbn.fn.log("IS SAVING");
+          this.post(
+            appui.plugins['appui-note'] + '/actions/postit/save',
+            {
+              data: bbn.fn.extend({}, this.source, {
+                title: this.currentTitle,
+                text: this.currentText,
+                bcolor: this.currentBcolor,
+                fcolor: this.currentFcolor,
+                pinned: this.currentPinned,
+              })
+            },
+            d => {
               if ( d.success ){
-                this.isModified = false;
-                this.editing = false;
-                appui.success(bbn._('Saved'));
+                appui.success(bbn._('Post-it saved'));
+                this.$emit('save', d.data)
               }
               else {
                 appui.error();
               }
-            });
-          }
-          else {
-            appui.warning(bbn._('No changes'));
-            this.editing = false;
-          }
-        });
-      },
-      editMode(e){
-        if ( !this.editing ){
-          this.editing = true;
+            }
+          );
         }
-        setTimeout(() => {
-          //$(e.target).focus();
-          e.target.focus();
-        }, 200);
       },
       removeNote(){
-        this.post(appui.plugins['appui-note'] + '/actions/delete',{id_note: this.id_note}, d =>{
+        this.post(appui.plugins['appui-note'] + '/actions/delete',{id_note: this.source.id}, d =>{
           if ( d.success ){
             appui.success(bbn._('Delete'));
             this.$nextTick(()=>{
@@ -95,26 +126,55 @@
           }
         });
       },
-      changeText(field, e){
+      changeTitle(e){
         //let newVal = this.html2text($(e.target).html());
         let newVal = this.html2text(e.target.innerHTML);
-        if ( newVal !== this.newData[field] ){
-          this.newData[field] = newVal;
-          this.isModified = true;
+        if (newVal !== this.currentTitle) {
+          this.currentTitle = newVal;
         }
-      }
-    },
-    beforeMount(){
-      if ( !this.color ){
-        let r = Math.random();
-        while ( !this.originalPalette[Math.round(r*10)] ){
-          r = Math.random();
-        }
-        this.actualColor = this.originalPalette[Math.round(r*10)];
+      },
+      setSaveChrono() {
+        clearTimeout(this.saveTimeout);
+        this.saveTimeout = setTimeout(() => {
+          this.save();
+        }, 2000)
       }
     },
     mounted(){
-      this.isMounted = true;
+      this.ready = true;
+    },
+    watch: {
+      "source.bcolor"(v) {
+        this.currentBcolor = v;
+        this.$forceUpdate();
+      },
+      "source.fcolor"(v) {
+        this.currentFcolor = v;
+        this.$forceUpdate();
+      },
+      "source.text"(v) {
+        this.currentText = v;
+        this.$forceUpdate();
+      },
+      "source.title"(v) {
+        this.currentTitle = v;
+        this.$forceUpdate();
+      },
+      currentText() {
+        this.setSaveChrono();
+      },
+      currentTitle() {
+        this.setSaveChrono();
+      },
+      currentBcolor() {
+        this.setSaveChrono();
+      },
+      currentFcolor() {
+        this.setSaveChrono();
+      },
+      currentPinned() {
+        this.setSaveChrono();
+      }
     }
   }
 })();

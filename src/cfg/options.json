@@ -212,6 +212,22 @@
             "front_img": 1
           },
           {
+            "id_alias": [
+              "multilines",
+              "editors",
+              "note",
+              "appui"
+            ],
+            "text": "Post-it",
+            "code": "postit"
+          },
+          {
+            "id_alias": [
+              "rich",
+              "editors",
+              "note",
+              "appui"
+            ],
             "text": "Tasks",
             "code": "tasks"
           }

@@ -305,9 +305,10 @@
       }
     },
     watch: {
-      'editedSource.type'(v) {
+      'editedSource.type'(v, ov) {
+        bbn.fn.log(v, ov, '???');
         let tmp = this.editedSource;
-        if (this.editedSource && this.realSourceArray.length) {
+        if (v && (ov !== undefined) && this.editedSource && this.realSourceArray.length) {
           let cfg = bbn.fn.getField(types, 'default', {value:v});
           if (cfg) {
             for (let n in cfg) {
@@ -325,14 +326,17 @@
             }
           }
         }
-      }
-    },
-    currentEdited(v) {
-      if (this.source[v]) {
-        this.currentType = this.source[v].type || 'text';
-      }
+      },
+      currentEdited(v) {
+        this.editedSource = null;
+        if (this.source[v]) {
+          this.currentType = this.source[v].type || 'text';
+        }
+        this.$nextTick(() => {
+          this.updateSelected();
+        })
 
-      this.updateSelected();
+      }
     }
   }
 })();

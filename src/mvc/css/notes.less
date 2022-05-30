@@ -1,10 +1,11 @@
 /*I use display flex on the parent div because bbn-masonry doesn't work*/
-.bbn-postit-container {
-  column-count: 3;
+.appui-note-postit-container {
+  column-count: auto;
+  column-width: 30em;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  .bbn-postit{
+  .appui-note-postit{
     padding-left: 5px;
     padding-right: 5px;
     background:#FFFFA5;
@@ -16,23 +17,6 @@
     //margin: 2% 15%;
     //padding: 5%;
     overflow-y: auto;
-    margin: 25px;
-    width: 250px;
-    min-height:220px;
-    max-height:220px;
-    padding-top:15px;
-    -webkit-transform: rotate(7.5deg);  /* Chrome, Opera 15+, Safari 3.1+*/
-      -ms-transform: rotate(7.5deg);  /* IE 9 */
-          transform: rotate(7.5deg);  /* Firefox 16+, IE 10+, Opera */
-    box-shadow: 0px 4px 6px #333;
-    -moz-box-shadow: 0px 4px 6px #333;
-    -webkit-box-shadow: 0px 4px 6px #333;
-    .cursor{
-      cursor: pointer;
-    }
-
-
-  
   }
 }
 ::-webkit-scrollbar

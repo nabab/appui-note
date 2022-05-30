@@ -7,10 +7,10 @@
     <bbn-pane :scrollable="true"
               size="50%"
               ref="leftPane">
-      <div class="bbn-vlpadded bbn-hlpadded bbn-w-100"
+      <div class="bbn-padding bbn-w-100"
            @click="currentEdited = -1">
         <div v-for="(cfg, i) in source"
-             class="bbn-w-100 bbn-vspadded">
+             class="bbn-w-100 bbn-bottom-padding">
           <appui-note-cms-block-container v-if="cfg.type === 'container'"
                                           :source="cfg"
                                           :ref="'block' + i"
