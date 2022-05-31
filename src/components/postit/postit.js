@@ -68,11 +68,27 @@
     },
     computed: {
       isSaved() {
+        if (this.currentTitle !== (this.source.title || '')) {
+          bbn.fn.log("title bad", this.currentTitle, (this.source.title || ''))
+        }
+        if (this.html2text(this.currentText) !== this.html2text(this.source.text || '')) {
+          bbn.fn.log("text bad", this.currentText, (this.source.text || ''))
+        }
+        if (this.currentBcolor !== (this.source.bcolor || '#fbf7ae')) {
+          bbn.fn.log("bcolor bad", this.currentBcolor, (this.source.bcolor || '#fbf7ae'))
+        }
+        if (this.currentFcolor !== (this.source.fcolor || '#000000')) {
+          bbn.fn.log("fcolor bad", this.currentFcolor, (this.source.fcolor || '#000000'))
+        }
+        if (this.currentPinned != (this.source.pinned || false)) {
+          bbn.fn.log("pinned bad", this.currentPinned, (this.source.pinned || false))
+        }
+
         return (this.currentTitle === (this.source.title || '')) &&
-          (this.currentText === (this.source.text || '')) &&
+          (this.html2text(this.currentText) === this.html2text(this.source.text || '')) &&
           (this.currentBcolor === (this.source.bcolor || '#fbf7ae')) &&
           (this.currentFcolor === (this.source.fcolor || '#000000')) &&
-        	(this.currentPinned === (this.source.pinned || false));
+        	(this.currentPinned == (this.source.pinned || false));
       },
       getStyle(){
         return '-moz-transform: rotate(' + this.actualRotation + 'deg); ' +
@@ -107,6 +123,13 @@
                 this.$emit('save', d.data)
               }
               else {
+                bbn.fn.log(bbn.fn.extend({}, this.source, {
+                  title: this.currentTitle,
+                  text: this.currentText,
+                  bcolor: this.currentBcolor,
+                  fcolor: this.currentFcolor,
+                  pinned: this.currentPinned,
+                }));
                 appui.error();
               }
             }

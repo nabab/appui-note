@@ -23,6 +23,7 @@
     methods: {
       add() {
         this.newPostIt = this.getNewPostIt();
+        this.$forceUpdate();
       },
       isEditing(val){
         bbn.fn.log(val);
@@ -30,8 +31,8 @@
       },
       getNewPostIt() {
         return {
-          text: '',
-          title: '',
+          text: bbn._("Write here your content"),
+          title: bbn._("Don't forget!"),
           date: bbn.fn.dateSQL(),
           bcolor: '#fbf7ae',
           fcolor: '#000000'

@@ -8,18 +8,19 @@
   </div-->
   <div class="bbn-w-100 bbn-flex-fill">
     <bbn-scroll>
-      <div class="bbn-lpadding bbn-postit-container bbn-w-100 bbn-flex-fill">
+      <div class="bbn-lpadding bbn-postit-container bbn-w-100 bbn-flex"
+           style="justify-content: center; align-items: center; flex-wrap: wrap; min-height: 100%">
         <appui-note-postit v-if="newPostIt"
                            :source="newPostIt"
                            @save="onSave"/>
-        <div v-else
-             class="bbn-block"
-             style="width: 20em; height: 20em">
+        <div style="width: 20em; height: 20em;"
+             v-else
+             class="bbn-p bbn-bordered bbn-reactive bbn-radius"
+             @click.stop.prevent="add">
           <div class="bbn-100 bbn-middle">
-            <div class="bbn-block bbn-xlpadding bbn-bordered bbn-xxl">
-              <bbn-button icon="nf nf-fa-plus"
-                          :notext="true"
-                          @click="add"/>
+            <div class="bbn-block">
+              <i class="bbn-xxxxl nf nf-fa-plus"
+                 :title="_('Add a new Post-It')"/>
             </div>
           </div>
         </div>

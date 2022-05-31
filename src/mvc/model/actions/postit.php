@@ -17,11 +17,11 @@ if ($model->hasData('action', true)) {
       if ($model->hasData('data', true) &&
           is_array($model->data['data']) &&
           X::hasProps($model->data['data'], ['title', 'text', 'fcolor', 'bcolor']) &&
-          $note->savePostIt($model->data['data'])
+          ($postit = $note->savePostIt($model->data['data']))
       ) {
         return [
           'success' => true,
-          'data'    => $note->getPostIt($model->data['data']['id'])
+          'data'    => $note->getPostIt($postit['id'])
         ];
       }
       break;

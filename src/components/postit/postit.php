@@ -1,4 +1,5 @@
-<div :class="componentClass">
+<div :class="[componentClass, 'bbn-margin']"
+     @click.stop>
   <div :style="getStyle"
        :class="getComponentName() + '-container bbn-shadow'">
     <div class="bbn-w-100 bbn-spadding">
@@ -16,10 +17,9 @@
                class="nf nf-fa-info_circle bbn-lg bbn-p"/>
           </div>
         </div>
-        <div v-if="currentTitle"
-             tabindex="0"
+        <div tabindex="0"
              title="<?=_('Edit Title')?>"
-             class="bbn-c bbn-p bbn-b bbn-flex-fill bbn-spadded"
+             class="bbn-c bbn-p bbn-b bbn-lg bbn-b bbn-flex-fill bbn-spadded bbn-small-caps"
              v-text="html2text(currentTitle)"
              :contenteditable="true"
              @blur="changeTitle"/>
@@ -104,7 +104,9 @@
         </div>
 
         <div>
-          <?= _("Pinned") ?>
+          <?= _("Pinned") ?><br>
+          <span v-if="currentPinned"><?= _('It will be removed from the Pinned post-its panel') ?></span>
+          <span v-else><?= _('It will be added to the pinned post-its panel') ?></span>
         </div>
         <div>
           <bbn-checkbox :value="1"
