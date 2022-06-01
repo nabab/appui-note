@@ -27,6 +27,7 @@
         <appui-note-postit v-for="note in source.notes"
                            :key="note.id"
                            :uid="note.id"
+                           :show-pinned="true"
                            :source="note"
                            @save="onSave"/>
       </div>

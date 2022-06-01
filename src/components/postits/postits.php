@@ -9,15 +9,15 @@
              ref="floater"
              :scrollable="false">
   <div class="bbn-overlay bbn-middle"
-       @click="$emit('close')">
+       @click="onClick">
     <div class="bbn-flex bbn-l"
          style="flex-wrap: wrap; max-width: 80%; align-items: center;">
       <appui-note-postit v-for="(pi, idx) in source"
                          :source="pi"
+                         @remove="onRemove"
                          @save="onSave($event, idx)"
-                         @click.stop.prevent
                          :key="pi.id"/>
-      <div style="width: 20em; height: 20em;"
+      <div style="width: 15rem; height: 15rem; margin: 2.5rem"
            v-if="!hasNew"
            class="bbn-p bbn-white bbn-bordered bbn-reactive bbn-radius"
            @click.stop.prevent="add">

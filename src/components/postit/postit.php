@@ -1,5 +1,4 @@
-<div :class="[componentClass, 'bbn-margin']"
-     @click.stop>
+<div :class="[componentClass, 'bbn-margin']">
   <div :style="getStyle"
        :class="getComponentName() + '-container bbn-shadow'">
     <div class="bbn-w-100 bbn-spadding">
@@ -15,10 +14,16 @@
                v-if="source.id"
                title="<?= _("Post-it information") ?>"
                class="nf nf-fa-info_circle bbn-lg bbn-p"/>
+            <i @click="remove(source.id)"
+               ref="info"
+               v-if="source.id"
+               title="<?= _("Delete this post-it") ?>"
+               class="nf nf-fa-trash bbn-lg bbn-p"/>
           </div>
         </div>
         <div tabindex="0"
              title="<?=_('Edit Title')?>"
+             ref="title"
              class="bbn-c bbn-p bbn-b bbn-lg bbn-b bbn-flex-fill bbn-spadded bbn-small-caps"
              v-text="html2text(currentTitle)"
              :contenteditable="true"
@@ -50,7 +55,8 @@
                :width="200"
                :auto-hide="true"
                :height="200">
-    <div class="bbn-w-100 bbn-padding">
+    <div class="bbn-w-100 bbn-padding"
+         @click.stop.prevent>
       <div class="bbn-grid-fields">
         <div>
           <?= _("Version") ?>
@@ -73,7 +79,8 @@
                :width="200"
                :auto-hide="true"
                :height="200">
-    <div class="bbn-w-100 bbn-padding">
+    <div class="bbn-w-100 bbn-padding"
+         @click.stop.prevent>
       <div class="bbn-grid-fields">
         <div>
           <?= _("Post-it color") ?>
@@ -81,6 +88,7 @@
         <div>
           <bbn-colorpicker :preview="true"
                            :palette="palette"
+                           :auto-select="true"
                            :cfg="{
                                  columns: 5,
                                  tileSize: 32
@@ -95,6 +103,7 @@
         <div>
           <bbn-colorpicker :preview="true"
                            :palette="['#000000', '#FFFFFF']"
+                           :auto-select="true"
                            :cfg="{
                                  columns: 5,
                                  tileSize: 32
@@ -103,12 +112,13 @@
                            ref="fcolorpicker"/>
         </div>
 
-        <div>
+        <div v-if="showPinned"
+             class="bbn-nowrap">
           <?= _("Pinned") ?><br>
           <span v-if="currentPinned"><?= _('It will be removed from the Pinned post-its panel') ?></span>
           <span v-else><?= _('It will be added to the pinned post-its panel') ?></span>
         </div>
-        <div>
+        <div v-if="showPinned">
           <bbn-checkbox :value="1"
                         :novalue="0"
                         v-model="currentPinned"/>

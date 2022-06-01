@@ -15,12 +15,28 @@
       }
     },
     methods: {
-      onSave(data) {
-        if (data.id && this.hasNew) {
-          let row = bbn.fn.getRow(this.source, {id: undefined});
-          this.extend(row, data);
+      onClick(e) {
+        if (!bbn.fn.isInside(e.target, '.appui-note-postit')) {
+          this.$emit('close');
         }
-        bbn.fn.log("Onsave", arguments);
+      },
+      onRemove(data) {
+        let idx = bbn.fn.search(this.source, {id: data.id || undefined});
+        bbn.fn.log("On remove", idx)
+        if (this.source[idx]) {
+          this.source.splice(idx, 1);
+        }
+      },
+      onSave(data) {
+        if (data.id) {
+          let row = bbn.fn.getRow(this.source, {id: data.id});
+          if (!row) {
+            row = bbn.fn.getRow(this.source, {id: undefined});
+          }
+          if (row) {
+            this.extend(row, data);
+          }
+        }
       },
       getNewPostIt() {
         return {
@@ -29,7 +45,8 @@
           date: bbn.fn.dateSQL(),
           bcolor: '#fbf7ae',
           fcolor: '#000000',
-          pinned: true
+          pinned: true,
+          id: undefined
         };
       },
       add() {

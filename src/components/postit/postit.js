@@ -8,6 +8,10 @@
   return {
     mixins: [bbn.vue.basicComponent],
     props: {
+      showPinned: {
+        type: Boolean,
+        default: false
+      },
       source: {
         type: Object,
         required: true
@@ -136,13 +140,11 @@
           );
         }
       },
-      removeNote(){
-        this.post(appui.plugins['appui-note'] + '/actions/delete',{id_note: this.source.id}, d =>{
+      remove() {
+        this.post(appui.plugins['appui-note'] + '/actions/delete',{id_note: this.source.id}, d => {
           if ( d.success ){
             appui.success(bbn._('Delete'));
-            this.$nextTick(()=>{
-              bbn.vue.closest(this, 'bbns-container').reload();
-            });
+            this.$emit('remove', this.source);
           }
           else{
             appui.error(bbn._('Error while deleting'));
