@@ -160,12 +160,18 @@
         //return dayjs(d).format('DD/MM/YY')
         return bbn.fn.fdate(d, true);
       },
+      ndate(d){
+        return dayjs(d).format('DD/MM/YYYY');
+      },
+      ndatetime(d){
+        return dayjs(d).format('DD/MM/YYYY HH:mm');
+      },
       fdate(d){
         //return dayjs(d).format('DD/MM/YY HH:mm:ss');
-        return bbn.fn.fdate(d, true);
+        return bbn.fn.fdatetime(d, true);
       },
       hour(d){
-        return dayjs(d).format('HH:mm:ss')
+        return dayjs(d).format('HH:mm')
       },
       hasEditUsers(users){
 		    if ( users ){
@@ -323,6 +329,12 @@
             props: {
               source: {
                 type: Object
+              },
+              index: {
+                type: Number
+              },
+              lastIndex: {
+                type: Number
               }
             },
             data(){
@@ -341,12 +353,13 @@
             data(){
               return {
                 topic: bbn.vue.closest(this, 'appui-note-forum-topic'),
-                currentLimit: 25,
+                currentLimit: 10,
                 originalData: null,
                 start: 0,
                 total: 0,
                 limits: [10, 25, 50, 100, 250, 500],
-                isLoading: false
+                isLoading: false,
+                isInit: true
               }
             },
             computed: {
@@ -367,6 +380,9 @@
               },
               pageable(){
                 return this.topic.forum.pageable;
+              },
+              showPager(){
+                return this.isInit && (this.source.num_replies > this.currentLimit);
               }
             },
             methods: {
@@ -396,6 +412,7 @@
                         this.total = result.total || result.data.length || 0;
                         this.source.num_replies = this.total;
                       }
+                      this.isInit = true;
                     });
                   });
                 }
@@ -406,6 +423,7 @@
                   }
                   this.total = this.source.replies.length;
                   this.source.num_replies = this.total;
+                  this.isInit = true;
                 }
               }
             },
