@@ -1,12 +1,13 @@
-<div class="bbn-overlay appui-note-forum">
+<div class="bbn-overlay appui-note-forum bbn-background bbn-bordered">
 	<div class="bbn-overlay bbn-flex-height">
 		<div v-if="toolbar"
-				 class="bbn-header bbn-w-100"
+				 class="bbn-header bbn-w-100 appui-note-forum-toolbar bbn-no-border-top bbn-no-border-left bbn-no-border-right"
 				 ref="toolbar"
 				 style="min-height: 30px"
 		>
 		<!-- toolbar -->
-			<div v-if="toolbarButtons.length" class="bbn-spadded">
+			<div v-if="toolbarButtons.length"
+           class="bbn-spadded">
 				<bbn-button v-for="(button, i) in toolbarButtons"
 										class="bbn-hsmargin"
 										:key="i"
@@ -31,7 +32,7 @@
                                  :source="d"
         >
           <div class="bbn-w-100">
-            <div :class="['bbn-flex-width', 'appui-note-forum-topic', {'bbn-box': !($vnode.key%2), 'bbn-alt': !!($vnode.key%2)}]">
+            <div :class="['bbn-flex-width', 'appui-note-forum-topic', 'bbn-bordered-bottom', 'bbn-no-border-top', 'bbn-no-border-left', 'bbn-no-border-right', {'bbn-alt': !!($vnode.key%2)}]">
               <div class="bbn-spadded"
                    style="height: 42px; width: 42px"
               >
@@ -196,16 +197,23 @@
               <div class="bbn-spadded bbn-vmiddle appui-note-forum-hfixed"
                    :title="'<?=_('Created')?>: ' + forum.fdate(source.creation) + ((source.creation !== source.last_edit) ? ('\n<?=_('Edited')?>: ' + forum.fdate(source.last_edit)) : '')"
                    style="margin-left: 0.5rem;">
-                <div class="bbn-middle" style="width: 10em">
-                  <i :class="['nf nf-fa-calendar', {'bbn-orange': source.creation !== source.last_edit}]"/>
-                  <div class="bbn-s bbn-left-sspace"
-                       v-text="(source.creation !== source.last_edit) ? forum.sdate(source.last_edit) : forum.sdate(source.creation)"/>
+                <div>
+                  <div class="bbn-vmiddle">
+                    <i :class="['nf nf-fa-calendar', {'bbn-orange': source.creation !== source.last_edit}]"/>
+                    <div class="bbn-s bbn-left-sspace"
+                         v-text="forum.ndate(source.creation !== source.last_edit ? source.last_edit : source.creation)"/>
+                  </div>
+                  <div class="bbn-vmiddle">
+                    <i :class="['nf nf-weather-time_3', {'bbn-orange': source.creation !== source.last_edit}]"/>
+                    <div class="bbn-s bbn-left-sspace"
+                         v-text="forum.hour(source.creation !== source.last_edit ? source.last_edit : source.creation)"/>
+                  </div>
                 </div>
               </div>
             </div>
             <!-- Replies -->
             <div v-if="showReplies"
-                 class="bbn-w-100"
+                 class="bbn-w-100 bbn-bordered-bottom"
             >
               <div v-if="!source.replies"
                    class="bbn-middle bbn-padded"
@@ -215,8 +223,10 @@
                                         v-for="(r, k) in source.replies"
                                         :source="r"
                                         :key="k"
+                                        :index="k"
+                                        :last-index="source.replies.length - 1"
                 >
-                  <div :class="['bbn-flex-width', 'appui-note-forum-replies', {'bbn-box': !($vnode.key%2), 'bbn-alt': !!($vnode.key%2)}]">
+                  <div :class="['bbn-flex-width', 'appui-note-forum-replies', 'bbn-bordered-left', 'bbn-no-border-top', 'bbn-no-border-right', {'bbn-alt': !!($vnode.key%2), 'bbn-bordered-bottom': lastIndex !== index}]">
                     <div class="bbn-spadded"
                          style="height: 42px; width: 42px"
                     >
@@ -240,7 +250,7 @@
                                      class="bbn-hsmargin"
                         ></bbn-initial>
                         <i class="nf nf-fa-calendar"></i>
-                        <span v-text="topic.forum.fdate(source.parent_creation)"
+                        <span v-text="topic.forum.ndatetime(source.parent_creation)"
                               :style="{
                                 textDecoration: !source.parent_active ? 'line-through' : 'none',
                                 marginLeft: '0.3rem'
@@ -321,6 +331,16 @@
                         ></i>
                       </div>
                     </template>
+                    <div v-if="source.num_replies"
+                         class="bbn-spadded bbn-vmiddle appui-note-forum-hfixed appui-note-forum-replies-badge"
+                         title="<?=_('Replies')?>"
+                         style="margin-left: 0.5rem"
+                    >
+                      <i class="nf nf-fa-comments bbn-xl bbn-hsmargin"></i>
+                      <span class="bbn-badge bbn-bg-green bbn-white"
+                            v-text="source.num_replies"
+                      ></span>
+                    </div>
                     <div v-if="!source.locked && !source.num_replies"
                          class="bbn-spadded bbn-vmiddle appui-note-forum-hfixed"
                          style="margin-left: 0.5rem"
@@ -347,23 +367,21 @@
                          @click="topic.forum.reply ? topic.forum.reply(source, _self) : false"
                       ></i>
                     </div>
-                    <div v-if="source.num_replies"
-                         class="bbn-spadded bbn-hsmargin bbn-vmiddle appui-note-forum-hfixed appui-note-forum-replies-badge"
-                         title="<?=_('Replies')?>"
-                    >
-                      <i class="nf nf-fa-comments bbn-xl bbn-hsmargin"></i>
-                      <span class="bbn-badge bbn-bg-green bbn-white"
-                            v-text="source.num_replies"
-                      ></span>
-                    </div>
                     <div class="bbn-spadded bbn-vmiddle appui-note-forum-hfixed"
                          :title="'<?=_('Created')?>: ' + topic.forum.fdate(source.creation) + ((source.creation !== source.last_edit) ? ('\n<?=_('Edited')?>: ' + topic.forum.fdate(source.last_edit)) : '')"
                          style="margin-left: 0.5rem"
                     >
-                      <i :class="['nf nf-fa-calendar', {'bbn-orange': source.creation !== source.last_edit}]"></i>
-                      <div class="bbn-c bbn-s" style="margin-left: 0.3rem">
-                        <div v-text="(source.creation !== source.last_edit) ? topic.forum.sdate(source.last_edit) : topic.forum.sdate(source.creation)"></div>
-                        <!--<div v-text="(source.creation !== source.last_edit) ? topic.forum.hour(source.last_edit) : topic.forum.hour(source.creation)"></div>-->
+                      <div style="margin-left: 0.3rem">
+                        <div class="bbn-vmiddle">
+                          <i :class="['nf nf-fa-calendar', {'bbn-orange': source.creation !== source.last_edit}]"/>
+                          <div class="bbn-s bbn-left-sspace"
+                              v-text="topic.forum.ndate(source.creation !== source.last_edit ? source.last_edit : source.creation)"/>
+                        </div>
+                        <div class="bbn-vmiddle">
+                          <i :class="['nf nf-weather-time_3', {'bbn-orange': source.creation !== source.last_edit}]"/>
+                          <div class="bbn-s bbn-left-sspace"
+                              v-text="topic.forum.hour(source.creation !== source.last_edit ? source.last_edit : source.creation)"/>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -375,8 +393,9 @@
                                        :key="'appui-note-forum-pager-' + $vnode.key"
                                        ref="pager"
               >
-                <div class="appui-note-forum-pager bbn-widget appui-note-forum-replies"
+                <div class="appui-note-forum-pager bbn-widget appui-note-forum-replies bbn-no-border-bottom bbn-no-border-right bbn-no-border-top"
                      v-if="pageable || isAjax"
+                     v-show="showPager"
                 >
                   <div class="bbn-block"
                        v-if="pageable"
@@ -446,7 +465,7 @@
 			</bbn-scroll>
 		</div>
 		<!-- Footer -->
-		<div class="appui-note-forum-pager bbn-widget"
+		<div class="appui-note-forum-pager bbn-widget bbn-no-border-bottom bbn-no-border-left bbn-no-border-right"
          v-if="pageable || filterable || isAjax"
     >
       <div class="bbn-block"
