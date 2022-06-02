@@ -94,7 +94,7 @@
           (this.currentFcolor === (this.source.fcolor || '#000000')) &&
         	(this.currentPinned == (this.source.pinned || false));
       },
-      getStyle(){
+      getStyle() {
         return '-moz-transform: rotate(' + this.actualRotation + 'deg); ' +
           '-webkit-transform: rotate(' + this.actualRotation + '); ' +
           '-o-transform: rotate(' + this.actualRotation + '); ' +
@@ -107,33 +107,34 @@
     methods: {
       fdate: bbn.fn.fdate,
       html2text: bbn.fn.html2text,
+      getObj() {
+        return {
+          title: this.currentTitle,
+          text: this.currentText,
+          bcolor: this.currentBcolor,
+          fcolor: this.currentFcolor,
+          pinned: this.currentPinned,
+        };
+      },
       save() {
         if (!this.isSaved) {
-          bbn.fn.log("IS SAVING");
+          let obj  = this.getObj();
+          let o    = bbn.fn.extend({}, this.source, obj);
+          let hash = bbn.fn.md5(JSON.stringify(obj));
           this.post(
             appui.plugins['appui-note'] + '/actions/postit/save',
             {
-              data: bbn.fn.extend({}, this.source, {
-                title: this.currentTitle,
-                text: this.currentText,
-                bcolor: this.currentBcolor,
-                fcolor: this.currentFcolor,
-                pinned: this.currentPinned,
-              })
+              data: o
             },
             d => {
               if ( d.success ){
                 appui.success(bbn._('Post-it saved'));
-                this.$emit('save', d.data)
+                let hash2 = bbn.fn.md5(JSON.stringify(this.getObj()));
+                if (hash === hash2) {
+                  this.$emit('save', d.data)
+                }
               }
               else {
-                bbn.fn.log(bbn.fn.extend({}, this.source, {
-                  title: this.currentTitle,
-                  text: this.currentText,
-                  bcolor: this.currentBcolor,
-                  fcolor: this.currentFcolor,
-                  pinned: this.currentPinned,
-                }));
                 appui.error();
               }
             }
@@ -169,22 +170,6 @@
       this.ready = true;
     },
     watch: {
-      "source.bcolor"(v) {
-        this.currentBcolor = v;
-        this.$forceUpdate();
-      },
-      "source.fcolor"(v) {
-        this.currentFcolor = v;
-        this.$forceUpdate();
-      },
-      "source.text"(v) {
-        this.currentText = v;
-        this.$forceUpdate();
-      },
-      "source.title"(v) {
-        this.currentTitle = v;
-        this.$forceUpdate();
-      },
       currentText() {
         this.setSaveChrono();
       },
