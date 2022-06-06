@@ -101,7 +101,7 @@
                              :selection="false"
                              :limit="50"
                              path-name="path"
-                             :upload="root + 'media/actions/upload'"
+                             :upload="root + 'media/actions/save'"
                              :remove="root + 'media/actions/remove'"/>
 </div>
         `,
