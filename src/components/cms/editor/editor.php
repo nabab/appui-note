@@ -56,7 +56,7 @@
             </label>
             <appui-note-media-field v-if="typeNote && typeNote.front_img"
                                     v-model="source.id_media"
-                                    :source="source.medias"/>
+                                    :source="source.medias || []"/>
 
             <label v-if="typeNote && typeNote.option"
                    v-text="typeNote.option_title || _('Category')"/>
