@@ -63,6 +63,22 @@
         },
         align: 'center'
       }
+    },{
+      text: bbn._("Image Text"),
+      value: 'imagetext',
+      default: {
+        source: '',
+        alt: '',
+        href: '',
+        caption: '',
+        details_title: '',
+        details: '',
+        style: {
+          width: '100%',
+          height: '100%'
+        },
+        align: 'center'
+      }
     }, {
       text: bbn._("Carousel"),
       value: 'carousel',

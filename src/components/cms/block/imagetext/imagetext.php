@@ -87,7 +87,7 @@
 				 :style="align">
 			<a v-if="!!source.href"
 				 target="_self"
-				 :href="$parent.linkURL + source.href"
+				 :href="$parent.linkURL ? $parent.linkURL : '' + source.href"
 				 class="bbn-c">
 				<img :src="$parent.path + source.source"
 						 :alt="source.alt ? source.alt : ''">
@@ -100,10 +100,18 @@
 				 v-if="!!source.caption"
 				 v-html="source.caption"/>
 			<!--error when using decodeuricomponent on details of home image-->
-			<p class="image-details-title bbn-vsmargin bbn-w-100 bbn-b"
-				 v-if="!!source.details_title"
-				 v-html="(source.details_title)"
-				 />
+			<a v-if="!!source.href && !!source.details_title"
+				 class="bbn-u"
+				 target="_self"
+				 :href="$parent.linkURL ? $parent.linkURL : '' + source.href">
+				<h4 class="image-details-title bbn-w-100 bbn-vpadded bbn-no-margin"
+						v-html="(source.details_title)"/>
+				
+			</a>
+			<h4 class="image-details-title bbn-w-100 bbn-vpadded bbn-no-margin"
+					v-else-if="!source.href && !!source.details_title"
+					v-html="(source.details_title)"
+				/>
 			<p class="image-details bbn-vsmargin"
 				 v-if="!!source.details"
 				 v-html="source.details"/>
