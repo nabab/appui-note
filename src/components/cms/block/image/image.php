@@ -81,7 +81,7 @@
 			<a v-if="!!source.href"
          :style="source.style"
 				 target="_self"
-				 :href="$parent.linkURL + source.href"
+				 :href="$parent.linkURL ? $parent.linkURL + source.href : source.href"
 				 class="bbn-c">
 				<img :src="$parent.path + source.source"
 						 :alt="source.alt ? source.alt : ''">
