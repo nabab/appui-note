@@ -33,6 +33,7 @@
         !!this.source.id.length
       ) {
         files.push({
+          linkUrl: this.source.linkUrl, 
           name: this.source.name,
           title: this.source.title,
           description: this.source.description,
