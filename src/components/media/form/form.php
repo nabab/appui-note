@@ -5,7 +5,8 @@
 						:data="{
 							ref: ref,
 							id: source.id,
-							action: isEdit ? 'edit' : 'insert'
+							action: isEdit ? 'edit' : 'insert',
+							idGroup: source.idGroup ? source.idGroup : ''
 						}"
 						:action="url"
 						@success="success"
@@ -28,6 +29,9 @@
 
         <div><?=_('Title')?>:</div>
 				<bbn-input v-model="f.title"/>
+				
+				<div><?=_('Link')?>:</div>
+				<bbn-input v-model="f.linkUrl"/>
 
         <div class="bbn-bottom-space"><?=_('Description')?>:</div>
 				<bbn-textarea v-model="f.description"
