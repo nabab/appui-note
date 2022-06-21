@@ -3,20 +3,19 @@
 			 class="bbn-padded"
 	>
     <div class="bbn-w-100 bbn-c">
-      <label><?=_('Mode')?></label>
-      <div class="bbn-flex bbn-w-100 bbn-padded" style="justify-content: space-between">
-        <label><?=_('Publications')?></label>
-        <bbn-switch v-model="sliderMode"
-                    :value="true"
-                    :nullable="true"
-                    :novalue="false"/>
-        <label ><?=_('Gallery')?></label>
+      <div class="bbn-w-100 bbn-grid-fields">
+        <label><?=_('Mode')?></label>
+        <bbn-radio v-model="sliderMode"
+                   :nullable="true"
+                   :source="radioSource"
+                   />
       </div>
+      
       <div class="bbn-w-100 bbn-c" v-if="!okMode"><bbn-button v-text="_('Continue')" @click="okMode = true"></bbn-button></div>
     </div>
     <div v-if="okMode"  class="bbn-w-100 bbn-grid-fields">
       <label v-if="source.mode === 'publications'"><?=_('Type of articles')?></label>
-      <bbn-dropdown :source="note + '/publications/data/types_notes'"
+      <bbn-dropdown :source="note + '/cms/data/types_notes'"
                     v-model="source.noteType"
                     @change="getSlideshowSource"
                     v-if="source.mode === 'publications'"
@@ -77,8 +76,7 @@
       
       <label><?=_('Limits')?></label>
       <bbn-numeric v-model="source.limit"
-                   :step="10"
-                   :min="10"
+                   :min="source.max"
                    :nullable="false"
                    @change="getSlideshowSource"
       />

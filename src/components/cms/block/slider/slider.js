@@ -6,13 +6,14 @@
     data(){
       return {
         okMode: false,
-        sliderMode:false,
+        sliderMode:0,
         mapped: [],
         slideshowSourceUrl: appui.plugins['appui-note'] + '/cms/data/slider_data',
         currentItems: [],
         galleryListUrl: appui.plugins['appui-note'] + '/media/data/groups/list',
         note: appui.plugins['appui-note'],
         orderFields: [{text: 'Title', value: 'versions.title'},{text: 'Pub. Date', value: 'start'}, {text: 'Last edit', value: 'versions.creation'}],
+        radioSource:[{text: 'Publications', value: 0}, {text:'Gallery', value:1}]
         
       }
     },
@@ -73,7 +74,7 @@
               this.$nextTick(() => {
                 this.mapped = bbn.fn.map(d.data, data => {
                   data.type = 'img';
-                  data.content = (this.source.mode === 'gallery') ? data.path : data.front_img.path;
+                  data.content = (this.source.mode === 'gallery') ? data.path : (data.front_img && data.front_img.path) ? data.front_img.path : '';
                   data.info = data.title;
                   data.mode = 'full';
                   data.component = 'appui-note-cms-block-slider-slide'
@@ -129,6 +130,14 @@
       }
     },
     watch:{
+      sliderMode(val){
+        if(!val){
+          this.source.mode = 'publications'
+        }
+        else{
+          this.source.mode = 'gallery'
+        }
+      },
       okMode(val){
         if(val){
           if(!this.sliderMode){
@@ -157,14 +166,14 @@
         this.source.min = 1;
       }
       if(!this.source.mode){
-        this.sliderMode = false;
+        this.sliderMode = 0;
       }
       else if(this.source.mode === 'publications' ){
-        this.sliderMode = false;
+        this.sliderMode = 0;
         this.okMode = true;
       }
       else if (this.source.mode === 'gallery'){
-        this.sliderMode = true;
+        this.sliderMode = 1;
         this.okMode = true;
       }
       this.updateData();

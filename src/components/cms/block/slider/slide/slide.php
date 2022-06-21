@@ -2,6 +2,7 @@
   <div class="component-container bbn-block-carousel bbn-w-100">
     <div v-for="d in data"
          v-if="data.length"
+         class="bbn-hspadded"
          v-bind:class = "d.class ? d.class+' slider-image-section' : 'slider-image-section'">
     	<a :href="d.url ? d.url : ''">
         <img v-if="d.front_img || d.path" :src="d.front_img ? d.front_img.path : d.path" alt="">
