@@ -3,15 +3,16 @@
 			 class="bbn-grid-fields bbn-padded"
 	>
 		<label><?=_('Type of articles')?></label>
-		<bbn-dropdown :source="typesNote"
+		<bbn-dropdown :source="note + '/cms/data/types_notes'"
 									v-model="source.noteType"
-									sourceValue="id"
+									@change="getSlideshowSource"
 		/>
 		
 		<label><?=_('Ordered by')?></label>
 		<bbn-dropdown :source="orderFields"
 									v-model="source.order"
 									sourceValue="value"
+                  @change="getSlideshowSource"
 		/>
 		
 		<label><?=_('Height')?> (px)</label>
@@ -22,7 +23,7 @@
 							 :show-reset="false"
 							 :show-numeric="true"
 							 unit="px"
-							 />
+               />
 
 		<label><?=_('Max slide in line')?></label>
 		<bbn-numeric v-model="source.max"
@@ -31,15 +32,18 @@
 								 :default="1"
 								 :nullable="false"
 								 :max="5"
+                 @change="adaptView"
 		/>
 		
-		<label><?=_('Min slide in line')?></label>
-		<bbn-numeric v-model="source.max"
+		<label><?=_('Min slide in line (mobile)')?></label>
+		<bbn-numeric v-model="source.min"
 								 :step="1"
 								 :min="1"
 								 :default="1"
 								 :max="5"
 								 :nullable="false"
+                 @change="adaptView"
+
 		/>
 		
 		<label><?=_('Limits')?></label>
@@ -47,19 +51,43 @@
 								 :step="10"
 								 :min="10"
 								 :nullable="false"
+                 @change="getSlideshowSource"
 		/>
+    <label><?=_('Autoplay')?></label>
+    <bbn-checkbox v-model="source.autoplay"
+                  :value="1"
+                  :novalue="0"/>
+                  
+    <label><?=_('Arrows')?></label>
+    <bbn-checkbox v-model="source.arrows"
+                  :value="1"
+                  :novalue="0"/>
+                  
+    <label><?=_('Preview')?></label>
+    <bbn-checkbox v-model="source.preview"
+                  :value="1"
+                  :novalue="0"/>
+                  
+    <label><?=_('Loop')?></label>
+    <bbn-checkbox v-model="source.loop"
+                  :value="1"
+                  :novalue="0"/>
+                  
+    <label><?=_('Show info')?></label>
+    <bbn-checkbox v-model="source.info"
+                  :value="1"
+                  :novalue="0"/>
 	</div>
 	<div v-else class="bbn-w-100" :style="source.style">
-		<bbn-slideshow :checkbox="false"
-									 :dimension-preview="45"
-									 :auto-play="false"
-									 :arrows="{left: 'nf nf-fa-angle_left', right: 'nf nf-fa-angle_right'}"
-									 :auto-hide-ctrl="true"
-									 :loop="true"
-									 :full-slide="true"
-									 :initial-slide="0"
-									 :source="sliderSource"
-									 v-if="sliderSource && sliderSource.length"
-		/>
+      <bbn-slideshow v-if="source.currentItems && source.currentItems.length"
+                     :source="source.currentItems"
+                     ref="slideshow"
+                     :arrows="!!source.arrows"
+                     :auto-play="!!source.autoplay"
+                     :loop="!!source.loop"
+                     :preview="!!source.preview"
+                     :show-info="!!source.info"
+                     />
+    </div>
 	</div>
 </div>

@@ -96,6 +96,22 @@
         align: 'center'
       }
     }, {
+      text: bbn._("Slider"),
+      value: 'slider',
+      default: {
+        source: '',
+        autoplay: 1,
+        arrows: 0,
+        preview: 1,
+        loop: 1,
+        info: 1,
+        style: {
+          width: '100%',
+          height: '300px'
+        },
+        align: 'center'
+      }
+    }, {
       text: bbn._("Gallery"),
       value: 'gallery',
       default: {

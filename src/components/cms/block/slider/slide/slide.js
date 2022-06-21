@@ -1,5 +1,8 @@
 (()=>{
 	return {
-		props: ['data']
+		props: ['data'],
+    mounted(){
+     
+    }
 	}
 })()
