@@ -38,6 +38,7 @@
             'limit': this.source.limit,
             'order': this.source.order
           }, (d) => {
+            alert('post')
             if(d.success && d.data.length){
               if(this.source.currentItems && this.source.currentItems.length){
                 this.source.currentItems.splice(0, this.source.currentItems.length);
@@ -47,11 +48,9 @@
                   data.type = 'img';
                   data.content = data.front_img.path;
                   data.info = data.title;
-                 
-                 data.mode = 'full';
-                  
+                  data.mode = 'full';
                   data.component = 'appui-note-cms-block-slider-slide'
-                   return data;
+                  return data;
                 });
                 this.adaptView()
               });
@@ -67,12 +66,14 @@
         if ( bbn.fn.isDesktopDevice() || bbn.fn.isTabletDevice()) {
           let start = 0;
           for (let i = 0; i < this.mapped.length; i += this.source.max) {
+            alert(i)
             start = i;
             this.source.currentItems.push({
               mode : 'full',
               component: 'appui-note-cms-block-slider-slide',
               data: this.mapped.slice(start, this.source.max)
             })
+            console.log('then', start, this.source.max)
           }
         }
         else if ( bbn.fn.isMobileDevice() ) {
