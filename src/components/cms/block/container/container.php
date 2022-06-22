@@ -21,7 +21,7 @@
                ]">
     <div v-if="source.items.length"
          class="bbn-grid"
-         :style="{gridTemplateColumns: 'repeat(' + source.items.length + ', 1fr)'}">
+         :style="gridStyle">
       <div v-for="(item, i) in source.items"
            @mouseenter="overItem = i"
            @mouseleave="overItem = -1"

@@ -60,6 +60,13 @@
       }
     },
     computed: {
+      gridStyle(){
+        let style = `gridTemplateColumns: repeat( ` + this.source.items.length + `, 1fr)`
+        if ( bbn.fn.isMobile() ){
+          style = `gridTemplateRows: repeat( ` + this.source.items.length + `, 1fr)`
+        }
+        return style;
+      },
       isSelected() {
         return this.selected === true;
       },

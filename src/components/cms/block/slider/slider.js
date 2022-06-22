@@ -104,14 +104,15 @@
         }
         else if ( bbn.fn.isMobileDevice() ) {
           let start = 0;
-          for (let i = 0; i < this.mapped.length; i += this.source.min) {
+          for (let i = 0; i < this.mapped.length; i += this.source.max) {
             start = i;
             this.source.currentItems.push({
               mode : 'full',
               component: 'appui-note-cms-block-slider-slide',
-              data: this.mapped.slice(start, this.source.min + start)
+              data: this.mapped.slice(start, this.source.max + start)
             })
           }
+
         }
       },
       openMediasGroups(){
@@ -125,9 +126,6 @@
           }
         });
       },
-      updateData(){
-        this.getSlideshowSource()
-      }
     },
     watch:{
       sliderMode(val){
@@ -176,7 +174,6 @@
         this.sliderMode = 1;
         this.okMode = true;
       }
-      this.updateData();
     },
     
   }
