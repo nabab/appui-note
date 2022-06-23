@@ -13,7 +13,7 @@
       },
 			pinnable: {
         type: Boolean,
-        default: false
+        default: true
       },
 			filters: {
 				type: Object,
@@ -311,6 +311,23 @@
               else {
                 this.showReplies = true;
               }
+            }
+          },
+          togglePinned(){
+            let ev = new Event('pin', {
+              cancelable: true
+            });
+            this.forum.$emit('pin', this.source, ev);
+            if (!ev.defaultPrevented) {
+              this.post(appui.plugins['appui-note'] + '/actions/pin', {
+                id: this.source.id,
+                pinned: !!this.source.pinned ? 0 : 1
+              }, d => {
+                if (d.success) {
+                  this.source.pinned = !!this.source.pinned ? 0 : 1;
+                  this.forum.updateData();
+                }
+              });
             }
           }
         },

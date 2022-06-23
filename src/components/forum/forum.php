@@ -163,9 +163,8 @@
                    style="margin-left: 0.5rem"
                    :title="source.pinned ? '<?=\bbn\Str::escapeSquotes(_('unpin'))?>' : '<?=\bbn\Str::escapeSquotes(_('pin'))?>'"
                    >
-                <i :class="'nf nf-mdi-' + (source.pinned ? 'pin_off' : 'pin') + ' bbn-xl bbn-p'"
-                   @click="source.pinned = !source.pinned; forum.$emit('pin', source)"
-                   ></i>
+                <i :class="'nf nf-mdi-' + (source.pinned ? 'pin_off bbn-lg' : 'pin') + ' bbn-p'"
+                   @click="togglePinned"/>
               </div>
               <div v-if="!source.locked"
                    class="bbn-spadded bbn-vmiddle appui-note-forum-hfixed"
