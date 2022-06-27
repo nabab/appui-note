@@ -83,6 +83,14 @@
         }
     },
     {
+      "cfg": {
+        "allow_children": 1,
+        "show_code": 1
+      },
+      "text": "Features",
+      "code": "features"
+    },
+    {
         "cfg": {
           "show_code": 1
         },
