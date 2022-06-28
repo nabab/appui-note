@@ -90,10 +90,12 @@
 				 :href="$parent.linkURL ? $parent.linkURL : '' + source.href"
 				 class="bbn-c">
 				<img :src="$parent.path + source.source"
+			    	 :style="source.style"
 						 :alt="source.alt ? source.alt : ''">
 			</a>
 			<img v-else-if="!!source.source"
            class="bbn-vsmargin"
+					 :style="source.style"
 				 	 :src="source.source"
 				 	 :alt="source.alt ? source.alt : ''">
 			<p class="image-caption bbn-s bbn-vsmargin"
