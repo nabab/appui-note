@@ -497,7 +497,10 @@
       </span> 
     </div>
     <div class="bbn-w-50 bbn-r bbn-line-vmiddle">
-      <span v-text="_('Since') + ' ' + fdate(source.creation)"/> 
+      <div>
+        <span v-text="_('Since') + ' ' + fdate(source.creation)"/> <br>
+        <span v-if="source.start" v-text="_('Published') + ' ' + fdate(source.start)"></span>
+      </div>
       <bbn-initial :user-name="name"
                    :width="24"
                    class="bbn-xs"/>
