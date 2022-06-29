@@ -10,7 +10,7 @@
       types: {
         type: Array,
         default() {
-          return []
+          return [];
         }
       }
     },
@@ -19,8 +19,10 @@
         root: appui.plugins['appui-note'] + '/'
       };
     },
-    computed: {
-      
+    methods: {
+      select(ev, data) {
+        this.$emit("select", data);
+      }
     }
-  }
+  };
 })();

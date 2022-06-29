@@ -144,6 +144,10 @@
         },
         align: 'center'
       }
+    }, {
+      text: bbn._("Feature"),
+      value: 'feature',
+      default: {}
     }
   ];
 
