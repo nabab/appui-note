@@ -91,6 +91,9 @@
         if(this.source.currentItems && this.source.currentItems.length){
           this.source.currentItems.splice(0, this.source.currentItems.length);
         }
+        else{
+          this.source.currentItems = [];
+        }
         if ( bbn.fn.isDesktopDevice() || bbn.fn.isTabletDevice()) {
           let start = 0;
           for (let i = 0; i < this.mapped.length; i += this.source.max) {
@@ -174,6 +177,7 @@
         this.sliderMode = 1;
         this.okMode = true;
       }
+      this.getSlideshowSource()
     },
     
   }
