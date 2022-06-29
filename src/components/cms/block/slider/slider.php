@@ -108,8 +108,7 @@
 
 	</div>
 	<div v-else class="bbn-w-100" :style="source.style">
-      <bbn-slideshow v-if="source.currentItems && source.currentItems.length"
-                     :source="source.currentItems"
+      <bbn-slideshow :source="source.currentItems"
                      ref="slideshow"
                      :arrows="!!source.arrows"
                      :auto-play="!!source.autoplay"
