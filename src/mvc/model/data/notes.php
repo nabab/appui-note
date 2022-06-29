@@ -6,6 +6,7 @@
 
 /** @var $model \bbn\mvc\model*/
 
+use bbn\Appui\Note;
 
-$note = new bbn\Appui\Note($model->db);
+$note = new Note($model->db);
 return $note->browse($model->data);
