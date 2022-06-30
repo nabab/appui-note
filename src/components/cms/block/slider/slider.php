@@ -1,7 +1,8 @@
 <div :class="[componentClass, 'bbn-w-100']">
 	<div v-if="mode === 'edit'"
 			 class="bbn-padded"
-	><div class="bbn-w-100 bbn-c">
+	>
+    <div class="bbn-w-100 bbn-c">
       <div class="bbn-w-100 bbn-grid-fields">
         <label><?=_('Mode')?></label>
         <bbn-radio v-model="sliderMode"
@@ -117,5 +118,4 @@
                      />
     </div>
 	</div>
-
 </div>

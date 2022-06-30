@@ -177,11 +177,8 @@
         this.sliderMode = 1;
         this.okMode = true;
       }
-    },
-    
-    mounted(){
       this.getSlideshowSource()
-    }
+    },
     
   }
 })();

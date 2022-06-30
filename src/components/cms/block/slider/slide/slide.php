@@ -4,11 +4,10 @@
          v-if="data.length"
          class="bbn-hspadded"
          v-bind:class = "d.class ? d.class+' slider-image-section' : 'slider-image-section'">
-      <a :href="d.url ? d.url : ''" class="bbn-flex block-slide-link">
+    	<a :href="d.url ? d.url : ''">
         <img v-if="d.front_img || d.path" :src="d.front_img ? d.front_img.path : d.path" alt="">
-        <div class="bbn-block-gallery-caption bbn-l slider-title bbn-top-padded"
+        <div class="bbn-block-gallery-caption bbn-l slider-title"
              v-html="d.title"></div>
-             
         <div v-if="d.desc" class="slider-desc bbn-l" v-html="d.desc"></div>
        </a>
   	</div>
