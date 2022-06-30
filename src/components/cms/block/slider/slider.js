@@ -177,8 +177,11 @@
         this.sliderMode = 1;
         this.okMode = true;
       }
-      this.getSlideshowSource()
     },
+    
+    mounted(){
+      this.getSlideshowSource()
+    }
     
   }
 })();
