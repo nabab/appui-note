@@ -178,6 +178,7 @@
         this.okMode = true;
       }
     },
+    
     mounted(){
       this.getSlideshowSource()
     }

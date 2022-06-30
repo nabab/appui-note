@@ -8,6 +8,7 @@
         <img v-if="d.front_img || d.path" :src="d.front_img ? d.front_img.path : d.path" alt="">
         <div class="bbn-block-gallery-caption bbn-l slider-title bbn-top-padded"
              v-html="d.title"></div>
+             
         <div v-if="d.desc" class="slider-desc bbn-l" v-html="d.desc"></div>
        </a>
   	</div>
