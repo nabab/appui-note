@@ -31,7 +31,7 @@
                  :key="item.id">
               <div style="width: 150px; max-width: 25vw; min-width: 80px"
                    class="bbn-block">
-                <img v-if="item.id_media"
+                <img v-if="item.media"
                      style="width: 100%; height: auto"
                      :src="item.media.url || item.media.path">
                 <div v-else
