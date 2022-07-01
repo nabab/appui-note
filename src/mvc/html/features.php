@@ -7,7 +7,7 @@
                 source-value="id"
                 @select="selectFeature"/>
     </bbn-pane>
-    <bbn-pane>
+    <bbn-pane :scrollable="true">
       <div class="bbn-100">
         <div v-if="selected">
           <div class="bbn-grid-fields bbn-xl bbn-padding bbn-margin-bottom">
