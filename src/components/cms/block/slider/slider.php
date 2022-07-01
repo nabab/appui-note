@@ -45,10 +45,11 @@
       <label><?=_('Height')?> (px)</label>
       <bbn-range v-model="source.style.height"
                  :min="10"
-                 :max="410"
+                 :max="2000"
                  :step="10"
                  :show-reset="false"
                  :show-numeric="true"
+                 :show-units="true"
                  unit="px"
                  />
 

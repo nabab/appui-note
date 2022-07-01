@@ -73,6 +73,7 @@
               }
               this.$nextTick(() => {
                 this.mapped = bbn.fn.map(d.data, data => {
+                  data.style = this.source.style,
                   data.type = 'img';
                   data.content = (this.source.mode === 'gallery') ? data.path : (data.front_img && data.front_img.path) ? data.front_img.path : '';
                   data.info = data.title;
