@@ -10,6 +10,12 @@ if ($model->hasData(['file', 'ref'], true)) {
     if (is_file($filePath)) {
       if ($id = $medias->insert($filePath, null , $title, 'file', false, !empty($f['description']) ? $f['description'] : null)){
         $media = $medias->getMedia($id, true);
+        if (empty($media['private'])
+          && empty($media['url'])
+        ) {
+          $medias->addUrl($id, 'img/' . $id . '/' . $media['name']);
+          $media = $medias->getMedia($id, true);
+        }
         if (!empty($media['content']) && \bbn\Str::isJson($media['content'])) {
           $media['content'] = json_decode($media['content']);
         }

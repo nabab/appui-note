@@ -40,6 +40,15 @@
         size: '1em'
       }
     }, {
+      text: bbn._("Button"),
+      value: 'button',
+      default: {
+        url: '',
+        content: '',
+        align: 'center',
+        style: {}
+      }
+    },{
       text: bbn._("Rich text (HTML)"),
       value: 'html',
       default: {
