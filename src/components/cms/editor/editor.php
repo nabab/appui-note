@@ -82,6 +82,13 @@
 
             <label><?= _("Tags") ?></label>
             <bbn-values v-model="source.tags"/>
+
+            <label><?=_('Cache')?></label>
+            <div>
+              <bbn-button :text="_('Clear')"
+                          icon="nf nf-mdi-cached"
+                          @click="clearCache"/>
+            </div>
           </div>
         </div>
       </bbn-scroll>
