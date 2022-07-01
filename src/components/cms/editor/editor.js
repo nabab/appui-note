@@ -108,6 +108,18 @@
       onSave(d) {
         this.oData = JSON.stringify(this.source);
         appui.success(bbn._("Saved"))
+      },
+      clearCache(){
+        this.confirm(bbn._('Are you sure?'), () => {
+          this.post(this.root + 'cms/actions/clear_cache', {id: this.source.id}, d => {
+            if (d.success) {
+              appui.success();
+            }
+            else {
+              appui.error();
+            }
+          })
+        });
       }
     },
     mounted() {
