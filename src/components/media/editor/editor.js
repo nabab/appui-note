@@ -62,6 +62,45 @@
       onRemove(ev, file){
         this.oldTitle = file.data.title;
         this.oldDescription = file.data.description;
+      },
+      clearCache(file, all){
+        if (!!file) {
+          this.confirm(bbn._('Are you sure?'), () => {
+            this.post(this.root + 'media/actions/clear_cache', {
+              file: file,
+              all: all
+            }, d => {
+              if (d.success) {
+                let form = this.getRef('form')
+                if (!!all) {
+                  if (bbn.fn.isVue(form)) {
+                    form.originalData.cacheFiles.splice(0);
+                  }
+                  this.source.cacheFiles.splice(0);
+                }
+                else {
+                  let idx = bbn.fn.search(this.source.cacheFiles, {file: file});
+                  if (idx > -1) {
+                    if (bbn.fn.isVue(form)) {
+                      idx = bbn.fn.search(form.originalData.cacheFiles, {file: file});
+                      if (idx > -1) {
+                        form.originalData.cacheFiles.splice(idx, 1);
+                      }
+                    }
+                    this.source.cacheFiles.splice(idx, 1);
+                  }
+                }
+                appui.success();
+              }
+              else {
+                appui.error();
+              }
+            });
+          })
+        }
+      },
+      fdatetime(d){
+        return dayjs.unix(d).format('DD/MM/YYYY HH:mm:ss')
       }
     }
   };
