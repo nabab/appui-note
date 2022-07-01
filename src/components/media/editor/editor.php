@@ -49,7 +49,7 @@
         <i class="bbn-p bbn-red nf nf-fa-trash"
            @click="clearCache(source.url, true)"
            title="<?=_('Clear all cache')?>"
-           v-if="!!source.cacheFiles && source.cacheFiles.length"/>
+           v-if="!!source.cacheFiles && source.cacheFiles.length > 1"/>
         <span><?=_('Cache')?></span>
       </label>
       <div class="bbn-grid-fields"
@@ -59,7 +59,8 @@
              @click="clearCache(f.file, false)"
              title="<?=_('Remove')?>"/>
           <div>
-            <span v-text="f.name"/>
+            <span v-text="f.name"
+                  :title="f.name"/>
             <span class="bbn-s bbn-i">({{fdatetime(f.modified)}})</span>
           </div>
         </template>

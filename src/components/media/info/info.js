@@ -61,7 +61,36 @@
         });
       },
       formatBytes: bbn.fn.formatBytes,
-      getField: bbn.fn.getField
+      getField: bbn.fn.getField,
+      clearCache(file, all){
+        if (!!file) {
+          this.confirm(bbn._('Are you sure?'), () => {
+            this.post(this.root + 'media/actions/clear_cache', {
+              file: file,
+              all: all
+            }, d => {
+              if (d.success) {
+                if (!!all) {
+                  this.source.cacheFiles.splice(0);
+                }
+                else {
+                  let idx = bbn.fn.search(this.source.cacheFiles, {file: file});
+                  if (idx > -1) {
+                    this.source.cacheFiles.splice(idx, 1);
+                  }
+                }
+                appui.success();
+              }
+              else {
+                appui.error();
+              }
+            });
+          })
+        }
+      },
+      fdatetime(d){
+        return dayjs.unix(d).format('DD/MM/YYYY HH:mm:ss')
+      }
     }
   }
 })();
