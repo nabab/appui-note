@@ -20,14 +20,14 @@
                        @change="updateOption"/>
 
             <label> <?= _("Order") ?></label>
-						<bbn-dropdown v-model="selectedOrder"
+            <bbn-dropdown v-model="selectedOrder"
                           :source="orderModes"
                           @change="updateOption"/>
           </div>
           <div class="bbn-w-100 bbn-spadding"
                v-if="featureItems.length">
             <div class="bbn-spadding bbn-bordered bbn-bottom-smargin bbn-flex-width"
-                 v-for="item in orderedItems"
+                 v-for="item in featureItems"
                  :key="item.id">
               <div style="width: 150px; max-width: 25vw; min-width: 80px"
                    class="bbn-block">
@@ -41,16 +41,26 @@
                   </div>
                 </div>
               </div>
-              <div class="bbn-flex-fill bbn-lg">
-                <div v-text="item.title"/>
-                <div v-text="'order: ' + item.num"/>
-                <bbn-numeric v-if="selectedOrder === 'manual'"
-                             min="1"
-                             v-model="item.num"
-                             size="15px"
-                             @change="setOrderFeature(item.id, item.num)"/>
+              <div class="bbn-flex-fill">
+                <div v-text="item.title"
+                     class="bbn-lg"/>
+                <div v-if="selectedOrder === 'manual'">
+                  <div v-text="'order: ' + item.num"/>
+                  <bbn-button v-if="item.num !== 1"
+                              icon="nf nf-fa-arrow_up"
+                              @click="setOrderFeature(item.id, item.num - 1)"
+                              :notext="true"
+                              text="<?= _("Move up") ?>"/>
+                  <bbn-button v-if="item.num < featureItems.length"
+                              icon="nf nf-fa-arrow_down"
+                              @click="setOrderFeature(item.id, item.num + 1)"
+                              :notext="true"
+                              text="<?= _("Move down") ?>"/>
+                </div>
                 <bbn-button @click="removeNote(item.id)"
-                            icon="nf nf-fa-trash_o"/>
+                            icon="nf nf-fa-trash_o"
+                            :notext="true"
+                            text="<?= _("Delete") ?>"/>
               </div>
             </div>
           </div>

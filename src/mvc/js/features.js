@@ -17,8 +17,8 @@
           text: bbn._("Latest published"),
           value: "latest"
         }, {
-          text: bbn._("First published"),
-          value: "first"
+          text: bbn._("Earliest published"),
+          value: "earliest"
         }, {
           text: bbn._("Manual order"),
           value: "manual"
@@ -41,7 +41,7 @@
           case "latest":
             new_arr = bbn.fn.order(this.featureItems, 'start', 'desc');
             break;
-          case "first":
+          case "earliest":
             new_arr = bbn.fn.order(this.featureItems, 'start', 'asc');
             break;
           case "manual":
@@ -53,7 +53,12 @@
     },
     methods: {
       selectFeature(item) {
-        if (item.id) {
+        if (!item) {
+          this.selectedFeature = '';
+          this.selected = '';
+          this.featureItems = [];
+        }
+        else if (item.id) {
           bbn.fn.post(appui.plugins['appui-note'] + '/data/features', {
             id_option: item.id
           }, d => {
@@ -61,6 +66,7 @@
               this.selectedFeature = item;
               this.selected = item.id;
               this.featureItems = d.data;
+              this.$forceUpdate();
             }
           });
         }
@@ -90,15 +96,17 @@
         });
       },
       updateOption() {
-        bbn.fn.post(appui.plugins['appui-note'] + '/actions/feature/update', {
+        let obj = {
           id: this.selected,
           text: this.selectedText,
           code: this.selectedCode,
           orderMode: this.selectedOrder,
-        }, d => {
+        };
+        bbn.fn.post(appui.plugins['appui-note'] + '/actions/feature/update', obj, d => {
           if (d.success) {
             appui.success(bbn._("Update successful"));
           }
+          this.selectFeature(obj);
         });
       },
       setOrderFeature(id, num) {
