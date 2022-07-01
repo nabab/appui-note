@@ -42,40 +42,65 @@
     <div v-if="source.path"><?= _("URL") ?></div>
     <div v-if="source.path"
          class="bbn-nowrap">
+      <bbn-button text="<?= _("Copy") ?>"
+                  icon="nf nf-fa-copy"
+                  :notext="true"
+                  @click="copyPath"/>
       <a :href="source.path"
          target="_blank"
          class="bbn-iblock"
          style="text-overflow: ellipsis; max-width: 20em; white-space: nowrap; overflow: hidden"
          :title="source.path"
          v-text="source.path"/>
-      <bbn-button text="<?= _("Copy") ?>"
-                  icon="nf nf-fa-copy"
-                  :notext="true"
-                  @click="copyPath"/>
     </div>
 
     <div><?= _("Real path") ?></div>
     <div class="bbn-nowrap">
-      <span class="bbn-iblock"
-            style="text-overflow: ellipsis; max-width: 20em; white-space: nowrap; overflow: hidden"
-            :title="source.file"
-            v-text="source.file"/>
       <bbn-button text="<?= _("Copy") ?>"
                   icon="nf nf-fa-copy"
                   :notext="true"
                   @click="copyFile"/>
+      <span class="bbn-iblock"
+            style="text-overflow: ellipsis; max-width: 20em; white-space: nowrap; overflow: hidden"
+            :title="source.file"
+            v-text="source.file"/>
     </div>
 
     <div><?= _("ID") ?></div>
     <div class="bbn-nowrap">
-      <span class="bbn-iblock"
-            style="text-overflow: ellipsis; max-width: 20em; white-space: nowrap; overflow: hidden"
-            :title="source.id"
-            v-text="source.id"/>
       <bbn-button text="<?= _("Copy") ?>"
                   icon="nf nf-fa-copy"
                   :notext="true"
                   @click="copyId"/>
+      <span class="bbn-iblock"
+            style="text-overflow: ellipsis; max-width: 20em; white-space: nowrap; overflow: hidden"
+            :title="source.id"
+            v-text="source.id"/>
+    </div>
+
+    <div v-if="source.url">
+      <span><?=_('Cache')?></span>
+      <bbn-button class="bbn-bg-red bbn-white"
+                  icon="nf nf-fa-trash"
+                  :notext="true"
+                  @click="clearCache(source.url, true)"
+                  title="<?=_('Clear all cache')?>"
+                  v-if="!!source.cacheFiles && source.cacheFiles.length > 1"/>
+    </div>
+    <div class="bbn-nowrap bbn-grid-fields"
+         style="grid-column-gap: 0.5rem">
+      <template v-for="f in source.cacheFiles">
+          <bbn-button class="bbn-bg-red bbn-white"
+                      icon="nf nf-fa-trash"
+                      :notext="true"
+                      @click="clearCache(f.file, false)"
+                      title="<?=_('Remove')?>"/>
+          <div>
+            <span class="bbn-s bbn-i">({{fdatetime(f.modified)}})</span>
+            <span v-text="f.name"
+                  :title="f.name"/>
+          </div>
+        </template>
     </div>
 
     <template v-if="source.is_image">
