@@ -97,7 +97,7 @@
       },
       updateOption() {
         let obj = {
-          id: this.selected,
+          id: this.selected, 
           text: this.selectedText,
           code: this.selectedCode,
           orderMode: this.selectedOrder,
