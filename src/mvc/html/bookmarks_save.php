@@ -3,7 +3,7 @@
   <bbn-splitter orientation="horizontal">
     <bbn-pane size="50%"
     >
-			<div class="bbn-100">
+      <div class="bbn-100">
         <div class="bbn-padded button-container">
           <bbn-button icon="nf nf-fa-star"
                       class="bbn-padded star"
