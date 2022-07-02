@@ -116,6 +116,7 @@
           this.$set(this.source, 'currentItems', []);
         }
         if (bbn.fn.isDesktopDevice() || bbn.fn.isTabletDevice()) {
+
           let start = 0;
           for (let i = 0; i < this.mapped.length; i += this.source.max) {
             start = i;
@@ -209,7 +210,10 @@
       else if (this.source.mode === 'features'){
         this.sliderMode = 'features';
       }
-      this.getSlideshowSource();
     },
+    mounted(){
+      this.getSlideshowSource();
+
+    }
   };
 })();
