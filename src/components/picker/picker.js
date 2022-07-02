@@ -7,6 +7,10 @@
       bbn.vue.inputComponent
     ],
     props: {
+      placeholder: {
+        type: String,
+        default: bbn._('Search for a note')
+      },
       types: {
         type: Array,
         default() {
