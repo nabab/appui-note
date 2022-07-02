@@ -72,30 +72,26 @@
         });
       },
       getSlideshowSource(){
-        let tmp = null;
-
-        if(this.source.mode === 'publications'){
-          tmp = {
-            'note_type' : this.source.noteType,
-            'limit': this.source.limit,
-            'order': this.source.order,
-            'mode': this.source.mode
+        let ok = false;
+        let tmp = {
+            limit: this.source.limit,
+            order: this.source.order,
+            mode: this.source.mode
           };
+        if (this.sliderMode === 'publications') {
+          tmp.note_type = this.source.noteType;
         }
-        else if(this.source.mode === 'gallery'){
-          tmp = {
-            'id_group' : this.source.id_group,
-            'limit': this.source.limit,
-            'order': this.source.order,
-            'mode': this.source.mode
-          };
+        else if (this.sliderMode === 'gallery') {
+          tmp.id_group = this.source.id_group;
         }
-        if(this.okMode) {
+        else if (this.sliderMode === 'features') {
+          tmp.id_feature = this.source.id_feature;
+          bbn.fn.log("YEPI", this.sliderMode);
+        }
+        bbn.fn.log("YOOOPI", tmp);
+        if (this.okMode) {
           this.post(this.slideshowSourceUrl, tmp, (d) => {
-            if(d.success && d.data.length){
-              if(this.source.currentItems && this.source.currentItems.length){
-                this.source.currentItems.splice(0, this.source.currentItems.length);
-              }
+            if(d.success && d.data.length) {
               this.$nextTick(() => {
                 this.mapped = bbn.fn.map(d.data, data => {
                   data.style = this.source.style;
@@ -113,13 +109,13 @@
         }
       },
       adaptView(){
-        if(this.source.currentItems && this.source.currentItems.length){
+        if (this.source.currentItems && this.source.currentItems.length){
           this.source.currentItems.splice(0, this.source.currentItems.length);
         }
         else{
-          this.source.currentItems = [];
+          this.$set(this.source, 'currentItems', []);
         }
-        if ( bbn.fn.isDesktopDevice() || bbn.fn.isTabletDevice()) {
+        if (bbn.fn.isDesktopDevice() || bbn.fn.isTabletDevice()) {
           let start = 0;
           for (let i = 0; i < this.mapped.length; i += this.source.max) {
             start = i;
@@ -147,52 +143,71 @@
     watch:{
       sliderMode(val){
         if(val === 'features') {
+          this.$delete(this.source, 'id_group');
+          this.$delete(this.source, 'noteType');
+          this.$set(this.source, 'id_feature', '');
+          this.okMode = true;
           this.source.mode = 'features';
         }
         else if (val === 'gallery') {
+          this.$delete(this.source, 'id_feature');
+          this.$delete(this.source, 'noteType');
+          this.$set(this.source, 'id_group', '');
+          this.okMode = true;
           this.source.mode = 'gallery';
         }
         else {
+          this.$delete(this.source, 'id_group');
+          this.$delete(this.source, 'id_feature');
+          this.$set(this.source, 'noteType', '');
+          this.okMode = true;
           this.source.mode = 'publications';
         }
       },
       okMode(val){
+        /* WTF?
         if(val){
-          if(!this.sliderMode){
-            this.source.mode = 'publications';
+          if(this.sliderMode === 'gallery') {
+            this.source.mode = 'gallery';
+          }
+          if(!this.sliderMode === 'features'){
+            this.source.mode = 'features';
           }
           else{
-            this.source.mode = this.sliderMode;
+            this.source.mode = 'publications';
           }
         }
+        */
       }
     },
     beforeMount(){
       if(!this.source.limit){
-        this.source.limit = 10;
+        this.$set(this.source, 'limit', 10);
       }
       if(!this.source.order){
-        this.source.order = 'versions.title';
+        this.$set(this.source, 'order', 'versions.title');
       }
       if(!this.source.currentItems){
-        this.source.curretItems = [];
+        this.$set(this.source, 'curretItems', []);
       }
       if(!this.source.max){
-        this.source.max = 3;
+        this.$set(this.source, 'max', 3);
       }
       if(!this.source.min){
-        this.source.min = 1;
+        this.$set(this.source, 'min', 1);
       }
       if(!this.source.mode){
-        this.sliderMode = 0;
+        this.sliderMode = 'publications';
+        this.$set(this.source, 'mode', this.sliderMode);
       }
       else if(this.source.mode === 'publications' ){
-        this.sliderMode = 0;
-        this.okMode = true;
+        this.sliderMode = 'publications';
       }
       else if (this.source.mode === 'gallery'){
-        this.sliderMode = 1;
-        this.okMode = true;
+        this.sliderMode = 'gallery';
+      }
+      else if (this.source.mode === 'features'){
+        this.sliderMode = 'features';
       }
       this.getSlideshowSource();
     },
