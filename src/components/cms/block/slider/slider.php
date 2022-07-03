@@ -36,12 +36,6 @@
                     title="<?=_('Open galleries management')?>"/>
       </div>
 
-      <label v-if="sliderMode === 'publications'"><?=_('Type of articles')?></label>
-      <bbn-dropdown :source="note + '/cms/data/types_notes'"
-                    v-model="source.noteType"
-                    @change="getSlideshowSource"
-                    v-if="sliderMode === 'publications'"/>
-
       <label v-if="sliderMode === 'features'"><?=_('Feature')?></label>
       <bbn-dropdown :source="note + '/cms/data/features'"
                     v-model="source.id_feature"
@@ -57,6 +51,7 @@
                  :show-reset="false"
                  :show-numeric="true"
                  :show-units="true"
+                 :nullable="true"
                  unit="px"/>
 
       <label><?=_('Max slide in line')?></label>

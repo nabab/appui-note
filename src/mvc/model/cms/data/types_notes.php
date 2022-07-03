@@ -1,4 +1,6 @@
 <?php 
 
 $cms = new \bbn\Appui\Cms($model->db);
-return ['data'=> $cms->getTypes()];
+$data = $cms->getTypes();
+$data[] = ['text' => 'News', 'value'=> 'news'];
+return ['data'=> $data];
