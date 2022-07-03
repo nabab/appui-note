@@ -65,7 +65,8 @@
 				
 				let pos = this.$parent.$el.getBoundingClientRect();
 				let col = (pos.width - 100) / this.max + 'px';
-				return 'repeat(auto-fit, minmax('+ col +',1fr))';
+				//return 'repeat(auto-fit, minmax('+ col +',1fr))';
+				return 'repeat(auto-fit, minmax(110px,1fr))'
 			}
 		},
 		beforeMount(){
