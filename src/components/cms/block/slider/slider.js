@@ -86,10 +86,9 @@
         }
         else if (this.sliderMode === 'features') {
           tmp.id_feature = this.source.id_feature;
-          bbn.fn.log("YEPI", this.sliderMode);
         }
-        bbn.fn.log("YOOOPI", tmp);
         if (this.okMode) {
+          
           this.post(this.slideshowSourceUrl, tmp, (d) => {
             if(d.success && d.data.length) {
               this.$nextTick(() => {
@@ -116,25 +115,28 @@
           this.$set(this.source, 'currentItems', []);
         }
         if (bbn.fn.isDesktopDevice() || bbn.fn.isTabletDevice()) {
-
           let start = 0;
           for (let i = 0; i < this.mapped.length; i += this.source.max) {
-            start = i;
+            start = i,
+            data = this.mapped.slice(start, this.source.max + start);
+
+
             this.source.currentItems.push({
-              mode : 'full',
+              //mode : 'full',
               component: 'appui-note-cms-block-slider-slide',
-              data: this.mapped.slice(start, this.source.max + start)
+              data: data
             });
           }
         }
         else if ( bbn.fn.isMobileDevice() ) {
           let start = 0;
           for (let i = 0; i < this.mapped.length; i += this.source.max) {
-            start = i;
+            start = i,
+            data =  this.mapped.slice(start, this.source.max + start);
             this.source.currentItems.push({
               mode : 'full',
               component: 'appui-note-cms-block-slider-slide',
-              data: this.mapped.slice(start, this.source.max + start)
+              data: data
             });
           }
 
@@ -189,7 +191,7 @@
         this.$set(this.source, 'order', 'versions.title');
       }
       if(!this.source.currentItems){
-        this.$set(this.source, 'curretItems', []);
+        this.$set(this.source, 'currentItems', []);
       }
       if(!this.source.max){
         this.$set(this.source, 'max', 3);
@@ -210,6 +212,7 @@
       else if (this.source.mode === 'features'){
         this.sliderMode = 'features';
       }
+      
     },
     mounted(){
       this.getSlideshowSource();
