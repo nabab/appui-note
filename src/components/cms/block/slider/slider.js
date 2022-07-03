@@ -86,21 +86,37 @@
         }
         else if (this.sliderMode === 'features') {
           tmp.id_feature = this.source.id_feature;
+          bbn.fn.log("YEPI", this.sliderMode);
         }
+        bbn.fn.log("YOOOPI", tmp, this.okMode);
         if (this.okMode) {
-          
-          this.post(this.slideshowSourceUrl, tmp, (d) => {
-            if(d.success && d.data.length) {
+          this.post(this.slideshowSourceUrl, tmp, d => {
+            bbn.fn.log("AFTER POST", d);
+            if (this.mapped.length) {
+              this.mapped.splice(0, this.mapped.length);
+            }
+            if(d.success && d.data) {
               this.$nextTick(() => {
-                this.mapped = bbn.fn.map(d.data, data => {
-                  data.style = this.source.style;
-                  data.type = 'img';
-                  data.content = (this.source.mode === 'gallery') ? data.path : (data.front_img && data.front_img.path) ? data.front_img.path : '';
-                  data.info = data.title;
-                  data.mode = 'full';
-                  data.component = 'appui-note-cms-block-slider-slide';
-                  return data;
+                bbn.fn.each(d.data, data => {
+                  bbn.fn.log("MAPOPING", data);
+                  let tmp = bbn.fn.clone(data);
+                  tmp.style = this.source.style;
+                  tmp.type = 'img';
+                  if (this.source.mode === 'gallery') {
+                    tmp.content = tmp.path || '';
+                  }
+                  else if (this.source.mode === 'features') {
+                      tmp.content = tmp.media ? tmp.media.url || tmp.media.path : '';
+                  }
+                  else {
+                    tmp.content = tmp.front_img && tmp.front_img.path ? tmp.front_img.path : '';
+                  }
+                  tmp.info = data.title;
+                  tmp.mode = 'full';
+                  tmp.component = 'appui-note-cms-block-slider-slide';
+                  this.mapped.push(tmp);
                 });
+                console.log('ADAPT VIEW')
                 this.adaptView();
               });
             }
@@ -130,9 +146,9 @@
         }
         else if ( bbn.fn.isMobileDevice() ) {
           let start = 0;
-          for (let i = 0; i < this.mapped.length; i += this.source.max) {
+          for (let i = 0; i < this.mapped.length; i += this.source.min) {
             start = i,
-            data =  this.mapped.slice(start, this.source.max + start);
+            data =  this.mapped.slice(start, this.source.min + start);
             this.source.currentItems.push({
               mode : 'full',
               component: 'appui-note-cms-block-slider-slide',
