@@ -11,7 +11,7 @@ use bbn\Str;
 if ($model->hasData('action')) {
   $note = new bbn\Appui\Note($model->db);
   switch ($model->data['action']) {
-    case 'add':
+    case 'add_feature':
       if ($model->hasData(['id_option', 'id_note', 'num'], true)) {
         $note = new bbn\Appui\Note($model->db);
         $feature = $note->addFeature($model->data['id_option'], $model->data['id_note'], null, $model->data['num']);
@@ -48,6 +48,19 @@ if ($model->hasData('action')) {
             'code' => $model->data['code'],
             'orderMode' => $model->data['orderMode']
           ])
+        ];
+      }
+      break;
+    case 'add_category':
+      if ($model->hasData(['text', 'code'], true)) {
+        $id_option = $model->inc->options->add([
+          'text' => $model->data['text'],
+          'code' => $model->data['code'],
+          'id_parent' => $model->inc->options->fromCode(['features', 'note', 'appui'])
+        ]);
+        return [
+          'success' => (bool)$id_option,
+          'data' => $id_option ? $model->inc->options->option($id_option) : null
         ];
       }
       break;
