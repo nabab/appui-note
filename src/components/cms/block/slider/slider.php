@@ -12,8 +12,18 @@
       <bbn-dropdown :source="note + '/cms/data/types_notes'"
                     v-model="source.noteType"
                     @change="getSlideshowSource"
-                    v-if="sliderMode === 'publications'"/>
-
+                    v-if="sliderMode === 'publications'"
+                    ref="publicationdropdown"/>
+      
+      <label v-if="(sliderMode === 'publications') && this.showRootAlias"><?=_('che scrivo?')?></label>
+      <bbn-dropdown :source="note + '/cms/data/types_notes/' + this.source.id_root_alias"
+                    v-model="source.id_option"
+                    :nullable="true"
+                    sourceValue="id"
+                    @change="getSlideshowSource"
+                    v-if="(sliderMode === 'publications') && this.showRootAlias"
+                    />
+                    
       <label v-if="sliderMode === 'publications'"><?=_('Ordered by')?></label>
       <bbn-dropdown :source="orderFields"
                     v-model="source.order"
