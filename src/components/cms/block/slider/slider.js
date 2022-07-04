@@ -39,7 +39,29 @@
             text:'Features',
             value: 'features'
           }
-        ]
+        ],
+        arrowsPositions: [{
+          text: bbn._('Default'),
+          value: 'default'
+        }, {
+          text: bbn._('Top'),
+          value: 'top'
+        }, {
+          text: bbn._('Top-Left'),
+          value: 'topleft'
+        }, {
+          text: bbn._('Top-Right'),
+          value: 'topright'
+        }, {
+          text: bbn._('Bottom'),
+          value: 'bottom'
+        }, {
+          text: bbn._('Bottom-Left'),
+          value: 'bottomleft'
+        }, {
+          text: bbn._('Bottom-Right'),
+          value: 'bottomright'
+        }]
       };
     },
     computed: {
@@ -228,7 +250,9 @@
       else if (this.source.mode === 'features'){
         this.sliderMode = 'features';
       }
-      
+      if (!!this.source.arrows && !this.source.arrowsPosition) {
+        this.$set(this.source, 'arrowsPosition', 'default');
+      }
     },
     mounted(){
       this.getSlideshowSource();
