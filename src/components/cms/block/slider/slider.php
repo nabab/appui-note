@@ -91,6 +91,11 @@
                     :value="1"
                     :novalue="0"/>
 
+      <label v-if="!!source.arrows"><?=_('Arrows position')?></label>
+      <bbn-dropdown v-if="!!source.arrows"
+                    v-model="source.arrowsPosition"
+                    :source="arrowsPositions"/>
+
       <label><?=_('Preview')?></label>
       <bbn-checkbox v-model="source.preview"
                     :value="1"
@@ -112,6 +117,7 @@
                    :source="source.currentItems"
                    ref="slideshow"
                    :arrows="!!source.arrows"
+                   :arrows-position="source.arrowsPosition"
                    :auto-play="!!source.autoplay"
                    :loop="!!source.loop"
                    :preview="!!source.preview"
