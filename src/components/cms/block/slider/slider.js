@@ -5,6 +5,7 @@
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
     data(){
       return {
+        showRootAlias: false,
         okMode: false,
         sliderMode: 'publication',
         mapped: [],
@@ -65,6 +66,9 @@
       };
     },
     computed: {
+      noteType(){
+        return this.source.noteType;
+      },
       align(){
         let style = {};
         switch (this.source.align) {
@@ -102,6 +106,9 @@
           };
         if (this.sliderMode === 'publications') {
           tmp.note_type = this.source.noteType;
+          if(this.source.id_option){
+            tmp.id_option = this.source.id_option;
+          }
         }
         else if (this.sliderMode === 'gallery') {
           tmp.id_group = this.source.id_group;
@@ -182,6 +189,17 @@
       },
     },
     watch:{
+      noteType(val){
+        if(val && (this.closest('appui-note-cms-block').mode !== 'read')){
+          
+          let ddSource = this.$refs.publicationdropdown.currentData;
+          let idx = bbn.fn.search(ddSource, 'data.id', val);
+          if ((idx > -1) && ddSource[idx].data.id_root_alias){
+            this.source.id_root_alias = ddSource[idx].data.id_root_alias;
+            this.showRootAlias = true;
+          }
+        }
+      },
       sliderMode(val){
         if(val === 'features') {
           this.$delete(this.source, 'id_group');
@@ -201,6 +219,8 @@
           this.$delete(this.source, 'id_group');
           this.$delete(this.source, 'id_feature');
           this.$set(this.source, 'noteType', '');
+          this.$set(this.source, 'id_option', '');
+
           this.okMode = true;
           this.source.mode = 'publications';
         }
