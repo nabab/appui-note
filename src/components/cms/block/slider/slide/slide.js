@@ -22,7 +22,7 @@
 				}
 				return st;
 			},
-			imgStyle(a){
+			/*imgStyle(a){
 				let st = '',
 						w = false,
 						h = false;
@@ -51,10 +51,13 @@
 					st = 'width: 100%;	height: auto;'
 				}
 				return st;
-			}
+			}*/
 			
 		},
 		computed:{
+			min(){
+				return this.closest('appui-note-cms-block-slider').source.min;
+			},
 			max(){
 				return this.closest('appui-note-cms-block-slider').source.max;
 			},
@@ -71,14 +74,20 @@
 		},
 		beforeMount(){
 			//need to put empty obj in data 
-			let diff =  this.max - this.data.length;
+			let diff;
+			if(!bbn.fn.isMobile()){
+				diff = this.max - this.data.length;
+			}
+			else{
+				diff = this.min - this.data.length;
+			}
 			if(diff >= 1){
 				for (var i = 0; i < diff; i++ ){
-					console.log(i, diff)
 					this.data.push({})
 				}
 				
 			}
+
 		}
 	}
 })()
