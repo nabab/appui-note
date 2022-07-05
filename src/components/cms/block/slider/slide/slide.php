@@ -6,7 +6,7 @@
          v-bind:class = "d.class ? d.class +' slider-image-section' : 'slider-image-section'">
       <a :href="d.url ? d.url : ''" class="bbn-100 block-slide-link" v-if="(d.id || d.id_note)">
         <div class="bbn-container-ratio">
-          <div class="bbn-100">
+          <div class="bbn-100 bbn-flex">
             <img v-if="imagePath(d).length" :src="imagePath(d)" alt="" :style="imgStyle(d)">
           </div>
           
