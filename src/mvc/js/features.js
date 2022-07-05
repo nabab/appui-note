@@ -129,21 +129,18 @@
           component: this.$options.components.form
         });
       },
-      openGallery(){
-        this.getPopup().open({
+      openGallery(item) {
+        this.getPopup({
           component: this.$options.components.gallery,
           componentOptions: {
-            onSelection: this.onSelection()
+            item: item
           },
           title: bbn._('Select an image'),
           width: '90%',
           height: '90%'
         });
       },
-      onSelection(img) {
-        this.source.source = img.data;
-        this.getPopup().close();
-      }
+
     },
     beforeMount() {
       that = this;
@@ -182,14 +179,30 @@
 </div>
         `,
         props: {
-          onSelection: {
-            type: Function
-          }
+          item: {}
         },
         data(){
           return {
             root: appui.plugins['appui-note'] + '/'
           };
+        },
+        methods: {
+          onSelection(img) {
+            bbn.fn.post(appui.plugins['appui-note'] + '/actions/feature/set_media', {
+              id: this.item.id,
+              id_media: img.data.id
+            }, d => {
+              if (d.success) {
+                let floater = this.closest("bbn-floater");
+                if (floater && floater.opener) {
+                  bbn.fn.log(img, this.item);
+                  this.item.id_media = img.data.id;
+                  this.$set(this.item, "media", img.data);
+                }
+                floater.close();
+              }
+            });
+          }
         }
       },
       form: {
