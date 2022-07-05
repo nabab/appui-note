@@ -69,7 +69,7 @@
                 </div>
                 <bbn-button icon="nf nf-fae-galery"
 										  :notext="false"
-					 						@click="openGallery"
+					 						@click="openGallery(item)"
 											title="<?=_('Select an image')?>"
 											class="bbn-right-sspace"/>
                 <bbn-button @click="removeNote(item.id)"

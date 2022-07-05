@@ -64,5 +64,12 @@ if ($model->hasData('action')) {
         ];
       }
       break;
+    case 'set_media':
+      if ($model->hasData(['id', 'id_media'], true)) {
+        return [
+          'success' => !!$note->setFeatureMedia($model->data['id'], $model->data['id_media'])
+        ];
+      }
+      break;
   }
 }
