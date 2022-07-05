@@ -66,6 +66,7 @@
       };
     },
     computed: {
+
       noteType(){
         return this.source.noteType;
       },
@@ -98,6 +99,7 @@
         });
       },
       getSlideshowSource(){
+
         let ok = false;
         let tmp = {
             limit: this.source.limit,
@@ -115,19 +117,15 @@
         }
         else if (this.sliderMode === 'features') {
           tmp.id_feature = this.source.id_feature;
-          bbn.fn.log("YEPI", this.sliderMode);
         }
-        bbn.fn.log("YOOOPI", tmp, this.okMode);
         if (this.okMode) {
           this.post(this.slideshowSourceUrl, tmp, d => {
-            bbn.fn.log("AFTER POST", d);
             if (this.mapped.length) {
               this.mapped.splice(0, this.mapped.length);
             }
             if(d.success && d.data) {
               this.$nextTick(() => {
                 bbn.fn.each(d.data, data => {
-                  bbn.fn.log("MAPOPING", data);
                   let tmp = bbn.fn.clone(data);
                   tmp.style = this.source.style;
                   tmp.type = 'img';
@@ -145,7 +143,6 @@
                   tmp.component = 'appui-note-cms-block-slider-slide';
                   this.mapped.push(tmp);
                 });
-                console.log('ADAPT VIEW')
                 this.adaptView();
               });
             }
@@ -198,50 +195,42 @@
             this.source.id_root_alias = ddSource[idx].data.id_root_alias;
             this.showRootAlias = true;
           }
+          else{
+            this.showRootAlias = false ;
+          }
         }
       },
       sliderMode(val){
         if(val === 'features') {
           this.$delete(this.source, 'id_group');
           this.$delete(this.source, 'noteType');
-          this.$set(this.source, 'id_feature', '');
+          //this.$set(this.source, 'id_feature', '');
           this.okMode = true;
           this.source.mode = 'features';
         }
         else if (val === 'gallery') {
           this.$delete(this.source, 'id_feature');
           this.$delete(this.source, 'noteType');
-          this.$set(this.source, 'id_group', '');
+          //this.$set(this.source, 'id_group', '');
           this.okMode = true;
           this.source.mode = 'gallery';
         }
         else {
           this.$delete(this.source, 'id_group');
           this.$delete(this.source, 'id_feature');
-          this.$set(this.source, 'noteType', '');
-          this.$set(this.source, 'id_option', '');
+          //this.$set(this.source, 'noteType', '');
+          //this.$set(this.source, 'id_option', '');
 
           this.okMode = true;
           this.source.mode = 'publications';
         }
       },
-      okMode(val){
-        /* WTF?
-        if(val){
-          if(this.sliderMode === 'gallery') {
-            this.source.mode = 'gallery';
-          }
-          if(!this.sliderMode === 'features'){
-            this.source.mode = 'features';
-          }
-          else{
-            this.source.mode = 'publications';
-          }
-        }
-        */
-      }
+
     },
     beforeMount(){
+      if(this.source.id_option){
+        this.showRootAlias = true;
+      }
       if(!this.source.limit){
         this.$set(this.source, 'limit', 10);
       }
@@ -275,6 +264,29 @@
       }
     },
     mounted(){
+      if(this.sliderMode === 'features') {
+        this.$delete(this.source, 'id_group');
+        this.$delete(this.source, 'noteType');
+       // this.$set(this.source, 'id_feature', '');
+        this.okMode = true;
+        this.source.mode = 'features';
+      }
+      else if (this.sliderMode === 'gallery') {
+        this.$delete(this.source, 'id_feature');
+        this.$delete(this.source, 'noteType');
+        //this.$set(this.source, 'id_group', '');
+        this.okMode = true;
+        this.source.mode = 'gallery';
+      }
+      else {
+        this.$delete(this.source, 'id_group');
+        this.$delete(this.source, 'id_feature');
+        //this.$set(this.source, 'noteType', '');
+        //this.$set(this.source, 'id_option', '');
+
+        this.okMode = true;
+        this.source.mode = 'publications';
+      }
       this.getSlideshowSource();
 
     }

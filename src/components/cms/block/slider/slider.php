@@ -15,7 +15,7 @@
                     v-if="sliderMode === 'publications'"
                     ref="publicationdropdown"/>
       
-      <label v-if="(sliderMode === 'publications') && this.showRootAlias"><?=_('che scrivo?')?></label>
+      <label v-if="(sliderMode === 'publications') && this.showRootAlias"><?=_('Category')?></label>
       <bbn-dropdown :source="note + '/cms/data/types_notes/' + this.source.id_root_alias"
                     v-model="source.id_option"
                     :nullable="true"
