@@ -99,57 +99,60 @@
         });
       },
       getSlideshowSource(){
-
-        let ok = false;
-        let tmp = {
-            limit: this.source.limit,
-            order: this.source.order,
-            mode: this.source.mode
-          };
-        if (this.sliderMode === 'publications') {
-          tmp.note_type = this.source.noteType;
-          if(this.source.id_option){
-            tmp.id_option = this.source.id_option;
+        if(this.mode === 'edit'){
+          
+          let ok = false;
+          let tmp = {
+              limit: this.source.limit,
+              order: this.source.order,
+              mode: this.source.mode
+            };
+          if (this.sliderMode === 'publications') {
+            tmp.note_type = this.source.noteType;
+            if(this.source.id_option){
+              tmp.id_option = this.source.id_option;
+            }
           }
-        }
-        else if (this.sliderMode === 'gallery') {
-          tmp.id_group = this.source.id_group;
-        }
-        else if (this.sliderMode === 'features') {
-          tmp.id_feature = this.source.id_feature;
-        }
-        if (this.okMode) {
-          this.post(this.slideshowSourceUrl, tmp, d => {
-            if (this.mapped.length) {
-              this.mapped.splice(0, this.mapped.length);
-            }
-            if(d.success && d.data) {
-              this.$nextTick(() => {
-                bbn.fn.each(d.data, data => {
-                  let tmp = bbn.fn.clone(data);
-                  tmp.style = this.source.style;
-                  tmp.type = 'img';
-                  if (this.source.mode === 'gallery') {
-                    tmp.content = tmp.path || '';
-                  }
-                  else if (this.source.mode === 'features') {
-                      tmp.content = tmp.media ? tmp.media.url || tmp.media.path : '';
-                  }
-                  else {
-                    tmp.content = tmp.front_img && tmp.front_img.path ? tmp.front_img.path : '';
-                  }
-                  tmp.info = data.title;
-                  tmp.mode = 'full';
-                  tmp.component = 'appui-note-cms-block-slider-slide';
-                  this.mapped.push(tmp);
+          else if (this.sliderMode === 'gallery') {
+            tmp.id_group = this.source.id_group;
+          }
+          else if (this.sliderMode === 'features') {
+            tmp.id_feature = this.source.id_feature;
+          }
+          if (this.okMode) {
+            this.post(this.slideshowSourceUrl, tmp, d => {
+              if (this.mapped.length) {
+                this.mapped.splice(0, this.mapped.length);
+              }
+              if(d.success && d.data) {
+                this.$nextTick(() => {
+                  bbn.fn.each(d.data, data => {
+                    let tmp = bbn.fn.clone(data);
+                    tmp.style = this.source.style;
+                    tmp.type = 'img';
+                    if (this.source.mode === 'gallery') {
+                      tmp.content = tmp.path || '';
+                    }
+                    else if (this.source.mode === 'features') {
+                        tmp.content = tmp.media ? tmp.media.url || tmp.media.path : '';
+                    }
+                    else {
+                      tmp.content = tmp.front_img && tmp.front_img.path ? tmp.front_img.path : '';
+                    }
+                    tmp.info = data.title;
+                    tmp.mode = 'full';
+                    tmp.component = 'appui-note-cms-block-slider-slide';
+                    this.mapped.push(tmp);
+                  });
+                  this.adaptView();
                 });
-                this.adaptView();
-              });
-            }
-          });
+              }
+            });
+          }
         }
       },
       adaptView(){
+        console.log('adapt!')
         if (this.source.currentItems && this.source.currentItems.length){
           this.source.currentItems.splice(0, this.source.currentItems.length);
         }
@@ -161,8 +164,6 @@
           for (let i = 0; i < this.mapped.length; i += this.source.max) {
             start = i,
             data = this.mapped.slice(start, this.source.max + start);
-
-
             this.source.currentItems.push({
               //mode : 'full',
               component: 'appui-note-cms-block-slider-slide',
@@ -171,32 +172,36 @@
           }
         }
         else if ( bbn.fn.isMobileDevice() ) {
+
           let start = 0;
           for (let i = 0; i < this.mapped.length; i += this.source.min) {
             start = i,
             data =  this.mapped.slice(start, this.source.min + start);
             this.source.currentItems.push({
-              mode : 'full',
+              //mode : 'full',
               component: 'appui-note-cms-block-slider-slide',
               data: data
             });
           }
+          console.log('currentItems',this.source.currentItems)
 
         }
       },
     },
     watch:{
       noteType(val){
-        if(val && (this.closest('appui-note-cms-block').mode !== 'read')){
-          
-          let ddSource = this.$refs.publicationdropdown.currentData;
-          let idx = bbn.fn.search(ddSource, 'data.id', val);
-          if ((idx > -1) && ddSource[idx].data.id_root_alias){
-            this.source.id_root_alias = ddSource[idx].data.id_root_alias;
-            this.showRootAlias = true;
-          }
-          else{
-            this.showRootAlias = false ;
+        if(val){
+          if(this.$refs.publicationdropdown){
+            
+            let ddSource = this.$refs.publicationdropdown.currentData;
+            let idx = bbn.fn.search(ddSource, 'data.id', val);
+            if ((idx > -1) && ddSource[idx].data.id_root_alias){
+              this.source.id_root_alias = ddSource[idx].data.id_root_alias;
+              this.showRootAlias = true;
+            }
+            else{
+              this.showRootAlias = false ;
+            }
           }
         }
       },
@@ -211,6 +216,7 @@
         else if (val === 'gallery') {
           this.$delete(this.source, 'id_feature');
           this.$delete(this.source, 'noteType');
+          this.$delete(this.source, 'id_option');
           //this.$set(this.source, 'id_group', '');
           this.okMode = true;
           this.source.mode = 'gallery';
@@ -218,6 +224,7 @@
         else {
           this.$delete(this.source, 'id_group');
           this.$delete(this.source, 'id_feature');
+          this.$delete(this.source, 'id_option');
           //this.$set(this.source, 'noteType', '');
           //this.$set(this.source, 'id_option', '');
 
@@ -228,6 +235,7 @@
 
     },
     beforeMount(){
+      
       if(this.source.id_option){
         this.showRootAlias = true;
       }
@@ -261,6 +269,15 @@
       }
       if (!!this.source.arrows && !this.source.arrowsPosition) {
         this.$set(this.source, 'arrowsPosition', 'default');
+      }
+      //to have the data recalculed it in mode read and view the correct number of cols in mobile and desktop
+      if((this.mode === 'read') && !this.mapped.length && this.source.currentItems.length){
+        bbn.fn.each(this.source.currentItems, (v,i) => {
+          this.mapped.push(...v.data)
+        })
+        if(this.mapped.length){
+          this.adaptView()
+        }
       }
     },
     mounted(){

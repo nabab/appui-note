@@ -6,14 +6,26 @@ if ($model->hasData(['mode', 'limit', 'order'])) {
       $filter = [];
       if($model->data['note_type'] === 'news'){
         $model->data['note_type'] = null;
-      }
-      if($model->hasData(['id_option'])){
-        $filter = [
-          'id_option' =>  $model->data['id_option']
+        $filter['conditions'] = [];
+        //all types except for pages
+        $filter['conditions'][] = [
+          'field' => 'id_type',
+          'operator' => '!=',
+          'value' => $model->inc->options->fromCode('pages','types','note','appui'),
         ];
       }
+      //if type === authors and a period is selected
+      if($model->hasData(['id_option'])){
+        $filter['conditions'][] = [
+          'field' => 'id_option',
+          'value' => $model->data['id_option'],
+          'operator'=> '='
+        ];
+      }
+      
       $cms = new \bbn\Appui\Cms($model->db);
       $res = $cms->getAll(false, $filter, [$model->data['order'] => 'desc'],$model->data['limit'],0, $model->data['note_type'] );
+      
       $res['success'] = true;
     }
     elseif (($mode === 'gallery') && ($id_group = $model->data['id_group'])) {
