@@ -2,10 +2,10 @@
 
 <div class="bbn-overlay bbn-flex-height">
   <bbn-toolbar class="bbn-lg bbn-padded">
-  	<div>
+    <div>
       <bbn-button text="<?= _("Add a new feature") ?>"
                   icon="nf nf-fa-plus"
-                  @click="() => {}"/>
+                  @click="openCategoryForm"/>
     </div>
   </bbn-toolbar>
   <div class="bbn-flex-fill">
@@ -67,6 +67,11 @@
                               :notext="true"
                               text="<?= _("Move down") ?>"/>
                 </div>
+                <bbn-button icon="nf nf-fae-galery"
+										  :notext="false"
+					 						@click="openGallery"
+											title="<?=_('Select an image')?>"
+											class="bbn-right-sspace"/>
                 <bbn-button @click="removeNote(item.id)"
                             icon="nf nf-fa-trash_o"
                             :notext="true"
@@ -75,17 +80,15 @@
             </div>
           </div>
           <div class="bbn-spadding">
-            <appui-note-picker @select="addNote"
+            <appui-note-picker @select="addFeature"
                                placeholder="<?= _('Search for a note to feature in this category') ?>"
                                class="bbn-lg bbn-w-100"/>
           </div>
         </div>
         <div v-else
              class="bbn-overlay bbn-middle">
-          <div class="bbn-block">
-            <h2>
-              <?= _("Pick an element") ?>
-            </h2>
+          <div class="bbn-label">
+            <?= _("Pick a feature") ?>
           </div>
         </div>
       </bbn-pane>

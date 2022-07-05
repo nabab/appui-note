@@ -1,6 +1,7 @@
 // Javascript Document
 
 (() => {
+  let that = null;
   return {
     data() {
       return {
@@ -10,6 +11,7 @@
         selectedCode: "",
         selectedOrder: "",
         featureItems: [],
+        showForm: false,
         orderModes: [{
           text: bbn._("Random"),
           value: "random"
@@ -71,9 +73,9 @@
           });
         }
       },
-      addNote(data) {
+      addFeature(data) {
         if (this.selected && data.id_note) {
-          bbn.fn.post(appui.plugins['appui-note'] + '/actions/feature/add', {
+          bbn.fn.post(appui.plugins['appui-note'] + '/actions/feature/add_feature', {
             id_option: this.selected,
             id_note: data.id_note,
             num: this.featureItems.length + 1
@@ -120,7 +122,31 @@
             appui.success(bbn._("Update successful"));
           }
         });
+      },
+      openCategoryForm() {
+        this.getPopup({
+          title: bbn._("New category"),
+          component: this.$options.components.form
+        });
+      },
+      openGallery(){
+        this.getPopup().open({
+          component: this.$options.components.gallery,
+          componentOptions: {
+            onSelection: this.onSelection()
+          },
+          title: bbn._('Select an image'),
+          width: '90%',
+          height: '90%'
+        });
+      },
+      onSelection(img) {
+        this.source.source = img.data;
+        this.getPopup().close();
       }
+    },
+    beforeMount() {
+      that = this;
     },
     watch: {
       selected(v) {
@@ -139,6 +165,73 @@
       selectedOrder(v) {
         this.selectFeature(this.selectedFeature);
       }
+    },
+    components: {
+      gallery: {
+        template: `
+<div>
+  <appui-note-media-browser2 :source="root + 'media/data/browser'"
+                             @selection="onSelection"
+                             @clickItem="onSelection"
+                             :zoomable="false"
+                             :selection="false"
+                             :limit="50"
+                             path-name="path"
+                             :upload="root + 'media/actions/save'"
+                             :remove="root + 'media/actions/remove'"/>
+</div>
+        `,
+        props: {
+          onSelection: {
+            type: Function
+          }
+        },
+        data(){
+          return {
+            root: appui.plugins['appui-note'] + '/'
+          };
+        }
+      },
+      form: {
+        data() {
+          return {
+            newCategory: {
+              text: "",
+              code: ""
+            },
+            root: appui.plugins['appui-note'] + '/'
+          };
+        },
+        methods: {
+          addCategory(data) {
+            bbn.fn.log(data, that);
+            if (that && data.success) {
+              this.newCategory.id = data.data.id;
+              that.source.data.push(bbn.fn.clone(this.newCategory));
+              this.newCategory.id = null;
+              this.newCategory.text = "";
+              this.newCategory.code = "";
+              appui.success(bbn._("Update successful"));
+              this.closest("bbn-floater").close();
+            }
+          },
+        },
+        template: `<bbn-form :source="newCategory"
+                    					@success="addCategory"
+                              :action="root + '/actions/feature/add_category'">
+                    	<div class="bbn-grid-fields bbn-padding"
+                           style="min-width: 20em">
+                      	<div class="bbn-label">text</div>
+                        <bbn-input title="text"
+                        					 v-model="newCategory.text"
+                                   :required="true"/>
+                      	<div class="bbn-label">code</div>
+                        <bbn-input title="code"
+                                   v-model="newCategory.code"
+                                   :required="true"/>
+                      </div>
+                    </bbn-form>`
+      },
     }
   };
 })();
