@@ -2,6 +2,7 @@
 if ($model->hasData(['id', 'ref', 'file'], true)) {
 
   $id = $model->data['id'];
+  $model->data = \bbn\X::mergeArrays($model->data, $model->data['file'][0]);
   $medias = new \bbn\Appui\Medias($model->db);
   if ($model->hasData('tags')) {
     $cms = new \bbn\Appui\Cms($model->db);
@@ -20,10 +21,14 @@ if ($model->hasData(['id', 'ref', 'file'], true)) {
     if (($oldMedia['name'] !== $model->data['name'])
       && is_file($tmpPath . $model->data['name'])
     ) {
+      if (!empty($oldMedia['url'])) {
+        $model->getModel($model->pluginUrl('appui-note'), '/media/actions/clear_chache', ['file' => $oldMedia['url'], 'all' => true]);
+      }
       $res['media'] = $medias->replaceContent($id, $tmpPath . $model->data['name']);
       if (empty($res['media'])) {
         throw new Error(_('Error while replacing the media'));
       }
+
     }
     if ($oldMedia['title'] !== $model->data['title']) {
       if (empty($model->data['title'])) {
