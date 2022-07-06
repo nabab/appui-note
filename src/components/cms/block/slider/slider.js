@@ -5,6 +5,7 @@
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
     data(){
       return {
+        isReady: true,
         okMode: false,
         sliderMode: 'publication',
         mapped: [],
@@ -25,6 +26,16 @@
             text: 'Last edit',
             value: 'versions.creation'
           }
+        ],
+        fitSource:[
+          {
+            text: 'Cover',
+            value: 'cover'
+          },
+          {
+            text:'Contain',
+            value: 'contain'
+          },
         ],
         radioSource:[
           {
@@ -103,6 +114,8 @@
         });
       },
       getSlideshowSource(){
+        this.isReady = false
+        console.log('getslide',this.isReady)
         if(this.mode === 'edit'){
           
           let ok = false;
@@ -166,6 +179,7 @@
         else{
           this.$set(this.source, 'currentItems', []);
         }
+        console.log('-> ', this.source.currentItems)
         if (bbn.fn.isDesktopDevice() || bbn.fn.isTabletDevice()) {
           let start = 0;
           for (let i = 0; i < this.mapped.length; i += this.source.max) {
@@ -177,7 +191,9 @@
               data: data
             });
           }
+          console.log(this.source.currentItems)
         }
+
         else if ( bbn.fn.isMobileDevice() ) {
 
           let start = 0;
@@ -231,7 +247,24 @@
           this.source.mode = 'publications';
         }
       },
-
+      'source.min':{
+        handler(val){
+          this.adaptView()
+        },
+        deep: true
+      },
+      'source.max':{
+        handler(val){
+          this.adaptView()
+        },
+        deep: true
+      },
+      'source.limit':{
+        handler(val){
+          this.getSlideshowSource()
+        },
+        deep: true
+      }
     },
     beforeMount(){
       if(!this.source.limit){

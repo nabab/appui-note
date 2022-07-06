@@ -2,6 +2,11 @@
 	return {
 		props: ['data'],
 		computed:{
+			imgStyle(){
+				let fit = this.closest('appui-note-cms-block-slider').source.fit;
+				let st = (fit === 'contain') ? ';object-position:bottom;' : ''
+				return 'object-fit:' + fit + st
+			},
 			min(){
 				return this.closest('appui-note-cms-block-slider').source.min;
 			},

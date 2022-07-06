@@ -63,7 +63,12 @@
                  :show-units="true"
                  :nullable="true"
                  unit="px"/>
-
+      
+      <label><?=_('Image fit')?></label>
+      <bbn-radio v-model="source.fit"
+                 :nullable="true"
+                 :source="fitSource"/>
+                 
       <label><?=_('Max slide in line')?></label>
       <div>
         <bbn-numeric v-model="source.max"
@@ -72,7 +77,6 @@
                       :default="1"
                       :nullable="false"
                       :max="5"
-                      @change="adaptView"
                       />
       </div>
       <label><?=_('Min slide in line (mobile)')?></label>
@@ -83,14 +87,14 @@
                     :default="1"
                     :max="5"
                     :nullable="false"
-                    @change="adaptView"
                     />
       </div>
-      <label><?=_('Limits')?></label>
+      <label v-if="sliderMode !== 'gallery'"><?=_('Limits')?></label>
       <bbn-numeric v-model="source.limit"
                    :min="source.max"
                    :nullable="false"
                    @change="getSlideshowSource"
+                   v-if="sliderMode !== 'gallery'"
                    />
 
       <label><?=_('Autoplay')?></label>
