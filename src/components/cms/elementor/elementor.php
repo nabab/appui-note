@@ -79,7 +79,7 @@
           </div>
           <bbn-scroll v-else>
             <div class="bbn-w-100 bbn-middle">
-              <div class="bbn-w-100 bbn-vlpadded bbn-hxlpadded">
+              <div class="bbn-w-100  bbn-padded">
                 <appui-note-cms-block class="bbn-contain"
                                       :source="editedSource"
                                       mode="edit"/>

@@ -65,25 +65,27 @@
                  unit="px"/>
 
       <label><?=_('Max slide in line')?></label>
-      <bbn-numeric v-model="source.max"
-                   :step="1"
-                   :min="1"
-                   :default="1"
-                   :nullable="false"
-                   :max="5"
-                   @change="adaptView"
-                   />
-
+      <div>
+        <bbn-numeric v-model="source.max"
+                      :step="1"
+                      :min="1"
+                      :default="1"
+                      :nullable="false"
+                      :max="5"
+                      @change="adaptView"
+                      />
+      </div>
       <label><?=_('Min slide in line (mobile)')?></label>
-      <bbn-numeric v-model="source.min"
-                   :step="1"
-                   :min="1"
-                   :default="1"
-                   :max="5"
-                   :nullable="false"
-                   @change="adaptView"
-                   />
-
+      <div>
+        <bbn-numeric v-model="source.min"
+                    :step="1"
+                    :min="1"
+                    :default="1"
+                    :max="5"
+                    :nullable="false"
+                    @change="adaptView"
+                    />
+      </div>
       <label><?=_('Limits')?></label>
       <bbn-numeric v-model="source.limit"
                    :min="source.max"

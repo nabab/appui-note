@@ -5,7 +5,6 @@
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
     data(){
       return {
-        showRootAlias: false,
         okMode: false,
         sliderMode: 'publication',
         mapped: [],
@@ -66,7 +65,12 @@
       };
     },
     computed: {
-
+      showRootAlias(){
+        if (this.source.id_root_alias ){
+          return true;
+        }
+        return false;
+      },
       noteType(){
         return this.source.noteType;
       },
@@ -120,39 +124,42 @@
             tmp.id_feature = this.source.id_feature;
           }
           if (this.okMode) {
-            this.post(this.slideshowSourceUrl, tmp, d => {
-              if (this.mapped.length) {
-                this.mapped.splice(0, this.mapped.length);
-              }
-              if(d.success && d.data) {
-                this.$nextTick(() => {
-                  bbn.fn.each(d.data, data => {
-                    let tmp = bbn.fn.clone(data);
-                    tmp.style = this.source.style;
-                    tmp.type = 'img';
-                    if (this.source.mode === 'gallery') {
-                      tmp.content = tmp.path || '';
-                    }
-                    else if (this.source.mode === 'features') {
-                        tmp.content = tmp.media ? tmp.media.url || tmp.media.path : '';
-                    }
-                    else {
-                      tmp.content = tmp.front_img && tmp.front_img.path ? tmp.front_img.path : '';
-                    }
-                    tmp.info = data.title;
-                    tmp.mode = 'full';
-                    tmp.component = 'appui-note-cms-block-slider-slide';
-                    this.mapped.push(tmp);
+						this.$nextTick(() => {
+              this.post(this.slideshowSourceUrl, tmp, d => {
+                if (this.mapped.length) {
+                  this.mapped.splice(0, this.mapped.length);
+                }
+                if(d.success && d.data) {
+                  this.$nextTick(() => {
+                    bbn.fn.each(d.data, data => {
+                      let tmp = bbn.fn.clone(data);
+                      tmp.style = this.source.style;
+                      tmp.type = 'img';
+                      if (this.source.mode === 'gallery') {
+                        tmp.content = tmp.path || '';
+                      }
+                      else if (this.source.mode === 'features') {
+                          tmp.content = tmp.media ? tmp.media.url || tmp.media.path : '';
+                      }
+                      else {
+                        tmp.content = tmp.front_img && tmp.front_img.path ? tmp.front_img.path : '';
+                      }
+                      tmp.info = data.title;
+                      tmp.mode = 'full';
+                      tmp.component = 'appui-note-cms-block-slider-slide';
+                      this.mapped.push(tmp);
+                    });
+                    this.adaptView();
                   });
-                  this.adaptView();
-                });
-              }
+                }
+              });
             });
           }
         }
+
       },
       adaptView(){
-        console.log('adapt!')
+        console.log('adapt view!!!')
         if (this.source.currentItems && this.source.currentItems.length){
           this.source.currentItems.splice(0, this.source.currentItems.length);
         }
@@ -183,24 +190,22 @@
               data: data
             });
           }
-          console.log('currentItems',this.source.currentItems)
-
         }
+
       },
     },
     watch:{
       noteType(val){
         if(val){
           if(this.$refs.publicationdropdown){
-            
             let ddSource = this.$refs.publicationdropdown.currentData;
             let idx = bbn.fn.search(ddSource, 'data.id', val);
             if ((idx > -1) && ddSource[idx].data.id_root_alias){
               this.source.id_root_alias = ddSource[idx].data.id_root_alias;
-              this.showRootAlias = true;
+              //this.showRootAlias = true;
             }
             else{
-              this.showRootAlias = false ;
+              //this.showRootAlias = false ;
             }
           }
         }
@@ -209,7 +214,6 @@
         if(val === 'features') {
           this.$delete(this.source, 'id_group');
           this.$delete(this.source, 'noteType');
-          //this.$set(this.source, 'id_feature', '');
           this.okMode = true;
           this.source.mode = 'features';
         }
@@ -217,17 +221,12 @@
           this.$delete(this.source, 'id_feature');
           this.$delete(this.source, 'noteType');
           this.$delete(this.source, 'id_option');
-          //this.$set(this.source, 'id_group', '');
           this.okMode = true;
           this.source.mode = 'gallery';
         }
         else {
           this.$delete(this.source, 'id_group');
           this.$delete(this.source, 'id_feature');
-          this.$delete(this.source, 'id_option');
-          //this.$set(this.source, 'noteType', '');
-          //this.$set(this.source, 'id_option', '');
-
           this.okMode = true;
           this.source.mode = 'publications';
         }
@@ -235,10 +234,6 @@
 
     },
     beforeMount(){
-      
-      if(this.source.id_option){
-        this.showRootAlias = true;
-      }
       if(!this.source.limit){
         this.$set(this.source, 'limit', 10);
       }
@@ -270,7 +265,7 @@
       if (!!this.source.arrows && !this.source.arrowsPosition) {
         this.$set(this.source, 'arrowsPosition', 'default');
       }
-      //to have the data recalculed it in mode read and view the correct number of cols in mobile and desktop
+      //to have the data recalculated in mode read and view the correct number of cols in mobile and desktop
       if((this.mode === 'read') && !this.mapped.length && this.source.currentItems.length){
         bbn.fn.each(this.source.currentItems, (v,i) => {
           this.mapped.push(...v.data)
@@ -284,23 +279,18 @@
       if(this.sliderMode === 'features') {
         this.$delete(this.source, 'id_group');
         this.$delete(this.source, 'noteType');
-       // this.$set(this.source, 'id_feature', '');
         this.okMode = true;
         this.source.mode = 'features';
       }
       else if (this.sliderMode === 'gallery') {
         this.$delete(this.source, 'id_feature');
         this.$delete(this.source, 'noteType');
-        //this.$set(this.source, 'id_group', '');
         this.okMode = true;
         this.source.mode = 'gallery';
       }
       else {
         this.$delete(this.source, 'id_group');
         this.$delete(this.source, 'id_feature');
-        //this.$set(this.source, 'noteType', '');
-        //this.$set(this.source, 'id_option', '');
-
         this.okMode = true;
         this.source.mode = 'publications';
       }

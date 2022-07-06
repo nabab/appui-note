@@ -116,7 +116,6 @@
         info: 1,
         style: {
           width: '100%',
-          height: '300px'
         },
         align: 'center'
       }
