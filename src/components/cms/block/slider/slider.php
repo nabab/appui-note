@@ -38,7 +38,10 @@
                       v-model="source.id_group"
                       ref="galleryList"
                       @change="getSlideshowSource"
+                      :suggest="true"
+                      :filterable="true"
                       :limit="0"/>
+                      
         <bbn-button icon="nf nf-fae-galery"
                     :notext="true"
                     @click="openMediasGroups"

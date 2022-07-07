@@ -12,16 +12,20 @@ if ($model->hasData('id', true)) {
   $data = $cms->get($model->data['id']);
   $data['items'] = $data['content'] ? json_decode($data['content']) : [];
   if (!empty($data['medias'])) {
+    
+    
     $data['medias'] = array_map(function($m){
-      $m['cacheFiles'] = array_map(function($f){
+      $files = \bbn\File\Dir::getFiles(BBN_PUBLIC . dirname($m['url']));
+      $m['cacheFiles'] = $files ? array_map(function($f){
         return [
           'file' => str_replace(BBN_PUBLIC, '', $f),
           'name' => basename($f),
           'modified' => filemtime($f)
         ];
-      }, \bbn\File\Dir::getFiles(BBN_PUBLIC . dirname($m['url'])));
+      }, $files) : [];
       return $m;
     }, $data['medias']);
+    
   }
   unset($data['content']);
   return ['data' => $data, 'types' => $note->getOptions('types'), 'title' => $data['title']];

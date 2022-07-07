@@ -9,6 +9,8 @@
                     source-value="id"
                     v-model="source.source"
                     ref="galleryList"
+                    :suggest="true"
+                    :filterable="true"
                     :limit="0"/>
       <bbn-button icon="nf nf-fae-galery"
                   :notext="true"
