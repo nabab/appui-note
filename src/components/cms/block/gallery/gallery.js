@@ -112,6 +112,9 @@
 
       if(this.source.imageWidth){
         this.source.imageWidth = parseInt(this.source.imageWidth) 
+        if(this.source.imageWidth > 100){
+          this.source.imageWidth = 33;
+        }
       }
 
     }
