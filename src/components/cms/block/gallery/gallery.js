@@ -109,12 +109,11 @@
       }
     },
     beforeMount(){
+
       if(this.source.imageWidth){
         this.source.imageWidth = parseInt(this.source.imageWidth) 
       }
-      else{
-        this.source.imageWidth = 150 
-      }
+
     }
   }
 })();
