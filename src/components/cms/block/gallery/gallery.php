@@ -41,12 +41,24 @@
     <label v-if="isConfig || !isInConfig('imageWidth')"><?=_('Image width')?></label>
     <bbn-range v-if="isConfig || !isInConfig('imageWidth')"
                v-model="source.imageWidth"
-               :min="10"
-               :max="2000"
-               :step="10"
+               :min="5"
+               :max="100"
+               :step="1"
                :show-reset="false"
-               :show-numeric="true"/>
-
+               :show-numeric="true"
+               unit="%"
+               />
+    
+    <label v-if="isConfig || !isInConfig('columnGap')"><?=_('Column gap')?></label>
+    <bbn-range v-if="isConfig || !isInConfig('columnGap')"
+               v-model="source.columnGap"
+               :min="2"
+               :max="100"
+               :step="1"
+               :default="10"
+               :show-reset="false"
+               :show-numeric="true"
+               />
     <label v-if="isConfig || !isInConfig('align')"><?=_('Alignment')?></label>
     <div v-if="isConfig || !isInConfig('align')">
       <div class="bbn-block">
@@ -118,13 +130,15 @@
                           idGroup: source.source
                           }"
                    ref="gallery"
+                   @ready="getItemWidth"
                    :scrollable="!!source.scrollable"
                    :pageable="!!source.pageable"
                    :zoomable="!!source.zoomable"
                    :resizable="!!source.resizable"
                    :toolbar="!!source.toolbar"
                    path-name="path"
-                   :itemWidth="source.imageWidth"
+                   :itemWidth="itemWidth"
+                   :columnGap="source.columnGap"
                    :pager="!!source.pager"/>
     </div>
   </div>
