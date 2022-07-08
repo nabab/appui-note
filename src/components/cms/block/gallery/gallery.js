@@ -16,6 +16,7 @@
     },
     data(){
       return {
+        itemWidth: 0,
         galleryListUrl: appui.plugins['appui-note'] + '/media/data/groups/list',
         gallerySourceUrl: appui.plugins['appui-note'] + '/media/data/groups/medias',
       };
@@ -41,6 +42,25 @@
       }
     },
     methods: {
+      getItemWidth(){
+        let gallery = this.$refs.gallery,
+            width = this.source.imageWidth,
+            int;
+        if(width){
+          console.log(this.$refs.gallery)
+          if( gallery ){
+            //the column gap to percent
+            let percentGap = gallery.columnGap * 100 / gallery.width ;
+            this.itemWidth = gallery.width / 100 * (width - percentGap) 
+          }
+          else{
+            this.itemWidth = parseInt(width)
+          }  
+        }
+        else {
+          this.itemWidth = 200
+        }
+      },
       isInConfig(fieldName) {
         return this.config[fieldName] !== undefined;
       },
@@ -57,6 +77,18 @@
       }
     },
     watch: {
+      'source.imageWidth'(val){
+        console.log('watch',val)
+        if(bbn.fn.isString(val)){
+          let unit = val.replace(parseInt(val), '');
+          if(unit === '%'){
+            console.log('watch 2',unit)
+            this.source.imageWidth = parseInt(val)
+          }
+          console.log('out watch')
+          this.getItemWidth()
+        }
+      },
       'source.source'(){
         let gallery = this.getRef('gallery');
         if (!!gallery) {
@@ -74,6 +106,14 @@
         if (!val) {
           this.source.resizable = 0;
         }
+      }
+    },
+    beforeMount(){
+      if(this.source.imageWidth){
+        this.source.imageWidth = parseInt(this.source.imageWidth) 
+      }
+      else{
+        this.source.imageWidth = 150 
       }
     }
   }
