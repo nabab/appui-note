@@ -1,9 +1,31 @@
 /* LESS Document */
 
 .@{componentName} {
+  .cropped{
+    .bbn-gallery-columns-container{
+      div{
+        display:grid;
+        .bbn-gallery-item{
+          span{
+            display: block;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            aspect-ratio: 1;
+            img{
+              height: 100%;
+              width: 100%;
+              object-fit: cover;
+            }
+          }
+        }
+      }
+    }
+  }
   .bbn-gallery-columns-container{
     display: flex;
     justify-content: space-between;
+    
   }
   a{
     overflow: hidden;

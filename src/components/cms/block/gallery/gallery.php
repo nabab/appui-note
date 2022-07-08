@@ -37,8 +37,14 @@
                :show-reset="false"
                :show-numeric="true"
                :show-units="true"/>
+    
+    <label v-if="isConfig || !isInConfig('crop')"><?=_('Crop Image')?></label>
+    <bbn-checkbox v-if="isConfig || !isInConfig('crop')"
+                  v-model="source.crop"
+                  :value="1"
+                  :novalue="0"/>
 
-    <label v-if="isConfig || !isInConfig('imageWidth')"><?=_('Image width')?></label>
+    <label v-if="isConfig || !isInConfig('imageWidth')"><?=_('Image width')?> (%)</label>
     <bbn-range v-if="isConfig || !isInConfig('imageWidth')"
                v-model="source.imageWidth"
                :min="5"
@@ -119,6 +125,7 @@
                   v-model="source.toolbar"
                   :value="1"
                   :novalue="0"/>
+
   </div>
   <div v-else
        class="bbn-flex"
@@ -126,6 +133,7 @@
     <div class="bbn-block"
          :style="source.style">
       <bbn-gallery :source="gallerySourceUrl"
+                   :class="{'cropped' : source.crop}"
                    :data="{
                           idGroup: source.source
                           }"

@@ -130,12 +130,13 @@
         zoomable: 0,
         resizable: 0,
         toolbar: 0,
+        crop: 1,
         style: {
           width: '100%',
           height: '100%'
         },
         align: 'center',
-        imageWidth: 150
+        imageWidth: 33
       }
     }, {
       text: bbn._("Video"),
