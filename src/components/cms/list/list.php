@@ -18,6 +18,8 @@
                        icon: 'nf nf-fa-plus',
                        text: _('Insert Articles'),
                        action: insertNote
-                       }]">
+                       }]"
+>
   </bbn-table>
 </div>
+
