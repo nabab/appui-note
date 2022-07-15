@@ -70,7 +70,6 @@
 
             <label><?= _("Public URL") ?></label>
             <appui-note-field-url :source="source"
-                                  prefix="post/"
                                   v-model="source.url"
                                   :readonly="true"/>
 
