@@ -87,6 +87,7 @@
                     :source="currentItems"
                     ref="slideshow"
                     :arrows="!!source.arrows"
+                    :arrows-position="source.arrowsPosition"
                     :auto-play="!!source.autoplay"
                     :loop="!!source.loop"
                     :preview="!!source.preview"
