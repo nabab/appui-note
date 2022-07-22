@@ -7,7 +7,29 @@
       return {
         slideshowSourceUrl: appui.plugins['appui-note'] + '/media/data/groups/medias',
         currentItems: [],
-        galleryListUrl: appui.plugins['appui-note'] + '/media/data/groups/list'
+        galleryListUrl: appui.plugins['appui-note'] + '/media/data/groups/list',
+        arrowsPositions: [{
+          text: bbn._('Default'),
+          value: 'default'
+        }, {
+          text: bbn._('Top'),
+          value: 'top'
+        }, {
+          text: bbn._('Top-Left'),
+          value: 'topleft'
+        }, {
+          text: bbn._('Top-Right'),
+          value: 'topright'
+        }, {
+          text: bbn._('Bottom'),
+          value: 'bottom'
+        }, {
+          text: bbn._('Bottom-Left'),
+          value: 'bottomleft'
+        }, {
+          text: bbn._('Bottom-Right'),
+          value: 'bottomright'
+        }]
       }
     },
     computed: {

@@ -61,6 +61,10 @@
     <bbn-checkbox v-model="source.arrows"
                   :value="1"
                   :novalue="0"/>
+    <label v-if="!!source.arrows"><?=_('Arrows position')?></label>
+    <bbn-dropdown v-if="!!source.arrows"
+                  v-model="source.arrowsPosition"
+                  :source="arrowsPositions"/>
     <label><?=_('Preview')?></label>
     <bbn-checkbox v-model="source.preview"
                   :value="1"
