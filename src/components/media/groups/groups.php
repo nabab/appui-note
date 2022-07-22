@@ -1,6 +1,6 @@
 <div class="appui-note-media-groups bbn-flex-width">
   <div class="bbn-flex-height appui-note-media-groups-panel bbn-bordered-right">
-    <div class="bbn-spadded bbn-header bbn-flex-width">
+    <div class="bbn-spadded bbn-header bbn-flex-width bbn-vmiddle appui-note-media-groups-toolbar">
       <bbn-button title="<?=_('New')?>"
                   icon="nf nf-fa-plus"
                   :notext="true"
@@ -76,7 +76,11 @@
                                :selection="false"
                                @delete="removeMedia"
                                :edit="actionsUrl + 'edit'"
-                               :detail="mediasDetailUrl"/>
+                               :detail="mediasDetailUrl"
+                               :sortable="true"
+                               source-order="position"
+                               :server-sorting="false"
+                               @sort="sort"/>
     <div v-else
          :class="['bbn-middle', {'bbn-overlay': scrollable}]">
       <div class="bbn-vmiddle">

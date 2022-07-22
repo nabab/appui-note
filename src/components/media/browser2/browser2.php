@@ -1,7 +1,7 @@
 
 <div :class="[componentClass, 'bbn-flex-height', 'bbn-background', 'bbn-overlay']" ref="browser">
   <bbn-gallery :source="source"
-               :searchName="searchName"
+               :search-name="searchName"
                :pageable="pageable"
                :filterable="filterable"
                :limit="limit"
@@ -21,10 +21,15 @@
                @selection="selectMedia"
                @clickItem="emitClickItem"
                :buttons-no-text="true"
-               :buttonMenu="buttonMenu || getButtonMenu"
-               :buttonMenuComponent="buttonMenuComponent"
+               :button-menu="buttonMenu || getButtonMenu"
+               :button-menuc-omponent="buttonMenuComponent"
                :selection="selection"
                uid="id"
                :data="data"
-               ref="gallery"/>
+               ref="gallery"
+               :sortable="sortable"
+               :source-order="sourceOrder"
+               :order="!!sourceOrder ? {[sourceOrder]: 'asc'} : {}"
+               :server-sorting="serverSorting"
+               @sort="sort"/>
 </div>
