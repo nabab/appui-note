@@ -110,6 +110,26 @@
             medias: []
           }
         });
+      },
+      sort(ev, ids){
+        if (this.current && this.current.id && bbn.fn.numProperties(ids)) {
+          this.post(appui.plugins['appui-note'] + '/media/actions/groups/order', {
+            idGroup: this.current.id,
+            idMedias: ids
+          }, d => {
+            if (d.success) {
+              appui.success();
+            }
+            else {
+              ev.preventDefault();
+              appui.error();
+            }
+          });
+        }
+        else {
+          ev.preventDefault();
+          appui.error();
+        }
       }
     },
     mounted(){

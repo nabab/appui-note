@@ -48,6 +48,17 @@
         type: Boolean,
         default: true
       },
+      sortable: {
+        type: Boolean,
+        default: false
+      },
+      serverSorting: {
+        type: Boolean,
+        default: true
+      },
+      sourceOrder: {
+        type: String
+      },
       zoomable: {
         type: Boolean,
         default: true
@@ -298,6 +309,9 @@
       },
       refresh(){
         this.getRef('gallery').updateData();
+      },
+      sort(ev, ids){
+        this.$emit('sort', ev, ids);
       }
     },
     beforeMount(){
