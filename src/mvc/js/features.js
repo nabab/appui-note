@@ -106,6 +106,7 @@
         };
         bbn.fn.post(appui.plugins['appui-note'] + '/actions/feature/update', obj, d => {
           if (d.success) {
+            bbn.fn.extend(this.selectedOption, obj);
             appui.success(bbn._("Update successful"));
           }
           this.selectFeature(obj);
