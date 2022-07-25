@@ -42,12 +42,19 @@ if ($model->hasData('action')) {
       break;
     case 'update':
       if ($model->hasData(['id', 'text', 'code', 'orderMode'], true)) {
+        $opt = $model->inc->options->option($model->data['id']);
+        $res = $model->inc->options->set($model->data['id'], [
+          'text' => $model->data['text'],
+          'code' => $model->data['code'],
+          'orderMode' => $model->data['orderMode']
+        ]);
+        if ($res && ($opt['orderMode'] !== $model->data['orderMode'])) {
+          $note = new bbn\Appui\Note($model->db);
+          $note->fixFeatureOrder($model->data['id']);
+        }
+
         return [
-          'success' => $model->inc->options->set($model->data['id'], [
-            'text' => $model->data['text'],
-            'code' => $model->data['code'],
-            'orderMode' => $model->data['orderMode']
-          ])
+          'success' => $res
         ];
       }
       break;
