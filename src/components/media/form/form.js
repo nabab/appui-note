@@ -1,5 +1,3 @@
-// Javascript Document
-
 (() => {
   return {
     mixins: [bbn.vue.basicComponent],
@@ -33,13 +31,13 @@
         !!this.source.id.length
       ) {
         files.push({
-          linkUrl: this.source.linkUrl, 
           name: this.source.name,
           title: this.source.title,
           description: this.source.description,
           extension: this.source.content.extension,
           size: this.source.content.size
         });
+
       }
       return {
         root: appui.plugins['appui-note'] + '/',
@@ -51,11 +49,19 @@
       };
     },
     computed: {
+      isMediaGroup(){
+        return (this.closest('bbn-container').find('appui-note-media-groups') !== undefined) || false
+      },
       isEdit(){
         return !!this.source && !!this.source.id && !!this.source.id.length;
       },
       asJson(){
         return !!this.source && !!this.source.content && bbn.fn.isString(this.source.content);
+      },
+      idGroup(){
+        if(this.isMediaGroup){
+          return this.closest('bbn-container').find('appui-note-media-groups').current.id
+        }
       }
     },
     methods: {
@@ -82,6 +88,9 @@
           bbn.fn.each(this.files, f => f.title = '');
         }
       },
+      'source.link'(val){
+        this.files[0].link = val;
+      },
       files(newVal, oldVal){
         if (this.isEdit && !oldVal.length) {
           newVal[0].title = this.oldTitle;
@@ -89,6 +98,11 @@
           this.oldTitle = '';
           this.oldDescription = '';
         }
+      }
+    },
+    mounted(){
+      if(this.isMediaGroup){
+        this.files[0].link = this.source.link;
       }
     }
   };

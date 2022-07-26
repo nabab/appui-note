@@ -1,13 +1,15 @@
 <!-- HTML Document -->
 
 <div :class="componentClass">
+	
 	<bbn-form :source="{file: files}"
 						:data="{
 							ref: ref,
 							id: source.id,
 							action: isEdit ? 'edit' : 'insert',
-							idGroup: source.idGroup ? source.idGroup : ''
+							idGroup: idGroup ? idGroup : ''
 						}"
+						:prefilled="true"
 						:action="url"
 						@success="success"
 						:scrollable="scrollable"
@@ -30,8 +32,8 @@
         <div><?=_('Title')?>:</div>
 				<bbn-input v-model="f.title"/>
 				
-				<div><?=_('Link')?>:</div>
-				<bbn-input v-model="f.linkUrl"/>
+				<div v-if="isMediaGroup"><?=_('Link')?>:</div>
+				<bbn-input v-if="isMediaGroup" v-model="source.link"/>
 
         <div class="bbn-bottom-space"><?=_('Description')?>:</div>
 				<bbn-textarea v-model="f.description"
