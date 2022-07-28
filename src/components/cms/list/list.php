@@ -14,6 +14,10 @@
              button-mode="menu"
              :search="true"
              :search-fields="['versions.title', 'bbn_url.url', 'bbn_notes.id', 'versions.excerpt']"
+             :order="[{
+                   field: 'start',
+                   dir: 'DESC'
+                   }]"
   					 :toolbar="[{
                        icon: 'nf nf-fa-plus',
                        text: _('Insert Articles'),
