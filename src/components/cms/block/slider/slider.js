@@ -172,14 +172,12 @@
 
       },
       adaptView(){
-        console.log('adapt view!!!')
         if (this.source.currentItems && this.source.currentItems.length){
           this.source.currentItems.splice(0, this.source.currentItems.length);
         }
         else{
           this.$set(this.source, 'currentItems', []);
         }
-        console.log('-> ', this.source.currentItems)
         if (bbn.fn.isDesktopDevice() || bbn.fn.isTabletDevice()) {
           let start = 0;
           for (let i = 0; i < this.mapped.length; i += this.source.max) {
@@ -191,7 +189,6 @@
               data: data
             });
           }
-          console.log(this.source.currentItems)
         }
 
         else if ( bbn.fn.isMobileDevice() ) {

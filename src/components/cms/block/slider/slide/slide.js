@@ -2,9 +2,12 @@
 	return {
 		props: ['data'],
 		computed:{
+			isMobile(){
+        return bbn.fn.isMobile()
+      },
 			imgStyle(){
 				let fit = this.closest('appui-note-cms-block-slider').source.fit;
-				let st = (fit === 'contain') ? ';object-position:bottom;' : ''
+				let st = (fit === 'contain') ? ';object-position:top;' : ''
 				return 'object-fit:' + fit + st
 			},
 			min(){
