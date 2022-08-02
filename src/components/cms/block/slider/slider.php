@@ -67,6 +67,29 @@
                  :nullable="true"
                  unit="px"/>
       
+      <label><?=_('Title distance')?> (px)</label>
+      <bbn-range v-model="source.style.margin"
+                 :min="-200"
+                 :max="200"
+                 :step="5"
+                 :show-reset="false"
+                 :show-numeric="true"
+                 :show-units="true"
+                 :nullable="true"
+                 unit="px"/>
+
+      <label><?=_('Title distance (mobile)')?> (px)</label>
+      <bbn-range v-model="source.style.marginMobile"
+                 :min="-200"
+                 :max="200"
+                 :step="5"
+                 :show-reset="false"
+                 :show-numeric="true"
+                 :show-units="true"
+                 :nullable="true"
+                 unit="px"/>
+
+
       <label><?=_('Image fit')?></label>
       <bbn-radio v-model="source.fit"
                  :nullable="true"
@@ -131,7 +154,7 @@
                     :novalue="0"/>
     </div>
   </div>
-  <div v-else class="bbn-w-100" :style="source.style">
+  <div v-else class="bbn-w-100" :style="{'height':source.style.height ? source.style.height : '', 'width':source.style.width ? source.style.width :''}">
     <bbn-slideshow v-if="source.currentItems"
                    :source="source.currentItems"
                    ref="slideshow"
