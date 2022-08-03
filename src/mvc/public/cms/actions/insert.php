@@ -1,4 +1,8 @@
 <?php
 /** @var \bbn\Mvc\Controller $ctrl */
-
-$ctrl->action();
+if($m = $ctrl->getPluginModel('cms/actions/insert', $ctrl->post)){
+  $ctrl->obj = $m;
+}
+else {
+  $ctrl->action();
+}
