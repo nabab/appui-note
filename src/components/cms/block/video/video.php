@@ -68,14 +68,7 @@
                           }]"/>
       </div>
     </div>
-    <label><?=_('Width')?></label>
-    <bbn-range v-model="source.style.width"
-									 :min="10"
-									 :max="2000" 
-									 :step="10"
-									 :show-reset="false"
-									 :show-numeric="true"
-									 :show-units="true"/>
+
     <label><?=_('Height')?></label>
     <bbn-range v-model="source.style.height"
 									 :min="10"
@@ -88,7 +81,7 @@
   <div v-else
        class="bbn-flex"
        :style="align">
-    <bbn-video :style="source.style" 
+    <bbn-video :style="'height:' + source.style.height" 
                :autoplay="!!source.autoplay"
                :controls="!!source.controls"
                :loop="!!source.loop"
