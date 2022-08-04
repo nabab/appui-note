@@ -91,7 +91,9 @@
                     :auto-play="!!source.autoplay"
                     :loop="!!source.loop"
                     :preview="!!source.preview"
-                    :show-info="!!source.info"/>
+                    :show-info="!!source.info"
+                    @hook:mounted="getCurrentIndex"
+                    @hook:updated="getCurrentIndex"/>
     </div>
   </div>
 </div>
