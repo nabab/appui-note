@@ -22,6 +22,9 @@
             break;
         }
         return style;
+      }, 
+      width(){
+        return 'min(100%, ' + this.source.style.width + ')'
       }
     }
   };

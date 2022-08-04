@@ -88,7 +88,10 @@
   <div v-else
        class="bbn-flex"
        :style="align">
-    <bbn-video :style="source.style" 
+    <bbn-video :style="{
+                  height: source.style.height,
+                  width: width
+                }" 
                :autoplay="!!source.autoplay"
                :controls="!!source.controls"
                :loop="!!source.loop"
