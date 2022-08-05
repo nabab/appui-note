@@ -5,6 +5,7 @@
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
     data(){
       return {
+        aspectRatio :false,
         disableHeight: false,
         ratios: [{
           text: '1:1',
@@ -56,18 +57,21 @@
     },
     watch: {
       'source.aspectRatio'(val){
-        console.log('watch aspect ratio')
         if(val){
           this.disableHeight = true;
           this.source.style.height = 'auto';
+          this.aspectRatio = this.source.aspectRatio;
         }
         else{
+          this.aspectRatio = undefined;
+
           this.disableHeight = false;
         }
       }
     },
     beforeMount(){
       if(this.source.aspectRatio){
+        this.aspectRatio = this.source.aspectRatio;
         this.disableHeight = true;
         this.source.style.height = 'auto'
       }
