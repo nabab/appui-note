@@ -5,6 +5,8 @@
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
     data(){
       return {
+        fullScreenView: false,
+        fullScreenImg: false,
         slideshowSourceUrl: appui.plugins['appui-note'] + '/media/data/groups/medias',
         currentItems: [],
         galleryListUrl: appui.plugins['appui-note'] + '/media/data/groups/list',
@@ -50,6 +52,13 @@
       }
     },
     methods: {
+      fullScreen(img){
+        this.fullScreenView = true;
+        this.fullScreenImg = img;
+      },
+      closeFullscreen(){
+        this.fullScreenView = false;
+        this.fullScreenImg = false;      },
       openMediasGroups(){
         this.getPopup().load({
           title: bbn._('Medias Groups Management'),
@@ -82,6 +91,11 @@
     },
     beforeMount(){
       this.updateData();
+      if(this.isMobile && this.source.arrows){
+        if(!this.source.arrowsPosition || this.source.arrowsPosition === 'default'){
+          this.source.arrowsPosition = 'topright'
+        }
+      }
     },
     watch: {
       'source.source'(){

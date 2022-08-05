@@ -98,7 +98,7 @@
        :style="align">
     <bbn-video :width="width"
                :height="source.style.height"
-               :aspectRatio="isNull(source.aspectRatio) ? undefined : source.aspectRatio"
+               :aspectRatio="aspectRatio"
                :autoplay="!!source.autoplay"
                :controls="!!source.controls"
                :loop="!!source.loop"

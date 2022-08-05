@@ -91,7 +91,17 @@
                     :auto-play="!!source.autoplay"
                     :loop="!!source.loop"
                     :preview="!!source.preview"
-                    :show-info="!!source.info"/>
+                    :show-info="!!source.info"
+                    :item-clickable="true"
+                    @clickitem="fullScreen"/>
+      <bbn-floater v-if="fullScreenView && fullScreenImg" 
+                   class="carousel-floater bbn-vmiddle" 
+                   @close="closeFullscreen"
+                   :scrollable="false"
+                   :closable="true"
+                   :title="fullScreenImg.title">
+        <img :src="fullScreenImg.path">
+      </bbn-floater>
     </div>
   </div>
 </div>
