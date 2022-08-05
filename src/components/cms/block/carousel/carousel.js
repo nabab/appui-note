@@ -5,6 +5,7 @@
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
     data(){
       return {
+        currentIndex: false,
         slideshowSourceUrl: appui.plugins['appui-note'] + '/media/data/groups/medias',
         currentItems: [],
         galleryListUrl: appui.plugins['appui-note'] + '/media/data/groups/list',
@@ -50,6 +51,26 @@
       }
     },
     methods: {
+      getCurrentIndex(){
+        this.$nextTick(()=>{
+          this.currentIndex = this.$refs.slideshow.currentIndex;
+        })
+        
+      },
+      requestFullScreen(){
+				if(document.fullscreenEnabled && this.img){
+          this.$nextTick(()=>{
+            if (this.img.requestFullscreen) {
+              this.img.requestFullscreen();
+            } else if (this.img.webkitRequestFullscreen) { /* Safari */
+              this.img.webkitRequestFullscreen();
+            } else if (this.img.msRequestFullscreen) { /* IE11 */
+              this.img.msRequestFullscreen();
+            }
+          })
+					
+				}
+			},
       openMediasGroups(){
         this.getPopup().load({
           title: bbn._('Medias Groups Management'),
@@ -84,6 +105,19 @@
       this.updateData();
     },
     watch: {
+      currentIndex(val){
+        this.$nextTick(() => {
+          if(this.img){
+            this.img.removeEventListener("click", this.requestFullScreen, false);
+          }
+          this.img =  this.$el.querySelector('.img' + val);
+          if(this.img){
+            this.img.classList.add('bbn-p')
+            this.img.addEventListener("click", this.requestFullScreen, false);
+          }
+        })
+        
+      },
       'source.source'(){
         this.updateData();
       }
