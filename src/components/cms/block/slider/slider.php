@@ -1,7 +1,11 @@
-<div :class="[componentClass, 'bbn-w-100']">
+<div :class="[componentClass, 'bbn-w-100']"
+     :id="source.sectionId ? source.sectionId : '' " 
+     :style="source.blockDistance ? ('margin-bottom:' + source.blockDistance) : ''">
   <div v-if="mode === 'edit'"
        class="bbn-padded">
     <div class="bbn-w-100 bbn-grid-fields">
+      <label><?=_('Section id')?><small> <?=_('(Optional)')?></small></label>
+      <bbn-input v-model="source.sectionId"/>
 
       <label><?=_('Mode')?></label>
       <bbn-radio v-model="sliderMode"
@@ -66,7 +70,18 @@
                  :show-units="true"
                  :nullable="true"
                  unit="px"/>
-      
+
+      <label><?=_('Distance block below')?> (px)</label>
+      <bbn-range v-model="source.blockDistance"
+                 :min="0"
+                 :max="200"
+                 :step="5"
+                 :show-reset="false"
+                 :show-numeric="true"
+                 :show-units="true"
+                 :nullable="true"
+                 unit="px"/>
+
       <label><?=_('Title distance')?> (px)</label>
       <bbn-range v-model="source.style.margin"
                  :min="-200"
