@@ -24,7 +24,7 @@
       };
     },
     methods: {
-      select(ev, data) {
+      select(data) {
         this.$emit("select", data);
       }
     }

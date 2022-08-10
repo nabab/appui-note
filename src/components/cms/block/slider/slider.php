@@ -1,11 +1,10 @@
-<div :class="[componentClass, 'bbn-w-100']"
-     :id="source.sectionId ? source.sectionId : '' " 
+<div :class="[componentClass, source.optionalClass, 'bbn-w-100']"
      :style="source.blockDistance ? ('margin-bottom:' + source.blockDistance) : ''">
   <div v-if="mode === 'edit'"
        class="bbn-padded">
     <div class="bbn-w-100 bbn-grid-fields">
-      <label><?=_('Section id')?><small> <?=_('(Optional)')?></small></label>
-      <bbn-input v-model="source.sectionId"/>
+      <label><?=_('Css class')?><small> <?=_('(Optional)')?></small></label>
+      <bbn-input v-model="source.optionalClass"/>
 
       <label><?=_('Mode')?></label>
       <bbn-radio v-model="sliderMode"
