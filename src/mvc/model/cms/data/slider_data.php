@@ -7,6 +7,23 @@ if ($model->hasData(['mode', 'limit', 'order'])) {
       if($model->data['note_type'] === 'news'){
         $model->data['note_type'] = null;
         $filter['conditions'] = [];
+        $filter['conditions'][] = [
+          'field' => 'start',
+          'operator' => '<=',
+          'value' => date('Y-m-d H:i:s')
+        ];
+        $filter['conditions'][] = [
+          'logic' => 'OR',
+          'conditions' => [
+            [
+              'field' => 'end',
+              'operator' => '>=',
+              'value' => date('Y-m-d H:i:s')
+          ], [
+             'field' => 'end',
+             'operator' => 'isnull'
+          ]
+        ]];
         //all types except for pages
         $filter['conditions'][] = [
           'field' => 'id_type',
@@ -24,7 +41,7 @@ if ($model->hasData(['mode', 'limit', 'order'])) {
       }
       
       $cms = new \bbn\Appui\Cms($model->db);
-      $res = $cms->getAll(false, $filter, [$model->data['order'] => 'desc'],$model->data['limit'],0, $model->data['note_type'] );
+      $res = $cms->getAll(false, $filter, [$model->data['order'] => 'desc'], $model->data['limit'],0, $model->data['note_type'] );
       
       $res['success'] = true;
     }
@@ -35,7 +52,7 @@ if ($model->hasData(['mode', 'limit', 'order'])) {
     }
     elseif (($mode === 'features') && $model->hasData('id_feature', true)) {
       $note = new bbn\Appui\Note($model->db);
-      $res['data'] = $note->getFeatures($model->data['id_feature']);
+      $res['data'] = $note->getFeatures($model->data['id_feature'], true);
       $res['success'] = true;
     }
   }
