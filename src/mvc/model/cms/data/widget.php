@@ -5,9 +5,12 @@
  **/
 
 /** @var $model \bbn\Mvc\Model*/
+
+use bbn\X;
 use bbn\Appui\Grid;
-if ($model->hasData('id') && ($option = $model->inc->options->option($model->data['id']))) {
-  $grid = new Grid($model->db, $model->data, [
+
+if ($model->hasData('id')) {
+  $cfg = [
     'tables' => ['bbn_notes'],
     'fields' => [
       'title',
@@ -20,7 +23,7 @@ if ($model->hasData('id') && ($option = $model->inc->options->option($model->dat
         'on' => [
           [
             'field' => 'bbn_notes.id',
-            'exp' => 'id_note'
+            'exp' => 'bbn_notes_versions.id_note'
           ], [
             'field' => 'latest',
             'value' => 1
@@ -28,17 +31,78 @@ if ($model->hasData('id') && ($option = $model->inc->options->option($model->dat
         ]
       ]
     ],
-    'where' => [
+    'group_by' => ['bbn_notes.id']
+  ];
+  $ok = false;
+  if (in_array($model->data['id'], ['pub', 'unpub'])) {
+    $cfg['join'][] = [
+      'table' => 'bbn_notes_events',
+      'on' => [
+        [
+          'field' => 'bbn_notes.id',
+          'exp' => 'bbn_notes_events.id_note'
+        ]
+      ]
+    ];
+    $cfg['join'][] = [
+      'table' => 'bbn_events',
+      'on' => [
+        [
+          'field' => 'bbn_events.id',
+          'exp' => 'bbn_notes_events.id_event'
+        ]
+      ]
+    ];
+    if ($model->data['id'] === 'pub') {
+      $cfg['where'] = [
+        [
+          'field' => 'start',
+          'operator' => '>',
+          'value' => date('Y-m-d H:i:s', strtotime("1 month ago"))
+        ]
+      ];
+      $cfg['order'] = [
+        'start' => 'ASC'
+      ];
+    }
+    else {
+      $cfg['where'] = [
+        [
+          'field' => 'end',
+          'operator' => '>',
+          'value' => date('Y-m-d H:i:s', strtotime("1 month ago"))
+        ],
+        [
+          'field' => 'start',
+          'operator' => 'isnotnull'
+        ]
+      ];
+      $cfg['order'] = [
+        'end' => 'ASC'
+      ];
+    }
+    array_push($cfg['fields'], 'start', 'end');
+    $ok = true;
+  }
+  elseif ($option = $model->inc->options->option($model->data['id'])) {
+    $cfg['where'] = [
       'id_type' => $model->data['id']
-    ],
-    'group_by' => ['bbn_notes.id'],
-    'order' => [
+    ];
+    $cfg['order'] = [
       'creation' => 'DESC'
-    ]
-  ]);
-  $data = $grid->getDatatable();
-  array_walk($data['data'], function (&$a) use (&$option){
-    $a['code'] = $option['code'];
-  });
-  return $data;
+    ];
+    $ok = true;
+  }
+
+  if ($ok) {
+    $grid = new Grid($model->db, $model->data, $cfg);
+    $data = $grid->getDatatable();
+    if ($option) {
+      array_walk($data['data'], function (&$a) use (&$option){
+        $a['code'] = $option['code'];
+      });
+    }
+    return $data;
+  }
+
 }
