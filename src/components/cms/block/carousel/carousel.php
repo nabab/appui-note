@@ -94,18 +94,16 @@
                     :show-info="!!source.info"
                     :item-clickable="true"
                     @clickitem="fullScreen"/>
-      <bbn-floater v-if="fullScreenView && fullScreenImg" 
-                   width="100%" 
-                   height="100%"       
-                   class="carousel-floater bbn-vmiddle" 
+      <bbn-floater v-if="fullScreenView && fullScreenImg"
+                   width="100%"
+                   height="100%"
+                   class="carousel-floater bbn-vmiddle"
                    @close="closeFullscreen"
                    :scrollable="false"
-                   :closable="true"
-                   :title="fullScreenImg.title">
+                   :closable="true">
         <div class="bbn-overlay bbn-middle">
           <img :src="fullScreenImg.path">
         </div>
-        
       </bbn-floater>
     </div>
   </div>
