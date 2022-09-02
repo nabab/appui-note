@@ -63,7 +63,7 @@
       gridStyle(){
         let style = `gridTemplateColumns: repeat( ` + this.source.items.length + `, 1fr)`
         if ( bbn.fn.isMobile() ){
-          style = `gridTemplateRows: repeat( ` + this.source.items.length + `, 1fr)`
+          style = `gridTemplateRows: repeat( ` + this.source.items.length + `, auto)`
         }
         return style;
       },
