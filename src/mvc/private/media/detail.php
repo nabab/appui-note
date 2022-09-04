@@ -1,4 +1,7 @@
 <?php
+
+use bbn\X;
+
 if (!empty($ctrl->arguments[0])
   && \bbn\Str::isUid($ctrl->arguments[0])
 ) {
