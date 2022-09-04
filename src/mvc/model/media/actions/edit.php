@@ -2,7 +2,9 @@
 if ($model->hasData(['id', 'ref', 'file'], true)) {
 
   $id = $model->data['id'];
-  $model->data = \bbn\X::mergeArrays($model->data, $model->data['file'][0]);
+  if (is_array($model->data['file'])) {
+    $model->data = \bbn\X::mergeArrays($model->data, $model->data['file'][0]);
+  }
   $medias = new \bbn\Appui\Medias($model->db);
   if ($model->hasData('tags')) {
     $cms = new \bbn\Appui\Cms($model->db);
