@@ -1,6 +1,6 @@
 // Javascript Document
 
-(() => {
+((bbn) => {
   return {
     /**
      * @mixin bbn.vue.basicComponent
@@ -61,10 +61,11 @@
     },
     computed: {
       gridStyle(){
-        let style = `gridTemplateColumns: repeat( ` + this.source.items.length + `, 1fr)`
+        let style = `gridTemplateColumns: repeat( ` + this.source.items.length + `, 1fr)`;
         if ( bbn.fn.isMobile() ){
-          style = `gridTemplateRows: repeat( ` + this.source.items.length + `, auto)`
+          style = `gridTemplateRows: repeat( ` + this.source.items.length + `, auto)`;
         }
+
         return style;
       },
       isSelected() {
@@ -105,4 +106,4 @@
       }
     }
   };
-})();
+})(bbn);

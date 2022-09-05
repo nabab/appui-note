@@ -22,7 +22,7 @@
                @clickItem="emitClickItem"
                :buttons-no-text="true"
                :button-menu="buttonMenu || getButtonMenu"
-               :button-menuc-omponent="buttonMenuComponent"
+               :button-menu-component="buttonMenuComponent"
                :selection="selection"
                uid="id"
                :data="data"
