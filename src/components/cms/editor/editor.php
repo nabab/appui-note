@@ -77,7 +77,8 @@
             <bbn-datetimepicker v-model="source.start"/>
 
             <label><?= _("End of publication") ?></label>
-            <bbn-datetimepicker v-model="source.end"/>
+            <bbn-datetimepicker v-model="source.end"
+                                :nullable="true"/>
 
             <label><?= _("Tags") ?></label>
             <bbn-values v-model="source.tags"/>
