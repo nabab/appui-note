@@ -19,6 +19,13 @@
         itemWidth: 0,
         galleryListUrl: appui.plugins['appui-note'] + '/media/data/groups/list',
         gallerySourceUrl: appui.plugins['appui-note'] + '/media/data/groups/medias',
+        sourceInfoList: [{
+          text: bbn._('Title'),
+          value: 'title'
+        }, {
+          text: bbn._('Description'),
+          value: 'description'
+        }]
       };
     },
     computed: {
@@ -78,11 +85,9 @@
     },
     watch: {
       'source.imageWidth'(val){
-        console.log('watch',val)
         if(bbn.fn.isString(val)){
           let unit = val.replace(parseInt(val), '');
           if(unit === '%'){
-            console.log('watch 2',unit)
             this.source.imageWidth = parseInt(val)
           }
           console.log('out watch')
@@ -105,6 +110,16 @@
       'source.toolbar'(val){
         if (!val) {
           this.source.resizable = 0;
+        }
+      },
+      'source.zoomable'(val){
+        if (!val && !!this.source.info) {
+          this.source.info = 0;
+        }
+      },
+      'source.info'(val){
+        if (!val && !!this.source.sourceInfo) {
+          this.source.sourceInfo = '';
         }
       }
     },
