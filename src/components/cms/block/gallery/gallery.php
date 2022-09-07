@@ -149,7 +149,7 @@
                           idGroup: source.source
                           }"
                    ref="gallery"
-                   @ready="getItemWidth"
+                   @resize="getItemWidth"
                    :scrollable="!!source.scrollable"
                    :pageable="!!source.pageable"
                    :zoomable="!!source.zoomable"
