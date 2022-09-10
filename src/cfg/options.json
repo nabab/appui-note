@@ -102,6 +102,18 @@
             "code": "file"
           },
           {
+            "text": "Image",
+            "code": "image",
+            "max": false,
+            "thumbs": [
+              {"width": 500, "height": false},
+              {"width": 250, "height": false},
+              {"width": 125, "height": false},
+              {"width": 96, "height": false},
+              {"width": 48, "height": false}
+            ]
+          },
+          {
             "text": "HTML code",
             "code": "html"
           },
