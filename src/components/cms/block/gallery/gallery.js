@@ -19,6 +19,13 @@
         itemWidth: 0,
         galleryListUrl: appui.plugins['appui-note'] + '/media/data/groups/list',
         gallerySourceUrl: appui.plugins['appui-note'] + '/media/data/groups/medias',
+        sourceInfoList: [{
+          text: bbn._('Title'),
+          value: 'title'
+        }, {
+          text: bbn._('Description'),
+          value: 'description'
+        }]
       };
     },
     computed: {
@@ -43,23 +50,23 @@
     },
     methods: {
       getItemWidth(){
-        let gallery = this.$refs.gallery,
-            width = this.source.imageWidth,
-            int;
-        if(width){
-          console.log(this.$refs.gallery)
-          if( gallery ){
-            //the column gap to percent
-            let percentGap = gallery.columnGap * 100 / gallery.width ;
-            this.itemWidth = gallery.width / 100 * (width - percentGap) 
+        this.$nextTick(() => {
+          let gallery = this.getRef('gallery'),
+              width = this.source.imageWidth;
+          if (width) {
+            if (gallery) {
+              //the column gap to percent
+              let percentGap = gallery.columnGap * 100 / gallery.lastKnownWidth ;
+              this.itemWidth = gallery.lastKnownWidth / 100 * (width - percentGap);
+            }
+            else{
+              this.itemWidth = parseInt(width);
+            }
           }
-          else{
-            this.itemWidth = parseInt(width)
-          }  
-        }
-        else {
-          this.itemWidth = 200
-        }
+          else {
+            this.itemWidth = 200
+          }
+        })
       },
       isInConfig(fieldName) {
         return this.config[fieldName] !== undefined;
@@ -78,14 +85,11 @@
     },
     watch: {
       'source.imageWidth'(val){
-        console.log('watch',val)
         if(bbn.fn.isString(val)){
           let unit = val.replace(parseInt(val), '');
           if(unit === '%'){
-            console.log('watch 2',unit)
             this.source.imageWidth = parseInt(val)
           }
-          console.log('out watch')
           this.getItemWidth()
         }
       },
@@ -105,6 +109,16 @@
       'source.toolbar'(val){
         if (!val) {
           this.source.resizable = 0;
+        }
+      },
+      'source.zoomable'(val){
+        if (!val && !!this.source.info) {
+          this.source.info = 0;
+        }
+      },
+      'source.info'(val){
+        if (!val && !!this.source.sourceInfo) {
+          this.source.sourceInfo = '';
         }
       }
     },

@@ -114,6 +114,17 @@
                   :value="1"
                   :novalue="0"/>
 
+    <label v-if="(isConfig || !isInConfig('info')) && !!source.zoomable"><?=_('Info')?></label>
+    <bbn-checkbox v-if="(isConfig || !isInConfig('info')) && !!source.zoomable"
+                  v-model="source.info"
+                  :value="1"
+                  :novalue="0"/>
+
+    <label v-if="(isConfig || !isInConfig('sourceInfo')) && !!source.info"><?=_('Info field')?></label>
+    <bbn-dropdown v-if="(isConfig || !isInConfig('sourceInfo')) && !!source.info"
+                  v-model="source.sourceInfo"
+                  :source="sourceInfoList"/>
+
     <label v-if="isConfig || !isInConfig('resizable')"><?=_('Resizable')?></label>
     <bbn-checkbox v-if="isConfig || !isInConfig('resizable')"
                   v-model="source.resizable"
@@ -138,10 +149,12 @@
                           idGroup: source.source
                           }"
                    ref="gallery"
-                   @ready="getItemWidth"
+                   @resize="getItemWidth"
                    :scrollable="!!source.scrollable"
                    :pageable="!!source.pageable"
                    :zoomable="!!source.zoomable"
+                   :info="!!source.info"
+                   :source-info="!!source.info ? source.sourceInfo : undefined"
                    :resizable="!!source.resizable"
                    :toolbar="!!source.toolbar"
                    path-name="path"

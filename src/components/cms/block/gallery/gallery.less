@@ -1,10 +1,14 @@
 /* LESS Document */
 
 .@{componentName} {
+  .bbn-gallery-columns-container{
+    display: flex;
+    justify-content: space-between;
+  }
   .cropped{
     .bbn-gallery-columns-container{
       div{
-        display:grid;
+        //display: grid !important;
         .bbn-gallery-item{
           span{
             display: block;
@@ -21,11 +25,6 @@
         }
       }
     }
-  }
-  .bbn-gallery-columns-container{
-    display: flex;
-    justify-content: space-between;
-    
   }
   a{
     overflow: hidden;
