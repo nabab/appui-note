@@ -145,14 +145,18 @@
         "items": [
           {
             "id_alias": [
-              "multilines",
+              "bbn-cms",
               "editors",
               "note",
               "appui"
             ],
             "text": "Events",
             "code": "events",
-            "prefix": "event\/"
+            "prefix": "event\/",
+            "font_img": 1,
+            "option": null,
+            "option_title": null,
+            "id_root_alias": null
           },
           {
             "id_alias": [
