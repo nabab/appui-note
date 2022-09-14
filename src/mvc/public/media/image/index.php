@@ -44,7 +44,7 @@ if ($ctrl->hasArguments()) {
   if (Str::isUid($ctrl->arguments[0])
     && ($media = $medias->getMedia($ctrl->arguments[0], false, $width, $height, $crop))
   ) {
-		$path = $media['file'];
+		$path = $media;
   }
   elseif ($idMediaFromUrl = $medias->urlToId($realUrl)) {
     $path = $medias->getMedia($idMediaFromUrl, false, $width, $height, $crop);
