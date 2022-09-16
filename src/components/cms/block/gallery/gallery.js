@@ -52,7 +52,7 @@
       getItemWidth(){
         this.$nextTick(() => {
           let gallery = this.getRef('gallery'),
-              width = this.isMobile ? 50 : this.source.imageWidth;
+              width = this.isMobile ? 45 : this.source.imageWidth;
           if (width) {
             if (gallery) {
               //the column gap to percent
