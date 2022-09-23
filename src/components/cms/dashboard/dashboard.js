@@ -10,7 +10,9 @@
           itemComponent: 'appui-note-widget-cms',
           url: appui.plugins['appui-note'] + '/cms/data/widget/' + a.id,
           uid: a.id,
-          key: a.code
+          key: a.code,
+          limit: 20,
+          pageable: true
         }
       });
       widgets.unshift({
@@ -21,7 +23,9 @@
         options: {start: true},
         url: appui.plugins['appui-note'] + '/cms/data/widget/pub',
         uid: 'pub',
-        key: 'pub'
+        key: 'pub',
+        limit: 20,
+        pageable: true
       }, {
         text: bbn._("Unpublications"),
         id: 'unpub',
@@ -30,7 +34,9 @@
         options: {end: true},
         url: appui.plugins['appui-note'] + '/cms/data/widget/unpub',
         uid: 'unpub',
-        key: 'unpub'
+        key: 'unpub',
+        limit: 20,
+        pageable: true
       });
 
       return {
