@@ -125,6 +125,7 @@
       }
     },
     methods: {
+      loadComponentsByPrefix: bbn.vue.loadComponentsByPrefix,
       selectImg(st){
         bbn.fn.link(st);
       },
@@ -205,6 +206,7 @@
         bbn.fn.log(v, JSON.stringify(this.source));
         this.ready = false;
         setTimeout(() => {
+          this.loadComponentsByPrefix(this.currentComponent);
           this.ready = true;
         }, 100)
       }

@@ -154,7 +154,7 @@
                      :title="tbtn.title || ''"
                 >
                   <i :class="['bbn-xl', 'bbn-p', tbtn.icon]"
-                     @click="tbtn.action ? tbtn.action(source, _self) : false"
+                     @click="tbtn.action ? tbtn.action(source, $self) : false"
                   ></i>
                 </div>
               </template>
@@ -172,7 +172,7 @@
                    title="<?=_('Delete')?>"
               >
                 <i class="nf nf-fa-trash bbn-xl bbn-p"
-                   @click="forum.remove ? forum.remove(source, _self) : false"
+                   @click="forum.remove ? forum.remove(source, $self) : false"
                 ></i>
               </div>
               <div v-if="(source.creator === forum.currentUser) || !source.locked || forum.canLock"
@@ -181,7 +181,7 @@
                    title="<?=_('Edit')?>"
               >
                 <i class="nf nf-fa-edit bbn-xl bbn-p"
-                   @click="forum.edit ? forum.edit(source, _self) : false"
+                   @click="forum.edit ? forum.edit(source, $self) : false"
                 ></i>
               </div>
               <div class="bbn-spadded bbn-vmiddle appui-note-forum-hfixed"
@@ -189,7 +189,7 @@
                    title="<?=_('Reply')?>"
               >
                 <i class="nf nf-fa-reply bbn-xl bbn-p"
-                   @click="forum.reply ? forum.reply(source, _self) : false"
+                   @click="forum.reply ? forum.reply(source, $self) : false"
                 ></i>
               </div>
 
@@ -326,7 +326,7 @@
                           :title="rbtn.title || ''"
                       >
                         <i :class="['bbn-xl', 'bbn-p', rbtn.icon]"
-                           @click="rbtn.action ? rbtn.action(source, topic.source, _self) : false"
+                           @click="rbtn.action ? rbtn.action(source, topic.source, $self) : false"
                         ></i>
                       </div>
                     </template>
@@ -346,7 +346,7 @@
                          title="<?=_('Delete')?>"
                     >
                       <i class="nf nf-fa-trash bbn-xl bbn-p"
-                         @click="topic.forum.remove ? topic.forum.remove(source, _self) : false"
+                         @click="topic.forum.remove ? topic.forum.remove(source, $self) : false"
                       ></i>
                     </div>
                     <div v-if="(source.creator === topic.forum.currentUser) || !source.locked || topic.forum.canLock"
@@ -355,7 +355,7 @@
                          title="<?=_('Edit')?>"
                     >
                       <i class="nf nf-fa-edit bbn-xl bbn-p"
-                         @click="topic.forum.edit ? topic.forum.edit(source, _self) : false"
+                         @click="topic.forum.edit ? topic.forum.edit(source, $self) : false"
                       ></i>
                     </div>
                     <div class="bbn-spadded bbn-vmiddle appui-note-forum-hfixed"
@@ -363,7 +363,7 @@
                          title="<?=_('Reply')?>"
                     >
                       <i class="nf nf-fa-reply bbn-xl bbn-p"
-                         @click="topic.forum.reply ? topic.forum.reply(source, _self) : false"
+                         @click="topic.forum.reply ? topic.forum.reply(source, $self) : false"
                       ></i>
                     </div>
                     <div class="bbn-spadded bbn-vmiddle appui-note-forum-hfixed"

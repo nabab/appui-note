@@ -9,6 +9,7 @@
       @mouseleave="over = false">
   <component v-if="ready"
              :is="currentComponent"
+             @hook:mounted="loadComponentsByPrefix(currentComponent)"
              ref="component"
              :mode="mode"
              :source="source"
