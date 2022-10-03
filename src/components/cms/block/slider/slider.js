@@ -225,21 +225,21 @@
       },
       sliderMode(val){
         if(val === 'features') {
-          this.$delete(this.source, 'id_group');
-          this.$delete(this.source, 'noteType');
+          delete this.source.id_group;
+          delete this.source.noteType;
           this.okMode = true;
           this.source.mode = 'features';
         }
         else if (val === 'gallery') {
-          this.$delete(this.source, 'id_feature');
-          this.$delete(this.source, 'noteType');
-          this.$delete(this.source, 'id_option');
+          delete this.source.id_feature;
+          delete this.source.noteType;
+          delete this.source.id_option;
           this.okMode = true;
           this.source.mode = 'gallery';
         }
         else {
-          this.$delete(this.source, 'id_group');
-          this.$delete(this.source, 'id_feature');
+          delete this.source.id_group;
+          delete this.source.id_feature;
           this.okMode = true;
           this.source.mode = 'publications';
         }
@@ -307,20 +307,20 @@
     },
     mounted(){
       if(this.sliderMode === 'features') {
-        this.$delete(this.source, 'id_group');
-        this.$delete(this.source, 'noteType');
+        delete this.source.id_group;
+        delete this.source.noteType;
         this.okMode = true;
         this.source.mode = 'features';
       }
       else if (this.sliderMode === 'gallery') {
-        this.$delete(this.source, 'id_feature');
-        this.$delete(this.source, 'noteType');
+        delete this.source.id_feature;
+        delete this.source.noteType;
         this.okMode = true;
         this.source.mode = 'gallery';
       }
       else {
-        this.$delete(this.source, 'id_group');
-        this.$delete(this.source, 'id_feature');
+        delete this.source.id_group;
+        delete this.source.id_feature;
         this.okMode = true;
         this.source.mode = 'publications';
       }

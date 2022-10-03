@@ -7,19 +7,19 @@
      	@click="$emit('click', $event)"
       @mouseenter="over = true"
       @mouseleave="over = false">
-  <component v-if="ready"
-             :is="currentComponent"
-             @hook:mounted="loadComponentsByPrefix(currentComponent)"
-             ref="component"
-             :mode="mode"
-             :source="source"
-             :class="[
-                       '<?= $componentName ?>-component',
-                       {
-                        '<?= $componentName ?>-selectable': selectable,
-                        '<?= $componentName ?>-selected': selectable && selected
-                       }
-                     ]"/>
+  <div v-if="ready"
+       :is="'vue:' + currentComponent"
+       @hook:mounted="loadComponentsByPrefix(currentComponent)"
+       ref="component"
+       :mode="mode"
+       :source="source"
+       :class="[
+                 '<?= $componentName ?>-component',
+                 {
+                   '<?= $componentName ?>-selectable': selectable,
+                   '<?= $componentName ?>-selected': selectable && selected
+                 }
+               ]"/>
   <div v-if="selectable"
        class="bbn-overlay bbn-p"/>
   <div v-if="editable"
