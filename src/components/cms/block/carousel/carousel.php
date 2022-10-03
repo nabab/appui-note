@@ -84,7 +84,7 @@
     <div class="bbn-block bbn-rel"
          :style="source.style">
       <bbn-loader v-if="isLoading"
-                  bg-color="white"
+                  bg-color="transparent"
                   type="circle"
                   text=""/>
       <bbn-slideshow v-else-if="currentItems.length"
