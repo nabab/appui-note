@@ -83,7 +83,11 @@
        :style="align">
     <div class="bbn-block bbn-rel"
          :style="source.style">
-      <bbn-slideshow v-if="currentItems.length"
+      <bbn-loader v-if="isLoading"
+                  bg-color="white"
+                  type="circle"
+                  text=""/>
+      <bbn-slideshow v-else-if="currentItems.length"
                     :source="currentItems"
                     ref="slideshow"
                     :arrows="!!source.arrows"

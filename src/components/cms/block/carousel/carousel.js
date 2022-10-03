@@ -5,6 +5,7 @@
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
     data(){
       return {
+        isLoading: false,
         fullScreenView: false,
         fullScreenImg: false,
         slideshowSourceUrl: appui.plugins['appui-note'] + '/media/data/groups/medias',
@@ -72,6 +73,7 @@
       },
       updateData(){
         if (this.source.source) {
+          this.isLoading = true;
           this.post(this.slideshowSourceUrl, {data: {idGroup: this.source.source}}, d => {
             if (d.success && d.data) {
               this.currentItems.splice(0, this.currentItems.length);
@@ -85,6 +87,7 @@
                 }));
               });
             }
+            this.isLoading = false;
           });
         }
       }
