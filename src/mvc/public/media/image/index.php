@@ -9,7 +9,6 @@ if ($ctrl->hasArguments()) {
 	$path = '';
   $url = $ctrl->getRequest();
   $realUrl = $url;
-  
   $reg = '/\.bbn-([\-\dwhc]+)\./';
   $width = $ctrl->get['w'] ?? null;
   $height = $ctrl->get['h'] ?? null;
@@ -35,20 +34,28 @@ if ($ctrl->hasArguments()) {
           break;
         default:
           if ($is) {
-            $$is = $r ?: false;
+            $$is = ($is === 'crop') ? true : ($r ?: false);
           }
+          break;
       }
     }
   }
 
   $idMediaFromUrl = false;
+  $media = false;
   if (Str::isUid($ctrl->arguments[0])
-    && ($media = $medias->getMedia($ctrl->arguments[0], false, $width, $height, $crop, true))
+    && ($media = $medias->getMedia($ctrl->arguments[0], true, $width, $height, $crop, true))
   ) {
-		$path = $media;
+		$path = $media['file'];
   }
   elseif ($idMediaFromUrl = $medias->urlToId($realUrl)) {
-    $path = $medias->getMedia($idMediaFromUrl, false, $width, $height, $crop);
+    $media = $medias->getMedia($idMediaFromUrl, true, $width, $height, $crop);
+    $path = $media['file'];
+  }
+
+  if (!empty($media) && !empty($media['redirect'])) {
+    header("Location: /" . dirname($url) . '/' . basename($media['file']));
+    exit();
   }
 
   if ($path && file_exists($path)) {
