@@ -43,6 +43,7 @@
 					if (this.source.product.stock) {
 						this.post('actions/shop/cart/add', {
 							id_product: this.source.product.id,
+							quantity: 1
 						}, d => {
 							if (d.success && d.newCart) {
 								this.productAdded = true;
