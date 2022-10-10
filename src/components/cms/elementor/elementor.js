@@ -157,6 +157,17 @@
       text: bbn._("Feature"),
       value: 'feature',
       default: {}
+    }, {
+      text: bbn._("Product"),
+      value: 'product',
+      default: {
+        source: '',
+        style: {
+          width: '100%',
+          height: '100%'
+        },
+        align: 'center'
+      }
     }
   ];
 
