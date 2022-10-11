@@ -13,6 +13,11 @@
       disabled(){
 				return !this.source.product.stock;
 			},
+      type(){
+        if(this.source.product.product_type){
+          return bbn.fn.getField(bbn.opt.product_types,'text', 'value', this.source.product.product_type)
+        }
+      },
       edition(){
         if(this.source.product.id_edition){
           return bbn.fn.getField(bbn.opt.editions,'text', 'value', this.source.product.id_edition)
