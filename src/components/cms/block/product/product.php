@@ -36,6 +36,13 @@
                     :novalue="false"
                     class="bbn-left-space"/>
         </div>
+        <label class="bbn-l"><?=_("Show type")?></label>
+        <div class="bbn-l">
+          <bbn-switch v-model="source.showType"
+                    :value="true"
+                    :novalue="false"
+                    class="bbn-left-space"/>
+        </div>
         <label class="bbn-l"><?=_("Show Sold out")?></label>
         <div class="bbn-l">
           <bbn-switch v-model="source.showSoldOut"
@@ -57,14 +64,14 @@
     <div class="bbn-w-100 bbn-padded">
       <div class="bbn-container-ratio-4-3 bbn-bottom-smargin">
         <a :href="source.product.url">
-          <img :src="imageSrc" class="bbn-top-left book-img" v-if="source.showImage">
+          <img :src="imageSrc" class="bbn-top-left product-img" v-if="source.showImage">
         </a>
       </div>
       <a class="bbn-large"
           :href="source.product.url"
           v-html="source.product.title"></a>
 
-      <p class="books-price bbn-flex" v-if="source.showPrice">
+      <p class="product-price bbn-flex" v-if="source.showPrice">
         <span v-if="source.product.num_variants > 1" v-html="_('From') + '&nbsp;'"></span>
         <bbn-field :value="source.product.price"
                     field="example"
@@ -74,11 +81,11 @@
                     unit="€"></bbn-field>
       </p>
 
-      <p class="books-desc"
-         v-if="source.showDesc"
-         v-html="source.product.type"></p>
+      <p class="product-desc"
+         v-if="source.showType"
+         v-text="type"></p>
 
-      <p class="books-desc"
+      <p class="product-desc"
          v-if="source.showEdition"
          v-html="edition"></p>
       <poc-product-soldout v-if="!source.product.stock && source.showSoldOut"/>
