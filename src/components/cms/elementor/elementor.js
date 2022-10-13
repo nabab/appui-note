@@ -162,6 +162,7 @@
       value: 'product',
       default: {
         source: '',
+        showType: true,
         style: {
           width: '100%',
           height: '100%'

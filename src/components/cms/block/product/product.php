@@ -61,15 +61,16 @@
   </div>
   <div v-else
        class="bbn-w-100">
-    <div class="bbn-w-100 bbn-padded">
+    <div class="bbn-w-100 bbn-padded" v-if="source.product">
       <div class="bbn-container-ratio-4-3 bbn-bottom-smargin">
-        <a :href="source.product.url">
+        <a :href="source.product.url" v-if="source.product.url">
           <img :src="imageSrc" class="bbn-top-left product-img" v-if="source.showImage">
         </a>
       </div>
       <a class="bbn-large"
-          :href="source.product.url"
-          v-html="source.product.title"></a>
+         v-if="source.product.url"
+         :href="source.product.url"
+        v-html="source.product.title"></a>
 
       <p class="product-price bbn-flex" v-if="source.showPrice">
         <span v-if="source.product.num_variants > 1" v-html="_('From') + '&nbsp;'"></span>
