@@ -68,8 +68,8 @@
     beforeMount(){
 			if(this.source.product && (this.source.showType === undefined)){
 				this.source.showType = true;
-			}
+			} 
 		}
     
   };
-})();
+})();it
