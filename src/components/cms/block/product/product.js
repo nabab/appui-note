@@ -66,8 +66,8 @@
       }
     },
     beforeMount(){
-			if(this.source.product && (this.source.product.showType === undefined)){
-				this.source.product.showType = true;
+			if(this.source.product && (this.source.showType === undefined)){
+				this.source.showType = true;
 			}
 		}
     
