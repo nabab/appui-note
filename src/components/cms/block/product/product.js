@@ -83,7 +83,6 @@
         this.source.product = {}
         this.source.product.ok = false
         this.isOk = false
-        console.log('making post', this.source.product.url, this.source.product)
         this.post(this.root + 'cms/data/product', {
           url: this.source.url
         }, d => {
@@ -102,7 +101,6 @@
     beforeMount(){
       if (this.source.product && (this.mode === 'read')){
         this.source.url = this.source.product.url
-        console.log('before of get', this.source.product.url)
         this.getProduct()
       }
 			if(this.source.showType === undefined){
