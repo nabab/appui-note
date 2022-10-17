@@ -6,41 +6,56 @@
     props: ['source'],
     data() {
       return {
-        value: ''
+        root: appui.plugins['appui-note'] + '/',
+        value: '',
+        isOk: false
       }
     },
     computed: {
+      placeholder(){
+        if(this.isOk && this.source.product.title){
+          return this.source.product.title
+        }
+        return ''
+      },
+      showProduct(){
+        if(this.isOk && this.source.product && this.source.product.ok){
+          return true
+        }
+        return false
+      },
       disabled(){
-				return !this.source.product.stock;
+        if(this.isOk && !this.source.product.stock){
+          return true;
+        }
+        else {
+          return false
+        }
 			},
       type(){
-        if(this.source.product.product_type){
+        if(this.source.product.product_type && this.isOk){
           return bbn.fn.getField(bbn.opt.product_types,'text', 'value', this.source.product.product_type)
         }
       },
       edition(){
-        if(this.source.product.id_edition){
+        if(this.source.product.id_edition && this.isOk){
           return bbn.fn.getField(bbn.opt.editions,'text', 'value', this.source.product.id_edition)
         }
       },
-      placeholder(){
-        if(this.source.product){
-          return this.source.product.title
-        }
-        return bbn._('Pick a product')
-      },
+      
       imageSrc(){
-        if(this.source.product.medias.length){
+        if(this.source.product.medias.length && this.isOk){
           return bbn.fn.getField(this.source.product.medias, 'path', 'id' , this.source.product.front_img)
 
         }
       }
     },
     methods:{
+
       addToCart(){
 				let id_nft =  bbn.fn.getField(appui.options.product_types, "value", { code:'nft' });
 
-				if (this.source.product_type ===  id_nft) {
+				if (this.source.product.product_type ===  id_nft) {
 					// remove comment to enable nft link to website
 					//bbn.fn.link('https://nft.vivearts.com/en_US/series/photography-ofchina');
 				}
@@ -62,14 +77,41 @@
 				}
 			},
       select(a){
-        this.$set(this.source, 'product', a);
+        this.$set(this.source, 'url', a.url);
+
+      },
+      getProduct(){
+        this.source.product = {}
+        this.source.product.ok = false
+        this.isOk = false
+        this.post(this.root + 'cms/data/product', {
+          url: this.source.url
+        }, d => {
+          if(d.success){
+            this.$nextTick(()=>{
+              this.source.product = d.data
+              this.source.product.ok = true
+              this.isOk = true
+            })
+            
+
+          }
+        })
       }
     },
     beforeMount(){
-			if(this.source.product && (this.source.showType === undefined)){
+      if (this.source.product && (this.mode === 'read')){
+        this.getProduct()
+      }
+			if(this.source.showType === undefined){
 				this.source.showType = true;
 			} 
-		}
-    
+      
+		},
+    watch:{
+      'source.url'(val){
+        this.getProduct()
+      }
+    }
   };
 })();
