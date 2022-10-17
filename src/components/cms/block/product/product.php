@@ -59,9 +59,9 @@
         </div>
     </div>
   </div>
-  <div v-else
+  <div v-if="(mode === 'read')"
        class="bbn-w-100">
-    <div class="bbn-w-100 bbn-padded" v-if="source.product">
+    <div class="bbn-w-100 bbn-padded" v-if="showProduct">
       <div class="bbn-container-ratio-4-3 bbn-bottom-smargin">
         <a :href="source.product.url" v-if="source.product.url">
           <img :src="imageSrc" class="bbn-top-left product-img" v-if="source.showImage">
