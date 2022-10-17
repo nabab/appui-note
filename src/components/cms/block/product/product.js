@@ -78,17 +78,17 @@
 			},
       select(a){
         this.$set(this.source, 'url', a.url);
-
       },
       getProduct(){
         this.source.product = {}
         this.source.product.ok = false
         this.isOk = false
+        console.log('making post', this.source.product.url, this.source.product)
         this.post(this.root + 'cms/data/product', {
           url: this.source.url
         }, d => {
           if(d.success){
-            this.$nextTick(()=>{
+            this.$nextTick(() => {
               this.source.product = d.data
               this.source.product.ok = true
               this.isOk = true
@@ -101,6 +101,8 @@
     },
     beforeMount(){
       if (this.source.product && (this.mode === 'read')){
+        this.source.url = this.source.product.url
+        console.log('before of get', this.source.product.url)
         this.getProduct()
       }
 			if(this.source.showType === undefined){
