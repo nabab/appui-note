@@ -63,18 +63,18 @@
        class="bbn-w-100">
     <div class="bbn-w-100 bbn-padded" v-if="showProduct">
       <div class="bbn-container-ratio-4-3 bbn-bottom-smargin">
-        <a :href="source.product.url" v-if="source.product.url">
+        <a :href="product.url" v-if="product.url">
           <img :src="imageSrc" class="bbn-top-left product-img" v-if="source.showImage">
         </a>
       </div>
       <a class="bbn-large"
-         v-if="source.product.url"
-         :href="source.product.url"
-        v-html="source.product.title"></a>
+         v-if="product.url"
+         :href="product.url"
+        v-html="product.title"></a>
 
       <p class="product-price bbn-flex" v-if="source.showPrice">
-        <span v-if="source.product.num_variants > 1" v-html="_('From') + '&nbsp;'"></span>
-        <bbn-field :value="source.product.price"
+        <span v-if="product.num_variants > 1" v-html="_('From') + '&nbsp;'"></span>
+        <bbn-field :value="product.price"
                     field="example"
                     mode="read"
                     type="money"
@@ -89,7 +89,7 @@
       <p class="product-desc"
          v-if="source.showEdition"
          v-html="edition"></p>
-      <poc-product-soldout v-if="!source.product.stock && source.showSoldOut"/>
+      <poc-product-soldout v-if="!product.stock && source.showSoldOut"/>
       <button :class="['add-to-cart bbn-p bbn-upper bbn-vsmargin', {'bbn-disabled': disabled, 'bbn-p':!disabled}]"
               v-if="source.showButton" 
               @click="addToCart"><?=_("Add to cart")?></button>
