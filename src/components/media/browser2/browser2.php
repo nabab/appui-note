@@ -1,6 +1,7 @@
 
 <div :class="[componentClass, 'bbn-flex-height', 'bbn-background', 'bbn-overlay']" ref="browser">
   <bbn-gallery :source="source"
+               :source-action="sourceAction"
                :search-name="searchName"
                :pageable="pageable"
                :filterable="filterable"

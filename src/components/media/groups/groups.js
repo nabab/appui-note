@@ -130,6 +130,15 @@
           ev.preventDefault();
           appui.error();
         }
+      },
+      insertLink(a){
+        console.log(a)
+        this.getPopup().open({
+          title: a.data.link ? bbn._('Edit Link') : bbn._('Insert Link'),
+          width: '300px',
+          component: this.$options.components.formLink,
+          source: a.data
+        });
       }
     },
     mounted(){
@@ -165,6 +174,61 @@
       }
     },
     components: {
+      formLink: {
+        template: `
+<bbn-form :action="mainComponent.actionsUrl + (!!source.id ? 'link/update' : 'link/insert')"
+          :source="source"
+          @success="onSuccess"
+          :data="{
+            id_group: mainComponent.current.id,
+            
+          }">
+  <div class="bbn-padded bbn-w-100 bbn-grid-fields">
+    <bbn-search source-text="title"
+                component="appui-note-search-item"
+                source-url=""
+                :placeholder="placeholder"
+                @select="select"
+                :source="note + '/cms/data/search'"
+                class="bbn-w-100"/>
+    <i class="nf nf-fa-close bbn-m bbn-p"
+       v-if="source.link"
+       @click="source.link = ''"
+    />
+  </div>
+</bbn-form>
+        `,
+        props: {
+          source: {
+            type: Object,
+            required: true
+          }
+        },
+        computed: {
+          placeholder(){
+            if(this.source.link){
+              return this.source.link
+            }
+            return bbn._('Pick a link')
+          },
+          note(){
+            return appui.plugins['appui-note']
+          },
+          mainComponent(){
+            return appui.getRegistered('appui-note-media-groups');
+          }
+        },
+        methods: {
+          select(a){
+            this.source.link = a.url;
+          },
+          onSuccess(d){
+            if(d.success){
+              appui.success(bbn._('Link saved'));
+            }
+          }
+        }
+      },
       form: {
         template: `
 <bbn-form :action="mainComponent.actionsUrl + (!!source.id ? 'rename' : 'create')"
