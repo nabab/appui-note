@@ -53,6 +53,14 @@
       }
     },
     methods: {
+      clickItem(img){
+        if(this.source.mode === 'fullscreen'){
+          this.fullScreen(img)
+        }
+        else{
+          this.closest('bbn-router').route(img.link)
+        }
+      },
       fullScreen(img){
         this.fullScreenView = true;
         this.fullScreenImg = img;
@@ -94,6 +102,9 @@
     },
     beforeMount(){
       this.updateData();
+      if(!this.source.mode){
+        this.source.mode = 'fullscreen'
+      }
       if(this.isMobile && this.source.arrows){
         if(!this.source.arrowsPosition || this.source.arrowsPosition === 'default'){
           this.source.arrowsPosition = 'topright'

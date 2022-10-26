@@ -53,6 +53,22 @@
                           }]"/>
       </div>
     </div>
+    <label><?=_('Mode')?></label>
+    <div>
+      <div class="bbn-block">
+        <bbn-radiobuttons :notext="true"
+                          v-model="source.mode"
+                          :source="[{
+                            text: _('Link'),
+                            value: 'link',
+                            icon: 'nf nf-fa-link'
+                          }, {
+                            text: _('Fullscreen'),
+                            value: 'fullscreen',
+                            icon: 'nf nf-mdi-fullscreen'
+                          }]"/>
+      </div>
+    </div>
     <label><?=_('Autoplay')?></label>
     <bbn-checkbox v-model="source.autoplay"
                   :value="1"
@@ -97,7 +113,7 @@
                     :preview="!!source.preview"
                     :show-info="!!source.info"
                     :item-clickable="true"
-                    @clickitem="fullScreen"/>
+                    @clickitem="clickItem"/>
       <bbn-floater v-if="fullScreenView && fullScreenImg"
                    width="100%"
                    height="100%"

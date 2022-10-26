@@ -59,6 +59,9 @@
       sourceOrder: {
         type: String
       },
+      sourceAction: {
+        type: String
+      },
       zoomable: {
         type: Boolean,
         default: true

@@ -61,6 +61,7 @@
     <appui-note-media-browser2 v-if="current"
                                ref="mediaBrowser"
                                :source="groupMediasUrl"
+                               source-action=""
                                :data="{
                                  idGroup: current.id
                                }"
@@ -71,9 +72,11 @@
                                  notext: true,
                                  action: openAddMediaForm
                                }]"
+                               :selection="false"
                                :limit="50"
                                path-name="path"
-                               :selection="false"
+                               @clickItem="insertLink"
+                               :zoomable="false"
                                @delete="removeMedia"
                                :edit="actionsUrl + 'edit'"
                                :detail="mediasDetailUrl"
