@@ -10,6 +10,7 @@
         <div class="bbn-l">
           <bbn-search source="admin/shop/products/list"
                       source-text="title"
+                      source-value="id"
                       component="appui-note-search-item"
                       source-url=""
                       :placeholder="placeholder"
