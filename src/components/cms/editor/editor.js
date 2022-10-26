@@ -105,6 +105,21 @@
       }
     },
     methods: {
+      submit(){
+        //remove the object product if the block type is product
+        bbn.fn.each(this.source.items, (v, i) => {
+          if(v.type === 'container'){
+            bbn.fn.each(this.source.items[i].items, (item, idx) => {
+              if((item.type === 'product') && this.source.items[i].items[idx].product){
+                delete(this.source.items[i].items[idx].product)
+              }
+            })
+          }
+          else if ((v.type === 'product' ) && this.source.items[i].product){
+            delete(this.source.items[i].product)
+          }
+        })
+      },
       onSave(d) {
         this.oData = JSON.stringify(this.source);
         appui.success(bbn._("Saved"))

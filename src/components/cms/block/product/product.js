@@ -77,14 +77,14 @@
 				}
 			},
       select(a){
-        this.$set(this.source, 'url', a.url);
+        this.$set(this.source, 'id_product', a.id);
       },
       getProduct(){
         this.source.product = {}
         this.source.product.ok = false
         this.isOk = false
         this.post(this.root + 'cms/data/product', {
-          url: this.source.url
+          id: this.source.id_product
         }, d => {
           if(d.success){
             this.$nextTick(() => {
@@ -100,8 +100,14 @@
     },
     beforeMount(){
       if (this.source.product && (this.mode === 'read')){
-        this.source.url = this.source.product.url
-        this.getProduct()
+        if(this.source.url){
+          delete(this.source.url)
+        }
+        this.$set(this.source, 'id_product',this.source.product.id )
+        this.getProduct();
+      }
+      else if(this.source.id_product ){
+        this.getProduct();
       }
 			if(this.source.showType === undefined){
 				this.source.showType = true;
@@ -109,7 +115,7 @@
       
 		},
     watch:{
-      'source.url'(val){
+      'source.id_product'(val){
         this.getProduct()
       }
     }

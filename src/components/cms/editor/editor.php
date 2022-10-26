@@ -26,6 +26,7 @@
     <bbn-form ref="form"
               class="bbn-hidden"
               @success="onSave"
+              @submit="submit"
               :source="source"
               :action="action"
               :buttons="[]"/>
