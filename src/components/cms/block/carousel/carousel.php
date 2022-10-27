@@ -54,20 +54,18 @@
       </div>
     </div>
     <label><?=_('Mode')?></label>
-    <div>
-      <div class="bbn-block">
-        <bbn-radiobuttons :notext="true"
-                          v-model="source.mode"
-                          :source="[{
-                            text: _('Link'),
-                            value: 'link',
-                            icon: 'nf nf-fa-link'
-                          }, {
-                            text: _('Fullscreen'),
-                            value: 'fullscreen',
-                            icon: 'nf nf-mdi-fullscreen'
-                          }]"/>
-      </div>
+    <div class="bbn-block">
+      <bbn-radiobuttons :notext="true"
+                        v-model="source.mode"
+                        :source="[{
+                          text: _('Link'),
+                          value: 'link',
+                          icon: 'nf nf-fa-link'
+                        }, {
+                          text: _('Fullscreen'),
+                          value: 'fullscreen',
+                          icon: 'nf nf-mdi-fullscreen'
+                        }]"/>
     </div>
     <label><?=_('Autoplay')?></label>
     <bbn-checkbox v-model="source.autoplay"

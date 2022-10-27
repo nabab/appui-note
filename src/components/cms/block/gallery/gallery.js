@@ -84,6 +84,11 @@
       }
     },
     watch: {
+      'source.mode'(val){
+        if (val === 'link'){
+          this.source.zoomable = false;
+        }
+      },
       'source.imageWidth'(val){
         if(bbn.fn.isString(val)){
           let unit = val.replace(parseInt(val), '');
@@ -114,6 +119,9 @@
       'source.zoomable'(val){
         if (!val && !!this.source.info) {
           this.source.info = 0;
+        }
+        if(val){
+          this.source.mode = 'fullscreen'
         }
       },
       'source.info'(val){

@@ -89,7 +89,21 @@
                                    }]"/>
       </div>
     </div>
-
+    
+    <label><?=_('Mode')?></label>
+    <div class="bbn-block">
+      <bbn-radiobuttons :notext="true"
+                        v-model="source.mode"
+                        :source="[{
+                          text: _('Link'),
+                          value: 'link',
+                          icon: 'nf nf-fa-link'
+                        }, {
+                          text: _('Fullscreen'),
+                          value: 'fullscreen',
+                          icon: 'nf nf-mdi-fullscreen'
+                        }]"/>
+    </div>
     <label v-if="isConfig || !isInConfig('scrollable')"><?=_('Scrollable')?></label>
     <bbn-checkbox v-if="isConfig || !isInConfig('acrollable')"
                   v-model="source.scrollable"
@@ -152,7 +166,7 @@
                    @resize="getItemWidth"
                    :scrollable="!!source.scrollable"
                    :pageable="!!source.pageable"
-                   :zoomable="!!source.zoomable"
+                   :zoomable="!!source.zoomable && (source.mode === 'fullscreen')"
                    :info="!!source.info"
                    :source-info="!!source.info ? source.sourceInfo : undefined"
                    :resizable="!!source.resizable"
