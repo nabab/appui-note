@@ -131,7 +131,9 @@
       }
     },
     beforeMount(){
-
+      if(this.source.zoomable){
+        this.source.mode = 'fullscreen'
+      }
       if(this.source.imageWidth){
         this.source.imageWidth = parseInt(this.source.imageWidth) 
         if(this.source.imageWidth > 100){
