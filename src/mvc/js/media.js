@@ -15,6 +15,24 @@
           overlayName: 'title'
         }
       };
+    },
+    methods: {
+      onDelete(obj){
+        this.confirm(bbn._("Are you sure you want to delete this media?"), () => {
+            this.post(this.root + 'media/actions/delete', {id: obj.media.id},
+              d => {
+                if (d.success){
+                  this.getRef('mediabrowser').refresh();
+                  appui.success(bbn._('Media successfully deleted'))
+                }
+                else{
+                  appui.error(bbn._('Something went wrong while deleting the media'))
+                }
+              }
+            )
+          }
+        )
+      }
     }
   };
 })();

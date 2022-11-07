@@ -7,13 +7,17 @@
 <bbn-router default="browser"
             :nav="true"
             :autoload="true">
-	<bbns-container url="browser"
+	<bbn-container url="browser"
                   :title="_('Browser')"
                   icon="nf nf-oct-file_media"
                   fcolor="#ccffcc"
                   bcolor="#009688"
-                  component="appui-note-media-browser2"
-                  :source="root + 'media/data/browser'"
-                  :static="true"
-                  :options="browserOptions"/>
+                  :static="true">
+    <div class="bbn-overlay">
+      <appui-note-media-browser2 v-bind="browserOptions"
+                                 :source="root + 'media/data/browser'"
+                                 @delete="onDelete"
+                                 ref="mediabrowser"/>
+    </div>
+  </bbn-container>
 </bbn-router>
