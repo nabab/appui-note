@@ -12,26 +12,35 @@
           detail: root + 'media/detail/',
           limit: 50,
           pathName: 'path',
-          overlayName: 'title'
+          overlayName: 'title',
+          selection: false
         }
       };
     },
     methods: {
-      onDelete(obj){
-        this.confirm(bbn._("Are you sure you want to delete this media?"), () => {
-            this.post(this.root + 'media/actions/delete', {id: obj.media.id},
-              d => {
-                if (d.success){
-                  this.getRef('mediabrowser').refresh();
-                  appui.success(bbn._('Media successfully deleted'))
-                }
-                else{
-                  appui.error(bbn._('Something went wrong while deleting the media'))
-                }
-              }
-            )
+      _delete(id){
+        this.post(this.root + 'media/actions/delete', {id: id},
+        d => {
+          this.getRef('mediabrowser').refresh();
+          if (d.success){
+            appui.success(bbn._('Media successfully deleted'))
           }
-        )
+          else{
+            appui.error(bbn._('Something went wrong while deleting the media'))
+          }
+        }
+      )
+      },
+      onDelete(obj){
+        if (bbn.fn.isArray(obj.media)) {
+          this._delete(bbn.fn.map(obj.media, m => m.id));
+        }
+        else {
+          this.confirm(bbn._("Are you sure you want to delete this media?"), () => {
+            this._delete(obj.media.id);
+            }
+          )
+        }
       }
     }
   };
