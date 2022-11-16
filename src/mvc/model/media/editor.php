@@ -1,4 +1,13 @@
 <?php
+/**
+ * What is my purpose?
+ *
+ **/
+
+use bbn\X;
+use bbn\Str;
+/** @var $model \bbn\Mvc\Model*/
+
 if ($model->hasData('id', true)) {
   $cms = new \bbn\Appui\Cms($model->db);
   $media = $cms->getMedia($model->data['id'], true);
@@ -12,7 +21,7 @@ if ($model->hasData('id', true)) {
     }, \bbn\File\Dir::getFiles(BBN_PUBLIC . dirname($media['url'])));
   }
   return [
-    'title' => $media['title'],
+    'title' => _('Editor').' '.$media['title'],
     'media' => $media
   ];
 }
