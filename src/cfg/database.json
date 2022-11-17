@@ -1219,7 +1219,7 @@
                 "type": "varchar",
                 "null": 0,
                 "key": "MUL",
-                        "maxlength": 1000
+                "maxlength": 1000
             },
             "num_calls": {
                 "type": "int",
