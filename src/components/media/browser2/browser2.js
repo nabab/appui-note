@@ -116,6 +116,10 @@
       }
     },
     computed: {
+      currentItems() {
+        bbn.fn.log("source", this.source);
+        return this.source;
+      },
       downloadEnabled(){
         return !!this.download && (!!this.url || bbn.fn.isString(this.download));
       },

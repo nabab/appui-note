@@ -20,8 +20,8 @@
     <div class="bbn-flex-items">
       <div v-for="t in source.media.thumbs"
            class="bbn-c">
-        <span v-text="t + ' px'"/><br>
-        <img :src="root + 'media/image/' + source.media.id + '?w=' + t">
+        <!--<span v-text="t + ' px'"/><br>-->
+        <img :src="t">
       </div>
     </div>
   </div>

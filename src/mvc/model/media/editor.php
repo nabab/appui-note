@@ -11,7 +11,7 @@ use bbn\Str;
 if ($model->hasData('id', true)) {
   $cms = new \bbn\Appui\Cms($model->db);
   $media = $cms->getMedia($model->data['id'], true);
-  if (!empty($media['url'])) {
+  if (!empty($media['url']) && is_dir(dirname($media['url']))) {
     $media['cacheFiles'] = array_map(function($f){
       return [
         'file' => str_replace(BBN_PUBLIC, '', $f),
