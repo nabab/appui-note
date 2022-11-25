@@ -12,7 +12,6 @@
 										class="bbn-hsmargin"
 										:key="i"
 										v-bind="button"
-										@click="_execCommand(button)"
 				></bbn-button>
 			</div>
 			<div v-else-if="typeof(toolbar) === 'function'"
