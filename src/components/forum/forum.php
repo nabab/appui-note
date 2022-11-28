@@ -170,8 +170,9 @@
                    style="margin-left: 0.5rem"
                    title="<?=_('Delete')?>"
               >
-                <i class="nf nf-fa-trash bbn-xl bbn-p"
+                <i :class="['nf nf-fa-trash', 'bbn-xl', 'bbn-p', {'bbn-disabled': !forum.remove}]"
                    @click="forum.remove ? forum.remove(source, _self) : false"
+                   :style="{backgroundColor: !forum.remove ? 'transparent !important' : ''}"
                 ></i>
               </div>
               <div v-if="(source.creator === forum.currentUser) || !source.locked || forum.canLock"
@@ -179,16 +180,18 @@
                    style="margin-left: 0.5rem"
                    title="<?=_('Edit')?>"
               >
-                <i class="nf nf-fa-edit bbn-xl bbn-p"
+                <i :class="['nf nf-fa-edit', 'bbn-xl', 'bbn-p', {'bbn-disabled': !forum.edit}]"
                    @click="forum.edit ? forum.edit(source, _self) : false"
+                   :style="{backgroundColor: !forum.edit ? 'transparent !important' : ''}"
                 ></i>
               </div>
               <div class="bbn-spadded bbn-vmiddle appui-note-forum-hfixed"
                    style="margin-left: 0.5rem"
                    title="<?=_('Reply')?>"
               >
-                <i class="nf nf-fa-reply bbn-xl bbn-p"
+                <i :class="['nf nf-fa-reply', 'bbn-xl', 'bbn-p', {'bbn-disabled': !forum.reply}]"
                    @click="forum.reply ? forum.reply(source, _self) : false"
+                   :style="{backgroundColor: !forum.reply ? 'transparent !important' : ''}"
                 ></i>
               </div>
 

@@ -51,13 +51,16 @@
         type: [String, Array, Function, Object]
       },
 			edit: {
-				type: Function
+				type: [Function, Boolean],
+        default: false
 			},
 			remove: {
-				type: Function
+				type: [Function, Boolean],
+        default: false
 			},
 			reply: {
-				type: Function
+				type: [Function, Boolean],
+        default: false
       },
       topicButtons: {
         type: Array,
