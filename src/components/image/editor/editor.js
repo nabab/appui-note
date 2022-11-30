@@ -18,20 +18,16 @@
       return {
         widget: null,
         showFloater: false,
+        img: null,
         config: {
           source: this.source,
-          onBeforeSave: () => {
-            this.getPopup({
-              title: false,
-              maxwidth: 1000,
-              closable: true,
-              closeIcon: "bbn-black bbn-xxl nf nf-mdi-close_circle",
-              component: "appui-note-image-form"
-            });
+          onBeforeSave: (imageFileInfo) => {
+            this.img = this.widget.config.getCurrentImgDataFnRef.current();
+            this.showFloater = true;
             return false;
           },
-          onSave: (imageData, designState) => {
-            this.$emit('save', imageData, designState);
+          onSave: () => {
+            bbn.fn.log('onSave');
           },
           annotationsCommon: {
             fill: '#ff0000'
@@ -55,7 +51,26 @@
             window.FilerobotImageEditor.terminate();
           }
         });
-      }
+      },
+      close() {
+        this.showFloater = false;
+      },
+      saveInfo(data) {
+        if ((data.width != this.img.imageData.width) || (data.height != this.img.imageData.height)) {
+          let img = new Image();
+          img.onload = function() {
+            let canva = document.createElement('canvas');
+        		let ctx = canva.getContext('2d');
+           	canva.width = data.width;
+    				canva.height = data.height;
+            ctx.drawImage(img, 0, 0, canva.width, canva.height);
+            ctx.drawImage(canva, 0, 0, canva.width, canva.height);
+          };
+          img.src = this.img.imageData.imageBase64;
+          this.img.imageData.imageBase64 = img;
+        }
+        this.$emit('save', this.img.imageData);
+      },
     },
     mounted() {
       let scriptRobot = document.getElementById('script_robot');
