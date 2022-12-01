@@ -1,8 +1,17 @@
 <?php
+/**
+ * What is my purpose?
+ *
+ **/
+
+use bbn\X;
+use bbn\Str;
+/** @var $model \bbn\Mvc\Model*/
+
 if ($model->hasData('id', true)) {
-  $cms = new \bbn\Appui\Medias($model->db);
+  $cms = new \bbn\Appui\Cms($model->db);
   $media = $cms->getMedia($model->data['id'], true);
-  if (!empty($media['url']) && is_dir(BBN_PUBLIC . dirname($media['url']))) {
+  if (!empty($media['url']) && is_dir(dirname($media['url']))) {
     $media['cacheFiles'] = array_map(function($f){
       return [
         'file' => str_replace(BBN_PUBLIC, '', $f),
@@ -11,11 +20,8 @@ if ($model->hasData('id', true)) {
       ];
     }, \bbn\File\Dir::getFiles(BBN_PUBLIC . dirname($media['url'])));
   }
-  $media["thumbs"] = array_map(function($a) use ($model, $media) {
-    return BBN_URL . $model->pluginUrl("appui-note") . '/media/image/' . $media['id'] . '/' . basename($a);
-  }, $cms->getThumbsPath($media));
   return [
-    'title' => $media['title'],
+    'title' => _('Editor').' '.$media['title'],
     'media' => $media
   ];
 }

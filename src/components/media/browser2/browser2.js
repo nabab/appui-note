@@ -116,6 +116,10 @@
       }
     },
     computed: {
+      currentItems() {
+        bbn.fn.log("source", this.source);
+        return this.source;
+      },
       downloadEnabled(){
         return !!this.download && (!!this.url || bbn.fn.isString(this.download));
       },
@@ -156,6 +160,15 @@
               this.editMedia(data);
             }
           });
+          if (data.is_image) {
+            res.push({
+              text: bbn._('Edit image'),
+              icon: 'nf nf-fa-image',
+              action: () => {
+                this.openImageEditor(data);
+              }
+            });
+          }
         }
         if (this.downloadEnabled) {
           res.push({
@@ -244,6 +257,11 @@
           bbn.fn.link(this.detail + (bbn.fn.substr(this.detail, -1, 1) !== '/' ? '/' : '') + media.id);
         }
       },
+      openImageEditor(media){
+        if (media && media.id) {
+          bbn.fn.link(appui.plugins['appui-note'] + '/media/editor/' + media.id);
+        }
+      },
       formatBytes: bbn.fn.formatBytes,
       removeMedia(m){
         this.$emit('delete', {
@@ -277,7 +295,7 @@
       },
       downloadMedia(a, b){
         this.$emit('download', a)
-       /* this.post(this.root + 'media/actions/file/download', a, (d) => { 
+        /* this.post(this.root + 'media/actions/file/download', a, (d) => { 
           if(d.success){
             appui.success(a.name +' '+ bbn._( +'downloaded'))
           }
