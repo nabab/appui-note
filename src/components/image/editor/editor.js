@@ -20,7 +20,7 @@
         showFloater: false,
         img: null,
         config: {
-          source: this.source,
+          source: this.source + '?t=' + bbn.fn.timestamp(),
           onBeforeSave: (imageFileInfo) => {
             this.img = this.widget.config.getCurrentImgDataFnRef.current();
             this.showFloater = true;
@@ -56,20 +56,31 @@
         this.showFloater = false;
       },
       saveInfo(data) {
-        if ((data.width != this.img.imageData.width) || (data.height != this.img.imageData.height)) {
-          let img = new Image();
-          img.onload = function() {
-            let canva = document.createElement('canvas');
-        		let ctx = canva.getContext('2d');
-           	canva.width = data.width;
-    				canva.height = data.height;
-            ctx.drawImage(img, 0, 0, canva.width, canva.height);
-            ctx.drawImage(canva, 0, 0, canva.width, canva.height);
+        if ((data.width != this.img.imageData.width) || (data.height != this.img.imageData.height) || (data.extension != this.img.imageData.extension)) {
+          bbn.fn.log('data', data);
+          bbn.fn.log('img', this.img);
+          let new_img = new Image();
+          new_img.onload = () => {
+          	let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
+            canvas.width = data.width;
+            canvas.height = data.height;
+            ctx.drawImage(new_img, 0, 0, data.width, data.height);
+            let dataURI = canvas.toDataURL('image/' + data.extension);
+            this.img.imageData.imageBase64 = dataURI;
+            this.img.imageData.imageCanvas = canvas;
+            this.img.imageData.extension = data.extension;
+            this.img.imageData.height = parseInt(data.height);
+            this.img.imageData.width = parseInt(data.width);
+            this.img.imageData.fullName = this.img.imageData.name + '.' + this.img.imageData.extension;
+            this.img.imageData.mimeType = 'image/' + this.img.imageData.extension;
+            this.$emit('save', this.img.imageData);
           };
-          img.src = this.img.imageData.imageBase64;
-          this.img.imageData.imageBase64 = img;
+          new_img.src = this.img.imageData.imageBase64;
+        } else {
+          this.img.imageData.name = data.name;
+        	this.$emit('save', this.img.imageData);
         }
-        this.$emit('save', this.img.imageData);
       },
     },
     mounted() {
