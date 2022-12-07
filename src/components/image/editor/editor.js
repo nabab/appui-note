@@ -57,27 +57,31 @@
       },
       saveInfo(data) {
         if ((data.width != this.img.imageData.width) || (data.height != this.img.imageData.height) || (data.extension != this.img.imageData.extension)) {
-          bbn.fn.log('data', data);
-          bbn.fn.log('img', this.img);
           let new_img = new Image();
           new_img.onload = () => {
           	let canvas = document.createElement('canvas');
             let ctx = canvas.getContext('2d');
             canvas.width = data.width;
             canvas.height = data.height;
-            ctx.drawImage(new_img, 0, 0, data.width, data.height);
-            let dataURI = canvas.toDataURL('image/' + data.extension);
+            if (data.extension == 'jpg' || data.extension == 'jpeg') {
+              ctx.fillStyle = "#fff";
+              ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            ctx.drawImage(new_img, 0, 0, canvas.width, canvas.height);
+            let dataURI = data.extension == 'jpg' ? canvas.toDataURL("image/jpeg") : canvas.toDataURL("image/" + data.extension);
             this.img.imageData.imageBase64 = dataURI;
             this.img.imageData.imageCanvas = canvas;
-            this.img.imageData.extension = data.extension;
             this.img.imageData.height = parseInt(data.height);
             this.img.imageData.width = parseInt(data.width);
-            this.img.imageData.fullName = this.img.imageData.name + '.' + this.img.imageData.extension;
-            this.img.imageData.mimeType = 'image/' + this.img.imageData.extension;
+            this.img.imageData.extension = data.extension;
+            this.img.imageData.name = data.name;
+            this.img.imageData.fullName = data.name + '.' + data.extension;
+            this.img.imageData.mimeType = data.extension == 'jpg' ? "image/jpeg" : "image/" + data.extension;
             this.$emit('save', this.img.imageData);
           };
           new_img.src = this.img.imageData.imageBase64;
-        } else {
+        }
+        else {
           this.img.imageData.name = data.name;
         	this.$emit('save', this.img.imageData);
         }
