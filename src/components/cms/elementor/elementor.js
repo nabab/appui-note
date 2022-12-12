@@ -192,8 +192,8 @@
           type: 'text',
           content: ''
         },
-        types: types
-
+        types: types,
+        showSlider: false,
       };
     },
     computed: {
@@ -385,15 +385,24 @@
         }
       },
       currentEdited(v) {
+        if (v != -1) {
+          this.showSlider = true;
+          bbn.fn.log('show slider')
+        }
         this.editedSource = null;
         if (this.source[v]) {
           this.currentType = this.source[v].type || 'text';
         }
         this.$nextTick(() => {
           this.updateSelected();
-        })
-
+        });
       }
+    },
+    mounted() {
+      if (this.source.length == 0) {
+        this.source.unshift({type: 'text', content: 'Hello world'});
+      }
+      bbn.fn.log('source', this.source);
     }
-  }
+  };
 })();

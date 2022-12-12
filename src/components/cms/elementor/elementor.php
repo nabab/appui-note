@@ -1,12 +1,5 @@
 <!-- HTML Document -->
 <div class="bbn-overlay">
-  <bbn-splitter :resizable="true"
-                :collapsible="true"
-                ref="splitter"
-                orientation="horizontal">
-    <bbn-pane :scrollable="true"
-              size="50%"
-              ref="leftPane">
       <div class="bbn-padding bbn-w-100"
            @click="currentEdited = -1">
         <div v-for="(cfg, i) in source"
@@ -28,8 +21,13 @@
                                 @click.stop="changeEdited(i)"/>
         </div>
       </div>
-    </bbn-pane>
-    <bbn-pane>
+  		<bbn-slider :visible="showSlider"
+                  :focused="false"
+                  :closeButton="true"
+                  orientation="right">
+        Hello world this is a slider
+      <bbn-slider/>
+    <!--<bbn-pane>
       <div class="bbn-overlay bbn-flex-height">
         <div v-if="currentEdited > -1"
              class="bbn-header bbn-padded bbn-vmiddle bbn-m bbn-b bbn-flex-width">
@@ -88,6 +86,5 @@
           </bbn-scroll>
         </div>
       </div>
-    </bbn-pane>
-  </bbn-splitter>
+    </bbn-pane>-->
 </div>
