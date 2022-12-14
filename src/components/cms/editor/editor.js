@@ -13,6 +13,9 @@
       },
       prefix: {
         type: String
+      },
+      blocks: {
+        type: Array,
       }
     },
     data(){
@@ -21,7 +24,12 @@
         oData: JSON.stringify(this.source),
         ready: false,
         root: appui.plugins['appui-note'] + '/',
-        showFloater: false
+        showFloater: false,
+        showSlider: false,
+        showWidgets: false,
+        currentEdited: -1,
+        editedSource: null,
+        isDraggedOver: false,
       };
     },
     computed: {
@@ -34,7 +42,7 @@
         }
         return {};
       },
-      isChanged(){
+      isChanged() {
         return JSON.stringify(this.source) !== this.oData;
       },
       contextSource(){
@@ -137,23 +145,66 @@
           });
         });
       },
-      openSettings() {
-        bbn.fn.log('openSettings');
-        this.showFloater = true;
-      },
-      closeSettings() {
-        this.showFloater = false;
-      },
       saveSettings() {
         this.$refs.form.submit();
         this.showFloater = false;
+      },
+      handleChanges(data) {
+        this.showWidgets = false;
+        this.showSlider = true;
+        this.currentEdited = data.currentEdited;
+        this.editedSource = this.source.items[data.currentEdited];
+        bbn.fn.log('editedSource', this.editedSource);
+      },
+      deleteCurrentSelected() {
+        this.confirm(bbn._("Are you sure you want to delete this block and its content?"), () => {
+          let idx = this.currentEdited;
+          this.currentEdited = -1;
+          this.source.items.splice(idx, 1);
+        });
+      },
+      onDrop(ev) {
+        const block = ev.detail.from.data;
+        bbn.fn.log('block', block);
+        this.source.items.push({type: block.type});
+      },
+      move(dir) {
+        let idx;
+        switch (dir) {
+          case 'top':
+            idx = 0;
+            break;
+          case 'up':
+            idx = this.currentEdited - 1;
+            break;
+          case 'down':
+            idx = this.currentEdited + 1;
+            break;
+          case 'bottom':
+            idx = this.source.items.length - 1;
+            break;
+        }
+        if (this.source.items[idx]) {
+          bbn.fn.move(this.source.items, this.currentEdited, idx);
+          this.currentEdited = idx;
+        }
+      },
+      onDrag() {
+        bbn.fn.log(arguments);
+      },
+      dragOver(e) {
+        bbn.fn.log("drag over droppable", e.detail.helper.getBoundingClientRect());
+        this.isDraggedOver = true;
       }
     },
     mounted() {
       this.data = this.closest('bbn-router').closest('bbn-container').source;
-      if (this.source.length == 0) {
-        this.source.items.push({type: 'html', content: '<p>Hello world<p>'});
-      }
+      this.$set(this.source.items, 0, {type: "title", content: "Bienvenue sur l'editeur de page", tag: 'h1', align: 'center', hr: null,
+        style: {
+          'text-decoration': 'none',
+          'font-style': 'normal',
+          color: '#000000'
+        }});
     }
   };
 })();

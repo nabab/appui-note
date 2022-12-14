@@ -193,97 +193,14 @@
           content: ''
         },
         types: types,
-        showSlider: false,
       };
-    },
-    computed: {
-      toolbarSource(){
-        let res = [];
-        if (this.currentEdited !== -1) {
-          res.push({});
-          res.push({
-            icon: 'nf nf-mdi-chevron_double_up',
-            notext: true,
-            text: bbn._("Move to start"),
-            disabled: this.currentEdited <= 1,
-            action: () => {
-              this.move('up', true);
-            }
-          });
-          res.push({
-            icon: 'nf nf-mdi-chevron_up',
-            notext: true,
-            text: bbn._("Move up"),
-            disabled: !this.currentEdited,
-            action: () => {
-              this.move('up');
-            }
-          });
-          res.push({
-            icon: 'nf nf-mdi-chevron_down',
-            notext: true,
-            text: bbn._("Move down"),
-            disabled: this.currentEdited >= this.source.length - 1,
-            action: () => {
-              this.move('down');
-            }
-          });
-          res.push({
-            icon: 'nf nf-mdi-chevron_double_down',
-            notext: true,
-            text: bbn._("Move to end"),
-            disabled: this.currentEdited >= this.source.length - 2,
-            action: () => {
-              this.move('down', true);
-            }
-          });
-          res.push({
-            icon: 'nf nf-fa-trash',
-            notext: true,
-            text: bbn._("Delete the block"),
-            end: true,
-            action: () => {
-              this.deleteBlock();
-            }
-          });
-        }
-        /*
-          <div class="bbn-flex-fill bbn-r bbn-h-100">
-            <div class="bbn-iblock bbn-nowrap">
-              <div class="bbn-iblock">
-                <bbn-button icon="nf nf-fa-check"
-                            :notext="true"
-                            text="<?= _("Supprimer ce bloc") ?>"/>
-              </div>
-              <div class="bbn-iblock bbn-toolbar-separator"> </div>
-              <div class="bbn-iblock">
-                <bbn-button icon="nf nf-fa-trash"
-                            :notext="true"
-                            text="<?= _("Supprimer ce bloc") ?>"/>
-              </div>
-            </div>
-          </div>
-          */
-        return res;
-      },
-      isEditorOverlay(){
-        if (this.currentEdited === -1) {
-          return false;
-        }
-
-        return ['html', 'markdown', 'gallery'].includes(this.source[this.currentEdited].type);
-      },
-      isEditorScrollable(){
-        if (this.currentEdited === -1) {
-          return false;
-        }
-
-        return ['html', 'markdown', 'gallery'].includes(this.source[this.currentEdited].type);
-      }
     },
     methods: {
       changeEdited(idx) {
         this.currentEdited = idx;
+        this.$emit('changes', {
+          currentEdited: this.currentEdited
+        });
       },
       onClose() {
         let form = this.getRef('form');
@@ -306,39 +223,6 @@
           this.currentEdited = idx
         }
       },
-      move(dir) {
-        let idx;
-        switch (dir) {
-          case 'top':
-            idx = 0;
-            break;
-          case 'up':
-            idx = this.currentEdited - 1;
-            break;
-          case 'down':
-            idx = this.currentEdited + 1;
-            break;
-          case 'bottom':
-            idx = this.source.length - 1;
-            break;
-        }
-        if (this.source[idx]) {
-          bbn.fn.move(this.source, this.currentEdited, idx);
-          this.currentEdited = idx;
-        }
-
-        setTimeout(() => {
-          this.getRef('block' + this.currentEdited).selected = true;
-          this.getRef('leftPane').getRef('scroll').scrollTo(null, this.getRef('block' + this.currentEdited).$el);
-        }, 500)
-      },
-      deleteCurrentSelected(){
-        this.confirm(bbn._("Are you sure you want to delete this block and its content?"), () => {
-          let idx = this.currentEdited;
-          this.currentEdited = -1;
-          this.source.splice(idx, 1);
-        })
-      },
       updateSelected() {
         if (this.source[this.currentEdited]) {
           let r = this.source[this.currentEdited];
@@ -359,6 +243,9 @@
           this.realRowSelected = -1;
           this.editedSource = null;
         }
+      },
+      onDrag() {
+        this.$emit('dragoverdroppable', ...arguments);
       }
     },
     watch: {
@@ -385,10 +272,6 @@
         }
       },
       currentEdited(v) {
-        if (v != -1) {
-          this.showSlider = true;
-          bbn.fn.log('show slider')
-        }
         this.editedSource = null;
         if (this.source[v]) {
           this.currentType = this.source[v].type || 'text';
@@ -398,11 +281,5 @@
         });
       }
     },
-    mounted() {
-      if (this.source.length == 0) {
-        this.source.unshift({type: 'text', content: 'Hello world'});
-      }
-      bbn.fn.log('source', this.source);
-    }
   };
 })();

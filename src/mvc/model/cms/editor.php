@@ -28,5 +28,10 @@ if ($model->hasData('id', true)) {
     
   }
   unset($data['content']);
-  return ['data' => $data, 'types' => $note->getOptions('types'), 'title' => $data['title']];
+  return [
+    'data' => $data,
+    'types' => $note->getOptions('types'),
+    'title' => $data['title'],
+    'blocks' => $model->inc->options->fullOptions("blocks", "note", "appui")
+  ];
 }

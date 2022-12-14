@@ -1,0 +1,24 @@
+/* LESS Document */
+
+.appui-note-cms-editor {
+  .slider {
+    width: 0px;
+    height: 100%;
+    box-shadow: -2px 0px 20px 0px !important;
+    transition: width 0.5s ease 0s;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    &.opened {
+      width: max(250px, 30%);
+    }
+  }
+  div.grid {
+    grid-template-columns: 50% 50%;
+  }
+  div.widgets {
+    border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+  }
+}
