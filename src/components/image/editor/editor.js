@@ -20,7 +20,7 @@
         showFloater: false,
         img: null,
         config: {
-          source: this.source,
+          source: this.source + '?t=' + bbn.fn.timestamp(),
           onBeforeSave: (imageFileInfo) => {
             this.img = this.widget.config.getCurrentImgDataFnRef.current();
             this.showFloater = true;
@@ -56,20 +56,35 @@
         this.showFloater = false;
       },
       saveInfo(data) {
-        if ((data.width != this.img.imageData.width) || (data.height != this.img.imageData.height)) {
-          let img = new Image();
-          img.onload = function() {
-            let canva = document.createElement('canvas');
-        		let ctx = canva.getContext('2d');
-           	canva.width = data.width;
-    				canva.height = data.height;
-            ctx.drawImage(img, 0, 0, canva.width, canva.height);
-            ctx.drawImage(canva, 0, 0, canva.width, canva.height);
+        if ((data.width != this.img.imageData.width) || (data.height != this.img.imageData.height) || (data.extension != this.img.imageData.extension)) {
+          let new_img = new Image();
+          new_img.onload = () => {
+          	let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
+            canvas.width = data.width;
+            canvas.height = data.height;
+            if (data.extension == 'jpg' || data.extension == 'jpeg') {
+              ctx.fillStyle = "#fff";
+              ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            ctx.drawImage(new_img, 0, 0, canvas.width, canvas.height);
+            let dataURI = data.extension == 'jpg' ? canvas.toDataURL("image/jpeg") : canvas.toDataURL("image/" + data.extension);
+            this.img.imageData.imageBase64 = dataURI;
+            this.img.imageData.imageCanvas = canvas;
+            this.img.imageData.height = parseInt(data.height);
+            this.img.imageData.width = parseInt(data.width);
+            this.img.imageData.extension = data.extension;
+            this.img.imageData.name = data.name;
+            this.img.imageData.fullName = data.name + '.' + data.extension;
+            this.img.imageData.mimeType = data.extension == 'jpg' ? "image/jpeg" : "image/" + data.extension;
+            this.$emit('save', this.img.imageData);
           };
-          img.src = this.img.imageData.imageBase64;
-          this.img.imageData.imageBase64 = img;
+          new_img.src = this.img.imageData.imageBase64;
         }
-        this.$emit('save', this.img.imageData);
+        else {
+          this.img.imageData.name = data.name;
+        	this.$emit('save', this.img.imageData);
+        }
       },
     },
     mounted() {
