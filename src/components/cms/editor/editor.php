@@ -34,7 +34,8 @@
                                   @changes="handleChanges"
                                   v-droppable="true"
                                   @drop.prevent="onDrop"
-                                  @dragoverdroppable="dragOver">
+                                  @dragoverdroppable="dragOver"
+                                  >
         </appui-note-cms-elementor>
       </div>
     </div>

@@ -29,7 +29,9 @@
         showWidgets: false,
         currentEdited: -1,
         editedSource: null,
-        isDraggedOver: false,
+        mapper: [],
+        currentElement: {},
+        nextPosition: 0
       };
     },
     computed: {
@@ -154,19 +156,28 @@
         this.showSlider = true;
         this.currentEdited = data.currentEdited;
         this.editedSource = this.source.items[data.currentEdited];
-        bbn.fn.log('editedSource', this.editedSource);
+        //bbn.fn.log('editedSource', this.editedSource);
       },
       deleteCurrentSelected() {
         this.confirm(bbn._("Are you sure you want to delete this block and its content?"), () => {
           let idx = this.currentEdited;
           this.currentEdited = -1;
           this.source.items.splice(idx, 1);
+          this.mapY();
         });
       },
       onDrop(ev) {
         const block = ev.detail.from.data;
         bbn.fn.log('block', block);
-        this.source.items.push({type: block.type});
+        if (this.nextPosition == 0) {
+          this.source.items.unshift({type: block.type});
+        }
+        else if (this.nextPosition == -1) {
+          this.source.items.push({type: block.type});
+        }
+        else {
+          this.source.items.splice(this.nextPosition, 0, {type: block.type});
+        }
       },
       move(dir) {
         let idx;
@@ -193,18 +204,108 @@
         bbn.fn.log(arguments);
       },
       dragOver(e) {
-        bbn.fn.log("drag over droppable", e.detail.helper.getBoundingClientRect());
-        this.isDraggedOver = true;
+        this.currentElement = e.detail.helper.getBoundingClientRect();
+        bbn.fn.log('currentElement', this.currentElement);
+        let editor = this.getRef('editor').$el.firstChild;
+        var p = document.createElement("p");
+        p.innerHTML = "--------------------";
+        this.mapper.map((v, idx, array) => {
+          //check if inside
+          if ((this.currentElement.y > v.y) && (this.currentElement.y < (v.y + v.height))) {
+            bbn.fn.log("Inside element", idx);
+            bbn.fn.log("value", v);
+          }
+          //check if at top
+          else if (this.currentElement.y < array[0].y) {
+            bbn.fn.log("At the top of all element", idx);
+            this.nextPosition = 0;
+          }
+          //check if at last
+          else if (this.currentElement.y > (array.at(-1).y + array.at(-1).height)) {
+            bbn.fn.log("At the bottom of last element", idx);
+            this.nextPosition = -1;
+          }
+          //check if between element
+          else if ((this.currentElement.y < v.y) && (this.currentElement.y > (array[idx - 1].y + array[idx - 1].height))) {
+            //let parentDiv = v.parent;
+            bbn.fn.log("between element", idx, "and", idx - 1);
+            //parentDiv.insertBefore(p, v.html);
+          }
+        });
+      },
+      mapY() {
+        bbn.fn.log("mapper in action");
+        /*this.source.items.map((v, idx) => {
+        	bbn.fn.log(v, idx);
+        });*/
+        let editor = this.getRef('editor').$el.firstChild.children;
+        //bbn.fn.log(editor);
+        let arr = [...editor];
+        let tmp_arr = [];
+        arr.map((v, idx, array) => {
+          bbn.fn.log(v);
+          let detail = v.getBoundingClientRect();
+          tmp_arr.push({
+            y: detail.y,
+            height: detail.height,
+            index: idx,
+            html: v,
+            parent: array[idx].parentNode
+          });
+        });
+        /*for (let i = 0; i <= editor.length; i++) {
+          bbn.fn.log(editor[i]);
+          let detail = editor[i].getBoundingClientRect();
+          tmp_arr.push({
+            y: detail.y,
+            height: detail.height,
+            index: i
+          });
+        }*/
+        //bbn.fn.log(tmp_arr);
+        this.mapper = tmp_arr.slice();
+        /*arr.map((v, idx) => {
+          let detail = v.getBoundingClientRect();
+          this.mapper.push({
+            y: detail.y,
+            height: detail.height,
+            index: idx
+          });
+        });*/
+      }
+    },
+    watch: {
+      'source.items'() {
+        bbn.fn.log(this.source.items.length);
+        bbn.fn.log('items changed');
+        setTimeout(() => {
+          this.mapY();
+        }, 50);
+      },
+      mapper() {
+        bbn.fn.log('mapper', this.mapper);
       }
     },
     mounted() {
       this.data = this.closest('bbn-router').closest('bbn-container').source;
       this.$set(this.source.items, 0, {type: "title", content: "Bienvenue sur l'editeur de page", tag: 'h1', align: 'center', hr: null,
-        style: {
-          'text-decoration': 'none',
-          'font-style': 'normal',
-          color: '#000000'
-        }});
+                                       style: {
+                                         'text-decoration': 'none',
+                                         'font-style': 'normal',
+                                         color: '#000000'
+                                       }});
+      /*setTimeout(() => {
+        let editor = this.getRef('editor').$el.firstChild.children;
+        let arr = [...editor];
+        arr.map((v, idx) => {
+          let detail = v.getBoundingClientRect();
+          this.mapper.push({
+            y: detail.y,
+            height: detail.height,
+            index: idx
+          });
+        });
+      }, 50);*/
     }
   };
 })();
