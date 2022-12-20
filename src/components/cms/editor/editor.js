@@ -31,7 +31,8 @@
         editedSource: null,
         mapper: [],
         currentElement: {},
-        nextPosition: 0
+        nextPosition: 0,
+        showGuide: false
       };
     },
     computed: {
@@ -167,6 +168,7 @@
         });
       },
       onDrop(ev) {
+        this.showGuide = false;
         const block = ev.detail.from.data;
         bbn.fn.log('block', block);
         if (this.nextPosition == 0) {
@@ -200,50 +202,42 @@
           this.currentEdited = idx;
         }
       },
-      onDrag() {
-        bbn.fn.log(arguments);
+      createHTMLElement(html) {
+        const placeholder = document.createElement("div");
+        placeholder.innerHTML = html;
+        const node = placeholder.firstElementChild;
+        return node;
       },
       dragOver(e) {
+        this.showGuide = true;
         this.currentElement = e.detail.helper.getBoundingClientRect();
-        bbn.fn.log('currentElement', this.currentElement);
         let editor = this.getRef('editor').$el.firstChild;
-        var p = document.createElement("p");
-        p.innerHTML = "--------------------";
         this.mapper.map((v, idx, array) => {
           //check if inside
           if ((this.currentElement.y > v.y) && (this.currentElement.y < (v.y + v.height))) {
-            bbn.fn.log("Inside element", idx);
-            bbn.fn.log("value", v);
+            //bbn.fn.log("Inside element", idx);
+            //bbn.fn.log("value", v);
           }
           //check if at top
           else if (this.currentElement.y < array[0].y) {
-            bbn.fn.log("At the top of all element", idx);
             this.nextPosition = 0;
           }
           //check if at last
           else if (this.currentElement.y > (array.at(-1).y + array.at(-1).height)) {
-            bbn.fn.log("At the bottom of last element", idx);
             this.nextPosition = -1;
           }
           //check if between element
           else if ((this.currentElement.y < v.y) && (this.currentElement.y > (array[idx - 1].y + array[idx - 1].height))) {
-            //let parentDiv = v.parent;
-            bbn.fn.log("between element", idx, "and", idx - 1);
-            //parentDiv.insertBefore(p, v.html);
+            this.nextPosition = idx;
           }
         });
       },
       mapY() {
-        bbn.fn.log("mapper in action");
-        /*this.source.items.map((v, idx) => {
-        	bbn.fn.log(v, idx);
-        });*/
         let editor = this.getRef('editor').$el.firstChild.children;
-        //bbn.fn.log(editor);
+        bbn.fn.log(editor);
         let arr = [...editor];
         let tmp_arr = [];
         arr.map((v, idx, array) => {
-          bbn.fn.log(v);
           let detail = v.getBoundingClientRect();
           tmp_arr.push({
             y: detail.y,
@@ -253,37 +247,20 @@
             parent: array[idx].parentNode
           });
         });
-        /*for (let i = 0; i <= editor.length; i++) {
-          bbn.fn.log(editor[i]);
-          let detail = editor[i].getBoundingClientRect();
-          tmp_arr.push({
-            y: detail.y,
-            height: detail.height,
-            index: i
-          });
-        }*/
-        //bbn.fn.log(tmp_arr);
         this.mapper = tmp_arr.slice();
-        /*arr.map((v, idx) => {
-          let detail = v.getBoundingClientRect();
-          this.mapper.push({
-            y: detail.y,
-            height: detail.height,
-            index: idx
-          });
-        });*/
       }
     },
     watch: {
       'source.items'() {
-        bbn.fn.log(this.source.items.length);
-        bbn.fn.log('items changed');
         setTimeout(() => {
           this.mapY();
         }, 50);
       },
       mapper() {
-        bbn.fn.log('mapper', this.mapper);
+        //bbn.fn.log('mapper', this.mapper);
+      },
+      showHover() {
+        //bbn.fn.log('showHover', this.showHover);
       }
     },
     mounted() {
@@ -294,18 +271,6 @@
                                          'font-style': 'normal',
                                          color: '#000000'
                                        }});
-      /*setTimeout(() => {
-        let editor = this.getRef('editor').$el.firstChild.children;
-        let arr = [...editor];
-        arr.map((v, idx) => {
-          let detail = v.getBoundingClientRect();
-          this.mapper.push({
-            y: detail.y,
-            height: detail.height,
-            index: idx
-          });
-        });
-      }, 50);*/
     }
   };
 })();

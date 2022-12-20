@@ -35,6 +35,8 @@
                                   v-droppable="true"
                                   @drop.prevent="onDrop"
                                   @dragoverdroppable="dragOver"
+                                  :show-guide="showGuide"
+                                  :position="nextPosition"
                                   >
         </appui-note-cms-elementor>
       </div>
@@ -85,7 +87,7 @@
     <!--Widgets menu-->
     <div :class="{slider: true, opened: showWidgets}">
       <bbn-scroll axis="y">
-        <div class="bbn-w-100 bbn-middle bbn-lpadding bbn-grid grid">
+        <div class="bbn-w-100 bbn-middle bbn-lpadding bbn-grid grid bbn-unselectable">
           <div v-for="(v, i) in blocks"
                :title="v.description"
                :class="['widgets', 'block-' + v.code, 'bbn-spadding', 'bbn-radius', 'bbn-smargin']"

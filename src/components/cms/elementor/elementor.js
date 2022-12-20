@@ -178,6 +178,12 @@
         type: Array,
         required: true
       },
+      showGuide: {
+        type: Boolean
+      },
+      position: {
+        type: Number
+      }
     },
     data(){
       return {
@@ -192,7 +198,7 @@
           type: 'text',
           content: ''
         },
-        types: types,
+        types: types
       };
     },
     methods: {
@@ -279,6 +285,12 @@
         this.$nextTick(() => {
           this.updateSelected();
         });
+      },
+      showHover() {
+        bbn.fn.log("show hover", this.showHover);
+      },
+      position() {
+        bbn.fn.log('position', this.position);
       }
     },
   };
