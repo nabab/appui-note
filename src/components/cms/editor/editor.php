@@ -35,7 +35,6 @@
                                   v-droppable="true"
                                   @drop.prevent="onDrop"
                                   @dragoverdroppable="dragOver"
-                                  :show-guide="showGuide"
                                   :position="nextPosition"
                                   >
         </appui-note-cms-elementor>

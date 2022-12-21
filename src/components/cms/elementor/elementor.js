@@ -290,7 +290,7 @@
         bbn.fn.log("show hover", this.showHover);
       },
       position() {
-        bbn.fn.log('position', this.position);
+        //bbn.fn.log('position', this.position);
       }
     },
   };

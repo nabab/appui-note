@@ -4,16 +4,8 @@
      @dragoverdroppable="onDrag">
   <div class="bbn-padding bbn-w-100"
        @click="currentEdited = -1">
-    <div v-if="showGuide"
-         class="guide bbn-w-100"
-         style="height: 20px; border-top: 3px dashed;">
-    </div>
     <div v-for="(cfg, i) in source"
          class="bbn-w-100 bbn-bottom-margin">
-      <div v-if="showGuide && position == i && position != 0"
-           class="guide bbn-w-100"
-           style="height: 20px; border-top: 3px dashed;">
-      </div>
       <appui-note-cms-block-container v-if="cfg.type === 'container'"
                                       :source="cfg"
                                       :ref="'block' + i"
@@ -22,7 +14,7 @@
                                       :selected="currentEdited === i"
                                       @select="updateSelected"
                                       @click.stop="changeEdited(i)"
-                                      v-draggable.data.mode="{data: {type: cfg.type}, mode: 'self'}"/>
+                                      v-draggable.data.mode="{data: {type: cfg.type, inside: true, index: i}, mode: 'self'}"/>
       <appui-note-cms-block v-else
                             :source="cfg"
                             :ref="'block' + i"
@@ -30,11 +22,18 @@
                             :overable="true"
                             :selected="currentEdited === i"
                             @click.stop="changeEdited(i)"
-                            v-draggable.data.mode="{data: {type: cfg.type}, mode: 'self'}"/>
+                            v-draggable.data.mode="{data: {type: cfg.type, inside: true, index: i}, mode: 'self'}"/>
+
     </div>
-    <div v-if="showGuide"
-         class="guide bbn-w-100"
-         style="height: 20px; border-top: 3px dashed;">
+    
+  </div>
+  <div ref="divider"
+         class="bbn-w-50"
+         style="display: none; position: absolute; border: 1px dashed;">
     </div>
+  <div ref="guide"
+       class="guide bbn-w-100"
+       style="height: 20px; display: none; justify-content: center; align-items: center; position: absolute; left: 0;">
+    <div class="bbn-w-100 bbn-h-10" style="border: 1px dashed;"/>
   </div>
 </div>

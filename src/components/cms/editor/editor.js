@@ -32,7 +32,6 @@
         mapper: [],
         currentElement: {},
         nextPosition: 0,
-        showGuide: false
       };
     },
     computed: {
@@ -168,9 +167,13 @@
         });
       },
       onDrop(ev) {
-        this.showGuide = false;
         const block = ev.detail.from.data;
-        bbn.fn.log('block', block);
+        let guide = document.getElementById('guide');
+        guide.style.display = "none";
+        if (block.inside) {
+          bbn.fn.move(this.source.items, block.index, this.nextPosition);
+          return;
+        }
         if (this.nextPosition == 0) {
           this.source.items.unshift({type: block.type});
         }
@@ -209,32 +212,51 @@
         return node;
       },
       dragOver(e) {
-        this.showGuide = true;
         this.currentElement = e.detail.helper.getBoundingClientRect();
-        let editor = this.getRef('editor').$el.firstChild;
+        let elementor = this.getRef('editor');
+        let editor = elementor.$el.firstChild;
+        let guide = elementor.getRef('guide');
+        let divider = elementor.getRef('divider');
+        let sum = 0;
+        guide.style.display = "none";
+        divider.style.display = "none";
+
         this.mapper.map((v, idx, array) => {
+          sum += array[idx].height + 10;
           //check if inside
           if ((this.currentElement.y > v.y) && (this.currentElement.y < (v.y + v.height))) {
-            //bbn.fn.log("Inside element", idx);
-            //bbn.fn.log("value", v);
+            bbn.fn.log("Inside element", idx);
+            bbn.fn.log("value", v);
+            divider.style.display = "block";
+            divider.style.height = String(v.height) + 'px';
+            divider.style.top = String(v.y) + 'px';
           }
           //check if at top
           else if (this.currentElement.y < array[0].y) {
+            //bbn.fn.log('at top');
             this.nextPosition = 0;
+            guide.style.display = "flex";
+            guide.style.top = 0;
           }
           //check if at last
           else if (this.currentElement.y > (array.at(-1).y + array.at(-1).height)) {
+            //bbn.fn.log('last position');
             this.nextPosition = -1;
+            guide.style.display = "flex";
+            guide.style.top = String(sum) + 'px';
           }
           //check if between element
           else if ((this.currentElement.y < v.y) && (this.currentElement.y > (array[idx - 1].y + array[idx - 1].height))) {
+            //bbn.fn.log('between', idx, 'and', idx-1);
+            bbn.fn.log('sum', sum);
             this.nextPosition = idx;
+            guide.style.display = "flex";
+            guide.style.top = String(sum - array[idx].height) + 'px';
           }
         });
       },
       mapY() {
         let editor = this.getRef('editor').$el.firstChild.children;
-        bbn.fn.log(editor);
         let arr = [...editor];
         let tmp_arr = [];
         arr.map((v, idx, array) => {
@@ -254,13 +276,16 @@
       'source.items'() {
         setTimeout(() => {
           this.mapY();
-        }, 50);
+        }, 100);
       },
       mapper() {
         //bbn.fn.log('mapper', this.mapper);
       },
       showHover() {
         //bbn.fn.log('showHover', this.showHover);
+      },
+      nextPosition() {
+        //bbn.fn.log('next position', this.nextPosition);
       }
     },
     mounted() {
