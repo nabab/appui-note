@@ -29,9 +29,14 @@
         showWidgets: false,
         currentEdited: -1,
         editedSource: null,
+        edited: {},
         mapper: [],
         currentElement: {},
         nextPosition: 0,
+        //realRowSelected: -1,
+        //realSourceArray: [],
+        nextContainerPosition: 0,
+        insideContainer: false,
       };
     },
     computed: {
@@ -155,8 +160,28 @@
         this.showWidgets = false;
         this.showSlider = true;
         this.currentEdited = data.currentEdited;
-        this.editedSource = this.source.items[data.currentEdited];
-        //bbn.fn.log('editedSource', this.editedSource);
+      },
+      updateSelected(v) {
+        bbn.fn.log('update selected', v);
+        /*if (this.source.items[this.currentEdited]) {
+          let r = this.source.items[this.currentEdited];
+          if (r.type === 'container') {
+            this.realSourceArray = r.items;
+            let ct = this.getRef('block' + this.currentEdited);
+            this.realRowSelected = ct ? ct.currentItemSelected : -1;
+            this.editedSource = r.items[this.realRowSelected] || null;
+          }
+          else {
+            this.realSourceArray = this.source;
+            this.realRowSelected = this.currentEdited;
+            this.editedSource = this.source[this.currentEdited] || null;
+          }
+        }
+        else {
+          this.realSourceArray = this.source.items;
+          this.realRowSelected = -1;
+          this.editedSource = null;
+        }*/
       },
       deleteCurrentSelected() {
         this.confirm(bbn._("Are you sure you want to delete this block and its content?"), () => {
@@ -169,7 +194,28 @@
       onDrop(ev) {
         const block = ev.detail.from.data;
         let guide = document.getElementById('guide');
-        guide.style.display = "none";
+        if (guide) {
+          guide.style.display = "none";
+        }
+        if (this.insideContainer) {
+          bbn.fn.log('drop inside');
+          bbn.fn.log('position', this.nextPosition);
+          let arr = this.source.items.splice(this.nextPosition, 1);
+          if (this.nextContainerPosition == 0) {
+            arr.unshift({type: block.type});
+          }
+          else if (this.nextContainerPosition == -1) {
+            arr.push({type: block.type});
+          }
+          bbn.fn.log('array', arr);
+          this.source.items.splice(this.nextPosition, 0, {
+            type: 'container',
+            source: {
+              items: arr
+            }
+          });
+          return;
+        }
         if (block.inside) {
           bbn.fn.move(this.source.items, block.index, this.nextPosition);
           return;
@@ -205,12 +251,6 @@
           this.currentEdited = idx;
         }
       },
-      createHTMLElement(html) {
-        const placeholder = document.createElement("div");
-        placeholder.innerHTML = html;
-        const node = placeholder.firstElementChild;
-        return node;
-      },
       dragOver(e) {
         this.currentElement = e.detail.helper.getBoundingClientRect();
         let elementor = this.getRef('editor');
@@ -223,32 +263,46 @@
 
         this.mapper.map((v, idx, array) => {
           sum += array[idx].height + 10;
+
           //check if inside
           if ((this.currentElement.y > v.y) && (this.currentElement.y < (v.y + v.height))) {
-            bbn.fn.log("Inside element", idx);
-            bbn.fn.log("value", v);
+            this.insideContainer = true;
+            this.nextPosition = idx;
+            if (this.currentElement.x < v.width/2) {
+              this.nextContainerPosition = 0;
+            }
+            else if (this.currentElement.x > v.width/2) {
+              this.nextContainerPosition = -1;
+            }
             divider.style.display = "block";
             divider.style.height = String(v.height) + 'px';
-            divider.style.top = String(v.y) + 'px';
+            divider.style.left = String(v.left) + 'px';
+            divider.style.top = array[idx - 1] ? array[idx-1].y + 'px' : '0px';
           }
+
           //check if at top
           else if (this.currentElement.y < array[0].y) {
+            this.insideContainer = false;
             //bbn.fn.log('at top');
             this.nextPosition = 0;
             guide.style.display = "flex";
             guide.style.top = 0;
           }
+
           //check if at last
           else if (this.currentElement.y > (array.at(-1).y + array.at(-1).height)) {
+            this.insideContainer = false;
             //bbn.fn.log('last position');
             this.nextPosition = -1;
             guide.style.display = "flex";
             guide.style.top = String(sum) + 'px';
           }
+
           //check if between element
           else if ((this.currentElement.y < v.y) && (this.currentElement.y > (array[idx - 1].y + array[idx - 1].height))) {
+            this.insideContainer = false;
             //bbn.fn.log('between', idx, 'and', idx-1);
-            bbn.fn.log('sum', sum);
+            //bbn.fn.log('sum', sum);
             this.nextPosition = idx;
             guide.style.display = "flex";
             guide.style.top = String(sum - array[idx].height) + 'px';
@@ -264,6 +318,8 @@
           tmp_arr.push({
             y: detail.y,
             height: detail.height,
+            left: detail.left,
+            width: detail.width,
             index: idx,
             html: v,
             parent: array[idx].parentNode
@@ -278,15 +334,41 @@
           this.mapY();
         }, 100);
       },
-      mapper() {
-        //bbn.fn.log('mapper', this.mapper);
+      'editedSource.type'(v, ov) {
+        bbn.fn.log(v, ov, '???');
+        let tmp = this.editedSource;
+        if (v && (ov !== undefined) && this.editedSource && this.realSourceArray.length) {
+          let cfg = bbn.fn.getField(types, 'default', {value:v});
+          if (cfg) {
+            for (let n in cfg) {
+              if ((n !== 'type') && (tmp[n] === undefined)) {
+                this.$set(tmp, n, cfg[n]);
+              }
+              else {
+                tmp[n] = cfg[n];
+              }
+            }
+            for (let n in tmp) {
+              if (cfg[n] === undefined && (n !== 'type')) {
+                delete tmp[n];
+              }
+            }
+          }
+        }
       },
-      showHover() {
-        //bbn.fn.log('showHover', this.showHover);
+      currentEdited(v) {
+        //Check if the currentEdited if a block or a container
+        this.editedSource = null;
+        if (this.source.items[v]) {
+          this.currentType = this.source.items[v].type || 'text';
+          if (this.currentType != 'container') {
+            this.editedSource = this.source.items[this.currentEdited];
+          }
+        }
+        /*this.$nextTick(() => {
+          this.updateSelected();
+        });*/
       },
-      nextPosition() {
-        //bbn.fn.log('next position', this.nextPosition);
-      }
     },
     mounted() {
       this.data = this.closest('bbn-router').closest('bbn-container').source;

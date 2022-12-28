@@ -229,69 +229,12 @@
           this.currentEdited = idx
         }
       },
-      updateSelected() {
-        if (this.source[this.currentEdited]) {
-          let r = this.source[this.currentEdited];
-          if (r.type === 'container') {
-            this.realSourceArray = r.items;
-            let ct = this.getRef('block' + this.currentEdited);
-            this.realRowSelected = ct ? ct.currentItemSelected : -1;
-            this.editedSource = r.items[this.realRowSelected] || null;
-          }
-          else {
-            this.realSourceArray = this.source;
-            this.realRowSelected = this.currentEdited;
-            this.editedSource = this.source[this.currentEdited] || null;
-          }
-        }
-        else {
-          this.realSourceArray = this.source;
-          this.realRowSelected = -1;
-          this.editedSource = null;
-        }
-      },
       onDrag() {
         this.$emit('dragoverdroppable', ...arguments);
-      }
-    },
-    watch: {
-      'editedSource.type'(v, ov) {
-        bbn.fn.log(v, ov, '???');
-        let tmp = this.editedSource;
-        if (v && (ov !== undefined) && this.editedSource && this.realSourceArray.length) {
-          let cfg = bbn.fn.getField(types, 'default', {value:v});
-          if (cfg) {
-            for (let n in cfg) {
-              if ((n !== 'type') && (tmp[n] === undefined)) {
-                this.$set(tmp, n, cfg[n]);
-              }
-              else {
-                tmp[n] = cfg[n];
-              }
-            }
-            for (let n in tmp) {
-              if (cfg[n] === undefined && (n !== 'type')) {
-                delete tmp[n];
-              }
-            }
-          }
-        }
       },
-      currentEdited(v) {
-        this.editedSource = null;
-        if (this.source[v]) {
-          this.currentType = this.source[v].type || 'text';
-        }
-        this.$nextTick(() => {
-          this.updateSelected();
-        });
+      updateSelected(v) {
+        this.$emit('update', v);
       },
-      showHover() {
-        bbn.fn.log("show hover", this.showHover);
-      },
-      position() {
-        //bbn.fn.log('position', this.position);
-      }
     },
   };
 })();

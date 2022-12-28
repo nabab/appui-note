@@ -19,7 +19,7 @@
                  '<?= $componentName ?>-selected': selectable && selected
                  },
                ]">
-    <div v-if="source.items.length"
+    <div v-if="source.items?.length"
          class="bbn-grid"
          :style="gridStyle">
       <div v-for="(item, i) in source.items"
