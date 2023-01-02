@@ -93,6 +93,9 @@
       },
       removeBlock(idx) {
         this.source.items.splice(idx, 1);
+      },
+      changeEditedContainer(i) {
+        this.$emit('click', i);
       }
     },
     watch: {
@@ -101,7 +104,10 @@
       },
       currentItemSelected(v) {
         if (v > -1) {
-          this.$emit('select', this.currentItemSelected);
+          /*this.$emit('select', {
+            currentItemIndex: this.currentItemSelected,
+            cfg: this.source
+          });*/
         }
       }
     }

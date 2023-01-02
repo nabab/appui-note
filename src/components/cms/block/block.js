@@ -36,7 +36,7 @@
         else {
           this.$set(this.source, prop, val);
         }
-      }
+      },
     },
     mounted() {
       this.ready = true;
@@ -125,6 +125,10 @@
       }
     },
     methods: {
+      sendBlock() {
+        bbn.fn.log('send Block');
+        this.$emit('click', this.source);
+      },
       selectImg(st){
         bbn.fn.link(st);
       },
@@ -157,7 +161,7 @@
       },
       /**
        * set edit to false
-       * @param {event} e 
+       * @param {event} e
        */
       checkMouseDown(e){
         if ( !e.target.closest(".bbn-cms-block-edit") ){
@@ -192,7 +196,7 @@
         bbn.fn.iterate(this.initialSource, (v, i)=>{
           this.source[i] = v;
           if (this.editable) {
-	          this.edit = false;
+            this.edit = false;
           }
         })
       },

@@ -198,15 +198,16 @@
           type: 'text',
           content: ''
         },
-        types: types
+        types: types,
+        indexInContainer: -1
       };
     },
     methods: {
-      changeEdited(idx) {
-        this.currentEdited = idx;
-        this.$emit('changes', {
-          currentEdited: this.currentEdited
-        });
+      changeEdited(source) {
+        this.$emit('changes', source);
+      },
+      changeEditedContainer(item) {
+        this.$emit('changes', item);
       },
       onClose() {
         let form = this.getRef('form');
@@ -233,8 +234,15 @@
         this.$emit('dragoverdroppable', ...arguments);
       },
       updateSelected(v) {
-        this.$emit('update', v);
+        this.indexInContainer = v.currentItemIndex;
+        /*this.$emit('update', {
+          index: v.currentItemIndex,
+          element: v.cfg
+        });*/
       },
+      selectedBlock(v) {
+        //bbn.fn.log('block', v);
+      }
     },
   };
 })();

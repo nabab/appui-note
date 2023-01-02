@@ -27,7 +27,7 @@
         showFloater: false,
         showSlider: false,
         showWidgets: false,
-        currentEdited: -1,
+        currentEdited: null,
         editedSource: null,
         edited: {},
         mapper: [],
@@ -156,10 +156,10 @@
         this.$refs.form.submit();
         this.showFloater = false;
       },
-      handleChanges(data) {
+      handleChanges(source) {
         this.showWidgets = false;
         this.showSlider = true;
-        this.currentEdited = data.currentEdited;
+        this.currentEdited = source;
       },
       updateSelected(v) {
         bbn.fn.log('update selected', v);
@@ -200,6 +200,10 @@
         if (this.insideContainer) {
           bbn.fn.log('drop inside');
           bbn.fn.log('position', this.nextPosition);
+          if (this.source.items[this.nextPosition].length > 2) {
+            //Not transforming into container
+            return;
+          }
           let arr = this.source.items.splice(this.nextPosition, 1);
           if (this.nextContainerPosition == 0) {
             arr.unshift({type: block.type});
@@ -268,6 +272,7 @@
           if ((this.currentElement.y > v.y) && (this.currentElement.y < (v.y + v.height))) {
             this.insideContainer = true;
             this.nextPosition = idx;
+            let mapContainer = this.mapContainer(idx);
             if (this.currentElement.x < v.width/2) {
               this.nextContainerPosition = 0;
             }
@@ -308,6 +313,9 @@
             guide.style.top = String(sum - array[idx].height) + 'px';
           }
         });
+      },
+      mapContainer(idx) {
+        
       },
       mapY() {
         let editor = this.getRef('editor').$el.firstChild.children;

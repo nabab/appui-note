@@ -4,7 +4,7 @@
         {'<?= $componentName ?>-over': overable && over}
       ]"
       tabindex="0"
-     	@click="$emit('click', $event)"
+     	@click="sendBlock"
       @mouseenter="over = true"
       @mouseleave="over = false">
   <component v-if="ready"

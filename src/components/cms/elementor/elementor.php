@@ -13,7 +13,7 @@
                                       :overable="true"
                                       :selected="currentEdited === i"
                                       @select="updateSelected"
-                                      @click.stop="changeEdited(i)"
+                                      @click="changeEditedContainer"
                                       v-draggable.data.mode="{data: {type: cfg.type, inside: true, index: i}, mode: 'self'}"/>
       <appui-note-cms-block v-else
                             :source="cfg"
@@ -21,7 +21,7 @@
                             :selectable="true"
                             :overable="true"
                             :selected="currentEdited === i"
-                            @click.stop="changeEdited(i)"
+                            @click="changeEdited"
                             v-draggable.data.mode="{data: {type: cfg.type, inside: true, index: i}, mode: 'self'}"/>
 
     </div>

@@ -8,7 +8,6 @@
         }
       ]"
       tabindex="0"
-     	@click="$emit('click', $event)"
       @mouseenter="over = true"
       @mouseleave="over = false">
   <div :class="[
@@ -27,7 +26,7 @@
            @mouseleave="overItem = -1"
            :key="i">
         <div class="bbn-100">
-          <appui-note-cms-block @click="currentItemSelected = i"
+          <appui-note-cms-block @click="changeEditedContainer(item)"
                                 :path="path"
                                 :editable="editable"
                                 :selectable="selectable"

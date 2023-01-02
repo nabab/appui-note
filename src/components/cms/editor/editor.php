@@ -45,11 +45,11 @@
     <div :class="{slider: true, opened: showSlider}">
       <bbn-scroll axis="y">
         <div class="bbn-w-100 bbn-middle bbn-flex"
-             v-if="editedSource !== null"
+             v-if="currentEdited !== null"
              style="flex-direction: column;">
           <div class="bbn-w-100 bbn-padded">
             <appui-note-cms-block class="bbn-contain"
-                                  :source="editedSource"
+                                  :source="currentEdited"
                                   mode="edit"/>
           </div>
           <div class="bbn-flex" style="gap: 10px; justify-content: center: align-items: center;">
