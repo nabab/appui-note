@@ -33,8 +33,6 @@
         mapper: [],
         currentElement: {},
         nextPosition: 0,
-        //realRowSelected: -1,
-        //realSourceArray: [],
         nextContainerPosition: 0,
         insideContainer: false,
       };
@@ -193,17 +191,23 @@
       },
       onDrop(ev) {
         const block = ev.detail.from.data;
-        let guide = document.getElementById('guide');
-        if (guide) {
-          guide.style.display = "none";
-        }
+        let elementor = this.getRef('editor');
+        let guide = elementor.getRef('guide');
+        let divider = elementor.getRef('divider');
+
         if (this.insideContainer) {
-          bbn.fn.log('drop inside');
-          bbn.fn.log('position', this.nextPosition);
-          if (this.source.items[this.nextPosition].length > 2) {
-            //Not transforming into container
+          bbn.fn.log('type', this.source.items[this.nextPosition]);
+          if (this.source.items[this.nextPosition].type == 'container') {
+            bbn.fn.log('drop inside real container');
+            if (this.nextContainerPosition == 0) {
+              this.source.items[this.nextPosition].source.items.unshift({type: block.type});
+            } else {
+              this.source.items[this.nextPosition].source.items.splice(this.nextContainerPosition, 0, {type: block.type});
+            }
+            this.cancelHelp();
             return;
           }
+
           let arr = this.source.items.splice(this.nextPosition, 1);
           if (this.nextContainerPosition == 0) {
             arr.unshift({type: block.type});
@@ -218,10 +222,12 @@
               items: arr
             }
           });
+          this.cancelHelp();
           return;
         }
         if (block.inside) {
           bbn.fn.move(this.source.items, block.index, this.nextPosition);
+          this.cancelHelp();
           return;
         }
         if (this.nextPosition == 0) {
@@ -233,6 +239,14 @@
         else {
           this.source.items.splice(this.nextPosition, 0, {type: block.type});
         }
+        this.cancelHelp();
+      },
+      cancelHelp() {
+        let elementor = this.getRef('editor');
+        let guide = elementor.getRef('guide');
+        let divider = elementor.getRef('divider');
+        guide.style.display = "none";
+        divider.style.display = "none";
       },
       move(dir) {
         let idx;
@@ -266,29 +280,63 @@
         divider.style.display = "none";
 
         this.mapper.map((v, idx, array) => {
-          sum += array[idx].height + 10;
+          sum += array[idx].height + 13;
 
           //check if inside
           if ((this.currentElement.y > v.y) && (this.currentElement.y < (v.y + v.height))) {
             this.insideContainer = true;
             this.nextPosition = idx;
-            let mapContainer = this.mapContainer(idx);
-            if (this.currentElement.x < v.width/2) {
-              this.nextContainerPosition = 0;
+            let rect = v.html.getBoundingClientRect();
+            let mapContainer = this.mapContainer(v, idx);
+            bbn.fn.log('map container', mapContainer);
+            if (mapContainer && mapContainer.length >= 2) {
+              mapContainer.map((v, idx, array) => {
+                bbn.fn.log('element number', idx);
+                if (this.currentElement.x < v.rect.width/2) {
+                  if (idx > 0) {
+                    bbn.fn.log('to the left');
+                    this.nextContainerPosition = idx;
+                  } else {
+                    bbn.fn.log('at the beginning of the list');
+                    this.nextContainerPosition = 0;
+                  }
+                }
+                else if (this.currentElement.x > v.rect.width/2) {
+                  bbn.fn.log('to the right');
+                }
+                /*if (this.currentElement.x < v.rect.width/2) {
+                  if (idx > 0) {
+                    bbn.fn.log('to the left of', idx);
+                  } else {
+                    bbn.fn.log('at the beginning of the list');
+                  }
+                }
+                else if (this.currentElement.x > v.rect.width/2) {
+                  bbn.fn.log('to the right of', idx);
+                  if (array[idx + 1]) {
+                    bbn.fn.log('something after');
+                  } else {
+                    bbn.fn.log('nothing after');
+                  }
+                }*/
+              });
             }
-            else if (this.currentElement.x > v.width/2) {
+            if (this.currentElement.x < rect.width/2) {
+              this.nextContainerPosition = 0;
+              divider.style.left = String(v.left) + 'px';
+            }
+            else if (this.currentElement.x > rect.width/2) {
               this.nextContainerPosition = -1;
+              divider.style.left = String(rect.width/2) + 'px';
             }
             divider.style.display = "block";
             divider.style.height = String(v.height) + 'px';
-            divider.style.left = String(v.left) + 'px';
-            divider.style.top = array[idx - 1] ? array[idx-1].y + 'px' : '0px';
+            divider.style.top = String(sum - array[idx].height) + 'px';
           }
 
           //check if at top
           else if (this.currentElement.y < array[0].y) {
             this.insideContainer = false;
-            //bbn.fn.log('at top');
             this.nextPosition = 0;
             guide.style.display = "flex";
             guide.style.top = 0;
@@ -297,7 +345,6 @@
           //check if at last
           else if (this.currentElement.y > (array.at(-1).y + array.at(-1).height)) {
             this.insideContainer = false;
-            //bbn.fn.log('last position');
             this.nextPosition = -1;
             guide.style.display = "flex";
             guide.style.top = String(sum) + 'px';
@@ -306,16 +353,25 @@
           //check if between element
           else if ((this.currentElement.y < v.y) && (this.currentElement.y > (array[idx - 1].y + array[idx - 1].height))) {
             this.insideContainer = false;
-            //bbn.fn.log('between', idx, 'and', idx-1);
-            //bbn.fn.log('sum', sum);
             this.nextPosition = idx;
             guide.style.display = "flex";
             guide.style.top = String(sum - array[idx].height) + 'px';
           }
         });
       },
-      mapContainer(idx) {
-        
+      mapContainer(src, idx) {
+        if (this.source.items[idx].type == 'container') {
+          let elems = src.html.querySelector('.bbn-grid').children;
+          let arr = [...elems];
+          let tmp_arr = [];
+          arr.map((v) => {
+            let detail = v.getBoundingClientRect();
+            tmp_arr.push({
+              rect: detail
+            });
+          });
+          return tmp_arr;
+        }
       },
       mapY() {
         let editor = this.getRef('editor').$el.firstChild.children;
