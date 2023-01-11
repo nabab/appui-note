@@ -11,10 +11,10 @@
                                       :ref="'block' + i"
                                       :selectable="true"
                                       :overable="true"
+                                      :index="i"
                                       :selected="currentEdited === i"
-                                      @select="updateSelected"
                                       @click="changeEditedContainer"
-                                      v-draggable.data.mode="{data: {type: cfg.type, inside: true, index: i}, mode: 'self'}"/>
+                                      />
       <appui-note-cms-block v-else
                             :source="cfg"
                             :ref="'block' + i"

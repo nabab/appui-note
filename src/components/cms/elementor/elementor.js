@@ -187,28 +187,27 @@
     },
     data(){
       return {
-        currentType: '',
-        isMoving: false,
         currentEdited: -1,
-        nextEdited: -1,
-        realRowSelected: -1,
-        realSourceArray: [],
-        editedSource: null,
-        data: {
-          type: 'text',
-          content: ''
-        },
         types: types,
         indexInContainer: -1
       };
     },
     methods: {
+      /*
+      Emit the current source object (from a block) to the editor component.
+      */
       changeEdited(source) {
         this.$emit('changes', source);
       },
+      /*
+      Emit the current source object (from a container) to the editor component.
+      */
       changeEditedContainer(item) {
         this.$emit('changes', item);
       },
+      /*
+      Ask the user to save changes and submit the form
+      */
       onClose() {
         let form = this.getRef('form');
         if (form.dirty) {
@@ -222,27 +221,20 @@
           }
           else {
             this.confirm(bbn._("Do you want to abandon your changes?"), () => {
-              this.currentEdited = idx
+              this.currentEdited = idx;
             });
           }
         }
         else {
-          this.currentEdited = idx
+          this.currentEdited = idx;
         }
       },
+      /*
+      Emit event when a block is dragged
+      */
       onDrag() {
         this.$emit('dragoverdroppable', ...arguments);
       },
-      updateSelected(v) {
-        this.indexInContainer = v.currentItemIndex;
-        /*this.$emit('update', {
-          index: v.currentItemIndex,
-          element: v.cfg
-        });*/
-      },
-      selectedBlock(v) {
-        //bbn.fn.log('block', v);
-      }
     },
   };
 })();

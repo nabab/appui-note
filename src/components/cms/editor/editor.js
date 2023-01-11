@@ -18,7 +18,7 @@
         type: Array,
       }
     },
-    data(){
+    data() {
       return {
         data: null,
         oData: JSON.stringify(this.source),
@@ -29,9 +29,8 @@
         showWidgets: false,
         currentEdited: null,
         editedSource: null,
-        edited: {},
-        mapper: [],
-        currentElement: {},
+        map: [],
+        currentPosition: {},
         nextPosition: 0,
         nextContainerPosition: 0,
         insideContainer: false,
@@ -49,75 +48,13 @@
       },
       isChanged() {
         return JSON.stringify(this.source) !== this.oData;
-      },
-      contextSource(){
-        let ed = this.getRef('editor');
-        let newBlock = {
-          type: 'text',
-          text: ''
-        };
-        let res = [{
-          text: bbn._("Add a block at the start"),
-          icon: 'nf nf-mdi-file_document_box',
-          action: () => {
-            this.source.items.splice(0, 0, newBlock);
-            this.$nextTick(() => {
-              this.getRef('editor').currentEdited = 0;
-            });
-          }
-        }, {
-          text: bbn._("Add a container at the start"),
-          icon: 'nf nf-mdi-table_row',
-          action: () => {
-            this.source.items.splice(0, 0, {
-              type: 'container',
-              items: []
-            });
-            this.$nextTick(() => {
-              this.getRef('editor').currentEdited = 0;
-            });
-          }
-        }];
-        if (this.source.items.length > 0) {
-          res.push({
-            text: bbn._("Add a block at the end"),
-            icon: 'nf nf-fa-plus',
-            action: () => {
-              let idx = this.source.items.length;
-              this.source.items.push(newBlock);
-              this.$nextTick(() => {
-                this.getRef('editor').currentEdited = idx;
-              });
-            }
-          });
-        }
-        if (ed) {
-          if (ed.currentEdited > 1) {
-            res.push({
-              text: bbn._("Add a block before the selected block"),
-              icon: 'nf nf-fa-plus',
-              action: () => {
-                this.source.items.splice(ed.currentEdited, 0, newBlock);
-              }
-            });
-          }
-          if (ed.currentEdited < (this.source.items.length -2)) {
-            res.push({
-              text: bbn._("Add a block after the selected block"),
-              icon: 'nf nf-fa-plus',
-              action: () => {
-                this.source.items.splice(ed.currentEdited + 1, 0, newBlock);
-                this.$nextTick(() => {
-                  this.getRef('editor').currentEdited++;
-                });
-              }
-            });
-          }
-        }
-        return res;
       }
     },
     methods: {
+      /**
+       * Removes the 'product' property from the object to be submitted
+       * @todo ask Loredana
+       */
       submit() {
         //remove the object product if the block type is product
         bbn.fn.each(this.source.items, (v, i) => {
@@ -133,10 +70,16 @@
           }
         });
       },
+      /**
+       * Convert the source in a JSON string
+       */
       onSave() {
         this.oData = JSON.stringify(this.source);
         appui.success(bbn._("Saved"));
       },
+      /**
+       * Clear the cache of the page via the page configuration.
+       */
       clearCache() {
         this.showFloater = false;
         this.confirm(bbn._('Are you sure?'), () => {
@@ -150,37 +93,26 @@
           });
         });
       },
+      /**
+       * Save the settings of the page and close the slider.
+       */
       saveSettings() {
         this.$refs.form.submit();
         this.showFloater = false;
       },
+      /**
+       * When changes are made to a block or a block inside a container, the currentEdited data receive
+       * the source of the block.
+       * @param {Object} source the source object of the current selected block
+       */
       handleChanges(source) {
         this.showWidgets = false;
         this.showSlider = true;
         this.currentEdited = source;
       },
-      updateSelected(v) {
-        bbn.fn.log('update selected', v);
-        /*if (this.source.items[this.currentEdited]) {
-          let r = this.source.items[this.currentEdited];
-          if (r.type === 'container') {
-            this.realSourceArray = r.items;
-            let ct = this.getRef('block' + this.currentEdited);
-            this.realRowSelected = ct ? ct.currentItemSelected : -1;
-            this.editedSource = r.items[this.realRowSelected] || null;
-          }
-          else {
-            this.realSourceArray = this.source;
-            this.realRowSelected = this.currentEdited;
-            this.editedSource = this.source[this.currentEdited] || null;
-          }
-        }
-        else {
-          this.realSourceArray = this.source.items;
-          this.realRowSelected = -1;
-          this.editedSource = null;
-        }*/
-      },
+      /**
+       * Delete the current selected block
+       */
       deleteCurrentSelected() {
         this.confirm(bbn._("Are you sure you want to delete this block and its content?"), () => {
           let idx = this.currentEdited;
@@ -189,16 +121,36 @@
           this.mapY();
         });
       },
+      /**
+       * Function triggered after the release of a block into the droppable zone.
+       * @param {Event} ev the event of the dropped block
+       * @return void
+       */
       onDrop(ev) {
         const block = ev.detail.from.data;
         let elementor = this.getRef('editor');
         let guide = elementor.getRef('guide');
         let divider = elementor.getRef('divider');
 
+        bbn.fn.log('event', ev.detail);
+        // Check if the moved block comes from inside the elementor component
+        if (block.inside) {
+          bbn.fn.log('move block with inside property');
+          bbn.fn.move(this.source.items, block.index, this.nextPosition);
+          if (block.globalIndex) {
+            bbn.fn.log('move block inside from', block.globalIndex);
+            this.source.items[block.globalIndex].source.items.splice(block.index, 1);
+            if (this.source.items[block.globalIndex].source.items.length < 2) {
+              //transform into normal block
+            }
+          }
+          this.cancelHelp();
+          return;
+        }
+        // Check if a block is dropped inside another block and create a container
         if (this.insideContainer) {
-          bbn.fn.log('type', this.source.items[this.nextPosition]);
+          bbn.fn.log('drop inside container');
           if (this.source.items[this.nextPosition].type == 'container') {
-            bbn.fn.log('drop inside real container');
             if (this.nextContainerPosition == 0) {
               this.source.items[this.nextPosition].source.items.unshift({type: block.type});
             } else {
@@ -215,7 +167,7 @@
           else if (this.nextContainerPosition == -1) {
             arr.push({type: block.type});
           }
-          bbn.fn.log('array', arr);
+          //bbn.fn.log('array', arr);
           this.source.items.splice(this.nextPosition, 0, {
             type: 'container',
             source: {
@@ -225,11 +177,7 @@
           this.cancelHelp();
           return;
         }
-        if (block.inside) {
-          bbn.fn.move(this.source.items, block.index, this.nextPosition);
-          this.cancelHelp();
-          return;
-        }
+        // Place the block at the correct index position
         if (this.nextPosition == 0) {
           this.source.items.unshift({type: block.type});
         }
@@ -241,6 +189,9 @@
         }
         this.cancelHelp();
       },
+      /**
+       * Remove the guide and the divider element by applying the style 'display: none'.
+       */
       cancelHelp() {
         let elementor = this.getRef('editor');
         let guide = elementor.getRef('guide');
@@ -248,6 +199,10 @@
         guide.style.display = "none";
         divider.style.display = "none";
       },
+      /**
+       * Move the selected block with the arrows in the configuration panel.
+       * @param {String} dir the given direction
+       */
       move(dir) {
         let idx;
         switch (dir) {
@@ -269,8 +224,12 @@
           this.currentEdited = idx;
         }
       },
+      /**
+       * Function triggered when a drag & drop block is hovering the droppable zone.
+       * @param {Event} e the event triggered
+       */
       dragOver(e) {
-        this.currentElement = e.detail.helper.getBoundingClientRect();
+        this.currentPosition = e.detail.helper.getBoundingClientRect();
         let elementor = this.getRef('editor');
         let editor = elementor.$el.firstChild;
         let guide = elementor.getRef('guide');
@@ -279,32 +238,49 @@
         guide.style.display = "none";
         divider.style.display = "none";
 
-        this.mapper.map((v, idx, array) => {
-          sum += array[idx].height + 13;
-
-          //check if inside
-          if ((this.currentElement.y > v.y) && (this.currentElement.y < (v.y + v.height))) {
-            this.insideContainer = true;
-            this.nextPosition = idx;
-            let rect = v.html.getBoundingClientRect();
-            let mapContainer = this.mapContainer(v, idx);
-            bbn.fn.log('map container', mapContainer);
-            if (mapContainer && mapContainer.length >= 2) {
-              mapContainer.map((v, idx, array) => {
-                bbn.fn.log('element number', idx);
-                if (this.currentElement.x < v.rect.width/2) {
-                  if (idx > 0) {
-                    bbn.fn.log('to the left');
-                    this.nextContainerPosition = idx;
-                  } else {
-                    bbn.fn.log('at the beginning of the list');
-                    this.nextContainerPosition = 0;
+        //check if the current position is at top
+        if (this.currentPosition.y < this.map[0].y) {
+          bbn.fn.log('top of the map');
+          this.insideContainer = false;
+          this.nextPosition = 0;
+          guide.style.display = "flex";
+          guide.style.top = 0;
+        }
+        //check if the current position is at bottom
+        else if (this.currentPosition.y > (this.map.at(-1).y + this.map.at(-1).height)) {
+          bbn.fn.log('bottom of the map');
+          this.insideContainer = false;
+          this.nextPosition = -1;
+          guide.style.display = "flex";
+          guide.style.top = String(sum) + 'px';
+        }
+        //check if the current position is inside an element
+        else {
+          bbn.fn.each(this.map, v => {
+            sum += v.height + 13;
+            //check if current position is inside a block
+            if ((this.currentPosition.y > v.y) && (this.currentPosition.y < (v.y + v.height))) {
+              bbn.fn.log('inside a block');
+              this.insideContainer = true;
+              this.nextPosition = this.map.indexOf(v);
+              let rect = v.html.getBoundingClientRect();
+              let mapContainer = this.mapContainer(v, this.map.indexOf(v));
+              //Check if the block is a container and do a mapper inside of it
+              if (mapContainer && mapContainer.length >= 2) {
+                bbn.fn.log('move inside container');
+                mapContainer.map((v, idx, array) => {
+                  if (this.currentPosition.x < v.rect.width/2) {
+                    if (idx > 0) {
+                      this.nextContainerPosition = idx;
+                    } else {
+                      this.nextContainerPosition = 0;
+                    }
+                    return false;
                   }
-                }
-                else if (this.currentElement.x > v.rect.width/2) {
-                  bbn.fn.log('to the right');
-                }
-                /*if (this.currentElement.x < v.rect.width/2) {
+                  else if (this.currentPosition.x > v.rect.width/2) {
+                    bbn.fn.log('to the right');
+                  }
+                  /*if (this.currentElement.x < v.rect.width/2) {
                   if (idx > 0) {
                     bbn.fn.log('to the left of', idx);
                   } else {
@@ -319,46 +295,29 @@
                     bbn.fn.log('nothing after');
                   }
                 }*/
-              });
+                });
+              }
+              if (this.currentPosition.x < rect.width/2) {
+                this.nextContainerPosition = 0;
+                divider.style.left = String(v.left) + 'px';
+              }
+              else if (this.currentPosition.x > rect.width/2) {
+                this.nextContainerPosition = -1;
+                divider.style.left = String(rect.width/2) + 'px';
+              }
+              divider.style.display = "block";
+              divider.style.height = String(v.height) + 'px';
+              divider.style.top = String(sum - v.height) + 'px';
             }
-            if (this.currentElement.x < rect.width/2) {
-              this.nextContainerPosition = 0;
-              divider.style.left = String(v.left) + 'px';
-            }
-            else if (this.currentElement.x > rect.width/2) {
-              this.nextContainerPosition = -1;
-              divider.style.left = String(rect.width/2) + 'px';
-            }
-            divider.style.display = "block";
-            divider.style.height = String(v.height) + 'px';
-            divider.style.top = String(sum - array[idx].height) + 'px';
-          }
-
-          //check if at top
-          else if (this.currentElement.y < array[0].y) {
-            this.insideContainer = false;
-            this.nextPosition = 0;
-            guide.style.display = "flex";
-            guide.style.top = 0;
-          }
-
-          //check if at last
-          else if (this.currentElement.y > (array.at(-1).y + array.at(-1).height)) {
-            this.insideContainer = false;
-            this.nextPosition = -1;
-            guide.style.display = "flex";
-            guide.style.top = String(sum) + 'px';
-          }
-
-          //check if between element
-          else if ((this.currentElement.y < v.y) && (this.currentElement.y > (array[idx - 1].y + array[idx - 1].height))) {
-            this.insideContainer = false;
-            this.nextPosition = idx;
-            guide.style.display = "flex";
-            guide.style.top = String(sum - array[idx].height) + 'px';
-          }
-        });
+            return false;
+          });
+        }
       },
+      /**
+       * Function to map inside a container block.
+       * @param {Object} src the source of the container's items
+       * @param {number} idx the index of the container in the global source
+       */
       mapContainer(src, idx) {
         if (this.source.items[idx].type == 'container') {
           let elems = src.html.querySelector('.bbn-grid').children;
@@ -373,6 +332,9 @@
           return tmp_arr;
         }
       },
+      /**
+       * Function to map the elements in elementor editor in an array.
+       */
       mapY() {
         let editor = this.getRef('editor').$el.firstChild.children;
         let arr = [...editor];
@@ -389,7 +351,7 @@
             parent: array[idx].parentNode
           });
         });
-        this.mapper = tmp_arr.slice();
+        this.map = tmp_arr.slice();
       }
     },
     watch: {
@@ -399,7 +361,7 @@
         }, 100);
       },
       'editedSource.type'(v, ov) {
-        bbn.fn.log(v, ov, '???');
+        //bbn.fn.log(v, ov, '???');
         let tmp = this.editedSource;
         if (v && (ov !== undefined) && this.editedSource && this.realSourceArray.length) {
           let cfg = bbn.fn.getField(types, 'default', {value:v});
@@ -435,6 +397,7 @@
       },
     },
     mounted() {
+      //Set a default title block when creating a new page.
       this.data = this.closest('bbn-router').closest('bbn-container').source;
       this.$set(this.source.items, 0, {type: "title", content: "Bienvenue sur l'editeur de page", tag: 'h1', align: 'center', hr: null,
                                        style: {
