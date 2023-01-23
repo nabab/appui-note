@@ -189,10 +189,20 @@
       return {
         currentEdited: -1,
         types: types,
-        indexInContainer: -1
+        indexInContainer: -1,
+        dragData: bbn.fn.map(this.source, (cfg, i) => {
+          return {data: bbn.fn.extend({}, cfg, {inside: true, index: i}), mode: 'self'};
+        })
       };
     },
     methods: {
+      dragStart() {
+        let currentElement = arguments[0].target;
+        this.$emit('dragstart', {
+          dataIndex: currentElement.getAttribute('data-index'),
+          dataContainerIndex: currentElement.getAttribute('data-container-index')
+        });
+      },
       /*
       Emit the current source object (from a block) to the editor component.
       */

@@ -34,7 +34,9 @@
                                 :overable="overable"
                                 :mode="mode"
                                 :source="item"
-                                v-draggable.data.mode="{data: {type: item.type, inside: true, index: i, globalIndex: index}, mode: 'self'}"/>
+                                :data-index="index"
+                                :data-container-index="i"
+                                v-draggable.data.mode="{data: item, mode: 'self'}"/>
           <div v-if="overable && (mode === 'read')"
                :class="['bbn-bottom-right', 'bbn-xspadding', {'bbn-hidden': overItem !== i}]">
             <bbn-button icon="nf nf-fa-minus"

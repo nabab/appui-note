@@ -36,7 +36,7 @@
                                   @drop.prevent="onDrop"
                                   @dragoverdroppable="dragOver"
                                   :position="nextPosition"
-                                  >
+                                  @dragstart="dragStart">
         </appui-note-cms-elementor>
       </div>
     </div>

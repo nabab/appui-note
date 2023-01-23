@@ -34,6 +34,8 @@
         nextPosition: 0,
         nextContainerPosition: 0,
         insideContainer: false,
+        dataElementor: {},
+        containerPosition: {}
       };
     },
     computed: {
@@ -127,34 +129,40 @@
        * @return void
        */
       onDrop(ev) {
-        const block = ev.detail.from.data;
+        const block = bbn.fn.clone(ev.detail.from.data);
         let elementor = this.getRef('editor');
         let guide = elementor.getRef('guide');
         let divider = elementor.getRef('divider');
+        let movedItem = false;
 
         bbn.fn.log('event', ev.detail);
         // Check if the moved block comes from inside the elementor component
-        if (block.inside) {
-          bbn.fn.log('move block with inside property');
-          bbn.fn.move(this.source.items, block.index, this.nextPosition);
-          if (block.globalIndex) {
-            bbn.fn.log('move block inside from', block.globalIndex);
-            this.source.items[block.globalIndex].source.items.splice(block.index, 1);
-            if (this.source.items[block.globalIndex].source.items.length < 2) {
-              //transform into normal block
+        if (this.source.items[this.dataElementor.dataIndex || null]) {
+          // if a container already exists dataContainerIndex will exist
+          if (this.dataElementor.dataContainerIndex) {
+            movedItem = this.source.items[this.dataElementor.dataIndex].source.items.splice(this.dataElementor.dataContainerIndex, 1);
+            //transform into normal block
+            if (this.source.items[this.dataElementor.dataIndex].source.items.length === 1) {
+              let last_block = this.source.items[this.dataElementor.dataIndex].source.items[0];
+              this.source.items.splice(this.dataElementor.dataIndex, 1, last_block);
             }
           }
+          else {
+            movedItem = this.source.items.splice(this.dataElementor.dataIndex, 1);
+          }
           this.cancelHelp();
-          return;
+          this.dataElementor = {};
         }
-        // Check if a block is dropped inside another block and create a container
+        // block is dropped inside another block and create a container
         if (this.insideContainer) {
           bbn.fn.log('drop inside container');
+          // avoid creating container inside container
           if (this.source.items[this.nextPosition].type == 'container') {
+            bbn.fn.log('avoid creation multiple containers', block, ev.detail.from);
             if (this.nextContainerPosition == 0) {
-              this.source.items[this.nextPosition].source.items.unshift({type: block.type});
+              this.source.items[this.nextPosition].source.items.unshift(block);
             } else {
-              this.source.items[this.nextPosition].source.items.splice(this.nextContainerPosition, 0, {type: block.type});
+              this.source.items[this.nextPosition].source.items.splice(this.nextContainerPosition, 0, block);
             }
             this.cancelHelp();
             return;
@@ -162,10 +170,10 @@
 
           let arr = this.source.items.splice(this.nextPosition, 1);
           if (this.nextContainerPosition == 0) {
-            arr.unshift({type: block.type});
+            arr.unshift(block);
           }
           else if (this.nextContainerPosition == -1) {
-            arr.push({type: block.type});
+            arr.push(block);
           }
           //bbn.fn.log('array', arr);
           this.source.items.splice(this.nextPosition, 0, {
@@ -178,14 +186,15 @@
           return;
         }
         // Place the block at the correct index position
+        bbn.fn.log('place block at correct index');
         if (this.nextPosition == 0) {
-          this.source.items.unshift({type: block.type});
+          this.source.items.unshift(block);
         }
         else if (this.nextPosition == -1) {
-          this.source.items.push({type: block.type});
+          this.source.items.push(block);
         }
         else {
-          this.source.items.splice(this.nextPosition, 0, {type: block.type});
+          this.source.items.splice(this.nextPosition, 0, block);
         }
         this.cancelHelp();
       },
@@ -229,6 +238,10 @@
        * @param {Event} e the event triggered
        */
       dragOver(e) {
+        // Check if map is empty or not
+        if (this.map.length == 0) {
+          return false;
+        }
         this.currentPosition = e.detail.helper.getBoundingClientRect();
         let elementor = this.getRef('editor');
         let editor = elementor.$el.firstChild;
@@ -252,11 +265,13 @@
           this.insideContainer = false;
           this.nextPosition = -1;
           guide.style.display = "flex";
-          guide.style.top = String(sum) + 'px';
+          guide.style.position = 'absolute';
+          this.containerPosition = this.getRef('editor').$el.getBoundingClientRect();
+          guide.style.top = (this.map.at(-1).y + this.map.at(-1).height - this.containerPosition.y) + 'px';
         }
         //check if the current position is inside an element
         else {
-          bbn.fn.each(this.map, v => {
+          bbn.fn.each(this.map, (v, idx) => {
             sum += v.height + 13;
             //check if current position is inside a block
             if ((this.currentPosition.y > v.y) && (this.currentPosition.y < (v.y + v.height))) {
@@ -308,8 +323,16 @@
               divider.style.display = "block";
               divider.style.height = String(v.height) + 'px';
               divider.style.top = String(sum - v.height) + 'px';
+              return false;
             }
-            return false;
+            else if (this.currentPosition.y > (v.y + v.height) && this.currentPosition.y < (v.y + bbn.fn.outerHeight(v.html.parentElement))) {
+              this.insideContainer = false;
+              this.nextPosition = idx + 1;
+              guide.style.display = 'flex';
+              guide.style.position = 'absolute';
+              guide.style.top = (sum) + 'px';
+              return false;
+            }
           });
         }
       },
@@ -336,29 +359,37 @@
        * Function to map the elements in elementor editor in an array.
        */
       mapY() {
-        let editor = this.getRef('editor').$el.firstChild.children;
-        let arr = [...editor];
+        let editor = this.getRef('editor');
         let tmp_arr = [];
-        arr.map((v, idx, array) => {
-          let detail = v.getBoundingClientRect();
+        bbn.fn.log('mapper in action');
+        this.source.items.map((v, idx) => {
+          let ele = editor.getRef('block' + idx);
+          let detail = ele.$el.getBoundingClientRect();
           tmp_arr.push({
             y: detail.y,
             height: detail.height,
             left: detail.left,
             width: detail.width,
             index: idx,
-            html: v,
-            parent: array[idx].parentNode
+            html: ele.$el,
           });
+          this.map = tmp_arr.slice();
         });
-        this.map = tmp_arr.slice();
-      }
+      },
+      /**
+       * Function triggered when dragging an element
+       */
+      dragStart(data) {
+        bbn.fn.log('start');
+        this.dataElementor = data;
+
+      },
     },
     watch: {
       'source.items'() {
         setTimeout(() => {
           this.mapY();
-        }, 100);
+        }, 500);
       },
       'editedSource.type'(v, ov) {
         //bbn.fn.log(v, ov, '???');
@@ -399,12 +430,14 @@
     mounted() {
       //Set a default title block when creating a new page.
       this.data = this.closest('bbn-router').closest('bbn-container').source;
-      this.$set(this.source.items, 0, {type: "title", content: "Bienvenue sur l'editeur de page", tag: 'h1', align: 'center', hr: null,
-                                       style: {
-                                         'text-decoration': 'none',
-                                         'font-style': 'normal',
-                                         color: '#000000'
-                                       }});
+      /*if (this.source.items.length == 0) {
+        this.$set(this.source.items, 0, {type: "title", content: "Bienvenue sur l'editeur de page", tag: 'h1', align: 'center', hr: null,
+                                         style: {
+                                           'text-decoration': 'none',
+                                           'font-style': 'normal',
+                                           color: '#000000'
+                                         }});
+      }*/
     }
   };
 })();

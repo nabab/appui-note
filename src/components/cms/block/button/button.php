@@ -9,7 +9,7 @@
       <bbn-input  v-model="source.url" />
       <label v-text="_('Dimensions')"></label>
       <div>
-        <div class="bbn-block">
+        <div class="bbn-block bbn-s">
           <bbn-radiobuttons  v-model="source.dimensions"
                             :source="[{
                                 text: _('Default'),

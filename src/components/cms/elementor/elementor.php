@@ -1,7 +1,8 @@
 <!-- HTML Document -->
 <div class="bbn-overlay"
      @drop="ev => $emit('drop', ev)"
-     @dragoverdroppable="onDrag">
+     @dragoverdroppable="onDrag"
+     @dragstart="dragStart">
   <div class="bbn-padding bbn-w-100"
        @click="currentEdited = -1">
     <div v-for="(cfg, i) in source"
@@ -22,7 +23,9 @@
                             :overable="true"
                             :selected="currentEdited === i"
                             @click="changeEdited"
-                            v-draggable.data.mode="{data: {type: cfg.type, inside: true, index: i}, mode: 'self'}"/>
+                            :data-index="i"
+                            v-draggable.data.mode="{data: cfg, mode: 'self'}"
+                            />
 
     </div>
   </div>
