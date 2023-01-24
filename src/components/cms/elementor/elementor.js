@@ -207,6 +207,7 @@
       Emit the current source object (from a block) to the editor component.
       */
       changeEdited(source) {
+        bbn.fn.log('emit changes to editor', source);
         this.$emit('changes', source);
       },
       /*

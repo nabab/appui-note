@@ -16,6 +16,12 @@
       mode: {
         type: String,
         default: 'read'
+      },
+      defaultConfig: {
+        type: Object,
+        default() {
+          return {};
+        }
       }
     },
     data(){
@@ -29,6 +35,13 @@
       }
     },
     methods: {
+      applyDefaultConfig() {
+        bbn.fn.iterate(this.defaultConfig, (a, n) => {
+          if (this.source[n] === undefined) {
+            this.$set(this.source, n, a);
+          }
+        });
+      },
       setSource(prop, val) {
         if (!val) {
           delete this.source[prop];
@@ -37,6 +50,11 @@
           this.$set(this.source, prop, val);
         }
       },
+    },
+    created() {
+      if (this.source.type && (bbn.fn.numProperties(this.source) === 1)) {
+        this.applyDefaultConfig();
+      }
     },
     mounted() {
       this.ready = true;
