@@ -1,98 +1,120 @@
 <!-- HTML Document -->
-<div :class="[componentClass, 'bbn-overlay', 'bbn-flex-height']">
-  <bbn-toolbar class="bbn-header">
-    <span class="bbn-lg bbn-b bbn-left-space"
-         v-text="source.title"/>
-    <div/>
-    <bbn-button class="bbn-left-sspace nf nf-fa-save bbn-lg"
-                title="<?= _("Save the note") ?>"
-                :notext="true"
-                :disabled="!isChanged"
-                @click="() => {$refs.form.submit()}"/>
-    <bbn-button class="bbn-left-sspace nf nf-mdi-cursor_default_outline bbn-lg"
-                title="<?= _("Select the note") ?>"
-                :disabled="!ready || ($refs.editor.currentEdited === -1)"
-                :notext="true"
-                @click="() => {$refs.editor.currentEdited = -1}"/>
-    <bbn-context class="bbn-left-sspace"
-                 :source="contextSource">
-      <bbn-button class="nf nf-mdi-plus_outline bbn-lg"
-                  :notext="true"
-                  secondary="nf nf-fa-caret_down"
-                  text="<?= _("Add a new block") ?>"/>
-    </bbn-context>
-  </bbn-toolbar>
-  <div class="bbn-flex-fill">
-    <bbn-form ref="form"
-              class="bbn-hidden"
-              @success="onSave"
-              @submit="submit"
-              :source="source"
-              :action="action"
-              :buttons="[]"/>
-    <appui-note-cms-elementor :source="source.items"
-                              @hook:mounted="ready = true"
-                              ref="editor">
-      <bbn-scroll v-if="$slots.default">
-        <slot/>
-      </bbn-scroll>
-      <bbn-scroll v-else>
-        <div class="bbn-w-100 bbn-padded">
-          <div class="bbn-grid-fields">
-            <div class="bbn-grid-full bbn-bottom-padding bbn-xl">
-              <?= _("Page's properties") ?>
-            </div>
-            <label><?= _("Title") ?></label>
-            <bbn-input v-model="source.title"
-                       :required="true"/>
-
-            <label><?= _("Description") ?></label>
-            <bbn-textarea v-model="source.excerpt"
-                          style="height: 10em"
-                          :required="true"/>
-
-            <label v-if="typeNote && typeNote.front_img"
-                   style="margin-top:10px">
-              <?=_('Front Image')?>
-            </label>
-            <appui-note-media-field v-if="typeNote && typeNote.front_img"
-                                    v-model="source.id_media"
-                                    :source="source.medias || []"/>
-
-            <label v-if="typeNote && typeNote.option"
-                   v-text="typeNote.option_title || _('Category')"/>
-            <div v-if="typeNote && typeNote.option">
-              <bbn-dropdown v-if="typeNote.options"
-                            :source="typeNote.options"
-                            v-model="source.id_option"/>
-              <appui-option-input-picker v-else
-                                         v-model="source.id_option"/>
-            </div>
-
-            <label><?= _("Public URL") ?></label>
-            <appui-note-field-url :source="source"
-                                  v-model="source.url"
-                                  :readonly="true"/>
-
-            <label><?= _("Start of publication") ?></label>
-            <bbn-datetimepicker v-model="source.start"/>
-
-            <label><?= _("End of publication") ?></label>
-            <bbn-datetimepicker v-model="source.end"
-                                :nullable="true"/>
-
-            <label><?= _("Tags") ?></label>
-            <bbn-values v-model="source.tags"/>
-
-            <label><?=_('Cache')?></label>
-            <div>
-              <bbn-button :text="_('Clear')"
-                          icon="nf nf-mdi-cached"
-                          @click="clearCache"/>
-            </div>
+<div :class="[componentClass, 'bbn-overlay']">
+  <div class="bbn-overlay bbn-flex-width">
+    <!--Elementor-->
+    <div class="bbn-flex-fill bbn-flex-height">
+      <div class="bbn-flex" style="justify-content: center">
+        <div class="bbn-flex bbn-spadding bbn-bg-grey bbn-xxxl" style="justify-content: center; align-items: center; gap: 10px; width: 200px">
+          <bbn-button class="nf nf-fa-save bbn-w-30"
+                      title="<?= _("Save the note") ?>"
+                      :disabled="!isChanged"
+                      @click="() => {$refs.form.submit()}"/>
+          <bbn-button class="nf nf-mdi-settings bbn-w-30"
+                      title="<?= _("Page's properties") ?>"
+                      @click="showFloater = true"/>
+          <bbn-button class="nf nf-mdi-widgets bbn-w-30"
+                      titel="<?= _("widgets") ?>"
+                      @click="() => {
+                              showWidgets = !showWidgets;
+                              showSlider = false;
+                              }"/>
+        </div>
+      </div>
+      <div class="bbn-flex-fill">
+        <bbn-form ref="form"
+                  class="bbn-hidden"
+                  @success="onSave"
+                  @submit="submit"
+                  :source="source"
+                  :action="action"
+                  :buttons="[]"/>
+        <appui-note-cms-elementor :source="source.items"
+                                  @hook:mounted="ready = true"
+                                  ref="editor"
+                                  @changes="handleChanges"
+                                  v-droppable="true"
+                                  @drop.prevent="onDrop"
+                                  @dragoverdroppable="dragOver"
+                                  :position="nextPosition"
+                                  @dragstart="dragStart">
+        </appui-note-cms-elementor>
+      </div>
+    </div>
+    <!--Wigets properties-->
+    <div :class="{slider: true, opened: showSlider}">
+      <bbn-scroll axis="y">
+        <div class="bbn-w-100 bbn-middle bbn-flex"
+             v-if="currentEdited !== null"
+             style="flex-direction: column;">
+          <div class="bbn-w-100 bbn-padded">
+            <appui-note-cms-block class="bbn-contain"
+                                  :source="currentEdited"
+                                  mode="edit"/>
+          </div>
+          <div class="bbn-flex" style="gap: 10px; justify-content: center: align-items: center;">
+            <bbn-button @click="deleteCurrentSelected"
+                        text="<?= _("Delete this block") ?>"
+                        icon="nf nf-fa-trash"/>
+            <bbn-button :notext="true"
+                        @click="move('top')"
+                        text="<?= _("Move top") ?>"
+                        :disabled="(source.items.length <= 1) || (currentEdited <= 1)"
+                        icon="nf nf-mdi-arrow_collapse_up"/>
+            <bbn-button :notext="true"
+                        @click="move('up')"
+                        text="<?= _("Move up") ?>"
+                        :disabled="(source.items.length <= 1) || !currentEdited"
+                        icon="nf nf-mdi-arrow_up"/>
+            <bbn-button :notext="true"
+                        @click="move('down')"
+                        text="<?= _("Move down") ?>"
+                        :disabled="(source.items.length <= 1) || (currentEdited === source.length - 1)"
+                        icon="nf nf-mdi-arrow_down"/>
+            <bbn-button :notext="true"
+                        @click="move('bottom')"
+                        text="<?= _("Move bottom") ?>"
+                        :disabled="(source.items.length <= 1) || (currentEdited >= source.length - 2)"
+                        icon="nf nf-mdi-arrow_collapse_down"/>
           </div>
         </div>
       </bbn-scroll>
-    </appui-note-cms-elementor>
+      <div class="bbn-top-right bbn-p bbn-lg"
+           @click="showSlider = false">
+        <i class="nf nf-fa-times"></i>
+      </div>
+    </div>
+    <!--Widgets menu-->
+    <div :class="{slider: true, opened: showWidgets}">
+      <bbn-scroll axis="y">
+        <div class="bbn-w-100 bbn-middle bbn-lpadding bbn-grid grid bbn-unselectable">
+          <div v-for="(v, i) in blocks"
+               :title="v.description"
+               :class="['widgets', 'block-' + v.code, 'bbn-spadding', 'bbn-radius', 'bbn-smargin']"
+               v-draggable.data="{data: {type: v.code}}"
+               style="cursor: grab">
+            <i :class="[v.icon + ' bbn-xxxl']"/>
+            <span class="bbn-xl bbn-top-smargin">
+              {{v.text}}
+            </span>
+          </div>
+        </div>
+      </bbn-scroll>
+      <div class="bbn-top-right bbn-p bbn-lg"
+           @click="showWidgets = false">
+        <i class="nf nf-fa-times"></i>
+      </div>
+    </div>
   </div>
+  <!--Settings-->
+  <div class="bbn-modal bbn-overlay"
+       v-if="showFloater">
+  </div>
+  <bbn-floater :modal="true"
+               v-if="showFloater">
+    <appui-note-cms-settings :source="source"
+                             :typeNote="typeNote"
+                             @clear="clearCache"
+                             @close="showFloater = false"
+                             @save="saveSettings"/>
+  </bbn-floater>
 </div>

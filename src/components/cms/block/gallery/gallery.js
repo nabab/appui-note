@@ -9,8 +9,30 @@
       },
       config: {
         type: Object,
-        default(){
-          return {};
+        default() {
+          return {
+          };
+        }
+      },
+      defaultConfig: {
+        type: Object,
+        default() {
+          return {
+            source: '',
+            scrollable: 0,
+            pageable: 0,
+            pager: 0,
+            zoomable: 0,
+            resizable: 0,
+            toolbar: 0,
+            crop: 1,
+            style: {
+              width: '100%',
+              height: '100%'
+            },
+            align: 'center',
+            imageWidth: 33
+          };
         }
       }
     },
@@ -141,6 +163,11 @@
         }
       }
 
+    },
+    created() {
+      bbn.fn.extend(this.source, {
+
+      });
     }
   }
 })();

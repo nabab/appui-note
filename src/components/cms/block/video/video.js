@@ -3,9 +3,28 @@
 (() => {
   return {
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
+    props: {
+      defaultConfig: {
+        type: Object,
+        default() {
+          return {
+            source: '',
+            autoplay: 0,
+            muted: 0,
+            controls: 0,
+            loop: 0,
+            style: {
+              width: '100%',
+              height: '100%'
+            },
+            align: 'center'
+          };
+        }
+      }
+    },
     data(){
       return {
-        aspectRatio :false,
+        aspectRatio: null,
         disableHeight: false,
         ratios: [{
           text: '1:1',
@@ -23,13 +42,13 @@
           text: '8:5',
           value: '8/5'
         }
-      ]
+                ]
 
       }
     },
     methods:{
       isNull: bbn.fn.isNull
-      
+
     },
     computed: {
       youtube(){
@@ -50,7 +69,7 @@
             break;
         }
         return style;
-      }, 
+      },
       width(){
         return 'min(100%, ' + this.source.style.width + ')'
       }

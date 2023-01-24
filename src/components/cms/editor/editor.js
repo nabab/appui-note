@@ -13,14 +13,29 @@
       },
       prefix: {
         type: String
+      },
+      blocks: {
+        type: Array,
       }
     },
-    data(){
+    data() {
       return {
         data: null,
         oData: JSON.stringify(this.source),
         ready: false,
-        root: appui.plugins['appui-note'] + '/'
+        root: appui.plugins['appui-note'] + '/',
+        showFloater: false,
+        showSlider: false,
+        showWidgets: false,
+        currentEdited: null,
+        editedSource: null,
+        map: [],
+        currentPosition: {},
+        nextPosition: 0,
+        nextContainerPosition: 0,
+        insideContainer: false,
+        dataElementor: {},
+        containerPosition: {}
       };
     },
     computed: {
@@ -31,100 +46,44 @@
         if (this.source.id_type) {
           return bbn.fn.getRow(this.types, {id: this.source.id_type});
         }
-
         return {};
       },
-      isChanged(){
+      isChanged() {
         return JSON.stringify(this.source) !== this.oData;
-      },
-      contextSource(){
-        let ed = this.getRef('editor');
-        let newBlock = {
-          type: 'text',
-          text: ''
-        };
-        let res = [{
-          text: bbn._("Add a block at the start"),
-          icon: 'nf nf-mdi-file_document_box',
-          action: () => {
-            this.source.items.splice(0, 0, newBlock);
-            this.$nextTick(() => {
-              this.getRef('editor').currentEdited = 0;
-            })
-          }
-        }, {
-          text: bbn._("Add a container at the start"),
-          icon: 'nf nf-mdi-table_row',
-          action: () => {
-            this.source.items.splice(0, 0, {
-              type: 'container',
-              items: []
-            });
-            this.$nextTick(() => {
-              this.getRef('editor').currentEdited = 0;
-            })
-          }
-        }];
-        if (this.source.items.length > 0) {
-          res.push({
-            text: bbn._("Add a block at the end"),
-            icon: 'nf nf-fa-plus',
-            action: () => {
-              let idx = this.source.items.length;
-              this.source.items.push(newBlock);
-              this.$nextTick(() => {
-                this.getRef('editor').currentEdited = idx;
-              })
-            }
-          });
-        }
-        if (ed) {
-          if (ed.currentEdited > 1) {
-            res.push({
-              text: bbn._("Add a block before the selected block"),
-              icon: 'nf nf-fa-plus',
-              action: () => {
-                this.source.items.splice(ed.currentEdited, 0, newBlock);
-              }
-            });
-          }
-          if (ed.currentEdited < (this.source.items.length -2)) {
-            res.push({
-              text: bbn._("Add a block after the selected block"),
-              icon: 'nf nf-fa-plus',
-              action: () => {
-                this.source.items.splice(ed.currentEdited + 1, 0, newBlock);
-                this.$nextTick(() => {
-                  this.getRef('editor').currentEdited++;
-                })
-              }
-            });
-          }
-        }
-        return res;
       }
     },
     methods: {
-      submit(){
+      /**
+       * Removes the 'product' property from the object to be submitted
+       * @todo ask Loredana
+       */
+      submit() {
         //remove the object product if the block type is product
         bbn.fn.each(this.source.items, (v, i) => {
           if(v.type === 'container'){
             bbn.fn.each(this.source.items[i].items, (item, idx) => {
               if((item.type === 'product') && this.source.items[i].items[idx].product){
-                delete(this.source.items[i].items[idx].product)
+                delete(this.source.items[i].items[idx].product);
               }
-            })
+            });
           }
           else if ((v.type === 'product' ) && this.source.items[i].product){
-            delete(this.source.items[i].product)
+            delete(this.source.items[i].product);
           }
-        })
+        });
       },
-      onSave(d) {
+      /**
+       * Convert the source in a JSON string
+       */
+      onSave() {
         this.oData = JSON.stringify(this.source);
-        appui.success(bbn._("Saved"))
+        appui.success(bbn._("Saved"));
       },
-      clearCache(){
+      /**
+       * Clear the cache of the page via the page configuration.
+       */
+      clearCache() {
+        this.showFloater = false;
         this.confirm(bbn._('Are you sure?'), () => {
           this.post(this.root + 'cms/actions/clear_cache', {id: this.source.id}, d => {
             if (d.success) {
@@ -133,12 +92,352 @@
             else {
               appui.error();
             }
-          })
+          });
         });
-      }
+      },
+      /**
+       * Save the settings of the page and close the slider.
+       */
+      saveSettings() {
+        this.$refs.form.submit();
+        this.showFloater = false;
+      },
+      /**
+       * When changes are made to a block or a block inside a container, the currentEdited data receive
+       * the source of the block.
+       * @param {Object} source the source object of the current selected block
+       */
+      handleChanges(source) {
+        this.showWidgets = false;
+        this.showSlider = true;
+        this.currentEdited = source;
+      },
+      /**
+       * Delete the current selected block
+       */
+      deleteCurrentSelected() {
+        this.confirm(bbn._("Are you sure you want to delete this block and its content?"), () => {
+          let idx = this.currentEdited;
+          this.currentEdited = -1;
+          this.source.items.splice(idx, 1);
+          this.mapY();
+        });
+      },
+      /**
+       * Function triggered after the release of a block into the droppable zone.
+       * @param {Event} ev the event of the dropped block
+       * @return void
+       */
+      onDrop(ev) {
+        const block = bbn.fn.clone(ev.detail.from.data);
+        let elementor = this.getRef('editor');
+        let guide = elementor.getRef('guide');
+        let divider = elementor.getRef('divider');
+        let movedItem = false;
+
+        bbn.fn.log('event', ev.detail);
+        // Check if the moved block comes from inside the elementor component
+        if (this.source.items[this.dataElementor.dataIndex || null]) {
+          // if a container already exists dataContainerIndex will exist
+          if (this.dataElementor.dataContainerIndex) {
+            movedItem = this.source.items[this.dataElementor.dataIndex].source.items.splice(this.dataElementor.dataContainerIndex, 1);
+            //transform into normal block
+            if (this.source.items[this.dataElementor.dataIndex].source.items.length === 1) {
+              let last_block = this.source.items[this.dataElementor.dataIndex].source.items[0];
+              this.source.items.splice(this.dataElementor.dataIndex, 1, last_block);
+            }
+          }
+          else {
+            movedItem = this.source.items.splice(this.dataElementor.dataIndex, 1);
+          }
+          this.cancelHelp();
+          this.dataElementor = {};
+        }
+        // block is dropped inside another block and create a container
+        if (this.insideContainer) {
+          bbn.fn.log('drop inside container');
+          // avoid creating container inside container
+          if (this.source.items[this.nextPosition].type == 'container') {
+            bbn.fn.log('avoid creation multiple containers', block, ev.detail.from);
+            if (this.nextContainerPosition == 0) {
+              this.source.items[this.nextPosition].source.items.unshift(block);
+            } else {
+              this.source.items[this.nextPosition].source.items.splice(this.nextContainerPosition, 0, block);
+            }
+            this.cancelHelp();
+            return;
+          }
+
+          let arr = this.source.items.splice(this.nextPosition, 1);
+          if (this.nextContainerPosition == 0) {
+            arr.unshift(block);
+          }
+          else if (this.nextContainerPosition == -1) {
+            arr.push(block);
+          }
+          //bbn.fn.log('array', arr);
+          this.source.items.splice(this.nextPosition, 0, {
+            type: 'container',
+            source: {
+              items: arr
+            }
+          });
+          this.cancelHelp();
+          return;
+        }
+        // Place the block at the correct index position
+        bbn.fn.log('place block at correct index');
+        if (this.nextPosition == 0) {
+          this.source.items.unshift(block);
+        }
+        else if (this.nextPosition == -1) {
+          this.source.items.push(block);
+        }
+        else {
+          this.source.items.splice(this.nextPosition, 0, block);
+        }
+        this.cancelHelp();
+      },
+      /**
+       * Remove the guide and the divider element by applying the style 'display: none'.
+       */
+      cancelHelp() {
+        let elementor = this.getRef('editor');
+        let guide = elementor.getRef('guide');
+        let divider = elementor.getRef('divider');
+        guide.style.display = "none";
+        divider.style.display = "none";
+      },
+      /**
+       * Move the selected block with the arrows in the configuration panel.
+       * @param {String} dir the given direction
+       */
+      move(dir) {
+        let idx;
+        switch (dir) {
+          case 'top':
+            idx = 0;
+            break;
+          case 'up':
+            idx = this.currentEdited - 1;
+            break;
+          case 'down':
+            idx = this.currentEdited + 1;
+            break;
+          case 'bottom':
+            idx = this.source.items.length - 1;
+            break;
+        }
+        if (this.source.items[idx]) {
+          bbn.fn.move(this.source.items, this.currentEdited, idx);
+          this.currentEdited = idx;
+        }
+      },
+      /**
+       * Function triggered when a drag & drop block is hovering the droppable zone.
+       * @param {Event} e the event triggered
+       */
+      dragOver(e) {
+        // Check if map is empty or not
+        if (this.map.length == 0) {
+          return false;
+        }
+        this.currentPosition = e.detail.helper.getBoundingClientRect();
+        let elementor = this.getRef('editor');
+        let editor = elementor.$el.firstChild;
+        let guide = elementor.getRef('guide');
+        let divider = elementor.getRef('divider');
+        let sum = 0;
+        guide.style.display = "none";
+        divider.style.display = "none";
+
+        //check if the current position is at top
+        if (this.currentPosition.y < this.map[0].y) {
+          bbn.fn.log('top of the map');
+          this.insideContainer = false;
+          this.nextPosition = 0;
+          guide.style.display = "flex";
+          guide.style.top = 0;
+        }
+        //check if the current position is at bottom
+        else if (this.currentPosition.y > (this.map.at(-1).y + this.map.at(-1).height)) {
+          bbn.fn.log('bottom of the map');
+          this.insideContainer = false;
+          this.nextPosition = -1;
+          guide.style.display = "flex";
+          guide.style.position = 'absolute';
+          this.containerPosition = this.getRef('editor').$el.getBoundingClientRect();
+          guide.style.top = (this.map.at(-1).y + this.map.at(-1).height - this.containerPosition.y) + 'px';
+        }
+        //check if the current position is inside an element
+        else {
+          bbn.fn.each(this.map, (v, idx) => {
+            sum += v.height + 13;
+            //check if current position is inside a block
+            if ((this.currentPosition.y > v.y) && (this.currentPosition.y < (v.y + v.height))) {
+              bbn.fn.log('inside a block');
+              this.insideContainer = true;
+              this.nextPosition = this.map.indexOf(v);
+              let rect = v.html.getBoundingClientRect();
+              let mapContainer = this.mapContainer(v, this.map.indexOf(v));
+              //Check if the block is a container and do a mapper inside of it
+              if (mapContainer && mapContainer.length >= 2) {
+                bbn.fn.log('move inside container');
+                mapContainer.map((v, idx, array) => {
+                  if (this.currentPosition.x < v.rect.width/2) {
+                    if (idx > 0) {
+                      this.nextContainerPosition = idx;
+                    } else {
+                      this.nextContainerPosition = 0;
+                    }
+                    return false;
+                  }
+                  else if (this.currentPosition.x > v.rect.width/2) {
+                    bbn.fn.log('to the right');
+                  }
+                  /*if (this.currentElement.x < v.rect.width/2) {
+                  if (idx > 0) {
+                    bbn.fn.log('to the left of', idx);
+                  } else {
+                    bbn.fn.log('at the beginning of the list');
+                  }
+                }
+                else if (this.currentElement.x > v.rect.width/2) {
+                  bbn.fn.log('to the right of', idx);
+                  if (array[idx + 1]) {
+                    bbn.fn.log('something after');
+                  } else {
+                    bbn.fn.log('nothing after');
+                  }
+                }*/
+                });
+              }
+              if (this.currentPosition.x < rect.width/2) {
+                this.nextContainerPosition = 0;
+                divider.style.left = String(v.left) + 'px';
+              }
+              else if (this.currentPosition.x > rect.width/2) {
+                this.nextContainerPosition = -1;
+                divider.style.left = String(rect.width/2) + 'px';
+              }
+              divider.style.display = "block";
+              divider.style.height = String(v.height) + 'px';
+              divider.style.top = String(sum - v.height) + 'px';
+              return false;
+            }
+            else if (this.currentPosition.y > (v.y + v.height) && this.currentPosition.y < (v.y + bbn.fn.outerHeight(v.html.parentElement))) {
+              this.insideContainer = false;
+              this.nextPosition = idx + 1;
+              guide.style.display = 'flex';
+              guide.style.position = 'absolute';
+              guide.style.top = (sum) + 'px';
+              return false;
+            }
+          });
+        }
+      },
+      /**
+       * Function to map inside a container block.
+       * @param {Object} src the source of the container's items
+       * @param {number} idx the index of the container in the global source
+       */
+      mapContainer(src, idx) {
+        if (this.source.items[idx].type == 'container') {
+          let elems = src.html.querySelector('.bbn-grid').children;
+          let arr = [...elems];
+          let tmp_arr = [];
+          arr.map((v) => {
+            let detail = v.getBoundingClientRect();
+            tmp_arr.push({
+              rect: detail
+            });
+          });
+          return tmp_arr;
+        }
+      },
+      /**
+       * Function to map the elements in elementor editor in an array.
+       */
+      mapY() {
+        let editor = this.getRef('editor');
+        let tmp_arr = [];
+        bbn.fn.log('mapper in action');
+        this.source.items.map((v, idx) => {
+          let ele = editor.getRef('block' + idx);
+          let detail = ele.$el.getBoundingClientRect();
+          tmp_arr.push({
+            y: detail.y,
+            height: detail.height,
+            left: detail.left,
+            width: detail.width,
+            index: idx,
+            html: ele.$el,
+          });
+          this.map = tmp_arr.slice();
+        });
+      },
+      /**
+       * Function triggered when dragging an element
+       */
+      dragStart(data) {
+        bbn.fn.log('start');
+        this.dataElementor = data;
+
+      },
+    },
+    watch: {
+      'source.items'() {
+        setTimeout(() => {
+          this.mapY();
+        }, 500);
+      },
+      'editedSource.type'(v, ov) {
+        //bbn.fn.log(v, ov, '???');
+        let tmp = this.editedSource;
+        if (v && (ov !== undefined) && this.editedSource && this.realSourceArray.length) {
+          let cfg = bbn.fn.getField(types, 'default', {value:v});
+          if (cfg) {
+            for (let n in cfg) {
+              if ((n !== 'type') && (tmp[n] === undefined)) {
+                this.$set(tmp, n, cfg[n]);
+              }
+              else {
+                tmp[n] = cfg[n];
+              }
+            }
+            for (let n in tmp) {
+              if (cfg[n] === undefined && (n !== 'type')) {
+                delete tmp[n];
+              }
+            }
+          }
+        }
+      },
+      currentEdited(v) {
+        //Check if the currentEdited if a block or a container
+        this.editedSource = null;
+        if (this.source.items[v]) {
+          this.currentType = this.source.items[v].type || 'text';
+          if (this.currentType != 'container') {
+            this.editedSource = this.source.items[this.currentEdited];
+          }
+        }
+        /*this.$nextTick(() => {
+          this.updateSelected();
+        });*/
+      },
     },
     mounted() {
+      //Set a default title block when creating a new page.
       this.data = this.closest('bbn-router').closest('bbn-container').source;
+      /*if (this.source.items.length == 0) {
+        this.$set(this.source.items, 0, {type: "title", content: "Bienvenue sur l'editeur de page", tag: 'h1', align: 'center', hr: null,
+                                         style: {
+                                           'text-decoration': 'none',
+                                           'font-style': 'normal',
+                                           color: '#000000'
+                                         }});
+      }*/
     }
-  }
+  };
 })();

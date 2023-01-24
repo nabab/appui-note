@@ -8,7 +8,6 @@
         }
       ]"
       tabindex="0"
-     	@click="$emit('click', $event)"
       @mouseenter="over = true"
       @mouseleave="over = false">
   <div :class="[
@@ -19,7 +18,7 @@
                  '<?= $componentName ?>-selected': selectable && selected
                  },
                ]">
-    <div v-if="source.items.length"
+    <div v-if="source.items?.length"
          class="bbn-grid"
          :style="gridStyle">
       <div v-for="(item, i) in source.items"
@@ -27,14 +26,17 @@
            @mouseleave="overItem = -1"
            :key="i">
         <div class="bbn-100">
-          <appui-note-cms-block @click="currentItemSelected = i"
+          <appui-note-cms-block @click="changeEditedContainer(item)"
                                 :path="path"
                                 :editable="editable"
                                 :selectable="selectable"
                                 :selected="currentItemSelected === i"
                                 :overable="overable"
                                 :mode="mode"
-                                :source="item"/>
+                                :source="item"
+                                :data-index="index"
+                                :data-container-index="i"
+                                v-draggable.data.mode="{data: item, mode: 'self'}"/>
           <div v-if="overable && (mode === 'read')"
                :class="['bbn-bottom-right', 'bbn-xspadding', {'bbn-hidden': overItem !== i}]">
             <bbn-button icon="nf nf-fa-minus"
