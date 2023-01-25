@@ -94,7 +94,7 @@
       removeBlock(idx) {
         this.source.items.splice(idx, 1);
       },
-      changeEditedContainer(i) {
+      clickBlock(i) {
         this.$emit('click', i);
       }
     },

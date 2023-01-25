@@ -36,7 +36,7 @@
     },
     methods: {
       applyDefaultConfig() {
-        bbn.fn.iterate(this.defaultConfig, (a, n) => {
+        bbn.fn.iterate(bbn.fn.extend({}, this.defaultConfig, this.cfg || {}), (a, n) => {
           if (this.source[n] === undefined) {
             this.$set(this.source, n, a);
           }

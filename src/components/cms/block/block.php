@@ -1,7 +1,9 @@
 <div :class="[
         componentClass,
         currentClass,
-        {'<?= $componentName ?>-over': overable && over}
+        {
+             '<?= $componentName ?>-over': overable && over,
+       	}
       ]"
       tabindex="0"
      	@click="sendBlock"

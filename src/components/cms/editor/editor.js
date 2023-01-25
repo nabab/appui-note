@@ -35,7 +35,9 @@
         nextContainerPosition: 0,
         insideContainer: false,
         dataElementor: {},
-        containerPosition: {}
+        containerPosition: {},
+        preview: false,
+        currentContainer: null
       };
     },
     computed: {
@@ -110,6 +112,7 @@
       handleChanges(source) {
         this.showWidgets = false;
         this.showSlider = true;
+        bbn.fn.log('handle changes', source);
         this.currentEdited = source;
       },
       /**
@@ -248,8 +251,8 @@
         let guide = elementor.getRef('guide');
         let divider = elementor.getRef('divider');
         let sum = 0;
-        guide.style.display = "none";
-        divider.style.display = "none";
+        guide.style.display = 'none';
+        divider.style.display = 'none';
 
         //check if the current position is at top
         if (this.currentPosition.y < this.map[0].y) {
@@ -314,15 +317,15 @@
               }
               if (this.currentPosition.x < rect.width/2) {
                 this.nextContainerPosition = 0;
-                divider.style.left = String(v.left) + 'px';
+                divider.style.left = v.left + 'px';
               }
               else if (this.currentPosition.x > rect.width/2) {
                 this.nextContainerPosition = -1;
-                divider.style.left = String(rect.width/2) + 'px';
+                divider.style.left = rect.width/2 + 'px';
               }
               divider.style.display = "block";
-              divider.style.height = String(v.height) + 'px';
-              divider.style.top = String(sum - v.height) + 'px';
+              divider.style.height = v.height + 'px';
+              divider.style.top = (sum - v.height) + 'px';
               return false;
             }
             else if (this.currentPosition.y > (v.y + v.height) && this.currentPosition.y < (v.y + bbn.fn.outerHeight(v.html.parentElement))) {
@@ -331,6 +334,7 @@
               guide.style.display = 'flex';
               guide.style.position = 'absolute';
               guide.style.top = (sum) + 'px';
+              const css = getComputedStyle(guide);
               return false;
             }
           });
@@ -382,8 +386,15 @@
       dragStart(data) {
         bbn.fn.log('start');
         this.dataElementor = data;
-
       },
+      /**
+       * Do a mapping when scrolling the delementor component
+       */
+      scrollElementor() {
+        setTimeout(() => {
+          this.mapY();
+        }, 500);
+      }
     },
     watch: {
       'source.items'() {
@@ -417,6 +428,7 @@
         //Check if the currentEdited if a block or a container
         this.editedSource = null;
         if (this.source.items[v]) {
+          this.currentContainer = null;
           this.currentType = this.source.items[v].type || 'text';
           if (this.currentType != 'container') {
             this.editedSource = this.source.items[this.currentEdited];
@@ -430,6 +442,9 @@
     mounted() {
       //Set a default title block when creating a new page.
       this.data = this.closest('bbn-router').closest('bbn-container').source;
+      setTimeout(() => {
+        this.mapY();
+      }, 500);
       /*if (this.source.items.length == 0) {
         this.$set(this.source.items, 0, {type: "title", content: "Bienvenue sur l'editeur de page", tag: 'h1', align: 'center', hr: null,
                                          style: {

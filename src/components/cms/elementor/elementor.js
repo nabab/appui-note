@@ -183,6 +183,10 @@
       },
       position: {
         type: Number
+      },
+      preview: {
+        type: Boolean,
+        default: false
       }
     },
     data(){
@@ -192,7 +196,7 @@
         indexInContainer: -1,
         dragData: bbn.fn.map(this.source, (cfg, i) => {
           return {data: bbn.fn.extend({}, cfg, {inside: true, index: i}), mode: 'self'};
-        })
+        }),
       };
     },
     methods: {
@@ -214,6 +218,7 @@
       Emit the current source object (from a container) to the editor component.
       */
       changeEditedContainer(item) {
+        bbn.fn.log('changes container', item);
         this.$emit('changes', item);
       },
       /*

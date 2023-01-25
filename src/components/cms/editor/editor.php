@@ -4,20 +4,28 @@
     <!--Elementor-->
     <div class="bbn-flex-fill bbn-flex-height">
       <div class="bbn-flex" style="justify-content: center">
-        <div class="bbn-flex bbn-spadding bbn-bg-grey bbn-xxxl" style="justify-content: center; align-items: center; gap: 10px; width: 200px">
-          <bbn-button class="nf nf-fa-save bbn-w-30"
+        <div class="bbn-flex bbn-spadding bbn-alt-background bbn-radius-bottom bbn-xl" style="justify-content: center; align-items: center; gap: 10px;">
+          <bbn-button icon="nf nf-fa-save"
                       title="<?= _("Save the note") ?>"
                       :disabled="!isChanged"
-                      @click="() => {$refs.form.submit()}"/>
-          <bbn-button class="nf nf-mdi-settings bbn-w-30"
+                      @click="() => {$refs.form.submit()}"
+                      :notext="true"/>
+          <bbn-button icon="nf nf-mdi-settings"
                       title="<?= _("Page's properties") ?>"
-                      @click="showFloater = true"/>
-          <bbn-button class="nf nf-mdi-widgets bbn-w-30"
-                      titel="<?= _("widgets") ?>"
+                      @click="showFloater = true"
+                      :notext="true"/>
+          <bbn-button icon="nf nf-mdi-widgets"
+                      title="<?= _("widgets") ?>"
+                      :notext="true"
                       @click="() => {
                               showWidgets = !showWidgets;
                               showSlider = false;
                               }"/>
+          <bbn-button icon="nf nf-fa-eye"
+                      :class="{'bbn-primary': preview}"
+                      title="<?= _("Preview") ?>"
+                      :notext="true"
+                      @click="preview = !preview"/>
         </div>
       </div>
       <div class="bbn-flex-fill">
@@ -27,17 +35,22 @@
                   @submit="submit"
                   :source="source"
                   :action="action"
-                  :buttons="[]"/>
-        <appui-note-cms-elementor :source="source.items"
-                                  @hook:mounted="ready = true"
-                                  ref="editor"
-                                  @changes="handleChanges"
-                                  v-droppable="true"
-                                  @drop.prevent="onDrop"
-                                  @dragoverdroppable="dragOver"
-                                  :position="nextPosition"
-                                  @dragstart="dragStart">
-        </appui-note-cms-elementor>
+                  :buttons="[]"
+                  :scrollable="true"/>
+        <bbn-scroll class="bbn-overlay"
+                    @scroll="scrollElementor">
+          <appui-note-cms-elementor :source="source.items"
+                                    @hook:mounted="ready = true"
+                                    ref="editor"
+                                    @changes="handleChanges"
+                                    v-droppable="true"
+                                    @drop.prevent="onDrop"
+                                    :preview="preview"
+                                    @dragoverdroppable="dragOver"
+                                    :position="nextPosition"
+                                    @dragstart="dragStart">
+          </appui-note-cms-elementor>
+        </bbn-scroll>
       </div>
     </div>
     <!--Wigets properties-->
@@ -77,6 +90,9 @@
                         icon="nf nf-mdi-arrow_collapse_down"/>
           </div>
         </div>
+        <div v-else-if="!currentEdited && currentContainer">
+          
+        </div>
       </bbn-scroll>
       <div class="bbn-top-right bbn-p bbn-lg"
            @click="showSlider = false">
@@ -87,16 +103,14 @@
     <div :class="{slider: true, opened: showWidgets}">
       <bbn-scroll axis="y">
         <div class="bbn-w-100 bbn-middle bbn-lpadding bbn-grid grid bbn-unselectable">
-          <div v-for="(v, i) in blocks"
-               :title="v.description"
-               :class="['widgets', 'block-' + v.code, 'bbn-spadding', 'bbn-radius', 'bbn-smargin']"
-               v-draggable.data="{data: {type: v.code}}"
-               style="cursor: grab">
-            <i :class="[v.icon + ' bbn-xxxl']"/>
-            <span class="bbn-xl bbn-top-smargin">
-              {{v.text}}
-            </span>
-          </div>
+          <appui-note-cms-dropper v-for="(v, i) in blocks"
+                                  :key="v.code"
+                                  :description="v.description"
+                                  :class="['block-' + v.code]"
+                                  :type="v.code"
+                                  :title="v.text"
+                                  :icon="v.icon"
+                                  />
         </div>
       </bbn-scroll>
       <div class="bbn-top-right bbn-p bbn-lg"
