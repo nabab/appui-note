@@ -1,13 +1,13 @@
 <!-- HTML Document -->
 <div :class="componentClass">
   <div v-if="mode === 'edit'"
-       class="bbn-grid-fields bbn-padded">
+       class="bbn-grid-fields">
     <label v-if="!isConfig"><?=_('Gallery')?></label>
     <div v-if="!isConfig"
          class="bbn-vmiddle">
       <bbn-dropdown :source="galleryListUrl"
                     source-value="id"
-                    v-model="source.source"
+                    v-model="source.content"
                     ref="galleryList"
                     :suggest="true"
                     :filterable="true"
@@ -21,7 +21,7 @@
 
     <label v-if="isConfig || !isInConfig('style')"><?=_('Width')?></label>
     <bbn-range v-if="isConfig || !isInConfig('style')"
-               v-model="source.style.width"
+               v-model="source.width"
                :min="10"
                :max="2000"
                :step="10"
@@ -30,7 +30,7 @@
                :show-units="true"/>
     <label v-if="isConfig || !isInConfig('style')"><?=_('Height')?></label>
     <bbn-range v-if="isConfig || !isInConfig('style')"
-               v-model="source.style.height"
+               v-model="source.height"
                :min="10"
                :max="2000"
                :step="10"
@@ -156,11 +156,11 @@
        class="bbn-flex"
        :style="align">
     <div class="bbn-block"
-         :style="source.style">
+         :style="{'width': source.width, 'height': source.height}">
       <bbn-gallery :source="gallerySourceUrl"
                    :class="{'cropped' : source.crop}"
                    :data="{
-                          idGroup: source.source
+                          idGroup: source.content
                           }"
                    ref="gallery"
                    @resize="getItemWidth"

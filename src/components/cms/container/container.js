@@ -94,20 +94,22 @@
       removeBlock(idx) {
         this.source.items.splice(idx, 1);
       },
-      clickBlock(i) {
-        this.$emit('click', i);
+      clickBlock(index) {
+        this.currentItemSelected = index;
+        this.$emit('click', this.index, this.source.items[index], index);
+      },
+      configInit(config) {
+        this.$emit('config-init', config);
       }
     },
     watch: {
       itemsSelected(v) {
+        bbn.fn.log('item selected', v);
         this.currentItemSelected = v;
       },
       currentItemSelected(v) {
         if (v > -1) {
-          /*this.$emit('select', {
-            currentItemIndex: this.currentItemSelected,
-            cfg: this.source
-          });*/
+          bbn.fn.log('current item selected', v);
         }
       }
     }

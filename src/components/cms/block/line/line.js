@@ -8,19 +8,20 @@
         type: Boolean,
         default: true
       },
-      defaultConfig: {
-        type: Object,
-        default() {
-          return {
-            hr: null,
-            align: 'center',
-            style: {
-              width: '100%',
-              height: '0px'
-            }
-          };
-        }
+      config: {
+        type: Object
       }
+    },
+    data() {
+      return {
+        defaultConfig: {
+          hr: null,
+          align: 'center',
+          width: '100%',
+          height: '0px',
+        }
+      };
+
     },
     computed: {
       line: {

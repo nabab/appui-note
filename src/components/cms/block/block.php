@@ -6,10 +6,11 @@
        	}
       ]"
       tabindex="0"
-     	@click="sendBlock"
+     	@click="$emit('click', $event, source)"
       @mouseenter="over = true"
       @mouseleave="over = false">
   <component v-if="ready"
+             @configinit="configInit"
              :is="currentComponent"
              ref="component"
              :mode="mode"

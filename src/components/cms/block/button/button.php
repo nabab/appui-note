@@ -2,9 +2,9 @@
 
 <div :class="[componentClass, 'bbn-w-100']">
   <div v-if="mode === 'edit'">
-    <div class="bbn-grid-fields bbn-vpadded bbn-w-100">
+    <div class="bbn-grid-fields bbn-w-100">
       <label v-text="_('Text')"></label>
-      <bbn-input  v-model="source.text" />
+      <bbn-input  v-model="source.content" />
       <label v-text="_('Link')"></label>
       <bbn-input  v-model="source.url" />
       <label v-text="_('Dimensions')"></label>
@@ -85,7 +85,7 @@
   <div v-else
        class="bbn-w-100" :style="'text-align:'+source.align">
     <bbn-button :url="source.url"
-                :text="source.text"
+                :text="source.content"
                 :class="[source.dimensions, source.padding, source.class]"/>
   </div>
 </div>

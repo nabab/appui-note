@@ -4,24 +4,24 @@
   return {
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
     props: {
-      defaultConfig: {
-        type: Object,
-        default() {
-          return {
-            source: '',
-            alt: '',
-            href: '',
-            caption: '',
-            details_title: '',
-            details: '',
-            style: {
-              width: '100%',
-              height: '100%'
-            },
-            align: 'center'
-          };
-        }
+      config: {
+        type: Object
       }
+    },
+    data() {
+      return {
+        defaultConfig: {
+          content: '',
+          alt: '',
+          href: '',
+          caption: '',
+          details_title: '',
+          details: '',
+          width: '100%',
+          height: '100%',
+          align: 'center'
+        }
+      };
     },
     computed: {
       align(){

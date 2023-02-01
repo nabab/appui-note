@@ -32,6 +32,7 @@ if ($model->hasData('id', true)) {
     'data' => $data,
     'types' => $note->getOptions('types'),
     'title' => $data['title'],
-    'blocks' => $model->inc->options->fullOptions("blocks", "note", "appui")
+    'blocks' => $model->inc->options->fullOptions("blocks", "note", "appui"),
+    'pblocks' => $model->inc->options->fullOptionsRef("pblocks", "note", "appui")
   ];
 }

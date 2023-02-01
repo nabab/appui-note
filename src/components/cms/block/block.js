@@ -17,7 +17,7 @@
         type: String,
         default: 'read'
       },
-      defaultConfig: {
+      cfg: {
         type: Object,
         default() {
           return {};
@@ -27,7 +27,9 @@
     data(){
       return {
         show: true,
-      }
+        defaultConfig: {},
+        ignoredFields: ['content']
+      };
     },
     computed: {
       isEditor(){
@@ -36,6 +38,7 @@
     },
     methods: {
       applyDefaultConfig() {
+        bbn.fn.log("apply def", this.cfg);
         bbn.fn.iterate(bbn.fn.extend({}, this.defaultConfig, this.cfg || {}), (a, n) => {
           if (this.source[n] === undefined) {
             this.$set(this.source, n, a);
@@ -51,25 +54,36 @@
         }
       },
     },
+    watch: {
+      source: {
+        deep: true,
+        handler(){
+          if (!this.isEditor) {
+            let cp = this.getRef('component');
+            if (cp) {
+              cp.$forceUpdate();
+            }
+          }
+        }
+      }
+    },
     created() {
       if (this.source.type && (bbn.fn.numProperties(this.source) === 1)) {
         this.applyDefaultConfig();
+      } else {
+        bbn.fn.log("test", this.source);
       }
+      const config = {};
+      bbn.fn.iterate(this.source, (a, n) => {
+        if (!this.ignoredFields.includes(n)) {
+          config[n] = a;
+        }
+      });
+      this.$emit('configinit', config);
     },
     mounted() {
       this.ready = true;
     },
-    source: {
-      deep: true,
-      handler(){
-        if (!this.isEditor) {
-          let cp = this.getRef('component');
-          if (cp) {
-            cp.$forceUpdate();
-          }
-        }
-      }
-    }
   };
 
   return {
@@ -123,9 +137,12 @@
         ready: true,
         initialSource: null,
         currentClass: 'bbn-w-100'
-      }
+      };
     },
     computed: {
+      ignoredFields() {
+        return this.getRef('component').ignoreFields;
+      },
       isSelected() {
         return this.selected === true;
       },
@@ -143,10 +160,6 @@
       }
     },
     methods: {
-      sendBlock() {
-        bbn.fn.log('send Block');
-        this.$emit('click', this.source);
-      },
       selectImg(st){
         bbn.fn.link(st);
       },
@@ -218,13 +231,15 @@
           }
         })
       },
+      configInit(config) {
+        this.$emit('configinit', config);
+      }
     },
     mounted(){
       this.ready = true;
     },
     watch: {
       currentComponent(v) {
-        bbn.fn.log(v, JSON.stringify(this.source));
         this.ready = false;
         setTimeout(() => {
           this.ready = true;

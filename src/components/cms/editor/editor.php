@@ -42,13 +42,14 @@
           <appui-note-cms-elementor :source="source.items"
                                     @hook:mounted="ready = true"
                                     ref="editor"
-                                    @changes="handleChanges"
+                                    @changes="handleSelected"
                                     v-droppable="true"
                                     @drop.prevent="onDrop"
                                     :preview="preview"
                                     @dragoverdroppable="dragOver"
                                     :position="nextPosition"
-                                    @dragstart="dragStart">
+                                    @dragstart="dragStart"
+                                    @unselect="unselectElements">
           </appui-note-cms-elementor>
         </bbn-scroll>
       </div>
@@ -56,42 +57,58 @@
     <!--Wigets properties-->
     <div :class="{slider: true, opened: showSlider}">
       <bbn-scroll axis="y">
-        <div class="bbn-w-100 bbn-middle bbn-flex"
-             v-if="currentEdited !== null"
-             style="flex-direction: column;">
-          <div class="bbn-w-100 bbn-padded">
-            <appui-note-cms-block class="bbn-contain"
-                                  :source="currentEdited"
-                                  mode="edit"/>
+        <div class="bbn-w-100"
+             v-if="currentEdited"
+             >
+          <h2 v-text="getBlockTitle(currentEdited.type)"
+              class="bbn-c" />
+          <div class="bbn-w-100 bbn-flex-width">
+            <div v-if="!currentEditedIndexInContainer"
+                 class="bbn-padding appui-note-cms-editor-position">
+              <bbn-button :notext="true"
+                          @click="move('top')"
+                          text="<?= _("Move top") ?>"
+                          :disabled="(source.items.length <= 1) || (currentEditedIndex < 1)"
+                          icon="nf nf-mdi-arrow_collapse_up"/>
+              <bbn-button :notext="true"
+                          @click="move('up')"
+                          text="<?= _("Move up") ?>"
+                          :disabled="(source.items.length <= 1) || !currentEditedIndex"
+                          icon="nf nf-mdi-arrow_up"/>
+              <bbn-button :notext="true"
+                          @click="move('down')"
+                          text="<?= _("Move down") ?>"
+                          :disabled="(source.items.length <= 1) || (currentEditedIndex === source.items.length - 1)"
+                          icon="nf nf-mdi-arrow_down"/>
+              <bbn-button :notext="true"
+                          @click="move('bottom')"
+                          text="<?= _("Move bottom") ?>"
+                          :disabled="(source.items.length <= 1) || (currentEditedIndex > source.items.length - 2)"
+                          icon="nf nf-mdi-arrow_collapse_down"/>
+            </div>
+            <div class="bbn-flex-fill">
+              <appui-note-cms-block	@configinit="setOriginalConfig"
+                                    v-if="isReady"
+                                    class="bbn-contain"
+                                    :source="currentEdited"
+                                    :cfg="currentBlockConfig"
+                                    ref="blockEditor"
+                                    mode="edit"/>
+            </div>
+
           </div>
-          <div class="bbn-flex" style="gap: 10px; justify-content: center: align-items: center;">
+          <div class="bbn-w-100 bbn-c bbn-padding">
+            <bbn-button @click="saveConfig"
+                        text="<?= _("Create new block type") ?>"
+                        icon="nf nf-fa-save"
+                        :disabled="!isConfigChanged"/>
             <bbn-button @click="deleteCurrentSelected"
                         text="<?= _("Delete this block") ?>"
                         icon="nf nf-fa-trash"/>
-            <bbn-button :notext="true"
-                        @click="move('top')"
-                        text="<?= _("Move top") ?>"
-                        :disabled="(source.items.length <= 1) || (currentEdited <= 1)"
-                        icon="nf nf-mdi-arrow_collapse_up"/>
-            <bbn-button :notext="true"
-                        @click="move('up')"
-                        text="<?= _("Move up") ?>"
-                        :disabled="(source.items.length <= 1) || !currentEdited"
-                        icon="nf nf-mdi-arrow_up"/>
-            <bbn-button :notext="true"
-                        @click="move('down')"
-                        text="<?= _("Move down") ?>"
-                        :disabled="(source.items.length <= 1) || (currentEdited === source.length - 1)"
-                        icon="nf nf-mdi-arrow_down"/>
-            <bbn-button :notext="true"
-                        @click="move('bottom')"
-                        text="<?= _("Move bottom") ?>"
-                        :disabled="(source.items.length <= 1) || (currentEdited >= source.length - 2)"
-                        icon="nf nf-mdi-arrow_collapse_down"/>
           </div>
         </div>
         <div v-else-if="!currentEdited && currentContainer">
-          
+          <appui-note-cms-container-config :source="currentContainer"/>
         </div>
       </bbn-scroll>
       <div class="bbn-top-right bbn-p bbn-lg"
@@ -103,13 +120,14 @@
     <div :class="{slider: true, opened: showWidgets}">
       <bbn-scroll axis="y">
         <div class="bbn-w-100 bbn-middle bbn-lpadding bbn-grid grid bbn-unselectable">
-          <appui-note-cms-dropper v-for="(v, i) in blocks"
-                                  :key="v.code"
+          <appui-note-cms-dropper v-for="(v, i) in allBlocks"
+                                  :key="v.id"
                                   :description="v.description"
-                                  :class="['block-' + v.code]"
+                                  :class="['block-' + v.code, {'bbn-pink': v.personalized}]"
                                   :type="v.code"
                                   :title="v.text"
                                   :icon="v.icon"
+                                  :default-config="v.cfg"
                                   />
         </div>
       </bbn-scroll>

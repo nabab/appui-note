@@ -16,18 +16,24 @@
       },
       blocks: {
         type: Array,
+      },
+      pblocks: {
+        type: Array
       }
     },
     data() {
       return {
         data: null,
         oData: JSON.stringify(this.source),
+        oConfig: null,
         ready: false,
         root: appui.plugins['appui-note'] + '/',
         showFloater: false,
         showSlider: false,
         showWidgets: false,
         currentEdited: null,
+        currentEditedIndex: -1,
+        currentEditedIndexInContainer: null,
         editedSource: null,
         map: [],
         currentPosition: {},
@@ -37,10 +43,28 @@
         dataElementor: {},
         containerPosition: {},
         preview: false,
-        currentContainer: null
+        currentContainer: null,
+        originalConfig: null,
+        isReady: true
       };
     },
     computed: {
+      allBlocks() {
+        const arr = [];
+        bbn.fn.each(this.pblocks, a => {
+          const block = bbn.fn.clone(bbn.fn.getRow(this.blocks, {id: a.id_alias}));
+          if (!block) {
+            bbn.fn.error(bbn._("The block doesn't exist"));
+          }
+          block.text = a.text;
+          block.cfg = a.configuration;
+          block.personalized = true;
+          block.id = a.id;
+          arr.push(block);
+        });
+        arr.push(...this.blocks);
+        return arr;
+      },
       types() {
         return this.data ? this.data.types_notes : [];
       },
@@ -52,9 +76,41 @@
       },
       isChanged() {
         return JSON.stringify(this.source) !== this.oData;
+      },
+      isConfigChanged() {
+        bbn.fn.log("config changed", this.currentEdited, this.originalConfig);
+        let isChanged = false;
+        if (this.originalConfig) {
+          bbn.fn.iterate(this.currentEdited, (value, prop) => {
+            if ((!bbn.fn.isSame(this.originalConfig[prop], value)) && this.originalConfig[prop] !== undefined) {
+              isChanged = true;
+              return false;
+            }
+          });
+        }
+        return isChanged;
       }
     },
     methods: {
+      unselectElements() {
+        this.currentEdited = null;
+        this.currentEditedIndex = -1;
+        this.currentEditedIndexInContainer = null;
+        this.showSlider = false;
+      },
+      setOriginalConfig(config) {
+        this.originalConfig = config;
+      },
+      saveConfig() {
+       	this.getPopup({
+          component: this.$options.components.configForm,
+          source: this.currentEdited,
+          title: false
+        });
+      },
+      getBlockTitle(code) {
+        return bbn.fn.getField(this.blocks, 'text', {code});
+      },
       /**
        * Removes the 'product' property from the object to be submitted
        * @todo ask Loredana
@@ -109,20 +165,33 @@
        * the source of the block.
        * @param {Object} source the source object of the current selected block
        */
-      handleChanges(source) {
+      handleSelected(index, source, indexInContainer = null) {
         this.showWidgets = false;
-        this.showSlider = true;
-        bbn.fn.log('handle changes', source);
-        this.currentEdited = source;
+        this.currentEdited = null;
+        setTimeout(() => {
+          this.currentEditedIndex = index;
+          this.currentEdited = source;
+          if (indexInContainer !== null) {
+            this.currentEditedIndexInContainer = indexInContainer;
+          }
+          this.showSlider = true;
+        }, 250);
       },
       /**
        * Delete the current selected block
        */
       deleteCurrentSelected() {
         this.confirm(bbn._("Are you sure you want to delete this block and its content?"), () => {
-          let idx = this.currentEdited;
-          this.currentEdited = -1;
+          let idx = this.currentEditedIndex;
+          let idxInContainer = this.currentEditedIndexInContainer;
+          if (this.currentEditedIndexInContainer) {
+            this.source.items[idx].source.items.splice(idxInContainer, 1);
+            this.mapY();
+            return;
+          }
           this.source.items.splice(idx, 1);
+          this.currentEditedIndex = -1;
+          this.showSlider = false;
           this.mapY();
         });
       },
@@ -132,13 +201,14 @@
        * @return void
        */
       onDrop(ev) {
-        const block = bbn.fn.clone(ev.detail.from.data);
+        const block = bbn.fn.clone(ev.detail.from.data.source);
+        this.currentBlockConfig = ev.detail.from.data.cfg || {};
+        bbn.fn.log("block config", this.currentBlockConfig);
         let elementor = this.getRef('editor');
         let guide = elementor.getRef('guide');
         let divider = elementor.getRef('divider');
         let movedItem = false;
 
-        bbn.fn.log('event', ev.detail);
         // Check if the moved block comes from inside the elementor component
         if (this.source.items[this.dataElementor.dataIndex || null]) {
           // if a container already exists dataContainerIndex will exist
@@ -158,7 +228,6 @@
         }
         // block is dropped inside another block and create a container
         if (this.insideContainer) {
-          bbn.fn.log('drop inside container');
           // avoid creating container inside container
           if (this.source.items[this.nextPosition].type == 'container') {
             bbn.fn.log('avoid creation multiple containers', block, ev.detail.from);
@@ -365,7 +434,6 @@
       mapY() {
         let editor = this.getRef('editor');
         let tmp_arr = [];
-        bbn.fn.log('mapper in action');
         this.source.items.map((v, idx) => {
           let ele = editor.getRef('block' + idx);
           let detail = ele.$el.getBoundingClientRect();
@@ -384,7 +452,6 @@
        * Function triggered when dragging an element
        */
       dragStart(data) {
-        bbn.fn.log('start');
         this.dataElementor = data;
       },
       /**
@@ -425,18 +492,10 @@
         }
       },
       currentEdited(v) {
-        //Check if the currentEdited if a block or a container
-        this.editedSource = null;
-        if (this.source.items[v]) {
-          this.currentContainer = null;
-          this.currentType = this.source.items[v].type || 'text';
-          if (this.currentType != 'container') {
-            this.editedSource = this.source.items[this.currentEdited];
-          }
-        }
-        /*this.$nextTick(() => {
-          this.updateSelected();
-        });*/
+        this.isReady = false;
+        setTimeout(() => {
+          this.isReady = true;
+        }, 100);
       },
     },
     mounted() {
@@ -445,14 +504,34 @@
       setTimeout(() => {
         this.mapY();
       }, 500);
-      /*if (this.source.items.length == 0) {
-        this.$set(this.source.items, 0, {type: "title", content: "Bienvenue sur l'editeur de page", tag: 'h1', align: 'center', hr: null,
-                                         style: {
-                                           'text-decoration': 'none',
-                                           'font-style': 'normal',
-                                           color: '#000000'
-                                         }});
-      }*/
+    },
+    components: {
+      configForm: {
+        template:`
+<bbn-form :action="root + 'cms/actions/config/insert'"
+					:source="formData">
+	<div class="bbn-grid-fields bbn-lg bbn-lpadding">
+  	<div v-text="_('Name of your block')"/>
+    <bbn-input v-model="formData.name"
+    					 :required="true"/>
+  </div>
+</bbn-form>
+        `,
+        props: {
+          source: {
+            type: Object
+          }
+        },
+        data() {
+          return {
+            root: appui.plugins['appui-note'] + '/',
+            formData: {
+              name: '',
+              config: this.source
+            }
+          };
+        }
+      }
     }
   };
 })();

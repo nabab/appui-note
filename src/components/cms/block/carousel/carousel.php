@@ -1,12 +1,12 @@
 <!-- HTML Document -->
 <div :class="componentClass">
   <div v-if="mode === 'edit'"
-       class="bbn-grid-fields bbn-padded">
+       class="bbn-grid-fields">
     <label><?=_('Gallery')?></label>
     <div class="bbn-vmiddle">
       <bbn-dropdown :source="galleryListUrl"
                     source-value="id"
-                    v-model="source.source"
+                    v-model="source.content"
                     ref="galleryList"
                     :suggest="true"
                     :filterable="true"
@@ -18,7 +18,7 @@
                   title="<?=_('Open galleries management')?>"/>
     </div>
     <label><?=_('Width')?></label>
-    <bbn-range v-model="source.style.width"
+    <bbn-range v-model="source.width"
 									 :min="10"
 									 :max="2000" 
 									 :step="10"
@@ -26,7 +26,7 @@
 									 :show-numeric="true"
 									 :show-units="true"/>
     <label><?=_('Height')?></label>
-    <bbn-range v-model="source.style.height"
+    <bbn-range v-model="source.height"
 									 :min="10"
 									 :max="2000" 
 									 :step="10"
@@ -96,7 +96,7 @@
        class="bbn-flex"
        :style="align">
     <div class="bbn-block bbn-rel"
-         :style="source.style">
+         :style="{'width': source.width, 'height': source.height}">
       <div v-if="isLoading"
            class="bbn-c">
         <bbn-loadicon :size="32"/>

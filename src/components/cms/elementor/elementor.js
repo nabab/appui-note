@@ -191,7 +191,7 @@
     },
     data(){
       return {
-        currentEdited: -1,
+        currentEditedIndex: -1,
         types: types,
         indexInContainer: -1,
         dragData: bbn.fn.map(this.source, (cfg, i) => {
@@ -200,6 +200,11 @@
       };
     },
     methods: {
+      unselect() {
+        this.currentEditedIndex = -1;
+        this.indexInContainer = -1;
+        this.$emit('unselect');
+      },
       dragStart() {
         let currentElement = arguments[0].target;
         this.$emit('dragstart', {
@@ -210,16 +215,18 @@
       /*
       Emit the current source object (from a block) to the editor component.
       */
-      changeEdited(source) {
-        bbn.fn.log('emit changes to editor', source);
-        this.$emit('changes', source);
+      selectBlock(index, source) {
+        this.currentEditedIndex = index;
+        this.indexInContainer = -1;
+        this.$emit('changes', index, source);
       },
       /*
       Emit the current source object (from a container) to the editor component.
       */
-      changeEditedContainer(item) {
-        bbn.fn.log('changes container', item);
-        this.$emit('changes', item);
+      selectContainer(index, source, indexInContainer) {
+        this.currentEditedIndex = index;
+        this.indexInContainer = indexInContainer;
+        this.$emit('changes', index, source, indexInContainer);
       },
       /*
       Ask the user to save changes and submit the form
@@ -230,19 +237,19 @@
           if (form.isValid()) {
             this.confirm(bbn._("Do you want to save your changes?"), () => {
               form.submit();
-              this.currentEdited = idx;
+              this.currentEditedIndex = idx;
             }, () => {
-              this.currentEdited = idx;
+              this.currentEditedIndex = idx;
             });
           }
           else {
             this.confirm(bbn._("Do you want to abandon your changes?"), () => {
-              this.currentEdited = idx;
+              this.currentEditedIndex = idx;
             });
           }
         }
         else {
-          this.currentEdited = idx;
+          this.currentEditedIndex = idx;
         }
       },
       /*
