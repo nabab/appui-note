@@ -12,6 +12,7 @@
   <component v-if="ready"
              @configinit="configInit"
              :is="currentComponent"
+             :cfg="cfg"
              ref="component"
              :mode="mode"
              :source="source"

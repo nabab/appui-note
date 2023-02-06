@@ -45,10 +45,16 @@
         preview: false,
         currentContainer: null,
         originalConfig: null,
-        isReady: true
+        isReady: false,
+        currentBlockConfig: null
       };
     },
     computed: {
+      currentEditedTitle() {
+        if (this.currentEdited) {
+          
+        }
+      },
       allBlocks() {
         const arr = [];
         bbn.fn.each(this.pblocks, a => {
@@ -59,6 +65,7 @@
           block.text = a.text;
           block.cfg = a.configuration;
           block.personalized = true;
+          block.id_alias = block.id;
           block.id = a.id;
           arr.push(block);
         });
@@ -99,17 +106,18 @@
         this.showSlider = false;
       },
       setOriginalConfig(config) {
+        bbn.fn.log('set original config', config);
         this.originalConfig = config;
       },
       saveConfig() {
-       	this.getPopup({
+        this.getPopup({
           component: this.$options.components.configForm,
           source: this.currentEdited,
           title: false
         });
       },
-      getBlockTitle(code) {
-        return bbn.fn.getField(this.blocks, 'text', {code});
+      getBlockTitle(id) {
+        return bbn.fn.getField(this.allBlocks, 'text', {id});
       },
       /**
        * Removes the 'product' property from the object to be submitted
@@ -203,6 +211,7 @@
       onDrop(ev) {
         const block = bbn.fn.clone(ev.detail.from.data.source);
         this.currentBlockConfig = ev.detail.from.data.cfg || {};
+        bbn.fn.iterate(this.currentBlockConfig, (a, n) => block[n] = a);
         bbn.fn.log("block config", this.currentBlockConfig);
         let elementor = this.getRef('editor');
         let guide = elementor.getRef('guide');
@@ -312,6 +321,10 @@
       dragOver(e) {
         // Check if map is empty or not
         if (this.map.length == 0) {
+          let elementor = this.getRef('editor');
+          let guide = elementor.getRef('guide');
+          guide.style.display = 'flex';
+          guide.style.top = 0;
           return false;
         }
         this.currentPosition = e.detail.helper.getBoundingClientRect();
@@ -325,7 +338,6 @@
 
         //check if the current position is at top
         if (this.currentPosition.y < this.map[0].y) {
-          bbn.fn.log('top of the map');
           this.insideContainer = false;
           this.nextPosition = 0;
           guide.style.display = "flex";
@@ -333,7 +345,6 @@
         }
         //check if the current position is at bottom
         else if (this.currentPosition.y > (this.map.at(-1).y + this.map.at(-1).height)) {
-          bbn.fn.log('bottom of the map');
           this.insideContainer = false;
           this.nextPosition = -1;
           guide.style.display = "flex";
@@ -347,15 +358,23 @@
             sum += v.height + 13;
             //check if current position is inside a block
             if ((this.currentPosition.y > v.y) && (this.currentPosition.y < (v.y + v.height))) {
-              bbn.fn.log('inside a block');
               this.insideContainer = true;
               this.nextPosition = this.map.indexOf(v);
               let rect = v.html.getBoundingClientRect();
               let mapContainer = this.mapContainer(v, this.map.indexOf(v));
               //Check if the block is a container and do a mapper inside of it
               if (mapContainer && mapContainer.length >= 2) {
-                bbn.fn.log('move inside container');
-                mapContainer.map((v, idx, array) => {
+                bbn.fn.log('move inside container', mapContainer);
+                mapContainer.map(v => {
+                  let block = v.rect;
+                  let middle = (block.x + block.width) / 2;
+                  if (this.currentPosition.x > middle && this.currentPosition.x < (block.x + block.width)) {
+                    bbn.fn.log('to the right');
+                  } else if (this.currentPosition.x < (block.width/2)) {
+                    bbn.fn.log('to the left');
+                  }
+                });
+                /*mapContainer.map((v, idx, array) => {
                   if (this.currentPosition.x < v.rect.width/2) {
                     if (idx > 0) {
                       this.nextContainerPosition = idx;
@@ -367,22 +386,22 @@
                   else if (this.currentPosition.x > v.rect.width/2) {
                     bbn.fn.log('to the right');
                   }
-                  /*if (this.currentElement.x < v.rect.width/2) {
-                  if (idx > 0) {
-                    bbn.fn.log('to the left of', idx);
-                  } else {
-                    bbn.fn.log('at the beginning of the list');
+                  if (this.currentElement.x < v.rect.width/2) {
+                    if (idx > 0) {
+                      bbn.fn.log('to the left of', idx);
+                    } else {
+                      bbn.fn.log('at the beginning of the list');
+                    }
                   }
-                }
-                else if (this.currentElement.x > v.rect.width/2) {
-                  bbn.fn.log('to the right of', idx);
-                  if (array[idx + 1]) {
-                    bbn.fn.log('something after');
-                  } else {
-                    bbn.fn.log('nothing after');
+                  else if (this.currentElement.x > v.rect.width/2) {
+                    bbn.fn.log('to the right of', idx);
+                    if (array[idx + 1]) {
+                      bbn.fn.log('something after');
+                    } else {
+                      bbn.fn.log('nothing after');
+                    }
                   }
-                }*/
-                });
+                });*/
               }
               if (this.currentPosition.x < rect.width/2) {
                 this.nextContainerPosition = 0;
@@ -504,6 +523,7 @@
       setTimeout(() => {
         this.mapY();
       }, 500);
+      bbn.fn.log('pblocks', this.pblocks);
     },
     components: {
       configForm: {

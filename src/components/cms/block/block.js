@@ -42,6 +42,8 @@
         bbn.fn.iterate(bbn.fn.extend({}, this.defaultConfig, this.cfg || {}), (a, n) => {
           if (this.source[n] === undefined) {
             this.$set(this.source, n, a);
+          } else {
+            this.source[n] = a;
           }
         });
       },
@@ -69,9 +71,11 @@
     },
     created() {
       if (this.source.type && (bbn.fn.numProperties(this.source) === 1)) {
+        bbn.fn.log('created', JSON.stringify(this.source), JSON.stringify(this.cfg));
         this.applyDefaultConfig();
+        bbn.fn.log('created 2', JSON.stringify(this.source));
       } else {
-        bbn.fn.log("test", this.source);
+        bbn.fn.log("test", JSON.stringify(this.source));
       }
       const config = {};
       bbn.fn.iterate(this.source, (a, n) => {
@@ -92,6 +96,12 @@
      */
     mixins: [bbn.vue.basicComponent, bbn.vue.resizerComponent],
     props: {
+      cfg: {
+        type: Object,
+        default() {
+          return {};
+        }
+      },
       source: {
         type: Object,
         required: true

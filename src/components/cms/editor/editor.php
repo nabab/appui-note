@@ -60,7 +60,7 @@
         <div class="bbn-w-100"
              v-if="currentEdited"
              >
-          <h2 v-text="getBlockTitle(currentEdited.type)"
+          <h2 v-text="currentEditedTitle"
               class="bbn-c" />
           <div class="bbn-w-100 bbn-flex-width">
             <div v-if="!currentEditedIndexInContainer"
