@@ -174,6 +174,9 @@
 
   return {
     props: {
+      allBlocks: {
+        type: Array
+      },
       source: {
         type: Array,
         required: true

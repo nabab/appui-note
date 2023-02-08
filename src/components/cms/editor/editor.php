@@ -42,6 +42,7 @@
           <appui-note-cms-elementor :source="source.items"
                                     @hook:mounted="ready = true"
                                     ref="editor"
+                                    :all-blocks="allBlocks"
                                     @changes="handleSelected"
                                     v-droppable="true"
                                     @drop.prevent="onDrop"
@@ -119,12 +120,13 @@
     <!--Widgets menu-->
     <div :class="{slider: true, opened: showWidgets}">
       <bbn-scroll axis="y">
-        <div class="bbn-w-100 bbn-middle bbn-lpadding bbn-grid grid bbn-unselectable">
+        <div class="bbn-w-100 bbn-middle bbn-lpadding bbn-grid grid-dropper bbn-unselectable">
           <appui-note-cms-dropper v-for="(v, i) in allBlocks"
                                   :key="v.id"
                                   :description="v.description"
-                                  :class="['block-' + v.code, {'bbn-pink': v.personalized}]"
+                                  :class="['block-' + v.code, {'bbn-pink': v.special}]"
                                   :type="v.code"
+                                  :special="v.special"
                                   :title="v.text"
                                   :icon="v.icon"
                                   :default-config="v.cfg"

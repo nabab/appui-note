@@ -22,6 +22,9 @@
         default() {
           return {};
         }
+      },
+      special: {
+        type: String
       }
     },
     data(){
@@ -70,7 +73,11 @@
       }
     },
     created() {
-      if (this.source.type && (bbn.fn.numProperties(this.source) === 1)) {
+      if (this.source.type 
+          && ((bbn.fn.numProperties(this.source) === 1) 
+              || (this.source.special && (bbn.fn.numProperties(this.source) === 2))
+             )
+      ) {
         bbn.fn.log('created', JSON.stringify(this.source), JSON.stringify(this.cfg));
         this.applyDefaultConfig();
         bbn.fn.log('created 2', JSON.stringify(this.source));
@@ -96,6 +103,9 @@
      */
     mixins: [bbn.vue.basicComponent, bbn.vue.resizerComponent],
     props: {
+      special: {
+        type: String
+      },
       cfg: {
         type: Object,
         default() {

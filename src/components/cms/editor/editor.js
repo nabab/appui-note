@@ -38,7 +38,7 @@
         map: [],
         currentPosition: {},
         nextPosition: 0,
-        nextContainerPosition: 0,
+        nextContainerPosition: -1,
         insideContainer: false,
         dataElementor: {},
         containerPosition: {},
@@ -52,7 +52,15 @@
     computed: {
       currentEditedTitle() {
         if (this.currentEdited) {
-          
+          if (this.currentEdited.special) {
+            let txt = bbn.fn.getField(this.allBlocks, 'text', {special: this.currentEdited.special});
+            if (!txt) {
+              this.$delete(this.currentEdited, 'special');
+            } else {
+              return txt;
+            }
+          }
+          return bbn.fn.getField(this.allBlocks, 'text', {special: null, code: this.currentEdited.type});
         }
       },
       allBlocks() {
@@ -64,12 +72,17 @@
           }
           block.text = a.text;
           block.cfg = a.configuration;
-          block.personalized = true;
+          block.special = a.id;
           block.id_alias = block.id;
           block.id = a.id;
           arr.push(block);
         });
-        arr.push(...this.blocks);
+        //arr.push(...this.blocks);
+        arr.push(...this.blocks.map(a => {
+          const it = bbn.fn.clone(a);
+          it.special = null;
+          return it;
+        }));
         return arr;
       },
       types() {
@@ -85,28 +98,37 @@
         return JSON.stringify(this.source) !== this.oData;
       },
       isConfigChanged() {
-        bbn.fn.log("config changed", this.currentEdited, this.originalConfig);
         let isChanged = false;
         if (this.originalConfig) {
+          let ignoredFields = [];
+          let block = this.getRef('blockEditor');
+          if (block) {
+            let edi = block.getRef('component');
+            if (edi && edi.ignoredFields) {
+              ignoredFields = edi.ignoredFields;
+            }
+          }
           bbn.fn.iterate(this.currentEdited, (value, prop) => {
-            if ((!bbn.fn.isSame(this.originalConfig[prop], value)) && this.originalConfig[prop] !== undefined) {
+            if (!ignoredFields.includes(prop) && !bbn.fn.isSame(this.originalConfig[prop], value)) {
               isChanged = true;
               return false;
             }
           });
         }
+        bbn.fn.log("config changed", isChanged, this.currentEdited, this.originalConfig);
         return isChanged;
       }
     },
     methods: {
       unselectElements() {
+        bbn.fn.log('unselect');
         this.currentEdited = null;
         this.currentEditedIndex = -1;
         this.currentEditedIndexInContainer = null;
         this.showSlider = false;
       },
       setOriginalConfig(config) {
-        bbn.fn.log('set original config', config);
+        //bbn.fn.log('set original config', config);
         this.originalConfig = config;
       },
       saveConfig() {
@@ -174,16 +196,19 @@
        * @param {Object} source the source object of the current selected block
        */
       handleSelected(index, source, indexInContainer = null) {
-        this.showWidgets = false;
-        this.currentEdited = null;
-        setTimeout(() => {
-          this.currentEditedIndex = index;
-          this.currentEdited = source;
-          if (indexInContainer !== null) {
-            this.currentEditedIndexInContainer = indexInContainer;
-          }
-          this.showSlider = true;
-        }, 250);
+        if (this.currentEdited !== source) {
+          bbn.fn.log('handle', this.currentEdited, source);
+          this.showWidgets = false;
+          this.currentEdited = null;
+          setTimeout(() => {
+            this.currentEditedIndex = index;
+            this.currentEdited = source;
+            if (indexInContainer !== null) {
+              this.currentEditedIndexInContainer = indexInContainer;
+            }
+            this.showSlider = true;
+          }, 250);
+        }
       },
       /**
        * Delete the current selected block
@@ -210,13 +235,17 @@
        */
       onDrop(ev) {
         const block = bbn.fn.clone(ev.detail.from.data.source);
+        bbn.fn.log('block dropped', block);
         this.currentBlockConfig = ev.detail.from.data.cfg || {};
         bbn.fn.iterate(this.currentBlockConfig, (a, n) => block[n] = a);
-        bbn.fn.log("block config", this.currentBlockConfig);
         let elementor = this.getRef('editor');
         let guide = elementor.getRef('guide');
         let divider = elementor.getRef('divider');
         let movedItem = false;
+        let found = this.allBlocks.find(el => el.id === block.special);
+
+        if (!found) {
+        }
 
         // Check if the moved block comes from inside the elementor component
         if (this.source.items[this.dataElementor.dataIndex || null]) {
@@ -239,7 +268,7 @@
         if (this.insideContainer) {
           // avoid creating container inside container
           if (this.source.items[this.nextPosition].type == 'container') {
-            bbn.fn.log('avoid creation multiple containers', block, ev.detail.from);
+            //bbn.fn.log('avoid creation multiple containers', block, ev.detail.from);
             if (this.nextContainerPosition == 0) {
               this.source.items[this.nextPosition].source.items.unshift(block);
             } else {
@@ -267,7 +296,7 @@
           return;
         }
         // Place the block at the correct index position
-        bbn.fn.log('place block at correct index');
+        //bbn.fn.log('place block at correct index');
         if (this.nextPosition == 0) {
           this.source.items.unshift(block);
         }
@@ -300,18 +329,18 @@
             idx = 0;
             break;
           case 'up':
-            idx = this.currentEdited - 1;
+            idx = this.currentEditedIndex - 1;
             break;
           case 'down':
-            idx = this.currentEdited + 1;
+            idx = this.currentEditedIndex + 1;
             break;
           case 'bottom':
             idx = this.source.items.length - 1;
             break;
         }
         if (this.source.items[idx]) {
-          bbn.fn.move(this.source.items, this.currentEdited, idx);
-          this.currentEdited = idx;
+          bbn.fn.move(this.source.items, this.currentEditedIndex, idx);
+          this.currentEditedIndex = idx;
         }
       },
       /**
@@ -327,6 +356,7 @@
           guide.style.top = 0;
           return false;
         }
+
         this.currentPosition = e.detail.helper.getBoundingClientRect();
         let elementor = this.getRef('editor');
         let editor = elementor.$el.firstChild;
@@ -365,43 +395,36 @@
               //Check if the block is a container and do a mapper inside of it
               if (mapContainer && mapContainer.length >= 2) {
                 bbn.fn.log('move inside container', mapContainer);
-                mapContainer.map(v => {
+                mapContainer.map((v, idx) => {
                   let block = v.rect;
-                  let middle = (block.x + block.width) / 2;
-                  if (this.currentPosition.x > middle && this.currentPosition.x < (block.x + block.width)) {
-                    bbn.fn.log('to the right');
-                  } else if (this.currentPosition.x < (block.width/2)) {
-                    bbn.fn.log('to the left');
+                  if (this.currentPosition.x > block.x && this.currentPosition.x < (block.x + block.width)) {
+                    bbn.fn.log('in the ', idx, 'block');
+                    if (this.currentPosition.x < block.x + (block.width / 2)) {
+                      bbn.fn.log('to the left');
+                      if (idx === 0) {
+                        this.nextContainerPosition = 0;
+                      } else {
+                        this.nextContainerPosition = idx;
+                      }
+                      divider.style.display = 'block';
+                      divider.style.height = block.height + 'px';
+                      divider.style.width = block.width/2 + 'px';
+                      divider.style.left = block.left + 'px';
+                    } else {
+                      bbn.fn.log('to the right');
+                      divider.style.display = 'block';
+                      divider.style.height = block.height + 'px';
+                      divider.style.width = block.width/2 + 'px';
+                      divider.style.left = block.x + block.width/2 + 'px';
+                      if (idx !== mapContainer.length - 1) {
+                        this.nextContainerPosition = idx + 1;
+                      } else {
+                        this.nextContainerPosition = -1;
+                      }
+                    }
                   }
                 });
-                /*mapContainer.map((v, idx, array) => {
-                  if (this.currentPosition.x < v.rect.width/2) {
-                    if (idx > 0) {
-                      this.nextContainerPosition = idx;
-                    } else {
-                      this.nextContainerPosition = 0;
-                    }
-                    return false;
-                  }
-                  else if (this.currentPosition.x > v.rect.width/2) {
-                    bbn.fn.log('to the right');
-                  }
-                  if (this.currentElement.x < v.rect.width/2) {
-                    if (idx > 0) {
-                      bbn.fn.log('to the left of', idx);
-                    } else {
-                      bbn.fn.log('at the beginning of the list');
-                    }
-                  }
-                  else if (this.currentElement.x > v.rect.width/2) {
-                    bbn.fn.log('to the right of', idx);
-                    if (array[idx + 1]) {
-                      bbn.fn.log('something after');
-                    } else {
-                      bbn.fn.log('nothing after');
-                    }
-                  }
-                });*/
+                return false;
               }
               if (this.currentPosition.x < rect.width/2) {
                 this.nextContainerPosition = 0;
@@ -483,6 +506,9 @@
       }
     },
     watch: {
+      nextContainerPosition() {
+        bbn.fn.log('next container position', this.nextContainerPosition);
+      },
       'source.items'() {
         setTimeout(() => {
           this.mapY();
@@ -510,11 +536,13 @@
           }
         }
       },
-      currentEdited(v) {
-        this.isReady = false;
-        setTimeout(() => {
-          this.isReady = true;
-        }, 100);
+      currentEdited(v, ov) {
+        if (!ov || !v || (v.type !== ov.type)) {
+          this.isReady = false;
+          setTimeout(() => {
+            this.isReady = true;
+          }, 100);
+        }
       },
     },
     mounted() {

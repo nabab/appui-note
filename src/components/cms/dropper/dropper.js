@@ -19,7 +19,10 @@
       },
       description: {
         type: String
+      },
+      special: {
+        type: String
       }
     }
-  }
+  };
 })();
