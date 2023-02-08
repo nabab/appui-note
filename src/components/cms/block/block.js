@@ -60,7 +60,7 @@
       },
     },
     watch: {
-      source: {
+      /*source: {
         deep: true,
         handler(){
           if (!this.isEditor) {
@@ -70,7 +70,7 @@
             }
           }
         }
-      }
+      }*/
     },
     created() {
       if (this.source.type 
@@ -96,16 +96,16 @@
       this.ready = true;
     },
     source: {
-      deep: true,
-      handler(){
-        if (!this.isEditor) {
-          let cp = this.getRef('component');
-          if (cp) {
-            cp.$forceUpdate();
+        deep: true,
+        handler(){
+          if (!this.isEditor) {
+            let cp = this.getRef('component');
+            if (cp) {
+              cp.$forceUpdate();
+            }
           }
         }
       }
-    }
   };
 
   return {

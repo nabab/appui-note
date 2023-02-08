@@ -96,9 +96,9 @@
         });
       },
       updateData(){
-        if (this.source.source) {
+        if (this.source.content) {
           this.isLoading = true;
-          this.post(this.slideshowSourceUrl, {data: {idGroup: this.source.source}}, d => {
+          this.post(this.slideshowSourceUrl, {data: {idGroup: this.source.content}}, d => {
             if (d.success && d.data) {
               this.currentItems.splice(0, this.currentItems.length);
               this.$nextTick(() => {
@@ -128,7 +128,7 @@
       }
     },
     watch: {
-      'source.source'(){
+      'source.content'(){
         this.updateData();
       }
     }

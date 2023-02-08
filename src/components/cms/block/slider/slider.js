@@ -19,7 +19,9 @@
           info: 1,
           width: '100%',
           height: '100%',
-          align: 'center'
+          align: 'center',
+          margin: '0px',
+          marginMobile: '0px'
         },
         isReady: true,
         okMode: false,

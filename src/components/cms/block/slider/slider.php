@@ -169,8 +169,8 @@
     </div>
   </div>
   <div v-else class="bbn-w-100" :style="{'height':source.height ? source.height : '', 'width':source.width ? source.width :''}">
-    <bbn-slideshow v-if="source.currentItems"
-                   :source="source.currentItems"
+    <bbn-slideshow v-if="source.content"
+                   :source="source.content.data"
                    ref="slideshow"
                    :arrows="!!source.arrows"
                    :arrows-position="source.arrowsPosition"

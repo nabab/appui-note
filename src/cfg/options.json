@@ -29,6 +29,114 @@
     "icon": "nf nf-fa-pencil_square_o",
     "plugin": true,
     "items": [
+	    {
+            "text": "Blocks",
+            "code": "blocks",
+            "items": [
+                {
+                    "text": "Button",
+                    "code": "button",
+                    "description": "A simple button block",
+                    "icon": "nf nf-fa-toggle_on"
+                },
+                {
+                    "text": "Carousel",
+                    "code": "carousel",
+                    "description": "A simple carousel block",
+                    "icon": "nf nf-mdi-view_carousel"
+                },
+                {
+                    "text": "Container",
+                    "code": "container",
+                    "description": "A simple container with multiple blocks",
+                    "icon": "nf nf-mdi-table_row"
+                },
+                {
+                    "text": "Feature",
+                    "code": "feature",
+                    "description": "A simple feature block",
+                    "icon": "nf nf-mdi-new_box"
+                },
+                {
+                    "text": "Gallery",
+                    "code": "gallery",
+                    "description": "A simple media gallery",
+                    "icon": "nf nf-fae-galery"
+                },
+                {
+                    "text": "Html",
+                    "code": "html",
+                    "description": "A simple HTML block",
+                    "icon": "nf nf-dev-html5"
+                },
+                {
+                    "text": "Image",
+                    "code": "image",
+                    "description": "A simple image block",
+                    "icon": "nf nf-fa-image"
+                },
+                {
+                    "text": "Line",
+                    "code": "line",
+                    "description": "A simple line delimiter",
+                    "icon": "nf nf-mdi-vector_line"
+                },
+                {
+                    "text": "Product",
+                    "code": "product",
+                    "description": "A simple product block",
+                    "icon": "nf nf-mdi-package"
+                },
+                {
+                    "text": "Slider",
+                    "code": "slider",
+                    "description": "A simple slider block",
+                    "icon": "nf nf-fa-sliders"
+                },
+                {
+                    "text": "Social",
+                    "code": "social",
+                    "description": "A simple social media block",
+                    "icon": "nf nf-fa-facebook_square"
+                },
+                {
+                    "text": "Space",
+                    "code": "space",
+                    "description": "An empty space block",
+                    "icon": "nf nf-fa-paragraph"
+                },
+                {
+                    "text": "Text",
+                    "code": "text",
+                    "description": "A simple text block",
+                    "icon": "nf nf-seti-text"
+                },
+                {
+                    "text": "Title",
+                    "code": "title",
+                    "description": "A configurable title block",
+                    "icon": "nf nf-mdi-format_title"
+                },
+                {
+                    "text": "Video",
+                    "code": "video",
+                    "description": "A simple video block",
+                    "icon": "nf nf-fa-file_video_o"
+                }
+            ],
+            "cfg": {
+                "show_code": 1,
+                "show_icon": 1,
+                "allow_children": 1,
+                "schema": [
+                    {
+                        "field": "description",
+                        "type": "textarea",
+                        "title": "Description"
+                    }
+                ]
+            }
+        },
       {
         "text": "Editors",
         "code": "editors",

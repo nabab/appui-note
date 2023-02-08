@@ -53,7 +53,7 @@
         });
       },
       onSelection(img) {
-        this.source.source = img.data.path;
+        this.source.content = img.data.path;
         this.getPopup().close();
       }
     },
