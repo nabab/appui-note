@@ -95,6 +95,17 @@
     mounted() {
       this.ready = true;
     },
+    source: {
+      deep: true,
+      handler(){
+        if (!this.isEditor) {
+          let cp = this.getRef('component');
+          if (cp) {
+            cp.$forceUpdate();
+          }
+        }
+      }
+    }
   };
 
   return {

@@ -543,6 +543,9 @@
             this.isReady = true;
           }, 100);
         }
+        /*this.$nextTick(() => {
+          this.updateSelected();
+        });*/
       },
     },
     mounted() {

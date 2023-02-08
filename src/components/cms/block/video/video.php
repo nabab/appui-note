@@ -3,7 +3,7 @@
   <div v-if="mode === 'edit'"
        class="bbn-grid-fields bbn-w-100">
     <label v-text="_('Video source')"/>
-    <bbn-input v-model="source"/>
+    <bbn-input v-model="source.content"/>
     <label><?=_('Muted')?></label>
     <div>
       <bbn-button :notext="true"
