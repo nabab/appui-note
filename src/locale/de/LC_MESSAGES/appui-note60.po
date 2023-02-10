@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: 1\n"
 "Report-Msgid-Bugs-To: info@bbn.so\n"
 "last-Translator: BBN Solutions <support@bbn.solutions>\n"
-"Language-Team: ES <ES@li.org>\n"
+"Language-Team: DE <DE@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-02-09 12:26+0100\n"
-"POT-Revision-Date: 2023-02-09 12:26+0100\n"
-"Language: es\n"
-"X-Domain: appui-note57\n"
+"POT-Creation-Date: 2023-02-10 15:10+0100\n"
+"POT-Revision-Date: 2023-02-10 15:10+0100\n"
+"Language: de\n"
+"X-Domain: appui-note60\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/block/block.js
@@ -81,6 +81,7 @@ msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/personal/personal.php
 msgid "Cancel"
@@ -145,6 +146,20 @@ msgstr ""
 msgid "URL's description"
 msgstr ""
 
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/form/form.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/popupLink/popupLink.php
+msgid "Pick a cover picture"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/form/form.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/popupLink/popupLink.php
+msgid "a screenshot from the site"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/item/item.php
+msgid "Open the link"
+msgstr ""
+
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.js
 msgid "Insert the link in the folder"
 msgstr ""
@@ -165,6 +180,7 @@ msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
@@ -205,6 +221,7 @@ msgid "Remove"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
 msgid "Save"
 msgstr ""
 
@@ -252,6 +269,48 @@ msgstr ""
 msgid "Block changed"
 msgstr ""
 
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/align/align.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/line/line.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
+msgid "Align left"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/align/align.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/line/line.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
+msgid "Align center"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/align/align.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/line/line.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
+msgid "Align right"
+msgstr ""
+
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
@@ -288,9 +347,120 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+msgid "Image"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/line/line.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
+msgid "Width"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/line/line.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/text/text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
+msgid "Alignment"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
+msgid "Alt"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/bookmarks_save.js
+msgid "Link"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
+msgid "Caption"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
+msgid "Details"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "Dimensions"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/masks.php
 msgid "Default"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
+msgid "XS"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
+msgid "S"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
+msgid "M"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
+msgid "L"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
+msgid "XL"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
+msgid "XXL"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/space/space.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+msgid "Space"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
+msgid "No space"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
+msgid "Class"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
@@ -344,20 +514,6 @@ msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
-msgid "Width"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/text/text.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
-msgid "Alignment"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 msgid "Mode"
 msgstr ""
@@ -392,6 +548,11 @@ msgstr ""
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 msgid "Show info"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+msgid "Fullscreen"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/container/container.php
@@ -443,6 +604,34 @@ msgstr ""
 msgid "Toolbar"
 msgstr ""
 
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+msgid "No value"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
+msgid "Columns (Desktop)"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
+msgid "Columns (Mobile)"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/line/line.php
+msgid "TOP"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/line/line.php
+msgid "BOTTOM"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/line/line.php
+msgid "BOTH"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/line/line.php
+msgid "NONE"
+msgstr ""
+
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
 msgid "Product Picker"
 msgstr ""
@@ -490,6 +679,7 @@ msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Category"
@@ -543,11 +733,6 @@ msgstr ""
 msgid "Min slide in line"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/space/space.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
-msgid "Space"
-msgstr ""
-
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/text/text.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
 msgid "Color"
@@ -573,6 +758,18 @@ msgstr ""
 msgid "Horizontal rule"
 msgstr ""
 
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
+msgid "Underlined"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
+msgid "Strikethrough"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
+msgid "None"
+msgstr ""
+
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
 msgid "Muted"
 msgstr ""
@@ -583,6 +780,14 @@ msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
 msgid "Aspect ratio"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
+msgid "Video source"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
+msgid "Mute the video"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/dashboard/dashboard.js
@@ -661,10 +866,6 @@ msgid "Rich text (HTML)"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
-msgid "Image"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
 msgid "Image Text"
 msgstr ""
 
@@ -733,14 +934,20 @@ msgstr ""
 msgid "End of publication"
 msgstr ""
 
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/publish/publish.php
+msgid "Confirm"
+msgstr ""
+
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/masks.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "ID"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/cat.php
 msgid "Article"
 msgstr ""
@@ -749,6 +956,7 @@ msgstr ""
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/toolbar/version/version.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/masks.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Version"
 msgstr ""
@@ -892,6 +1100,8 @@ msgid "Published"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/toolbar/toolbar.php
 msgid "Insert Articles"
 msgstr ""
 
@@ -918,6 +1128,10 @@ msgstr ""
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Cache"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
+msgid "Clear"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.js
@@ -1156,11 +1370,13 @@ msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Yes"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "No"
 msgstr ""
 
@@ -1213,11 +1429,6 @@ msgstr ""
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/new/new.php
 msgid "Filename"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/bookmarks_save.js
-msgid "Link"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.php
@@ -1277,6 +1488,10 @@ msgstr ""
 msgid "Select one or create new"
 msgstr ""
 
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.php
+msgid "Insert"
+msgstr ""
+
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "General Information"
 msgstr ""
@@ -1311,10 +1526,6 @@ msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Image Information"
-msgstr ""
-
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
-msgid "Dimensions"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
@@ -1417,6 +1628,31 @@ msgstr ""
 msgid "Don't forget!"
 msgstr ""
 
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postits/postits.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/notes.php
+msgid "Add a new Post-It"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/search/cms/cms.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/search/item/item.php
+msgid "V"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/search/cms/cms.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/search/item/item.php
+msgid "Version number"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/search/cms/cms.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/search/item/item.php
+msgid "This is the latest version"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/search/cms/cms.php
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/search/item/item.php
+msgid "This is not the latest version"
+msgstr ""
+
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/toolbar/version/version.php
 msgid "Versions"
 msgstr ""
@@ -1502,6 +1738,14 @@ msgstr ""
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form_rte.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Are you sure you want to leave this form without saving your changes?"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/list.php
+msgid "All categories"
+msgstr ""
+
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/media.php
+msgid "Browser"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
