@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: 1\n"
 "Report-Msgid-Bugs-To: info@bbn.so\n"
 "last-Translator: BBN Solutions <support@bbn.solutions>\n"
-"Language-Team: IT <IT@li.org>\n"
+"Language-Team: EN <EN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-02-10 15:10+0100\n"
-"POT-Revision-Date: 2023-02-10 15:10+0100\n"
-"Language: it\n"
-"X-Domain: appui-note60\n"
+"POT-Creation-Date: 2023-02-10 18:48+0100\n"
+"POT-Revision-Date: 2023-02-10 18:48+0100\n"
+"Language: en\n"
+"X-Domain: appui-note61\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/block/block.js
@@ -18,14 +18,14 @@ msgstr ""
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/bookmarks.js
 msgid "Edit Form"
-msgstr "Modifica Formulario"
+msgstr "Edit Form"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/block/block.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/item/item.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/bookmarks.js
 msgid "New Form"
-msgstr "Nuovo Formulario"
+msgstr "New Form"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/block/block.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/item/item.js
@@ -35,7 +35,7 @@ msgstr "Nuovo Formulario"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/bookmarks.js
 msgid "Edit"
-msgstr "Modifica"
+msgstr "Edit"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/block/block.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/item/item.js
@@ -47,37 +47,37 @@ msgstr "Modifica"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
 msgid "Delete"
-msgstr "Elimina"
+msgstr "Delete"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/block/block.php
 msgid "links"
-msgstr "Collegamenti"
+msgstr "Links"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.js
 msgid "The name of the folder cannot be 'ROOT'"
-msgstr "Il nome della cartella non può essere 'ROOT'"
+msgstr "The name of the folder cannot be 'ROOT'"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.js
 msgid "The name of the folder cannot be an empty string"
-msgstr "Il nome della cartella non può essere vuoto"
+msgstr "The name of the folder cannot be an empty string"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 msgid "Create the link at root"
-msgstr "Crea il collegamento alla radice"
+msgstr "Create the link at root"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
 msgid "Create the folder in"
-msgstr "Crea la cartella dentro"
+msgstr "Create the folder in"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
 msgid "Create the folder at root or select a folder from the tree"
-msgstr "Crea la cartella alla radice o seleziona una cartella dall'albero"
+msgstr "Create the folder at root or select a folder from the tree"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/bookmarks_save.php
 msgid "New folder"
-msgstr "Nuova cartella"
+msgstr "New folder"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
@@ -85,11 +85,11 @@ msgstr "Nuova cartella"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/personal/personal.php
 msgid "Cancel"
-msgstr "Annulla"
+msgstr "Cancel"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
 msgid "Create folder"
-msgstr "Crea cartella"
+msgstr "Create folder"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/form/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/insert/insert.php
@@ -108,7 +108,7 @@ msgstr "URL"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/popupLink/popupLink.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/formTest.php
 msgid "In which file ?"
-msgstr "In quale file?"
+msgstr "In which file ?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/form/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
@@ -138,45 +138,45 @@ msgstr "In quale file?"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Title"
-msgstr "Titolo"
+msgstr "Title"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/form/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/popupLink/popupLink.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/formTest.php
 msgid "URL's description"
-msgstr "Descrizione della URL"
+msgstr "URL's description"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/form/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/popupLink/popupLink.php
 msgid "Pick a cover picture"
-msgstr "Scegli un'immagine di copertina"
+msgstr "Pick a cover picture"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/form/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/popupLink/popupLink.php
 msgid "a screenshot from the site"
-msgstr "uno screenshot dal sito"
+msgstr "a screenshot from the site"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/item/item.php
 msgid "Open the link"
-msgstr "Apri il collegamento"
+msgstr "Open the link"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.js
 msgid "Insert the link in the folder"
-msgstr "Crea il collegamento dentro la cartella"
+msgstr "Insert the link in the folder"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Edit this link"
-msgstr "Modifica questo collegamento"
+msgstr "Edit this link"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.js
 msgid "Are you sure you want to save changes?"
-msgstr "Sei sicuro di voler salvare i cambi?"
+msgstr "Are you sure you want to save changes?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.js
 msgid "Are you sure you want to remove this link?"
-msgstr "Sei sicuro di voler rimuovere questo collegamento?"
+msgstr "Are you sure you want to remove this link?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
@@ -186,11 +186,11 @@ msgstr "Sei sicuro di voler rimuovere questo collegamento?"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Text"
-msgstr "Testo"
+msgstr "Text"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 msgid "Link title"
-msgstr "Titolo del collegamento"
+msgstr "Link title"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
@@ -201,7 +201,7 @@ msgstr "Titolo del collegamento"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/new/new.php
 msgid "Description"
-msgstr "Descrizione"
+msgstr "Description"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
@@ -211,63 +211,63 @@ msgstr "URL"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
 msgid "Type or paste your URL and press Enter to valid"
-msgstr "Digita o incolla il tuo URL e premi Invio per confermare"
+msgstr "Type or paste your URL and press Enter to valid"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Remove"
-msgstr "Rimuovi"
+msgstr "Remove"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
 msgid "Save"
-msgstr "Salva"
+msgstr "Save"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/list/list.js
 msgid "Are you sure you want to delete all your bookmarks ?"
-msgstr "Sei sicuro di voler eliminare tutti i tuoi segnalibri?"
+msgstr "Are you sure you want to delete all your bookmarks ?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/list/list.php
 msgid "No Bookmarks yet"
-msgstr "Nessun Segnalibro ancora"
+msgstr "No Bookmarks yet"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/search/search.php
 msgid "1314 links"
-msgstr "1314 collegamenti"
+msgstr "1314 links"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Delete this link"
-msgstr "Elimina questo collegamento"
+msgstr "Delete this link"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Delete this"
-msgstr "Elimina questo"
+msgstr "Delete this"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Edit this"
-msgstr "Modifica questo"
+msgstr "Edit this"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Path"
-msgstr "Percorso"
+msgstr "Path"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "This folder is empty"
-msgstr "La cartella è vuota"
+msgstr "This folder is empty"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Folder name"
-msgstr "Nome della cartella"
+msgstr "Folder name"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
 msgid "Parent"
-msgstr "Genitore"
+msgstr "Parent"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block.js
 msgid "Block changed"
-msgstr "Blocco cambiato"
+msgstr "Block changed"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/align/align.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
@@ -281,7 +281,7 @@ msgstr "Blocco cambiato"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
 msgid "Align left"
-msgstr "Allinea a sinistra"
+msgstr "Align left"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/align/align.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
@@ -295,7 +295,7 @@ msgstr "Allinea a sinistra"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
 msgid "Align center"
-msgstr "Allinea al centro"
+msgstr "Align center"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/align/align.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
@@ -309,7 +309,7 @@ msgstr "Allinea al centro"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
 msgid "Align right"
-msgstr "Allinea a destra"
+msgstr "Align right"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.js
@@ -322,7 +322,7 @@ msgstr "Allinea a destra"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
 msgid "Select an image"
-msgstr "Seleziona un'immagine"
+msgstr "Select an image"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
@@ -335,7 +335,7 @@ msgstr "Seleziona un'immagine"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider_old_incomplete/slider.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
 msgid "Height"
-msgstr "Altezza"
+msgstr "Height"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
@@ -345,7 +345,7 @@ msgstr "Altezza"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Content"
-msgstr "Contenuto"
+msgstr "Content"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
@@ -353,7 +353,7 @@ msgstr "Contenuto"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
 msgid "Image"
-msgstr "Immagine"
+msgstr "Image"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
@@ -364,7 +364,7 @@ msgstr "Immagine"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/line/line.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
 msgid "Width"
-msgstr "Larghezza"
+msgstr "Width"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
@@ -378,7 +378,7 @@ msgstr "Larghezza"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
 msgid "Alignment"
-msgstr "Allineamento"
+msgstr "Alignment"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
@@ -397,33 +397,33 @@ msgstr "Alt"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/bookmarks_save.js
 msgid "Link"
-msgstr "Collegamento"
+msgstr "Link"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
 msgid "Caption"
-msgstr "Didascalia"
+msgstr "Caption"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
 msgid "Details"
-msgstr "Dettagli"
+msgstr "Details"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Dimensions"
-msgstr "Dimensioni"
+msgstr "Dimensions"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/masks.php
 msgid "Default"
-msgstr "Predefinito"
+msgstr "Default"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
 msgid "XS"
@@ -453,139 +453,139 @@ msgstr "XXL"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/space/space.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
 msgid "Space"
-msgstr "Spazio"
+msgstr "Space"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
 msgid "No space"
-msgstr "Nessun spazio"
+msgstr "No space"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/button/button.php
 msgid "Class"
-msgstr "Classe"
+msgstr "Class"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
 msgid "Top"
-msgstr "In alto"
+msgstr "Top"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
 msgid "Top-Left"
-msgstr "In alto a sinistra"
+msgstr "Top-Left"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
 msgid "Top-Right"
-msgstr "In alto a destra"
+msgstr "Top-Right"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
 msgid "Bottom"
-msgstr "In basso"
+msgstr "Bottom"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
 msgid "Bottom-Left"
-msgstr "In basso a sinistra"
+msgstr "Bottom-Left"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
 msgid "Bottom-Right"
-msgstr "In basso a destra"
+msgstr "Bottom-Right"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
 msgid "Medias Groups Management"
-msgstr "Gestione Gruppi Media"
+msgstr "Medias Groups Management"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
 msgid "Gallery"
-msgstr "Galleria"
+msgstr "Gallery"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 msgid "Open galleries management"
-msgstr "Apri gestione gallerie"
+msgstr "Open galleries management"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 msgid "Mode"
-msgstr "Modo"
+msgstr "Mode"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
 msgid "Autoplay"
-msgstr "Riproduzione automatica"
+msgstr "Autoplay"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 msgid "Arrows"
-msgstr "Frecce"
+msgstr "Arrows"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 msgid "Arrows position"
-msgstr "Posizione frecce"
+msgstr "Arrows position"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 msgid "Preview"
-msgstr "Anteprima"
+msgstr "Preview"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
 msgid "Loop"
-msgstr "Ciclo"
+msgstr "Loop"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 msgid "Show info"
-msgstr "Mostra informazioni"
+msgstr "Show info"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 msgid "Fullscreen"
-msgstr "A schermo intero"
+msgstr "Fullscreen"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/container/container.php
 msgid "Click here to add a new item on this line"
-msgstr "Clicca qui per aggiungere un nuovo elemento in questa linea"
+msgstr "Click here to add a new item on this line"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 msgid "Crop Image"
-msgstr "Ritaglia immagine"
+msgstr "Crop Image"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 msgid "Image width"
-msgstr "Larghezza immagine"
+msgstr "Image width"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 msgid "Column gap"
-msgstr "Spazio colonna"
+msgstr "Column gap"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 msgid "Scrollable"
-msgstr "Scrollabile"
+msgstr "Scrollable"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 msgid "Pageable"
-msgstr "Paginabile"
+msgstr "Pageable"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 msgid "Footer"
-msgstr "Piè di pagina"
+msgstr "Footer"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 msgid "Zoomable"
-msgstr "Zoomabile"
+msgstr "Zoomable"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
@@ -594,88 +594,88 @@ msgstr "Info"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 msgid "Info field"
-msgstr "Campo informazioni"
+msgstr "Info field"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 msgid "Resizable"
-msgstr "Ridimensionabile"
+msgstr "Resizable"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 msgid "Toolbar"
-msgstr "Barra degli strumenti"
+msgstr "Toolbar"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
 msgid "No value"
-msgstr "Nessun valore"
+msgstr "No value"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
 msgid "Columns (Desktop)"
-msgstr "Colonne (Desktop)"
+msgstr "Columns (Desktop)"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
 msgid "Columns (Mobile)"
-msgstr "Colonne (Mobile)"
+msgstr "Columns (Mobile)"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/line/line.php
 msgid "TOP"
-msgstr "In alto"
+msgstr "Top"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/line/line.php
 msgid "BOTTOM"
-msgstr "In basso"
+msgstr "Bottom"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/line/line.php
 msgid "BOTH"
-msgstr "ENTRAMBI"
+msgstr "BOTH"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/line/line.php
 msgid "NONE"
-msgstr "Nessuno"
+msgstr "None"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
 msgid "Product Picker"
-msgstr "Selezionatore di prodotti"
+msgstr "Product Picker"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
 msgid "Show image"
-msgstr "Mostra immagine"
+msgstr "Show image"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
 msgid "Show price"
-msgstr "Mostra prezzo"
+msgstr "Show price"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
 msgid "Show edition"
-msgstr "Mostra edizione"
+msgstr "Show edition"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
 msgid "Show type"
-msgstr "Mostra tipo"
+msgstr "Show type"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
 msgid "Show Sold out"
-msgstr "Mostra Esaurito"
+msgstr "Show Sold out"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
 msgid "Show 'Add to cart' button "
-msgstr "Mostra bottone 'Aggiungi al carrello'"
+msgstr "Show 'Add to cart' button"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
 msgid "Add to cart"
-msgstr "Aggiungi al carrello"
+msgstr "Add to cart"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 msgid "Css class"
-msgstr "Classe CSS"
+msgstr "Css class"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 msgid "(Optional)"
-msgstr "(Opzionale)"
+msgstr "(Optional)"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider_old_incomplete/slider.php
 msgid "Type of articles"
-msgstr "Tipo di articoli"
+msgstr "Type of articles"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
@@ -683,121 +683,121 @@ msgstr "Tipo di articoli"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Category"
-msgstr "Categoria"
+msgstr "Category"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider_old_incomplete/slider.php
 msgid "Ordered by"
-msgstr "Ordinato per"
+msgstr "Ordered by"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
 msgid "Feature"
-msgstr "Caratteristica"
+msgstr "Feature"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 msgid "Distance block below"
-msgstr "Distanza blocco sotto"
+msgstr "Distance block below"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 msgid "Title distance"
-msgstr "Distanza titolo"
+msgstr "Title distance"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 msgid "Title distance (mobile)"
-msgstr "Distanza titolo (mobile)"
+msgstr "Title distance (mobile)"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 msgid "Image fit"
-msgstr "Immagine adatta"
+msgstr "Image fit"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider_old_incomplete/slider.php
 msgid "Max slide in line"
-msgstr "Massimo diapositive in linea"
+msgstr "Max slide in line"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 msgid "Min slide in line (mobile)"
-msgstr "Massimo diapositive in linea (mobile)"
+msgstr "Min slide in line (mobile)"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider_old_incomplete/slider.php
 msgid "Limits"
-msgstr "Limiti"
+msgstr "Limits"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
 msgid "No items"
-msgstr "Nessun elemento"
+msgstr "No items"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider_old_incomplete/slider.php
 msgid "Min slide in line"
-msgstr "Minimo diapositive in linea"
+msgstr "Min slide in line"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/text/text.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
 msgid "Color"
-msgstr "Colore"
+msgstr "Color"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
 msgid "Tag"
-msgstr "Etichetta"
+msgstr "Tag"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
 msgid "Style"
-msgstr "Stile"
+msgstr "Style"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
 msgid "Italic"
-msgstr "Italico"
+msgstr "Italic"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
 msgid "Decoration"
-msgstr "Decorazione"
+msgstr "Decoration"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
 msgid "Horizontal rule"
-msgstr "Linea orizzontale"
+msgstr "Horizontal rule"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
 msgid "Underlined"
-msgstr "Sottolineato"
+msgstr "Underlined"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
 msgid "Strikethrough"
-msgstr "Barrato"
+msgstr "Strikethrough"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
 msgid "None"
-msgstr "Nessuno"
+msgstr "None"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
 msgid "Muted"
-msgstr "Silenziato"
+msgstr "Muted"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
 msgid "Controls"
-msgstr "Controlli"
+msgstr "Controls"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
 msgid "Aspect ratio"
-msgstr "Proporzioni"
+msgstr "Aspect ratio"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
 msgid "Video source"
-msgstr "Sorgente video"
+msgstr "Video source"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
 msgid "Mute the video"
-msgstr "Silenzia il video"
+msgstr "Mute the video"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/dashboard/dashboard.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/publications.php
 msgid "Publications"
-msgstr "Pubblicazioni"
+msgstr "Publications"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/dashboard/dashboard.js
 msgid "Unpublications"
-msgstr "Non pubblicati"
+msgstr "Unpublications"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.js
@@ -806,76 +806,76 @@ msgstr "Non pubblicati"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/news.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Saved"
-msgstr "Salvato"
+msgstr "Saved"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.js
 msgid "Are you sure?"
-msgstr "Sei sicuro?"
+msgstr "Are you sure?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.js
 msgid "Are you sure you want to delete this block and its content?"
-msgstr "Sei sicuro di voler eliminare questo blocco e il suo contenuto?"
+msgstr "Are you sure you want to delete this block and its content?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
 msgid "Save the note"
-msgstr "Salva la nota"
+msgstr "Save the note"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
 msgid "Page's properties"
-msgstr "Proprietà della pagina"
+msgstr "Page's properties"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
 msgid "widgets"
-msgstr "Widget"
+msgstr "Widgets"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
 msgid "Delete this block"
-msgstr "Elimina questo blocco"
+msgstr "Delete this block"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
 msgid "Move top"
-msgstr "Sposta in cima"
+msgstr "Move top"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
 msgid "Move up"
-msgstr "Sposta in alto"
+msgstr "Move up"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
 msgid "Move down"
-msgstr "Sposta in basso"
+msgstr "Move down"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
 msgid "Move bottom"
-msgstr "Sposta in fondo"
+msgstr "Move bottom"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
 msgid "Line"
-msgstr "Linea"
+msgstr "Line"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
 msgid "Button"
-msgstr "bottone"
+msgstr "button"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
 msgid "Rich text (HTML)"
-msgstr "Testo ricco (HTML)"
+msgstr "Rich text (HTML)"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
 msgid "Image Text"
-msgstr "Testo Immagine"
+msgstr "Image Text"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
 msgid "Carousel"
-msgstr "Carosello"
+msgstr "Carousel"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
 msgid "Slider"
-msgstr "Cursore"
+msgstr "Slider"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
 msgid "Video"
@@ -883,60 +883,60 @@ msgstr "Video"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
 msgid "Product"
-msgstr "Prodotto"
+msgstr "Product"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
 msgid "Do you want to save your changes?"
-msgstr "Vuoi salvare i tuoi cambi?"
+msgstr "Do you want to save your changes?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
 msgid "Do you want to abandon your changes?"
-msgstr "Vuoi abbandonare le tue modifiche?"
+msgstr "Do you want to abandon your changes?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/insert/insert.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/new/new.js
 msgid "Note"
-msgstr "Nota"
+msgstr "Note"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/insert/insert.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/new/new.php
 msgid "Article type"
-msgstr "Tipo articolo"
+msgstr "Article type"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/insert/insert.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/new/new.php
 msgid "Language"
-msgstr "Lingua"
+msgstr "Language"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/insert/insert.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Excerpt"
-msgstr "Estratto"
+msgstr "Excerpt"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/publish/publish.php
 msgid "You can program the publication for now or the future"
-msgstr "Puoi programmare la pubblicazione per ora o per il futuro"
+msgstr "You can program the publication for now or the future"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/publish/publish.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
 msgid "Publication date"
-msgstr "Data di pubblicazione"
+msgstr "Publication date"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/publish/publish.php
 msgid "You can (or not) end a publication"
-msgstr "Puoi (o meno) terminare una pubblicazione"
+msgstr "You can (or not) end a publication"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/publish/publish.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
 msgid "End of publication"
-msgstr "Fine della pubblicazione"
+msgstr "End of publication"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/publish/publish.php
 msgid "Confirm"
-msgstr "Conferma"
+msgstr "Confirm"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
@@ -950,7 +950,7 @@ msgstr "ID"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/cat.php
 msgid "Article"
-msgstr "Articolo"
+msgstr "Article"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
@@ -959,172 +959,170 @@ msgstr "Articolo"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/masks.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Version"
-msgstr "Versione"
+msgstr "Version"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Cover image"
-msgstr "Immagine di copertina"
+msgstr "Cover image"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Type"
-msgstr "Tipo"
+msgstr "Type"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
 msgid "Start of publication"
-msgstr "Inizio della pubblicazione"
+msgstr "Start of publication"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Since"
-msgstr "Da"
+msgstr "Since"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Creator"
-msgstr "Creatore"
+msgstr "Creator"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Number of medias associated with this entry"
-msgstr "Numero di media associati a questa voce"
+msgstr "Number of medias associated with this entry"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Publish"
-msgstr "Pubblica"
+msgstr "Publish"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Unpublish"
-msgstr "Togli pubblicazione"
+msgstr "Unpublish"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "New"
-msgstr "Nuovo"
+msgstr "New"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Are you sure you want to cease the publication of this note?"
-msgstr "Sei sicuro di voler cessare la pubblicazione di questa nota?"
+msgstr "Are you sure you want to cease the publication of this note?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Successfully removed from publications"
-msgstr "Rimosso con successo dalle pubblicazioni"
+msgstr "Successfully removed from publications"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Error in this action"
-msgstr "Errore in questa azione"
+msgstr "Error in this action"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Are you sure to delete this note?"
-msgstr "Sei sicuro di eliminare questa nota?"
+msgstr "Are you sure to delete this note?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "There is also one variant"
-msgstr "C'è anche una variante"
+msgstr "There is also one variant"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "There are also %d variants"
-msgstr "Ci sono anche %d varianti"
+msgstr "There are also %d variants"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "and also one translation"
-msgstr "e anche una traduzione"
+msgstr "and also one translation"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "and also %d translations"
-msgstr "e anche %d traduzioni"
+msgstr "and also %d translations"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "which will be deleted too"
-msgstr "che verrà anch'esso cancellato"
+msgstr "which will be deleted too"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "There is also one translation"
-msgstr "C'è anche una traduzione"
+msgstr "There is also one translation"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "There are also %d translations"
-msgstr "Ci sono anche %d traduzioni"
+msgstr "There are also %d translations"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Successfully deleted"
-msgstr "Eliminato con successo"
+msgstr "Successfully deleted"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Error in deleting"
-msgstr "Errore nell'eliminazione"
+msgstr "Error in deleting"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Media correctly added to the note"
-msgstr "Elemento multimediale correttamente aggiunto alla nota"
+msgstr "Media correctly added to the note"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Something went wrong while adding the media to the note"
-msgstr ""
-"Qualcosa è andato storto durante l'aggiunta dell'elemento multimediale alla "
-"nota"
+msgstr "Something went wrong while adding the media to the note"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Currently published"
-msgstr "Attualmente pubblicato"
+msgstr "Currently published"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Currently not published"
-msgstr "Attualmente non pubblicato"
+msgstr "Currently not published"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Never published"
-msgstr "Mai pubblicato"
+msgstr "Never published"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Open the article in a new window"
-msgstr "Apri l'articolo in una nuova finestra"
+msgstr "Open the article in a new window"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Number of medias directly linked to this article"
-msgstr "Numero di elementi multimediali direttamente collegati a questo articolo"
+msgstr "Number of medias directly linked to this article"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Number of variants of this article"
-msgstr "Numero di varianti di questo articolo"
+msgstr "Number of variants of this article"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 msgid "Number of translations for this article"
-msgstr "Numero di traduzioni per questo articolo"
+msgstr "Number of translations for this article"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/preview/index.js
 msgid "Published"
-msgstr "Pubblicato"
+msgstr "Published"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/toolbar/toolbar.php
 msgid "Insert Articles"
-msgstr "Inserisci Articoli"
+msgstr "Insert Articles"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/toolbar/toolbar.php
 msgid "The Content Management System"
-msgstr "Il Sistema di Gestione dei Contenuti"
+msgstr "The Content Management System"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
 msgid "Front Image"
-msgstr "Immagine Frontale"
+msgstr "Front Image"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
 msgid "Public URL"
-msgstr "URL Pubblico"
+msgstr "Public URL"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/new/new.php
 msgid "Tags"
-msgstr "Etichette"
+msgstr "Tags"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.php
@@ -1134,178 +1132,176 @@ msgstr "Cache"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
 msgid "Clear"
-msgstr "Pulisci"
+msgstr "Clear"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.js
 msgid "Unknown"
-msgstr "Sconosciuto"
+msgstr "Unknown"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.js
 msgid "Error while updating the data"
-msgstr "Errore durante l'aggiornamento dei dati"
+msgstr "Error while updating the data"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Replies"
-msgstr "Risposte"
+msgstr "Replies"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Show full text"
-msgstr "Mostra il testo completo"
+msgstr "Show full text"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Hidden full text"
-msgstr "Testo completo nascosto"
+msgstr "Hidden full text"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Links:"
-msgstr "Collegamenti:"
+msgstr "Links:"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Files:"
-msgstr "File:"
+msgstr "Files:"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "unpin"
-msgstr "Sblocca"
+msgstr "Unpin"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "pin"
-msgstr "Fissa"
+msgstr "Pin"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Reply"
-msgstr "Rispondi"
+msgstr "Reply"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/table_notes.js
 msgid "Created"
-msgstr "Creata"
+msgstr "Created"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Edited"
-msgstr "Modificato"
+msgstr "Edited"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "LOADING"
-msgstr "CARICAMENTO"
+msgstr "LOADING"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "deleted"
-msgstr "Eliminato"
+msgstr "Deleted"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Go to the first page"
-msgstr "Vai alla prima pagina"
+msgstr "Go to the first page"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Go to the previous page"
-msgstr "Vai alla pagina precedente"
+msgstr "Go to the previous page"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Page"
-msgstr "Pagina"
+msgstr "Page"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "of"
-msgstr "di"
+msgstr "of"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Go to the next page"
-msgstr "Vai alla pagina successiva"
+msgstr "Go to the next page"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Go to the last page"
-msgstr "Vai all'ultima pagina"
+msgstr "Go to the last page"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "items per page"
-msgstr "elementi per pagina"
+msgstr "items per page"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Display items"
-msgstr "Mostra elementi"
+msgstr "Display items"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "Total"
-msgstr "Totale"
+msgstr "Total"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "items"
-msgstr "elementi"
+msgstr "items"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 msgid "No item"
-msgstr "Nessun elemento"
+msgstr "No item"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.php
 msgid "Refresh"
-msgstr "Aggiorna"
+msgstr "Refresh"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.js
 msgid "Simple text"
-msgstr "Testo semplice"
+msgstr "Simple text"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.js
 msgid "Rich text"
-msgstr "Testo ricco (HTML)"
+msgstr "Rich text"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.js
 msgid "Markdown"
-msgstr "Testo ricco (Markdown)"
+msgstr "Markdown"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.js
 msgid "PHP code"
-msgstr "Codice PHP"
+msgstr "PHP code"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.js
 msgid "JavaScript code"
-msgstr "Codice JavaScript"
+msgstr "JavaScript code"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.js
 msgid "CSS code"
-msgstr "Codice CSS"
+msgstr "CSS code"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
 msgid "Files"
-msgstr "File"
+msgstr "Files"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
 msgid "Links"
-msgstr "Collegamenti"
+msgstr "Links"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
 msgid "Locked"
-msgstr "Bloccato"
+msgstr "Locked"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/block/block.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
 msgid "The title must contain the extension of the file"
-msgstr "Il titolo deve contenere l'estensione del file"
+msgstr "The title must contain the extension of the file"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/block/block.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
 msgid "Media title successfully changed!"
-msgstr "Titolo dell'elemento multimediale cambiato con successo"
+msgstr "Media title successfully changed!"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/block/block.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
 msgid "Something went wrong while changing the media title"
-msgstr ""
-"Qualcosa è andato storto durante la modifica del titolo dell'elemento "
-"multimediale"
+msgstr "Something went wrong while changing the media title"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/block/block.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
 msgid "The title must end with the same extension of the file"
-msgstr "Il titolo deve terminare con la stessa estensione del file"
+msgstr "The title must end with the same extension of the file"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
@@ -1313,14 +1309,14 @@ msgstr "Il titolo deve terminare con la stessa estensione del file"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/picker/picker.js
 msgid "Edit media"
-msgstr "Modifica elemento multimediale"
+msgstr "Edit media"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/picker/picker.js
 msgid "Add new media"
-msgstr "Aggiungi nuovo elemento multimediale"
+msgstr "Add new media"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
@@ -1328,63 +1324,59 @@ msgid ""
 "The media you're going to delete is linked to a note, are you sure you want to "
 "remove it?"
 msgstr ""
-"L'elemento multimediale che stai per eliminare è collegato a una nota, sei "
-"sicuro di volerlo rimuovere?"
+"The media you're going to delete is linked to a note, are you sure you want to "
+"remove it?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/media.js
 msgid "Are you sure you want to delete this media?"
-msgstr "Sei sicuro di voler eliminare questo elemento multimediale?"
+msgstr "Are you sure you want to delete this media?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
 msgid "Media successfully deleted :)"
-msgstr "Elemento multimediale eliminato con successo :)"
+msgstr "Media successfully deleted :)"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
 msgid "Something went wrong while deleting the media :("
-msgstr "Qualcosa è andato storto durante l'eliminazione dell'elemento multimediale :("
+msgstr "Something went wrong while deleting the media :("
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid ""
 "The extension in the title or in the filename doesn't match the extension of the "
 "file inserted!"
 msgstr ""
-"L'estensione nel titolo o nel nome del file non corrisponde all'estensione del "
-"file inserito!"
+"The extension in the title or in the filename doesn't match the extension of the "
+"file inserted!"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
 msgid "Media successfully added to media browser"
-msgstr ""
-"Elemento multimediale aggiunto con successo all'esploratore degli elementi "
-"multimediali"
+msgstr "Media successfully added to media browser"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
 msgid "Media successfully updated"
-msgstr "Elemento multimediale correttamente aggiornato"
+msgstr "Media successfully updated"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
 msgid "Something went wrong while adding the media to the media broser"
-msgstr ""
-"Qualcosa è andato storto durante l'aggiunta dell'elemento multimediale "
-"all'esploratore degli elementi multimediali"
+msgstr "Something went wrong while adding the media to the media broser"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/list/list.js
 msgid "Delete media"
-msgstr "Elimina elemento multimediale"
+msgstr "Delete media"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Yes"
-msgstr "Si"
+msgstr "Yes"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
@@ -1394,26 +1386,26 @@ msgstr "No"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
 msgid "Edit image"
-msgstr "Modifica immagine"
+msgstr "Edit image"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/picker/picker.js
 msgid "Download"
-msgstr "Scarica"
+msgstr "Download"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
 msgid "Media(s) successfully added"
-msgstr "Elemento(i) multimediale(i) aggiunto(i) con successo"
+msgstr "Media(s) successfully added"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
 msgid "Media successfully edited"
-msgstr "Elemento multimediale modificato con successo"
+msgstr "Media successfully edited"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/new/new.js
 msgid "Something went wrong while saving the media"
-msgstr "Qualcosa è andato storto durante il salvataggio dell'elemento multimediale"
+msgstr "Something went wrong while saving the media"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.php
 msgid "File"
@@ -1422,228 +1414,228 @@ msgstr "File"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Clear all cache"
-msgstr "Cancella tutta la cache"
+msgstr "Clear all cache"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/field/field.php
 msgid "Browse the images"
-msgstr "Sfoglia le immagini"
+msgstr "Browse the images"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/field/field.php
 msgid "Show media information"
-msgstr "Mostra le informazioni dell'elemento multimediale"
+msgstr "Show media information"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/new/new.php
 msgid "Customize titles/descriptions"
-msgstr "Personalizza titoli/descrizioni"
+msgstr "Customize titles/descriptions"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/new/new.php
 msgid "Filename"
-msgstr "Nome del file"
+msgstr "Filename"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/new/new.php
 msgid "Media"
-msgstr "elemento multimediale"
+msgstr "media"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
 msgid "Create new medias group"
-msgstr "Crea nuovo gruppo di elementi multimediali"
+msgstr "Create new medias group"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.php
 msgid "Rename"
-msgstr "Rinomina"
+msgstr "Rename"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
 msgid "Are you sure you want to delete this medias group?"
-msgstr "Sei sicuro di voler eliminare questo gruppo di elementi multimediali?"
+msgstr "Are you sure you want to delete this medias group?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
 msgid "Are you sure you want to remove these medias from this group?"
-msgstr "Sei sicuro di voler rimuovere questi elementi multimediali da questo gruppo?"
+msgstr "Are you sure you want to remove these medias from this group?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
 msgid "Select media(s)"
-msgstr "Seleziona elemento(i) multimediale(i)"
+msgstr "Select media(s)"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
 msgid "Edit Link"
-msgstr "Modifica Collegamento"
+msgstr "Edit Link"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
 msgid "Insert Link"
-msgstr "Inserisci Collegamento"
+msgstr "Insert Link"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
 msgid "Pick a link"
-msgstr "Scegli un collegamento"
+msgstr "Pick a link"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
 msgid "Link saved"
-msgstr "Collegamento salvato"
+msgstr "Link saved"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
 msgid "Name"
-msgstr "Nome"
+msgstr "Name"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/notes.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/post-it.php
 msgid "Search"
-msgstr "Ricerca"
+msgstr "Search"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.php
 msgid "Select one or create new"
-msgstr "Seleziona o crea nuovo"
+msgstr "Select one or create new"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.php
 msgid "Insert"
-msgstr "Inserisci"
+msgstr "Insert"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "General Information"
-msgstr "Informazioni Generali"
+msgstr "General Information"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "MIME type"
-msgstr "Tipo MIME"
+msgstr "MIME type"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "User"
-msgstr "Utente"
+msgstr "User"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Size"
-msgstr "Taglia"
+msgstr "Size"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Extension"
-msgstr "Estensione"
+msgstr "Extension"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Internal Information"
-msgstr "Informazioni interne"
+msgstr "Internal Information"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Copy"
-msgstr "Copia"
+msgstr "Copy"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Real path"
-msgstr "Percorso reale"
+msgstr "Real path"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Image Information"
-msgstr "Informazioni Immagine"
+msgstr "Image Information"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Thumbnails"
-msgstr "Miniature"
+msgstr "Thumbnails"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Show details"
-msgstr "Mostra dettagli"
+msgstr "Show details"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Note title"
-msgstr "Titolo della nota"
+msgstr "Note title"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Creation"
-msgstr "Creazione"
+msgstr "Creation"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
 msgid "Note content"
-msgstr "Contenuto della nota"
+msgstr "Note content"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/picker/picker.js
 msgid "Search for a note"
-msgstr "Ricerca per una nota"
+msgstr "Search for a note"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/popupLink/popupLink.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/formTest.php
 msgid "Add Link"
-msgstr "Aggiungi Collegamento"
+msgstr "Add Link"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/popupLink/popupLink.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/formTest.php
 msgid "Modify Link"
-msgstr "Modifica Collegamento"
+msgstr "Modify Link"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/popupLink/popupLink.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/formTest.php
 msgid "Delete Link"
-msgstr "Elimina Collegamento"
+msgstr "Delete Link"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.js
 msgid "Post-it saved"
-msgstr "Post-it salvato"
+msgstr "Post-it saved"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.js
 msgid "Error while deleting"
-msgstr "Errore durante l'eliminazione"
+msgstr "Error while deleting"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
 msgid "Post-it configuration"
-msgstr "Configurazione post-it"
+msgstr "Post-it configuration"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
 msgid "Post-it information"
-msgstr "Informazioni post-it"
+msgstr "Post-it information"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
 msgid "Delete this post-it"
-msgstr "Elimina questo post-it"
+msgstr "Delete this post-it"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
 msgid "Edit Title"
-msgstr "Modifica Titolo"
+msgstr "Edit Title"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
 msgid "Edit Content"
-msgstr "Modifica Contenuto"
+msgstr "Edit Content"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
 msgid "Post-it color"
-msgstr "Colore post-it"
+msgstr "Post-it color"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
 msgid "Pen color"
-msgstr "Colore penna"
+msgstr "Pen color"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
 msgid "Pinned"
-msgstr "Fissato"
+msgstr "Pinned"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
 msgid "It will be removed from the Pinned post-its panel"
-msgstr "Verrà rimosso dal pannello dei post-it appuntati"
+msgstr "It will be removed from the Pinned post-its panel"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
 msgid "It will be added to the pinned post-its panel"
-msgstr "Verrà aggiunto al pannello dei post-it appuntati"
+msgstr "It will be added to the pinned post-its panel"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postits/postits.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/notes.js
 msgid "Write here your content"
-msgstr "Scrivi qui il tuo contenuto"
+msgstr "Write here your content"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postits/postits.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/notes.js
 msgid "Don't forget!"
-msgstr "Non dimenticare!"
+msgstr "Don't forget!"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postits/postits.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/notes.php
 msgid "Add a new Post-It"
-msgstr "Aggiungi un nuovo Post-it"
+msgstr "Add a new Post-It"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/search/cms/cms.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/search/item/item.php
@@ -1653,78 +1645,78 @@ msgstr "V"
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/search/cms/cms.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/search/item/item.php
 msgid "Version number"
-msgstr "Numero di versione"
+msgstr "Version number"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/search/cms/cms.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/search/item/item.php
 msgid "This is the latest version"
-msgstr "Questa è l'ultima versione"
+msgstr "This is the latest version"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/search/cms/cms.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/search/item/item.php
 msgid "This is not the latest version"
-msgstr "Questa non è l'ultima versione"
+msgstr "This is not the latest version"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/toolbar/version/version.php
 msgid "Versions"
-msgstr "Versioni"
+msgstr "Versions"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Enter a title for the note"
-msgstr "Immetti un titolo per la nota"
+msgstr "Enter a title for the note"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/publications.php
 msgid "Pub. date"
-msgstr "Data pub."
+msgstr "Pub. date"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
 msgid "End date"
-msgstr "Data fine"
+msgstr "End date"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/personal/personal.php
 msgid "Add"
-msgstr "Aggiungi"
+msgstr "Add"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/bookmarks_save.php
 msgid "New bookmark"
-msgstr "Nuovo segnalibro"
+msgstr "New bookmark"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms.php
 msgid "Home"
-msgstr "Accoglienza"
+msgstr "Home"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms.php
 msgid "Articles' list"
-msgstr "Elenco degli articoli"
+msgstr "Articles' list"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
 msgid "Add a new feature"
-msgstr "Aggiungi una nuova funzionalità"
+msgstr "Add a new feature"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
 msgid "Code"
-msgstr "Codice"
+msgstr "Code"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
 msgid "Order"
-msgstr "Ordine"
+msgstr "Order"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
 msgid "No image"
-msgstr "Nessuna immagine"
+msgstr "No image"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
 msgid "Search for a note to feature in this category"
-msgstr "Cerca una nota da includere in questa categoria"
+msgstr "Search for a note to feature in this category"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
 msgid "Pick a feature"
-msgstr "Scegli una funzionalità"
+msgstr "Pick a feature"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
 msgid "Mime"
@@ -1732,61 +1724,61 @@ msgstr "Mime"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
 msgid "lang"
-msgstr "Lingua"
+msgstr "lang"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
 msgid "Private"
-msgstr "Privato"
+msgstr "Private"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
 msgid "Start"
-msgstr "Inizio"
+msgstr "Start"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
 msgid "End"
-msgstr "Fine"
+msgstr "End"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form_markdown.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form_rte.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Are you sure you want to leave this form without saving your changes?"
-msgstr "Sei sicuro di voler abbandonare questo modulo senza salvare le modifiche?"
+msgstr "Are you sure you want to leave this form without saving your changes?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/list.php
 msgid "All categories"
-msgstr "Tutte le categorie"
+msgstr "All categories"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/media.php
 msgid "Browser"
-msgstr "Navigatore"
+msgstr "Browser"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/news.js
 msgid "New message"
-msgstr "Nuovo messaggio"
+msgstr "New message"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Author"
-msgstr "Autore"
+msgstr "Author"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
 msgid "Creation date"
-msgstr "Data di creazione"
+msgstr "Creation date"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
 msgid "Start date"
-msgstr "Data d'inizio"
+msgstr "Start date"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Actions"
-msgstr "Azioni"
+msgstr "Actions"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
 msgid "See"
-msgstr "Vedi"
+msgstr "See"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
 msgid "Mod."
@@ -1794,435 +1786,434 @@ msgstr "Mod."
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/publications.php
 msgid "Publications' management"
-msgstr "Gestione delle pubblicazioni"
+msgstr "Publications' management"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Resume"
-msgstr "Riprendi"
+msgstr "Resume"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Last version user"
-msgstr "Ultimo editore"
+msgstr "Last version user"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/table_notes.js
 msgid "Last edit"
-msgstr "Ultima modifica"
+msgstr "Last edit"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Option"
-msgstr "Opzione"
+msgstr "Option"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
 msgid "Blocked"
-msgstr "Bloccato"
+msgstr "Blocked"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
 msgid "Pick a type"
-msgstr "Seleziona un tipo"
+msgstr "Pick a type"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
 msgid "URL prefix"
-msgstr "Prefisso URL"
+msgstr "URL prefix"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
 msgid "Use main image"
-msgstr "Usa immagine principale"
+msgstr "Use main image"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
 msgid "Use option column"
-msgstr "Usa la colonna delle opzioni"
+msgstr "Use option column"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
 msgid "Option title"
-msgstr "Titolo dell'opzione"
+msgstr "Option title"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
 msgid "Option root"
-msgstr "Radice dell'opzione"
+msgstr "Option root"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
 msgid "Editor type"
-msgstr "Tipo di editore"
+msgstr "Editor type"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
 msgid "Pick one..."
-msgstr "Scegline uno..."
+msgstr "Pick one..."
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
 msgid "Select a blocktype here"
-msgstr "Seleziona qui un tipo di blocco"
+msgstr "Select a blocktype here"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
 msgid "Leave default"
-msgstr "Lascia predefinito"
+msgstr "Leave default"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
 msgid "Set value"
-msgstr "Imposta valore"
+msgstr "Set value"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
 msgid "Let user decide"
-msgstr "Lascia che sia l'utente a decidere"
+msgstr "Let user decide"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/preview/index.php
 msgid "All rights reserved."
-msgstr "Tutti i diritti riservati."
+msgstr "All rights reserved."
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 msgid "Post Type"
-msgstr "Tipo di pubblicazione"
+msgstr "Post Type"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 msgid "Post Name"
-msgstr "Nome della pubblicazione"
+msgstr "Post Name"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 msgid "Page url"
-msgstr "URL della pagina"
+msgstr "Page url"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Post title"
-msgstr "Titolo della pubblicazione"
+msgstr "Post title"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 msgid "Post Content"
-msgstr "Contenuto della pubblicazione"
+msgstr "Post Content"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Date"
-msgstr "Data"
+msgstr "Date"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Date GMT"
-msgstr "Data GMT"
+msgstr "Date GMT"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 msgid "Post modified"
-msgstr "Pubblicazione modificata"
+msgstr "Post modified"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Post Status"
-msgstr "Stato della pubblicazione"
+msgstr "Post Status"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/bookmarks_save.js
 msgid "Folder"
-msgstr "Cartella"
+msgstr "Folder"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/bookmarks_save.js
 msgid "correctly inserted"
-msgstr "Inserito correttamente"
+msgstr "correctly inserted"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/bookmarks_save.js
 msgid "Are you sure you want to delete this folder"
-msgstr "Sei sicuro di voler eliminare questa cartella"
+msgstr "Are you sure you want to delete this folder"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/bookmarks_save.js
 msgid "and all it's content?"
-msgstr "e tutto il suo contenuto?"
+msgstr "and all it's content?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/bookmarks_save.js
 msgid "Folder successfully deleted"
-msgstr "Cartella eliminata con successo"
+msgstr "Folder successfully deleted"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/bookmarks_save.js
 msgid "Something went wrong while deleting the folder"
-msgstr "Qualcosa è andato storto durante l'eliminazione della cartella"
+msgstr "Something went wrong while deleting the folder"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/bookmarks_save.js
 msgid "Are you sure you want to delete this link?"
-msgstr "Sei sicuro di voler eliminare questo collegamento?"
+msgstr "Are you sure you want to delete this link?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/bookmarks_save.js
 msgid "Link successfully deleted"
-msgstr "Collegamento eliminato con successo"
+msgstr "Link successfully deleted"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/bookmarks_save.js
 msgid "Something went wrong while deleting the link"
-msgstr "Qualcosa è andato storto durante l'eliminazione del collegamento"
+msgstr "Something went wrong while deleting the link"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/cms/settings.php
 msgid "Settings"
-msgstr "Impostazioni"
+msgstr "Settings"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
 msgid "Random"
-msgstr "Casuale"
+msgstr "Random"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
 msgid "Latest published"
-msgstr "Ultimo pubblicato"
+msgstr "Latest published"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
 msgid "Earliest published"
-msgstr "Primo pubblicato"
+msgstr "Earliest published"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
 msgid "Manual order"
-msgstr "Ordine manuale"
+msgstr "Manual order"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
 msgid "Add successful"
-msgstr "Inserimento riuscito"
+msgstr "Add successful"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
 msgid "Remove successful"
-msgstr "Rimozione riuscita"
+msgstr "Remove successful"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
 msgid "Update successful"
-msgstr "Aggiornamento riuscito"
+msgstr "Update successful"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
 msgid "New category"
-msgstr "Nuova categoria"
+msgstr "New category"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid "Modification of the standard letter"
-msgstr "Modifica della lettera standard"
+msgstr "Modification of the standard letter"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid "Are you sure you want to delete this standard letter?"
-msgstr "Sei sicuro di voler eliminare questa lettera standard?"
+msgstr "Are you sure you want to delete this standard letter?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid "Creation of a standard letter"
-msgstr "Creazione di una lettera standard"
+msgstr "Creation of a standard letter"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid "Warning on standard letters"
-msgstr "Avviso sulle lettere standard"
+msgstr "Warning on standard letters"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid ""
 "Here you can modify the standard letters but they use a system of \"templates\" "
 "with which you have to be very cautious."
 msgstr ""
-"Qui puoi modificare le lettere standard, ma usano un sistema di \"modelli\" con il "
-"quale devi stare molto cauto."
+"Here you can modify the standard letters but they use a system of \"templates\" "
+"with which you have to be very cautious."
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid "The best is to duplicate an existing standard letter and modify it."
-msgstr "La cosa migliore è duplicare una lettera standard esistente e modificarla."
+msgstr "The best is to duplicate an existing standard letter and modify it."
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid ""
 "Once finished, put it in default if it is used on a feature without choice (eg "
 "certificates), and will test it in context."
 msgstr ""
-"Una volta completato, se deve essere utilizzato in funzionalità senza scelta "
-"(es: attestazioni), impostalo come predefinito della sua categoria e testalo nel "
-"contesto."
+"Once finished, put it in default if it is used on a feature without choice (eg "
+"certificates), and will test it in context."
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid ""
 "Then you can erase the old one or else redo it if your modification returns an "
 "error."
 msgstr ""
-"Quindi puoi eliminare quello vecchio o ricominciare da capo se le tue modifiche "
-"generano un errore."
+"Then you can erase the old one or else redo it if your modification returns an "
+"error."
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid "Creation of a standard letter for"
-msgstr "Creazione di una lettera standard per"
+msgstr "Creation of a standard letter for"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
 msgid "Add a standard letter"
-msgstr "Aggiungi una lettera standard"
+msgstr "Add a standard letter"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/media.js
 msgid "Media successfully deleted"
-msgstr "Elemento multimediale eliminato con successo"
+msgstr "Media successfully deleted"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/media.js
 msgid "Something went wrong while deleting the media"
-msgstr "Qualcosa è andato storto durante l'eliminazione dell'elemento multimediale"
+msgstr "Something went wrong while deleting the media"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/news.js
 msgid "Edit message"
-msgstr "Modifica messaggio"
+msgstr "Edit message"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/news.js
 msgid "Error"
-msgstr "Errore"
+msgstr "Error"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Show"
-msgstr "Mostra"
+msgstr "Show"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Find"
-msgstr "Trova"
+msgstr "Find"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Tools"
-msgstr "Strumenti"
+msgstr "Tools"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Import"
-msgstr "Importa"
+msgstr "Import"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Export"
-msgstr "Esporta"
+msgstr "Export"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/table_notes.js
 msgid "New Note"
-msgstr "Nuova Nota"
+msgstr "New Note"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Post name"
-msgstr "Nome della pubblicazione"
+msgstr "Post Name"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Modified"
-msgstr "Modificato"
+msgstr "Modified"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Are you sure you import the posts?"
-msgstr "Sei sicuro di voler importare le pubblicazioni?"
+msgstr "Are you sure you import the posts?"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Import performed"
-msgstr "Importazione eseguita"
+msgstr "Import performed"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
 msgid "Error Import"
-msgstr "Errore durante l'importazione"
+msgstr "Error Import"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/table_notes.js
 msgid "Click on the first column of this row to view full content"
-msgstr "Clicca sulla prima colonna di questa riga per vedere tutto il contenuto"
+msgstr "Click on the first column of this row to view full content"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/table_notes.js
 msgid "by"
-msgstr "da"
+msgstr "by"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/table_notes.js
 msgid "Unknown user"
-msgstr "Utente sconosciuto"
+msgstr "Unknown user"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/table_notes.js
 msgid "Editing a mailing"
-msgstr "Modifica di una mailing"
+msgstr "Editing a mailing"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/settings.js
 msgid "Options"
-msgstr "Opzioni"
+msgstr "Options"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/square.js
 msgid "Add a new block to this row"
-msgstr "Aggiungi un nuovo blocco a questa riga"
+msgstr "Add a new block to this row"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/square.js
 msgid "Edit blocks in this row"
-msgstr "Modifica blocchi di questa riga"
+msgstr "Edit blocks in this row"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/preview/index.js
 msgid "Draft"
-msgstr "Bozza"
+msgstr "Draft"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/actions/bookmarks/insert.php
 msgid "The "
-msgstr "Il"
+msgstr "The"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/actions/insert.php
 msgid "Impossible to create the note"
-msgstr "Impossibile creare la nota"
+msgstr "Impossible to create the note"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/media/editor.php
 msgid "Editor"
-msgstr "Editore"
+msgstr "Editor"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/media/actions/edit.php
 msgid "Error while replacing the media"
-msgstr "Errore durante la sostituzione dell'elemento multimediale"
+msgstr "Error while replacing the media"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/media/actions/edit.php
 msgid "Error while replacing the media title"
-msgstr "Errore durante la sostituzione del titolo dell'elemento multimediale"
+msgstr "Error while replacing the media title"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/media/actions/edit.php
 msgid "Error while replacing the media description"
-msgstr "Errore durante la sostituzione della descrizione dell'elemento multimediale"
+msgstr "Error while replacing the media description"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/bookmarks.php
 msgid "My bookmarks"
-msgstr "I miei segnalibri"
+msgstr "My bookmarks"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/cms.php
 msgid "CMS"
-msgstr "CMS"
+msgstr "Cms"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/features.php
 msgid "Features"
-msgstr "Caratteristiche"
+msgstr "Features"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/form.php
 msgid "Notes Form"
-msgstr "Formulario delle note"
+msgstr "Notes Form"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/form_markdown.php
 msgid "Markdown editor"
-msgstr "Editore markdown"
+msgstr "Markdown editor"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/form_rte.php
 msgid "Note Editor (Markdown)"
-msgstr "Editore delle note (Markdown)"
+msgstr "Note Editor (Markdown)"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/list.php
 msgid "All the notes"
-msgstr "Tutte le note"
+msgstr "All the notes"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/media.php
 msgid "Medias"
-msgstr "Elementi multimediali"
+msgstr "Medias"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/news.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/plugins/appui-dashboard/model/news.php
 msgid "News"
-msgstr "Notizie"
+msgstr "News"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/notes.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/post-it.php
 msgid "My post-it"
-msgstr "I miei post-it"
+msgstr "My post-it"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/prove_notes.php
 msgid "Notes' tree"
-msgstr "Albero delle note"
+msgstr "Notes' tree"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/table_notes.php
 msgid "Notes"
-msgstr "Note"
+msgstr "Notes"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/actions/get.php
 msgid "Impossible to find the note"
-msgstr "Impossibile trovare la nota"
+msgstr "Impossible to find the note"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/actions/bookmarks/import.php
 msgid "Invalid File"
-msgstr "File invalido"
+msgstr "Invalid File"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/cms/article.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/cms/editor.php
 msgid "No arguments"
-msgstr "Nessun argomento"
+msgstr "No arguments"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/cms/cat.php
 msgid "Articles' List"
-msgstr "Elenco degli articoli"
+msgstr "Articles' list"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/editor/index.php
 msgid "Rich Text Editor frame"
-msgstr "Editore di testo ricco in un iFrame"
+msgstr "Rich Text Editor frame"
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/plugins/appui-dashboard/model/personal.php
 msgid "Personal notes"
-msgstr "Note personali"
+msgstr "Personal notes"
