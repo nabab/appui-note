@@ -1,4 +1,7 @@
 /* LESS Document */
+
+@border-width: 1px;
+
 .@{componentName} {
   .@{componentName}-icons {
     display: none;
@@ -14,7 +17,7 @@
       border-color: var(--secondary-border) !important;
     }
     &.@{componentName}-selectable {
-      border: 0.3em dashed var(--alt-background);
+      border: @border-width dashed var(--alt-background);
     }
 	}
 	&.@{componentName}-over {

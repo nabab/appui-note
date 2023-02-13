@@ -391,53 +391,50 @@
               this.insideContainer = true;
               this.nextPosition = this.map.indexOf(v);
               let rect = v.html.getBoundingClientRect();
-              let mapContainer = this.mapContainer(v, this.map.indexOf(v));
-              //Check if the block is a container and do a mapper inside of it
+              /*let mapContainer = this.mapContainer(v, this.map.indexOf(v));
               if (mapContainer && mapContainer.length >= 2) {
                 bbn.fn.log('move inside container', mapContainer);
                 mapContainer.map((v, idx) => {
                   let block = v.rect;
+                  bbn.fn.log('block in container', block);
                   if (this.currentPosition.x > block.x && this.currentPosition.x < (block.x + block.width)) {
-                    bbn.fn.log('in the ', idx, 'block');
                     if (this.currentPosition.x < block.x + (block.width / 2)) {
-                      bbn.fn.log('to the left');
                       if (idx === 0) {
                         this.nextContainerPosition = 0;
                       } else {
                         this.nextContainerPosition = idx;
                       }
-                      divider.style.display = 'block';
-                      divider.style.height = block.height + 'px';
-                      divider.style.width = block.width/2 + 'px';
                       divider.style.left = block.left + 'px';
-                    } else {
-                      bbn.fn.log('to the right');
-                      divider.style.display = 'block';
-                      divider.style.height = block.height + 'px';
-                      divider.style.width = block.width/2 + 'px';
-                      divider.style.left = block.x + block.width/2 + 'px';
+                    }
+                    else {
                       if (idx !== mapContainer.length - 1) {
                         this.nextContainerPosition = idx + 1;
                       } else {
                         this.nextContainerPosition = -1;
                       }
+                      divider.style.left = block.x + block.width/2 + 'px';
                     }
+                    divider.style.display = 'flex';
+                    divider.style.position = "absolute";
+                    divider.style.height = block.height + 'px';
+                    divider.style.width = block.width/2 + 'px';
+                    //divider.style.top = block.top + 'px';
                   }
                 });
-                return false;
-              }
+              }*/
               if (this.currentPosition.x < rect.width/2) {
                 this.nextContainerPosition = 0;
                 divider.style.left = v.left + 'px';
               }
               else if (this.currentPosition.x > rect.width/2) {
                 this.nextContainerPosition = -1;
-                divider.style.left = rect.width/2 + 'px';
+                divider.style.left = Math.round(rect.width/2) + 10 + 'px';
               }
               divider.style.display = "block";
-              divider.style.height = v.height + 'px';
+              divider.style.height = v.height - 4 + 'px';
+              divider.style.width = (v.width / 2) + 'px';
               divider.style.top = (sum - v.height) + 'px';
-              return false;
+              //return false;
             }
             else if (this.currentPosition.y > (v.y + v.height) && this.currentPosition.y < (v.y + bbn.fn.outerHeight(v.html.parentElement))) {
               this.insideContainer = false;

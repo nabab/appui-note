@@ -35,8 +35,7 @@
   </div>
   <div ref="guide"
        class="appui-note-cms-elementor-guide">
-    <div class="bbn-w-100"
-         style="height: 0.3em;">
+    <div class="bbn-w-100">
     </div>
   </div>
 </div>
