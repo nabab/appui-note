@@ -384,59 +384,66 @@
         }
         //check if the current position is inside an element
         else {
-          bbn.fn.each(this.map, (v, idx) => {
-            sum += v.height + 13;
+          bbn.fn.each(this.map, (block, idx) => {
+            sum += block.height + 13;
             //check if current position is inside a block
-            if ((this.currentPosition.y > v.y) && (this.currentPosition.y < (v.y + v.height))) {
+            if ((this.currentPosition.y > block.y) && (this.currentPosition.y < (block.y + block.height))) {
               this.insideContainer = true;
-              this.nextPosition = this.map.indexOf(v);
-              let rect = v.html.getBoundingClientRect();
-              /*let mapContainer = this.mapContainer(v, this.map.indexOf(v));
+              this.nextPosition = this.map.indexOf(block);
+              let rect = block.html.getBoundingClientRect();
+              //bbn.fn.log('container rect', rect);
+              let mapContainer = this.mapContainer(block, this.map.indexOf(block));
               if (mapContainer && mapContainer.length >= 2) {
-                bbn.fn.log('move inside container', mapContainer);
-                mapContainer.map((v, idx) => {
-                  let block = v.rect;
-                  bbn.fn.log('block in container', block);
-                  if (this.currentPosition.x > block.x && this.currentPosition.x < (block.x + block.width)) {
-                    if (this.currentPosition.x < block.x + (block.width / 2)) {
-                      if (idx === 0) {
-                        this.nextContainerPosition = 0;
-                      } else {
-                        this.nextContainerPosition = idx;
-                      }
-                      divider.style.left = block.left + 'px';
-                    }
-                    else {
-                      if (idx !== mapContainer.length - 1) {
-                        this.nextContainerPosition = idx + 1;
-                      } else {
-                        this.nextContainerPosition = -1;
-                      }
-                      divider.style.left = block.x + block.width/2 + 'px';
-                    }
-                    divider.style.display = 'flex';
-                    divider.style.position = "absolute";
-                    divider.style.height = block.height + 'px';
-                    divider.style.width = block.width/2 + 'px';
-                    //divider.style.top = block.top + 'px';
+                mapContainer.map((cont, idx) => {
+                  let block = cont.rect;
+                  // If we are at the beginning of the container
+                  if (this.currentPosition.x < (mapContainer[0].rect.x + mapContainer[0].rect.width / 4)) {
+                    bbn.fn.log('at the start');
+                    this.nextContainerPosition = 0;
+                    divider.style.display = "block";
+                    divider.style.height = block.height - 4 + 'px';
+                		divider.style.width = '3px';
+                		divider.style.top = (sum - block.height) + 'px';
+                    divider.style.left = mapContainer[0].rect.left + 'px';
+                  }
+                  // If we are at the end of the container
+                  if (this.currentPosition.x > (mapContainer.at(-1).rect.x + (3*mapContainer.at(-1).rect.width / 4))) {
+                    bbn.fn.log('at the end');
+                    this.nextContainerPosition = 0;
+                    divider.style.display = "block";
+                    divider.style.height = block.height - 4 + 'px';
+                		divider.style.width = '3px';
+                		divider.style.top = (sum - block.height) + 'px';
+                    divider.style.left = mapContainer.at(-1).rect.x + mapContainer.at(-1).rect.width - 3 + 'px';
+                  }
+                  // If we are between two blocks in a container
+                  if (this.currentPosition.x > block.x + block.width && this.currentPosition.x < mapContainer[idx + 1].rect.x) {
+                    bbn.fn.log('between two blocks');
+                    this.nextContainerPosition = idx + 1;
+                    divider.style.display = "block";
+                    divider.style.height = block.height - 4 + 'px';
+                		divider.style.width = block.width + 'px';
+                		divider.style.top = (sum - block.height) + 'px';
+                    divider.style.left = (block.right - block.width/2)  + 'px';
                   }
                 });
-              }*/
-              if (this.currentPosition.x < rect.width/2) {
-                this.nextContainerPosition = 0;
-                divider.style.left = v.left + 'px';
+              } else {
+                if (this.currentPosition.x < rect.width/2) {
+                  this.nextContainerPosition = 0;
+                  divider.style.left = block.left + 'px';
+                }
+                else if (this.currentPosition.x > rect.width/2) {
+                  this.nextContainerPosition = -1;
+                  divider.style.left = Math.round(rect.width/2) + 10 + 'px';
+                }
+                divider.style.display = "block";
+                divider.style.height = block.height - 4 + 'px';
+                divider.style.width = (block.width / 2) + 'px';
+                divider.style.top = (sum - block.height) + 'px';
+                //return false;
               }
-              else if (this.currentPosition.x > rect.width/2) {
-                this.nextContainerPosition = -1;
-                divider.style.left = Math.round(rect.width/2) + 10 + 'px';
-              }
-              divider.style.display = "block";
-              divider.style.height = v.height - 4 + 'px';
-              divider.style.width = (v.width / 2) + 'px';
-              divider.style.top = (sum - v.height) + 'px';
-              //return false;
             }
-            else if (this.currentPosition.y > (v.y + v.height) && this.currentPosition.y < (v.y + bbn.fn.outerHeight(v.html.parentElement))) {
+            else if (this.currentPosition.y > (block.y + block.height) && this.currentPosition.y < (block.y + bbn.fn.outerHeight(block.html.parentElement))) {
               this.insideContainer = false;
               this.nextPosition = idx + 1;
               guide.style.display = 'flex';

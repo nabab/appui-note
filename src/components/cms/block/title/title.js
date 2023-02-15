@@ -20,12 +20,6 @@
             tag: 'h1',
             content: '',
             align: 'left',
-            hr: null,
-            style: {
-              'text-decoration': 'none',
-              'font-style': 'normal',
-              color: '#000000'
-            }
           }
       };
     },
