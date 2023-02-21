@@ -5,7 +5,7 @@
  **/
 use bbn\X;
 
-$rows = $ctrl->db->rselectAll('bbn_notes_versions', ['version', 'id_note', 'content']);
+$q = $ctrl->db->query("SELECT version, id_note, content FROM bbn_notes_versions");
 $fn = function(&$block) {
   $isChanged = false;
   switch($block['type']) {
@@ -41,7 +41,7 @@ $fn = function(&$block) {
   return $isChanged;
 };
 
-foreach($rows as $row) {
+while($row = $q->getRow()) {
   $blocks = json_decode($row['content'], true);
   $isChanged = false;
   foreach($blocks as &$block) {

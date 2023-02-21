@@ -104,14 +104,11 @@
     },
     watch: {
       itemsSelected(v) {
-        bbn.fn.log('item selected', v);
         this.currentItemSelected = v;
-      },
-      currentItemSelected(v) {
-        if (v > -1) {
-          bbn.fn.log('current item selected', v);
-        }
       }
+    },
+    mounted() {
+      bbn.fn.log('prop container', this.source);
     }
   };
 })(bbn);

@@ -262,5 +262,8 @@
         this.$emit('dragoverdroppable', ...arguments);
       },
     },
+    mounted() {
+      bbn.fn.log('source elementor', this.source);
+    }
   };
 })();

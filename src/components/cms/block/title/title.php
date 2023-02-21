@@ -14,7 +14,7 @@
       </div>
       <label><?=_('Color')?></label>
       <div>
-        <bbn-colorpicker v-model="source.style.color"/>
+        <bbn-colorpicker v-model="source.color"/>
       </div>
       <label><?=_('Alignment')?></label>
       <div>
@@ -39,18 +39,18 @@
       <label><?=_('Style')?></label>
       <div>
         <bbn-button title="<?=_('Italic')?>"
-                    @click="source.style['font-style'] = source.style['font-style'] === 'italic' ? 'normal' : 'italic'"
+                    @click="source.fontStyle = source.fontStyle === 'italic' ? 'normal' : 'italic'"
                     :notext="true"
                     icon="nf nf-fa-italic"
                     :class="['bbn-no-radius', {
-                      'bbn-state-active': source.style['font-style'] === 'italic'
+                      'bbn-state-active': source.fontStyle === 'italic'
                     }]"/>
       </div>
       <label><?=_('Decoration')?></label>
       <div>
         <div class="bbn-block">
           <bbn-radiobuttons :notext="true"
-                            v-model="source.style['text-decoration']"
+                            v-model="source.textDecoration"
                             :source="[{
                               text: _('Underlined'),
                               value: 'underline',
@@ -81,7 +81,7 @@
                                mode="read"
                                :details="false">
       <component :is="source.tag"
-                 :style="style"
+                 :style="currentStyle"
                  v-html="source.content"/>
     </appui-note-cms-block-line>
   </div>

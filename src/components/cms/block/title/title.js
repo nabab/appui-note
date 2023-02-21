@@ -17,20 +17,23 @@
           };
         }),
         defaultConfig: {
-            tag: 'h1',
-            content: '',
-            align: 'left',
-          }
+          tag: 'h1',
+          content: '',
+          align: 'left',
+          color: '',
+          fontStyle: 'normal',
+          textDecoration: 'none'
+        }
       };
     },
     computed: {
-      style(){
-        return bbn.fn.extend(true, {
-          textAlign: this.source.align || 'left',
-          //color: this.source.color || undefined,
-          //textDecoration: this.source.decoration || undefined,
-          //fontStyle: !!this.source.italic ? 'italic' : 'normal'
-        }, this.source.style);
+      currentStyle(){
+        return {
+          textAlign: this.source.align || undefined,
+          color: this.source.color || undefined,
+          textDecoration: this.source.decoration || undefined,
+          fontStyle: !!this.source.fontStyle || undefined
+        };
       }
     },
   };

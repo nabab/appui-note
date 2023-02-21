@@ -8,7 +8,7 @@
     <div v-for="(cfg, i) in source"
          class="bbn-w-100 bbn-bottom-margin">
       <appui-note-cms-container v-if="cfg.type === 'container'"
-                                :source="cfg.source"
+                                :source="cfg"
                                 :ref="'block' + i"
                                 :selectable="!preview"
                                 :overable="!preview"

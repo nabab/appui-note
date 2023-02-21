@@ -41,7 +41,6 @@
     },
     methods: {
       applyDefaultConfig() {
-        bbn.fn.log("apply def", this.cfg);
         bbn.fn.iterate(bbn.fn.extend({}, this.defaultConfig, this.cfg || {}), (a, n) => {
           if (this.source[n] === undefined) {
             this.$set(this.source, n, a);
@@ -78,11 +77,7 @@
               || (this.source.special && (bbn.fn.numProperties(this.source) === 2))
              )
       ) {
-        bbn.fn.log('created', JSON.stringify(this.source), JSON.stringify(this.cfg));
         this.applyDefaultConfig();
-        bbn.fn.log('created 2', JSON.stringify(this.source));
-      } else {
-        bbn.fn.log("test", JSON.stringify(this.source));
       }
       const config = {};
       bbn.fn.iterate(this.source, (a, n) => {
@@ -199,7 +194,6 @@
        * @param {boolean} edit
        */
       _setEvents(){
-        bbn.fn.log("setEvent")
         /*
         document.addEventListener('mousedown', this.checkMouseDown);
         document.addEventListener('touchstart', this.checkMouseDown);
@@ -216,7 +210,6 @@
         }*/
       },
       checkKeyCode(e){
-        bbn.fn.log("checkKeyCode")
         if ( e.keyCode === 27 ){
           this.edit = false;
         }
@@ -238,7 +231,6 @@
         }
       },
       editBlock(){
-        bbn.fn.log("editBlock")
         if ( this.changed ){
           appui.success(bbn._('Block changed'))
           //add a confirm
@@ -254,7 +246,6 @@
         }
       },
       cancelEdit(){
-        bbn.fn.log("cancelEdit")
         bbn.fn.iterate(this.initialSource, (v, i)=>{
           this.source[i] = v;
           if (this.editable) {

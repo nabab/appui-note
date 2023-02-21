@@ -115,20 +115,17 @@
             }
           });
         }
-        bbn.fn.log("config changed", isChanged, this.currentEdited, this.originalConfig);
         return isChanged;
       }
     },
     methods: {
       unselectElements() {
-        bbn.fn.log('unselect');
         this.currentEdited = null;
         this.currentEditedIndex = -1;
         this.currentEditedIndexInContainer = null;
         this.showSlider = false;
       },
       setOriginalConfig(config) {
-        //bbn.fn.log('set original config', config);
         this.originalConfig = config;
       },
       saveConfig() {
@@ -197,7 +194,6 @@
        */
       handleSelected(index, source, indexInContainer = null) {
         if (this.currentEdited !== source) {
-          bbn.fn.log('handle', this.currentEdited, source);
           this.showWidgets = false;
           this.currentEdited = null;
           setTimeout(() => {
@@ -235,7 +231,6 @@
        */
       onDrop(ev) {
         const block = bbn.fn.clone(ev.detail.from.data.source);
-        bbn.fn.log('block dropped', block);
         this.currentBlockConfig = ev.detail.from.data.cfg || {};
         bbn.fn.iterate(this.currentBlockConfig, (a, n) => block[n] = a);
         let elementor = this.getRef('editor');
@@ -268,7 +263,6 @@
         if (this.insideContainer) {
           // avoid creating container inside container
           if (this.source.items[this.nextPosition].type == 'container') {
-            //bbn.fn.log('avoid creation multiple containers', block, ev.detail.from);
             if (this.nextContainerPosition == 0) {
               this.source.items[this.nextPosition].source.items.unshift(block);
             } else {
@@ -285,7 +279,6 @@
           else if (this.nextContainerPosition == -1) {
             arr.push(block);
           }
-          //bbn.fn.log('array', arr);
           this.source.items.splice(this.nextPosition, 0, {
             type: 'container',
             source: {
@@ -296,7 +289,6 @@
           return;
         }
         // Place the block at the correct index position
-        //bbn.fn.log('place block at correct index');
         if (this.nextPosition == 0) {
           this.source.items.unshift(block);
         }
@@ -391,39 +383,35 @@
               this.insideContainer = true;
               this.nextPosition = this.map.indexOf(block);
               let rect = block.html.getBoundingClientRect();
-              //bbn.fn.log('container rect', rect);
               let mapContainer = this.mapContainer(block, this.map.indexOf(block));
               if (mapContainer && mapContainer.length >= 2) {
                 mapContainer.map((cont, idx) => {
                   let block = cont.rect;
                   // If we are at the beginning of the container
                   if (this.currentPosition.x < (mapContainer[0].rect.x + mapContainer[0].rect.width / 4)) {
-                    bbn.fn.log('at the start');
                     this.nextContainerPosition = 0;
                     divider.style.display = "block";
                     divider.style.height = block.height - 4 + 'px';
-                		divider.style.width = '3px';
-                		divider.style.top = (sum - block.height) + 'px';
+                    divider.style.width = '3px';
+                    divider.style.top = (sum - block.height) + 'px';
                     divider.style.left = mapContainer[0].rect.left + 'px';
                   }
                   // If we are at the end of the container
                   if (this.currentPosition.x > (mapContainer.at(-1).rect.x + (3*mapContainer.at(-1).rect.width / 4))) {
-                    bbn.fn.log('at the end');
                     this.nextContainerPosition = 0;
                     divider.style.display = "block";
                     divider.style.height = block.height - 4 + 'px';
-                		divider.style.width = '3px';
-                		divider.style.top = (sum - block.height) + 'px';
+                    divider.style.width = '3px';
+                    divider.style.top = (sum - block.height) + 'px';
                     divider.style.left = mapContainer.at(-1).rect.x + mapContainer.at(-1).rect.width - 3 + 'px';
                   }
                   // If we are between two blocks in a container
                   if (this.currentPosition.x > block.x + block.width && this.currentPosition.x < mapContainer[idx + 1].rect.x) {
-                    bbn.fn.log('between two blocks');
                     this.nextContainerPosition = idx + 1;
                     divider.style.display = "block";
                     divider.style.height = block.height - 4 + 'px';
-                		divider.style.width = block.width + 'px';
-                		divider.style.top = (sum - block.height) + 'px';
+                    divider.style.width = block.width + 'px';
+                    divider.style.top = (sum - block.height) + 'px';
                     divider.style.left = (block.right - block.width/2)  + 'px';
                   }
                 });
@@ -478,20 +466,28 @@
        * Function to map the elements in elementor editor in an array.
        */
       mapY() {
+        bbn.fn.log('mapper in action');
         let editor = this.getRef('editor');
         let tmp_arr = [];
         this.source.items.map((v, idx) => {
-          let ele = editor.getRef('block' + idx);
-          let detail = ele.$el.getBoundingClientRect();
-          tmp_arr.push({
-            y: detail.y,
-            height: detail.height,
-            left: detail.left,
-            width: detail.width,
-            index: idx,
-            html: ele.$el,
-          });
-          this.map = tmp_arr.slice();
+          bbn.fn.log(v);
+          let ele = editor.getRef('block' + idx.toString());
+          if (ele.$el && ele.$el.getBoundingClientRect) {
+            let detail = ele.$el.getBoundingClientRect();
+            tmp_arr.push({
+              y: detail.y,
+              height: detail.height,
+              left: detail.left,
+              width: detail.width,
+              index: idx,
+              html: ele.$el,
+            });
+            this.map = tmp_arr.slice();
+            bbn.fn.log('mapper result', this.map);
+          }
+					else {
+            bbn.fn.log('false mapper', ele.$el, idx);
+          }
         });
       },
       /**
@@ -510,16 +506,12 @@
       }
     },
     watch: {
-      nextContainerPosition() {
-        bbn.fn.log('next container position', this.nextContainerPosition);
-      },
       'source.items'() {
         setTimeout(() => {
           this.mapY();
         }, 500);
       },
       'editedSource.type'(v, ov) {
-        //bbn.fn.log(v, ov, '???');
         let tmp = this.editedSource;
         if (v && (ov !== undefined) && this.editedSource && this.realSourceArray.length) {
           let cfg = bbn.fn.getField(types, 'default', {value:v});
@@ -558,7 +550,6 @@
       setTimeout(() => {
         this.mapY();
       }, 500);
-      bbn.fn.log('pblocks', this.pblocks);
     },
     components: {
       configForm: {
