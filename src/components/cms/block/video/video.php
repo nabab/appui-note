@@ -96,7 +96,11 @@
   <div v-else
        class="bbn-flex"
        :style="align">
-    <bbn-video :width="width"
+    <div class="bbn-padding bbn-c bbn-lg bbn-w-100"
+         v-text="_('Missing video content')"
+         v-if="!source.content"/>
+    <bbn-video v-else
+               :width="source.width"
                :height="source.height"
                :aspectRatio="aspectRatio"
                :autoplay="!!source.autoplay"

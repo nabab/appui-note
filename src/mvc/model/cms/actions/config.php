@@ -12,7 +12,7 @@ $res = [
   'success' => false,
 ];
 if ($model->hasData(['config', 'name'], true)) {
-  $idParent = $model->inc->options->fromCode('pblocks', 'appui-note', 'plugins');
+  $idParent = $model->inc->options->fromCode('pblocks', 'note', 'appui');
   $idBlock = $model->inc->options->fromCode($model->data['config']['type'] ?? null, 'blocks', 'note', 'appui');
   if ($idParent && $idBlock) {
     $cfg = [];

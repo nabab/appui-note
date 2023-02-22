@@ -10,7 +10,12 @@ if ($model->hasData('id', true)) {
   $note = new bbn\Appui\Note($model->db);
   $cms = new bbn\Appui\Cms($model->db, $note);
   $data = $cms->get($model->data['id']);
-  $data['items'] = $data['content'] ? json_decode($data['content']) : [];
+  foreach($data['items'] as &$item) {
+    if ($item['type'] === 'slider') {
+      $item['items'] = $item['currentItems'];
+    }
+  }
+  //$data['items'] = $data['content'] ? json_decode($data['content']) : [];
   if (!empty($data['medias'])) {
     
     

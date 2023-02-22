@@ -72,7 +72,6 @@
                                    mode="edit"
                                    :details="false"/>
       </div>
-      
     </div>
   </div>
   <div v-else

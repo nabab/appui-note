@@ -14,8 +14,7 @@
           content: '',
           padding: 'bbn-xspadded',
           dimensions: '',
-          align: 'left',
-          style: {}
+          align: 'left'
         },
       };
     }

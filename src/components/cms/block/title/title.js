@@ -6,7 +6,7 @@
     props: {
       config: {
         type: Object
-      }
+      },
     },
     data() {
       return {
@@ -20,7 +20,7 @@
           tag: 'h1',
           content: '',
           align: 'left',
-          color: '',
+          color: '#000',
           fontStyle: 'normal',
           textDecoration: 'none'
         }
@@ -31,10 +31,10 @@
         return {
           textAlign: this.source.align || undefined,
           color: this.source.color || undefined,
-          textDecoration: this.source.decoration || undefined,
+          textDecoration: this.source.textDecoration || undefined,
           fontStyle: !!this.source.fontStyle || undefined
         };
       }
-    },
+    }
   };
 })();

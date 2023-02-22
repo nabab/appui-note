@@ -11,7 +11,7 @@
     },
     data() {
       return {
-        value: ''
+        content: ''
       }
     }
   };

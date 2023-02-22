@@ -41,6 +41,7 @@
     },
     methods: {
       applyDefaultConfig() {
+        bbn.fn.log('apply default config');
         bbn.fn.iterate(bbn.fn.extend({}, this.defaultConfig, this.cfg || {}), (a, n) => {
           if (this.source[n] === undefined) {
             this.$set(this.source, n, a);
@@ -59,7 +60,7 @@
       },
     },
     watch: {
-      /*source: {
+      source: {
         deep: true,
         handler(){
           if (!this.isEditor) {
@@ -69,14 +70,11 @@
             }
           }
         }
-      }*/
+      }
     },
     created() {
-      if (this.source.type 
-          && ((bbn.fn.numProperties(this.source) === 1) 
-              || (this.source.special && (bbn.fn.numProperties(this.source) === 2))
-             )
-      ) {
+      bbn.fn.log('created');
+      if (this.source.type && ((bbn.fn.numProperties(this.source) === 2) || (this.source.special && (bbn.fn.numProperties(this.source) === 2)))) {
         this.applyDefaultConfig();
       }
       const config = {};
@@ -89,18 +87,8 @@
     },
     mounted() {
       this.ready = true;
-    },
-    source: {
-        deep: true,
-        handler(){
-          if (!this.isEditor) {
-            let cp = this.getRef('component');
-            if (cp) {
-              cp.$forceUpdate();
-            }
-          }
-        }
-      }
+      bbn.fn.log('source when mounted', this.source);
+    }
   };
 
   return {
@@ -173,6 +161,9 @@
         return this.selected === true;
       },
       currentComponent(){
+        if (this.type === "container") {
+          return "appui-note-cms-container";
+        }
         return this.getComponentName(this.type);
       },
       changed(){

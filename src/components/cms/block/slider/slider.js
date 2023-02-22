@@ -152,7 +152,7 @@
             tmp.id_group = this.source.id_group;
           }
           else if (this.sliderMode === 'features') {
-            tmp.id_feature = this.source.id_feature;
+            tmp.content = this.source.content;
           }
           if (this.okMode) {
             this.$nextTick(() => {
@@ -249,7 +249,7 @@
           this.source.mode = 'features';
         }
         else if (val === 'gallery') {
-          this.$delete(this.source, 'id_feature');
+          this.$delete(this.source, 'content');
           this.$delete(this.source, 'noteType');
           this.$delete(this.source, 'id_option');
           this.okMode = true;
@@ -257,7 +257,7 @@
         }
         else {
           this.$delete(this.source, 'id_group');
-          this.$delete(this.source, 'id_feature');
+          this.$delete(this.source, 'content');
           this.okMode = true;
           this.source.mode = 'publications';
         }
@@ -331,14 +331,14 @@
         this.source.mode = 'features';
       }
       else if (this.sliderMode === 'gallery') {
-        this.$delete(this.source, 'id_feature');
+        this.$delete(this.source, 'content');
         this.$delete(this.source, 'noteType');
         this.okMode = true;
         this.source.mode = 'gallery';
       }
       else {
         this.$delete(this.source, 'id_group');
-        this.$delete(this.source, 'id_feature');
+        this.$delete(this.source, 'content');
         this.okMode = true;
         this.source.mode = 'publications';
       }

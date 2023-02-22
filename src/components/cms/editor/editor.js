@@ -466,11 +466,9 @@
        * Function to map the elements in elementor editor in an array.
        */
       mapY() {
-        bbn.fn.log('mapper in action');
         let editor = this.getRef('editor');
         let tmp_arr = [];
         this.source.items.map((v, idx) => {
-          bbn.fn.log(v);
           let ele = editor.getRef('block' + idx.toString());
           if (ele.$el && ele.$el.getBoundingClientRect) {
             let detail = ele.$el.getBoundingClientRect();
@@ -483,7 +481,6 @@
               html: ele.$el,
             });
             this.map = tmp_arr.slice();
-            bbn.fn.log('mapper result', this.map);
           }
 					else {
             bbn.fn.log('false mapper', ele.$el, idx);

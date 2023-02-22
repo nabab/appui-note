@@ -30,6 +30,14 @@ $fn = function(&$block) {
         $isChanged = true;
       }
       break;
+    case 'slider':
+      if (isset($block['id_feature'])) {
+        $content = $block['id_feature'];
+        unset($block['id_feature']);
+        $block['content'] = $content;
+        $isChanged = true;
+      }
+      break;
   }
   if (isset($block['style'])) {
     $isChanged = true;
@@ -37,6 +45,10 @@ $fn = function(&$block) {
       $block[$name] = $value;
     }
     unset($block['style']);
+  }
+  if (isset($block['currentItems'])) {
+    $isChanged = true;
+    unset($block['currentItems']);
   }
   return $isChanged;
 };

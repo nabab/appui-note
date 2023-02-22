@@ -54,7 +54,7 @@
 
       <label v-if="sliderMode === 'features'"><?=_('Feature')?></label>
       <bbn-dropdown :source="note + '/cms/data/features'"
-                    v-model="source.id_feature"
+                    v-model="source.content"
                     @change="getSlideshowSource"
                     source-value="id"
                     v-if="sliderMode === 'features'"/>
@@ -170,7 +170,7 @@
   </div>
   <div v-else class="bbn-w-100" :style="{'height':source.height ? source.height : '', 'width':source.width ? source.width :''}">
     <bbn-slideshow v-if="source.content"
-                   :source="source.content.data"
+                   :source="source.currentItems"
                    ref="slideshow"
                    :arrows="!!source.arrows"
                    :arrows-position="source.arrowsPosition"

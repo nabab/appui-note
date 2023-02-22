@@ -406,6 +406,14 @@
           "show_code": 1,
           "allow_children": 1
         },
+        "text": "Personalized blocks",
+        "code": "pblocks"
+      },
+      {
+        "cfg": {
+          "show_code": 1,
+          "allow_children": 1
+        },
         "text": "Plugins",
         "code": "plugins",
         "items": [
