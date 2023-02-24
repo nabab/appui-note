@@ -1,4 +1,7 @@
 /* LESS Document */
+
+@border-width: 1px;
+
 .@{componentName} {
 
   .@{componentName}-icons {
@@ -10,7 +13,7 @@
       border-color: var(--tertiary-border) !important;
     }
     &.@{componentName}-selectable {
-      border: 0.3em dashed transparent;
+      border: @border-width dashed transparent;
     }
   }
   &.@{componentName}-over {

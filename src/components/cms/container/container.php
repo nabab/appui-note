@@ -9,7 +9,8 @@
       ]"
       tabindex="0"
       @mouseenter="over = true"
-      @mouseleave="over = false">
+      @mouseleave="over = false"
+     	@click="$emit('click', $event)">
   <div :class="[
                  'bbn-w-100',
                  '<?= $componentName ?>-component',
@@ -26,11 +27,12 @@
            @mouseleave="overItem = -1"
            :key="i">
         <div class="bbn-100">
-          <appui-note-cms-block @click="changeEditedContainer(item)"
+          <appui-note-cms-block @click.stop="clickBlock(i)"
+                                @config-init="configInit"
                                 :path="path"
                                 :editable="editable"
                                 :selectable="selectable"
-                                :selected="currentItemSelected === i"
+                                :selected="itemSelected === i"
                                 :overable="overable"
                                 :mode="mode"
                                 :source="item"

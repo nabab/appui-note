@@ -1,4 +1,7 @@
 /* LESS Document */
+
+@border-width: 1px;
+
 .@{componentName} {
   .@{componentName}-icons {
     display: none;
@@ -14,58 +17,59 @@
       border-color: var(--secondary-border) !important;
     }
     &.@{componentName}-selectable {
-      border: 0.3em dashed transparent;
+      border: @border-width dashed var(--alt-background);
     }
-  }
-  &.@{componentName}-over {
-    .@{componentName}-icons {
-      display: block;
-    }
-    > .@{componentName}-component {
-      border-color: var(--primary-border);
-    }
-  }
-  /*margin: 15px auto;*/
-  hr{
-    color: #bbb;
-    background-color: #bbb;
-    border-bottom-width: 0;
-    border-top-width: 1px;
-  }
-  .@{componentName}-container{
-    padding: 12px 10px;
-    margin: 0 auto;
-    float: unset;
-    .bbn-grid-fields{
-      align-items: center;
-    }
-    &.has-hr{
-      display: flex;
-      align-items: center;
-      &.edit-block{
-        flex-direction: column;
-        .edit-title{
-          width: 100%;
-          display: flex;
-          align-items: center;
-        }
-      }
-      hr{
-        margin: 0 30px;
-        flex-grow: 1.5;
-      }
-    }
-  }
-/*
+	}
+	&.@{componentName}-over {
+      .@{componentName}-icons {
+        display: block;
+    	}
+    	> .@{componentName}-component {
+      	border-color: var(--primary-border) !important;
+    	}
+  	}
+
+/*margin: 15px auto;*/
+hr{
+  color: #bbb;
+  background-color: #bbb;
+  border-bottom-width: 0;
+  border-top-width: 1px;
+}
+.@{componentName}-container{
+  padding: 12px 10px;
+  margin: 0 auto;
+  float: unset;
   .bbn-grid-fields{
-    border: none!important;
+    align-items: center;
   }
+  &.has-hr{
+    display: flex;
+    align-items: center;
+    &.edit-block{
+      flex-direction: column;
+      .edit-title{
+        width: 100%;
+        display: flex;
+        align-items: center;
+      }
+    }
+    hr{
+      margin: 0 30px;
+      flex-grow: 1.5;
+    }
+  }
+}
+/*
+.bbn-grid-fields{
+border: none!important;
+}
 */
 }
 @media only screen and (max-width: 640px){
   .@{componentName} {
     > .@{componentName}-component {
       padding: 0;
-    }
   }
+}
 }

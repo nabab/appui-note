@@ -17,17 +17,22 @@
         type: String,
         default: 'read'
       },
-      defaultConfig: {
+      cfg: {
         type: Object,
         default() {
           return {};
         }
+      },
+      special: {
+        type: String
       }
     },
     data(){
       return {
         show: true,
-      }
+        defaultConfig: {},
+        ignoredFields: ['content']
+      };
     },
     computed: {
       isEditor(){
@@ -36,9 +41,12 @@
     },
     methods: {
       applyDefaultConfig() {
-        bbn.fn.iterate(this.defaultConfig, (a, n) => {
+        bbn.fn.log('apply default config');
+        bbn.fn.iterate(bbn.fn.extend({}, this.defaultConfig, this.cfg || {}), (a, n) => {
           if (this.source[n] === undefined) {
             this.$set(this.source, n, a);
+          } else {
+            this.source[n] = a;
           }
         });
       },
@@ -51,24 +59,35 @@
         }
       },
     },
-    created() {
-      if (this.source.type && (bbn.fn.numProperties(this.source) === 1)) {
-        this.applyDefaultConfig();
-      }
-    },
-    mounted() {
-      this.ready = true;
-    },
-    source: {
-      deep: true,
-      handler(){
-        if (!this.isEditor) {
-          let cp = this.getRef('component');
-          if (cp) {
-            cp.$forceUpdate();
+    watch: {
+      source: {
+        deep: true,
+        handler(){
+          if (!this.isEditor) {
+            let cp = this.getRef('component');
+            if (cp) {
+              cp.$forceUpdate();
+            }
           }
         }
       }
+    },
+    created() {
+      bbn.fn.log('created');
+      if (this.source.type && ((bbn.fn.numProperties(this.source) === 2) || (this.source.special && (bbn.fn.numProperties(this.source) === 2)))) {
+        this.applyDefaultConfig();
+      }
+      const config = {};
+      bbn.fn.iterate(this.source, (a, n) => {
+        if (!this.ignoredFields.includes(n)) {
+          config[n] = a;
+        }
+      });
+      this.$emit('configinit', config);
+    },
+    mounted() {
+      this.ready = true;
+      bbn.fn.log('source when mounted', this.source);
     }
   };
 
@@ -78,6 +97,15 @@
      */
     mixins: [bbn.vue.basicComponent, bbn.vue.resizerComponent],
     props: {
+      special: {
+        type: String
+      },
+      cfg: {
+        type: Object,
+        default() {
+          return {};
+        }
+      },
       source: {
         type: Object,
         required: true
@@ -123,13 +151,19 @@
         ready: true,
         initialSource: null,
         currentClass: 'bbn-w-100'
-      }
+      };
     },
     computed: {
+      ignoredFields() {
+        return this.getRef('component').ignoreFields;
+      },
       isSelected() {
         return this.selected === true;
       },
       currentComponent(){
+        if (this.type === "container") {
+          return "appui-note-cms-container";
+        }
         return this.getComponentName(this.type);
       },
       changed(){
@@ -143,10 +177,6 @@
       }
     },
     methods: {
-      sendBlock() {
-        bbn.fn.log('send Block');
-        this.$emit('click', this.source);
-      },
       selectImg(st){
         bbn.fn.link(st);
       },
@@ -155,7 +185,6 @@
        * @param {boolean} edit
        */
       _setEvents(){
-        bbn.fn.log("setEvent")
         /*
         document.addEventListener('mousedown', this.checkMouseDown);
         document.addEventListener('touchstart', this.checkMouseDown);
@@ -172,7 +201,6 @@
         }*/
       },
       checkKeyCode(e){
-        bbn.fn.log("checkKeyCode")
         if ( e.keyCode === 27 ){
           this.edit = false;
         }
@@ -194,7 +222,6 @@
         }
       },
       editBlock(){
-        bbn.fn.log("editBlock")
         if ( this.changed ){
           appui.success(bbn._('Block changed'))
           //add a confirm
@@ -210,7 +237,6 @@
         }
       },
       cancelEdit(){
-        bbn.fn.log("cancelEdit")
         bbn.fn.iterate(this.initialSource, (v, i)=>{
           this.source[i] = v;
           if (this.editable) {
@@ -218,13 +244,15 @@
           }
         })
       },
+      configInit(config) {
+        this.$emit('configinit', config);
+      }
     },
     mounted(){
       this.ready = true;
     },
     watch: {
       currentComponent(v) {
-        bbn.fn.log(v, JSON.stringify(this.source));
         this.ready = false;
         setTimeout(() => {
           this.ready = true;

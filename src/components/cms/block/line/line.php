@@ -17,9 +17,9 @@
                   :class="{'bbn-state-active': !line}"/>
     </div>
     <div v-if="details"
-         class="bbn-grid-fields bbn-vpadded bbn-w-100">
+         class="bbn-grid-fields bbn-w-100">
       <label v-text="_('Width')"></label>
-      <bbn-range v-model="source.style.width"
+      <bbn-range v-model="source.width"
                   :min="10"
                   :max="2000" 
                   :step="10"
@@ -27,7 +27,7 @@
                   :show-numeric="true"
                   :show-units="true"/>
       <label><?=_('Height')?></label>
-      <bbn-range v-model="source.style.height"
+      <bbn-range v-model="source.height"
                   :min="10"
                   :max="2000" 
                   :step="10"

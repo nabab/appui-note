@@ -1,7 +1,7 @@
 <!-- HTML Document -->
 <div :class="[componentClass]">
   <div v-if="mode === 'edit'"
-       class="bbn-grid-fields bbn-vspadded bbn-w-100">
+       class="bbn-grid-fields bbn-w-100">
     <!--label><?= _('Color') ?></!--label>
     <div>
       <bbn-colorpicker v-model="color"/>

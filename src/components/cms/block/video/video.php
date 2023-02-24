@@ -1,9 +1,9 @@
 <!-- HTML Document -->
 <div :class="componentClass">
   <div v-if="mode === 'edit'"
-       class="bbn-grid-fields bbn-vspadded bbn-w-100">
+       class="bbn-grid-fields bbn-w-100">
     <label v-text="_('Video source')"/>
-    <bbn-input v-model="source.source"/>
+    <bbn-input v-model="source.content"/>
     <label><?=_('Muted')?></label>
     <div>
       <bbn-button :notext="true"
@@ -69,7 +69,7 @@
       </div>
     </div>
     <label><?=_('Width')?></label>
-    <bbn-range v-model="source.style.width"
+    <bbn-range v-model="source.width"
               :min="10"
               :max="2000" 
               :step="10"
@@ -77,7 +77,7 @@
               :show-numeric="true"
               :show-units="true"/>
     <label><?=_('Height')?></label>
-    <bbn-range v-model="source.style.height"
+    <bbn-range v-model="source.height"
                :disabled="disableHeight"
                :min="10"
                :max="2000" 
@@ -96,14 +96,18 @@
   <div v-else
        class="bbn-flex"
        :style="align">
-    <bbn-video :width="width"
-               :height="source.style.height"
+    <div class="bbn-padding bbn-c bbn-lg bbn-w-100"
+         v-text="_('Missing video content')"
+         v-if="!source.content"/>
+    <bbn-video v-else
+               :width="source.width"
+               :height="source.height"
                :aspectRatio="aspectRatio"
                :autoplay="!!source.autoplay"
                :controls="!!source.controls"
                :loop="!!source.loop"
                :muted="!!source.muted"
                :youtube="!!youtube"
-               :source="source.source"/>
+               :source="source.content"/>
   </div>     
 </div>

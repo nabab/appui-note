@@ -20,12 +20,16 @@
   div.grid {
     grid-template-columns: 50% 50%;
   }
-  div.widgets {
-    border: 1px solid #ccc;
-    display: flex;
-    flex-direction: column;
+  div.grid-dropper {
+    grid-template-columns: repeat(4, 25%);
   }
-  div.widgets:hover {
-    background-color: rgb(211, 211, 211);
+  .appui-note-cms-editor-position {
+    .bbn-button {
+      clear: both;
+      float: left;
+      &:not(:first-child) {
+        margin-top: var(--xsspace);
+      }
+    }
   }
 }

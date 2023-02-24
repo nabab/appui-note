@@ -4,22 +4,9 @@
   return {
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
     props: {
-      defaultConfig: {
-        type: Object,
-        default() {
-          return {
-            tag: 'h1',
-            content: 'hello',
-            align: 'left',
-            hr: null,
-            style: {
-              'text-decoration': 'none',
-              'font-style': 'normal',
-              color: '#000000'
-            }
-          };
-        }
-      }
+      config: {
+        type: Object
+      },
     },
     data() {
       return {
@@ -28,23 +15,26 @@
             text: bbn._("Title") + ' ' + a,
             value: a
           };
-        })
+        }),
+        defaultConfig: {
+          tag: 'h1',
+          content: '',
+          align: 'left',
+          color: '#000',
+          fontStyle: 'normal',
+          textDecoration: 'none'
+        }
       };
     },
     computed: {
-      style(){
-        return bbn.fn.extend(true, {
-          textAlign: this.source.align || 'left',
-          //color: this.source.color || undefined,
-          //textDecoration: this.source.decoration || undefined,
-          //fontStyle: !!this.source.italic ? 'italic' : 'normal'
-        }, this.source.style);
+      currentStyle(){
+        return {
+          textAlign: this.source.align || undefined,
+          color: this.source.color || undefined,
+          textDecoration: this.source.textDecoration || undefined,
+          fontStyle: !!this.source.fontStyle || undefined
+        };
       }
-    },
-    watch: {
-      'this.source'() {
-        bbn.fn.log('changes in source', this.source);
-      }
-    },
+    }
   };
 })();

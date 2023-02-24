@@ -4,26 +4,22 @@
   return {
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
     props: {
-      defaultConfig: {
-        type: Object,
-        default() {
-          return {
-            source: '',
-            autoplay: 0,
-            muted: 0,
-            controls: 0,
-            loop: 0,
-            style: {
-              width: '100%',
-              height: '100%'
-            },
-            align: 'center'
-          };
-        }
+      config: {
+        type: Object
       }
     },
     data(){
       return {
+        defaultConfig: {
+          content: "",
+          autoplay: 0,
+          muted: 0,
+          controls: 0,
+          loop: 0,
+          width: '100%',
+          height: '100%',
+          align: 'center'
+        },
         aspectRatio: null,
         disableHeight: false,
         ratios: [{
@@ -53,7 +49,7 @@
     computed: {
       youtube(){
         let reg = /^https?:\/\/w{0,3}\.?youtu\.?be(-nocookie)?(\.com)?\//gm;
-        return this.source.source.search(reg) > -1;
+        return this.source.content.search(reg) > -1;
       },
       align(){
         let style = {};
@@ -71,14 +67,14 @@
         return style;
       },
       width(){
-        return 'min(100%, ' + this.source.style.width + ')'
+        return 'min(100%, ' + this.source.width + ')'
       }
     },
     watch: {
       'source.aspectRatio'(val){
         if(val){
           this.disableHeight = true;
-          this.source.style.height = 'auto';
+          this.source.height = 'auto';
           this.aspectRatio = this.source.aspectRatio;
         }
         else{
@@ -92,7 +88,7 @@
       if(this.source.aspectRatio){
         this.aspectRatio = this.source.aspectRatio;
         this.disableHeight = true;
-        this.source.style.height = 'auto'
+        this.source.height = 'auto'
       }
     }
   };

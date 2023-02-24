@@ -3,7 +3,7 @@
 <div :class="componentClass">
   <div v-if="mode === 'edit'">
     <div class="bbn-padded">
-      <div class="bbn-grid-fields bbn-vspadded">
+      <div class="bbn-grid-fields">
         <label v-text="_('Image')"></label>
         <div class="appui-note-cms-block-image-preview bbn-flex">
           <bbn-button icon="nf nf-fae-galery"
@@ -12,11 +12,11 @@
 											title="<?=_('Select an image')?>"
 											class="bbn-right-sspace"/>
 					<img class="bbn-bordered bbn-radius"
-					 		 :src="source.source"
-							 v-if="!!source.source">
+					 		 :src="source.content"
+							 v-if="!!source.content">
         </div>
         <label v-text="_('Width')"></label>
-				<bbn-range v-model="source.style.width"
+				<bbn-range v-model="source.width"
 									 :min="10"
 									 :max="2000" 
 									 :step="10"
@@ -24,7 +24,7 @@
 									 :show-numeric="true"
 									 :show-units="true"/>
 				<label><?=_('Height')?></label>
-				<bbn-range v-model="source.style.height"
+				<bbn-range v-model="source.height"
 									 :min="10"
 									 :max="2000"
 									 :step="10"
@@ -79,16 +79,16 @@
 		<div class="bbn-flex"
 				 :style="align">
 			<a v-if="!!source.href"
-         :style="source.style"
+         :style="{'width': source.width, 'height': source.height}"
 				 target="_self"
 				 :href="$parent.linkURL ? $parent.linkURL + source.href : source.href"
 				 class="bbn-c">
-				<img :src="$parent.path + source.source"
+				<img :src="$parent.path + source.content"
 						 :alt="source.alt ? source.alt : ''">
 			</a>
-			<img v-else-if="!!source.source"
-           :style="source.style"
-				 	 :src="source.source"
+			<img v-else-if="!!source.content"
+           :style="{'width': source.width, 'height': source.height}"
+				 	 :src="source.content"
 				 	 :alt="source.alt ? source.alt : ''">
 			<p class="image-caption bbn-l bbn-s bbn-vsmargin"
 				 v-if="!!source.caption"

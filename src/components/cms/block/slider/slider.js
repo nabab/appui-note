@@ -4,26 +4,25 @@
   return {
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
     props: {
-      defaultConfig: {
-        type: Object,
-        default() {
-          return {
-            source: '',
-            autoplay: 1,
-            arrows: 0,
-            preview: 1,
-            loop: 1,
-            info: 1,
-            style: {
-              width: '100%',
-            },
-            align: 'center'
-          };
-        }
-      }
+      config: {
+        type: Object
+      },
     },
     data(){
       return {
+        defaultConfig: {
+          content: "",
+          autoplay: 1,
+          arrows: 0,
+          preview: 1,
+          loop: 1,
+          info: 1,
+          width: '100%',
+          height: '100%',
+          align: 'center',
+          margin: '0px',
+          marginMobile: '0px'
+        },
         isReady: true,
         okMode: false,
         sliderMode: 'publication',
@@ -153,7 +152,7 @@
             tmp.id_group = this.source.id_group;
           }
           else if (this.sliderMode === 'features') {
-            tmp.id_feature = this.source.id_feature;
+            tmp.content = this.source.content;
           }
           if (this.okMode) {
             this.$nextTick(() => {
@@ -250,7 +249,7 @@
           this.source.mode = 'features';
         }
         else if (val === 'gallery') {
-          this.$delete(this.source, 'id_feature');
+          this.$delete(this.source, 'content');
           this.$delete(this.source, 'noteType');
           this.$delete(this.source, 'id_option');
           this.okMode = true;
@@ -258,7 +257,7 @@
         }
         else {
           this.$delete(this.source, 'id_group');
-          this.$delete(this.source, 'id_feature');
+          this.$delete(this.source, 'content');
           this.okMode = true;
           this.source.mode = 'publications';
         }
@@ -332,14 +331,14 @@
         this.source.mode = 'features';
       }
       else if (this.sliderMode === 'gallery') {
-        this.$delete(this.source, 'id_feature');
+        this.$delete(this.source, 'content');
         this.$delete(this.source, 'noteType');
         this.okMode = true;
         this.source.mode = 'gallery';
       }
       else {
         this.$delete(this.source, 'id_group');
-        this.$delete(this.source, 'id_feature');
+        this.$delete(this.source, 'content');
         this.okMode = true;
         this.source.mode = 'publications';
       }

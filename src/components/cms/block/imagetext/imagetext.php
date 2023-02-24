@@ -3,7 +3,7 @@
 <div :class="componentClass">
   <div v-if="mode === 'edit'">
     <div class="bbn-padded">
-      <div class="bbn-grid-fields bbn-vspadded">
+      <div class="bbn-grid-fields">
         <!--label v-text="_('Columns (Desktop)')"></label>
         <bbn-grid-configuration :cols="5" :rows="1" @select="selectDesktopGrid"></bbn-grid-configuration>
         <label v-text="_('Columns (Mobile)')"></label>
@@ -16,8 +16,8 @@
 											title="<?=_('Select an image')?>"
 											class="bbn-right-sspace"/>
 					<img class="bbn-bordered bbn-radius"
-					 		 :src="source.source"
-							 v-if="!!source.source">
+					 		 :src="source.content"
+							 v-if="!!source.content">
         </div>
         <label v-text="_('Width')"></label>
 				<bbn-range v-model="source.style.width"
@@ -84,14 +84,14 @@
 				 target="_self"
 				 :href="$parent.linkURL ? $parent.linkURL : '' + source.href"
 				 class="bbn-c">
-				<img :src="$parent.path + source.source"
+				<img :src="$parent.path + source.content"
 			    	 :style="source.style"
 						 :alt="source.alt ? source.alt : ''">
 			</a>
-			<div v-else-if="!!source.source">
+			<div v-else-if="!!source.content">
 				<img class="bbn-vsmargin"
 						 :style="source.style"
-						 :src="source.source"
+						 :src="source.content"
 						 :alt="source.alt ? source.alt : ''">
 			</div>
 			<p class="image-caption bbn-s bbn-vsmargin"

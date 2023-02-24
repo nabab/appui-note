@@ -54,13 +54,13 @@
 
       <label v-if="sliderMode === 'features'"><?=_('Feature')?></label>
       <bbn-dropdown :source="note + '/cms/data/features'"
-                    v-model="source.id_feature"
+                    v-model="source.content"
                     @change="getSlideshowSource"
                     source-value="id"
                     v-if="sliderMode === 'features'"/>
 
       <label><?=_('Height')?> (px)</label>
-      <bbn-range v-model="source.style.height"
+      <bbn-range v-model="source.height"
                  :min="10"
                  :max="2000"
                  :step="10"
@@ -82,7 +82,7 @@
                  unit="px"/>
 
       <label><?=_('Title distance')?> (px)</label>
-      <bbn-range v-model="source.style.margin"
+      <bbn-range v-model="source.margin"
                  :min="-200"
                  :max="200"
                  :step="5"
@@ -93,7 +93,7 @@
                  unit="px"/>
 
       <label><?=_('Title distance (mobile)')?> (px)</label>
-      <bbn-range v-model="source.style.marginMobile"
+      <bbn-range v-model="source.marginMobile"
                  :min="-200"
                  :max="200"
                  :step="5"
@@ -168,8 +168,8 @@
                     :novalue="0"/>
     </div>
   </div>
-  <div v-else class="bbn-w-100" :style="{'height':source.style.height ? source.style.height : '', 'width':source.style.width ? source.style.width :''}">
-    <bbn-slideshow v-if="source.currentItems"
+  <div v-else class="bbn-w-100" :style="{'height':source.height ? source.height : '', 'width':source.width ? source.width :''}">
+    <bbn-slideshow v-if="source.content"
                    :source="source.currentItems"
                    ref="slideshow"
                    :arrows="!!source.arrows"

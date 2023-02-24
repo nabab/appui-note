@@ -1,2 +1,24 @@
 /* LESS Document */
 
+@border-width: 2px;
+
+.appui-note-cms-elementor {
+  .appui-note-cms-elementor-guide {
+    position: absolute;
+    left: 2em;
+    right: 2em;
+    pointer-events: none;
+    border-bottom: @border-width dashed #ccc;
+    height: 0.3em;
+    display: none;
+  }
+  .appui-note-cms-elementor-divider  {
+    display: none;
+    position: absolute;
+    border-style: dashed;
+    border-color: #ccc;
+    border-width: @border-width;
+    pointer-events: none;
+    width: 50%;
+  }
+}

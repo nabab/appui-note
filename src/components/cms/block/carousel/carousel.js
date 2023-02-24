@@ -4,27 +4,23 @@
   return {
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
     props: {
-      defaultConfig: {
+      config: {
         type: Object,
-        default() {
-          return {
-            source: '',
-            autoplay: 1,
-            arrows: 0,
-            preview: 1,
-            loop: 1,
-            info: 1,
-            style: {
-              width: '100%',
-              height: '300px'
-            },
-            align: 'center'
-          };
-        }
       }
     },
     data(){
       return {
+        defaultConfig: {
+          content: '',
+          autoplay: 1,
+          arrows: 0,
+          preview: 1,
+          loop: 1,
+          info: 1,
+          width: '100%',
+          height: '300px',
+          align: 'center'
+        },
         isLoading: false,
         fullScreenView: false,
         fullScreenImg: false,
@@ -100,9 +96,9 @@
         });
       },
       updateData(){
-        if (this.source.source) {
+        if (this.source.content) {
           this.isLoading = true;
-          this.post(this.slideshowSourceUrl, {data: {idGroup: this.source.source}}, d => {
+          this.post(this.slideshowSourceUrl, {data: {idGroup: this.source.content}}, d => {
             if (d.success && d.data) {
               this.currentItems.splice(0, this.currentItems.length);
               this.$nextTick(() => {
@@ -132,7 +128,7 @@
       }
     },
     watch: {
-      'source.source'(){
+      'source.content'(){
         this.updateData();
       }
     }

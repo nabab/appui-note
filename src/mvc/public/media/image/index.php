@@ -70,4 +70,6 @@ if ($ctrl->hasArguments()) {
 	}
 }
 
+X::ddump($path);
+
 // 404
