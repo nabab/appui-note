@@ -19,7 +19,7 @@ $types_cond = array_values(array_map(
 ));
 $url = $model->pluginUrl('appui-note');
 return Search::register(function($search) use ($url, $types_cond) {
-  $fields = ['id_note', 'version', 'id_type', 'code', 'type' => 'bbn_options.text', 'title', 'latest', 'match' => "'Found in content'"];
+  $fields = ['id_note', 'version', 'id_type', 'code', 'type' => 'bbn_options.text', 'title', 'latest', 'match' => "'" . _('Found in content') . "'"];
   return [
     'score' => 2,
     'component' => 'appui-note-search-item',
