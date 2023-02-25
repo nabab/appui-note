@@ -9,18 +9,25 @@
         <label v-text="_('Columns (Mobile)')"></label>
         <bbn-grid-configuration @select="selectMobileGrid" :cols="5" :rows="1"></bbn-grid-configuration-->
         <label v-text="_('Image')"></label>
-        <div class="appui-note-cms-block-image-preview bbn-flex">
-          <bbn-button icon="nf nf-fae-galery"
-										  :notext="false"
-					 						@click="openGallery"
-											title="<?=_('Select an image')?>"
-											class="bbn-right-sspace"/>
-					<img class="bbn-bordered bbn-radius"
-					 		 :src="source.content"
-							 v-if="!!source.content">
+        <div class="appui-note-cms-block-image-preview">
+          <div class="bbn-flex-width">
+            <div class="bbn-block">
+              <bbn-button icon="nf nf-fae-galery"
+                          :notext="false"
+                          @click="openGallery"
+                          title="<?=_('Select an image')?>"
+                          class="bbn-right-sspace"/>
+            </div>
+            <div class="bbn-flex-fill">
+              <img class="bbn-bordered bbn-radius"
+                   :src="source.content"
+                   style="max-width: 100%; height: auto"
+                   v-if="!!source.content">
+            </div>
+          </div>
         </div>
         <label v-text="_('Width')"></label>
-				<bbn-range v-model="source.style.width"
+				<bbn-range v-model="source.width"
 									 :min="10"
 									 :max="2000"
 									 :step="10"
@@ -28,7 +35,7 @@
 									 :show-numeric="true"
 									 :show-units="true"/>
 				<label><?=_('Height')?></label>
-				<bbn-range v-model="source.style.height"
+				<bbn-range v-model="source.height"
 									 :min="10"
 									 :max="2000"
 									 :step="10"

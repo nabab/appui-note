@@ -23,6 +23,7 @@
     },
     data() {
       return {
+        isDev: appui.app.user.isDev,
         data: null,
         oData: JSON.stringify(this.source),
         oConfig: null,
@@ -33,7 +34,7 @@
         showWidgets: false,
         currentEdited: null,
         currentEditedIndex: -1,
-        currentEditedIndexInContainer: null,
+        currentEditedIndexInContainer: -1,
         editedSource: null,
         map: [],
         currentPosition: {},
@@ -43,6 +44,7 @@
         dataElementor: {},
         containerPosition: {},
         preview: false,
+        showJSON: false,
         currentContainer: null,
         originalConfig: null,
         isReady: false,
@@ -119,10 +121,13 @@
       }
     },
     methods: {
+      scrollToSelected() {
+        
+      },
       unselectElements() {
         this.currentEdited = null;
         this.currentEditedIndex = -1;
-        this.currentEditedIndexInContainer = null;
+        this.currentEditedIndexInContainer = -1;
         this.showSlider = false;
       },
       setOriginalConfig(config) {
@@ -213,7 +218,7 @@
         this.confirm(bbn._("Are you sure you want to delete this block and its content?"), () => {
           let idx = this.currentEditedIndex;
           let idxInContainer = this.currentEditedIndexInContainer;
-          if (this.currentEditedIndexInContainer) {
+          if (this.currentEditedIndexInContainer > -1) {
             this.source.items[idx].source.items.splice(idxInContainer, 1);
             this.mapY();
             return;
@@ -466,6 +471,10 @@
        * Function to map the elements in elementor editor in an array.
        */
       mapY() {
+        if (this.showJSON || this.preview) {
+          return;
+        }
+
         let editor = this.getRef('editor');
         let tmp_arr = [];
         this.source.items.map((v, idx) => {

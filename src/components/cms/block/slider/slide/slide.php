@@ -12,7 +12,7 @@
           
         </div>
         <div class="bbn-block-gallery-caption bbn-l slider-title"
-             :style="'margin-top:' + ( (d.style.margin && !isMobile) ? d.style.margin : (d.style.marginMobile && isMobile) ? d.style.marginMobile : '' )"
+             :style="'margin-top:' + ( (d.style?.margin && !isMobile) ? d.style.margin : (d.style?.marginMobile && isMobile) ? d.style.marginMobile : '' )"
              v-html="d.title"></div>
         <div v-if="d.desc" class="slider-desc bbn-l" v-html="d.desc"></div>
       </a>

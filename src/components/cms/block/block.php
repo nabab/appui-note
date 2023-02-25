@@ -3,6 +3,7 @@
         currentClass,
         {
              '<?= $componentName ?>-over': overable && over,
+             '<?= $componentName ?>-selected': selected,
        	}
       ]"
       tabindex="0"

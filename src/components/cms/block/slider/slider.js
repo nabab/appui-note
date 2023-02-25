@@ -3,11 +3,6 @@
 (() => {
   return {
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
-    props: {
-      config: {
-        type: Object
-      },
-    },
     data(){
       return {
         defaultConfig: {
@@ -135,13 +130,13 @@
         this.isReady = false
         console.log('getslide',this.isReady)
         if(this.mode === 'edit'){
-
+          
           let ok = false;
           let tmp = {
-            limit: this.source.limit,
-            order: this.source.order,
-            mode: this.source.mode
-          };
+              limit: this.source.limit,
+              order: this.source.order,
+              mode: this.source.mode
+            };
           if (this.sliderMode === 'publications') {
             tmp.note_type = this.source.noteType;
             if(this.source.id_option){
@@ -152,10 +147,10 @@
             tmp.id_group = this.source.id_group;
           }
           else if (this.sliderMode === 'features') {
-            tmp.content = this.source.content;
+            tmp.id_feature = this.source.id_feature;
           }
           if (this.okMode) {
-            this.$nextTick(() => {
+						this.$nextTick(() => {
               this.post(this.slideshowSourceUrl, tmp, d => {
                 if (this.mapped.length) {
                   this.mapped.splice(0, this.mapped.length);
@@ -170,7 +165,7 @@
                         tmp.content = tmp.path || '';
                       }
                       else if (this.source.mode === 'features') {
-                        tmp.content = tmp.media ? tmp.media.url || tmp.media.path : '';
+                          tmp.content = tmp.media ? tmp.media.url || tmp.media.path : '';
                       }
                       else {
                         tmp.content = tmp.front_img && tmp.front_img.path ? tmp.front_img.path : '';
@@ -200,7 +195,7 @@
           let start = 0;
           for (let i = 0; i < this.mapped.length; i += this.source.max) {
             start = i,
-              data = this.mapped.slice(start, this.source.max + start);
+            data = this.mapped.slice(start, this.source.max + start);
             this.source.currentItems.push({
               //mode : 'full',
               component: 'appui-note-cms-block-slider-slide',
@@ -214,7 +209,7 @@
           let start = 0;
           for (let i = 0; i < this.mapped.length; i += this.source.min) {
             start = i,
-              data =  this.mapped.slice(start, this.source.min + start);
+            data =  this.mapped.slice(start, this.source.min + start);
             this.source.currentItems.push({
               //mode : 'full',
               component: 'appui-note-cms-block-slider-slide',
@@ -249,7 +244,7 @@
           this.source.mode = 'features';
         }
         else if (val === 'gallery') {
-          this.$delete(this.source, 'content');
+          this.$delete(this.source, 'id_feature');
           this.$delete(this.source, 'noteType');
           this.$delete(this.source, 'id_option');
           this.okMode = true;
@@ -257,7 +252,7 @@
         }
         else {
           this.$delete(this.source, 'id_group');
-          this.$delete(this.source, 'content');
+          this.$delete(this.source, 'id_feature');
           this.okMode = true;
           this.source.mode = 'publications';
         }
@@ -331,14 +326,14 @@
         this.source.mode = 'features';
       }
       else if (this.sliderMode === 'gallery') {
-        this.$delete(this.source, 'content');
+        this.$delete(this.source, 'id_feature');
         this.$delete(this.source, 'noteType');
         this.okMode = true;
         this.source.mode = 'gallery';
       }
       else {
         this.$delete(this.source, 'id_group');
-        this.$delete(this.source, 'content');
+        this.$delete(this.source, 'id_feature');
         this.okMode = true;
         this.source.mode = 'publications';
       }
