@@ -4,7 +4,7 @@
  *
  **/
 
-/** @var $model \bbn\Mvc\Model*/
+/** @var $model \bbn\Mvc\Model */
 
 $types_notes = $model->inc->options->fullOptions('types', 'note', 'appui');
 $cms = $model->inc->options->fromCode('bbn-cms', 'editors', 'note', 'appui');

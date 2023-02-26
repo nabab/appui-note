@@ -1,6 +1,7 @@
 <!-- HTML Document -->
 <div :class="[componentClass, 'bbn-overlay']">
-  <div class="bbn-overlay bbn-flex-width">
+  <div class="bbn-overlay bbn-flex-width"
+       v-if="data">
     <!--Elementor-->
     <div class="bbn-flex-fill bbn-flex-height">
       <div class="bbn-flex" style="justify-content: center">
@@ -151,7 +152,7 @@
           <appui-note-cms-dropper v-for="(v, i) in allBlocks"
                                   :key="v.id"
                                   :description="v.description"
-                                  :class="['block-' + v.code, {'bbn-pink': v.special}]"
+                                  :class="'block-' + v.code"
                                   :type="v.code"
                                   :special="v.special"
                                   :title="v.text"

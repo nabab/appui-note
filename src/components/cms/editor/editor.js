@@ -18,7 +18,10 @@
         type: Array,
       },
       pblocks: {
-        type: Array
+        type: Array,
+        default() {
+          return [];
+        }
       }
     },
     data() {
@@ -48,7 +51,9 @@
         currentContainer: null,
         originalConfig: null,
         isReady: false,
-        currentBlockConfig: null
+        currentBlockConfig: null,
+        personalizedBlocks: this.pblocks.slice(),
+        classicBlocks: this.blocks || []
       };
     },
     computed: {
@@ -67,8 +72,8 @@
       },
       allBlocks() {
         const arr = [];
-        bbn.fn.each(this.pblocks, a => {
-          const block = bbn.fn.clone(bbn.fn.getRow(this.blocks, {id: a.id_alias}));
+        bbn.fn.each(this.personalizedBlocks, a => {
+          const block = bbn.fn.clone(bbn.fn.getRow(this.classicBlocks, {id: a.id_alias}));
           if (!block) {
             bbn.fn.error(bbn._("The block doesn't exist"));
           }
@@ -80,7 +85,7 @@
           arr.push(block);
         });
         //arr.push(...this.blocks);
-        arr.push(...this.blocks.map(a => {
+        arr.push(...this.classicBlocks.map(a => {
           const it = bbn.fn.clone(a);
           it.special = null;
           return it;
@@ -471,15 +476,15 @@
        * Function to map the elements in elementor editor in an array.
        */
       mapY() {
-        if (this.showJSON || this.preview) {
+        let editor = this.getRef('editor');
+        if (!editor || this.showJSON || this.preview) {
           return;
         }
 
-        let editor = this.getRef('editor');
         let tmp_arr = [];
         this.source.items.map((v, idx) => {
           let ele = editor.getRef('block' + idx.toString());
-          if (ele.$el && ele.$el.getBoundingClientRect) {
+          if (ele?.$el && ele.$el.getBoundingClientRect) {
             let detail = ele.$el.getBoundingClientRect();
             tmp_arr.push({
               y: detail.y,
@@ -549,13 +554,36 @@
           this.updateSelected();
         });*/
       },
+      ready() {
+        this.mapY();
+      }
     },
     mounted() {
-      //Set a default title block when creating a new page.
-      this.data = this.closest('bbn-router').closest('bbn-container').source;
-      setTimeout(() => {
-        this.mapY();
-      }, 500);
+      const data = this.closest('bbn-router').closest('bbn-container').source;
+      if (!this.classicBlocks.length && !this.personalizedBlocks.length) {
+        if (!appui.cms?.blocks) {
+          bbn.fn.post(this.root + 'cms/data/blocks', d => {
+            if (d.blocks) {
+              if (!appui.cms) {
+                appui.cms = bbn.fn.createObject();
+              }
+              appui.cms.blocks = d.blocks;
+              appui.cms.pblocks = d.pblocks || [];
+            }
+            this.classicBlocks.push(...appui.cms.blocks);
+            this.personalizedBlocks.push(...appui.cms.pblocks);
+            this.data = data;
+          });
+        }
+        else {
+          this.classicBlocks.push(...appui.cms.blocks);
+          this.personalizedBlocks.push(...appui.cms.pblocks);
+          this.data = data;
+        }
+      }
+      else {
+        this.data = data;
+      }
     },
     components: {
       configForm: {

@@ -1,2 +1,2 @@
 <!-- HTML Document -->
-<appui-note-cms-editor :source="source.data" :blocks="source.blocks" :pblocks="source.pblocks"/>
+<appui-note-cms-editor :source="source.data"/>
