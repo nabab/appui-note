@@ -18,11 +18,19 @@
         type: Array,
       },
       pblocks: {
-        type: Array
+        type: Array,
+        default() {
+          return [];
+        }
+      },
+      historyLength: {
+        type: Number,
+        default: 15
       }
     },
     data() {
       return {
+        isDev: appui.app.user.isDev,
         data: null,
         oData: JSON.stringify(this.source),
         oConfig: null,
@@ -32,8 +40,6 @@
         showSlider: false,
         showWidgets: false,
         currentEdited: null,
-        currentEditedIndex: -1,
-        currentEditedIndexInContainer: null,
         editedSource: null,
         map: [],
         currentPosition: {},
@@ -43,13 +49,27 @@
         dataElementor: {},
         containerPosition: {},
         preview: false,
+        showJSON: false,
         currentContainer: null,
         originalConfig: null,
         isReady: false,
-        currentBlockConfig: null
+        currentBlockConfig: null,
+        personalizedBlocks: this.pblocks.slice(),
+        classicBlocks: this.blocks || [],
+        elementorIndex: -1,
+        elementorContainerIndex: -1,
+        history: [],
+        historyIndex: null,
+        historyApplying: false
       };
     },
     computed: {
+      jsonValue() {
+        return {
+          items: this.source.items,
+          history: this.history.map(a => JSON.parse(a))
+        }
+      },
       currentEditedTitle() {
         if (this.currentEdited) {
           if (this.currentEdited.special) {
@@ -65,8 +85,8 @@
       },
       allBlocks() {
         const arr = [];
-        bbn.fn.each(this.pblocks, a => {
-          const block = bbn.fn.clone(bbn.fn.getRow(this.blocks, {id: a.id_alias}));
+        bbn.fn.each(this.personalizedBlocks, a => {
+          const block = bbn.fn.clone(bbn.fn.getRow(this.classicBlocks, {id: a.id_alias}));
           if (!block) {
             bbn.fn.error(bbn._("The block doesn't exist"));
           }
@@ -78,7 +98,7 @@
           arr.push(block);
         });
         //arr.push(...this.blocks);
-        arr.push(...this.blocks.map(a => {
+        arr.push(...this.classicBlocks.map(a => {
           const it = bbn.fn.clone(a);
           it.special = null;
           return it;
@@ -119,10 +139,49 @@
       }
     },
     methods: {
+      undo() {
+        if (!this.history.length) {
+          return;
+        }
+        if (this.historyIndex === null) {
+          this.historyIndex = 1;
+        }
+        else if (this.history[this.historyIndex + 1]) {
+          this.historyIndex++;
+        }
+        if (this.history[this.historyIndex] && (JSON.stringify(this.source.items) !== this.history[this.historyIndex])) {
+          this.historyApplying = true;
+          this.source.items.splice(0, this.source.items.length, ...JSON.parse(this.history[this.historyIndex]));
+        }
+      },
+      redo() {
+        if (this.historyIndex >= 1) {
+          this.historyIndex--;
+          if (this.history[this.historyIndex] && (JSON.stringify(this.source.items) !== this.history[this.historyIndex])) {
+            this.historyApplying = true;
+            this.source.items.splice(0, this.source.items.length, ...JSON.parse(this.history[this.historyIndex]));
+          }
+          if (this.historyIndex === 0) {
+            this.historyIndex = null;
+          }
+        }
+      },
+      updateIndexes() {
+        const elementor = this.getRef('editor');
+        this.elementorIndex = elementor.currentEditedIndex;
+        this.elementorContainerIndex = elementor.currentEditedIndexInContainer;
+      },
+      scrollToSelected() {
+        let elementor = this.getRef('editor');
+        let myScroll = elementor.closest('bbn-scroll');
+        let ele = this.map[elementor.currentEditedIndex];
+        myScroll.scrollTo(null, ele.y);
+      },
       unselectElements() {
+        let elementor = this.getRef('editor');
         this.currentEdited = null;
-        this.currentEditedIndex = -1;
-        this.currentEditedIndexInContainer = null;
+        elementor.currentEditedIndex = -1;
+        elementor.currentEditedIndexInContainer = -1;
         this.showSlider = false;
       },
       setOriginalConfig(config) {
@@ -193,14 +252,15 @@
        * @param {Object} source the source object of the current selected block
        */
       handleSelected(index, source, indexInContainer = null) {
+        let elementor = this.getRef('editor');
         if (this.currentEdited !== source) {
           this.showWidgets = false;
           this.currentEdited = null;
           setTimeout(() => {
-            this.currentEditedIndex = index;
+            elementor.currentEditedIndex = index;
             this.currentEdited = source;
             if (indexInContainer !== null) {
-              this.currentEditedIndexInContainer = indexInContainer;
+              elementor.currentEditedIndexInContainer = indexInContainer;
             }
             this.showSlider = true;
           }, 250);
@@ -210,16 +270,17 @@
        * Delete the current selected block
        */
       deleteCurrentSelected() {
+        let elementor = this.getRef('elementor');
         this.confirm(bbn._("Are you sure you want to delete this block and its content?"), () => {
-          let idx = this.currentEditedIndex;
-          let idxInContainer = this.currentEditedIndexInContainer;
-          if (this.currentEditedIndexInContainer) {
+          let idx = elementor.currentEditedIndex;
+          let idxInContainer = elementor.currentEditedIndexInContainer;
+          if (elementor.currentEditedIndexInContainer > -1) {
             this.source.items[idx].source.items.splice(idxInContainer, 1);
             this.mapY();
             return;
           }
           this.source.items.splice(idx, 1);
-          this.currentEditedIndex = -1;
+          elementor.currentEditedIndex = -1;
           this.showSlider = false;
           this.mapY();
         });
@@ -238,9 +299,6 @@
         let divider = elementor.getRef('divider');
         let movedItem = false;
         let found = this.allBlocks.find(el => el.id === block.special);
-
-        if (!found) {
-        }
 
         // Check if the moved block comes from inside the elementor component
         if (this.source.items[this.dataElementor.dataIndex || null]) {
@@ -261,6 +319,7 @@
         }
         // block is dropped inside another block and create a container
         if (this.insideContainer) {
+          bbn.fn.log('drop inside container');
           // avoid creating container inside container
           if (this.source.items[this.nextPosition].type == 'container') {
             if (this.nextContainerPosition == 0) {
@@ -279,12 +338,13 @@
           else if (this.nextContainerPosition == -1) {
             arr.push(block);
           }
+          bbn.fn.log(arr);
           this.source.items.splice(this.nextPosition, 0, {
             type: 'container',
-            source: {
-              items: arr
-            }
+            special: null,
+            items: arr
           });
+          bbn.fn.log('drop', this.source.items[this.nextPosition]);
           this.cancelHelp();
           return;
         }
@@ -315,24 +375,45 @@
        * @param {String} dir the given direction
        */
       move(dir) {
+        let elementor = this.getRef('editor');
         let idx;
+        let idxInContainer;
         switch (dir) {
           case 'top':
             idx = 0;
             break;
           case 'up':
-            idx = this.currentEditedIndex - 1;
+            idx = elementor.currentEditedIndex - 1;
             break;
           case 'down':
-            idx = this.currentEditedIndex + 1;
+            idx = elementor.currentEditedIndex + 1;
             break;
           case 'bottom':
             idx = this.source.items.length - 1;
             break;
+          case 'left':
+            bbn.fn.log('move left in container');
+            idx = elementor.currentEditedIndex;
+            idxInContainer = elementor.currentEditedIndexInContainer - 1;
+            break;
+          case 'right':
+            bbn.fn.log('move right in container');
+            idx = elementor.currentEditedIndex;
+            idxInContainer = elementor.currentEditedIndexInContainer + 1;
+            break;
         }
         if (this.source.items[idx]) {
-          bbn.fn.move(this.source.items, this.currentEditedIndex, idx);
-          this.currentEditedIndex = idx;
+          if (this.source.items[idx].type === "container") {
+            bbn.fn.log('in container', this.source.items[idx]);
+            bbn.fn.move(this.source.items[idx].items, elementor.currentEditedIndexInContainer, idxInContainer);
+            setTimeout(() => {
+              elementor.currentEditedIndexInContainer = idxInContainer;
+            }, 100);
+          }
+          else {
+            bbn.fn.move(this.source.items, elementor.currentEditedIndex, idx);
+            elementor.currentEditedIndex = idx;
+          }
         }
       },
       /**
@@ -467,10 +548,14 @@
        */
       mapY() {
         let editor = this.getRef('editor');
+        if (!editor || this.showJSON || this.preview) {
+          return;
+        }
+
         let tmp_arr = [];
         this.source.items.map((v, idx) => {
           let ele = editor.getRef('block' + idx.toString());
-          if (ele.$el && ele.$el.getBoundingClientRect) {
+          if (ele?.$el && ele.$el.getBoundingClientRect) {
             let detail = ele.$el.getBoundingClientRect();
             tmp_arr.push({
               y: detail.y,
@@ -482,7 +567,7 @@
             });
             this.map = tmp_arr.slice();
           }
-					else {
+          else {
             bbn.fn.log('false mapper', ele.$el, idx);
           }
         });
@@ -504,6 +589,26 @@
     },
     watch: {
       'source.items'() {
+        bbn.fn.log('source items');
+        let apply = true;
+        bbn.fn.each(this.source.items, a => {
+          if ((bbn.fn.numProperties(a) === 2) && Object.hasOwn('type') && Object.hasOwn('special')) {
+            apply = false;
+            return false;
+          }
+        });
+        if (!this.historyApplying && apply) {
+          this.history.unshift(JSON.stringify(this.source.items));
+          if (this.history.length > this.historyLength) {
+            this.history.pop();
+          }
+        }
+        else {
+
+          if (apply) {
+            this.historyApplying = false;
+          }
+        }
         setTimeout(() => {
           this.mapY();
         }, 500);
@@ -540,13 +645,37 @@
           this.updateSelected();
         });*/
       },
+      ready() {
+        this.mapY();
+      }
     },
     mounted() {
-      //Set a default title block when creating a new page.
-      this.data = this.closest('bbn-router').closest('bbn-container').source;
-      setTimeout(() => {
-        this.mapY();
-      }, 500);
+      const data = this.closest('bbn-router').closest('bbn-container').source;
+      if (!this.classicBlocks.length && !this.personalizedBlocks.length) {
+        if (!appui.cms?.blocks) {
+          bbn.fn.post(this.root + 'cms/data/blocks', d => {
+            if (d.blocks) {
+              if (!appui.cms) {
+                appui.cms = bbn.fn.createObject();
+              }
+              appui.cms.blocks = d.blocks;
+              appui.cms.pblocks = d.pblocks || [];
+            }
+            this.classicBlocks.push(...appui.cms.blocks);
+            this.personalizedBlocks.push(...appui.cms.pblocks);
+            this.data = data;
+          });
+        }
+        else {
+          this.classicBlocks.push(...appui.cms.blocks);
+          this.personalizedBlocks.push(...appui.cms.pblocks);
+          this.data = data;
+        }
+      }
+      else {
+        this.data = data;
+      }
+      this.history.unshift(JSON.stringify(this.source.items));
     },
     components: {
       configForm: {

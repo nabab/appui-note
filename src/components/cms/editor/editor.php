@@ -5,6 +5,16 @@
     <div class="bbn-flex-fill bbn-flex-height">
       <div class="bbn-flex" style="justify-content: center">
         <div class="bbn-flex bbn-spadding bbn-alt-background bbn-radius-bottom bbn-xl" style="justify-content: center; align-items: center; gap: 10px;">
+          <!--<bbn-button icon="nf nf-mdi-undo"
+                      :disabled="(history.length <= 1) || (historyIndex === history.length -1)"
+                      @click="undo"
+                      :notext="true"
+                      title="<?= _("Undo") ?>"/>
+          <bbn-button icon="nf nf-mdi-redo"
+                      :disabled="(history.length <= 1) || (historyIndex <= 1)"
+                      @click="redo"
+                      :notext="true"
+                      title="<?= _("Redo") ?>"/>-->
           <bbn-button icon="nf nf-fa-save"
                       title="<?= _("Save the note") ?>"
                       :disabled="!isChanged"
@@ -39,7 +49,11 @@
                   :scrollable="true"/>
         <bbn-scroll class="bbn-overlay"
                     @scroll="scrollElementor">
-          <appui-note-cms-elementor :source="source.items"
+          <bbn-json-editor v-if="showJSON && isDev"
+                           :expanded="1"
+                           v-model="jsonValue"/>
+          <appui-note-cms-elementor v-else
+                                    :source="source.items"
                                     @hook:mounted="ready = true"
                                     ref="editor"
                                     :all-blocks="allBlocks"
@@ -50,8 +64,8 @@
                                     @dragoverdroppable="dragOver"
                                     :position="nextPosition"
                                     @dragstart="dragStart"
-                                    @unselect="unselectElements">
-          </appui-note-cms-elementor>
+                                    @changeposition="updateIndexes"
+                                    @unselect="unselectElements"/>
         </bbn-scroll>
       </div>
     </div>
@@ -86,6 +100,47 @@
                           text="<?= _("Move bottom") ?>"
                           :disabled="(source.items.length <= 1) || (currentEditedIndex > source.items.length - 2)"
                           icon="nf nf-mdi-arrow_collapse_down"/>
+              <bbn-button :no-text="true"
+                          @click="scrollToSelected"
+                          text="<?= _("Scroll to selected element") ?>"
+                          icon="nf nf-mdi-target"/>
+              <template v-if="(elementorContainerIndex === -1) && (elementorIndex !== -1)"
+                        class="bbn-padding appui-note-cms-editor-position">
+                <bbn-button :notext="true"
+                            @click="move('top')"
+                            text="<?= _("Move top") ?>"
+                            :disabled="(source.items.length <= 1) || (elementorIndex < 1)"
+                            icon="nf nf-mdi-arrow_collapse_up"/>
+                <bbn-button :notext="true"
+                            @click="move('up')"
+                            text="<?= _("Move up") ?>"
+                            :disabled="(source.items.length <= 1) || (elementorIndex < 1)"
+                            icon="nf nf-mdi-arrow_up"/>
+                <bbn-button :notext="true"
+                            @click="move('down')"
+                            text="<?= _("Move down") ?>"
+                            :disabled="(source.items.length <= 1) || (elementorIndex >= source.items.length - 1)"
+                            icon="nf nf-mdi-arrow_down"/>
+                <bbn-button :notext="true"
+                            @click="move('bottom')"
+                            text="<?= _("Move bottom") ?>"
+                            :disabled="(source.items.length <= 1) || (elementorIndex >= source.items.length - 1)"
+                            icon="nf nf-mdi-arrow_collapse_down"/>
+              </template>
+              <!-- Leo to do -->
+              <template v-else-if="elementorContainerIndex !== -1"
+                        class="bbn-padding appui-note-cms-editor-position">
+                <bbn-button :notext="true"
+                            @click="move('left')"
+                            text="<?= _("Move left") ?>"
+                            :disabled="(elementorContainerIndex < 1)"
+                            icon="nf nf-mdi-arrow_left"/>
+                <bbn-button :notext="true"
+                            @click="move('right')"
+                            text="<?= _("Move right") ?>"
+                            :disabled="(elementorContainerIndex >= source.items[elementorIndex].items.length -1)"
+                            icon="nf nf-mdi-arrow_right"/>
+              </template>
             </div>
             <div class="bbn-flex-fill">
               <appui-note-cms-block	@configinit="setOriginalConfig"

@@ -14,7 +14,7 @@
                                 :overable="!preview"
                                 :index="i"
                                 :selected="currentEditedIndex === i"
-                                :itemSelected="indexInContainer"
+                                :itemSelected="currentEditedIndex === i ? currentEditedIndexInContainer : -1"
                                 @click="selectContainer"
                                 />
       <appui-note-cms-block v-else

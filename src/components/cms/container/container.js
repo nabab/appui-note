@@ -86,10 +86,12 @@
     },
     methods: {
       addBlock() {
-        this.source.items.push({
-          type: 'text',
-          content: ''
-        });
+        if (this.source.items) {
+          this.source.items.push({
+            type: 'text',
+            content: ''
+          });
+        }
       },
       removeBlock(idx) {
         this.source.items.splice(idx, 1);

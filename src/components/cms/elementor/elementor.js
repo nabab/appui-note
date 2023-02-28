@@ -195,8 +195,8 @@
     data(){
       return {
         currentEditedIndex: -1,
+        currentEditedIndexInContainer: -1,
         types: types,
-        indexInContainer: -1,
         dragData: bbn.fn.map(this.source, (cfg, i) => {
           return {data: bbn.fn.extend({}, cfg, {inside: true, index: i}), mode: 'self'};
         }),
@@ -205,7 +205,7 @@
     methods: {
       unselect() {
         this.currentEditedIndex = -1;
-        this.indexInContainer = -1;
+        this.currentEditedIndexInContainer = -1;
         this.$emit('unselect');
       },
       dragStart() {
@@ -220,7 +220,7 @@
       */
       selectBlock(index, source) {
         this.currentEditedIndex = index;
-        this.indexInContainer = -1;
+        this.currentEditedIndexInContainer = -1;
         this.$emit('changes', index, source);
       },
       /*
@@ -228,8 +228,8 @@
       */
       selectContainer(index, source, indexInContainer) {
         this.currentEditedIndex = index;
-        this.indexInContainer = indexInContainer;
-        this.$emit('changes', index, source, indexInContainer);
+        this.currentEditedIndexInContainer = indexInContainer;
+        this.$emit('changes', index, source, this.currentEditedIndexInContainer);
       },
       /*
       Ask the user to save changes and submit the form
@@ -260,7 +260,16 @@
       */
       onDrag() {
         this.$emit('dragoverdroppable', ...arguments);
+      }
+    },
+    watch: {
+      currentEditedIndex() {
+        bbn.fn.log('currentEditedIndex', this.currentEditedIndex);
+        this.$emit('changeposition');
       },
+      currentEditedIndexInContainer() {
+        this.$emit('changeposition');
+      }
     }
   };
 })();
