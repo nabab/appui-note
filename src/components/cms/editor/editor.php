@@ -100,7 +100,7 @@
                           text="<?= _("Move bottom") ?>"
                           :disabled="(source.items.length <= 1) || (currentEditedIndex > source.items.length - 2)"
                           icon="nf nf-mdi-arrow_collapse_down"/>
-              <bbn-button :no-text="true"
+              <bbn-button :notext="true"
                           @click="scrollToSelected"
                           text="<?= _("Scroll to selected element") ?>"
                           icon="nf nf-mdi-target"/>
