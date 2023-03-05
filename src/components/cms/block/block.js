@@ -155,7 +155,7 @@
     },
     computed: {
       ignoredFields() {
-        return this.getRef('component').ignoreFields;
+        return this.getRef('component')?.ignoreFields;
       },
       isSelected() {
         return this.selected === true;
@@ -164,7 +164,7 @@
         if (this.type === "container") {
           return "appui-note-cms-container";
         }
-        return this.getComponentName(this.type);
+        return "appui-note-cms-block-" + this.type;
       },
       changed(){
         return this.ready && !bbn.fn.isSame(this.initialSource, this.source);
