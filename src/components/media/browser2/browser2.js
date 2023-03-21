@@ -103,6 +103,10 @@
       },
       toolbarButtons: {
         type: Array
+      },
+      scrollable: {
+        type: Boolean,
+        default: true
       }
     },
     data(){
@@ -192,40 +196,52 @@
       },
       editMedia(m){
         if (this.editEnabled) {
-          if(bbn.fn.isString(m.content)){
-            m.content = JSON.parse(m.content)
-          }
-          this.getPopup().open({
-            title: bbn._('Edit media'),
-            component: 'appui-note-media-form',
-            componentOptions: {
-              source: m,
-              multiple: false,
-              url: this.edit || this.url
-            },
-            height: '400px',
-            width: '500px',
-            onOpen: pop => {
-              pop.$on('edited', this.onEdited);
-            }
+          let ev = new CustomEvent('beforeedit', {
+            cancelable: true
           });
+          this.$emit('beforeedit', ev, m);
+          if (!ev.defaultPrevented) {
+            if(bbn.fn.isString(m.content)){
+              m.content = JSON.parse(m.content)
+            }
+            this.getPopup().open({
+              title: bbn._('Edit media'),
+              component: 'appui-note-media-form',
+              componentOptions: {
+                source: m,
+                multiple: false,
+                url: this.edit || this.url
+              },
+              height: '400px',
+              width: '500px',
+              onOpen: pop => {
+                pop.$on('edited', this.onEdited);
+              }
+            });
+          }
         }
       },
       addMedia(){
         if (this.uploadEnabled) {
-          this.getPopup().open({
-            title: bbn._('Add new media'),
-            component: 'appui-note-media-form',
-            componentOptions: {
-              source: {},
-              url: this.upload || this.url
-            },
-            height: '400px',
-            width: '500px',
-            onOpen: pop => {
-              pop.$on('added', this.onAdded);
-            }
+          let ev = new CustomEvent('beforeadd', {
+            cancelable: true
           });
+          this.$emit('beforeadd', ev);
+          if (!ev.defaultPrevented) {
+            this.getPopup().open({
+              title: bbn._('Add new media'),
+              component: 'appui-note-media-form',
+              componentOptions: {
+                source: {},
+                url: this.upload || this.url
+              },
+              height: '400px',
+              width: '500px',
+              onOpen: pop => {
+                pop.$on('added', this.onAdded);
+              }
+            });
+          }
         }
       },
       onAdded(media){
@@ -264,34 +280,40 @@
       },
       formatBytes: bbn.fn.formatBytes,
       removeMedia(m){
-        this.$emit('delete', {
-          id_note: !!this.data && !!this.data.id_note ? this.data.id_note : false,
-          media: m
+        let ev = new CustomEvent('beforeremove', {
+          cancelable: true
         });
-        /*this.confirm(
-          (m.notes && m.notes.length) ?
-	          bbn._("The media you're going to delete is linked to a note, are you sure you want to remove it?") :
-          	bbn._("Are you sure you want to delete this media?"),
-          () => {
-            this.$emit('delete', {'id_note':this.data.id_note, 'id': m.id} );
-            this.post(
-              appui.plugins['appui-note'] + '/media/actions/delete',
-              m,
-              (d) => {
-                if (d.success){
-                  let idx = bbn.fn.search(this.currentData, {id: m.id});
-                  if (idx > -1) {
-                    this.currentData.splice(idx, 1);
+        this.$emit('beforeremove', ev, m);
+        if (!ev.defaultPrevented) {
+          this.$emit('delete', {
+            id_note: !!this.data && !!this.data.id_note ? this.data.id_note : false,
+            media: m
+          });
+          /*this.confirm(
+            (m.notes && m.notes.length) ?
+              bbn._("The media you're going to delete is linked to a note, are you sure you want to remove it?") :
+              bbn._("Are you sure you want to delete this media?"),
+            () => {
+              this.$emit('delete', {'id_note':this.data.id_note, 'id': m.id} );
+              this.post(
+                appui.plugins['appui-note'] + '/media/actions/delete',
+                m,
+                (d) => {
+                  if (d.success){
+                    let idx = bbn.fn.search(this.currentData, {id: m.id});
+                    if (idx > -1) {
+                      this.currentData.splice(idx, 1);
+                    }
+                    appui.success(bbn._('Media successfully deleted :)'))
                   }
-                  appui.success(bbn._('Media successfully deleted :)'))
+                  else{
+                    appui.error(bbn._('Something went wrong while deleting the media :('))
+                  }
                 }
-                else{
-                  appui.error(bbn._('Something went wrong while deleting the media :('))
-                }
-              }
-            )
-          }
-        )*/
+              )
+            }
+          )*/
+        }
       },
       downloadMedia(a, b){
         this.$emit('download', a)

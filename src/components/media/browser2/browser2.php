@@ -1,5 +1,6 @@
 
-<div :class="[componentClass, 'bbn-flex-height', 'bbn-background', 'bbn-overlay']" ref="browser">
+<div :class="[componentClass, 'bbn-flex-height', 'bbn-background', {'bbn-overlay': !!scrollable}]"
+     ref="browser">
   <bbn-gallery :source="source"
                :source-action="sourceAction"
                :search-name="searchName"
@@ -32,5 +33,6 @@
                :source-order="sourceOrder"
                :order="!!sourceOrder ? {[sourceOrder]: 'asc'} : {}"
                :server-sorting="serverSorting"
-               @sort="sort"/>
+               @sort="sort"
+               :scrollable="scrollable"/>
 </div>
