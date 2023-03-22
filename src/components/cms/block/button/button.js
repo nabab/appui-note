@@ -9,7 +9,8 @@
         defaultConfig: {
           url: '',
           content: '',
-          padding: '',
+          hpadding: '',
+          vpadding: '',
           dimensions: '',
           align: 'left'
         },
