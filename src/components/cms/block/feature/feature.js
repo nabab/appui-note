@@ -11,7 +11,9 @@
     },
     data() {
       return {
-        content: ''
+        defaultConfig: {
+          content: '',
+        }
       }
     }
   };

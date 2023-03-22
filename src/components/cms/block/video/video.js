@@ -49,11 +49,11 @@
     computed: {
       youtube(){
         let reg = /^https?:\/\/w{0,3}\.?youtu\.?be(-nocookie)?(\.com)?\//gm;
-        return this.source.content.search(reg) > -1;
+        return this.currentSource.content.search(reg) > -1;
       },
       align(){
         let style = {};
-        switch (this.source.align) {
+        switch (this.currentSource.align) {
           case 'left':
             style.justifyContent = 'flex-start';
             break;
@@ -67,15 +67,15 @@
         return style;
       },
       width(){
-        return 'min(100%, ' + this.source.width + ')'
+        return 'min(100%, ' + this.currentSource.width + ')'
       }
     },
     watch: {
-      'source.aspectRatio'(val){
+      'currentSource.aspectRatio'(val){
         if(val){
           this.disableHeight = true;
-          this.source.height = 'auto';
-          this.aspectRatio = this.source.aspectRatio;
+          this.currentSource.height = 'auto';
+          this.aspectRatio = this.currentSource.aspectRatio;
         }
         else{
           this.aspectRatio = undefined;
@@ -85,10 +85,10 @@
       }
     },
     beforeMount(){
-      if(this.source.aspectRatio){
-        this.aspectRatio = this.source.aspectRatio;
+      if(this.currentSource.aspectRatio){
+        this.aspectRatio = this.currentSource.aspectRatio;
         this.disableHeight = true;
-        this.source.height = 'auto'
+        this.currentSource.height = 'auto'
       }
     }
   };

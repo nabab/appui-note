@@ -1,10 +1,10 @@
-<div :class="[componentClass, source.optionalClass, 'bbn-w-100']"
-     :style="source.blockDistance ? ('margin-bottom:' + source.blockDistance) : ''">
+<div :class="[componentClass, currentSource.optionalClass, 'bbn-w-100']"
+     :style="currentSource.blockDistance ? ('margin-bottom:' + currentSource.blockDistance) : ''">
   <div v-if="mode === 'edit'"
        class="bbn-padded">
     <div class="bbn-w-100 bbn-grid-fields">
       <label><?=_('Css class')?><small> <?=_('(Optional)')?></small></label>
-      <bbn-input v-model="source.optionalClass"/>
+      <bbn-input v-model="currentSource.optionalClass"/>
 
       <label><?=_('Mode')?></label>
       <bbn-radio v-model="sliderMode"
@@ -13,14 +13,14 @@
 
       <label v-if="sliderMode === 'publications'"><?=_('Type of articles')?></label>
       <bbn-dropdown :source="note + '/cms/data/types_notes'"
-                    v-model="source.noteType"
+                    v-model="currentSource.noteType"
                     @change="getSlideshowSource"
                     v-if="sliderMode === 'publications'"
                     ref="publicationdropdown"/>
       
       <label v-if="(sliderMode === 'publications') && this.showRootAlias"><?=_('Category')?></label>
-      <bbn-dropdown :source="note + '/cms/data/types_notes/' + this.source.id_root_alias"
-                    v-model="source.id_option"
+      <bbn-dropdown :source="note + '/cms/data/types_notes/' + this.currentSource.id_root_alias"
+                    v-model="currentSource.id_option"
                     :nullable="true"
                     sourceValue="id"
                     @change="getSlideshowSource"
@@ -29,7 +29,7 @@
                     
       <label v-if="sliderMode === 'publications'"><?=_('Ordered by')?></label>
       <bbn-dropdown :source="orderFields"
-                    v-model="source.order"
+                    v-model="currentSource.order"
                     sourceValue="value"
                     @change="getSlideshowSource"
                     v-if="sliderMode === 'publications'"/>
@@ -38,7 +38,7 @@
       <div v-if="sliderMode === 'gallery'" class="bbn-vmiddle">
         <bbn-dropdown :source="galleryListUrl"
                       source-value="id"
-                      v-model="source.id_group"
+                      v-model="currentSource.id_group"
                       ref="galleryList"
                       @change="getSlideshowSource"
                       :suggest="true"
@@ -54,13 +54,13 @@
 
       <label v-if="sliderMode === 'features'"><?=_('Feature')?></label>
       <bbn-dropdown :source="note + '/cms/data/features'"
-                    v-model="source.content"
+                    v-model="currentSource.content"
                     @change="getSlideshowSource"
                     source-value="id"
                     v-if="sliderMode === 'features'"/>
 
       <label><?=_('Height')?> (px)</label>
-      <bbn-range v-model="source.height"
+      <bbn-range v-model="currentSource.height"
                  :min="10"
                  :max="2000"
                  :step="10"
@@ -71,7 +71,7 @@
                  unit="px"/>
 
       <label><?=_('Distance block below')?> (px)</label>
-      <bbn-range v-model="source.blockDistance"
+      <bbn-range v-model="currentSource.blockDistance"
                  :min="0"
                  :max="200"
                  :step="5"
@@ -82,7 +82,7 @@
                  unit="px"/>
 
       <label><?=_('Title distance')?> (px)</label>
-      <bbn-range v-model="source.margin"
+      <bbn-range v-model="currentSource.margin"
                  :min="-200"
                  :max="200"
                  :step="5"
@@ -93,7 +93,7 @@
                  unit="px"/>
 
       <label><?=_('Title distance (mobile)')?> (px)</label>
-      <bbn-range v-model="source.marginMobile"
+      <bbn-range v-model="currentSource.marginMobile"
                  :min="-200"
                  :max="200"
                  :step="5"
@@ -105,13 +105,13 @@
 
 
       <label><?=_('Image fit')?></label>
-      <bbn-radio v-model="source.fit"
+      <bbn-radio v-model="currentSource.fit"
                  :nullable="true"
                  :source="fitSource"/>
                  
       <label><?=_('Max slide in line')?></label>
       <div>
-        <bbn-numeric v-model="source.max"
+        <bbn-numeric v-model="currentSource.max"
                       :step="1"
                       :min="1"
                       :default="1"
@@ -121,7 +121,7 @@
       </div>
       <label><?=_('Min slide in line (mobile)')?></label>
       <div>
-        <bbn-numeric v-model="source.min"
+        <bbn-numeric v-model="currentSource.min"
                     :step="1"
                     :min="1"
                     :default="1"
@@ -130,54 +130,54 @@
                     />
       </div>
       <label v-if="sliderMode !== 'gallery'"><?=_('Limits')?></label>
-      <bbn-numeric v-model="source.limit"
-                   :min="source.max"
+      <bbn-numeric v-model="currentSource.limit"
+                   :min="currentSource.max"
                    :nullable="false"
                    @change="getSlideshowSource"
                    v-if="sliderMode !== 'gallery'"
                    />
 
       <label><?=_('Autoplay')?></label>
-      <bbn-checkbox v-model="source.autoplay"
+      <bbn-checkbox v-model="currentSource.autoplay"
                     :value="1"
                     :novalue="0"/>
 
       <label><?=_('Arrows')?></label>
-      <bbn-checkbox v-model="source.arrows"
+      <bbn-checkbox v-model="currentSource.arrows"
                     :value="1"
                     :novalue="0"/>
 
-      <label v-if="!!source.arrows"><?=_('Arrows position')?></label>
-      <bbn-dropdown v-if="!!source.arrows"
-                    v-model="source.arrowsPosition"
+      <label v-if="!!currentSource.arrows"><?=_('Arrows position')?></label>
+      <bbn-dropdown v-if="!!currentSource.arrows"
+                    v-model="currentSource.arrowsPosition"
                     :source="arrowsPositions"/>
 
       <label><?=_('Preview')?></label>
-      <bbn-checkbox v-model="source.preview"
+      <bbn-checkbox v-model="currentSource.preview"
                     :value="1"
                     :novalue="0"/>
 
       <label><?=_('Loop')?></label>
-      <bbn-checkbox v-model="source.loop"
+      <bbn-checkbox v-model="currentSource.loop"
                     :value="1"
                     :novalue="0"/>
 
       <label><?=_('Show info')?></label>
-      <bbn-checkbox v-model="source.info"
+      <bbn-checkbox v-model="currentSource.info"
                     :value="1"
                     :novalue="0"/>
     </div>
   </div>
-  <div v-else class="bbn-w-100" :style="{'height':source.height ? source.height : '', 'width':source.width ? source.width :''}">
-    <bbn-slideshow v-if="source.content"
-                   :source="source.currentItems"
+  <div v-else class="bbn-w-100" :style="{'height':currentSource.height ? currentSource.height : '', 'width':currentSource.width ? currentSource.width :''}">
+    <bbn-slideshow v-if="currentSource.content"
+                   :source="currentSource.currentItems"
                    ref="slideshow"
-                   :arrows="!!source.arrows"
-                   :arrows-position="source.arrowsPosition"
-                   :auto-play="!!source.autoplay"
-                   :loop="!!source.loop"
-                   :preview="!!source.preview"
-                   :show-info="!!source.info"
+                   :arrows="!!currentSource.arrows"
+                   :arrows-position="currentSource.arrowsPosition"
+                   :auto-play="!!currentSource.autoplay"
+                   :loop="!!currentSource.loop"
+                   :preview="!!currentSource.preview"
+                   :show-info="!!currentSource.info"
                    />
     <div v-else
          class="bbn-light bbn-lg">

@@ -7,7 +7,7 @@
          class="bbn-vmiddle">
       <bbn-dropdown :source="galleryListUrl"
                     source-value="id"
-                    v-model="source.content"
+                    v-model="currentSource.content"
                     ref="galleryList"
                     :suggest="true"
                     :filterable="true"
@@ -21,7 +21,7 @@
 
     <label v-if="isConfig || !isInConfig('style')"><?=_('Width')?></label>
     <bbn-range v-if="isConfig || !isInConfig('style')"
-               v-model="source.width"
+               v-model="currentSource.width"
                :min="10"
                :max="2000"
                :step="10"
@@ -30,7 +30,7 @@
                :show-units="true"/>
     <label v-if="isConfig || !isInConfig('style')"><?=_('Height')?></label>
     <bbn-range v-if="isConfig || !isInConfig('style')"
-               v-model="source.height"
+               v-model="currentSource.height"
                :min="10"
                :max="2000"
                :step="10"
@@ -40,13 +40,13 @@
     
     <label v-if="isConfig || !isInConfig('crop')"><?=_('Crop Image')?></label>
     <bbn-checkbox v-if="isConfig || !isInConfig('crop')"
-                  v-model="source.crop"
+                  v-model="currentSource.crop"
                   :value="1"
                   :novalue="0"/>
 
     <label v-if="isConfig || !isInConfig('imageWidth')"><?=_('Image width')?> (%)</label>
     <bbn-range v-if="isConfig || !isInConfig('imageWidth')"
-               v-model="source.imageWidth"
+               v-model="currentSource.imageWidth"
                :min="5"
                :max="100"
                :step="1"
@@ -57,7 +57,7 @@
     
     <label v-if="isConfig || !isInConfig('columnGap')"><?=_('Column gap')?></label>
     <bbn-range v-if="isConfig || !isInConfig('columnGap')"
-               v-model="source.columnGap"
+               v-model="currentSource.columnGap"
                :min="2"
                :max="100"
                :step="1"
@@ -69,7 +69,7 @@
     <div v-if="isConfig || !isInConfig('align')">
       <div class="bbn-block">
         <bbn-radiobuttons :notext="true"
-                          v-model="source.align"
+                          v-model="currentSource.align"
                           :source="[{
                                    text: _('Align left'),
                                    value: 'left',
@@ -93,7 +93,7 @@
     <label><?=_('Mode')?></label>
     <div class="bbn-block">
       <bbn-radiobuttons :notext="true"
-                        v-model="source.mode"
+                        v-model="currentSource.mode"
                         :source="[{
                           text: _('Link'),
                           value: 'link',
@@ -106,48 +106,48 @@
     </div>
     <label v-if="isConfig || !isInConfig('scrollable')"><?=_('Scrollable')?></label>
     <bbn-checkbox v-if="isConfig || !isInConfig('acrollable')"
-                  v-model="source.scrollable"
+                  v-model="currentSource.scrollable"
                   :value="1"
                   :novalue="0"/>
 
     <label v-if="isConfig || !isInConfig('pageable')"><?=_('Pageable')?></label>
     <bbn-checkbox v-if="isConfig || !isInConfig('pageable')"
-                  v-model="source.pageable"
+                  v-model="currentSource.pageable"
                   :value="1"
                   :novalue="0"/>
 
     <label v-if="isConfig || !isInConfig('footer')"><?=_('Footer')?></label>
     <bbn-checkbox v-if="isConfig || !isInConfig('footer')"
-                  v-model="source.pager"
+                  v-model="currentSource.pager"
                   :value="1"
                   :novalue="0"/>
 
     <label v-if="isConfig || !isInConfig('zoomable')"><?=_('Zoomable')?></label>
     <bbn-checkbox v-if="isConfig || !isInConfig('zoomable')"
-                  v-model="source.zoomable"
+                  v-model="currentSource.zoomable"
                   :value="1"
                   :novalue="0"/>
 
-    <label v-if="(isConfig || !isInConfig('info')) && !!source.zoomable"><?=_('Info')?></label>
-    <bbn-checkbox v-if="(isConfig || !isInConfig('info')) && !!source.zoomable"
-                  v-model="source.info"
+    <label v-if="(isConfig || !isInConfig('info')) && !!currentSource.zoomable"><?=_('Info')?></label>
+    <bbn-checkbox v-if="(isConfig || !isInConfig('info')) && !!currentSource.zoomable"
+                  v-model="currentSource.info"
                   :value="1"
                   :novalue="0"/>
 
-    <label v-if="(isConfig || !isInConfig('sourceInfo')) && !!source.info"><?=_('Info field')?></label>
-    <bbn-dropdown v-if="(isConfig || !isInConfig('sourceInfo')) && !!source.info"
-                  v-model="source.sourceInfo"
+    <label v-if="(isConfig || !isInConfig('sourceInfo')) && !!currentSource.info"><?=_('Info field')?></label>
+    <bbn-dropdown v-if="(isConfig || !isInConfig('sourceInfo')) && !!currentSource.info"
+                  v-model="currentSource.sourceInfo"
                   :source="sourceInfoList"/>
 
     <label v-if="isConfig || !isInConfig('resizable')"><?=_('Resizable')?></label>
     <bbn-checkbox v-if="isConfig || !isInConfig('resizable')"
-                  v-model="source.resizable"
+                  v-model="currentSource.resizable"
                   :value="1"
                   :novalue="0"/>
 
     <label v-if="isConfig || !isInConfig('toolbar')"><?=_('Toolbar')?></label>
     <bbn-checkbox v-if="isConfig || !isInConfig('toolbar')"
-                  v-model="source.toolbar"
+                  v-model="currentSource.toolbar"
                   :value="1"
                   :novalue="0"/>
 
@@ -156,25 +156,25 @@
        class="bbn-flex"
        :style="align">
     <div class="bbn-block"
-         :style="{'width': source.width, 'height': source.height}">
+         :style="{'width': currentSource.width, 'height': currentSource.height}">
       <bbn-gallery :source="gallerySourceUrl"
-                   :class="{'cropped' : source.crop}"
+                   :class="{'cropped' : currentSource.crop}"
                    :data="{
-                          idGroup: source.content
+                          idGroup: currentSource.content
                           }"
                    ref="gallery"
                    @resize="getItemWidth"
-                   :scrollable="!!source.scrollable"
-                   :pageable="!!source.pageable"
-                   :zoomable="!!source.zoomable && (source.mode === 'fullscreen')"
-                   :info="!!source.info"
-                   :source-info="!!source.info ? source.sourceInfo : undefined"
-                   :resizable="!!source.resizable"
-                   :toolbar="!!source.toolbar"
+                   :scrollable="!!currentSource.scrollable"
+                   :pageable="!!currentSource.pageable"
+                   :zoomable="!!currentSource.zoomable && (currentSource.mode === 'fullscreen')"
+                   :info="!!currentSource.info"
+                   :source-info="!!currentSource.info ? currentSource.sourceInfo : undefined"
+                   :resizable="!!currentSource.resizable"
+                   :toolbar="!!currentSource.toolbar"
                    path-name="path"
                    :itemWidth="itemWidth"
-                   :columnGap="source.columnGap"
-                   :pager="!!source.pager"/>
+                   :columnGap="currentSource.columnGap"
+                   :pager="!!currentSource.pager"/>
     </div>
   </div>
 </div>

@@ -167,18 +167,18 @@
         }
       },
       updateIndexes() {
-        const elementor = this.getRef('editor');
+        const elementor = this.getRef('elementor');
         this.elementorIndex = elementor.currentEditedIndex;
         this.elementorContainerIndex = elementor.currentEditedIndexInContainer;
       },
       scrollToSelected() {
-        let elementor = this.getRef('editor');
+        let elementor = this.getRef('elementor');
         let myScroll = elementor.closest('bbn-scroll');
         let ele = this.map[elementor.currentEditedIndex];
         myScroll.scrollTo(null, ele.y);
       },
       unselectElements() {
-        let elementor = this.getRef('editor');
+        let elementor = this.getRef('elementor');
         this.currentEdited = null;
         elementor.currentEditedIndex = -1;
         elementor.currentEditedIndexInContainer = -1;
@@ -252,7 +252,7 @@
        * @param {Object} source the source object of the current selected block
        */
       handleSelected(index, source, indexInContainer = null) {
-        let elementor = this.getRef('editor');
+        let elementor = this.getRef('elementor');
         if (this.currentEdited !== source) {
           this.showWidgets = false;
           this.currentEdited = null;
@@ -275,7 +275,11 @@
           let idx = elementor.currentEditedIndex;
           let idxInContainer = elementor.currentEditedIndexInContainer;
           if (elementor.currentEditedIndexInContainer > -1) {
-            this.source.items[idx].source.items.splice(idxInContainer, 1);
+            this.source.items[idx].items.splice(idxInContainer, 1);
+            if (this.source.items[idx].items.length === 1) {
+              const tmp = this.source.items[idx].items[0];
+              this.source.items.splice(idx, 1, tmp);
+            }
             this.mapY();
             return;
           }
@@ -294,7 +298,7 @@
         const block = bbn.fn.clone(ev.detail.from.data.source);
         this.currentBlockConfig = ev.detail.from.data.cfg || {};
         bbn.fn.iterate(this.currentBlockConfig, (a, n) => block[n] = a);
-        let elementor = this.getRef('editor');
+        let elementor = this.getRef('elementor');
         let guide = elementor.getRef('guide');
         let divider = elementor.getRef('divider');
         let movedItem = false;
@@ -364,7 +368,7 @@
        * Remove the guide and the divider element by applying the style 'display: none'.
        */
       cancelHelp() {
-        let elementor = this.getRef('editor');
+        let elementor = this.getRef('elementor');
         let guide = elementor.getRef('guide');
         let divider = elementor.getRef('divider');
         guide.style.display = "none";
@@ -375,7 +379,7 @@
        * @param {String} dir the given direction
        */
       move(dir) {
-        let elementor = this.getRef('editor');
+        let elementor = this.getRef('elementor');
         let idx;
         let idxInContainer;
         switch (dir) {
@@ -423,7 +427,7 @@
       dragOver(e) {
         // Check if map is empty or not
         if (this.map.length == 0) {
-          let elementor = this.getRef('editor');
+          let elementor = this.getRef('elementor');
           let guide = elementor.getRef('guide');
           guide.style.display = 'flex';
           guide.style.top = 0;
@@ -431,7 +435,7 @@
         }
 
         this.currentPosition = e.detail.helper.getBoundingClientRect();
-        let elementor = this.getRef('editor');
+        let elementor = this.getRef('elementor');
         let editor = elementor.$el.firstChild;
         let guide = elementor.getRef('guide');
         let divider = elementor.getRef('divider');
@@ -452,7 +456,7 @@
           this.nextPosition = -1;
           guide.style.display = "flex";
           guide.style.position = 'absolute';
-          this.containerPosition = this.getRef('editor').$el.getBoundingClientRect();
+          this.containerPosition = elementor.$el.getBoundingClientRect();
           guide.style.top = (this.map.at(-1).y + this.map.at(-1).height - this.containerPosition.y) + 'px';
         }
         //check if the current position is inside an element
@@ -547,14 +551,14 @@
        * Function to map the elements in elementor editor in an array.
        */
       mapY() {
-        let editor = this.getRef('editor');
-        if (!editor || this.showJSON || this.preview) {
+        let elementor = this.getRef('elementor');
+        if (!elementor || this.showJSON || this.preview) {
           return;
         }
 
         let tmp_arr = [];
         this.source.items.map((v, idx) => {
-          let ele = editor.getRef('block' + idx.toString());
+          let ele = elementor.getRef('block' + idx.toString());
           if (ele?.$el && ele.$el.getBoundingClientRect) {
             let detail = ele.$el.getBoundingClientRect();
             tmp_arr.push({
@@ -635,6 +639,8 @@
         }
       },
       currentEdited(v, ov) {
+        const elementor = this.getRef('elementor');
+        bbn.fn.log("Changing currentEdited", this.currentEdited, elementor.currentEditedIndex, elementor.currentEditedIndexInContainer);
         if (!ov || !v || (v.type !== ov.type)) {
           this.isReady = false;
           setTimeout(() => {

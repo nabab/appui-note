@@ -2,8 +2,8 @@
 
 <div :class="[componentClass, 'component-container', 'bbn-block-html']">
   <bbn-rte v-if="isEditor"
-           v-model="source.content"/>
+           v-model="currentSource.content"/>
   <div v-else
-	     v-html="source.content"
+	     v-html="currentSource.content"
        :style="style"/>
 </div>

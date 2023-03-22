@@ -26,7 +26,7 @@
     computed: {
       align(){
         let style = {};
-        switch (this.source.align) {
+        switch (this.currentSource.align) {
           case 'left':
             style.justifyContent = 'flex-start';
             break;
@@ -53,7 +53,7 @@
         });
       },
       onSelection(img) {
-        this.source.content = img.data.path;
+        this.currentSource.content = img.data.path;
         this.getPopup().close();
       }
     },

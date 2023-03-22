@@ -4,7 +4,7 @@
   <div v-if="mode === 'edit'"
        class="bbn-grid-fields">
     <label><?= _("Space") ?></label>
-    <bbn-range v-model="source.size"
+    <bbn-range v-model="currentSource.size"
 						   :max="2000" 
                :show-reset="false"
                :show-numeric="true"
@@ -12,7 +12,7 @@
                unit="em"/>
   </div>
   <div v-else
-       :style="{height: source.size}">
+       :style="{height: currentSource.size}">
     &nbsp;
   </div>
 </div>

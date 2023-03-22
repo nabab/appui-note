@@ -2,55 +2,58 @@
 <div :class="[componentClass, 'bbn-w-100']">
   <div v-if="mode === 'edit'">
     <div class="bbn-w-100">
-      <bbn-textarea v-model="source.content"
+      <bbn-textarea v-model="currentSource.content"
                     class="bbn-w-100"/>
     </div>
     <div class="bbn-grid-fields bbn-vpadded bbn-w-100">
       <label><?=_('Tag')?></label>
       <div>
         <bbn-dropdown :source="tags"
-                      v-model="source.tag"
+                      v-model="currentSource.tag"
                       :component="$options.components.tag"/>
       </div>
       <label><?=_('Color')?></label>
       <div>
-        <bbn-colorpicker v-model="source.color"/>
+        <bbn-colorpicker v-model="currentSource.color"/>
       </div>
       <label><?=_('Alignment')?></label>
       <div>
-        <div class="bbn-block">
+        <div class="bbn-block bbn-s">
           <bbn-radiobuttons :notext="true"
-                            v-model="source.align"
+                            v-model="currentSource.align"
                             :source="[{
-                              text: _('Align left'),
-                              value: 'left',
-                              icon: 'nf nf-fa-align_left'
+                                text: _('Default'),
+                                value: '',
+                                icon: 'nf nf-oct-diff_ignored'
                             }, {
-                              text: _('Align center'),
-                              value: 'center',
-                              icon: 'nf nf-fa-align_center'
+                                text: _('Align left'),
+                                value: 'left',
+                                icon: 'nf nf-fa-align_left'
                             }, {
-                              text: _('Align right'),
-                              value: 'right',
-                              icon: 'nf nf-fa-align_right'
+                                text: _('Align center'),
+                                value: 'center',
+                                icon: 'nf nf-fa-align_center'
+                            }, {
+                                text: _('Align right'),
+                                value: 'right',
+                                icon: 'nf nf-fa-align_right'
                             }]"/>
         </div>
-      </div>
       <label><?=_('Style')?></label>
       <div>
         <bbn-button title="<?=_('Italic')?>"
-                    @click="source.fontStyle = source.fontStyle === 'italic' ? 'normal' : 'italic'"
+                    @click="currentSource.fontStyle = currentSource.fontStyle === 'italic' ? 'normal' : 'italic'"
                     :notext="true"
                     icon="nf nf-fa-italic"
                     :class="['bbn-no-radius', {
-                      'bbn-state-active': source.fontStyle === 'italic'
+                      'bbn-state-active': currentSource.fontStyle === 'italic'
                     }]"/>
       </div>
       <label><?=_('Decoration')?></label>
       <div>
         <div class="bbn-block">
           <bbn-radiobuttons :notext="true"
-                            v-model="source.textDecoration"
+                            v-model="currentSource.textDecoration"
                             :source="[{
                               text: _('Underlined'),
                               value: 'underline',
@@ -67,7 +70,7 @@
         </div>
       </div>
       <label><?=_('Horizontal rule')?></label>
-      <div>
+      <div class="bbn-s">
         <appui-note-cms-block-line :source="source"
                                    mode="edit"
                                    :details="false"/>
@@ -79,9 +82,9 @@
     <appui-note-cms-block-line :source="source"
                                mode="read"
                                :details="false">
-      <component :is="source.tag"
+      <component :is="currentSource.tag"
                  :style="currentStyle"
-                 v-html="source.content"/>
+                 v-html="currentSource.content"/>
     </appui-note-cms-block-line>
   </div>
 </div>

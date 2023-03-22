@@ -19,21 +19,29 @@
         defaultConfig: {
           tag: 'h1',
           content: '',
-          align: 'left',
-          color: '#000',
-          fontStyle: 'normal',
-          textDecoration: 'none'
+          align: '',
+          color: '',
+          fontStyle: '',
+          textDecoration: ''
         }
       };
     },
     computed: {
-      currentStyle(){
-        return {
-          textAlign: this.source.align || undefined,
-          color: this.source.color || undefined,
-          textDecoration: this.source.textDecoration || undefined,
-          fontStyle: !!this.source.fontStyle || undefined
-        };
+      currentStyle() {
+        const st = {};
+        if (this.currentSource.align) {
+          st.textAlign = this.currentSource.align;
+        }
+        if (this.currentSource.color) {
+          st.color = this.currentSource.color;
+        }
+        if (this.currentSource.textDecoration) {
+          st.textDecoration = this.currentSource.textDecoration;
+        }
+        if (this.currentSource.fontStyle) {
+          st.fontStyle = this.currentSource.fontStyle;
+        }
+        return st;
       }
     }
   };

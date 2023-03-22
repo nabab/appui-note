@@ -55,7 +55,7 @@
           <appui-note-cms-elementor v-else
                                     :source="source.items"
                                     @hook:mounted="ready = true"
-                                    ref="editor"
+                                    ref="elementor"
                                     :all-blocks="allBlocks"
                                     @changes="handleSelected"
                                     v-droppable="true"
@@ -78,27 +78,27 @@
           <h2 v-text="currentEditedTitle"
               class="bbn-c" />
           <div class="bbn-w-100 bbn-flex-width">
-            <div v-if="!currentEditedIndexInContainer"
+            <div v-if="elementorContainerIndex > -1"
                  class="bbn-padding appui-note-cms-editor-position">
               <bbn-button :notext="true"
                           @click="move('top')"
                           text="<?= _("Move top") ?>"
-                          :disabled="(source.items.length <= 1) || (currentEditedIndex < 1)"
+                          :disabled="(source.items.length <= 1) || (elementorIndex < 1)"
                           icon="nf nf-mdi-arrow_collapse_up"/>
               <bbn-button :notext="true"
                           @click="move('up')"
                           text="<?= _("Move up") ?>"
-                          :disabled="(source.items.length <= 1) || !currentEditedIndex"
+                          :disabled="(source.items.length <= 1) || !elementorIndex"
                           icon="nf nf-mdi-arrow_up"/>
               <bbn-button :notext="true"
                           @click="move('down')"
                           text="<?= _("Move down") ?>"
-                          :disabled="(source.items.length <= 1) || (currentEditedIndex === source.items.length - 1)"
+                          :disabled="(source.items.length <= 1) || (elementorIndex === source.items.length - 1)"
                           icon="nf nf-mdi-arrow_down"/>
               <bbn-button :notext="true"
                           @click="move('bottom')"
                           text="<?= _("Move bottom") ?>"
-                          :disabled="(source.items.length <= 1) || (currentEditedIndex > source.items.length - 2)"
+                          :disabled="(source.items.length <= 1) || (elementorIndex > source.items.length - 2)"
                           icon="nf nf-mdi-arrow_collapse_down"/>
               <bbn-button :notext="true"
                           @click="scrollToSelected"

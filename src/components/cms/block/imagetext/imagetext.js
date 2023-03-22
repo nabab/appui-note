@@ -7,17 +7,20 @@
     computed: {
       align(){
         let style = {};
-        style['text-align'] = this.source.align
+        style['text-align'] = this.currentSource.align
         
         return style;
+      },
+      currentStyle() {
+        return ''
       }
     },
     methods: {
 	  	selectDesktopGrid(a){
-        this.source.elements = a[1]
+        this.currentSource.elements = a[1]
       },
       selectMobileGrid(a){
-        this.source.mobileElements = a[1]
+        this.currentSource.mobileElements = a[1]
       },
       openGallery(){
         this.getPopup().open({
@@ -31,7 +34,7 @@
         });
       },
       onSelection(img) {
-        this.source.content = img.data.path;
+        this.currentSource.content = img.data.path;
         this.getPopup().close();
       }
     },

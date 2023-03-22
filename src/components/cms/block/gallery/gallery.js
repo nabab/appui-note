@@ -49,7 +49,7 @@
       },
       align(){
         let style = {};
-        switch (this.source.align) {
+        switch (this.currentSource.align) {
           case 'left':
             style.justifyContent = 'flex-start';
             break;
@@ -67,7 +67,7 @@
       getItemWidth(){
         this.$nextTick(() => {
           let gallery = this.getRef('gallery'),
-              width = this.isMobile ? 49 : this.source.imageWidth;
+              width = this.isMobile ? 49 : this.currentSource.imageWidth;
           if (width) {
             if (gallery) {
               //the column gap to percent
@@ -99,21 +99,21 @@
       }
     },
     watch: {
-      'source.mode'(val){
+      'currentSource.mode'(val){
         if (val === 'link'){
-          this.source.zoomable = false;
+          this.currentSource.zoomable = false;
         }
       },
-      'source.imageWidth'(val){
+      'currentSource.imageWidth'(val){
         if(bbn.fn.isString(val)){
           let unit = val.replace(parseInt(val), '');
           if(unit === '%'){
-            this.source.imageWidth = parseInt(val)
+            this.currentSource.imageWidth = parseInt(val)
           }
           this.getItemWidth()
         }
       },
-      'source.source'(){
+      'currentSource.source'(){
         let gallery = this.getRef('gallery');
         if (!!gallery) {
           this.$nextTick(() => {
@@ -121,38 +121,38 @@
           });
         }
       },
-      'source.resizable'(val){
+      'currentSource.resizable'(val){
         if (!!val) {
-          this.source.toolbar = 1;
+          this.currentSource.toolbar = 1;
         }
       },
-      'source.toolbar'(val){
+      'currentSource.toolbar'(val){
         if (!val) {
-          this.source.resizable = 0;
+          this.currentSource.resizable = 0;
         }
       },
-      'source.zoomable'(val){
-        if (!val && !!this.source.info) {
-          this.source.info = 0;
+      'currentSource.zoomable'(val){
+        if (!val && !!this.currentSource.info) {
+          this.currentSource.info = 0;
         }
         if(val){
-          this.source.mode = 'fullscreen'
+          this.currentSource.mode = 'fullscreen'
         }
       },
-      'source.info'(val){
-        if (!val && !!this.source.sourceInfo) {
-          this.source.sourceInfo = '';
+      'currentSource.info'(val){
+        if (!val && !!this.currentSource.sourceInfo) {
+          this.currentSource.sourceInfo = '';
         }
       }
     },
     beforeMount(){
-      if(this.source.zoomable){
-        this.source.mode = 'fullscreen'
+      if(this.currentSource.zoomable){
+        this.currentSource.mode = 'fullscreen'
       }
-      if(this.source.imageWidth){
-        this.source.imageWidth = parseInt(this.source.imageWidth) 
-        if(this.source.imageWidth > 100){
-          this.source.imageWidth = 33;
+      if(this.currentSource.imageWidth){
+        this.currentSource.imageWidth = parseInt(this.currentSource.imageWidth) 
+        if(this.currentSource.imageWidth > 100){
+          this.currentSource.imageWidth = 33;
         }
       }
 

@@ -6,7 +6,7 @@
     <div class="bbn-vmiddle">
       <bbn-dropdown :source="galleryListUrl"
                     source-value="id"
-                    v-model="source.content"
+                    v-model="currentSource.content"
                     ref="galleryList"
                     :suggest="true"
                     :filterable="true"
@@ -18,7 +18,7 @@
                   title="<?=_('Open galleries management')?>"/>
     </div>
     <label><?=_('Width')?></label>
-    <bbn-range v-model="source.width"
+    <bbn-range v-model="currentSource.width"
 									 :min="10"
 									 :max="2000" 
 									 :step="10"
@@ -26,7 +26,7 @@
 									 :show-numeric="true"
 									 :show-units="true"/>
     <label><?=_('Height')?></label>
-    <bbn-range v-model="source.height"
+    <bbn-range v-model="currentSource.height"
 									 :min="10"
 									 :max="2000" 
 									 :step="10"
@@ -37,7 +37,7 @@
     <div>
       <div class="bbn-block">
         <bbn-radiobuttons :notext="true"
-                          v-model="source.align"
+                          v-model="currentSource.align"
                           :source="[{
                             text: _('Align left'),
                             value: 'left',
@@ -56,7 +56,7 @@
     <label><?=_('Mode')?></label>
     <div class="bbn-block">
       <bbn-radiobuttons :notext="true"
-                        v-model="source.mode"
+                        v-model="currentSource.mode"
                         :source="[{
                           text: _('Link'),
                           value: 'link',
@@ -68,27 +68,27 @@
                         }]"/>
     </div>
     <label><?=_('Autoplay')?></label>
-    <bbn-checkbox v-model="source.autoplay"
+    <bbn-checkbox v-model="currentSource.autoplay"
                   :value="1"
                   :novalue="0"/>
     <label><?=_('Arrows')?></label>
-    <bbn-checkbox v-model="source.arrows"
+    <bbn-checkbox v-model="currentSource.arrows"
                   :value="1"
                   :novalue="0"/>
-    <label v-if="!!source.arrows"><?=_('Arrows position')?></label>
-    <bbn-dropdown v-if="!!source.arrows"
-                  v-model="source.arrowsPosition"
+    <label v-if="!!currentSource.arrows"><?=_('Arrows position')?></label>
+    <bbn-dropdown v-if="!!currentSource.arrows"
+                  v-model="currentSource.arrowsPosition"
                   :source="arrowsPositions"/>
     <label><?=_('Preview')?></label>
-    <bbn-checkbox v-model="source.preview"
+    <bbn-checkbox v-model="currentSource.preview"
                   :value="1"
                   :novalue="0"/>
     <label><?=_('Loop')?></label>
-    <bbn-checkbox v-model="source.loop"
+    <bbn-checkbox v-model="currentSource.loop"
                   :value="1"
                   :novalue="0"/>
     <label><?=_('Show info')?></label>
-    <bbn-checkbox v-model="source.info"
+    <bbn-checkbox v-model="currentSource.info"
                   :value="1"
                   :novalue="0"/>
   </div>
@@ -96,7 +96,7 @@
        class="bbn-flex"
        :style="align">
     <div class="bbn-block bbn-rel"
-         :style="{'width': source.width, 'height': source.height}">
+         :style="{'width': currentSource.width, 'height': currentSource.height}">
       <div v-if="isLoading"
            class="bbn-c">
         <bbn-loadicon :size="32"/>
@@ -104,12 +104,12 @@
       <bbn-slideshow v-else-if="currentItems.length"
                     :source="currentItems"
                     ref="slideshow"
-                    :arrows="!!source.arrows"
-                    :arrows-position="source.arrowsPosition"
-                    :auto-play="!!source.autoplay"
-                    :loop="!!source.loop"
-                    :preview="!!source.preview"
-                    :show-info="!!source.info"
+                    :arrows="!!currentSource.arrows"
+                    :arrows-position="currentSource.arrowsPosition"
+                    :auto-play="!!currentSource.autoplay"
+                    :loop="!!currentSource.loop"
+                    :preview="!!currentSource.preview"
+                    :show-info="!!currentSource.info"
                     :item-clickable="true"
                     @clickitem="clickItem"/>
       <bbn-floater v-if="fullScreenView && fullScreenImg"

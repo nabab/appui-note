@@ -19,7 +19,7 @@
     <div v-if="details"
          class="bbn-grid-fields bbn-w-100">
       <label v-text="_('Width')"></label>
-      <bbn-range v-model="source.width"
+      <bbn-range v-model="currentSource.width"
                   :min="10"
                   :max="2000" 
                   :step="10"
@@ -27,7 +27,7 @@
                   :show-numeric="true"
                   :show-units="true"/>
       <label><?=_('Height')?></label>
-      <bbn-range v-model="source.height"
+      <bbn-range v-model="currentSource.height"
                   :min="10"
                   :max="2000" 
                   :step="10"
@@ -38,7 +38,7 @@
       <div>
         <div class="bbn-block">
           <bbn-radiobuttons :notext="true"
-                            v-model="source.align"
+                            v-model="currentSource.align"
                             :source="[{
                                 text: _('Align left'),
                                 value: 'left',

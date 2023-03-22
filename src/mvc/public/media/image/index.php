@@ -3,7 +3,6 @@ use bbn\X;
 use bbn\Str;
 use bbn\File\System;
 use bbn\Appui\Medias;
-
 if ($ctrl->hasArguments()) {
 	$medias = new Medias($ctrl->db);
 	$path = '';
@@ -70,6 +69,5 @@ if ($ctrl->hasArguments()) {
 	}
 }
 
-X::ddump($path);
 
 // 404

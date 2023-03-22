@@ -12,12 +12,12 @@
     },
     computed: {
       isValid() {
-        return !!this.source.content;
+        return !!this.currentSource.content;
       },
       style(){
-        let style = bbn.fn.extend(true, {}, this.source.style);
-        if (this.source.align) {
-          style['text-align'] = this.source.align;
+        let style = bbn.fn.extend(true, {}, this.currentSource.style);
+        if (this.currentSource.align) {
+          style['text-align'] = this.currentSource.align;
         }
         return style;
       }

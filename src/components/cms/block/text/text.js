@@ -3,32 +3,26 @@
 (() => {
   return {
     mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
-    data(){
+    data() {
       return {
-        color: this.source.color || '#000',
-        align: this.source.align || 'left'
+        defaultConfig: {
+          align: '',
+          color: '',
+        }
       }
     },
     computed: {
       currentContent(){
-        return this.source.content || '&nbsp;';
+        return this.currentSource.content || '&nbsp;';
       },
       content: {
         get() {
-          return this.source.content || '';
+          return this.currentContent;
         },
         set(v) {
           this.setSource('content', v);
         }
       },
-    },
-    watch: {
-      color(v) {
-        this.setSource('color', v);
-      },
-      align(v) {
-        this.setSource('align', v);
-      }
     }
   }
 })();

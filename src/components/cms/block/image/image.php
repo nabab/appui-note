@@ -12,11 +12,11 @@
 											title="<?=_('Select an image')?>"
 											class="bbn-right-sspace"/>
 					<img class="bbn-bordered bbn-radius"
-					 		 :src="source.content"
-							 v-if="!!source.content">
+					 		 :src="currentSource.content"
+							 v-if="!!currentSource.content">
         </div>
         <label v-text="_('Width')"></label>
-				<bbn-range v-model="source.width"
+				<bbn-range v-model="currentSource.width"
 									 :min="10"
 									 :max="2000" 
 									 :step="10"
@@ -24,7 +24,7 @@
 									 :show-numeric="true"
 									 :show-units="true"/>
 				<label><?=_('Height')?></label>
-				<bbn-range v-model="source.height"
+				<bbn-range v-model="currentSource.height"
 									 :min="10"
 									 :max="2000"
 									 :step="10"
@@ -36,7 +36,7 @@
         <div>
         	<div class="bbn-block">
           	<bbn-radiobuttons :notext="true"
-                              v-model="source.align"
+                              v-model="currentSource.align"
                               :source="[{
                                  text: _('Align left'),
                                  value: 'left',
@@ -53,20 +53,20 @@
 					</div>
         </div>
 				<label v-text="_('Alt')"></label>
-				<bbn-input v-model="source.alt"/>
+				<bbn-input v-model="currentSource.alt"/>
 				<label v-text="_('Link')"></label>
-				<bbn-input v-model="source.href"/>
+				<bbn-input v-model="currentSource.href"/>
 				<label v-text="_('Caption')"></label>
-				<bbn-input v-model="source.caption"/>
+				<bbn-input v-model="currentSource.caption"/>
 				<label v-text="_('Details')"></label>
 				<div>
 					<div>
-						<bbn-input v-model="source.details_title"
+						<bbn-input v-model="currentSource.details_title"
 											 placeholder="<?=_('Title')?>"
 											 class="bbn-w-100"/>
 					</div>
 					<div>
-						<bbn-input v-model="source.details"
+						<bbn-input v-model="currentSource.details"
 											 placeholder="<?=_('Content')?>"
 											 class="bbn-w-100"/>
 					</div>
@@ -78,30 +78,30 @@
   <div v-else>
 		<div class="bbn-flex"
 				 :style="align">
-			<a v-if="!!source.href"
-         :style="{'width': source.width, 'height': source.height}"
+			<a v-if="!!currentSource.href"
+         :style="{'width': currentSource.width, 'height': currentSource.height}"
 				 target="_self"
-				 :href="$parent.linkURL ? $parent.linkURL + source.href : source.href"
+				 :href="$parent.linkURL ? $parent.linkURL + currentSource.href : currentSource.href"
 				 class="bbn-c">
-				<img :src="$parent.path + source.content"
-						 :alt="source.alt ? source.alt : ''">
+				<img :src="$parent.path + currentSource.content"
+						 :alt="currentSource.alt ? currentSource.alt : ''">
 			</a>
-			<img v-else-if="!!source.content"
-           :style="{'width': source.width, 'height': source.height}"
-				 	 :src="source.content"
-				 	 :alt="source.alt ? source.alt : ''">
+			<img v-else-if="!!currentSource.content"
+           :style="{'width': currentSource.width, 'height': currentSource.height}"
+				 	 :src="currentSource.content"
+				 	 :alt="currentSource.alt ? currentSource.alt : ''">
 			<p class="image-caption bbn-l bbn-s bbn-vsmargin"
-				 v-if="!!source.caption"
-				 v-html="source.caption"/>
+				 v-if="!!currentSource.caption"
+				 v-html="currentSource.caption"/>
 			<!--error when using decodeuricomponent on details of home image-->
 			<a class="image-details-title bbn-l bbn-vsmargin bbn-w-100"
-				 v-if="!!source.details_title"
-				 v-html="(source.details_title)"
-				 :href="source.href"
+				 v-if="!!currentSource.details_title"
+				 v-html="(currentSource.details_title)"
+				 :href="currentSource.href"
 				 target="_blank"/>
 			<p class="image-details bbn-l bbn-vsmargin"
-				 v-if="!!source.details"
-				 v-html="source.details"/>
+				 v-if="!!currentSource.details"
+				 v-html="currentSource.details"/>
 		</div>
   </div>
 </div>

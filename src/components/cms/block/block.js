@@ -31,7 +31,8 @@
       return {
         show: true,
         defaultConfig: {},
-        ignoredFields: ['content']
+        ignoredFields: ['content'],
+        currentSource: bbn.fn.extend({}, this.source)
       };
     },
     computed: {
@@ -42,27 +43,41 @@
     methods: {
       applyDefaultConfig() {
         bbn.fn.log('apply default config');
-        bbn.fn.iterate(bbn.fn.extend({}, this.defaultConfig, this.cfg || {}), (a, n) => {
-          if (this.source[n] === undefined) {
-            this.$set(this.source, n, a);
-          } else {
-            this.source[n] = a;
+        bbn.fn.iterate(
+          bbn.fn.extend({}, this.defaultConfig, this.cfg),
+          (a, n) => {
+            if (!Object.hasOwn(this.currentSource, n)) {
+              this.$set(this.currentSource, n, a);
+            }
           }
-        });
+        );
       },
       setSource(prop, val) {
-        if (!val) {
+        if (val === undefined) {
           delete this.source[prop];
         }
         else {
-          this.$set(this.source, prop, val);
+          if (Object.hasOwn(this.source, prop)) {
+            this.source[prop] = val;
+          }
+          else {
+            this.$set(this.source, prop, val);
+          }
         }
       },
     },
     watch: {
-      source: {
+      currentSource: {
         deep: true,
-        handler(){
+        handler() {
+          bbn.fn.iterate(this.currentSource, (v, n) => {
+            if (v !== this.source[n]) {
+              if ((v !== this.defaultConfig[n]) || Object.hasOwn(this.source, n)) {
+                this.setSource(n, v);
+              }
+            }
+          });
+
           if (!this.isEditor) {
             let cp = this.getRef('component');
             if (cp) {
@@ -70,11 +85,22 @@
             }
           }
         }
+      },
+      source: {
+        deep: true,
+        handler() {
+          bbn.fn.iterate(this.source, (v, n) => {
+            if ((v !== this.currentSource[n])) {
+              this.currentSource[n] = v;
+            }
+          });
+        }
       }
     },
     created() {
       bbn.fn.log('created');
-      if (this.source.type && ((bbn.fn.numProperties(this.source) === 2) || (this.source.special && (bbn.fn.numProperties(this.source) === 2)))) {
+      if (this.source.type && !this.source.special && (this.source.type !== 'container')) {
+        bbn.fn.log("Config applied for " + this.$options.name);
         this.applyDefaultConfig();
       }
       const config = {};

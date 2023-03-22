@@ -95,17 +95,17 @@
     },
     computed: {
       showRootAlias(){
-        if (this.source.id_root_alias ){
+        if (this.currentSource.id_root_alias ){
           return true;
         }
         return false;
       },
       noteType(){
-        return this.source.noteType;
+        return this.currentSource.noteType;
       },
       align(){
         let style = {};
-        switch (this.source.align) {
+        switch (this.currentSource.align) {
           case 'left':
             style.justifyContent = 'flex-start';
             break;
@@ -138,21 +138,21 @@
 
           let ok = false;
           let tmp = {
-            limit: this.source.limit,
-            order: this.source.order,
-            mode: this.source.mode
+            limit: this.currentSource.limit,
+            order: this.currentSource.order,
+            mode: this.currentSource.mode
           };
           if (this.sliderMode === 'publications') {
-            tmp.note_type = this.source.noteType;
-            if(this.source.id_option){
-              tmp.id_option = this.source.id_option;
+            tmp.note_type = this.currentSource.noteType;
+            if(this.currentSource.id_option){
+              tmp.id_option = this.currentSource.id_option;
             }
           }
           else if (this.sliderMode === 'gallery') {
-            tmp.id_group = this.source.id_group;
+            tmp.id_group = this.currentSource.id_group;
           }
           else if (this.sliderMode === 'features') {
-            tmp.content = this.source.content;
+            tmp.content = this.currentSource.content;
           }
           if (this.okMode) {
             this.$nextTick(() => {
@@ -164,12 +164,12 @@
                   this.$nextTick(() => {
                     bbn.fn.each(d.data, data => {
                       let tmp = bbn.fn.clone(data);
-                      tmp.style = this.source.style;
+                      tmp.style = this.currentSource.style;
                       tmp.type = 'img';
-                      if (this.source.mode === 'gallery') {
+                      if (this.currentSource.mode === 'gallery') {
                         tmp.content = tmp.path || '';
                       }
-                      else if (this.source.mode === 'features') {
+                      else if (this.currentSource.mode === 'features') {
                         tmp.content = tmp.media ? tmp.media.url || tmp.media.path : '';
                       }
                       else {
@@ -190,18 +190,18 @@
 
       },
       adaptView(){
-        if (this.source.currentItems && this.source.currentItems.length){
-          this.source.currentItems.splice(0, this.source.currentItems.length);
+        if (this.currentSource.currentItems && this.currentSource.currentItems.length){
+          this.currentSource.currentItems.splice(0, this.currentSource.currentItems.length);
         }
         else{
-          this.$set(this.source, 'currentItems', []);
+          this.$set(this.currentSource, 'currentItems', []);
         }
         if (bbn.fn.isDesktopDevice() || bbn.fn.isTabletDevice()) {
           let start = 0;
-          for (let i = 0; i < this.mapped.length; i += this.source.max) {
+          for (let i = 0; i < this.mapped.length; i += this.currentSource.max) {
             start = i,
-              data = this.mapped.slice(start, this.source.max + start);
-            this.source.currentItems.push({
+              data = this.mapped.slice(start, this.currentSource.max + start);
+            this.currentSource.currentItems.push({
               //mode : 'full',
               component: 'appui-note-cms-block-slider-slide',
               data: data
@@ -212,10 +212,10 @@
         else if ( bbn.fn.isMobileDevice() ) {
 
           let start = 0;
-          for (let i = 0; i < this.mapped.length; i += this.source.min) {
+          for (let i = 0; i < this.mapped.length; i += this.currentSource.min) {
             start = i,
-              data =  this.mapped.slice(start, this.source.min + start);
-            this.source.currentItems.push({
+              data =  this.mapped.slice(start, this.currentSource.min + start);
+            this.currentSource.currentItems.push({
               //mode : 'full',
               component: 'appui-note-cms-block-slider-slide',
               data: data
@@ -232,7 +232,7 @@
             let ddSource = this.$refs.publicationdropdown.currentData;
             let idx = bbn.fn.search(ddSource, 'data.id', val);
             if ((idx > -1) && ddSource[idx].data.id_root_alias){
-              this.source.id_root_alias = ddSource[idx].data.id_root_alias;
+              this.currentSource.id_root_alias = ddSource[idx].data.id_root_alias;
               //this.showRootAlias = true;
             }
             else{
@@ -243,38 +243,38 @@
       },
       sliderMode(val){
         if(val === 'features') {
-          this.$delete(this.source, 'id_group');
-          this.$delete(this.source, 'noteType');
+          this.$delete(this.currentSource, 'id_group');
+          this.$delete(this.currentSource, 'noteType');
           this.okMode = true;
-          this.source.mode = 'features';
+          this.currentSource.mode = 'features';
         }
         else if (val === 'gallery') {
-          this.$delete(this.source, 'content');
-          this.$delete(this.source, 'noteType');
-          this.$delete(this.source, 'id_option');
+          this.$delete(this.currentSource, 'content');
+          this.$delete(this.currentSource, 'noteType');
+          this.$delete(this.currentSource, 'id_option');
           this.okMode = true;
-          this.source.mode = 'gallery';
+          this.currentSource.mode = 'gallery';
         }
         else {
-          this.$delete(this.source, 'id_group');
-          this.$delete(this.source, 'content');
+          this.$delete(this.currentSource, 'id_group');
+          this.$delete(this.currentSource, 'content');
           this.okMode = true;
-          this.source.mode = 'publications';
+          this.currentSource.mode = 'publications';
         }
       },
-      'source.min':{
+      'currentSource.min':{
         handler(val){
           this.adaptView()
         },
         deep: true
       },
-      'source.max':{
+      'currentSource.max':{
         handler(val){
           this.adaptView()
         },
         deep: true
       },
-      'source.limit':{
+      'currentSource.limit':{
         handler(val){
           this.getSlideshowSource()
         },
@@ -282,40 +282,40 @@
       }
     },
     beforeMount(){
-      if(!this.source.limit){
-        this.$set(this.source, 'limit', 10);
+      if(!this.currentSource.limit){
+        this.$set(this.currentSource, 'limit', 10);
       }
-      if(!this.source.order){
-        this.$set(this.source, 'order', 'versions.title');
+      if(!this.currentSource.order){
+        this.$set(this.currentSource, 'order', 'versions.title');
       }
-      if(!this.source.currentItems){
-        this.$set(this.source, 'currentItems', []);
+      if(!this.currentSource.currentItems){
+        this.$set(this.currentSource, 'currentItems', []);
       }
-      if(!this.source.max){
-        this.$set(this.source, 'max', 3);
+      if(!this.currentSource.max){
+        this.$set(this.currentSource, 'max', 3);
       }
-      if(!this.source.min){
-        this.$set(this.source, 'min', 1);
+      if(!this.currentSource.min){
+        this.$set(this.currentSource, 'min', 1);
       }
-      if(!this.source.mode){
+      if(!this.currentSource.mode){
         this.sliderMode = 'publications';
-        this.$set(this.source, 'mode', this.sliderMode);
+        this.$set(this.currentSource, 'mode', this.sliderMode);
       }
-      else if(this.source.mode === 'publications' ){
+      else if(this.currentSource.mode === 'publications' ){
         this.sliderMode = 'publications';
       }
-      else if (this.source.mode === 'gallery'){
+      else if (this.currentSource.mode === 'gallery'){
         this.sliderMode = 'gallery';
       }
-      else if (this.source.mode === 'features'){
+      else if (this.currentSource.mode === 'features'){
         this.sliderMode = 'features';
       }
-      if (!!this.source.arrows && !this.source.arrowsPosition) {
-        this.$set(this.source, 'arrowsPosition', 'default');
+      if (!!this.currentSource.arrows && !this.currentSource.arrowsPosition) {
+        this.$set(this.currentSource, 'arrowsPosition', 'default');
       }
       //to have the data recalculated in mode read and view the correct number of cols in mobile and desktop
-      if((this.mode === 'read') && !this.mapped.length && this.source.currentItems.length){
-        bbn.fn.each(this.source.currentItems, (v,i) => {
+      if((this.mode === 'read') && !this.mapped.length && this.currentSource.currentItems.length){
+        bbn.fn.each(this.currentSource.currentItems, (v,i) => {
           this.mapped.push(...v.data)
         })
         if(this.mapped.length){
@@ -325,22 +325,22 @@
     },
     mounted(){
       if(this.sliderMode === 'features') {
-        this.$delete(this.source, 'id_group');
-        this.$delete(this.source, 'noteType');
+        this.$delete(this.currentSource, 'id_group');
+        this.$delete(this.currentSource, 'noteType');
         this.okMode = true;
-        this.source.mode = 'features';
+        this.currentSource.mode = 'features';
       }
       else if (this.sliderMode === 'gallery') {
-        this.$delete(this.source, 'content');
-        this.$delete(this.source, 'noteType');
+        this.$delete(this.currentSource, 'content');
+        this.$delete(this.currentSource, 'noteType');
         this.okMode = true;
-        this.source.mode = 'gallery';
+        this.currentSource.mode = 'gallery';
       }
       else {
-        this.$delete(this.source, 'id_group');
-        this.$delete(this.source, 'content');
+        this.$delete(this.currentSource, 'id_group');
+        this.$delete(this.currentSource, 'content');
         this.okMode = true;
-        this.source.mode = 'publications';
+        this.currentSource.mode = 'publications';
       }
       this.getSlideshowSource();
 

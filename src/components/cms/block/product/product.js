@@ -13,19 +13,19 @@
     },
     computed: {
       placeholder(){
-        if(this.isOk && this.source.product.title){
-          return this.source.product.title
+        if(this.isOk && this.currentSource.product.title){
+          return this.currentSource.product.title
         }
         return ''
       },
       showProduct(){
-        if(this.isOk && this.source.product && this.source.product.ok){
+        if(this.isOk && this.currentSource.product && this.currentSource.product.ok){
           return true
         }
         return false
       },
       disabled(){
-        if(this.isOk && !this.source.product.stock){
+        if(this.isOk && !this.currentSource.product.stock){
           return true;
         }
         else {
@@ -33,19 +33,19 @@
         }
 			},
       type(){
-        if(this.source.product.product_type && this.isOk){
-          return bbn.fn.getField(bbn.opt.product_types,'text', 'value', this.source.product.product_type)
+        if(this.currentSource.product.product_type && this.isOk){
+          return bbn.fn.getField(bbn.opt.product_types,'text', 'value', this.currentSource.product.product_type)
         }
       },
       edition(){
-        if(this.source.product.id_edition && this.isOk){
-          return bbn.fn.getField(bbn.opt.editions,'text', 'value', this.source.product.id_edition)
+        if(this.currentSource.product.id_edition && this.isOk){
+          return bbn.fn.getField(bbn.opt.editions,'text', 'value', this.currentSource.product.id_edition)
         }
       },
       
       imageSrc(){
-        if(this.source.product.medias.length && this.isOk){
-          return bbn.fn.getField(this.source.product.medias, 'path', 'id' , this.source.product.front_img)
+        if(this.currentSource.product.medias.length && this.isOk){
+          return bbn.fn.getField(this.currentSource.product.medias, 'path', 'id' , this.currentSource.product.front_img)
 
         }
       }
@@ -55,14 +55,14 @@
       addToCart(){
 				let id_nft =  bbn.fn.getField(appui.options.product_types, "value", { code:'nft' });
 
-				if (this.source.product.product_type ===  id_nft) {
+				if (this.currentSource.product.product_type ===  id_nft) {
 					// remove comment to enable nft link to website
 					//bbn.fn.link('https://nft.vivearts.com/en_US/series/photography-ofchina');
 				}
 				else {
-					if (this.source.product.stock) {
+					if (this.currentSource.product.stock) {
 						this.post('actions/shop/cart/add', {
-							id_product: this.source.product.id,
+							id_product: this.currentSource.product.id,
 							quantity: 1
 						}, d => {
 							if (d.success && d.newCart) {
@@ -80,16 +80,16 @@
         this.$set(this.source, 'id_product', a.id);
       },
       getProduct(){
-        this.source.product = {}
-        this.source.product.ok = false
+        this.currentSource.product = {}
+        this.currentSource.product.ok = false
         this.isOk = false
         this.post(this.root + 'cms/data/product', {
-          id: this.source.id_product
+          id: this.currentSource.id_product
         }, d => {
           if(d.success){
             this.$nextTick(() => {
-              this.source.product = d.data
-              this.source.product.ok = true
+              this.currentSource.product = d.data
+              this.currentSource.product.ok = true
               this.isOk = true
             })
             
@@ -99,23 +99,23 @@
       }
     },
     beforeMount(){
-      if (this.source.product && (this.mode === 'read')){
-        if(this.source.url){
-          delete(this.source.url)
+      if (this.currentSource.product && (this.mode === 'read')){
+        if(this.currentSource.url){
+          delete(this.currentSource.url)
         }
-        this.$set(this.source, 'id_product',this.source.product.id )
+        this.$set(this.source, 'id_product',this.currentSource.product.id )
         this.getProduct();
       }
-      else if(this.source.id_product ){
+      else if(this.currentSource.id_product ){
         this.getProduct();
       }
-			if(this.source.showType === undefined){
-				this.source.showType = true;
+			if(this.currentSource.showType === undefined){
+				this.currentSource.showType = true;
 			} 
       
 		},
     watch:{
-      'source.id_product'(val){
+      'currentSource.id_product'(val){
         this.getProduct()
       }
     }

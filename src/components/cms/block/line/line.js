@@ -26,7 +26,7 @@
     computed: {
       line: {
         get(){
-          return this.source.hr || null;
+          return this.currentSource.hr || null;
         },
         set(v){
           this.$set(this.source, 'hr', v);
@@ -36,8 +36,8 @@
         if (!this.details) {
           return {};
         }
-        let style = bbn.fn.extend(true, {}, this.source.style);
-        switch (this.source.align) {
+        let style = bbn.fn.extend(true, {}, this.currentSource.style);
+        switch (this.currentSource.align) {
           case 'left':
             style['margin-inline-start'] = 0;
             style['margin-inline-end'] = 'auto';

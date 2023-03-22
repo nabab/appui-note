@@ -54,7 +54,7 @@
     computed: {
       align(){
         let style = {};
-        switch (this.source.align) {
+        switch (this.currentSource.align) {
           case 'left':
             style.justifyContent = 'flex-start';
             break;
@@ -70,7 +70,7 @@
     },
     methods: {
       clickItem(img){
-        if(this.source.mode === 'fullscreen'){
+        if(this.currentSource.mode === 'fullscreen'){
           this.fullScreen(img)
         }
         else{
@@ -96,9 +96,9 @@
         });
       },
       updateData(){
-        if (this.source.content) {
+        if (this.currentSource.content) {
           this.isLoading = true;
-          this.post(this.slideshowSourceUrl, {data: {idGroup: this.source.content}}, d => {
+          this.post(this.slideshowSourceUrl, {data: {idGroup: this.currentSource.content}}, d => {
             if (d.success && d.data) {
               this.currentItems.splice(0, this.currentItems.length);
               this.$nextTick(() => {
@@ -118,17 +118,17 @@
     },
     beforeMount(){
       this.updateData();
-      if(!this.source.mode){
-        this.source.mode = 'fullscreen'
+      if(!this.currentSource.mode){
+        this.currentSource.mode = 'fullscreen'
       }
-      if(this.isMobile && this.source.arrows){
-        if(!this.source.arrowsPosition || this.source.arrowsPosition === 'default'){
-          this.source.arrowsPosition = 'topright'
+      if(this.isMobile && this.currentSource.arrows){
+        if(!this.currentSource.arrowsPosition || this.currentSource.arrowsPosition === 'default'){
+          this.currentSource.arrowsPosition = 'topright'
         }
       }
     },
     watch: {
-      'source.content'(){
+      'currentSource.content'(){
         this.updateData();
       }
     }
