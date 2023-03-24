@@ -1,5 +1,46 @@
 (() => {
+  let mixins = [{
+    data(){
+      return {
+        forum: null,
+        topic: null
+      };
+    },
+    methods: {
+      shorten: bbn.fn.shorten,
+      sdate(d){
+        return bbn.fn.fdate(d, true);
+      },
+      ndate(d){
+        return dayjs(d).format('DD/MM/YYYY');
+      },
+      ndatetime(d){
+        return dayjs(d).format('DD/MM/YYYY HH:mm');
+      },
+      fdate(d){
+        return bbn.fn.fdatetime(d, true);
+      },
+      hour(d){
+        return dayjs(d).format('HH:mm')
+      },
+    },
+    created(){
+      this.$set(this, 'forum', this.closest('appui-note-forum'));
+      this.$set(this, 'topic', this.closest('appui-note-forum-topic'));
+    }
+  }];
+  bbn.vue.addPrefix('appui-note-forum-topic-', (tag, resolve, reject) => {
+    return bbn.vue.queueComponent(
+      tag,
+      appui.plugins['appui-note'] + '/components/forum/topic/' + bbn.fn.replaceAll('-', '/', tag).substr('appui-note-forum-topic-'.length),
+      mixins,
+      resolve,
+      reject
+    );
+  });
+
   return {
+    mixins: mixins,
     props: {
       source: {
         type: Object
@@ -11,32 +52,13 @@
     },
     data(){
       return {
-        forum: bbn.vue.closest(this, 'appui-note-forum'),
-        currentLimit: this.limit,
-        start: 0,
-        total: 0,
-        limits: [10, 25, 50, 100, 250, 500],
-        isLoading: false,
-        showReplies: false,
-        contentContainerHeight: 'auto',
-        possibleHiddenContent: false
-      }
-    },
-    computed: {
-      cutContentContainer(){
-        return this.contentContainerHeight !== 'auto';
-      },
-      cutContent(){
-        return bbn.fn.html2text(this.source.content).replace(/\n/g, ' ');
+        showReplies: false
       }
     },
     methods: {
-      showContentContainer(val){
-        this.contentContainerHeight = val;
-      },
       toggleReplies(){
-        if ( this.source.num_replies ){
-          if ( this.showReplies ){
+        if (this.source.num_replies) {
+          if (this.showReplies) {
             this.showReplies = false;
             this.source.replies = false;
           }
@@ -44,12 +66,16 @@
             this.showReplies = true;
           }
         }
+        else {
+          this.showReplies = false;
+          this.source.replies = false;
+        }
       },
       togglePinned(){
         let ev = new Event('pin', {
           cancelable: true
         });
-        this.forum.$emit('pin', this.source, ev);
+        this.forum.$emit('pin', ev, this.source);
         if (!ev.defaultPrevented) {
           this.post(appui.plugins['appui-note'] + '/actions/pin', {
             id: this.source.id,
@@ -61,16 +87,13 @@
             }
           });
         }
-      }
-    },
-    mounted(){
-      this.$nextTick(() => {
-        // if ( this.getRef('contentContainer').clientHeight > 35 ){
-        if ( this.getRef('contentContainer').getBoundingClientRect().height > 35 ){
-          this.contentContainerHeight = '35px';
-          this.possibleHiddenContent = true;
+      },
+      updateData(){
+        let replies = this.getRef('replies');
+        if (replies) {
+          replies.updateData();
         }
-      });
+      }
     }
   }
 })();
