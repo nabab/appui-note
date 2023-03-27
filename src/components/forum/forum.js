@@ -45,6 +45,12 @@
       canLock: {
         type: Boolean,
         default: true
+      },
+      types: {
+        type: Array,
+        default(){
+          return [];
+        }
       }
 		},
 		data(){

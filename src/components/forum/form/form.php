@@ -68,12 +68,12 @@
            ref="linksContainer"
            v-if="source.row.links && source.row.links.length">
         <div v-for="(l, idx) in source.row.links"
-             :class="{
+             :class="['bbn-spadded', {
                'link-progress': l.inProgress && !l.error,
                'link-success': !l.inProgress && !l.error,
                'link-error': l.error,
                'bbn-bordered-top': idx > 0
-             }">
+             }]">
           <div class="bbn-flex-width">
             <div v-if="imageDom"
                  class="appui-note-forum-link-image">

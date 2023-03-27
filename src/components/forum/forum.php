@@ -2,13 +2,12 @@
 	<div class="bbn-overlay bbn-flex-height">
 		<div v-if="toolbar"
 				 class="appui-note-forum-toolbar bbn-header bbn-w-100 bbn-no-border-top bbn-no-border-left bbn-no-border-right"
-				 ref="toolbar"
-				 style="min-height: 30px">
+				 ref="toolbar">
 		  <!-- Toolbar -->
 			<div v-if="toolbarButtons.length"
-           class="bbn-">
+           class="bbn-xspadded">
 				<bbn-button v-for="(button, i) in toolbarButtons"
-										class="bbn-hsmargin"
+										class="bbn-right-sspace"
 										:key="i"
 										v-bind="button"/>
 			</div>
@@ -19,7 +18,8 @@
 		</div>
 		<!-- Main -->
 		<div class="bbn-w-100 bbn-flex-fill">
-			<bbn-scroll v-if="!isLoading">
+			<bbn-scroll v-if="!isLoading"
+                  axis="y">
       <appui-note-forum-topic v-for="(d, i) in filteredData"
                               :key="d.key"
                               :source="d.data"

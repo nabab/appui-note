@@ -6,7 +6,7 @@
     ],
     computed: {
       pagerVisible(){
-        return !!this.topic && (this.topic.source.num_replies > this.limit);
+        return this.total > this.limit;
       }
     },
     mounted(){

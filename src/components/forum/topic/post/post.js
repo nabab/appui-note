@@ -50,9 +50,28 @@
       },
       creatorName(){
         return appui.app.getUserName(this.source.creator);
+      },
+      isEdited(){
+        return this.source.creation !== this.source.last_edit;
+      },
+      type(){
+        if (!!this.forum.types
+          && this.forum.types.length
+          && !!this.source.id_type_note
+        ) {
+          return bbn.fn.getField(this.forum.types, 'text', 'value', this.source.id_type_note);
+        }
+        return '';
+      },
+      isSubReply(){
+        return this.source.id_parent !== this.source.id_alias;
+      },
+      userFlexFill(){
+        return (this.isTopic && !this.source.title) || (!this.isTopic && !this.isSubReply);
       }
     },
     methods: {
+      getUserName: appui.app.getUserName,
       showContent(){
         this.contentVisible = true;
       },
