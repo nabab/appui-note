@@ -7,5 +7,7 @@
                                   :data="{id_alias: source.id}"
                                   ref="replies"
                                   :pageable="forum.pageable"
-                                  :limit="forum.pageable ? 10 : 0"/>
+                                  :limit="forum.pageable ? 10 : 0"
+                                  :filterable="forum.filterable"
+                                  :filters="filters"/>
 </div>

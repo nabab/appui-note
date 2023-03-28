@@ -55,6 +55,28 @@
         showReplies: false
       }
     },
+    computed: {
+      filters(){
+        if (this.forum.filterable
+          && this.forum.search
+          && this.forum.filterString.length
+        ) {
+          return {
+            logic: 'OR',
+            conditions: [{
+              field: 'title',
+              operator: 'contains',
+              value: this.forum.filterString
+            }, {
+              field: 'content',
+              operator: 'contains',
+              value: this.forum.filterString
+            }]
+          }
+        }
+        return {};
+      }
+    },
     methods: {
       toggleReplies(){
         if (this.source.num_replies) {

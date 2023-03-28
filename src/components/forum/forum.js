@@ -46,11 +46,14 @@
         type: Boolean,
         default: true
       },
-      types: {
+      categories: {
         type: Array,
         default(){
           return [];
         }
+      },
+      autoUnfoldCats: {
+        type: Array
       }
 		},
 		data(){
@@ -107,10 +110,58 @@
         if (!!id && this.downloadUrl) {
           this.postOut(this.downloadUrl + id);
         }
+      },
+			seeImage(img){
+        if (!!img.id && !!img.name && this.imageDom) {
+          this.getPopup({
+            title: img.name,
+            width: '100%',
+            height: '100%',
+            scrollable: false,
+            content: `
+              <div class="bbn-overlay">
+                <img src="${this.imageDom}${img.id}"
+                     style="width: 100%; height: 100%; object-fit: scale-down">
+              </div>
+            `
+          });
+        }
+      },
+      clearSearch(){
+        if (this.filterString.length) {
+          this.filterString = '';
+        }
       }
     },
     mounted(){
 			this.ready = true;
-		}
+		},
+    watch: {
+      filterString(newVal){
+        if (this.filterable) {
+          let ev = new CustomEvent('search', {cancelable: true});
+          this.$emit('search', ev, newVal);
+          if (!ev.defaultPrevented) {
+            if (!newVal) {
+              this.currentFilters.conditions.splice(0);  
+            }
+            else {
+              this.currentFilters.conditions.splice(0, this.currentFilters.conditions.length, {
+                logic: 'OR',
+                conditions: [{
+                  field: 'title',
+                  operator: 'contains',
+                  value: newVal
+                }, {
+                  field: 'content',
+                  operator: 'contains',
+                  value: newVal
+                }]
+              });
+            }
+          }
+        }
+      }
+    }
 	}
 })();

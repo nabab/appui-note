@@ -19,7 +19,7 @@
     },
     computed: {
       isTopic(){
-        return !this.source.id_alias;
+        return this.source.id === this.topic.source.id;
       },
       usersNumber(){
         if (this.source.users) {
@@ -54,12 +54,12 @@
       isEdited(){
         return this.source.creation !== this.source.last_edit;
       },
-      type(){
-        if (!!this.forum.types
-          && this.forum.types.length
-          && !!this.source.id_type_note
+      category(){
+        if (!!this.forum.categories
+          && this.forum.categories.length
+          && !!this.source.category
         ) {
-          return bbn.fn.getField(this.forum.types, 'text', 'value', this.source.id_type_note);
+          return bbn.fn.getField(this.forum.categories, 'text', 'value', this.source.category);
         }
         return '';
       },
@@ -72,10 +72,10 @@
     },
     methods: {
       getUserName: appui.app.getUserName,
-      showContent(){
+      unfoldContent(){
         this.contentVisible = true;
       },
-      hideContent(){
+      foldContent(){
         this.contentVisible = false;
       },
       isYou(id){
@@ -88,7 +88,14 @@
           && (this.getRef('contentContainer').getBoundingClientRect().height > 35)
         ) {
           this.hasBigContent = true;
-          this.hideContent();
+          if (!this.forum.autoUnfoldCats
+            || !this.source.category
+            || (bbn.fn.isArray(this.forum.autoUnfoldCats)
+              && !this.forum.autoUnfoldCats.includes(this.source.category)
+            )
+          ) {
+            this.foldContent();
+          }
         }
       });
     }
