@@ -43,9 +43,11 @@ if ($ctrl->hasArguments()) {
 
   $idMediaFromUrl = false;
   $media = false;
+
   if (Str::isUid($ctrl->arguments[0])
     && ($media = $medias->getMedia($ctrl->arguments[0], true, $width, $height, $crop, true))
   ) {
+
 		$path = $media['file'];
   }
   elseif ($idMediaFromUrl = $medias->urlToId($realUrl)) {
@@ -69,7 +71,5 @@ if ($ctrl->hasArguments()) {
     $ctrl->obj->img = $path;
 	}
 }
-
-X::ddump($path);
 
 // 404

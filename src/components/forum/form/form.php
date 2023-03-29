@@ -1,62 +1,59 @@
 <bbn-form class="appui-note-forum-form"
-          :action="source.props.formAction"
-          :source="source.row"
-					:data="data"
-          @success="source.props.formSuccess">
-  <appui-note-toolbar-version v-if="data.id && source.row.hasVersions"
-                               :source="source.row"
-                               :data="data"
-                               @version="changeVersion"/>
+          :action="formAction"
+          :source="source"
+					:data="formData"
+          @success="formSuccess">
+  <appui-note-toolbar-version v-if="data.id && source.hasVersions"
+                              :source="source"
+                              :data="data"
+                              @version="changeVersion"/>
   <div class="bbn-grid-fields bbn-padded">
-    <label v-if="source.row.title !== undefined">
-      <?= _("Title") ?>
-    </label>
-    <bbn-input v-if="source.row.title !== undefined"
-							 v-model="source.row.title"/>
+    <template v-if="source.title !== undefined">
+      <label><?= _("Title") ?></label>
+      <bbn-input v-model="source.title"/>
+    </template>
 
-    <label v-if="(source.row.category !== undefined) && source.props.categories">
-      <?= _("Category") ?>
-    </label>
-    <bbn-dropdown v-if="(source.row.category !== undefined) && source.props.categories"
-                  required="required"
-                  v-model="source.row.category"
-                  :source="source.props.categories"/>
+    <template v-if="(source.category !== undefined) && categories">
+      <label><?= _("Category") ?></label>
+      <bbn-dropdown required="required"
+                    v-model="source.category"
+                    :source="categories"/>
+    </template>
 
-    <div style="text-align: right">
-      <div><?= _("Text") ?></div>
-      <!--<br>
+    <!--<div style="text-align: right">
+      <label><?= _("Text") ?></label>
+      <br>
       <bbn-dropdown :source="editorTypes"
                     ref="editorType"
                     @change="switchEditorType"
-      ></bbn-dropdown>-->
-    </div>
+      ></bbn-dropdown>
+    </div>-->
+    <label><?= _("Text") ?></label>
     <div>
       <div class="bbn-w-100">
         <component :is="editorType"
-                  ref="editor"
-                  v-model="source.row.text"
-                  style="min-height: 450px; width: 100%;"
-                  required="required"
-                  class="bbn-w-100"
-                  height="450px"/>
+                   ref="editor"
+                   v-model="source.text"
+                   style="min-height: 450px; width: 100%;"
+                   required="required"
+                   class="bbn-w-100"
+                   height="450px"/>
       </div>
     </div>
 
-    <label v-if="fileSave && fileRemove">
-      <?= _("Files") ?>
-    </label>
-    <div v-if="fileSave && fileRemove"
-         class="bbn-task-files-container">
-      <bbn-upload :save-url="fileSave + data.ref"
-                  :remove-url="fileRemove + data.ref"
-                  v-model="source.row.files"
-                  :paste="true"
-                  :show-filesize="false"/>
-    </div>
+    <template v-if="fileSave && fileRemove">
+      <label><?= _("Files") ?></label>
+      <div class="bbn-task-files-container">
+        <bbn-upload :save-url="fileSave + ref"
+                    :remove-url="fileRemove + ref"
+                    v-model="source.files"
+                    :paste="true"
+                    :show-filesize="false"/>
+      </div>
+    </template>
 
-    <label>
-      <?= _("Links") ?>
-    </label>
+    <!--
+    <label><?= _("Links") ?></label>
     <div>
       <div class="bbn-w-100">
         <bbn-input ref="link"
@@ -66,19 +63,19 @@
       </div>
       <div class="appui-note-forum-links-container bbn-widget bbn-w-100"
            ref="linksContainer"
-           v-if="source.row.links && source.row.links.length">
-        <div v-for="(l, idx) in source.row.links"
-             :class="{
+           v-if="source.links && source.links.length">
+        <div v-for="(l, idx) in source.links"
+             :class="['bbn-spadded', {
                'link-progress': l.inProgress && !l.error,
                'link-success': !l.inProgress && !l.error,
                'link-error': l.error,
                'bbn-bordered-top': idx > 0
-             }">
+             }]">
           <div class="bbn-flex-width">
             <div v-if="imageDom"
                  class="appui-note-forum-link-image">
               <img v-if="l.image"
-                   :src="imageDom + data.ref + '/' + l.image">
+                   :src="imageDom + ref + '/' + l.image">
               <i v-else class="nf nf-fa-link"> </i>
             </div>
             <div class="appui-note-forum-link-title bbn-flex-fill">
@@ -100,16 +97,15 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
 
-    <label v-if="canLock">
-      <?= _("Locked") ?>
-    </label>
-    <div>
-      <bbn-checkbox v-if="canLock"
-                    v-model="source.row.locked"
-                    :value="1"
-                    :novalue="0"/>
-    </div>
+    <template v-if="canLock">
+      <label><?= _("Locked") ?></label>
+      <div>
+        <bbn-checkbox v-model="source.locked"
+                      :value="1"
+                      :novalue="0"/>
+      </div>
+    </template>
   </div>
 </bbn-form>

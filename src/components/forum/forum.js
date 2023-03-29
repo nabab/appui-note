@@ -1,46 +1,14 @@
 (() => {
 	return {
+    mixins: [
+      bbn.vue.basicComponent,
+      bbn.vue.listComponent
+    ],
 		props: {
-			data: {
-        type: [Object, Function],
-        default(){
-          return {};
-        }
-      },
-			filterable: {
-        type: Boolean,
-        default: false
-      },
 			pinnable: {
         type: Boolean,
         default: true
       },
-			filters: {
-				type: Object,
-				default(){
-					return {
-						logic: 'AND',
-						conditions: []
-					};
-				}
-			},
-			limit: {
-        type: Number,
-        default: 25
-      },
-			map: {
-        type: Function
-      },
-			pageable: {
-        type: Boolean,
-        default: true
-      },
-      source: {
-				type: [Array, String],
-				default(){
-					return [];
-				}
-			},
 			imageDom: {
 				type: String
 			},
@@ -50,17 +18,17 @@
 			toolbar: {
         type: [String, Array, Function, Object]
       },
-			edit: {
-				type: [Function, Boolean],
-        default: false
+			editEnabled: {
+				type: Boolean,
+        default: true
 			},
-			remove: {
-				type: [Function, Boolean],
-        default: false
+			removeEnabled: {
+				type: Boolean,
+        default: true
 			},
-			reply: {
-				type: [Function, Boolean],
-        default: false
+			replyEnabled: {
+				type: Boolean,
+        default: true
       },
       topicButtons: {
         type: Array,
@@ -77,50 +45,35 @@
       canLock: {
         type: Boolean,
         default: true
+      },
+      categories: {
+        type: Array,
+        default(){
+          return [];
+        }
+      },
+      autoUnfoldCats: {
+        type: Array
       }
 		},
 		data(){
 			return {
 			  currentUser: appui.app.user.id,
-				currentData: [],
-				currentLimit: this.limit,
-				currentFilters: bbn.fn.extend({}, this.filters),
-				originalData: null,
-				start: 0,
-        total: 0,
-				limits: [10, 25, 50, 100, 250, 500],
-				isLoading: false,
-        isAjax: typeof(this.source) === 'string',
 				mediaFileType: appui.options.media_types.file.id,
         mediaLinkType: appui.options.media_types.link.id
 			}
 		},
 		computed: {
-			numPages(){
-        return Math.ceil(this.total/this.currentLimit);
-      },
-			currentPage: {
-        get(){
-          return Math.ceil((this.start+1)/this.currentLimit);
-        },
-        set(val){
-          this.start = val > 1 ? (val-1) * this.currentLimit : 0;
-          this.updateData();
-        }
-      },
-      toolbarButtons(){
-        let r = [],
-            ar = [];
+			toolbarButtons(){
+        let r = [];
         if ( this.toolbar ){
-          //ar = $.isFunction(this.toolbar) ?
-          ar = typeof(this.toolbar) === 'function' ?
-            this.toolbar() : (
-              Array.isArray(this.toolbar) ? this.toolbar.slice() : []
-            );
-          if ( Array.isArray(ar) ){
-            bbn.fn.each(ar, (a, i) => {
-              let o = bbn.fn.extend({}, a);
-              if ( o.action ){
+          let ar = bbn.fn.isFunction(this.toolbar) ?
+            this.toolbar() :
+            (bbn.fn.isArray(this.toolbar) ? this.toolbar.slice() : []);
+          if (bbn.fn.isArray(ar)) {
+            bbn.fn.each(ar, a => {
+              let o = bbn.fn.clone(a);
+              if (o.action) {
                 o.action = () => {
                   this._execCommand(a);
                 }
@@ -133,323 +86,85 @@
       }
 		},
 		methods: {
-		  shorten: bbn.fn.shorten,
       _execCommand(button, data){
-        if ( button.action ){
-          //if ( $.isFunction(button.action) ){
-          if ( typeof(button.action) === "function" ){
+        if (button.action) {
+          if (bbn.fn.isFunction(button.action)) {
             return button.action(data);
           }
-          else if ( typeof(button.action) === 'string' ){
-            switch ( button.action ){
+          else if (bbn.fn.isString(button.action)) {
+            switch (button.action) {
               case 'insert':
-                return this.insert(data);
+                return this.$emit('insert', data);
               case 'edit':
-                return this.edit(data);
+                return this.$emit('edit', data);
               case 'delete':
-                return this.remove(data);
+                return this.$emit('remove', data);
               case 'reply':
-                return this.reply(data);
+                return this.$emit('reply', data);
             }
           }
         }
         return false;
       },
-      _map(data){
-        //return this.map ? $.map(data, this.map) : data;
-        return this.map ? bbn.fn.map(data, this.map) : data;
-      },
-      sdate(d){
-        //return dayjs(d).format('DD/MM/YY')
-        return bbn.fn.fdate(d, true);
-      },
-      ndate(d){
-        return dayjs(d).format('DD/MM/YYYY');
-      },
-      ndatetime(d){
-        return dayjs(d).format('DD/MM/YYYY HH:mm');
-      },
-      fdate(d){
-        //return dayjs(d).format('DD/MM/YY HH:mm:ss');
-        return bbn.fn.fdatetime(d, true);
-      },
-      hour(d){
-        return dayjs(d).format('HH:mm')
-      },
-      hasEditUsers(users){
-		    if ( users ){
-          let u = users.split(',');
-          if ( u.length > 1 ){
-            return true;
-          }
-        }
-        return false;
-      },
-      usersNames(creator, users, number){
-        let ret = appui.app.getUserName(creator.toLowerCase()) || bbn._('Unknown'),
-            u;
-        if ( users ){
-          u = users.split(',');
-          if ( number ){
-            return u.length;
-          }
-          if ( u.length > 1 ){
-            u.forEach((v) => {
-              if ( v !== creator ){
-                ret += ', ' + appui.app.getUserName(v.toLowerCase()) || bbn._('Unknown');
-              }
-            });
-          }
-        }
-        return number ? 0 : ret;
-      },
-			updateData(withoutOriginal){
-        if ( this.isAjax && !this.isLoading ){
-          this.isLoading = true;
-          this.$nextTick(() => {
-            let data = {
-              limit: this.currentLimit,
-              start: this.start,
-              data: this.data ? ( typeof(this.data) === "function" ? this.data() : this.data) : {}
-            };
-            if ( this.filterable ){
-              data.filters = this.currentFilters;
-            }
-            this.post(this.source, data, result => {
-              this.isLoading = false;
-              if (
-                !result ||
-                result.error ||
-                ((result.success !== undefined) && !result.success)
-              ){
-                appui.alert(result && result.error ? result.error : bbn._("Error while updating the data"));
-              }
-              else {
-                this.currentData = this._map(result.data || []);
-                if ( this.editable ){
-                  this.originalData = JSON.parse(JSON.stringify(this.currentData));
-                }
-                this.total = result.total || result.data.length || 0;
-              }
-            });
-          });
-        }
-        else if ( Array.isArray(this.source) ){
-          this.currentData = this._map(this.source);
-          if ( this.isBatch && !withoutOriginal ){
-            this.originalData = JSON.parse(JSON.stringify(this.currentData));
-          }
-          this.total = this.currentData.length;
-        }
-      },
-      downloadMedia(id){
-        if ( id && this.downloadUrl ){
+			downloadMedia(id){
+        if (!!id && this.downloadUrl) {
           this.postOut(this.downloadUrl + id);
         }
       },
-    },
-    watch: {
-      currentFilters: {
-        deep: true,
-        handler(){
-          this.$nextTick(() => {
-            this.updateData();
+			seeImage(img){
+        if (!!img.id && !!img.name && this.imageDom) {
+          this.getPopup({
+            title: img.name,
+            width: '100%',
+            height: '100%',
+            scrollable: false,
+            content: `
+              <div class="bbn-overlay">
+                <img src="${this.imageDom}${img.id}"
+                     style="width: 100%; height: 100%; object-fit: scale-down">
+              </div>
+            `
           });
         }
       },
-      filters: {
-        deep: true,
-        handler(){
-          this.$nextTick(() => {
-            this.updateData();
-          });
+      clearSearch(){
+        if (this.filterString.length) {
+          this.filterString = '';
         }
       }
     },
-		mounted(){
-			this.$nextTick(() => {
-        this.updateData();
-      });
-      this.ready = true;
+    mounted(){
+			this.ready = true;
 		},
-		components: {
-		  'appui-note-forum-topic': {
-        name: 'appui-note-forum-topic',
-        props: {
-          source: {
-            type: Object
-          }
-        },
-        data(){
-          return {
-            forum: bbn.vue.closest(this, 'appui-note-forum'),
-            currentLimit: this.limit,
-            start: 0,
-            total: 0,
-            limits: [10, 25, 50, 100, 250, 500],
-            isLoading: false,
-            showReplies: false,
-            contentContainerHeight: 'auto',
-						possibleHiddenContent: false
-          }
-        },
-        computed: {
-          cutContentContainer(){
-            return this.contentContainerHeight !== 'auto';
-          },
-          cutContent(){
-            return bbn.fn.html2text(this.source.content).replace(/\n/g, ' ');
-          }
-        },
-        methods: {
-					showContentContainer(val){
-						this.contentContainerHeight = val;
-					},
-          toggleReplies(){
-            if ( this.source.num_replies ){
-              if ( this.showReplies ){
-                this.showReplies = false;
-                this.source.replies = false;
-              }
-              else {
-                this.showReplies = true;
-              }
+    watch: {
+      filterString(newVal){
+        if (this.filterable) {
+          let ev = new CustomEvent('search', {cancelable: true});
+          this.$emit('search', ev, newVal);
+          if (!ev.defaultPrevented) {
+            if (!newVal) {
+              this.currentFilters.conditions.splice(0);
             }
-          },
-          togglePinned(){
-            let ev = new Event('pin', {
-              cancelable: true
-            });
-            this.forum.$emit('pin', this.source, ev);
-            if (!ev.defaultPrevented) {
-              this.post(appui.plugins['appui-note'] + '/actions/pin', {
-                id: this.source.id,
-                pinned: !!this.source.pinned ? 0 : 1
-              }, d => {
-                if (d.success) {
-                  this.source.pinned = !!this.source.pinned ? 0 : 1;
-                  this.forum.updateData();
-                }
-              });
-            }
-          }
-        },
-        mounted(){
-          this.$nextTick(() => {
-            // if ( this.getRef('contentContainer').clientHeight > 35 ){
-            if ( this.getRef('contentContainer').getBoundingClientRect().height > 35 ){
-              this.contentContainerHeight = '35px';
-							this.possibleHiddenContent = true;
-            }
-          });
-        },
-        components: {
-          'appui-note-forum-post': {
-            name: 'appui-note-forum-post',
-            props: {
-              source: {
-                type: Object
-              },
-              index: {
-                type: Number
-              },
-              lastIndex: {
-                type: Number
-              }
-            },
-            data(){
-              return {
-                topic: bbn.vue.closest(this, 'appui-note-forum-topic')
-              }
-            }
-          },
-          'appui-note-forum-pager': {
-            name: 'appui-note-forum-pager',
-            props: {
-              source: {
-                type: Object
-              }
-            },
-            data(){
-              return {
-                topic: bbn.vue.closest(this, 'appui-note-forum-topic'),
-                currentLimit: 10,
-                originalData: null,
-                start: 0,
-                total: 0,
-                limits: [10, 25, 50, 100, 250, 500],
-                isLoading: false,
-                isInit: true
-              }
-            },
-            computed: {
-              numPages(){
-                return Math.ceil(this.total / this.currentLimit);
-              },
-              currentPage: {
-                get(){
-                  return Math.ceil((this.start + 1) / this.currentLimit);
-                },
-                set(val){
-                  this.start = val > 1 ? (val - 1) * this.currentLimit : 0;
-                  this.updateData();
-                }
-              },
-              isAjax(){
-                return this.topic.forum.isAjax;
-              },
-              pageable(){
-                return this.topic.forum.pageable;
-              },
-              showPager(){
-                return this.isInit && (this.source.num_replies > this.currentLimit);
-              }
-            },
-            methods: {
-              updateData(withoutOriginal){
-                if ( this.isAjax && !this.isLoading ){
-                  this.isLoading = true;
-                  this.$nextTick(() =>{
-                    let data = {
-                      limit: this.currentLimit,
-                      start: this.start,
-                      data: {id_alias: this.source.id}
-                    };
-                    this.post(this.topic.forum.source, data, result =>{
-                      this.isLoading = false;
-                      if (
-                        !result ||
-                        result.error ||
-                        ((result.success !== undefined) && !result.success)
-                      ){
-                        appui.alert(result && result.error ? result.error : bbn._("Error while updating the data"));
-                      }
-                      else {
-                        this.$set(this.source, 'replies', this.topic.forum._map(result.data || []));
-                        if ( this.editable ){
-                          this.originalData = JSON.parse(JSON.stringify(this.source.replies));
-                        }
-                        this.total = result.total || result.data.length || 0;
-                        this.source.num_replies = this.total;
-                      }
-                      this.isInit = true;
-                    });
-                  });
-                }
-                else if ( Array.isArray(this.source.replies) ){
-                  this.source.replies = this._map(this.source.replies);
-                  if ( this.isBatch && !withoutOriginal ){
-                    this.originalData = JSON.parse(JSON.stringify(this.source.replies));
-                  }
-                  this.total = this.source.replies.length;
-                  this.source.num_replies = this.total;
-                  this.isInit = true;
-                }
-              }
-            },
-            mounted(){
-              this.$nextTick(() =>{
-                this.updateData();
+            else {
+              this.currentFilters.conditions.splice(0, this.currentFilters.conditions.length, {
+                logic: 'OR',
+                conditions: [{
+                  field: 'title',
+                  operator: 'contains',
+                  value: newVal
+                }, {
+                  field: 'content',
+                  operator: 'contains',
+                  value: newVal
+                }, {
+                  field: 'replies_versions.title',
+                  operator: 'contains',
+                  value: newVal
+                }, {
+                  field: 'replies_versions.content',
+                  operator: 'contains',
+                  value: newVal
+                }]
               });
             }
           }

@@ -9,17 +9,39 @@
     props: {
       source: {
         type: Object
+      },
+      data: {
+        type: Object,
+        default(){
+          return {}
+        }
+      },
+      formAction: {
+        type: String
+      },
+      formSuccess: {
+        type: Function
+      },
+      fileSave: {
+        type: String
+      },
+      fileRemove: {
+        type: String
+      },
+      imageDom: {
+        type: String
+      },
+      linkPreview: {
+        type: String
+      },
+      categories: {
+        type: Array
       }
     },
     data(){
       return {
         canLock : true,
-				formAction: this.source.props.formAction || false,
-        fileSave: this.source.props.fileSave || false,
-        fileRemove: this.source.props.fileRemove || false,
-        imageDom: this.source.props.imageDom || false,
-				linkPreview: this.source.props.linkPreview || false,
-        editorTypes: [{
+				editorTypes: [{
           text: bbn._('Simple text'),
           value: 'bbn-textarea'
         }, {
@@ -42,17 +64,22 @@
           mode: 'less'
         }],
         editorType: 'bbn-rte',
-        data: bbn.fn.extend({
-					ref: dayjs().unix()
-				}, this.source.data ? this.source.data : {})
+        ref: dayjs().unix()
+      }
+    },
+    computed: {
+      formData(){
+        return bbn.fn.extend(true, {ref: this.ref}, this.data);
       }
     },
     methods: {
       switchEditorType(){
         let mode;
-        if ( this.$refs.editorType.widget ){
+        if (this.$refs.editorType.widget) {
           this.editorType = this.$refs.editorType.widget.value();
-          if ( (this.editorType === 'bbn-code') && (mode = this.$refs.editorType.widget.dataItem()['mode']) ){
+          if ((this.editorType === 'bbn-code')
+            && (mode = this.$refs.editorType.widget.dataItem()['mode'])
+          ) {
             setTimeout(() => {
               this.$refs.editor.widget.setOption('mode', mode);
             }, 500);
@@ -62,7 +89,7 @@
 			linkEnter(){
         const link = (this.$refs.link.$refs.element.value.indexOf('http') !== 0 ? 'http://' : '') +
                 this.$refs.link.$refs.element.value,
-              idx = this.source.row.links.push({
+              idx = this.source.links.push({
                 inProgress: true,
                 content: {
                   url: link,
@@ -72,26 +99,26 @@
                 title: false,
                 error: false
               }) - 1;
-				if ( this.linkPreview ){
+				if (this.linkPreview) {
 					this.post(this.linkPreview, {
 	          url: link,
-	          ref: this.data.ref
-	        }, (d) => {
-	          if ( d.data && d.data.realurl ){
-	            if ( d.data.picture ){
-	              this.source.row.links[idx].image = d.data.picture;
+	          ref: this.ref
+	        }, d => {
+	          if (d.data && d.data.realurl) {
+	            if (d.data.picture) {
+	              this.source.links[idx].image = d.data.picture;
 	            }
-	            if ( d.data.title ){
-	              this.source.row.links[idx].title = d.data.title;
+	            if (d.data.title) {
+	              this.source.links[idx].title = d.data.title;
 	            }
-	            if ( d.data.desc ){
-	              this.source.row.links[idx].content.description = d.data.desc;
+	            if (d.data.desc) {
+	              this.source.links[idx].content.description = d.data.desc;
 	            }
-	            this.source.row.links[idx].inProgress = false;
+	            this.source.links[idx].inProgress = false;
 	            this.$refs.link.$refs.element.value = '';
 	          }
 	          else{
-	            this.source.row.links[idx].error = true;
+	            this.source.links[idx].error = true;
 	          }
 	        });
 				}
@@ -99,37 +126,33 @@
       linkRemove(idx){
         if ( idx !== undefined){
           this.confirm(bbn._('Are you sure you want to remove this link?'), () => {
-            this.source.row.links.splice(idx, 1);
+            this.source.links.splice(idx, 1);
           });
         }
       },
       changeVersion(d){
-        if ( d ){
-          bbn.fn.log("changer versoin ok");
-          if ( 
-            (this.source.row.category !== undefined) &&
+        if (d) {
+          if ((this.source.category !== undefined) &&
             (d.category !== undefined)
           ){
-            this.$set(this.source.row, 'category', d.category);  
+            this.$set(this.source, 'category', d.category);
           }
-          this.$set(this.source.row, 'creation', d.creation);
-          this.$set(this.source.row, 'creator', d.id_user);
-          this.$set(this.source.row, 'locked', d.locked);
-          this.$set(this.source.row, 'text', d.content);
-          if ( this.source.row.title !== undefined ){
-            this.$set(this.source.row, 'title', d.title);
+          this.$set(this.source, 'creation', d.creation);
+          this.$set(this.source, 'creator', d.id_user);
+          this.$set(this.source, 'locked', d.locked);
+          this.$set(this.source, 'text', d.content);
+          if ( this.source.title !== undefined ){
+            this.$set(this.source, 'title', d.title);
           }
-          this.$set(this.source.row, 'files', d.files);
-          this.$set(this.source.row, 'links', d.links);
-          bbn.fn.log("set everything");
+          this.$set(this.source, 'files', d.files);
+          this.$set(this.source, 'links', d.links);
           this.$forceUpdate();
-          bbn.fn.log("set everything");
         }
       }
     },
     mounted(){
       let forum =  this.closest('bbn-container').find('appui-note-forum');
-      if ( forum ){
+      if (forum) {
         this.canLock = forum.canLock;
       }
     }
