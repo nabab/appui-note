@@ -143,7 +143,7 @@
           this.$emit('search', ev, newVal);
           if (!ev.defaultPrevented) {
             if (!newVal) {
-              this.currentFilters.conditions.splice(0);  
+              this.currentFilters.conditions.splice(0);
             }
             else {
               this.currentFilters.conditions.splice(0, this.currentFilters.conditions.length, {
@@ -154,6 +154,14 @@
                   value: newVal
                 }, {
                   field: 'content',
+                  operator: 'contains',
+                  value: newVal
+                }, {
+                  field: 'replies_versions.title',
+                  operator: 'contains',
+                  value: newVal
+                }, {
+                  field: 'replies_versions.content',
                   operator: 'contains',
                   value: newVal
                 }]
