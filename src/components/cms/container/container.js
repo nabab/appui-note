@@ -95,6 +95,7 @@
       },
       removeBlock(idx) {
         this.source.items.splice(idx, 1);
+        this.$emit('remove', idx);
       },
       clickBlock(index) {
         this.currentItemSelected = index;

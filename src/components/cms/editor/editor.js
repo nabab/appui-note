@@ -2,7 +2,7 @@
 
 (() => {
   return {
-    mixins: [bbn.vue.basicComponent],
+    mixins: [bbn.vue.basicComponent, bbn.vue.resizerComponent, bbn.vue.componentInsideComponent],
     props: {
       source: {
         type: Object
@@ -26,10 +26,59 @@
       historyLength: {
         type: Number,
         default: 15
+      },
+      component: {
+        type: [String, Object],
+        default: 'appui-note-cms-settings'
       }
     },
     data() {
       return {
+        mappingTimeout: null,
+        displayModes: [{
+          text: bbn._("100%"),
+          value: '100%',
+          cfg: {
+            width: '100%',
+            height: '100%'
+        	}
+        }, {
+          text: bbn._("Desktop 1920px"),
+          value: '1920px',
+          cfg: {
+            width: '1920px',
+            height: '1080px'
+        	}
+        }, {
+          text: bbn._("Desktop 1366px"),
+          value: '1366px',
+          cfg: {
+            width: '1366px',
+            height: '768px'
+        	}
+        }, {
+          text: bbn._("Desktop 1024px"),
+          value: '1024px',
+          cfg: {
+            width: '1024px',
+            height: '768px'
+        	}
+        }, {
+          text: bbn._("Mobile 412px"),
+          value: '412px',
+          cfg: {
+            width: '412px',
+            height: '915px'
+        	}
+        }, {
+          text: bbn._("Mobile 360px"),
+          value: '360px',
+          cfg: {
+            width: '360px',
+            height: '800px'
+        	}
+        }],
+        displayMode: '100%',
         isDev: appui.app.user.isDev,
         data: null,
         oData: JSON.stringify(this.source),
@@ -64,6 +113,12 @@
       };
     },
     computed: {
+      realComponentOptions() {
+        return bbn.fn.numProperties(this.componentOptions) ? this.componentOptions : {source: this.source, typeNote: this.typeNote}
+      },
+      currentDisplayMode() {
+        return bbn.fn.getRow(this.displayModes, {value: this.displayMode});
+      },
       jsonValue() {
         return {
           items: this.source.items,
@@ -106,7 +161,7 @@
         return arr;
       },
       types() {
-        return this.data ? this.data.types_notes : [];
+        return this.data?.types_notes ? this.data.types_notes : [];
       },
       typeNote() {
         if (this.source.id_type) {
@@ -308,10 +363,10 @@
         if (this.source.items[this.dataElementor.dataIndex || null]) {
           // if a container already exists dataContainerIndex will exist
           if (this.dataElementor.dataContainerIndex) {
-            movedItem = this.source.items[this.dataElementor.dataIndex].source.items.splice(this.dataElementor.dataContainerIndex, 1);
+            movedItem = this.source.items[this.dataElementor.dataIndex].items.splice(this.dataElementor.dataContainerIndex, 1);
             //transform into normal block
-            if (this.source.items[this.dataElementor.dataIndex].source.items.length === 1) {
-              let last_block = this.source.items[this.dataElementor.dataIndex].source.items[0];
+            if (this.source.items[this.dataElementor.dataIndex].items.length === 1) {
+              let last_block = this.source.items[this.dataElementor.dataIndex].items[0];
               this.source.items.splice(this.dataElementor.dataIndex, 1, last_block);
             }
           }
@@ -327,9 +382,9 @@
           // avoid creating container inside container
           if (this.source.items[this.nextPosition].type == 'container') {
             if (this.nextContainerPosition == 0) {
-              this.source.items[this.nextPosition].source.items.unshift(block);
+              this.source.items[this.nextPosition].items.unshift(block);
             } else {
-              this.source.items[this.nextPosition].source.items.splice(this.nextContainerPosition, 0, block);
+              this.source.items[this.nextPosition].items.splice(this.nextContainerPosition, 0, block);
             }
             this.cancelHelp();
             return;
@@ -551,30 +606,36 @@
        * Function to map the elements in elementor editor in an array.
        */
       mapY() {
-        let elementor = this.getRef('elementor');
-        if (!elementor || this.showJSON || this.preview) {
-          return;
+        if (this.mappingTimeout !== null) {
+          clearTimeout(this.mappingTimeout);
         }
+        this.mappingTimeout = setTimeout(() => {
+          bbn.fn.log("mapY");
+          let elementor = this.getRef('elementor');
+          if (!elementor || this.showJSON || this.preview) {
+            return;
+          }
 
-        let tmp_arr = [];
-        this.source.items.map((v, idx) => {
-          let ele = elementor.getRef('block' + idx.toString());
-          if (ele?.$el && ele.$el.getBoundingClientRect) {
-            let detail = ele.$el.getBoundingClientRect();
-            tmp_arr.push({
-              y: detail.y,
-              height: detail.height,
-              left: detail.left,
-              width: detail.width,
-              index: idx,
-              html: ele.$el,
-            });
-            this.map = tmp_arr.slice();
-          }
-          else {
-            bbn.fn.log('false mapper', ele.$el, idx);
-          }
-        });
+          let tmp_arr = [];
+          this.source.items.map((v, idx) => {
+            let ele = elementor.getRef('block' + idx.toString());
+            if (ele?.$el && ele.$el.getBoundingClientRect) {
+              let detail = ele.$el.getBoundingClientRect();
+              tmp_arr.push({
+                y: detail.y,
+                height: detail.height,
+                left: detail.left,
+                width: detail.width,
+                index: idx,
+                html: ele.$el,
+              });
+              this.map = tmp_arr.slice();
+            }
+            else {
+              bbn.fn.log('false mapper', ele.$el, idx);
+            }
+          });
+        }, 100)
       },
       /**
        * Function triggered when dragging an element
@@ -583,15 +644,16 @@
         this.dataElementor = data;
       },
       /**
-       * Do a mapping when scrolling the delementor component
+       * Do a mapping when scrolling the delementor componetn
        */
       scrollElementor() {
-        setTimeout(() => {
-          this.mapY();
-        }, 500);
+        this.mapY();
       }
     },
     watch: {
+      displayMode() {
+        this.mapY();
+      },
       'source.items'() {
         bbn.fn.log('source items');
         let apply = true;
@@ -613,9 +675,7 @@
             this.historyApplying = false;
           }
         }
-        setTimeout(() => {
-          this.mapY();
-        }, 500);
+        this.mapY();
       },
       'editedSource.type'(v, ov) {
         let tmp = this.editedSource;
@@ -653,6 +713,35 @@
       },
       ready() {
         this.mapY();
+      },
+      showFloater(v) {
+        if (v) {
+          const t = this;
+          this.getPopup({
+            title: false,
+            width: '50rem',
+            component: this.component,
+            componentOptions: this.realComponentOptions,
+            onOpen() {
+              bbn.fn.log("Open");
+              setTimeout(() => {
+                const cp = this.getRef('component');
+                if (cp) {
+                  bbn.fn.log("YOOOOOOOO")
+                  cp.$on('clear', t.clearCache);
+                  cp.$on('save', t.saveSettings);
+                  cp.$on('close', () => t.showFloater = false);
+                }
+              }, 250)
+            },
+            onClose: () => {
+              this.showFloater = false;
+            }
+          });
+        }
+        else {
+          this.getPopup().close();
+        }
       }
     },
     mounted() {

@@ -44,7 +44,7 @@
             <bbn-button icon="nf nf-fa-minus"
                         title="<?= _("Click here to add a new item on this line") ?>"
                         :notext="true"
-                        @click="removeBlock(i)"/>
+                        @click.stop="removeBlock(i)"/>
           </div>
         </div>
       </div>
@@ -54,12 +54,12 @@
         @click="addBlock">
       <?= _("Click here to add a new item on this line") ?>
     </h3>
-    <div v-if="overable && (mode === 'read')"
+    <!--div v-if="overable && (mode === 'read')"
          :class="['bbn-top-right', 'bbn-xspadding', {'bbn-hidden': !over}]">
       <bbn-button icon="nf nf-fa-plus"
                   title="<?= _("Click here to add a new item on this line") ?>"
                   :notext="true"
                   @click="addBlock"/>
-    </div>
+    </div-->
   </div>
 </div>

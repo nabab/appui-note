@@ -20,5 +20,7 @@ foreach ($types_notes as $t) {
 }
 return [
   'root' => $model->data['root'],
+  'blocks' => $model->inc->options->fullOptions("blocks", "note", "appui"),
+  'pblocks' => $model->inc->options->fullOptionsRef("pblocks", "note", "appui"),
   'types_notes' => $res
 ];

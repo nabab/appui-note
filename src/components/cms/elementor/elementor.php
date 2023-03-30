@@ -16,7 +16,7 @@
                                 :selected="currentEditedIndex === i"
                                 :itemSelected="currentEditedIndex === i ? currentEditedIndexInContainer : -1"
                                 @click="selectContainer"
-                                />
+                                @remove="deleteContainerItem($event, i)"/>
       <appui-note-cms-block v-else
                             :source="cfg"
                             :ref="'block' + i"
@@ -25,9 +25,7 @@
                             :selected="currentEditedIndex === i"
                             @click.stop="selectBlock(i, cfg)"
                             :data-index="i"
-                            v-draggable.data.mode="{data: cfg, mode: 'self'}"
-                            />
-
+                            v-draggable.data.mode="{data: cfg, mode: 'self'}"/>
     </div>
   </div>
   <div ref="divider"

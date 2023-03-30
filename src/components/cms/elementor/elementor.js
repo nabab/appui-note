@@ -260,6 +260,9 @@
       */
       onDrag() {
         this.$emit('dragoverdroppable', ...arguments);
+      },
+      deleteContainerItem(containerIdx) {
+        bbn.fn.log("deleteContainerItem", ...arguments);
       }
     },
     watch: {
