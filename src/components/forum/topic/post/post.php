@@ -1,7 +1,7 @@
-<div class="appui-note-forum-topic-post bbn-no-border bbn-alt-background bbn-radius bbn-spadded">
+<div class="appui-note-forum-topic-post bbn-bordered bbn-background bbn-radius bbn-spadded">
   <div class="bbn-flex-width bbn-vmiddle">
     <div :class="['appui-note-forum-topic-post-minwidth', 'bbn-unselectable', 'bbn-vmiddle', {'bbn-flex-fill': userFlexFill}]">
-      <span class="bbn-vmiddle bbn-right-xspadded bbn-radius bbn-background"
+      <span class="bbn-vmiddle bbn-right-xspadded bbn-radius bbn-alt-background bbn-bordered"
             :title="usersNames">
         <bbn-initial :user-name="creatorName"
                      width="1.5rem"
@@ -19,7 +19,7 @@
     <div v-if="!isTopic && isSubReply"
          class="appui-note-forum-topic-post-minwidth bbn-flex-fill bbn-vmiddle bbn-hsspace">
       <i class="nf nf-fa-reply bbn-right-xsspace icon-flip"/>
-      <span class="bbn-vmiddle bbn-right-xspadded bbn-radius bbn-background">
+      <span class="bbn-vmiddle bbn-right-xspadded bbn-radius bbn-alt-background bbn-alt-text bbn-bordered">
         <bbn-initial :user-id="source.parent_creator"
                      width="1.5rem"
                      height="1.5rem"
@@ -41,29 +41,29 @@
          class="bbn-vmiddle bbn-flex-fill bbn-hsspace bbn-s"
          style="overflow: hidden;">
       <span v-text="shorten(source.title, 120)"
-            class="bbn-radius bbn-xspadded bbn-b bbn-ellipsis bbn-background-secondary bbn-secondary-text"
+            class="bbn-xspadded bbn-b bbn-ellipsis bbn-m"
             :title="source.title"/>
     </div>
     <div v-if="isTopic && !!category"
-         class="appui-note-forum-topic-post-minwidth bbn-s bbn-vmiddle bbn-radius bbn-xspadded bbn-background-tertiary bbn-tertiary-text bbn-right-sspace"
+         class="appui-note-forum-topic-post-minwidth bbn-s bbn-vmiddle bbn-radius bbn-xspadded bbn-alt-background bbn-alt-text bbn-right-sspace bbn-bordered"
          v-text="category"/>
     <div v-if="source.files && source.files.length"
          title="<?=_('Files')?>"
-         class="appui-note-forum-topic-post-minwidth appui-note-forum-topic-post-darkgray bbn-radius bbn-vmiddle bbn-right-sspace bbn-xspadded">
+         class="appui-note-forum-topic-post-minwidth appui-note-forum-topic-post-darkgray bbn-radius bbn-vmiddle bbn-right-sspace bbn-xspadded bbn-bordered">
       <i class="nf nf-md-attachment"/>
       <span class="bbn-b bbn-s bbn-left-xsspace"
             v-text="source.files.length"/>
     </div>
     <div v-if="source.links && source.links.length"
          title="<?=_('Links')?>"
-         class="appui-note-forum-topic-post-minwidth appui-note-forum-topic-post-darkgray bbn-radius bbn-vmiddle bbn-right-sspace bbn-xspadded">
+         class="appui-note-forum-topic-post-minwidth appui-note-forum-topic-post-darkgray bbn-radius bbn-vmiddle bbn-right-sspace bbn-xspadded bbn-bordered">
       <i class="nf nf-md-link_variant"/>
       <span class="bbn-b bbn-s bbn-left-xsspace"
             v-text="source.links.length"/>
     </div>
     <div v-if="!isTopic"
          title="<?=_('Replies')?>"
-         class="appui-note-forum-topic-post-minwidth bbn-background bbn-radius bbn-vmiddle bbn-right-sspace bbn-xspadded">
+         class="appui-note-forum-topic-post-minwidth bbn-alt-background bbn-alt-text bbn-radius bbn-vmiddle bbn-right-sspace bbn-xspadded bbn-bordered">
       <i class="nf nf-md-forum_outline"/>
       <span :class="['bbn-b', 'bbn-s', 'bbn-left-xsspace', {
               'bbn-red': !source.num_replies,
@@ -73,12 +73,12 @@
     </div>
     <div v-text="ndatetime(isEdited ? source.last_edit : source.creation)"
          :title="isEdited ? _('Updated at') : _('Created at')"
-         class="appui-note-forum-topic-post-minwidth bbn-s bbn-vmiddle bbn-radius bbn-xspadded bbn-background"/>
+         class="appui-note-forum-topic-post-minwidth bbn-s bbn-vmiddle bbn-radius bbn-xspadded bbn-alt-background bbn-alt-text bbn-bordered"/>
   </div>
   <div class="bbn-flex-width bbn-top-sspace">
     <div v-if="isTopic">
       <div title="<?=_('Replies')?>"
-           class="bbn-background bbn-radius bbn-p bbn-xspadded bbn-vmiddle"
+           class="bbn-alt-background bbn-alt-text bbn-radius bbn-p bbn-xspadded bbn-vmiddle bbn-bordered bbn-reactive"
            @click="topic.toggleReplies()">
         <i class="nf nf-md-forum_outline bbn-lg"/>
         <span :class="['bbn-s', 'bbn-b', {
@@ -99,12 +99,12 @@
                       :title="!!contentVisible ? _('Hidden full text') : _('Show full text')"
                       @click="!!contentVisible ? foldContent() : unfoldContent()"
                       :notext="true"
-                      class="bbn-no-border bbn-right-xsspace"
+                      class="bbn-alt-background bbn-alt-text bbn-right-xsspace"
                       style="min-width: 1.4em; max-width: 1.4em"/>
           <div class="bbn-flex-fill"
                style="overflow: hidden">
             <div v-html="!contentVisible ? cutContent : source.content"
-                 :class="['bbn-background', 'bbn-radius', 'bbn-xspadded', {'bbn-ellipsis': !contentVisible}]"/>
+                 :class="['bbn-background', 'bbn-text', 'bbn-radius', 'bbn-xspadded', {'bbn-ellipsis': !contentVisible}]"/>
           </div>
         </div>
         <div v-if="source.links && source.links.length && !!contentVisible"
@@ -153,7 +153,7 @@
                style="flex-wrap: wrap">
             <span v-for="f in source.files"
                   :title="f.title"
-                  class="bbn-p bbn-background bbn-text bbn-radius bbn-xspadded bbn-right-sspace bbn-top-sspace bbn-vmiddle">
+                  class="bbn-p bbn-alt-background bbn-alt-text bbn-radius bbn-xspadded bbn-right-sspace bbn-top-sspace bbn-vmiddle bbn-bordered">
               <i class="nf nf-fa-download bbn-right-sspace"
                  @click="forum.downloadMedia(f.id)"/>
               <i v-if="f.isImage"
@@ -172,7 +172,7 @@
         <bbn-button v-if="isTopic && forum.topicButtons && forum.topicButtons.length"
                     v-for="(btn, i) in forum.topicButtons"
                     :key="i"
-                    class="bbn-no-border bbn-background bbn-text bbn-left-sspace"
+                    class="bbn-alt-background bbn-alt-text bbn-left-sspace"
                     :icon="btn.icon"
                     :notext="true"
                     @click="btn.action ? btn.action(source, _self, topic) : false"
@@ -181,14 +181,14 @@
         <bbn-button v-if="!isTopic && forum.replyButtons && forum.replyButtons.length"
                     v-for="(btn, i) in forum.replyButtons"
                     :key="i"
-                    class="bbn-no-border bbn-background bbn-text bbn-left-sspace"
+                    class="bbn-alt-background bbn-alt-text bbn-left-sspace"
                     :icon="btn.icon"
                     :notext="true"
                     @click="btn.action ? btn.action(source, _self, topic) : false"
                     :title="btn.title || ''"/>
         <!-- Delete -->
         <bbn-button v-if="!source.locked && (!isTopic || !source.num_replies)"
-                    class="bbn-no-border bbn-background bbn-text bbn-left-sspace bbn-bg-red bbn-white"
+                    class="bbn-alt-background bbn-alt-text bbn-left-sspace bbn-bg-red bbn-white"
                     icon="nf nf-fa-trash"
                     :notext="true"
                     @click="forum.removeEnabled ? forum.$emit('remove', source, _self, topic) : false"
@@ -196,7 +196,7 @@
                     :disabled="!forum.removeEnabled"/>
         <!-- Edit -->
         <bbn-button v-if="(source.creator === forum.currentUser) || !source.locked || forum.canLock"
-                    class="bbn-no-border bbn-background bbn-text bbn-left-sspace"
+                    class="bbn-alt-background bbn-alt-text bbn-left-sspace"
                     icon="nf nf-fa-edit"
                     :notext="true"
                     @click="forum.editEnabled ? forum.$emit('edit', source, _self, topic) : false"
@@ -204,17 +204,17 @@
                     :disabled="!forum.editEnabled"/>
         <!-- Pin|Unpin -->
         <bbn-button v-if="isTopic && forum.pinnable"
-                    class="bbn-no-border bbn-left-sspace"
+                    class="bbn-left-sspace"
                     :icon="'nf nf-mdi-' + (source.pinned ? 'pin_off' : 'pin')"
                     :notext="true"
                     @click="topic.togglePinned"
                     :title="source.pinned ? '<?=_('Unpin')?>' : '<?=_('Pin')?>'"
                     :style="{
-                      backgroundColor: source.pinned ? 'var(--active-background)' : 'var(--default-background)',
-                      color: source.pinned ? 'var(--active-text)' : 'var(--default-text)'
+                      backgroundColor: source.pinned ? 'var(--active-background)' : 'var(--alt-background)',
+                      color: source.pinned ? 'var(--active-text)' : 'var(--alt-text)'
                     }"/>
         <!-- Reply -->
-        <bbn-button class="bbn-no-border bbn-background bbn-text bbn-left-sspace"
+        <bbn-button class="bbn-alt-background bbn-alt-text bbn-left-sspace"
                     icon="nf nf-fa-reply"
                     :notext="true"
                     @click="forum.replyEnabled ? forum.$emit('reply', source, _self, topic) : false"
