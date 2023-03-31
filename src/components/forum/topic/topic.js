@@ -24,7 +24,7 @@
         return dayjs(d).format('HH:mm')
       },
     },
-    created(){
+    beforeMount(){
       this.$set(this, 'forum', this.closest('appui-note-forum'));
       this.$set(this, 'topic', this.closest('appui-note-forum-topic'));
     }

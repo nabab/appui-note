@@ -19,7 +19,7 @@
     },
     computed: {
       isTopic(){
-        return this.source.id === this.topic.source.id;
+        return this.source.id === this.topic?.source?.id;
       },
       usersNumber(){
         if (this.source.users) {
