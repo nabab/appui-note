@@ -44,9 +44,66 @@
             class="bbn-xspadded bbn-b bbn-ellipsis bbn-m"
             :title="source.title"/>
     </div>
-    <div v-if="isTopic && !!category"
-         class="appui-note-forum-topic-post-minwidth bbn-s bbn-vmiddle bbn-radius bbn-xspadded bbn-alt-background bbn-alt-text bbn-right-sspace bbn-bordered"
-         v-text="category"/>
+
+
+    <!-- Topic's buttons -->
+    <bbn-button v-if="isTopic && forum.topicButtons && forum.topicButtons.length"
+                v-for="(btn, i) in forum.topicButtons"
+                :key="i"
+                class="bbn-alt-background bbn-alt-text bbn-left-sspace"
+                :icon="btn.icon"
+                :notext="true"
+                @click="btn.action ? btn.action(source, _self, topic) : false"
+                :title="btn.title || ''"/>
+    <!-- Reply's buttons -->
+    <bbn-button v-if="!isTopic && forum.replyButtons && forum.replyButtons.length"
+                v-for="(btn, i) in forum.replyButtons"
+                :key="i"
+                class="bbn-alt-background bbn-alt-text bbn-left-sspace"
+                :icon="btn.icon"
+                :notext="true"
+                @click="btn.action ? btn.action(source, _self, topic) : false"
+                :title="btn.title || ''"/>
+    <!-- Delete -->
+    <bbn-button v-if="!source.locked && (!isTopic || !source.num_replies)"
+                class="bbn-alt-background bbn-alt-text bbn-left-sspace bbn-bg-red bbn-white"
+                icon="nf nf-fa-trash"
+                :notext="true"
+                @click="forum.removeEnabled ? forum.$emit('remove', source, _self, topic) : false"
+                title="<?=_('Delete')?>"
+                :disabled="!forum.removeEnabled"/>
+    <!-- Edit -->
+    <bbn-button v-if="(source.creator === forum.currentUser) || !source.locked || forum.canLock"
+                class="bbn-alt-background bbn-alt-text bbn-left-sspace"
+                icon="nf nf-fa-edit"
+                :notext="true"
+                @click="forum.editEnabled ? forum.$emit('edit', source, _self, topic) : false"
+                title="<?=_('Edit')?>"
+                :disabled="!forum.editEnabled"/>
+    <!-- Pin|Unpin -->
+    <bbn-button v-if="isTopic && forum.pinnable"
+                class="bbn-left-sspace"
+                :icon="'nf nf-mdi-' + (source.pinned ? 'pin_off' : 'pin')"
+                :notext="true"
+                @click="topic.togglePinned"
+                :title="source.pinned ? '<?=_('Unpin')?>' : '<?=_('Pin')?>'"
+                :style="{
+                  backgroundColor: source.pinned ? 'var(--active-background)' : 'var(--alt-background)',
+                  color: source.pinned ? 'var(--active-text)' : 'var(--alt-text)'
+                }"/>
+    <!-- Reply -->
+    <bbn-button class="bbn-alt-background bbn-alt-text bbn-left-sspace"
+                icon="nf nf-fa-reply"
+                :notext="true"
+                @click="forum.replyEnabled ? forum.$emit('reply', source, _self, topic) : false"
+                title="<?=_('Reply')?>"
+                :disabled="!forum.replyEnabled"/>
+
+  </div>
+  <div class="bbn-vmiddle bbn-top-sspace">
+    <div v-text="ndatetime(isEdited ? source.last_edit : source.creation)"
+         :title="isEdited ? _('Updated at') : _('Created at')"
+         class="appui-note-forum-topic-post-minwidth bbn-s bbn-vmiddle bbn-radius bbn-xspadded bbn-alt-background bbn-alt-text bbn-bordered bbn-right-sspace"/>
     <div v-if="source.files && source.files.length"
          title="<?=_('Files')?>"
          class="appui-note-forum-topic-post-minwidth appui-note-forum-topic-post-darkgray bbn-radius bbn-vmiddle bbn-right-sspace bbn-xspadded bbn-bordered">
@@ -71,9 +128,9 @@
             }]"
             v-text="source.num_replies || 0"/>
     </div>
-    <div v-text="ndatetime(isEdited ? source.last_edit : source.creation)"
-         :title="isEdited ? _('Updated at') : _('Created at')"
-         class="appui-note-forum-topic-post-minwidth bbn-s bbn-vmiddle bbn-radius bbn-xspadded bbn-alt-background bbn-alt-text bbn-bordered"/>
+    <div v-if="isTopic && !!category"
+         class="appui-note-forum-topic-post-minwidth bbn-s bbn-vmiddle bbn-radius bbn-xspadded bbn-alt-background bbn-alt-text bbn-bordered"
+         v-text="category"/>
   </div>
   <div class="bbn-flex-width bbn-top-sspace">
     <div v-if="isTopic">
@@ -168,58 +225,7 @@
     </div>
     <div>
       <div class="bbn-vmiddle">
-        <!-- Topic's buttons -->
-        <bbn-button v-if="isTopic && forum.topicButtons && forum.topicButtons.length"
-                    v-for="(btn, i) in forum.topicButtons"
-                    :key="i"
-                    class="bbn-alt-background bbn-alt-text bbn-left-sspace"
-                    :icon="btn.icon"
-                    :notext="true"
-                    @click="btn.action ? btn.action(source, _self, topic) : false"
-                    :title="btn.title || ''"/>
-        <!-- Reply's buttons -->
-        <bbn-button v-if="!isTopic && forum.replyButtons && forum.replyButtons.length"
-                    v-for="(btn, i) in forum.replyButtons"
-                    :key="i"
-                    class="bbn-alt-background bbn-alt-text bbn-left-sspace"
-                    :icon="btn.icon"
-                    :notext="true"
-                    @click="btn.action ? btn.action(source, _self, topic) : false"
-                    :title="btn.title || ''"/>
-        <!-- Delete -->
-        <bbn-button v-if="!source.locked && (!isTopic || !source.num_replies)"
-                    class="bbn-alt-background bbn-alt-text bbn-left-sspace bbn-bg-red bbn-white"
-                    icon="nf nf-fa-trash"
-                    :notext="true"
-                    @click="forum.removeEnabled ? forum.$emit('remove', source, _self, topic) : false"
-                    title="<?=_('Delete')?>"
-                    :disabled="!forum.removeEnabled"/>
-        <!-- Edit -->
-        <bbn-button v-if="(source.creator === forum.currentUser) || !source.locked || forum.canLock"
-                    class="bbn-alt-background bbn-alt-text bbn-left-sspace"
-                    icon="nf nf-fa-edit"
-                    :notext="true"
-                    @click="forum.editEnabled ? forum.$emit('edit', source, _self, topic) : false"
-                    title="<?=_('Edit')?>"
-                    :disabled="!forum.editEnabled"/>
-        <!-- Pin|Unpin -->
-        <bbn-button v-if="isTopic && forum.pinnable"
-                    class="bbn-left-sspace"
-                    :icon="'nf nf-mdi-' + (source.pinned ? 'pin_off' : 'pin')"
-                    :notext="true"
-                    @click="topic.togglePinned"
-                    :title="source.pinned ? '<?=_('Unpin')?>' : '<?=_('Pin')?>'"
-                    :style="{
-                      backgroundColor: source.pinned ? 'var(--active-background)' : 'var(--alt-background)',
-                      color: source.pinned ? 'var(--active-text)' : 'var(--alt-text)'
-                    }"/>
-        <!-- Reply -->
-        <bbn-button class="bbn-alt-background bbn-alt-text bbn-left-sspace"
-                    icon="nf nf-fa-reply"
-                    :notext="true"
-                    @click="forum.replyEnabled ? forum.$emit('reply', source, _self, topic) : false"
-                    title="<?=_('Reply')?>"
-                    :disabled="!forum.replyEnabled"/>
+        
       </div>
     </div>
   </div>
