@@ -18,6 +18,9 @@
       }
     },
     computed: {
+      isAlt(){
+        return this.index % 2;
+      },
       isTopic(){
         return this.source.id === this.topic.source.id;
       },

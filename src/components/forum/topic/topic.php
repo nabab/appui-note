@@ -1,6 +1,7 @@
 <div class="appui-note-forum-topic bbn-w-100 bbn-hspadded bbn-top-spadded">
   <appui-note-forum-topic-post :source="source"
-                               ref="post"/>
+                               ref="post"
+                               :index="index"/>
   <!-- Replies -->
   <appui-note-forum-topic-replies v-if="showReplies"
                                   :source="forum.source"
