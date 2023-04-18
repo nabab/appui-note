@@ -175,6 +175,19 @@
                         "default": 0,
                 "maxlength": 1
             },
+            "important": {
+                "position": 11,
+                "type": "tinyint",
+                "null": 0,
+                "key": null,
+                "extra": "",
+                "signed": 0,
+                "virtual": false,
+                "generation": null,
+                "default": 0,
+                "defaultExpression": false,
+                "maxlength": 1
+            },
             "creator": {
                 "type": "binary",
                 "null": 0,

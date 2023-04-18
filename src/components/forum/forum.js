@@ -42,6 +42,10 @@
           return [];
         }
       },
+      replies: {
+        type: Boolean,
+        default: true
+      },
       canLock: {
         type: Boolean,
         default: true
@@ -54,6 +58,10 @@
       },
       autoUnfoldCats: {
         type: Array
+      },
+      autoUnfoldImportants: {
+        type: Boolean,
+        default: false
       }
 		},
 		data(){
@@ -162,6 +170,10 @@
                   value: newVal
                 }, {
                   field: 'replies_versions.content',
+                  operator: 'contains',
+                  value: newVal
+                }, {
+                  field: 'username',
                   operator: 'contains',
                   value: newVal
                 }]

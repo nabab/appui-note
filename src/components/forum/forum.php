@@ -1,7 +1,7 @@
 <div class="appui-note-forum bbn-overlay bbn-background bbn-bordered">
 	<div class="bbn-overlay bbn-flex-height">
 		<div v-if="toolbar || search"
-				 class="appui-note-forum-toolbar bbn-header bbn-flex-width bbn-no-border-top bbn-no-border-left bbn-no-border-right"
+				 class="appui-note-forum-toolbar bbn-header bbn-flex-width bbn-no-border-top bbn-no-border-left bbn-no-border-right bbn-vmiddle"
 				 ref="toolbar">
 		  <!-- Toolbar -->
       <div v-if="toolbar"
@@ -20,7 +20,7 @@
       </div>
       <div v-if="search"
            class="bbn-spadded bbn-vmiddle">
-        <span v-text="_('Search')"
+        <span v-text="_('Rechercher')"
               class="bbn-right-sspace"/>
         <bbn-input v-model="filterString"
                    class="bbn-wide"
