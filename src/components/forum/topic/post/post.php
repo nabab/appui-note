@@ -95,7 +95,8 @@
                 :notext="true"
                 :text="_('Important')"
                 :class="['bbn-right-sspace', {'bbn-bg-red bbn-white': !!source.important}]"
-                @click="setUnsetImportant"/>
+                @click="setUnsetImportant"
+                style="min-width: 1.4em; max-width: 1.4em"/>
     <div class="bbn-flex-fill bbn-right-sspace"
          style="overflow: hidden">
       <div ref="contentContainer"
