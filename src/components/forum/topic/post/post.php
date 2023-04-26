@@ -71,12 +71,9 @@
             }]"
             v-text="source.num_replies || 0"/>
     </div>
-    <div v-text="ndatetime(isEdited ? source.last_edit : source.creation)"
+    <div v-text="(source.version > 1 ? 'V' + source.version + ' - ' : '') + ndatetime(isEdited ? source.last_edit : source.creation)"
          :title="dateTitle"
-         :class="['appui-note-forum-topic-post-minwidth', 'bbn-s', 'bbn-radius', 'bbn-xspadded', 'bbn-alt-background', 'bbn-bordered', {
-           'bbn-alt-text': !isEdited,
-           'bbn-primary-text-alt': isEdited
-         }]"/>
+         class="appui-note-forum-topic-post-minwidth bbn-s bbn-radius bbn-xspadded bbn-alt-background bbn-bordered"/>
   </div>
   <div class="bbn-flex-width bbn-top-sspace">
     <div v-if="isTopic && forum.replies">
