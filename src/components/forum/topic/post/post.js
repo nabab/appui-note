@@ -68,6 +68,13 @@
       },
       userFlexFill(){
         return (this.isTopic && !this.source.title) || (!this.isTopic && !this.isSubReply);
+      },
+      dateTitle(){
+        let ret = bbn._('Created at %s', this.ndatetime(this.source.creation));
+        if (this.isEdited) {
+          ret += "\n" + bbn._('Updated at %s', this.ndatetime(this.source.last_edit));
+        }
+        return ret;
       }
     },
     methods: {
@@ -80,6 +87,20 @@
       },
       isYou(id){
         return id === appui.app.user.id;
+      },
+      setUnsetImportant(){
+        this.post(appui.plugins['appui-note'] + '/actions/update', {
+          id_note: this.source.id,
+          important: !this.source.important
+        }, d => {
+          if (d.success) {
+            this.source.important = !!this.source.important ? 0 : 1;
+            appui.success();
+          }
+          else {
+            appui.error();
+          }
+        })
       }
     },
     mounted(){
@@ -89,14 +110,19 @@
             && (this.getRef('contentContainer').getBoundingClientRect().height > 35)
           ) {
             this.hasBigContent = true;
-            if (!this.forum.autoUnfoldCats
-              || !this.source.category
-              || (bbn.fn.isArray(this.forum.autoUnfoldCats)
-                && !this.forum.autoUnfoldCats.includes(this.source.category)
-              )
+            if (!!this.forum.autoUnfoldImportants
+              && !!this.source.important
             ) {
-              this.foldContent();
+              return;
             }
+            if (!!this.forum.autoUnfoldCats
+              && !!this.source.category
+              && bbn.fn.isArray(this.forum.autoUnfoldCats)
+              && this.forum.autoUnfoldCats.includes(this.source.category)
+            ) {
+              return;
+            }
+            this.foldContent();
           }
         }, 100)
       });

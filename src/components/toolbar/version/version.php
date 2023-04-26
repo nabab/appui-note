@@ -1,9 +1,9 @@
 <div class="bbn-header bbn-spadded bbn-vmiddle">
-  <div class="bbn-flex-width">
+  <div class="bbn-flex-width bbn-vmiddle">
     <div class="bbn-flex-fill">
       <span><?=_('Version')?>: </span>
       <span v-text="currentVersion"></span>
-      <span class="bbn-hsmargin">|</span>  
+      <span class="bbn-hsmargin">|</span>
       <span v-text="currentDate"></span>
       <span class="bbn-hsmargin">|</span>
       <span v-text="currentCreator"></span>

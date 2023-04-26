@@ -71,14 +71,14 @@
             }]"
             v-text="source.num_replies || 0"/>
     </div>
-    <div v-text="ndatetime(isEdited ? source.last_edit : source.creation)"
-         :title="isEdited ? _('Updated at') : _('Created at')"
-         class="appui-note-forum-topic-post-minwidth bbn-s bbn-vmiddle bbn-radius bbn-xspadded bbn-alt-background bbn-alt-text bbn-bordered"/>
+    <div v-text="(source.version > 1 ? 'V' + source.version + ' - ' : '') + ndatetime(isEdited ? source.last_edit : source.creation)"
+         :title="dateTitle"
+         class="appui-note-forum-topic-post-minwidth bbn-s bbn-radius bbn-xspadded bbn-alt-background bbn-bordered"/>
   </div>
   <div class="bbn-flex-width bbn-top-sspace">
-    <div v-if="isTopic">
+    <div v-if="isTopic && forum.replies">
       <div title="<?=_('Replies')?>"
-           class="bbn-alt-background bbn-alt-text bbn-radius bbn-p bbn-xspadded bbn-vmiddle bbn-bordered bbn-reactive"
+           class="bbn-alt-background bbn-alt-text bbn-radius bbn-p bbn-xspadded bbn-vmiddle bbn-bordered bbn-reactive bbn-right-sspace"
            @click="topic.toggleReplies()">
         <i class="nf nf-md-forum_outline bbn-lg"/>
         <span :class="['bbn-s', 'bbn-b', {
@@ -88,7 +88,13 @@
               v-text="source.num_replies || 0"/>
       </div>
     </div>
-    <div :class="['bbn-flex-fill', 'bbn-right-sspace', {'bbn-left-sspace': isTopic}]"
+    <bbn-button icon="nf nf-fa-exclamation"
+                :notext="true"
+                :text="_('Important')"
+                :class="['bbn-right-sspace', {'bbn-bg-red bbn-white': !!source.important}]"
+                @click="setUnsetImportant"
+                style="min-width: 1.4em; max-width: 1.4em"/>
+    <div class="bbn-flex-fill bbn-right-sspace"
          style="overflow: hidden">
       <div ref="contentContainer"
            :style="{'overflow': 'hidden'}"
@@ -214,7 +220,8 @@
                       color: source.pinned ? 'var(--active-text)' : 'var(--alt-text)'
                     }"/>
         <!-- Reply -->
-        <bbn-button class="bbn-alt-background bbn-alt-text bbn-left-sspace"
+        <bbn-button v-if="forum.replies"
+                    class="bbn-alt-background bbn-alt-text bbn-left-sspace"
                     icon="nf nf-fa-reply"
                     :notext="true"
                     @click="forum.replyEnabled ? forum.$emit('reply', source, _self, topic) : false"

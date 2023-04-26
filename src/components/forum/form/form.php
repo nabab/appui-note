@@ -99,6 +99,12 @@
       </div>
     </div>-->
 
+    <label><?= _("Important") ?></label>
+    <div>
+      <bbn-checkbox v-model="source.important"
+                    :value="1"
+                    :novalue="0"/>
+    </div>
     <template v-if="canLock">
       <label><?= _("Locked") ?></label>
       <div>
