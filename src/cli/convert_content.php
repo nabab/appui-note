@@ -30,6 +30,14 @@ $fn = function(&$block) {
         $isChanged = true;
       }
       break;
+    case 'product':
+      if (isset($block['product'])) {
+        $content = $block['product'];
+        unset($block['product']);
+        $block['content'] = $content;
+        $isChanged = true;
+      }
+      break;
     case 'slider':
       if (isset($block['id_feature'])) {
         $content = $block['id_feature'];

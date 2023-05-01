@@ -13,19 +13,19 @@
     },
     computed: {
       placeholder(){
-        if(this.isOk && this.source.product.title){
-          return this.source.product.title
+        if(this.isOk && this.source.content.title){
+          return this.source.content.title
         }
         return ''
       },
       showProduct(){
-        if(this.isOk && this.source.product && this.source.product.ok){
+        if(this.isOk && this.source.product && this.source.content.ok){
           return true
         }
         return false
       },
       disabled(){
-        if(this.isOk && !this.source.product.stock){
+        if(this.isOk && !this.source.content.stock){
           return true;
         }
         else {
@@ -33,19 +33,19 @@
         }
 			},
       type(){
-        if(this.source.product.product_type && this.isOk){
-          return bbn.fn.getField(bbn.opt.product_types,'text', 'value', this.source.product.product_type)
+        if(this.source.content.product_type && this.isOk){
+          return bbn.fn.getField(bbn.opt.product_types,'text', 'value', this.source.content.product_type)
         }
       },
       edition(){
-        if(this.source.product.id_edition && this.isOk){
-          return bbn.fn.getField(bbn.opt.editions,'text', 'value', this.source.product.id_edition)
+        if(this.source.content.id_edition && this.isOk){
+          return bbn.fn.getField(bbn.opt.editions,'text', 'value', this.source.content.id_edition)
         }
       },
       
       imageSrc(){
-        if(this.source.product.medias.length && this.isOk){
-          return bbn.fn.getField(this.source.product.medias, 'path', 'id' , this.source.product.front_img)
+        if(this.source.content.medias.length && this.isOk){
+          return bbn.fn.getField(this.source.content.medias, 'path', 'id' , this.source.content.front_img)
 
         }
       }
@@ -55,14 +55,14 @@
       addToCart(){
 				let id_nft =  bbn.fn.getField(appui.options.product_types, "value", { code:'nft' });
 
-				if (this.source.product.product_type ===  id_nft) {
+				if (this.source.content.product_type ===  id_nft) {
 					// remove comment to enable nft link to website
 					//bbn.fn.link('https://nft.vivearts.com/en_US/series/photography-ofchina');
 				}
 				else {
-					if (this.source.product.stock) {
+					if (this.source.content.stock) {
 						this.post('actions/shop/cart/add', {
-							id_product: this.source.product.id,
+							id_product: this.source.content.id,
 							quantity: 1
 						}, d => {
 							if (d.success && d.newCart) {
@@ -81,7 +81,7 @@
       },
       getProduct(){
         this.source.product = {}
-        this.source.product.ok = false
+        this.source.content.ok = false
         this.isOk = false
         this.post(this.root + 'cms/data/product', {
           id: this.source.id_product
@@ -89,7 +89,7 @@
           if(d.success){
             this.$nextTick(() => {
               this.source.product = d.data
-              this.source.product.ok = true
+              this.source.content.ok = true
               this.isOk = true
             })
             
@@ -103,7 +103,7 @@
         if(this.source.url){
           delete(this.source.url)
         }
-        this.$set(this.source, 'id_product',this.source.product.id )
+        this.$set(this.source, 'id_product',this.source.content.id )
         this.getProduct();
       }
       else if(this.source.id_product ){
