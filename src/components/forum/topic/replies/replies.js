@@ -1,8 +1,8 @@
 (() => {
   return {
     mixins: [
-      bbn.vue.basicComponent,
-      bbn.vue.listComponent
+      bbn.wc.mixins.basic,
+      bbn.wc.mixins.list
     ],
     computed: {
       pagerVisible(){

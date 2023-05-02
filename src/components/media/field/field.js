@@ -2,7 +2,7 @@
 
 (() => {
   return {
-    mixins: [bbn.vue.basicComponent, bbn.vue.inputComponent],
+    mixins: [bbn.wc.mixins.basic, bbn.wc.mixins.input],
     props: {
       source: {
         type: Array

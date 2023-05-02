@@ -3,9 +3,9 @@
 ((bbn) => {
   return {
     /**
-     * @mixin bbn.vue.basicComponent
+     * @mixin bbn.wc.mixins.basic
      */
-    mixins: [bbn.vue.basicComponent, bbn.vue.resizerComponent],
+    mixins: [bbn.wc.mixins.basic, bbn.wc.mixins.resizer],
     props: {
       source: {
         type: Object,

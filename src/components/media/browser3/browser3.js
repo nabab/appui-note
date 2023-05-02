@@ -1,7 +1,7 @@
 // Javascript Document
 (()=>{
   return{
-    mixins: [bbn.vue.basicComponent, bbn.vue.listComponent],
+    mixins: [bbn.wc.mixins.basic, bbn.wc.mixins.list],
     props: {
       mediaType: {
         type: String,

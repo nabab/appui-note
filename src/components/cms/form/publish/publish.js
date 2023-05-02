@@ -12,7 +12,7 @@
         required: true
       },
       list: {
-        type: Vue
+        type: Object
       }
     },
     data() {

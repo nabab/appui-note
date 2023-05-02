@@ -29,8 +29,8 @@
       this.$set(this, 'topic', this.closest('appui-note-forum-topic'));
     }
   }];
-  bbn.vue.addPrefix('appui-note-forum-topic-', (tag, resolve, reject) => {
-    return bbn.vue.queueComponent(
+  bbn.wc.addPrefix('appui-note-forum-topic-', (tag, resolve, reject) => {
+    return bbn.wc.queueComponent(
       tag,
       appui.plugins['appui-note'] + '/components/forum/topic/' + bbn.fn.replaceAll('-', '/', tag).substr('appui-note-forum-topic-'.length),
       mixins,

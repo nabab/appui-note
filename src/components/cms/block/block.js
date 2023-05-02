@@ -1,11 +1,7 @@
 // Javascript Document
 
 (() => {
-  if (!bbn.vue.mixins) {
-    bbn.vue.mixins = {};
-  }
-
-  bbn.vue.mixins['appui-note-cms-block'] = {
+  bbn.wc.mixins['appui-note-cms-block'] = {
     props: {
       source: {
         type: Object,
@@ -93,9 +89,9 @@
 
   return {
     /**
-     * @mixin bbn.vue.basicComponent
+     * @mixin bbn.wc.mixins.basic
      */
-    mixins: [bbn.vue.basicComponent, bbn.vue.resizerComponent],
+    mixins: [bbn.wc.mixins.basic, bbn.wc.mixins.resizer],
     props: {
       special: {
         type: String

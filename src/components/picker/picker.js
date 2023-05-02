@@ -3,8 +3,8 @@
 (() => {
   return {
     mixins: [
-      bbn.vue.basicComponent,
-      bbn.vue.inputComponent
+      bbn.wc.mixins.basic,
+      bbn.wc.mixins.input
     ],
     props: {
       placeholder: {
