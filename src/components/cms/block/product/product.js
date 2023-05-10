@@ -19,7 +19,7 @@
         return ''
       },
       showProduct(){
-        if(this.isOk && this.source.product && this.source.content.ok){
+        if(this.isOk && this.source.content && this.source.content.ok){
           return true
         }
         return false
@@ -80,7 +80,7 @@
         this.$set(this.source, 'id_product', a.id);
       },
       getProduct(){
-        this.source.product = {}
+        this.source.content = {}
         this.source.content.ok = false
         this.isOk = false
         this.post(this.root + 'cms/data/product', {
@@ -88,7 +88,7 @@
         }, d => {
           if(d.success){
             this.$nextTick(() => {
-              this.source.product = d.data
+              this.source.content = d.data
               this.source.content.ok = true
               this.isOk = true
             })
@@ -99,7 +99,7 @@
       }
     },
     beforeMount(){
-      if (this.source.product && (this.mode === 'read')){
+      if (this.source.content && (this.mode === 'read')){
         if(this.source.url){
           delete(this.source.url)
         }

@@ -32,7 +32,6 @@
         oConfig: null,
         ready: false,
         root: appui.plugins['appui-note'] + '/',
-        showFloater: false,
         showSlider: false,
         showWidgets: false,
         currentEdited: null,
@@ -157,28 +156,32 @@
         bbn.fn.each(this.source.items, (v, i) => {
           if(v.type === 'container'){
             bbn.fn.each(this.source.items[i].items, (item, idx) => {
-              if((item.type === 'product') && this.source.items[i].items[idx].product){
-                delete(this.source.items[i].items[idx].product);
+              if((item.type === 'product') && this.source.items[i].items[idx].content){
+                delete(this.source.items[i].items[idx].content);
               }
             });
           }
-          else if ((v.type === 'product' ) && this.source.items[i].product){
-            delete(this.source.items[i].product);
+          else if ((v.type === 'product' ) && this.source.items[i].content){
+            delete(this.source.items[i].content);
           }
         });
       },
       /**
        * Convert the source in a JSON string
        */
-      onSave() {
-        this.oData = JSON.stringify(this.source);
-        appui.success(bbn._("Saved"));
+      onSave(d){
+        if (d.success) {
+          this.oData = JSON.stringify(this.source);
+          appui.success(bbn._("Saved"));
+        }
+        else {
+          appui.error();
+        }
       },
       /**
        * Clear the cache of the page via the page configuration.
        */
       clearCache() {
-        this.showFloater = false;
         this.confirm(bbn._('Are you sure?'), () => {
           this.post(this.root + 'cms/actions/clear_cache', {id: this.source.id}, d => {
             if (d.success) {
@@ -190,12 +193,40 @@
           });
         });
       },
+      openSettings(){
+        this.getPopup({
+          title: bbn._("Page's properties"),
+          minWidth: '50rem',
+          component: 'appui-note-cms-settings',
+          componentOptions: {
+            source: this.source,
+            typeNote: this.typeNote
+          },
+          onOpen: (floater) => {
+            let c = floater.find('appui-note-cms-settings');
+            if (c) {
+              c.$on('clear', this.clearCache);
+              c.$on('save', this.saveSettings);
+            }
+          }
+        })
+      },
       /**
-       * Save the settings of the page and close the slider.
+       * Save the settings of the page and close the popup.
        */
       saveSettings() {
-        this.$refs.form.submit();
-        this.showFloater = false;
+        let form = this.getRef('form');
+        if (form) {
+          form.$once('success', d => {
+            if (d.success) {
+              let popup = this.getPopup();
+              if (popup) {
+                popup.close(popup.items.length - 1, true);
+              }
+            }
+          });
+          form.submit();
+        }
       },
       /**
        * When changes are made to a block or a block inside a container, the currentEdited data receive
@@ -350,19 +381,17 @@
        * @param {Event} e the event triggered
        */
       dragOver(e) {
+        let elementor = this.getRef('editor');
+        let guide = elementor.getRef('guide');
         // Check if map is empty or not
-        if (this.map.length == 0) {
-          let elementor = this.getRef('editor');
-          let guide = elementor.getRef('guide');
+        if (!this.map.length) {
           guide.style.display = 'flex';
           guide.style.top = 0;
           return false;
         }
 
         this.currentPosition = e.detail.helper.getBoundingClientRect();
-        let elementor = this.getRef('editor');
         let editor = elementor.$el.firstChild;
-        let guide = elementor.getRef('guide');
         let divider = elementor.getRef('divider');
         let sum = 0;
         guide.style.display = 'none';
@@ -389,40 +418,42 @@
           bbn.fn.each(this.map, (block, idx) => {
             sum += block.height + 13;
             //check if current position is inside a block
-            if ((this.currentPosition.y > block.y) && (this.currentPosition.y < (block.y + block.height))) {
+            if ((this.currentPosition.y > block.y)
+              && (this.currentPosition.y < (block.y + block.height))
+            ) {
               this.insideContainer = true;
               this.nextPosition = this.map.indexOf(block);
               let rect = block.html.getBoundingClientRect();
               let mapContainer = this.mapContainer(block, this.map.indexOf(block));
               if (mapContainer && mapContainer.length >= 2) {
-                mapContainer.map((cont, idx) => {
+                bbn.fn.each(mapContainer, (cont, idx) => {
                   let block = cont.rect;
+                  let setDividerStyle = false;
                   // If we are at the beginning of the container
                   if (this.currentPosition.x < (mapContainer[0].rect.x + mapContainer[0].rect.width / 4)) {
+                    setDividerStyle = true;
                     this.nextContainerPosition = 0;
-                    divider.style.display = "block";
-                    divider.style.height = block.height - 4 + 'px';
                     divider.style.width = '3px';
-                    divider.style.top = (sum - block.height) + 'px';
                     divider.style.left = mapContainer[0].rect.left + 'px';
                   }
                   // If we are at the end of the container
                   if (this.currentPosition.x > (mapContainer.at(-1).rect.x + (3*mapContainer.at(-1).rect.width / 4))) {
+                    setDividerStyle = true;
                     this.nextContainerPosition = 0;
-                    divider.style.display = "block";
-                    divider.style.height = block.height - 4 + 'px';
                     divider.style.width = '3px';
-                    divider.style.top = (sum - block.height) + 'px';
                     divider.style.left = mapContainer.at(-1).rect.x + mapContainer.at(-1).rect.width - 3 + 'px';
                   }
                   // If we are between two blocks in a container
                   if (this.currentPosition.x > block.x + block.width && this.currentPosition.x < mapContainer[idx + 1].rect.x) {
+                    setDividerStyle = true;
                     this.nextContainerPosition = idx + 1;
+                    divider.style.width = block.width + 'px';
+                    divider.style.left = (block.right - block.width/2)  + 'px';
+                  }
+                  if (setDividerStyle) {
                     divider.style.display = "block";
                     divider.style.height = block.height - 4 + 'px';
-                    divider.style.width = block.width + 'px';
                     divider.style.top = (sum - block.height) + 'px';
-                    divider.style.left = (block.right - block.width/2)  + 'px';
                   }
                 });
               } else {
@@ -583,6 +614,9 @@
       }
       else {
         this.data = data;
+      }
+      if (!!this.source.items && !this.source.items.length) {
+        this.showWidgets = true;
       }
     },
     components: {

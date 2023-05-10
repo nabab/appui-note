@@ -13,7 +13,7 @@
                       :notext="true"/>
           <bbn-button icon="nf nf-mdi-settings"
                       title="<?= _("Page's properties") ?>"
-                      @click="showFloater = true"
+                      @click="openSettings"
                       :notext="true"/>
           <bbn-button icon="nf nf-mdi-widgets"
                       title="<?= _("widgets") ?>"
@@ -166,16 +166,4 @@
       </div>
     </div>
   </div>
-  <!--Settings-->
-  <div class="bbn-modal bbn-overlay"
-       v-if="showFloater">
-  </div>
-  <bbn-floater :modal="true"
-               v-if="showFloater">
-    <appui-note-cms-settings :source="source"
-                             :typeNote="typeNote"
-                             @clear="clearCache"
-                             @close="showFloater = false"
-                             @save="saveSettings"/>
-  </bbn-floater>
 </div>
