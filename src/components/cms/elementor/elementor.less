@@ -4,13 +4,10 @@
 
 .appui-note-cms-elementor {
   .appui-note-cms-elementor-guide {
-    position: absolute;
-    left: 2em;
-    right: 2em;
-    pointer-events: none;
-    border-bottom: @border-width dashed #ccc;
-    height: 0.3em;
-    display: none;
+    > div {
+      pointer-events: none;
+      border-bottom: @border-width dashed var(--secondary-background);
+    }
   }
   .appui-note-cms-elementor-divider  {
     display: none;

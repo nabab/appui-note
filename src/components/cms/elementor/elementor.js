@@ -190,46 +190,84 @@
       preview: {
         type: Boolean,
         default: false
+      },
+      dragging: {
+        type: Boolean,
+        default: false
       }
     },
     data(){
       return {
-        currentEditedIndex: -1,
+        currentEditingKey: -1,
         types: types,
         indexInContainer: -1,
         dragData: bbn.fn.map(this.source, (cfg, i) => {
           return {data: bbn.fn.extend({}, cfg, {inside: true, index: i}), mode: 'self'};
         }),
+        currentDragging: false
       };
+    },
+    computed: {
+      isDragging(){
+        return !!this.dragging || !!this.currentDragging;
+      }
     },
     methods: {
       unselect() {
-        this.currentEditedIndex = -1;
+        this.currentEditingKey = -1;
         this.indexInContainer = -1;
         this.$emit('unselect');
       },
-      dragStart() {
-        let currentElement = arguments[0].target;
-        this.$emit('dragstart', {
-          dataIndex: currentElement.getAttribute('data-index'),
-          dataContainerIndex: currentElement.getAttribute('data-container-index')
-        });
+      onDragStart(ev){
+        this.currentDragging = true;
+      },
+      onDragEnd(ev){
+        this.currentDragging = false;
+      },
+      onDrop(ev){
+        this.onDragEnd();
+        let fromData = bbn.fn.clone(ev.detail.from.data);
+        if (fromData?.type === 'elementor') {
+          let toData = bbn.fn.clone(ev.detail.to.data);
+          bbn.fn.log('onDrop', fromData, toData)
+          let oldIndex = fromData.index;
+          let newIndex = toData.index;
+          if ((oldIndex === undefined)
+            || (newIndex < oldIndex)
+            || (newIndex > (oldIndex + 1))
+          ) {
+            if (oldIndex !== undefined) {
+              this.source.splice(fromData.index, 1);
+              if (oldIndex < newIndex) {
+                newIndex--;
+              }
+            }
+            else {
+              bbn.fn.iterate(fromData.cfg || {}, (v, k) => fromData.source[k] = v);
+              fromData.source._elementor = {
+                key: bbn.fn.randomString(32, 32)
+              }
+            }
+            this.source.splice(newIndex, 0, fromData.source);
+          }
+        }
       },
       /*
       Emit the current source object (from a block) to the editor component.
       */
-      selectBlock(index, source) {
-        this.currentEditedIndex = index;
+      selectBlock(key, source) {
+        bbn.fn.log('selectBlock')
+        this.currentEditingKey = key;
         this.indexInContainer = -1;
-        this.$emit('changes', index, source);
+        this.$emit('changes', key, source);
       },
       /*
       Emit the current source object (from a container) to the editor component.
       */
-      selectContainer(index, source, indexInContainer) {
-        this.currentEditedIndex = index;
+      selectContainer(key, source, indexInContainer) {
+        this.currentEditingKey = key;
         this.indexInContainer = indexInContainer;
-        this.$emit('changes', index, source, indexInContainer);
+        this.$emit('changes', key, source, indexInContainer);
       },
       /*
       Ask the user to save changes and submit the form
@@ -240,27 +278,56 @@
           if (form.isValid()) {
             this.confirm(bbn._("Do you want to save your changes?"), () => {
               form.submit();
-              this.currentEditedIndex = idx;
+              this.currentEditingKey = idx;
             }, () => {
-              this.currentEditedIndex = idx;
+              this.currentEditingKey = idx;
             });
           }
           else {
             this.confirm(bbn._("Do you want to abandon your changes?"), () => {
-              this.currentEditedIndex = idx;
+              this.currentEditingKey = idx;
             });
           }
         }
         else {
-          this.currentEditedIndex = idx;
+          this.currentEditingKey = idx;
         }
       },
-      /*
-      Emit event when a block is dragged
-      */
-      onDrag() {
-        this.$emit('dragoverdroppable', ...arguments);
-      },
+      
+    },
+    components: {
+      guide: {
+        namme: 'guide',
+        template: `
+<div class="appui-note-cms-elementor-guide bbn-vspadded bbn-w-100"
+     @mouseover="isOver = true"
+     @mouseleave="isOver = false"
+     @drop="e => $emit('drop', e)">
+  <div class="bbn-w-100"
+       :style="{visibility: isVisible ? 'visible' : 'hidden'}"/>
+</div>
+        `,
+        props: {
+          visible: {
+            type: Boolean,
+            default: false
+          },
+          force: {
+            type: Boolean,
+            default: false
+          }
+        },
+        data(){
+          return {
+            isOver: false
+          }
+        },
+        computed: {
+          isVisible(){
+            return this.visible && (this.force || this.isOver);
+          }
+        }
+      }
     }
   };
 })();

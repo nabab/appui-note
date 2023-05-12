@@ -246,6 +246,10 @@
       },
       configInit(config) {
         this.$emit('configinit', config);
+      },
+      onClick(ev){
+        bbn.fn.log('BLOCKCLICK')
+        this.$emit('click', ev, this.source)
       }
     },
     mounted(){

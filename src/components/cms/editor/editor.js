@@ -52,7 +52,8 @@
         isReady: false,
         currentBlockConfig: null,
         personalizedBlocks: this.pblocks.slice(),
-        classicBlocks: this.blocks || []
+        classicBlocks: this.blocks || [],
+        isDragging: false
       };
     },
     computed: {
@@ -132,6 +133,7 @@
         this.currentEdited = null;
         this.currentEditedIndex = -1;
         this.currentEditedIndexInContainer = -1;
+        this.showWidgets = true;
         this.showSlider = false;
       },
       setOriginalConfig(config) {
@@ -147,24 +149,37 @@
       getBlockTitle(id) {
         return bbn.fn.getField(this.allBlocks, 'text', {id});
       },
-      /**
-       * Removes the 'product' property from the object to be submitted
-       * @todo ask Loredana
-       */
-      submit() {
-        //remove the object product if the block type is product
-        bbn.fn.each(this.source.items, (v, i) => {
-          if(v.type === 'container'){
-            bbn.fn.each(this.source.items[i].items, (item, idx) => {
-              if((item.type === 'product') && this.source.items[i].items[idx].content){
-                delete(this.source.items[i].items[idx].content);
-              }
-            });
+      submit(){
+        //remove the 'content' property if the block type is product
+        this.clearItems(this.source.items);
+      },
+      clearItems(items){
+        bbn.fn.each(items, (v, i) => {
+          if ((v.type === 'container') && !!v.items) {
+            this.normalizeItems(v.items);
           }
-          else if ((v.type === 'product' ) && this.source.items[i].content){
-            delete(this.source.items[i].content);
+          else if ((v.type === 'product') && (v.content !== undefined)) {
+            delete(items[i].content);
+          }
+          if (v._elementor !== undefined) {
+            delete(items[i]._elementorKey);
           }
         });
+        return items;
+      },
+      normalizeItems(items){
+        bbn.fn.each(items, (v, i) => {
+          if ((v.type === 'container') && !!v.items) {
+            this.normalizeItems(v.items);
+          }
+          this.$set(items[i], '_elementor', this.getElementorDefaultObj(i));
+        });
+        return items;
+      },
+      getElementorDefaultObj(index){
+        return {
+          key: bbn.fn.randomString(32, 32)
+        }
       },
       /**
        * Convert the source in a JSON string
@@ -234,17 +249,15 @@
        * @param {Object} source the source object of the current selected block
        */
       handleSelected(index, source, indexInContainer = null) {
+        bbn.fn.log('select', index, source)
         if (this.currentEdited !== source) {
           this.showWidgets = false;
-          this.currentEdited = null;
-          setTimeout(() => {
-            this.currentEditedIndex = index;
-            this.currentEdited = source;
-            if (indexInContainer !== null) {
-              this.currentEditedIndexInContainer = indexInContainer;
-            }
-            this.showSlider = true;
-          }, 250);
+          this.currentEditedIndex = index;
+          this.currentEdited = source;
+          if (indexInContainer !== null) {
+            this.currentEditedIndexInContainer = indexInContainer;
+          }
+          this.showSlider = true;
         }
       },
       /**
@@ -271,6 +284,7 @@
        * @return void
        */
       onDrop(ev) {
+        bbn.fn.log('DROP', ev, bbn.fn.clone(ev.detail.from.data));
         const block = bbn.fn.clone(ev.detail.from.data.source);
         this.currentBlockConfig = ev.detail.from.data.cfg || {};
         bbn.fn.iterate(this.currentBlockConfig, (a, n) => block[n] = a);
@@ -329,6 +343,7 @@
           this.cancelHelp();
           return;
         }
+        block._elementor = this.getElementorDefaultObj(0);
         // Place the block at the correct index position
         if (this.nextPosition == 0) {
           this.source.items.unshift(block);
@@ -348,7 +363,7 @@
         let elementor = this.getRef('editor');
         let guide = elementor.getRef('guide');
         let divider = elementor.getRef('divider');
-        guide.style.display = "none";
+        //guide.style.display = "none";
         divider.style.display = "none";
       },
       /**
@@ -381,6 +396,8 @@
        * @param {Event} e the event triggered
        */
       dragOver(e) {
+        bbn.fn.log('draOver', e)
+        return;
         let elementor = this.getRef('editor');
         let guide = elementor.getRef('guide');
         // Check if map is empty or not
@@ -589,7 +606,12 @@
         this.mapY();
       }
     },
-    mounted() {
+    beforeMount(){
+      if (bbn.fn.isArray(this.source?.items)) {
+        this.normalizeItems(this.source.items);
+      }
+    },
+    mounted(){
       const data = this.closest('bbn-router').closest('bbn-container').source;
       if (!this.classicBlocks.length && !this.personalizedBlocks.length) {
         if (!appui.cms?.blocks) {

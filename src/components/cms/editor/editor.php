@@ -54,18 +54,19 @@
                                     ref="editor"
                                     :all-blocks="allBlocks"
                                     @changes="handleSelected"
-                                    v-droppable="true"
                                     @drop.prevent="onDrop"
                                     :preview="preview"
                                     @dragoverdroppable="dragOver"
                                     :position="nextPosition"
                                     @dragstart="dragStart"
-                                    @unselect="unselectElements"/>
+                                    @unselect="unselectElements"
+                                    :dragging="isDragging"/>
         </bbn-scroll>
       </div>
     </div>
     <!--Wigets properties-->
-    <div :class="{slider: true, opened: showSlider}">
+    <div v-if="showSlider"
+         :class="{slider: true, opened: true}">
       <bbn-scroll axis="y">
         <div class="bbn-w-100"
              v-if="currentEdited">
@@ -146,7 +147,8 @@
       </div>
     </div>
     <!--Widgets menu-->
-    <div :class="{slider: true, opened: showWidgets}">
+    <div v-if="showWidgets"
+         :class="{slider: true, opened: true}">
       <bbn-scroll axis="y">
         <div class="bbn-w-100 bbn-middle bbn-lpadding bbn-grid grid-dropper bbn-unselectable">
           <appui-note-cms-dropper v-for="(v, i) in allBlocks"
@@ -157,7 +159,9 @@
                                   :special="v.special"
                                   :title="v.text"
                                   :icon="v.icon"
-                                  :default-config="v.cfg"/>
+                                  :default-config="v.cfg"
+                                  @dragend="isDragging = false"
+                                  @dragstart="isDragging = true"/>
         </div>
       </bbn-scroll>
       <div class="bbn-top-right bbn-p bbn-spadding"
