@@ -2,15 +2,15 @@
         componentClass,
         currentClass,
         {
-             '<?= $componentName ?>-over': overable && over,
-             '<?= $componentName ?>-selected': selected,
+          '<?= $componentName ?>-over': overable && over,
+          '<?= $componentName ?>-selected': selected,
        	}
       ]"
       tabindex="0"
      	@click="onClick"
       @mouseenter="over = true"
       @mouseleave="over = false"
-      @dragstart="e => $emit('dragstart', e)"
+      @dragstart.stop="e => $emit('dragstart', e)"
       @dragend="e => $emit('dragend', e)"
       @beforedrop="e => $emit('beforedrop', e)">
   <component v-if="ready"

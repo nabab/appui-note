@@ -4,6 +4,7 @@
   return {
     /**
      * @mixin bbn.vue.basicComponent
+     * @mixin bbn.vue.resizerComponent
      */
     mixins: [bbn.vue.basicComponent, bbn.vue.resizerComponent],
     props: {
@@ -28,8 +29,7 @@
         default: false
       },
       itemSelected: {
-        type: Number,
-        default: -1
+        type: String
       },
       selected: {
         type: Boolean,
@@ -42,6 +42,10 @@
       mode: {
         type: String,
         default: 'read'
+      },
+      dragging: {
+        type: Boolean,
+        default: false
       }
     },
     data(){
@@ -56,14 +60,30 @@
         //ready is important for the component template to be defined
         ready: true,
         initialSource: null,
-        currentItemSelected: this.itemSelected
+        currentDragging: false
       }
     },
     computed: {
+      isDragging(){
+        return !!this.dragging || !!this.currentDragging;
+      },
       gridStyle(){
-        let style = `gridTemplateColumns: repeat( ` + this.source.items.length + `, 1fr)`;
-        if ( bbn.fn.isMobile() ){
-          style = `gridTemplateRows: repeat( ` + this.source.items.length + `, auto)`;
+        let style = {};
+        let elements = this.source.items.length;
+        if (this.overable && !!elements) {
+          elements = elements * 2 + 1;
+        }
+
+        let s = '';
+        for (let i = 1; i <= elements; i++) {
+          s += (i % 2) && this.overable ? 'max-content ' : '1fr ';
+        }
+
+        if (this.isMobile) {
+          style.gridTemplateRows = s;
+        }
+        else {
+          style.gridTemplateColumns = s;
         }
 
         return style;
@@ -94,17 +114,16 @@
       removeBlock(idx) {
         this.source.items.splice(idx, 1);
       },
-      clickBlock(index) {
-        this.currentItemSelected = index;
-        this.$emit('click', this.index, this.source.items[index], index);
+      selectBlock(key, src, ev) {
+        if (this.overable) {
+          if (ev) {
+            ev.stopImmediatePropagation();
+          }
+          this.$emit('selectblock', key, src);
+        }
       },
       configInit(config) {
         this.$emit('config-init', config);
-      }
-    },
-    watch: {
-      itemsSelected(v) {
-        this.currentItemSelected = v;
       }
     },
     mounted() {

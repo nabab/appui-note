@@ -8,6 +8,7 @@ use bbn\X;
 $q = $ctrl->db->query("SELECT version, id_note, content FROM bbn_notes_versions");
 $fn = function(&$block) {
   $isChanged = false;
+  $content = false;
   switch($block['type']) {
     case 'button':
     case 'text':
@@ -31,11 +32,24 @@ $fn = function(&$block) {
       }
       break;
     case 'product':
-      if (isset($block['product'])) {
-        $content = $block['product'];
-        unset($block['product']);
-        $block['content'] = $content;
+      if (array_key_exists('id_product', $block)) {
+        if (!empty($block['id_product'])) {
+          $content = $block['id_product'];
+        }
+        unset($block['id_product']);
         $isChanged = true;
+      }
+      if (array_key_exists('product', $block)) {
+        if (!empty($block['product']['id'])
+          && empty($content)
+        ) {
+          $content = $block['product']['id'];
+        }
+        unset($block['product']);
+        $isChanged = true;
+      }
+      if ($isChanged) {
+        $block['content'] = $content ?: null;
       }
       break;
     case 'slider':

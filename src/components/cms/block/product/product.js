@@ -103,7 +103,7 @@
         if(this.source.url){
           delete(this.source.url)
         }
-        this.$set(this.source, 'id_product',this.source.content.id )
+        this.$set(this.source, 'id_product', this.source.content.id )
         this.getProduct();
       }
       else if(this.source.id_product ){
@@ -111,8 +111,7 @@
       }
 			if(this.source.showType === undefined){
 				this.source.showType = true;
-			} 
-      
+			}
 		},
     watch:{
       'source.id_product'(val){

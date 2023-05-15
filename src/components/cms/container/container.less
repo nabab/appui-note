@@ -1,6 +1,6 @@
 /* LESS Document */
 
-@border-width: 1px;
+@border-width: 2px;
 
 .@{componentName} {
 
@@ -10,15 +10,15 @@
   > .@{componentName}-component {
     min-height: 1.8em;
     &.@{componentName}-selected {
-      border-color: var(--tertiary-border) !important;
+      border-color: var(--selected-border) !important;
     }
     &.@{componentName}-selectable {
-      border: @border-width dashed transparent;
+      border: @border-width dashed var(--alt-background);
     }
   }
   &.@{componentName}-over {
     > .@{componentName}-component {
-      border-color: var(--primary-border) !important;
+      border-color: var(--hover-border) !important;
     }
   }
 /*

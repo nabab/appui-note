@@ -21,6 +21,7 @@
                       @click="() => {
                               showWidgets = !showWidgets;
                               showSlider = false;
+                              currentEditedIndex = '';
                               }"/>
           <bbn-button icon="nf nf-md-code_json"
                       v-if="isDev"
@@ -65,8 +66,7 @@
       </div>
     </div>
     <!--Wigets properties-->
-    <div v-if="showSlider"
-         :class="{slider: true, opened: true}">
+    <div :class="{slider: true, opened: showSlider}">
       <bbn-scroll axis="y">
         <div class="bbn-w-100"
              v-if="currentEdited">
@@ -147,8 +147,7 @@
       </div>
     </div>
     <!--Widgets menu-->
-    <div v-if="showWidgets"
-         :class="{slider: true, opened: true}">
+    <div :class="{slider: true, opened: showWidgets}">
       <bbn-scroll axis="y">
         <div class="bbn-w-100 bbn-middle bbn-lpadding bbn-grid grid-dropper bbn-unselectable">
           <appui-note-cms-dropper v-for="(v, i) in allBlocks"

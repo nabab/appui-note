@@ -6,9 +6,9 @@
     <template v-if="source.length">
       <div v-for="(cfg, i) in source"
            class="bbn-w-100">
-        <guide :visible="isDragging"
-               v-droppable.data="{data: {index: i}}"
-               @drop.prevent="onDrop"/>
+        <appui-note-cms-elementor-guide :visible="isDragging"
+                                        v-droppable.data="{data: {index: i}}"
+                                        @drop.prevent="onDrop"/>
         <appui-note-cms-container v-if="cfg.type === 'container'"
                                   :source="cfg"
                                   :ref="'block' + i"
@@ -16,9 +16,14 @@
                                   :overable="!preview"
                                   :index="i"
                                   :selected="currentEditingKey === cfg._elementor.key"
-                                  :itemSelected="indexInContainer"
-                                  @click="selectContainer(cfg._elementor.key, cfg)"
-                                  :key="cfg._elementor.key"/>
+                                  :itemSelected="currentEditingKey"
+                                  @click.stop="selectBlock(cfg._elementor.key, cfg)"
+                                  @selectblock="selectBlock"
+                                  :key="cfg._elementor.key"
+                                  v-draggable.data.mode="{data: {type: 'cmsContainer', index: i, source: cfg}, mode: 'clone'}"
+                                  @dragstart="currentDragging = true"
+                                  @dragend="onDragEnd"
+                                  :dragging="isDragging"/>
         <appui-note-cms-block v-else
                               :source="cfg"
                               :ref="'block' + i"
@@ -27,15 +32,15 @@
                               :selected="currentEditingKey === cfg._elementor.key"
                               @click.stop="selectBlock(cfg._elementor.key, cfg)"
                               :data-index="i"
-                              v-draggable.data.mode="{data: {type: 'elementor', index: i, source: cfg}, mode: 'clone'}"
+                              v-draggable.data.mode="{data: {type: 'cmsBlock', index: i, source: cfg}, mode: 'clone'}"
                               @dragstart="currentDragging = true"
                               @dragend="onDragEnd"
                               :key="cfg._elementor.key"/>
       </div>
-      <guide :visible="isDragging"
-             :force="isDragging && !source.length"
-             v-droppable.data="{data: {index: source.length}}"
-             @drop.prevent="onDrop"/>
+      <appui-note-cms-elementor-guide :visible="isDragging"
+                                      :force="isDragging && !source.length"
+                                      v-droppable.data="{data: {index: source.length}}"
+                                      @drop.prevent="onDrop"/>
     </template>
     <div v-if="dragging"
          class="bbn-w-100-bbn-lpadded bbn-middle bbn-upper"
