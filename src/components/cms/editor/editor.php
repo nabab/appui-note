@@ -7,9 +7,9 @@
       <div class="bbn-flex" style="justify-content: center">
         <div class="bbn-flex bbn-spadding bbn-alt-background bbn-radius-bottom bbn-xl" style="justify-content: center; align-items: center; gap: 10px;">
           <bbn-button icon="nf nf-fa-save"
-                      title="<?= _("Save the note") ?>"
+                      title="<?= _("Save") ?>"
                       :disabled="!isChanged"
-                      @click="() => {$refs.form.submit()}"
+                      @click="save"
                       :notext="true"/>
           <bbn-button icon="nf nf-mdi-settings"
                       title="<?= _("Page's properties") ?>"
@@ -36,14 +36,6 @@
         </div>
       </div>
       <div class="bbn-flex-fill">
-        <bbn-form ref="form"
-                  class="bbn-hidden"
-                  @success="onSave"
-                  @submit="submit"
-                  :source="source"
-                  :action="action"
-                  :buttons="[]"
-                  :scrollable="true"/>
         <bbn-scroll class="bbn-overlay"
                     @scroll="scrollElementor">
           <bbn-json-editor v-if="showJSON && isDev"

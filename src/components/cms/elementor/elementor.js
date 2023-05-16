@@ -216,6 +216,22 @@
         this.currentEditingKey = '';
         this.$emit('unselect');
       },
+      getDraggableData(index, src, type){
+        if (!this.preview) {
+          return {
+            data: {
+              type: type,
+              index: index,
+              source: src,
+              parentUid: this._uid,
+              parentSource: this.source
+            },
+            mode: 'clone'
+          };
+        }
+
+        return false;
+      },
       onDragStart(ev){
         this.currentDragging = true;
       },
@@ -224,37 +240,38 @@
       },
       onDrop(ev){
         this.onDragEnd();
-        let fromData = bbn.fn.clone(ev.detail.from.data);
-        if (!!fromData.type) {
-          let toData = bbn.fn.clone(ev.detail.to.data);
+        let fromData = ev.detail.from.data;
+        if (!!fromData.type && (fromData.source !== undefined)) {
+          let newSource = bbn.fn.clone(fromData.source);
+          let toData = ev.detail.to.data;
           let oldIndex = null;
           let newIndex = toData.index;
           bbn.fn.log('onDrop', fromData, toData)
           switch (fromData.type) {
             case 'cmsDropper':
-              bbn.fn.iterate(fromData.cfg || {}, (v, k) => fromData.source[k] = v);
-              fromData.source._elementor = {
-                key: bbn.fn.randomString(32, 32)
-              }
+              bbn.fn.iterate(fromData.cfg || {}, (v, k) => newSource[k] = v);
+              newSource._elementor = this.closest('appui-note-cms-editor').getElementorDefaultObj();
               break;
             case 'cmsContainerBlock':
-              break;
             case 'cmsBlock':
             case 'cmsContainer':
               oldIndex = fromData.index;
+              if ((fromData.parentSource !== undefined)
+                && ((fromData.parentUid !== this._uid)
+                  || ((newIndex < oldIndex)
+                    || (newIndex > (oldIndex + 1))))
+              ) {
+                fromData.parentSource.splice(oldIndex, 1);
+              }
               break;
           }
           if (bbn.fn.isNull(oldIndex)
-            || (newIndex < oldIndex)
-            || (newIndex > (oldIndex + 1))
+            || ((fromData.parentSource !== undefined)
+              && ((fromData.parentUid !== this._uid)
+                || ((newIndex < oldIndex)
+                  || (newIndex > (oldIndex + 1)))))
           ) {
-            if (!bbn.fn.isNull(oldIndex)) {
-              this.source.splice(oldIndex, 1);
-              if (oldIndex < newIndex) {
-                newIndex--;
-              }
-            }
-            this.source.splice(newIndex, 0, fromData.source);
+            this.source.splice(newIndex, 0, newSource);
           }
         }
       },

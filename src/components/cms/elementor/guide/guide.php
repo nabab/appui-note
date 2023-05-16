@@ -3,11 +3,12 @@
        'bbn-vspadded': !vertical,
        'bbn-h-100': !!vertical,
        'bbn-hspadded': !!vertical,
-       'bbn-vpadded': !!vertical
+       'bbn-vpadded': !!vertical,
+       'vertical': !!vertical
      }]"
      @mouseover="isOver = true"
      @mouseleave="isOver = false"
-     @drop="e => $emit('drop', e)">
-  <div :class="['bbn-100', {vertical: !!vertical}]"
+     @drop="onDrop">
+  <div class="bbn-100"
        :style="{visibility: isVisible ? 'visible' : 'hidden'}"/>
 </div>

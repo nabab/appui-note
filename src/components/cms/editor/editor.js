@@ -149,20 +149,31 @@
       getBlockTitle(id) {
         return bbn.fn.getField(this.allBlocks, 'text', {id});
       },
-      submit(){
-        //remove the 'content' property if the block type is product
-        this.clearItems(this.source.items);
+      save(){
+        let src = bbn.fn.clone(this.source);
+        this.clearItems(src.items);
+        delete src._elementor;
+        return this.post(this.action, src, d => {
+          if (d.success) {
+            this.oData = JSON.stringify(this.source);
+            appui.success(bbn._('Saved'));
+          }
+          else {
+            appui.error();
+          }
+        });
       },
       clearItems(items){
         bbn.fn.each(items, (v, i) => {
           if ((v.type === 'container') && !!v.items) {
-            this.normalizeItems(v.items);
+            this.clearItems(v.items);
           }
-          else if ((v.type === 'product') && (v.content !== undefined)) {
-            delete(items[i].content);
-          }
+          /* else if ((v.type === 'product') && (v.content !== undefined)) {
+            delete items[i].content;
+          } */
           if (v._elementor !== undefined) {
-            delete(items[i]._elementorKey);
+            delete items[i]._elementor;
+            bbn.fn.log('delete')
           }
         });
         return items;
@@ -179,18 +190,6 @@
       getElementorDefaultObj(index){
         return {
           key: bbn.fn.randomString(32, 32)
-        }
-      },
-      /**
-       * Convert the source in a JSON string
-       */
-      onSave(d){
-        if (d.success) {
-          this.oData = JSON.stringify(this.source);
-          appui.success(bbn._("Saved"));
-        }
-        else {
-          appui.error();
         }
       },
       /**
@@ -230,18 +229,14 @@
        * Save the settings of the page and close the popup.
        */
       saveSettings() {
-        let form = this.getRef('form');
-        if (form) {
-          form.$once('success', d => {
-            if (d.success) {
-              let popup = this.getPopup();
-              if (popup) {
-                popup.close(popup.items.length - 1, true);
-              }
+        this.save().then(d => {
+          if (d.data && d.data.success) {
+            let popup = this.getPopup();
+            if (popup) {
+              popup.close(popup.items.length - 1, true);
             }
-          });
-          form.submit();
-        }
+          }
+        });
       },
       /**
        * When changes are made to a block or a block inside a container, the currentEdited data receive

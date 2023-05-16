@@ -20,7 +20,7 @@
                                   @click.stop="selectBlock(cfg._elementor.key, cfg)"
                                   @selectblock="selectBlock"
                                   :key="cfg._elementor.key"
-                                  v-draggable.data.mode="{data: {type: 'cmsContainer', index: i, source: cfg}, mode: 'clone'}"
+                                  v-draggable.data.mode="getDraggableData(i, cfg, 'cmsContainer')"
                                   @dragstart="currentDragging = true"
                                   @dragend="onDragEnd"
                                   :dragging="isDragging"/>
@@ -32,7 +32,7 @@
                               :selected="currentEditingKey === cfg._elementor.key"
                               @click.stop="selectBlock(cfg._elementor.key, cfg)"
                               :data-index="i"
-                              v-draggable.data.mode="{data: {type: 'cmsBlock', index: i, source: cfg}, mode: 'clone'}"
+                              v-draggable.data.mode="getDraggableData(i, cfg, 'cmsBlock')"
                               @dragstart="currentDragging = true"
                               @dragend="onDragEnd"
                               :key="cfg._elementor.key"/>
@@ -43,11 +43,11 @@
                                       @drop.prevent="onDrop"/>
     </template>
     <div v-if="dragging"
-         class="bbn-w-100-bbn-lpadded bbn-middle bbn-upper"
+         class="bbn-w-100 bbn-lpadded bbn-middle bbn-upper"
          v-text="!!source.length ? _('Drop the widget here to place it at the bottom of the page') : _('Drop the widget here')"
          v-droppable.data="{data: {index: source.length}}"
          @drop.prevent="onDrop"
-         style="height: 10rem; border: 2px dashed var(--alt-background);"/>
+         style="border: 2px dashed var(--alt-background);"/>
   </div>
   <div ref="divider"
        class="appui-note-cms-elementor-divider"/>

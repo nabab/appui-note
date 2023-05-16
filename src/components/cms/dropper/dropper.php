@@ -5,7 +5,7 @@
              'bbn-primary': !!special,
              'bbn-secondary': !special
              }]"
-     v-draggable.data="{data: {type: 'cmsDropper', source: {type, special}, cfg: defaultConfig}}"
+     v-draggable.data.mode="{data: {type: 'cmsDropper', source: {type, special}, cfg: defaultConfig, parendUid: _uid}, mode: 'clone'}"
      style="cursor: grab"
      @dragend="e => $emit('dragend', e)"
      @dragstart="e => $emit('dragstart', e)">

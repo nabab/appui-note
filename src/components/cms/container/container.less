@@ -3,7 +3,6 @@
 @border-width: 2px;
 
 .@{componentName} {
-
   .@{componentName}-icons {
     display: none;
   }
@@ -13,7 +12,7 @@
       border-color: var(--selected-border) !important;
     }
     &.@{componentName}-selectable {
-      border: @border-width dashed var(--alt-background);
+      border: @border-width dotted var(--default-border);
     }
   }
   &.@{componentName}-over {
@@ -21,9 +20,8 @@
       border-color: var(--hover-border) !important;
     }
   }
-/*
-  .bbn-grid-fields{
-    border: none!important;
+  .appui-note-cms-elementor-guide:not(.vertical) {
+    padding-left: var(--space);
+    padding-right: var(--space);
   }
-*/
 }
