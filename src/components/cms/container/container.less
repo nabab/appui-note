@@ -20,8 +20,15 @@
       border-color: var(--hover-border) !important;
     }
   }
-  .appui-note-cms-elementor-guide:not(.vertical) {
+  .@{componentName}-guide:not(.vertical) {
     padding-left: var(--space);
     padding-right: var(--space);
+  }
+  .@{componentName}-editor {
+    .bbn-radiobuttons.halign {
+      .bbn-button {
+        border-radius: 0 !important;
+      }
+    }
   }
 }

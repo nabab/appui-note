@@ -84,11 +84,11 @@
 
         if (this.isVertical) {
           style.gridTemplateRows = s;
-          style.height = '100%';
+          style.maxHeight = '100%';
         }
         else {
           style.gridTemplateColumns = s;
-          style.width = '100%';
+          style.maxWidth = '100%';
         }
         if (!!this.source.align) {
           style.justifyContent = this.source.align;
@@ -98,6 +98,13 @@
         }
 
         return style;
+      },
+      gridLayout(){
+        let res = {};
+        if (this.source.layout?.length) {
+          res = Object.assign({}, this.source.layout.split(' '));
+        }
+        return res;
       },
       isSelected() {
         return this.selected === true;
@@ -165,7 +172,6 @@
         this.$emit('dragend', ev);
       },
       onDrop(ev){
-        bbn.fn.log('aaaaaa', ev)
         this.onDragEnd();
         let fromData = ev.detail.from.data;
         if (!!fromData.type && (fromData.source !== undefined)) {
@@ -206,6 +212,10 @@
           }
         }
       },
+      getWidgetName(type){
+        let blocks = bbn.fn.extend(true, [], appui.cms?.blocks || [], appui.cms?.pblocks || []);
+        return bbn.fn.getField(blocks, 'text', 'code', type) || bbn._('Unknown');
+      }
     },
     mounted() {
       if (this.source.orientation === undefined) {

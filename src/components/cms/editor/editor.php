@@ -4,8 +4,8 @@
        v-if="data">
     <!--Elementor-->
     <div class="bbn-flex-fill bbn-flex-height">
-      <div class="bbn-flex" style="justify-content: center">
-        <div class="bbn-flex bbn-spadding bbn-alt-background bbn-radius-bottom bbn-xl" style="justify-content: center; align-items: center; gap: 10px;">
+      <div class="bbn-middle">
+        <div class="appui-note-cms-editor-dock bbn-middle bbn-spadding bbn-radius-bottom bbn-xl">
           <bbn-button icon="nf nf-fa-save"
                       title="<?= _("Save") ?>"
                       :disabled="!isChanged"

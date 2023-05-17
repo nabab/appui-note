@@ -102,7 +102,7 @@
       </div>
     </template>
     <div v-else
-         class="bbn-grid-fields bbn-w-100">
+         class="appui-note-cms-container-editor bbn-grid-fields bbn-w-100">
       <label v-text="_('Orientation')"/>
       <bbn-radiobuttons v-model="source.orientation"
                         :source="[{
@@ -113,35 +113,74 @@
                           value: 'vertical'
                         }]"/>
       <label v-text="_('Horizontal Alignment')"/>
-      <bbn-radiobuttons v-model="source.align"
+      <bbn-radiobuttons class="halign"
+                        v-model="source.align"
                         :source="[{
+                          text: _('None'),
+                          value: ''
+                        }, {
                           text: _('Start'),
-                          value: 'start'
+                          value: 'flex-start'
                         }, {
                           text: _('Center'),
                           value: 'center'
                         }, {
                           text: _('End'),
-                          value: 'end'
+                          value: 'flex-end'
                         }, {
                           text: _('Stretch'),
                           value: 'stretch'
-                        }]"/>
+                        }, {
+                          text: _('Space between'),
+                          value: 'space-between'
+                        }, {
+                          text: _('Space around'),
+                          value: 'space-around'
+                        }, {
+                          text: _('Space evenly'),
+                          value: 'space-evenly'
+                        }]"
+                        style="flex-wrap: wrap"/>
       <label v-text="_('Vertical Alignment')"/>
       <bbn-radiobuttons v-model="source.valign"
                         :source="[{
+                          text: _('None'),
+                          value: ''
+                        }, {
                           text: _('Start'),
-                          value: 'start'
+                          value: 'flex-start'
                         }, {
                           text: _('Center'),
                           value: 'center'
                         }, {
                           text: _('End'),
-                          value: 'end'
+                          value: 'flex-end'
                         }, {
                           text: _('Stretch'),
                           value: 'stretch'
                         }]"/>
+      <template v-if="source.items?.length">
+        <label v-text="_('Layout')"/>
+        <div>
+          <div v-for="(it, i) in source.items"
+               :class="{'bbn-bottom-space': !!source.items[i+1]}">
+            <div class="bbn-bottom-sspace">
+              {{i + 1}} - {{getWidgetName(it.code)}}
+            </div>
+            <bbn-radiobuttons v-model="gridLayout[i]"
+                              :source="[{
+                                text: _('Auto'),
+                                value: 'auto'
+                              }, {
+                                text: _('Max content'),
+                                value: 'max-content'
+                              }, {
+                                text: _('Fraction'),
+                                value: '1fr'
+                              }]"/>
+          </div>
+        </div>
+      </template>
     </div>
   </div>
 </div>
