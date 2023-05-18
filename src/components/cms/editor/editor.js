@@ -126,6 +126,7 @@
       }
     },
     methods: {
+      randomString: bbn.fn.randomString,
       scrollToSelected() {
         
       },

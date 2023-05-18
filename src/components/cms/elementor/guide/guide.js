@@ -28,7 +28,6 @@
       onDrop(ev){
         ev.stopImmediatePropagation();
         ev.preventDefault();
-        bbn.fn.log('eee', ev)
         this.$emit('drop', ev);
       }
     }

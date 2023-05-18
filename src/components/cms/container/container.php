@@ -93,13 +93,6 @@
            v-droppable.data="{data: {index: 0}}"
            @drop.prevent.stop="onDrop"
            key="containerDropArea"/>
-      <div v-if="overable && (mode === 'read')"
-           :class="['bbn-top-right', 'bbn-xspadding', {'bbn-hidden': !over}]">
-        <bbn-button icon="nf nf-fa-plus"
-                    title="<?= _("Click here to add a new item on this line") ?>"
-                    :notext="true"
-                    @click="addBlock"/>
-      </div>
     </template>
     <div v-else
          class="appui-note-cms-container-editor bbn-grid-fields bbn-w-100">
@@ -159,15 +152,16 @@
                           text: _('Stretch'),
                           value: 'stretch'
                         }]"/>
-      <template v-if="source.items?.length">
+      <template v-if="source.items?.length && Object.keys(gridLayout).length">
         <label v-text="_('Layout')"/>
         <div>
           <div v-for="(it, i) in source.items"
                :class="{'bbn-bottom-space': !!source.items[i+1]}">
             <div class="bbn-bottom-sspace">
-              {{i + 1}} - {{getWidgetName(it.code)}}
+              {{i + 1}} - {{getWidgetName(it.type)}}
             </div>
             <bbn-radiobuttons v-model="gridLayout[i]"
+                              class="bbn-bottom-sspace"
                               :source="[{
                                 text: _('Auto'),
                                 value: 'auto'
@@ -178,6 +172,8 @@
                                 text: _('Fraction'),
                                 value: '1fr'
                               }]"/>
+            <bbn-input v-model="gridLayout[i]"
+                       style="width: 100%"/>
           </div>
         </div>
       </template>

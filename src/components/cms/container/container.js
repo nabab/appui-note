@@ -60,7 +60,8 @@
         //ready is important for the component template to be defined
         ready: true,
         initialSource: null,
-        currentDragging: false
+        currentDragging: false,
+        gridLayout: {}
       }
     },
     computed: {
@@ -72,39 +73,37 @@
       },
       gridStyle(){
         let style = {};
-        let elements = this.source.items.length;
+        let elements = this.source.layout?.split(' ') || [];
+        let arr = [];
         if (this.overable && !!elements) {
-          elements = elements * 2 + 1;
+          bbn.fn.each(elements, (e, i) => {
+            arr.splice(i * 2, 0, 'max-content', e);
+          });
+          arr.push('max-content');
+        }
+        else {
+          arr = elements;
         }
 
-        let s = '';
-        for (let i = 1; i <= elements; i++) {
-          s += (i % 2) && this.overable ? 'max-content ' : 'auto ';
-        }
-
+        let s = arr.join(' ');
         if (this.isVertical) {
           style.gridTemplateRows = s;
+          style.height = '100%';
           style.maxHeight = '100%';
         }
         else {
           style.gridTemplateColumns = s;
+          style.width = '100%';
           style.maxWidth = '100%';
         }
         if (!!this.source.align) {
           style.justifyContent = this.source.align;
         }
         if (!!this.source.valign) {
-          style.alignItems = this.source.valign;
+          style.alignContent = this.source.valign;
         }
 
         return style;
-      },
-      gridLayout(){
-        let res = {};
-        if (this.source.layout?.length) {
-          res = Object.assign({}, this.source.layout.split(' '));
-        }
-        return res;
       },
       isSelected() {
         return this.selected === true;
@@ -123,6 +122,7 @@
       }
     },
     methods: {
+      randomString: bbn.fn.randomString,
       getDraggableData(index, src, type){
         if (this.overable) {
           return {
@@ -213,13 +213,41 @@
         }
       },
       getWidgetName(type){
-        let blocks = bbn.fn.extend(true, [], appui.cms?.blocks || [], appui.cms?.pblocks || []);
+        let blocks = (appui.cms?.blocks || []).concat(appui.cms?.pblocks || []);
         return bbn.fn.getField(blocks, 'text', 'code', type) || bbn._('Unknown');
-      }
+      },
+      setGridLayout(){
+        let arr = [];
+        if (this.source.layout?.length) {
+          arr = this.source.layout.split(' ');
+        }
+        if (arr.length < this.source.items.length) {
+          arr = arr.concat(Array.from({length: this.source.items.length - arr.length}, a => 'auto'));
+        }
+        if (arr.length > this.source.items.length) {
+          arr.splice(this.source.items.length - 1);
+        }
+        this.$set(this, 'gridLayout', Object.assign({}, arr));
+        return this.gridLayout;
+      },
+    },
+    created(){
+      this.setGridLayout();
     },
     mounted() {
       if (this.source.orientation === undefined) {
         this.$set(this.source, 'orientation', 'horizontal');
+      }
+    },
+    watch: {
+      gridLayout: {
+        deep: true,
+        handler(newVal){
+          this.$set(this.source, 'layout', Object.values(newVal).join(' '));
+        }
+      },
+      'source.items'(){
+        this.setGridLayout();
       }
     }
   };

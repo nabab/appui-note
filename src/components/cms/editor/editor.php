@@ -4,6 +4,7 @@
        v-if="data">
     <!--Elementor-->
     <div class="bbn-flex-fill bbn-flex-height">
+      <!-- Dock -->
       <div class="bbn-middle">
         <div class="appui-note-cms-editor-dock bbn-middle bbn-spadding bbn-radius-bottom bbn-xl">
           <bbn-button icon="nf nf-fa-save"
@@ -108,16 +109,16 @@
                             icon="nf nf-mdi-arrow_right"/>
               </template>
             </div>
-            <div class="bbn-flex-fill">
-              <appui-note-cms-block	@configinit="setOriginalConfig"
-                                    v-if="isReady"
-                                    class="bbn-contain"
-                                    :source="currentEdited"
-                                    :cfg="currentBlockConfig"
-                                    ref="blockEditor"
-                                    mode="edit"/>
+            <div class="bbn-flex-fill bbn-right-spadded">
+              <component	@configinit="setOriginalConfig"
+                          class="bbn-contain bbn-w-100"
+                          :source="currentEdited"
+                          :cfg="currentBlockConfig"
+                          ref="blockEditor"
+                          mode="edit"
+                          :is="currentEdited.type === 'container' ? 'appui-note-cms-container' : 'appui-note-cms-block'"
+                          :key="currentEdited.type === 'container' ? randomString(32, 32) : undefined"/>
             </div>
-
           </div>
           <div class="bbn-w-100 bbn-c bbn-padding">
             <bbn-button @click="saveConfig"
@@ -128,9 +129,6 @@
                         text="<?= _("Delete this block") ?>"
                         icon="nf nf-fa-trash"/>
           </div>
-        </div>
-        <div v-else-if="!currentEdited && currentContainer">
-          <appui-note-cms-container-config :source="currentContainer"/>
         </div>
       </bbn-scroll>
       <div class="bbn-top-right bbn-p bbn-spadding"
