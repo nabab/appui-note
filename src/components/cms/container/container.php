@@ -15,7 +15,8 @@
      	@click="$emit('click', $event)"
       @dragstart="e => $emit('dragstart', e)"
       @dragend="e => $emit('dragend', e)"
-      @beforedrop="e => $emit('beforedrop', e)">
+      @beforedrop="e => $emit('beforedrop', e)"
+      @drop="e => $emit('drop', e)">
   <div :class="['<?= $componentName ?>-component', {
          'bbn-w-100': !isVertical,
          'bbn-h-100': !!isVertical,
@@ -47,8 +48,8 @@
                                         :overable="selectable"
                                         :index="i"
                                         :selected="itemSelected === item._elementor?.key"
-                                        :itemSelected="itemSelected"
-                                        @click.stop="selectBlock(item._elementor.key, item, $event)"
+                                        :item-selected="itemSelected"
+                                        @click.stop="selectBlock(item._elementor.key, item, _self, $event)"
                                         @selectblock="selectBlock"
                                         :key="overable ? item._elementor.key : i"
                                         v-draggable.data.mode="getDraggableData(i, item, 'cmsContainer')"
@@ -56,7 +57,7 @@
                                         @dragend="onDragEnd"
                                         :dragging="isDragging"/>
               <appui-note-cms-block v-else
-                                    @click="selectBlock(item._elementor.key, item, $event)"
+                                    @click="selectBlock(item._elementor.key, item, _self, $event)"
                                     @config-init="configInit"
                                     :path="path"
                                     :editable="editable"
@@ -70,6 +71,8 @@
                                     v-draggable.data.mode="getDraggableData(i, item, 'cmsContainerBlock')"
                                     @dragstart="onDragStart"
                                     @dragend="onDragEnd"
+                                    v-droppable.data="{data: {index: i, replace: true, source: item}}"
+                                    @drop.prevent="onDrop"
                                     :key="overable ? item._elementor.key : i"/>
               <div v-if="overable && (mode === 'read')"
                    :class="['bbn-bottom-right', 'bbn-xspadding', {'bbn-hidden': overItem !== i}]">
@@ -98,59 +101,72 @@
          class="appui-note-cms-container-editor bbn-grid-fields bbn-w-100">
       <label v-text="_('Orientation')"/>
       <bbn-radiobuttons v-model="source.orientation"
+                        :notext="true"
                         :source="[{
                           text: _('Horizontal'),
-                          value: 'horizontal'
+                          value: 'horizontal',
+                          icon: 'nf nf-cod-split_horizontal'
                         }, {
                           text: _('Vertical'),
-                          value: 'vertical'
+                          value: 'vertical',
+                          icon: 'nf nf-cod-split_vertical'
                         }]"/>
       <label v-text="_('Horizontal Alignment')"/>
-      <bbn-radiobuttons class="halign"
-                        v-model="source.align"
+      <bbn-radiobuttons v-model="source.align"
+                        :notext="true"
                         :source="[{
                           text: _('None'),
-                          value: ''
+                          value: '',
+                          icon: 'nf nf-md-cancel'
                         }, {
                           text: _('Start'),
-                          value: 'flex-start'
+                          value: 'flex-start',
+                          icon: 'nf nf-md-align_horizontal_left'
                         }, {
                           text: _('Center'),
-                          value: 'center'
+                          value: 'center',
+                          icon: 'nf nf-md-align_horizontal_center'
                         }, {
                           text: _('End'),
-                          value: 'flex-end'
-                        }, {
-                          text: _('Stretch'),
-                          value: 'stretch'
+                          value: 'flex-end',
+                          icon: 'nf nf-md-align_horizontal_right'
                         }, {
                           text: _('Space between'),
-                          value: 'space-between'
+                          value: 'space-between',
+                          icon: 'nf nf-md-align_horizontal_distribute'
                         }, {
                           text: _('Space around'),
-                          value: 'space-around'
+                          value: 'space-around',
+                          icon: 'nf nf-md-align_horizontal_distribute'
                         }, {
                           text: _('Space evenly'),
-                          value: 'space-evenly'
+                          value: 'space-evenly',
+                          icon: 'nf nf-md-align_horizontal_distribute'
                         }]"
                         style="flex-wrap: wrap"/>
       <label v-text="_('Vertical Alignment')"/>
       <bbn-radiobuttons v-model="source.valign"
+                        :notext="true"
                         :source="[{
                           text: _('None'),
-                          value: ''
+                          value: '',
+                          icon: 'nf nf-md-cancel'
                         }, {
                           text: _('Start'),
-                          value: 'flex-start'
+                          value: 'flex-start',
+                          icon: 'nf nf-md-align_vertical_top'
                         }, {
                           text: _('Center'),
-                          value: 'center'
+                          value: 'center',
+                          icon: 'nf nf-md-align_vertical_center'
                         }, {
                           text: _('End'),
-                          value: 'flex-end'
+                          value: 'flex-end',
+                          icon: 'nf nf-md-align_vertical_bottom'
                         }, {
                           text: _('Stretch'),
-                          value: 'stretch'
+                          value: 'stretch',
+                          icon: 'nf nf-md-align_vertical_distribute'
                         }]"/>
       <template v-if="source.items?.length && Object.keys(gridLayout).length">
         <label v-text="_('Layout')"/>
@@ -161,15 +177,18 @@
               {{i + 1}} - {{getWidgetName(it.type)}}
             </div>
             <bbn-radiobuttons v-model="gridLayout[i]"
-                              class="bbn-bottom-sspace"
+                              class="bbn-bottom-sspace bbn-s"
                               :source="[{
-                                text: _('Auto'),
+                                text: 'AUTO',
+                                title: _('Auto'),
                                 value: 'auto'
                               }, {
-                                text: _('Max content'),
+                                text: 'MAX',
+                                title: _('Max content'),
                                 value: 'max-content'
                               }, {
-                                text: _('Fraction'),
+                                text: 'FR',
+                                title: _('Fraction'),
                                 value: '1fr'
                               }]"/>
             <bbn-input v-model="gridLayout[i]"

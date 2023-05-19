@@ -152,12 +152,12 @@
       removeBlock(idx) {
         this.source.items.splice(idx, 1);
       },
-      selectBlock(key, src, ev) {
+      selectBlock(key, src, items, ev) {
         if (this.overable) {
           if (ev) {
             ev.stopImmediatePropagation();
           }
-          this.$emit('selectblock', key, src);
+          this.$emit('selectblock', key, src, items);
         }
       },
       configInit(config) {
@@ -198,6 +198,20 @@
                 fromData.parentSource.splice(oldIndex, 1);
               }
               break;
+            default:
+              return;
+          }
+          if (toData.replace) {
+            let ns = bbn.fn.extend(
+              true,
+              {
+                type: 'container',
+                _elementor: bbn.fn.randomString(32, 32)
+              },
+              bbn.fn.getRow(appui.cms.blocks, 'code', 'container').configuration
+            );
+            ns.items.push(toData.source, newSource);
+            newSource = ns;
           }
           if (bbn.fn.isNull(oldIndex)
             || ((fromData.parentSource !== undefined)
@@ -208,7 +222,7 @@
             if (this.source.items === undefined) {
               this.$set(this.source, 'items', []);
             }
-            this.source.items.splice(newIndex, 0, newSource);
+            this.source.items.splice(newIndex, toData.replace ? 1 : 0, newSource);
           }
         }
       },

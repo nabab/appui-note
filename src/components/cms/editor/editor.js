@@ -34,9 +34,10 @@
         root: appui.plugins['appui-note'] + '/',
         showSlider: false,
         showWidgets: false,
-        currentEdited: null,
-        currentEditedIndex: -1,
-        currentEditedIndexInContainer: -1,
+        currentEditing: null,
+        currentEditingKey: null,
+        currentEditingParent: null,
+        currentEditingIndexInContainer: -1,
         editedSource: null,
         map: [],
         currentPosition: {},
@@ -57,17 +58,17 @@
       };
     },
     computed: {
-      currentEditedTitle() {
-        if (this.currentEdited) {
-          if (this.currentEdited.special) {
-            let txt = bbn.fn.getField(this.allBlocks, 'text', {special: this.currentEdited.special});
+      currentEditingTitle() {
+        if (this.currentEditing) {
+          if (this.currentEditing.special) {
+            let txt = bbn.fn.getField(this.allBlocks, 'text', {special: this.currentEditing.special});
             if (!txt) {
-              this.$delete(this.currentEdited, 'special');
+              this.$delete(this.currentEditing, 'special');
             } else {
               return txt;
             }
           }
-          return bbn.fn.getField(this.allBlocks, 'text', {special: null, code: this.currentEdited.type});
+          return bbn.fn.getField(this.allBlocks, 'text', {special: null, code: this.currentEditing.type});
         }
       },
       allBlocks() {
@@ -115,7 +116,7 @@
               ignoredFields = edi.ignoredFields;
             }
           }
-          bbn.fn.iterate(this.currentEdited, (value, prop) => {
+          bbn.fn.iterate(this.currentEditing, (value, prop) => {
             if (!ignoredFields.includes(prop) && !bbn.fn.isSame(this.originalConfig[prop], value)) {
               isChanged = true;
               return false;
@@ -123,6 +124,21 @@
           });
         }
         return isChanged;
+      },
+      currentEditingParentItems(){
+        if (!!this.currentEditingParent) {
+          if (this.currentEditingParent.source?.type === 'container') {
+            return this.currentEditingParent.source.items;
+          }
+          return this.currentEditingParent.source;
+        }
+        return null;
+      },
+      currentEditingIndex(){
+        if (!!this.currentEditingKey && !!this.currentEditingParentItems) {
+          return bbn.fn.search(this.currentEditingParentItems, '_elementor.key', this.currentEditingKey);
+        }
+        return -1;
       }
     },
     methods: {
@@ -131,9 +147,9 @@
         
       },
       unselectElements() {
-        this.currentEdited = null;
-        this.currentEditedIndex = -1;
-        this.currentEditedIndexInContainer = -1;
+        this.currentEditing = null;
+        this.currentEditingKey = '';
+        this.currentEditingIndexInContainer = -1;
         this.showWidgets = true;
         this.showSlider = false;
       },
@@ -143,7 +159,7 @@
       saveConfig() {
         this.getPopup({
           component: this.$options.components.configForm,
-          source: this.currentEdited,
+          source: this.currentEditing,
           title: false
         });
       },
@@ -208,6 +224,13 @@
           });
         });
       },
+      toggleWidgets(){
+        this.showWidgets = !this.showWidgets;
+        this.showSlider = false;
+        this.currentEditing = null;
+        this.currentEditingKey = null;
+        this.currentEditingParent = null;
+      },
       openSettings(){
         this.getPopup({
           title: bbn._("Page's properties"),
@@ -240,19 +263,17 @@
         });
       },
       /**
-       * When changes are made to a block or a block inside a container, the currentEdited data receive
+       * When changes are made to a block or a block inside a container, the currentEditing data receive
        * the source of the block.
        * @param {Object} source the source object of the current selected block
        */
-      handleSelected(index, source, indexInContainer = null) {
-        bbn.fn.log('select', index, source)
-        if (this.currentEdited !== source) {
+      handleSelected(key, source, parent) {
+        bbn.fn.log('select', key, source)
+        if (this.currentEditingKey !== key) {
           this.showWidgets = false;
-          this.currentEditedIndex = index;
-          this.currentEdited = source;
-          if (indexInContainer !== null) {
-            this.currentEditedIndexInContainer = indexInContainer;
-          }
+          this.currentEditingKey = key;
+          this.currentEditing = source;
+          this.currentEditingParent = parent;
           this.showSlider = true;
         }
       },
@@ -261,17 +282,19 @@
        */
       deleteCurrentSelected() {
         this.confirm(bbn._("Are you sure you want to delete this block and its content?"), () => {
-          let idx = this.currentEditedIndex;
-          let idxInContainer = this.currentEditedIndexInContainer;
-          if (this.currentEditedIndexInContainer > -1) {
-            this.source.items[idx].source.items.splice(idxInContainer, 1);
-            this.mapY();
-            return;
+          if (this.currentEditingKey && !!this.currentEditingParentItems?.length) {
+            let idx = bbn.fn.search(this.currentEditingParentItems, '_elementor.key', this.currentEditingKey);
+            if (idx > -1) {
+              this.currentEditingParentItems.splice(idx, 1);
+            }
+            this.currentEditingKey = null;
+            this.currentEditing = null;
+            this.currentEditingParent = null;
+            this.showSlider = false;
           }
-          this.source.items.splice(idx, 1);
-          this.currentEditedIndex = -1;
-          this.showSlider = false;
-          this.mapY();
+          else {
+            appui.error();
+          }
         });
       },
       /**
@@ -367,24 +390,32 @@
        * @param {String} dir the given direction
        */
       move(dir) {
-        let idx;
-        switch (dir) {
-          case 'top':
-            idx = 0;
-            break;
-          case 'up':
-            idx = this.currentEditedIndex - 1;
-            break;
-          case 'down':
-            idx = this.currentEditedIndex + 1;
-            break;
-          case 'bottom':
-            idx = this.source.items.length - 1;
-            break;
-        }
-        if (this.source.items[idx]) {
-          bbn.fn.move(this.source.items, this.currentEditedIndex, idx);
-          this.currentEditedIndex = idx;
+        if (!!this.currentEditingKey && !!this.currentEditingParentItems) {
+          let currentIdx = bbn.fn.search(this.currentEditingParentItems, '_elementor.key', this.currentEditingKey);
+          if (currentIdx > -1) {
+            let newIdx;
+            switch (dir) {
+              case 'start':
+                newIdx = 0;
+                break;
+              case 'before':
+                if (currentIdx > 0) {
+                  newIdx = currentIdx - 1;
+                }
+                break;
+              case 'after':
+                if (currentIdx < (this.currentEditingParentItems.length - 1)) {
+                  newIdx = currentIdx + 1;
+                }
+                break;
+              case 'end':
+                newIdx = this.currentEditingParentItems.length - 1;
+                break;
+            }
+            if (this.currentEditingParentItems[newIdx]) {
+              bbn.fn.move(this.currentEditingParentItems, currentIdx, newIdx);
+            }
+          }
         }
       },
       /**
@@ -587,7 +618,7 @@
           }
         }
       },
-      currentEdited(v, ov) {
+      currentEditing(v, ov) {
         if (!ov || !v || (v.type !== ov.type)) {
           this.isReady = false;
           setTimeout(() => {

@@ -19,11 +19,7 @@
           <bbn-button icon="nf nf-mdi-widgets"
                       title="<?= _("widgets") ?>"
                       :notext="true"
-                      @click="() => {
-                              showWidgets = !showWidgets;
-                              showSlider = false;
-                              currentEditedIndex = '';
-                              }"/>
+                      @click="toggleWidgets"/>
           <bbn-button icon="nf nf-md-code_json"
                       v-if="isDev"
                       title="<?= _("See JSON") ?>"
@@ -54,7 +50,8 @@
                                     :position="nextPosition"
                                     @dragstart="dragStart"
                                     @unselect="unselectElements"
-                                    :dragging="isDragging"/>
+                                    :dragging="isDragging"
+                                    :item-selected="currentEditingKey"/>
         </bbn-scroll>
       </div>
     </div>
@@ -62,8 +59,8 @@
     <div :class="{slider: true, opened: showSlider}">
       <bbn-scroll axis="y">
         <div class="bbn-w-100"
-             v-if="currentEdited">
-          <h2 v-text="currentEditedTitle"
+             v-if="currentEditing">
+          <h2 v-text="currentEditingTitle"
               class="bbn-c" />
           <div class="bbn-w-100 bbn-flex-width">
             <div class="bbn-spadding appui-note-cms-editor-position">
@@ -71,53 +68,39 @@
                           @click="scrollToSelected"
                           text="<?= _("Scroll to selected element") ?>"
                           icon="nf nf-mdi-target"/>
-              <template v-if="currentEditedIndexInContainer === -1"
+              <template v-if="currentEditingParentItems?.length > 1"
                         class="bbn-padding appui-note-cms-editor-position">
                 <bbn-button :notext="true"
-                            @click="move('top')"
-                            text="<?= _("Move top") ?>"
-                            :disabled="(source.items.length <= 1) || (currentEditedIndex < 1)"
-                            icon="nf nf-mdi-arrow_collapse_up"/>
+                            @click="move('start')"
+                            text="<?= _("Move to start") ?>"
+                            :disabled="currentEditingIndex < 1"
+                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-mdi-arrow_collapse_up' : 'nf nf-mdi-arrow_collapse_left'"/>
                 <bbn-button :notext="true"
-                            @click="move('up')"
-                            text="<?= _("Move up") ?>"
-                            :disabled="(source.items.length <= 1) || !currentEditedIndex"
-                            icon="nf nf-mdi-arrow_up"/>
+                            @click="move('before')"
+                            :text="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? _('Move up') : _('Move left')"
+                            :disabled="!currentEditingIndex"
+                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-mdi-arrow_up' : 'nf nf-mdi-arrow_left'"/>
                 <bbn-button :notext="true"
-                            @click="move('down')"
-                            text="<?= _("Move down") ?>"
-                            :disabled="(source.items.length <= 1) || (currentEditedIndex === source.items.length - 1)"
-                            icon="nf nf-mdi-arrow_down"/>
+                            @click="move('after')"
+                            :text="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? _('Move down') : _('Move right')"
+                            :disabled="currentEditingIndex === (currentEditingParentItems.length - 1)"
+                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-mdi-arrow_down' : 'nf nf-mdi-arrow_right'"/>
                 <bbn-button :notext="true"
-                            @click="move('bottom')"
-                            text="<?= _("Move bottom") ?>"
-                            :disabled="(source.items.length <= 1) || (currentEditedIndex > source.items.length - 2)"
-                            icon="nf nf-mdi-arrow_collapse_down"/>
-              </template>
-              <!-- Leo to do -->
-              <template v-else-if="currentEditedIndex > -1"
-                   class="bbn-padding appui-note-cms-editor-position">
-                <bbn-button :notext="true"
-                            @click="move('left')"
-                            text="<?= _("Move left") ?>"
-                            :disabled="(source.items.length <= 1) || (currentEditedIndex < 1)"
-                            icon="nf nf-mdi-arrow_left"/>
-                <bbn-button :notext="true"
-                            @click="move('right')"
-                            text="<?= _("Move right") ?>"
-                            :disabled="(source.items.length <= 1) || (currentEditedIndex > source.items.length - 2)"
-                            icon="nf nf-mdi-arrow_right"/>
+                            @click="move('end')"
+                            text="<?= _("Move to end") ?>"
+                            :disabled="currentEditingIndex === (currentEditingParentItems.length - 1)"
+                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-mdi-arrow_collapse_down' : 'nf nf-mdi-arrow_collapse_right'"/>
               </template>
             </div>
             <div class="bbn-flex-fill bbn-right-spadded">
               <component	@configinit="setOriginalConfig"
                           class="bbn-contain bbn-w-100"
-                          :source="currentEdited"
+                          :source="currentEditing"
                           :cfg="currentBlockConfig"
                           ref="blockEditor"
                           mode="edit"
-                          :is="currentEdited.type === 'container' ? 'appui-note-cms-container' : 'appui-note-cms-block'"
-                          :key="currentEdited.type === 'container' ? randomString(32, 32) : undefined"/>
+                          :is="currentEditing.type === 'container' ? 'appui-note-cms-container' : 'appui-note-cms-block'"
+                          :key="currentEditing._elementor.key"/>
             </div>
           </div>
           <div class="bbn-w-100 bbn-c bbn-padding">

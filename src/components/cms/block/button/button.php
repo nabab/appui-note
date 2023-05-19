@@ -10,7 +10,7 @@
       <label v-text="_('Dimensions')"></label>
       <div>
         <div class="bbn-block bbn-s">
-          <bbn-radiobuttons  v-model="source.dimensions"
+          <bbn-radiobuttons v-model="source.dimensions"
                             :source="[{
                                 text: _('Default'),
                                 value: '',
@@ -37,8 +37,8 @@
       </div>
       <label v-text="_('Space')"></label>
       <div>
-        <div class="bbn-block">
-          <bbn-radiobuttons  v-model="source.padding"
+        <div class="bbn-block bbn-s">
+          <bbn-radiobuttons v-model="source.padding"
                             :source="[
                               {
                                 text: _('No space'),

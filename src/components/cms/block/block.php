@@ -12,7 +12,8 @@
       @mouseleave="over = false"
       @dragstart.stop="e => $emit('dragstart', e)"
       @dragend="e => $emit('dragend', e)"
-      @beforedrop="e => $emit('beforedrop', e)">
+      @beforedrop="e => $emit('beforedrop', e)"
+      @drop="e => $emit('drop', e)">
   <component v-if="ready"
              @configinit="configInit"
              :is="currentComponent"

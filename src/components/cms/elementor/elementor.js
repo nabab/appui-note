@@ -194,15 +194,15 @@
       dragging: {
         type: Boolean,
         default: false
+      },
+      itemSelected: {
+        type: String
       }
     },
     data(){
       return {
-        currentEditingKey: '',
         types: types,
-        dragData: bbn.fn.map(this.source, (cfg, i) => {
-          return {data: bbn.fn.extend({}, cfg, {inside: true, index: i}), mode: 'self'};
-        }),
+        editor: {},
         currentDragging: false
       };
     },
@@ -213,7 +213,6 @@
     },
     methods: {
       unselect() {
-        this.currentEditingKey = '';
         this.$emit('unselect');
       },
       getDraggableData(index, src, type){
@@ -246,11 +245,10 @@
           let toData = ev.detail.to.data;
           let oldIndex = null;
           let newIndex = toData.index;
-          bbn.fn.log('onDrop', fromData, toData)
           switch (fromData.type) {
             case 'cmsDropper':
               bbn.fn.iterate(fromData.cfg || {}, (v, k) => newSource[k] = v);
-              newSource._elementor = this.closest('appui-note-cms-editor').getElementorDefaultObj();
+              newSource._elementor = this.editor.getElementorDefaultObj();
               break;
             case 'cmsContainerBlock':
             case 'cmsBlock':
@@ -264,6 +262,20 @@
                 fromData.parentSource.splice(oldIndex, 1);
               }
               break;
+            default:
+              return;
+          }
+          if (toData.replace) {
+            let ns = bbn.fn.extend(
+              true,
+              {
+                type: 'container',
+                _elementor: this.editor.getElementorDefaultObj()
+              },
+              bbn.fn.getRow(appui.cms.blocks, 'code', 'container').configuration
+            );
+            ns.items.push(toData.source, newSource);
+            newSource = ns;
           }
           if (bbn.fn.isNull(oldIndex)
             || ((fromData.parentSource !== undefined)
@@ -271,17 +283,15 @@
                 || ((newIndex < oldIndex)
                   || (newIndex > (oldIndex + 1)))))
           ) {
-            this.source.splice(newIndex, 0, newSource);
+            this.source.splice(newIndex, toData.replace ? 1 : 0, newSource);
           }
         }
       },
       /*
       Emit the current source object (from a block) to the editor component.
       */
-      selectBlock(key, source) {
-        bbn.fn.log('SELECTBLOCK')
-        this.currentEditingKey = key;
-        this.$emit('changes', key, source);
+      selectBlock(key, source, items) {
+        this.$emit('changes', key, source, items);
       },
       /*
       Ask the user to save changes and submit the form
@@ -292,22 +302,24 @@
           if (form.isValid()) {
             this.confirm(bbn._("Do you want to save your changes?"), () => {
               form.submit();
-              this.currentEditingKey = idx;
+              //this.currentEditingKey = idx;
             }, () => {
-              this.currentEditingKey = idx;
+              //this.currentEditingKey = idx;
             });
           }
           else {
             this.confirm(bbn._("Do you want to abandon your changes?"), () => {
-              this.currentEditingKey = idx;
+              //this.currentEditingKey = idx;
             });
           }
         }
         else {
-          this.currentEditingKey = idx;
+          //this.currentEditingKey = idx;
         }
-      },
-      
+      }
+    },
+    mounted(){
+      this.$set(this, 'editor', this.closest('appui-note-cms-editor'));
     }
   };
 })();
