@@ -14,6 +14,12 @@
     &.@{componentName}-selectable {
       border: @border-width dotted var(--default-border);
     }
+    .@{componentName}-droparea {
+      color: var(--default-border);
+      &.bbn-droppable-over {
+        color: var(--secondary-background) !important;
+      }
+    }
   }
   &.@{componentName}-over {
     > .@{componentName}-component {

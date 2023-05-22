@@ -77,7 +77,7 @@
               <div v-if="overable && (mode === 'read')"
                    :class="['bbn-bottom-right', 'bbn-xspadding', {'bbn-hidden': overItem !== i}]">
                 <bbn-button icon="nf nf-fa-minus"
-                            title="<?= _("Click here to add a new item on this line") ?>"
+                            title="<?= _("Remove block") ?>"
                             :notext="true"
                             @click="removeBlock(i)"/>
               </div>
@@ -91,11 +91,12 @@
                                         :vertical="!isVertical"/>
       </div>
       <div v-else-if="selectable"
-           class="bbn-w-100 bbn-lpadded bbn-middle bbn-upper"
-           v-text="_('Drop a widget here')"
+           class="<?= $componentName ?>-droparea bbn-w-100 bbn-lpadded bbn-middle bbn-upper"
            v-droppable.data="{data: {index: 0}}"
            @drop.prevent.stop="onDrop"
-           key="containerDropArea"/>
+           key="containerDropArea">
+        <i class="bbn-xl nf nf-fa-plus"/>
+      </div>
     </template>
     <div v-else
          class="appui-note-cms-container-editor bbn-grid-fields bbn-w-100">

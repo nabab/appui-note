@@ -45,11 +45,12 @@
                                       @drop.prevent="onDrop"/>
     </template>
     <div v-if="dragging"
-         class="bbn-w-100 bbn-lpadded bbn-middle bbn-upper"
-         v-text="!!source.length ? _('Drop the widget here to place it at the bottom of the page') : _('Drop the widget here')"
+         class="appui-note-cms-elementor-droparea bbn-w-100 bbn-lpadded bbn-middle bbn-upper"
          v-droppable.data="{data: {index: source.length}}"
          @drop.prevent="onDrop"
-         style="border: 2px dashed var(--alt-background);"/>
+         key="elementorDropArea">
+      <i class="nf nf-fa-plus bbn-xl"/>
+    </div>
   </div>
   <div ref="divider"
        class="appui-note-cms-elementor-divider"/>

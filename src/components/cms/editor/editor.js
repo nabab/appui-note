@@ -168,8 +168,7 @@
       },
       save(){
         let src = bbn.fn.clone(this.source);
-        this.clearItems(src.items);
-        delete src._elementor;
+        this.clearItem(src);
         return this.post(this.action, src, d => {
           if (d.success) {
             this.oData = JSON.stringify(this.source);
@@ -180,20 +179,18 @@
           }
         });
       },
-      clearItems(items){
-        bbn.fn.each(items, (v, i) => {
-          if ((v.type === 'container') && !!v.items) {
-            this.clearItems(v.items);
-          }
-          /* else if ((v.type === 'product') && (v.content !== undefined)) {
-            delete items[i].content;
-          } */
-          if (v._elementor !== undefined) {
-            delete items[i]._elementor;
-            bbn.fn.log('delete')
-          }
-        });
-        return items;
+      clearItem(item){
+        if (!!item.items) {
+          bbn.fn.each(item.items, this.clearItem);
+        }
+        else if ((item.type === 'product') && (item.id_product !== undefined)) {
+          item.content = item.id_product;
+          delete item.id_product;
+        }
+        if (item._elementor !== undefined) {
+          delete item._elementor;
+        }
+        return item;
       },
       normalizeItems(items){
         bbn.fn.each(items, (v, i) => {

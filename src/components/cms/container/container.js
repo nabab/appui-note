@@ -235,10 +235,10 @@
         if (this.source.layout?.length) {
           arr = this.source.layout.split(' ');
         }
-        if (arr.length < this.source.items.length) {
+        if (arr.length < this.source.items?.length) {
           arr = arr.concat(Array.from({length: this.source.items.length - arr.length}, a => 'auto'));
         }
-        if (arr.length > this.source.items.length) {
+        if (arr.length > this.source.items?.length) {
           arr.splice(this.source.items.length - 1);
         }
         this.$set(this, 'gridLayout', Object.assign({}, arr));
