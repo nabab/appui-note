@@ -42,9 +42,9 @@
                     @click="source.fontStyle = source.fontStyle === 'italic' ? 'normal' : 'italic'"
                     :notext="true"
                     icon="nf nf-fa-italic"
-                    :class="['bbn-no-radius', {
+                    :class="{
                       'bbn-state-active': source.fontStyle === 'italic'
-                    }]"/>
+                    }"/>
       </div>
       <label><?=_('Decoration')?></label>
       <div>

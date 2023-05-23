@@ -4,7 +4,7 @@ if ($model->hasData(['mode', 'limit', 'order'])) {
   if (($mode = $model->data['mode'])) {
     if (($mode === 'publications') && isset($model->data['note_type'])) {
       $filter = [];
-      if($model->data['note_type'] === 'news'){
+      if ($model->data['note_type'] === 'news') {
         $model->data['note_type'] = null;
         $filter['conditions'] = [];
         $filter['conditions'][] = [
@@ -31,28 +31,27 @@ if ($model->hasData(['mode', 'limit', 'order'])) {
           'value' => $model->inc->options->fromCode('pages','types','note','appui'),
         ];
       }
+
       //if type === authors and a period is selected
-      if($model->hasData(['id_option'])){
+      if ($model->hasData('id', true)) {
         $filter['conditions'][] = [
           'field' => 'id_option',
-          'value' => $model->data['id_option'],
-          'operator'=> '='
+          'value' => $model->data['id']
         ];
       }
-      
+
       $cms = new \bbn\Appui\Cms($model->db);
-      $res = $cms->getAll(false, $filter, [$model->data['order'] => 'desc'], $model->data['limit'],0, $model->data['note_type'] );
-      
+      $res = $cms->getAll(false, $filter, [$model->data['order'] => 'desc'], $model->data['limit'], 0, $model->data['note_type']);
       $res['success'] = true;
     }
-    elseif (($mode === 'gallery') && ($id_group = $model->data['id_group'])) {
+    elseif (($mode === 'gallery') && ($idGroup = $model->data['id'])) {
       $medias = new \bbn\Appui\Medias($model->db);
-      $res = $medias->browseByGroup($id_group, ['limit' => $model->data['limit']]);
+      $res = $medias->browseByGroup($idGroup, ['limit' => $model->data['limit']]);
       $res['success'] = true;
     }
-    elseif (($mode === 'features') && $model->hasData('id_feature', true)) {
+    elseif (($mode === 'features') && $model->hasData('id', true)) {
       $note = new bbn\Appui\Note($model->db);
-      $res['data'] = $note->getFeatures($model->data['id_feature'], true);
+      $res['data'] = $note->getFeatures($model->data['id'], true);
       $res['success'] = true;
     }
   }

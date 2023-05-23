@@ -9,7 +9,7 @@ $q = $ctrl->db->query("SELECT version, id_note, content FROM bbn_notes_versions"
 $fn = function(&$block) {
   $isChanged = false;
   $content = false;
-  switch($block['type']) {
+  switch ($block['type']) {
     case 'button':
     case 'text':
       if (isset($block['text'])) {
@@ -55,9 +55,25 @@ $fn = function(&$block) {
     case 'slider':
       if (isset($block['id_feature'])) {
         $content = $block['id_feature'];
-        unset($block['id_feature']);
         $block['content'] = $content;
         $isChanged = true;
+      }
+      else if (isset($block['id_option'])) {
+        $content = $block['id_option'];
+        $block['content'] = $content;
+        $isChanged = true;
+      }
+      else if (isset($block['id_group'])) {
+        $content = $block['id_group'];
+        $block['content'] = $content;
+        $isChanged = true;
+      }
+      if (array_key_exists('items', $block)) {
+        unset($block['items']);
+        $isChanged = true;
+      }
+      if ($isChanged) {
+        unset($block['id_feature'], $block['id_option'], $block['id_group']);
       }
       break;
   }
@@ -75,7 +91,7 @@ $fn = function(&$block) {
   return $isChanged;
 };
 
-while($row = $q->getRow()) {
+while ($row = $q->getRow()) {
   $blocks = json_decode($row['content'], true);
   $isChanged = false;
   foreach($blocks as &$block) {
