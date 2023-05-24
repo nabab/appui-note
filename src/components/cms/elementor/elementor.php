@@ -7,7 +7,7 @@
       <div v-for="(cfg, i) in source"
            class="bbn-w-100">
         <appui-note-cms-elementor-guide :visible="isDragging"
-                                        v-droppable.data="{data: {index: i}}"
+                                        v-droppable.data="!!preview ? false : {data: {index: i}}"
                                         @drop.prevent="onDrop"/>
         <appui-note-cms-container v-if="cfg.type === 'container'"
                                   :source="cfg"
@@ -35,13 +35,13 @@
                               v-draggable.data.mode="getDraggableData(i, cfg, 'cmsBlock')"
                               @dragstart="currentDragging = true"
                               @dragend="onDragEnd"
-                              v-droppable.data="{data: {index: i, replace: true, source: cfg}}"
+                              v-droppable.data="!!preview ? false : {data: {index: i, replace: true, source: cfg}}"
                               @drop.prevent="onDrop"
                               :key="cfg._elementor.key"/>
       </div>
       <appui-note-cms-elementor-guide :visible="isDragging"
                                       :force="isDragging && !source.length"
-                                      v-droppable.data="{data: {index: source.length}}"
+                                      v-droppable.data="!!preview ? false : {data: {index: source.length}}"
                                       @drop.prevent="onDrop"/>
     </template>
     <div v-if="dragging"

@@ -73,7 +73,7 @@
       },
       gridStyle(){
         let style = {};
-        let elements = this.source.layout?.split(' ') || [];
+        let elements = this.source.layout?.length ? this.source.layout.split(' ') : [];
         let arr = [];
         if (this.overable && !!elements) {
           bbn.fn.each(elements, (e, i) => {
@@ -100,6 +100,7 @@
           style.justifyContent = this.source.align;
         }
         if (!!this.source.valign) {
+          style.alignItems = this.source.valign;
           style.alignContent = this.source.valign;
         }
 
@@ -179,50 +180,63 @@
           let toData = ev.detail.to.data;
           let oldIndex = null;
           let newIndex = toData.index;
+          let deleted = false;
           switch (fromData.type) {
             case 'cmsDropper':
               bbn.fn.iterate(fromData.cfg || {}, (v, k) => newSource[k] = v);
-              newSource._elementor = {
-                key: bbn.fn.randomString(32, 32)
-              }
+              newSource._elementor = this.randomString(32, 32);
               break;
             case 'cmsContainerBlock':
             case 'cmsBlock':
             case 'cmsContainer':
               oldIndex = fromData.index;
               if ((fromData.parentSource !== undefined)
-                && ((fromData.parentUid !== this._uid)
-                  || ((newIndex < oldIndex)
-                    || (newIndex > (oldIndex + 1))))
+                && (!!toData.replace
+                  || (fromData.parentUid !== this._uid))
               ) {
-                fromData.parentSource.splice(oldIndex, 1);
+                deleted = fromData.parentSource.splice(oldIndex, 1);
               }
               break;
             default:
               return;
           }
-          if (toData.replace) {
+          if (!!toData.replace) {
             let ns = bbn.fn.extend(
               true,
               {
                 type: 'container',
-                _elementor: bbn.fn.randomString(32, 32)
+                _elementor: this.randomString(32, 32)
               },
               bbn.fn.getRow(appui.cms.blocks, 'code', 'container').configuration
             );
+            if (ns.items === undefined) {
+              ns.items = [];
+            }
             ns.items.push(toData.source, newSource);
             newSource = ns;
           }
           if (bbn.fn.isNull(oldIndex)
-            || ((fromData.parentSource !== undefined)
-              && ((fromData.parentUid !== this._uid)
-                || ((newIndex < oldIndex)
-                  || (newIndex > (oldIndex + 1)))))
+            || !!deleted
           ) {
+            if (!!deleted
+              && (fromData.parentUid === this._uid)
+              && (oldIndex < newIndex)
+            ) {
+              newIndex--;
+            }
             if (this.source.items === undefined) {
               this.$set(this.source, 'items', []);
             }
             this.source.items.splice(newIndex, toData.replace ? 1 : 0, newSource);
+          }
+          else if ((fromData.parentUid === this._uid)
+            && ((newIndex < oldIndex)
+            || (newIndex > (oldIndex + 1)))
+          ){
+            if (newIndex > oldIndex) {
+              newIndex--;
+            }
+            bbn.fn.move(this.source.items, oldIndex, newIndex);
           }
         }
       },
@@ -235,11 +249,15 @@
         if (this.source.layout?.length) {
           arr = this.source.layout.split(' ');
         }
-        if (arr.length < this.source.items?.length) {
-          arr = arr.concat(Array.from({length: this.source.items.length - arr.length}, a => 'auto'));
+        if (!!this.source.items?.length
+          && (arr.length < this.source.items.length)
+        ) {
+          arr = arr.concat(Array.from({length: this.source.items.length - arr.length}, a => arr.length ? 'auto' : '1fr'));
         }
-        if (arr.length > this.source.items?.length) {
-          arr.splice(this.source.items.length - 1);
+        if (!!this.source.items?.length
+          && (arr.length > this.source.items.length)
+        ) {
+          arr.splice(this.source.items.length, arr.length);
         }
         this.$set(this, 'gridLayout', Object.assign({}, arr));
         return this.gridLayout;

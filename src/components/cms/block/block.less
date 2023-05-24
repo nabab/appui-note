@@ -14,10 +14,13 @@
     min-height: 1.8em;
     padding: 1em;
     &.@{componentName}-selected {
-      border-color: var(--selected-border) !important;
+      border: @border-width dashed var(--selected-border) !important;
     }
     &.@{componentName}-selectable {
-      border: @border-width dashed var(--default-border);
+      border: @border-width dashed transparent;
+      &:hover {
+        border-color: var(--default-border);
+      }
     }
 	}
 	&.@{componentName}-over {

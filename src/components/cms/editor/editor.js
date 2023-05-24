@@ -127,10 +127,7 @@
       },
       currentEditingParentItems(){
         if (!!this.currentEditingParent) {
-          if (this.currentEditingParent.source?.type === 'container') {
-            return this.currentEditingParent.source.items;
-          }
-          return this.currentEditingParent.source;
+          return this.currentEditingParent.source.items;
         }
         return null;
       },

@@ -245,6 +245,7 @@
           let toData = ev.detail.to.data;
           let oldIndex = null;
           let newIndex = toData.index;
+          let deleted = false;
           switch (fromData.type) {
             case 'cmsDropper':
               bbn.fn.iterate(fromData.cfg || {}, (v, k) => newSource[k] = v);
@@ -255,17 +256,16 @@
             case 'cmsContainer':
               oldIndex = fromData.index;
               if ((fromData.parentSource !== undefined)
-                && ((fromData.parentUid !== this._uid)
-                  || ((newIndex < oldIndex)
-                    || (newIndex > (oldIndex + 1))))
+                && (!!toData.replace
+                  || (fromData.parentUid !== this._uid))
               ) {
-                fromData.parentSource.splice(oldIndex, 1);
+                deleted = fromData.parentSource.splice(oldIndex, 1);
               }
               break;
             default:
               return;
           }
-          if (toData.replace) {
+          if (!!toData.replace) {
             let ns = bbn.fn.extend(
               true,
               {
@@ -274,16 +274,31 @@
               },
               bbn.fn.getRow(appui.cms.blocks, 'code', 'container').configuration
             );
+            if (ns.items === undefined) {
+              ns.items = [];
+            }
             ns.items.push(toData.source, newSource);
             newSource = ns;
           }
           if (bbn.fn.isNull(oldIndex)
-            || ((fromData.parentSource !== undefined)
-              && ((fromData.parentUid !== this._uid)
-                || ((newIndex < oldIndex)
-                  || (newIndex > (oldIndex + 1)))))
+            || !!deleted
           ) {
+            if (!!deleted
+              && (fromData.parentUid === this._uid)
+              && (oldIndex < newIndex)
+            ) {
+              newIndex--;
+            }
             this.source.splice(newIndex, toData.replace ? 1 : 0, newSource);
+          }
+          else if ((fromData.parentUid === this._uid)
+            && ((newIndex < oldIndex)
+            || (newIndex > (oldIndex + 1)))
+          ){
+            if (newIndex > oldIndex) {
+              newIndex--;
+            }
+            bbn.fn.move(this.source, oldIndex, newIndex);
           }
         }
       },

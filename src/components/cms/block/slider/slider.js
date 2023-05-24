@@ -202,7 +202,6 @@
         if (this.source._elementor?.key) {
           let comps = appui.findAllByKey(this.source._elementor.key, '.appui-note-cms-block');
           if (!!comps) {
-            bbn.fn.log('aaaa', comps)
             bbn.fn.each(comps, c => {
               let s = c.find('appui-note-cms-block-slider');
               if (!!s) {

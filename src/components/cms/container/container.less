@@ -9,10 +9,13 @@
   > .@{componentName}-component {
     min-height: 1.8em;
     &.@{componentName}-selected {
-      border-color: var(--selected-border) !important;
+      border: @border-width dotted var(--selected-border) !important;
     }
     &.@{componentName}-selectable {
-      border: @border-width dotted var(--default-border);
+      border: @border-width dotted transparent;
+      &:hover, &.@{componentName}-empty {
+        border-color: var(--default-border);
+      }
     }
     .@{componentName}-droparea {
       color: var(--default-border);

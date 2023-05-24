@@ -49,7 +49,12 @@
                     "text": "Container",
                     "code": "container",
                     "description": "A simple container with multiple blocks",
-                    "icon": "nf nf-mdi-table_row"
+                    "icon": "nf nf-mdi-table_row",
+                    "configuration": {
+                      "items": [],
+                      "orientation": "horizontal",
+                      "layout": ""
+                    }
                 },
                 {
                     "text": "Feature",

@@ -3,7 +3,6 @@
        'bbn-vspadded': !vertical,
        'bbn-h-100': !!vertical,
        'bbn-hspadded': !!vertical,
-       'bbn-vpadded': !!vertical,
        'vertical': !!vertical
      }]"
      @mouseover="isOver = true"
