@@ -122,7 +122,7 @@
     <!--Widgets menu-->
     <div :class="{slider: true, opened: showWidgets}">
       <bbn-scroll axis="y">
-        <div class="bbn-w-100 bbn-middle bbn-lpadding bbn-grid grid-dropper bbn-unselectable">
+        <div class="bbn-lpadding bbn-grid grid-dropper bbn-unselectable">
           <appui-note-cms-dropper v-for="(v, i) in allBlocks"
                                   :key="v.id"
                                   :description="v.description"

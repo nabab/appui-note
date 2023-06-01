@@ -61,7 +61,8 @@
         ready: true,
         initialSource: null,
         currentDragging: false,
-        gridLayout: {}
+        gridLayout: {},
+        editor: false
       }
     },
     computed: {
@@ -141,6 +142,7 @@
         return false;
       },
       addBlock() {
+        bbn.fn.log('ADDBLOCK')
         if (this.source.items === undefined) {
           this.$set(this.source, 'items', []);
         }
@@ -184,7 +186,7 @@
           switch (fromData.type) {
             case 'cmsDropper':
               bbn.fn.iterate(fromData.cfg || {}, (v, k) => newSource[k] = v);
-              newSource._elementor = this.randomString(32, 32);
+              newSource._elementor = this.editor.getElementorDefaultObj();
               break;
             case 'cmsContainerBlock':
             case 'cmsBlock':
@@ -205,7 +207,7 @@
               true,
               {
                 type: 'container',
-                _elementor: this.randomString(32, 32)
+                _elementor: this.editor.getElementorDefaultObj()
               },
               bbn.fn.getRow(appui.cms.blocks, 'code', 'container').configuration
             );
@@ -270,6 +272,7 @@
       if (this.source.orientation === undefined) {
         this.$set(this.source, 'orientation', 'horizontal');
       }
+      this.$set(this, 'editor', this.closest('appui-note-cms-editor'));
     },
     watch: {
       gridLayout: {
