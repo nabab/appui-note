@@ -82,6 +82,18 @@
                             value: 'right',
                             icon: 'nf nf-fa-align_right'
                           }, {
+                          text: _('Space between'),
+                          value: 'space-between',
+                          icon: 'nf nf-md-align_horizontal_distribute'
+                        }, {
+                          text: _('Space around'),
+                          value: 'space-around',
+                          icon: 'nf nf-md-align_horizontal_distribute'
+                        }, {
+                          text: _('Space evenly'),
+                          value: 'space-evenly',
+                          icon: 'nf nf-md-align_horizontal_distribute'
+                        }, {
                             text: _('No value'),
                             value: null,
                             icon: 'nf nf-fa-times'
@@ -152,9 +164,13 @@
                   :value="1"
                   :novalue="0"/>
   </div>
+  <div v-else-if="!source.content && $parent.selectable"
+        class="bbn-alt-background bbn-middle bbn-lpadded"
+        style="overflow: hidden">
+    <i class="bbn-xxxxl nf nf-fae-galery"/>
+  </div>
   <div v-else
-       class="bbn-flex"
-       :style="align">
+       class="bbn-flex">
     <div class="bbn-block"
          :style="{'width': source.width, 'height': source.height}">
       <bbn-gallery :source="gallerySourceUrl"
@@ -172,7 +188,8 @@
                    :item-width="itemWidth"
                    item-width-unit="%"
                    :column-gap="source.columnGap"
-                   :pager="!!source.pager"/>
+                   :pager="!!source.pager"
+                   :align="source.align"/>
     </div>
   </div>
 </div>

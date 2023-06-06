@@ -90,12 +90,8 @@
 		<div class="bbn-flex"
 				 :style="align">
       <div v-if="$parent.selectable && !source.content"
-           class="bbn-alt-background bbn-middle bbn-lpadded"
-           :style="{
-             width: source.width,
-             height: source.height,
-             overflow: 'hidden'
-           }">
+           class="bbn-alt-background bbn-middle bbn-lpadded bbn-w-100"
+           style="overflow: hidden">
         <i class="bbn-xxxxl nf nf-fa-image"/>
       </div>
 			<a v-if="!!source.href && !!source.content"

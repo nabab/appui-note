@@ -16,7 +16,7 @@
      }"
      @dragend="e => $emit('dragend', e)"
      @dragstart="e => $emit('dragstart', e)">
-  <i :class="[icon + ' bbn-lg']"/>
+  <i :class="[icon, ' bbn-xl']"/>
   <span class="bbn-s bbn-top-smargin"
         v-text="title"/>
 </div>

@@ -164,6 +164,11 @@
                     :novalue="0"/>
     </div>
   </div>
+  <div v-else-if="$parent.selectable && !source.content"
+       class="bbn-alt-background bbn-middle bbn-lpadded bbn-w-100"
+       style="overflow: hidden">
+    <i class="bbn-xxxxl nf nf-md-table_row"/>
+  </div>
   <div v-else
        class="bbn-w-100"
        :style="{

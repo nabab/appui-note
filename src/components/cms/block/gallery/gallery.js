@@ -46,21 +46,6 @@
     computed: {
       isConfig() {
         return this.settings;
-      },
-      align(){
-        let style = {};
-        switch (this.source.align) {
-          case 'left':
-            style.justifyContent = 'flex-start';
-            break;
-          case 'center':
-            style.justifyContent = 'center';
-            break;
-          case 'right':
-            style.justifyContent = 'flex-end';
-            break;
-        }
-        return style;
       }
     },
     methods: {

@@ -82,6 +82,11 @@
       <bbn-input  v-model="source.class"/>
     </div>
   </div>
+  <div v-else-if="!source.content && $parent.selectable"
+        class="bbn-alt-background bbn-middle bbn-lpadded"
+        style="overflow: hidden">
+    <i class="bbn-xxxxl nf nf-md-gesture_tap_button"/>
+  </div>
   <div v-else
        class="bbn-w-100" :style="'text-align:'+source.align">
     <bbn-button :url="source.url"

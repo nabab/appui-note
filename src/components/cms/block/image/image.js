@@ -57,10 +57,12 @@
         this.getPopup().close();
       },
       toggleAutoWidth(){
-        this.$set(this.source, 'width', this.source.width === 'auto' ? '10' + this.getRef('widthRange').currentUnit : 'auto');
+        let isActive = (this.source.width === 'auto') || (this.source.width === '') || (this.source.width === undefined);
+        this.$set(this.source, 'width', isActive ? '10' + this.getRef('widthRange').currentUnit : 'auto');
       },
       toggleAutoHeight(){
-        this.$set(this.source, 'height', this.source.height === 'auto' ? '10' + this.getRef('heighttRange').currentUnit : 'auto');
+        let isActive = (this.source.height === 'auto') || (this.source.height === '') || (this.source.height === undefined);
+        this.$set(this.source, 'height', isActive ? '10' + this.getRef('heightRange').currentUnit : 'auto');
       }
     },
     components: {
