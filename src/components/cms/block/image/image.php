@@ -1,13 +1,14 @@
 <!-- HTML Document -->
 
 <div :class="componentClass">
-  <div v-if="mode === 'edit'">
-    <div class="bbn-padded">
+  <div v-if="mode === 'edit'"
+       class="bbn-w-100">
+    <div class="bbn-padded bbn-w-100">
       <div class="bbn-grid-fields">
         <label v-text="_('Image')"></label>
         <div class="appui-note-cms-block-image-preview bbn-flex">
           <bbn-button icon="nf nf-fae-galery"
-										  :notext="false"
+										  :notext="true"
 					 						@click="openGallery"
 											title="<?=_('Select an image')?>"
 											class="bbn-right-sspace"/>
@@ -16,22 +17,33 @@
 							 v-if="!!source.content">
         </div>
         <label v-text="_('Width')"></label>
-				<bbn-range v-model="source.width"
-									 :min="10"
-									 :max="2000" 
-									 :step="10"
-									 :show-reset="false"
-									 :show-numeric="true"
-									 :show-units="true"/>
+        <div>
+          <bbn-range v-model="source.width"
+                     :show-reset="false"
+                     :show-numeric="true"
+                     :show-units="true"
+                     ref="widthRange"
+                     :disabled="(source.width === 'auto') || (source.width === '') || (source.width === undefined)"/>
+          <bbn-button :class="['bbn-upper', 'bbn-w-100', 'bbn-s', 'bbn-top-sspace', {
+                        'bbn-state-active': (source.width === 'auto') || (source.width === '') || (source.width === undefined)
+                      }]"
+                      @click="toggleAutoWidth"
+                      :text="_('Auto')"/>
+        </div>
 				<label><?=_('Height')?></label>
-				<bbn-range v-model="source.height"
-									 :min="10"
-									 :max="2000"
-									 :step="10"
-									 :show-reset="false"
-									 :show-numeric="true"
-									 :show-units="true"/>
-
+        <div>
+          <bbn-range v-model="source.height"
+                     :show-reset="false"
+                     :show-numeric="true"
+                     :show-units="true"
+                     ref="heightRange"
+                     :disabled="(source.height === 'auto') || (source.height === '') || (source.height === undefined)"/>
+          <bbn-button :class="['bbn-upper', 'bbn-w-100', 'bbn-s', 'bbn-top-sspace', {
+                        'bbn-state-active': (source.height === 'auto') || (source.height === '') || (source.height === undefined)
+                      }]"
+                      @click="toggleAutoHeight"
+                      :text="_('Auto')"/>
+        </div>
         <label v-text="_('Alignment')"></label>
         <div>
         	<div class="bbn-block">
@@ -71,15 +83,23 @@
 											 class="bbn-w-100"/>
 					</div>
 				</div>
-				
-      </div> 
+      </div>
     </div>
-  </div>          
+  </div>
   <div v-else>
 		<div class="bbn-flex"
 				 :style="align">
-			<a v-if="!!source.href"
-         :style="{'width': source.width, 'height': source.height}"
+      <div v-if="$parent.selectable && !source.content"
+           class="bbn-alt-background bbn-middle bbn-lpadded"
+           :style="{
+             width: source.width,
+             height: source.height,
+             overflow: 'hidden'
+           }">
+        <i class="bbn-xxxxl nf nf-fa-image"/>
+      </div>
+			<a v-if="!!source.href && !!source.content"
+         :style="{width: source.width, height: source.height}"
 				 target="_self"
 				 :href="$parent.linkURL ? $parent.linkURL + source.href : source.href"
 				 class="bbn-c">

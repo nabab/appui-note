@@ -64,25 +64,6 @@
       }
     },
     methods: {
-      getItemWidth(){
-        this.$nextTick(() => {
-          let gallery = this.getRef('gallery'),
-              width = this.isMobile ? 49 : this.source.imageWidth;
-          if (width) {
-            if (gallery) {
-              //the column gap to percent
-              let percentGap = gallery.columnGap * 100 / gallery.lastKnownWidth ;
-              this.itemWidth = gallery.lastKnownWidth / 100 * (width - percentGap);
-            }
-            else{
-              this.itemWidth = parseInt(width);
-            }
-          }
-          else {
-            this.itemWidth = 200
-          }
-        })
-      },
       isInConfig(fieldName) {
         return this.config[fieldName] !== undefined;
       },
@@ -96,7 +77,38 @@
             this.getRef('galleryList').updateData();
           }
         });
+      },
+      checkImageWidth(val){
+        if (this.isMobile) {
+          this.itemWidth = 49;
+          return;
+        }
+        else if (val) {
+          let value = parseInt(val);
+          if (bbn.fn.isString(val)) {
+            let unit = val.replace(value, '');
+            if (unit === '%') {
+              this.source.imageWidth = value > 100 ? 100 : value;
+            }
+          }
+          else if (bbn.fn.isNumber(val)) {
+            this.source.imageWidth = value;
+          }
+        }
+        else {
+          this.source.imageWidth = 33;
+        }
+        this.itemWidth = this.source.imageWidth;
       }
+    },
+    beforeMount(){
+      if(this.source.zoomable){
+        this.source.mode = 'fullscreen'
+      }
+      if (this.source.imageWidth) {
+        this.checkImageWidth(this.source.imageWidth);
+      }
+
     },
     watch: {
       'source.mode'(val){
@@ -105,13 +117,7 @@
         }
       },
       'source.imageWidth'(val){
-        if(bbn.fn.isString(val)){
-          let unit = val.replace(parseInt(val), '');
-          if(unit === '%'){
-            this.source.imageWidth = parseInt(val)
-          }
-          this.getItemWidth()
-        }
+        this.checkImageWidth(val);
       },
       'source.source'(){
         let gallery = this.getRef('gallery');
@@ -144,23 +150,6 @@
           this.source.sourceInfo = '';
         }
       }
-    },
-    beforeMount(){
-      if(this.source.zoomable){
-        this.source.mode = 'fullscreen'
-      }
-      if(this.source.imageWidth){
-        this.source.imageWidth = parseInt(this.source.imageWidth) 
-        if(this.source.imageWidth > 100){
-          this.source.imageWidth = 33;
-        }
-      }
-
-    },
-    created() {
-      bbn.fn.extend(this.source, {
-
-      });
     }
   }
 })();

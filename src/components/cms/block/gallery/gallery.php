@@ -37,7 +37,7 @@
                :show-reset="false"
                :show-numeric="true"
                :show-units="true"/>
-    
+
     <label v-if="isConfig || !isInConfig('crop')"><?=_('Crop Image')?></label>
     <bbn-checkbox v-if="isConfig || !isInConfig('crop')"
                   v-model="source.crop"
@@ -52,44 +52,43 @@
                :step="1"
                :show-reset="false"
                :show-numeric="true"
-               unit="%"
-               />
-    
+               unit="%"/>
+
     <label v-if="isConfig || !isInConfig('columnGap')"><?=_('Column gap')?></label>
     <bbn-range v-if="isConfig || !isInConfig('columnGap')"
                v-model="source.columnGap"
-               :min="2"
+               :min="0"
                :max="100"
                :step="1"
                :default="10"
                :show-reset="false"
-               :show-numeric="true"
-               />
+               :show-numeric="true"/>
+
     <label v-if="isConfig || !isInConfig('align')"><?=_('Alignment')?></label>
     <div v-if="isConfig || !isInConfig('align')">
       <div class="bbn-block">
         <bbn-radiobuttons :notext="true"
                           v-model="source.align"
                           :source="[{
-                                   text: _('Align left'),
-                                   value: 'left',
-                                   icon: 'nf nf-fa-align_left'
-                                   }, {
-                                   text: _('Align center'),
-                                   value: 'center',
-                                   icon: 'nf nf-fa-align_center'
-                                   }, {
-                                   text: _('Align right'),
-                                   value: 'right',
-                                   icon: 'nf nf-fa-align_right'
-                                   }, {
-                                   text: _('No value'),
-                                   value: null,
-                                   icon: 'nf nf-fa-times'
-                                   }]"/>
+                            text: _('Align left'),
+                            value: 'left',
+                            icon: 'nf nf-fa-align_left'
+                          }, {
+                            text: _('Align center'),
+                            value: 'center',
+                            icon: 'nf nf-fa-align_center'
+                          }, {
+                            text: _('Align right'),
+                            value: 'right',
+                            icon: 'nf nf-fa-align_right'
+                          }, {
+                            text: _('No value'),
+                            value: null,
+                            icon: 'nf nf-fa-times'
+                          }]"/>
       </div>
     </div>
-    
+
     <label><?=_('Mode')?></label>
     <div class="bbn-block">
       <bbn-radiobuttons :notext="true"
@@ -104,11 +103,13 @@
                           icon: 'nf nf-mdi-fullscreen'
                         }]"/>
     </div>
+
     <label v-if="isConfig || !isInConfig('scrollable')"><?=_('Scrollable')?></label>
     <bbn-checkbox v-if="isConfig || !isInConfig('acrollable')"
                   v-model="source.scrollable"
                   :value="1"
                   :novalue="0"/>
+
 
     <label v-if="isConfig || !isInConfig('pageable')"><?=_('Pageable')?></label>
     <bbn-checkbox v-if="isConfig || !isInConfig('pageable')"
@@ -150,7 +151,6 @@
                   v-model="source.toolbar"
                   :value="1"
                   :novalue="0"/>
-
   </div>
   <div v-else
        class="bbn-flex"
@@ -159,11 +159,8 @@
          :style="{'width': source.width, 'height': source.height}">
       <bbn-gallery :source="gallerySourceUrl"
                    :class="{'cropped' : source.crop}"
-                   :data="{
-                          idGroup: source.content
-                          }"
+                   :data="{idGroup: source.content}"
                    ref="gallery"
-                   @resize="getItemWidth"
                    :scrollable="!!source.scrollable"
                    :pageable="!!source.pageable"
                    :zoomable="!!source.zoomable && (source.mode === 'fullscreen')"
@@ -172,8 +169,9 @@
                    :resizable="!!source.resizable"
                    :toolbar="!!source.toolbar"
                    path-name="path"
-                   :itemWidth="itemWidth"
-                   :columnGap="source.columnGap"
+                   :item-width="itemWidth"
+                   item-width-unit="%"
+                   :column-gap="source.columnGap"
                    :pager="!!source.pager"/>
     </div>
   </div>
