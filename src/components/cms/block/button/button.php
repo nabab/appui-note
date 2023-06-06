@@ -10,7 +10,7 @@
       <label v-text="_('Dimensions')"></label>
       <div>
         <div class="bbn-block bbn-s">
-          <bbn-radiobuttons  v-model="source.dimensions"
+          <bbn-radiobuttons v-model="source.dimensions"
                             :source="[{
                                 text: _('Default'),
                                 value: '',
@@ -37,8 +37,8 @@
       </div>
       <label v-text="_('Space')"></label>
       <div>
-        <div class="bbn-block">
-          <bbn-radiobuttons  v-model="source.padding"
+        <div class="bbn-block bbn-s">
+          <bbn-radiobuttons v-model="source.padding"
                             :source="[
                               {
                                 text: _('No space'),
@@ -81,6 +81,11 @@
       <label v-text="_('Class')"/>
       <bbn-input  v-model="source.class"/>
     </div>
+  </div>
+  <div v-else-if="!source.content && $parent.selectable"
+        class="bbn-alt-background bbn-middle bbn-lpadded"
+        style="overflow: hidden">
+    <i class="bbn-xxxxl nf nf-md-gesture_tap_button"/>
   </div>
   <div v-else
        class="bbn-w-100" :style="'text-align:'+source.align">

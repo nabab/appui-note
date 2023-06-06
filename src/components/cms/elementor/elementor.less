@@ -3,14 +3,12 @@
 @border-width: 2px;
 
 .appui-note-cms-elementor {
-  .appui-note-cms-elementor-guide {
-    position: absolute;
-    left: 2em;
-    right: 2em;
-    pointer-events: none;
-    border-bottom: @border-width dashed #ccc;
-    height: 0.3em;
-    display: none;
+  .appui-note-cms-elementor-droparea {
+    color: var(--alt-background);
+    border: @border-width dashed var(--alt-background);
+    &.bbn-droppable-over {
+      color: var(--secondary-background) !important;
+    }
   }
   .appui-note-cms-elementor-divider  {
     display: none;

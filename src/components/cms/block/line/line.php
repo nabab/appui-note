@@ -63,5 +63,10 @@
     <slot></slot>
     <hr v-if="['both', 'bottom', true].includes(line)"
         :style="style">
+    <div v-if="!line && $parent.selectable"
+         class="bbn-alt-background bbn-middle bbn-lpadded bbn-w-100"
+         style="overflow: hidden">
+      <i class="bbn-xxxxl nf nf-cod-horizontal_rule"/>
+    </div>
   </div>
 </div>

@@ -190,46 +190,123 @@
       preview: {
         type: Boolean,
         default: false
+      },
+      dragging: {
+        type: Boolean,
+        default: false
+      },
+      itemSelected: {
+        type: String
       }
     },
     data(){
       return {
-        currentEditedIndex: -1,
         types: types,
-        indexInContainer: -1,
-        dragData: bbn.fn.map(this.source, (cfg, i) => {
-          return {data: bbn.fn.extend({}, cfg, {inside: true, index: i}), mode: 'self'};
-        }),
+        editor: {},
+        currentDragging: false
       };
+    },
+    computed: {
+      isDragging(){
+        return !!this.dragging || !!this.currentDragging;
+      }
     },
     methods: {
       unselect() {
-        this.currentEditedIndex = -1;
-        this.indexInContainer = -1;
         this.$emit('unselect');
       },
-      dragStart() {
-        let currentElement = arguments[0].target;
-        this.$emit('dragstart', {
-          dataIndex: currentElement.getAttribute('data-index'),
-          dataContainerIndex: currentElement.getAttribute('data-container-index')
-        });
+      getDraggableData(index, src, type){
+        if (!this.preview) {
+          return {
+            data: {
+              type: type,
+              index: index,
+              source: src,
+              parentUid: this._uid,
+              parentSource: this.source
+            },
+            mode: 'clone'
+          };
+        }
+
+        return false;
+      },
+      onDragStart(ev){
+        this.currentDragging = true;
+      },
+      onDragEnd(ev){
+        this.currentDragging = false;
+      },
+      onDrop(ev){
+        this.onDragEnd();
+        let fromData = ev.detail.from.data;
+        if (!!fromData.type && (fromData.source !== undefined)) {
+          let newSource = bbn.fn.clone(fromData.source);
+          let toData = ev.detail.to.data;
+          let oldIndex = null;
+          let newIndex = toData.index;
+          let deleted = false;
+          switch (fromData.type) {
+            case 'cmsDropper':
+              bbn.fn.iterate(fromData.cfg || {}, (v, k) => newSource[k] = v);
+              newSource._elementor = this.editor.getElementorDefaultObj();
+              break;
+            case 'cmsContainerBlock':
+            case 'cmsBlock':
+            case 'cmsContainer':
+              oldIndex = fromData.index;
+              if ((fromData.parentSource !== undefined)
+                && (!!toData.replace
+                  || (fromData.parentUid !== this._uid))
+              ) {
+                deleted = fromData.parentSource.splice(oldIndex, 1);
+              }
+              break;
+            default:
+              return;
+          }
+          if (!!toData.replace) {
+            let ns = bbn.fn.extend(
+              true,
+              {
+                type: 'container',
+                _elementor: this.editor.getElementorDefaultObj()
+              },
+              bbn.fn.getRow(appui.cms.blocks, 'code', 'container').configuration
+            );
+            if (ns.items === undefined) {
+              ns.items = [];
+            }
+            ns.items.push(toData.source, newSource);
+            newSource = ns;
+          }
+          if (bbn.fn.isNull(oldIndex)
+            || !!deleted
+          ) {
+            if (!!deleted
+              && (fromData.parentUid === this._uid)
+              && (oldIndex < newIndex)
+            ) {
+              newIndex--;
+            }
+            this.source.splice(newIndex, toData.replace ? 1 : 0, newSource);
+          }
+          else if ((fromData.parentUid === this._uid)
+            && ((newIndex < oldIndex)
+            || (newIndex > (oldIndex + 1)))
+          ){
+            if (newIndex > oldIndex) {
+              newIndex--;
+            }
+            bbn.fn.move(this.source, oldIndex, newIndex);
+          }
+        }
       },
       /*
       Emit the current source object (from a block) to the editor component.
       */
-      selectBlock(index, source) {
-        this.currentEditedIndex = index;
-        this.indexInContainer = -1;
-        this.$emit('changes', index, source);
-      },
-      /*
-      Emit the current source object (from a container) to the editor component.
-      */
-      selectContainer(index, source, indexInContainer) {
-        this.currentEditedIndex = index;
-        this.indexInContainer = indexInContainer;
-        this.$emit('changes', index, source, indexInContainer);
+      selectBlock(key, source, items) {
+        this.$emit('changes', key, source, items);
       },
       /*
       Ask the user to save changes and submit the form
@@ -240,27 +317,24 @@
           if (form.isValid()) {
             this.confirm(bbn._("Do you want to save your changes?"), () => {
               form.submit();
-              this.currentEditedIndex = idx;
+              //this.currentEditingKey = idx;
             }, () => {
-              this.currentEditedIndex = idx;
+              //this.currentEditingKey = idx;
             });
           }
           else {
             this.confirm(bbn._("Do you want to abandon your changes?"), () => {
-              this.currentEditedIndex = idx;
+              //this.currentEditingKey = idx;
             });
           }
         }
         else {
-          this.currentEditedIndex = idx;
+          //this.currentEditingKey = idx;
         }
-      },
-      /*
-      Emit event when a block is dragged
-      */
-      onDrag() {
-        this.$emit('dragoverdroppable', ...arguments);
-      },
+      }
+    },
+    mounted(){
+      this.$set(this, 'editor', this.closest('appui-note-cms-editor'));
     }
   };
 })();

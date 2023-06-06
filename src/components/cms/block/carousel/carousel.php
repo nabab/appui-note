@@ -92,6 +92,11 @@
                   :value="1"
                   :novalue="0"/>
   </div>
+  <div v-else-if="!source.content && $parent.selectable"
+        class="bbn-alt-background bbn-middle bbn-lpadded"
+        style="overflow: hidden">
+    <i class="bbn-xxxxl nf nf-mdi-view_carousel"/>
+  </div>
   <div v-else
        class="bbn-flex"
        :style="align">

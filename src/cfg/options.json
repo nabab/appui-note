@@ -37,7 +37,7 @@
                     "text": "Button",
                     "code": "button",
                     "description": "A simple button block",
-                    "icon": "nf nf-fa-toggle_on"
+                    "icon": "nf nf-md-gesture_tap_button"
                 },
                 {
                     "text": "Carousel",
@@ -49,7 +49,12 @@
                     "text": "Container",
                     "code": "container",
                     "description": "A simple container with multiple blocks",
-                    "icon": "nf nf-mdi-table_row"
+                    "icon": "nf nf-md-dots_square",
+                    "configuration": {
+                      "items": [],
+                      "orientation": "horizontal",
+                      "layout": ""
+                    }
                 },
                 {
                     "text": "Feature",
@@ -67,7 +72,7 @@
                     "text": "Html",
                     "code": "html",
                     "description": "A simple HTML block",
-                    "icon": "nf nf-dev-html5"
+                    "icon": "nf nf-fa-html5"
                 },
                 {
                     "text": "Image",
@@ -79,19 +84,19 @@
                     "text": "Line",
                     "code": "line",
                     "description": "A simple line delimiter",
-                    "icon": "nf nf-mdi-vector_line"
+                    "icon": "nf nf-cod-horizontal_rule"
                 },
                 {
                     "text": "Product",
                     "code": "product",
                     "description": "A simple product block",
-                    "icon": "nf nf-mdi-package"
+                    "icon": "nf nf-cod-package"
                 },
                 {
                     "text": "Slider",
                     "code": "slider",
                     "description": "A simple slider block",
-                    "icon": "nf nf-fa-sliders"
+                    "icon": "nf nf-md-table_row"
                 },
                 {
                     "text": "Social",
@@ -121,7 +126,7 @@
                     "text": "Video",
                     "code": "video",
                     "description": "A simple video block",
-                    "icon": "nf nf-fa-file_video_o"
+                    "icon": "nf nf-md-video_vintage"
                 }
             ],
             "cfg": {

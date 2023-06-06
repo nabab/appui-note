@@ -42,9 +42,9 @@
                     @click="source.fontStyle = source.fontStyle === 'italic' ? 'normal' : 'italic'"
                     :notext="true"
                     icon="nf nf-fa-italic"
-                    :class="['bbn-no-radius', {
+                    :class="{
                       'bbn-state-active': source.fontStyle === 'italic'
-                    }]"/>
+                    }"/>
       </div>
       <label><?=_('Decoration')?></label>
       <div>
@@ -79,7 +79,13 @@
     <appui-note-cms-block-line :source="source"
                                mode="read"
                                :details="false">
-      <component :is="source.tag"
+      <div v-if="$parent.selectable && !source.content"
+           class="bbn-alt-background bbn-middle bbn-lpadded"
+           style="overflow: hidden">
+        <i class="bbn-xxxxl nf nf-md-format_title"/>
+      </div>
+      <component v-else
+                 :is="source.tag"
                  :style="currentStyle"
                  v-html="source.content"/>
     </appui-note-cms-block-line>

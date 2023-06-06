@@ -11,7 +11,7 @@
     },
     computed: {
       currentContent(){
-        return this.source.content || '&nbsp;';
+        return this.source.content || (this.$parent.selectable && (this.mode === 'read') ? '' : '&nbsp;');
       },
       content: {
         get() {

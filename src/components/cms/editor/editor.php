@@ -4,24 +4,22 @@
        v-if="data">
     <!--Elementor-->
     <div class="bbn-flex-fill bbn-flex-height">
-      <div class="bbn-flex" style="justify-content: center">
-        <div class="bbn-flex bbn-spadding bbn-alt-background bbn-radius-bottom bbn-xl" style="justify-content: center; align-items: center; gap: 10px;">
+      <!-- Dock -->
+      <div class="bbn-middle">
+        <div class="appui-note-cms-editor-dock bbn-middle bbn-spadding bbn-radius-bottom bbn-xl">
           <bbn-button icon="nf nf-fa-save"
-                      title="<?= _("Save the note") ?>"
+                      title="<?= _("Save") ?>"
                       :disabled="!isChanged"
-                      @click="() => {$refs.form.submit()}"
+                      @click="save"
                       :notext="true"/>
           <bbn-button icon="nf nf-mdi-settings"
                       title="<?= _("Page's properties") ?>"
-                      @click="showFloater = true"
+                      @click="openSettings"
                       :notext="true"/>
           <bbn-button icon="nf nf-mdi-widgets"
                       title="<?= _("widgets") ?>"
                       :notext="true"
-                      @click="() => {
-                              showWidgets = !showWidgets;
-                              showSlider = false;
-                              }"/>
+                      @click="toggleWidgets"/>
           <bbn-button icon="nf nf-md-code_json"
                       v-if="isDev"
                       title="<?= _("See JSON") ?>"
@@ -35,14 +33,6 @@
         </div>
       </div>
       <div class="bbn-flex-fill">
-        <bbn-form ref="form"
-                  class="bbn-hidden"
-                  @success="onSave"
-                  @submit="submit"
-                  :source="source"
-                  :action="action"
-                  :buttons="[]"
-                  :scrollable="true"/>
         <bbn-scroll class="bbn-overlay"
                     @scroll="scrollElementor">
           <bbn-json-editor v-if="showJSON && isDev"
@@ -54,13 +44,14 @@
                                     ref="editor"
                                     :all-blocks="allBlocks"
                                     @changes="handleSelected"
-                                    v-droppable="true"
                                     @drop.prevent="onDrop"
                                     :preview="preview"
                                     @dragoverdroppable="dragOver"
                                     :position="nextPosition"
                                     @dragstart="dragStart"
-                                    @unselect="unselectElements"/>
+                                    @unselect="unselectElements"
+                                    :dragging="isDragging"
+                                    :item-selected="currentEditingKey"/>
         </bbn-scroll>
       </div>
     </div>
@@ -68,8 +59,8 @@
     <div :class="{slider: true, opened: showSlider}">
       <bbn-scroll axis="y">
         <div class="bbn-w-100"
-             v-if="currentEdited">
-          <h2 v-text="currentEditedTitle"
+             v-if="currentEditing">
+          <h2 v-text="currentEditingTitle"
               class="bbn-c" />
           <div class="bbn-w-100 bbn-flex-width">
             <div class="bbn-spadding appui-note-cms-editor-position">
@@ -77,54 +68,40 @@
                           @click="scrollToSelected"
                           text="<?= _("Scroll to selected element") ?>"
                           icon="nf nf-mdi-target"/>
-              <template v-if="currentEditedIndexInContainer === -1"
+              <template v-if="currentEditingParentItems?.length > 1"
                         class="bbn-padding appui-note-cms-editor-position">
                 <bbn-button :notext="true"
-                            @click="move('top')"
-                            text="<?= _("Move top") ?>"
-                            :disabled="(source.items.length <= 1) || (currentEditedIndex < 1)"
-                            icon="nf nf-mdi-arrow_collapse_up"/>
+                            @click="move('start')"
+                            text="<?= _("Move to start") ?>"
+                            :disabled="currentEditingIndex < 1"
+                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-mdi-arrow_collapse_up' : 'nf nf-mdi-arrow_collapse_left'"/>
                 <bbn-button :notext="true"
-                            @click="move('up')"
-                            text="<?= _("Move up") ?>"
-                            :disabled="(source.items.length <= 1) || !currentEditedIndex"
-                            icon="nf nf-mdi-arrow_up"/>
+                            @click="move('before')"
+                            :text="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? _('Move up') : _('Move left')"
+                            :disabled="!currentEditingIndex"
+                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-mdi-arrow_up' : 'nf nf-mdi-arrow_left'"/>
                 <bbn-button :notext="true"
-                            @click="move('down')"
-                            text="<?= _("Move down") ?>"
-                            :disabled="(source.items.length <= 1) || (currentEditedIndex === source.items.length - 1)"
-                            icon="nf nf-mdi-arrow_down"/>
+                            @click="move('after')"
+                            :text="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? _('Move down') : _('Move right')"
+                            :disabled="currentEditingIndex === (currentEditingParentItems.length - 1)"
+                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-mdi-arrow_down' : 'nf nf-mdi-arrow_right'"/>
                 <bbn-button :notext="true"
-                            @click="move('bottom')"
-                            text="<?= _("Move bottom") ?>"
-                            :disabled="(source.items.length <= 1) || (currentEditedIndex > source.items.length - 2)"
-                            icon="nf nf-mdi-arrow_collapse_down"/>
-              </template>
-              <!-- Leo to do -->
-              <template v-else-if="currentEditedIndex > -1"
-                   class="bbn-padding appui-note-cms-editor-position">
-                <bbn-button :notext="true"
-                            @click="move('left')"
-                            text="<?= _("Move left") ?>"
-                            :disabled="(source.items.length <= 1) || (currentEditedIndex < 1)"
-                            icon="nf nf-mdi-arrow_left"/>
-                <bbn-button :notext="true"
-                            @click="move('right')"
-                            text="<?= _("Move right") ?>"
-                            :disabled="(source.items.length <= 1) || (currentEditedIndex > source.items.length - 2)"
-                            icon="nf nf-mdi-arrow_right"/>
+                            @click="move('end')"
+                            text="<?= _("Move to end") ?>"
+                            :disabled="currentEditingIndex === (currentEditingParentItems.length - 1)"
+                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-mdi-arrow_collapse_down' : 'nf nf-mdi-arrow_collapse_right'"/>
               </template>
             </div>
-            <div class="bbn-flex-fill">
-              <appui-note-cms-block	@configinit="setOriginalConfig"
-                                    v-if="isReady"
-                                    class="bbn-contain"
-                                    :source="currentEdited"
-                                    :cfg="currentBlockConfig"
-                                    ref="blockEditor"
-                                    mode="edit"/>
+            <div class="bbn-flex-fill bbn-right-spadded">
+              <component	@configinit="setOriginalConfig"
+                          class="bbn-contain bbn-w-100"
+                          :source="currentEditing"
+                          :cfg="currentBlockConfig"
+                          ref="blockEditor"
+                          mode="edit"
+                          :is="currentEditing.type === 'container' ? 'appui-note-cms-container' : 'appui-note-cms-block'"
+                          :key="currentEditing._elementor.key"/>
             </div>
-
           </div>
           <div class="bbn-w-100 bbn-c bbn-padding">
             <bbn-button @click="saveConfig"
@@ -136,9 +113,6 @@
                         icon="nf nf-fa-trash"/>
           </div>
         </div>
-        <div v-else-if="!currentEdited && currentContainer">
-          <appui-note-cms-container-config :source="currentContainer"/>
-        </div>
       </bbn-scroll>
       <div class="bbn-top-right bbn-p bbn-spadding"
            @click="showSlider = false">
@@ -148,7 +122,7 @@
     <!--Widgets menu-->
     <div :class="{slider: true, opened: showWidgets}">
       <bbn-scroll axis="y">
-        <div class="bbn-w-100 bbn-middle bbn-lpadding bbn-grid grid-dropper bbn-unselectable">
+        <div class="bbn-lpadding bbn-grid grid-dropper bbn-unselectable">
           <appui-note-cms-dropper v-for="(v, i) in allBlocks"
                                   :key="v.id"
                                   :description="v.description"
@@ -157,7 +131,9 @@
                                   :special="v.special"
                                   :title="v.text"
                                   :icon="v.icon"
-                                  :default-config="v.cfg"/>
+                                  :default-config="v.cfg"
+                                  @dragend="isDragging = false"
+                                  @dragstart="isDragging = true"/>
         </div>
       </bbn-scroll>
       <div class="bbn-top-right bbn-p bbn-spadding"
@@ -166,16 +142,4 @@
       </div>
     </div>
   </div>
-  <!--Settings-->
-  <div class="bbn-modal bbn-overlay"
-       v-if="showFloater">
-  </div>
-  <bbn-floater :modal="true"
-               v-if="showFloater">
-    <appui-note-cms-settings :source="source"
-                             :typeNote="typeNote"
-                             @clear="clearCache"
-                             @close="showFloater = false"
-                             @save="saveSettings"/>
-  </bbn-floater>
 </div>

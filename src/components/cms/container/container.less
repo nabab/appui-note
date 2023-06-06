@@ -1,29 +1,41 @@
 /* LESS Document */
 
-@border-width: 1px;
+@border-width: 2px;
 
 .@{componentName} {
-
   .@{componentName}-icons {
     display: none;
   }
   > .@{componentName}-component {
     min-height: 1.8em;
     &.@{componentName}-selected {
-      border-color: var(--tertiary-border) !important;
+      border: @border-width dotted var(--selected-border) !important;
     }
     &.@{componentName}-selectable {
-      border: @border-width dashed transparent;
+      border: @border-width dotted transparent;
+      &:hover, &.@{componentName}-empty {
+        border-color: var(--default-border);
+      }
+    }
+    .@{componentName}-droparea {
+      color: var(--default-border);
+      &.bbn-droppable-over {
+        color: var(--secondary-background) !important;
+      }
     }
   }
-  &.@{componentName}-over {
+  &.@{componentName}-over:not(.@{componentName}-selected) {
     > .@{componentName}-component {
-      border-color: var(--primary-border) !important;
+      border-color: var(--hover-border) !important;
     }
   }
-/*
-  .bbn-grid-fields{
-    border: none!important;
+  .@{componentName}-guide:not(.vertical) {
+    padding-left: var(--space);
+    padding-right: var(--space);
   }
-*/
+  .@{componentName}-editor {
+    .bbn-radiobuttons {
+      width: max-content;
+    }
+  }
 }

@@ -12,13 +12,11 @@ if ($model->hasData('id', true)) {
   $data = $cms->get($model->data['id']);
   foreach($data['items'] as &$item) {
     if ($item['type'] === 'slider') {
-      $item['items'] = $item['currentItems'];
+      //$item['items'] = $item['currentItems'];
     }
   }
   //$data['items'] = $data['content'] ? json_decode($data['content']) : [];
   if (!empty($data['medias'])) {
-    
-    
     $data['medias'] = array_map(function($m){
       $files = \bbn\File\Dir::getFiles(BBN_PUBLIC . dirname($m['url']));
       $m['cacheFiles'] = $files ? array_map(function($f){
@@ -30,7 +28,6 @@ if ($model->hasData('id', true)) {
       }, $files) : [];
       return $m;
     }, $data['medias']);
-    
   }
   unset($data['content']);
   return [

@@ -4,6 +4,7 @@
   return {
     /**
      * @mixin bbn.vue.basicComponent
+     * @mixin bbn.vue.resizerComponent
      */
     mixins: [bbn.vue.basicComponent, bbn.vue.resizerComponent],
     props: {
@@ -28,8 +29,7 @@
         default: false
       },
       itemSelected: {
-        type: Number,
-        default: -1
+        type: String
       },
       selected: {
         type: Boolean,
@@ -42,6 +42,10 @@
       mode: {
         type: String,
         default: 'read'
+      },
+      dragging: {
+        type: Boolean,
+        default: false
       }
     },
     data(){
@@ -56,14 +60,49 @@
         //ready is important for the component template to be defined
         ready: true,
         initialSource: null,
-        currentItemSelected: this.itemSelected
+        currentDragging: false,
+        gridLayout: {},
+        editor: false
       }
     },
     computed: {
+      isDragging(){
+        return !!this.dragging || !!this.currentDragging;
+      },
+      isVertical(){
+        return this.source.orientation === 'vertical';
+      },
       gridStyle(){
-        let style = `gridTemplateColumns: repeat( ` + this.source.items.length + `, 1fr)`;
-        if ( bbn.fn.isMobile() ){
-          style = `gridTemplateRows: repeat( ` + this.source.items.length + `, auto)`;
+        let style = {};
+        let elements = this.source.layout?.length ? this.source.layout.split(' ') : [];
+        let arr = [];
+        if (this.overable && !!elements) {
+          bbn.fn.each(elements, (e, i) => {
+            arr.splice(i * 2, 0, 'max-content', e);
+          });
+          arr.push('max-content');
+        }
+        else {
+          arr = elements;
+        }
+
+        let s = arr.join(' ');
+        if (this.isVertical) {
+          style.gridTemplateRows = s;
+          style.height = '100%';
+          style.maxHeight = '100%';
+        }
+        else {
+          style.gridTemplateColumns = s;
+          style.width = '100%';
+          style.maxWidth = '100%';
+        }
+        if (!!this.source.align) {
+          style.justifyContent = this.source.align;
+        }
+        if (!!this.source.valign) {
+          style.alignItems = this.source.valign;
+          style.alignContent = this.source.valign;
         }
 
         return style;
@@ -85,8 +124,30 @@
       }
     },
     methods: {
+      randomString: bbn.fn.randomString,
+      getDraggableData(index, src, type){
+        if (this.overable) {
+          return {
+            data: {
+              type: type,
+              index: index,
+              source: src,
+              parentUid: this._uid,
+              parentSource: this.source.items
+            },
+            mode: 'clone'
+          };
+        }
+
+        return false;
+      },
       addBlock() {
+        bbn.fn.log('ADDBLOCK')
+        if (this.source.items === undefined) {
+          this.$set(this.source, 'items', []);
+        }
         this.source.items.push({
+          _elementor: this.closest('appui-note-cms-editor').getElementorDefaultObj(),
           type: 'text',
           content: ''
         });
@@ -94,21 +155,135 @@
       removeBlock(idx) {
         this.source.items.splice(idx, 1);
       },
-      clickBlock(index) {
-        this.currentItemSelected = index;
-        this.$emit('click', this.index, this.source.items[index], index);
+      selectBlock(key, src, items, ev) {
+        if (this.overable) {
+          if (ev) {
+            ev.stopImmediatePropagation();
+          }
+          this.$emit('selectblock', key, src, items);
+        }
       },
       configInit(config) {
         this.$emit('config-init', config);
-      }
+      },
+      onDragStart(ev){
+        this.currentDragging = true;
+        this.$emit('dragstart', ev);
+      },
+      onDragEnd(ev){
+        this.currentDragging = false;
+        this.$emit('dragend', ev);
+      },
+      onDrop(ev){
+        this.onDragEnd();
+        let fromData = ev.detail.from.data;
+        if (!!fromData.type && (fromData.source !== undefined)) {
+          let newSource = bbn.fn.clone(fromData.source);
+          let toData = ev.detail.to.data;
+          let oldIndex = null;
+          let newIndex = toData.index;
+          let deleted = false;
+          switch (fromData.type) {
+            case 'cmsDropper':
+              bbn.fn.iterate(fromData.cfg || {}, (v, k) => newSource[k] = v);
+              newSource._elementor = this.editor.getElementorDefaultObj();
+              break;
+            case 'cmsContainerBlock':
+            case 'cmsBlock':
+            case 'cmsContainer':
+              oldIndex = fromData.index;
+              if ((fromData.parentSource !== undefined)
+                && (!!toData.replace
+                  || (fromData.parentUid !== this._uid))
+              ) {
+                deleted = fromData.parentSource.splice(oldIndex, 1);
+              }
+              break;
+            default:
+              return;
+          }
+          if (!!toData.replace) {
+            let ns = bbn.fn.extend(
+              true,
+              {
+                type: 'container',
+                _elementor: this.editor.getElementorDefaultObj()
+              },
+              bbn.fn.getRow(appui.cms.blocks, 'code', 'container').configuration
+            );
+            if (ns.items === undefined) {
+              ns.items = [];
+            }
+            ns.items.push(toData.source, newSource);
+            newSource = ns;
+          }
+          if (bbn.fn.isNull(oldIndex)
+            || !!deleted
+          ) {
+            if (!!deleted
+              && (fromData.parentUid === this._uid)
+              && (oldIndex < newIndex)
+            ) {
+              newIndex--;
+            }
+            if (this.source.items === undefined) {
+              this.$set(this.source, 'items', []);
+            }
+            this.source.items.splice(newIndex, toData.replace ? 1 : 0, newSource);
+          }
+          else if ((fromData.parentUid === this._uid)
+            && ((newIndex < oldIndex)
+            || (newIndex > (oldIndex + 1)))
+          ){
+            if (newIndex > oldIndex) {
+              newIndex--;
+            }
+            bbn.fn.move(this.source.items, oldIndex, newIndex);
+          }
+        }
+      },
+      getWidgetName(type){
+        let blocks = (appui.cms?.blocks || []).concat(appui.cms?.pblocks || []);
+        return bbn.fn.getField(blocks, 'text', 'code', type) || bbn._('Unknown');
+      },
+      setGridLayout(){
+        let arr = [];
+        if (this.source.layout?.length) {
+          arr = this.source.layout.split(' ');
+        }
+        if (!!this.source.items?.length
+          && (arr.length < this.source.items.length)
+        ) {
+          arr = arr.concat(Array.from({length: this.source.items.length - arr.length}, a => arr.length ? 'auto' : '1fr'));
+        }
+        if (!!this.source.items?.length
+          && (arr.length > this.source.items.length)
+        ) {
+          arr.splice(this.source.items.length, arr.length);
+        }
+        this.$set(this, 'gridLayout', Object.assign({}, arr));
+        return this.gridLayout;
+      },
     },
-    watch: {
-      itemsSelected(v) {
-        this.currentItemSelected = v;
-      }
+    created(){
+      this.setGridLayout();
     },
     mounted() {
-      bbn.fn.log('prop container', this.source);
+      if (this.source.orientation === undefined) {
+        this.$set(this.source, 'orientation', 'horizontal');
+      }
+      this.$set(this, 'editor', this.closest('appui-note-cms-editor'));
+    },
+    watch: {
+      gridLayout: {
+        deep: true,
+        handler(newVal){
+          this.$set(this.source, 'layout', Object.values(newVal).join(' '));
+        }
+      },
+      'source.items'(){
+        this.setGridLayout();
+      }
     }
   };
 })(bbn);

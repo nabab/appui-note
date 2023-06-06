@@ -15,18 +15,21 @@
     padding: 1em;
     display: block;
     &.@{componentName}-selected {
-      border-color: var(--primary-border) !important;
+      border: @border-width dashed var(--selected-border) !important;
     }
     &.@{componentName}-selectable {
-      border: @border-width dashed var(--alt-background);
+      border: @border-width dashed transparent;
+      &:hover {
+        border-color: var(--default-border);
+      }
     }
 	}
-	&.@{componentName}-over {
+	&.@{componentName}-over:not(.@{componentName}-selected) {
       .@{componentName}-icons {
         display: block;
     	}
     	> .@{componentName}-component {
-      	border-color: var(--secondary-border);
+      	border-color: var(--hover-border) !important;
     	}
   	}
 

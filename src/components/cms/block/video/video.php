@@ -71,7 +71,7 @@
     <label><?=_('Width')?></label>
     <bbn-range v-model="source.width"
               :min="10"
-              :max="2000" 
+              :max="2000"
               :step="10"
               :show-reset="false"
               :show-numeric="true"
@@ -80,25 +80,27 @@
     <bbn-range v-model="source.height"
                :disabled="disableHeight"
                :min="10"
-               :max="2000" 
+               :max="2000"
                :step="10"
                :show-reset="false"
                :show-numeric="true"
                :show-units="true"/>
-      
-
-    <label><?=_('Aspect ratio')?></label>      
+    <label><?=_('Aspect ratio')?></label>
     <bbn-dropdown :source="ratios"
                   :nullable="true"
-                  v-model="source.aspectRatio"
-    />      
+                  v-model="source.aspectRatio"/>
   </div>
   <div v-else
        class="bbn-flex"
        :style="align">
-    <div class="bbn-padding bbn-c bbn-lg bbn-w-100"
-         v-text="_('Missing video content')"
-         v-if="!source.content"/>
+    <div v-if="$parent.selectable && !source.content"
+         class="bbn-alt-background bbn-middle bbn-lpadded bbn-w-100"
+         style="overflow: hidden">
+      <i class="bbn-xxxxl nf nf-md-video_vintage"/>
+    </div>
+    <div v-else-if="!source.content"
+         class="bbn-padding bbn-c bbn-lg bbn-w-100"
+         v-text="_('Missing video content')"/>
     <bbn-video v-else
                :width="source.width"
                :height="source.height"
@@ -109,5 +111,5 @@
                :muted="!!source.muted"
                :youtube="!!youtube"
                :source="source.content"/>
-  </div>     
+  </div>
 </div>

@@ -4,12 +4,10 @@
 <!-- HTML Document -->
 <div :class="[componentClass, 'bbn-w-100']">
   <div v-if="mode === 'edit'">
-        
     <div class='bbn-w-100 bbn-padding bbn-grid-fields'>
-
       <label class="bbn-l"><?=_("Product Picker")?></label>
         <div class="bbn-l">
-          <bbn-search source="admin/shop/products/list"
+          <bbn-search :source="shopRoot + 'products/list'"
                       source-text="title"
                       source-value="id"
                       component="appui-note-search-item"
@@ -67,49 +65,51 @@
         </div>
     </div>
   </div>
-  <div v-if="(mode === 'read')"
+  <div v-else
        class="bbn-w-100">
-    <div class="bbn-w-100 bbn-padded"
-         v-if="showProduct">
+    <div v-if="showProduct"
+         class="bbn-w-100 bbn-padded">
       <div class="bbn-container-ratio-4-3 bbn-bottom-smargin">
-        <a :href="source.content.url"
-           v-if="source.content.url">
+        <a v-if="productData.url"
+           :href="productData.url">
           <img :src="imageSrc"
                class="bbn-top-left product-img"
                v-if="source.showImage">
         </a>
       </div>
-      <a class="bbn-large"
-         v-if="source.content.url"
-         :href="source.content.url"
-         v-html="source.content.title"/>
-
-      <p class="product-price bbn-flex" v-if="source.showPrice">
-        <span v-if="source.content.num_variants > 1" v-html="_('From') + '&nbsp;'"></span>
-        <bbn-field :value="source.content.price"
+      <a v-if="productData.url"
+         class="bbn-large"
+         :href="productData.url"
+         v-html="productData.title"/>
+      <p v-if="source.showPrice"
+         class="product-price bbn-flex">
+        <span v-if="productData.num_variants > 1"
+              v-html="_('From') + '&nbsp;'"></span>
+        <bbn-field :value="productData.price"
                     field="example"
                     mode="read"
                     type="money"
                     :decimals="2"
                     unit="€"/>
       </p>
-
       <p class="product-desc"
          v-if="source.showType"
          v-text="type"/>
-
       <p class="product-desc"
          v-if="source.showEdition"
          v-html="edition"/>
-
-      <poc-product-soldout v-if="!source.content.stock && source.showSoldOut"/>
-
+      <poc-product-soldout v-if="!productData.stock && source.showSoldOut"/>
       <button :class="['add-to-cart bbn-p bbn-upper bbn-vsmargin', {'bbn-disabled': disabled, 'bbn-p':!disabled}]"
-              v-if="source.showButton" 
-              @click="addToCart">
+              v-if="source.showButton"
+              @click="addToCart"
+              :disabled="disabled">
         <?=_("Add to cart")?>
       </button>
-
+    </div>
+    <div v-else-if="$parent.selectable"
+         class="bbn-alt-background bbn-middle bbn-lpadded bbn-w-100"
+         style="overflow: hidden">
+      <i class="bbn-xxxxl nf nf-cod-package"/>
     </div>
   </div>
 </div>
