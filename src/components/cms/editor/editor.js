@@ -32,12 +32,13 @@
         oConfig: null,
         ready: false,
         root: appui.plugins['appui-note'] + '/',
-        showSlider: false,
+        showWidgetSettings: false,
         showWidgets: false,
+        showPageSettings: false,
+        sliderMaximized: false,
         currentEditing: null,
         currentEditingKey: null,
         currentEditingParent: null,
-        currentEditingIndexInContainer: -1,
         editedSource: null,
         map: [],
         currentPosition: {},
@@ -136,6 +137,9 @@
           return bbn.fn.search(this.currentEditingParentItems, '_elementor.key', this.currentEditingKey);
         }
         return -1;
+      },
+      showSlider(){
+        return !!this.showPageSettings || !!this.showWidgetSettings || !!this.showWidgets;
       }
     },
     methods: {
@@ -145,10 +149,9 @@
       },
       unselectElements() {
         this.currentEditing = null;
-        this.currentEditingKey = '';
-        this.currentEditingIndexInContainer = -1;
-        this.showWidgets = true;
-        this.showSlider = false;
+        this.currentEditingKey = null;
+        this.currentEditingParent = null;
+        this.closeSlider();
       },
       setOriginalConfig(config) {
         this.originalConfig = config;
@@ -220,28 +223,14 @@
       },
       toggleWidgets(){
         this.showWidgets = !this.showWidgets;
-        this.showSlider = false;
-        this.currentEditing = null;
-        this.currentEditingKey = null;
-        this.currentEditingParent = null;
       },
-      openSettings(){
-        this.getPopup({
-          title: bbn._("Page's properties"),
-          minWidth: '50rem',
-          component: 'appui-note-cms-settings',
-          componentOptions: {
-            source: this.source,
-            typeNote: this.typeNote
-          },
-          onOpen: (floater) => {
-            let c = floater.find('appui-note-cms-settings');
-            if (c) {
-              c.$on('clear', this.clearCache);
-              c.$on('save', this.saveSettings);
-            }
-          }
-        })
+      togglePageSettings(){
+        this.showPageSettings = !this.showPageSettings;
+      },
+      closeSlider(){
+        this.showWidgets = false;
+        this.showWidgetSettings = false;
+        this.showPageSettings = false;
       },
       /**
        * Save the settings of the page and close the popup.
@@ -264,11 +253,10 @@
       handleSelected(key, source, parent) {
         bbn.fn.log('select', key, source)
         if (this.currentEditingKey !== key) {
-          this.showWidgets = false;
           this.currentEditingKey = key;
           this.currentEditing = source;
           this.currentEditingParent = parent;
-          this.showSlider = true;
+          this.showWidgetSettings = true;
         }
       },
       /**
@@ -284,7 +272,7 @@
             this.currentEditingKey = null;
             this.currentEditing = null;
             this.currentEditingParent = null;
-            this.showSlider = false;
+            this.showWidgetSettings = false;
           }
           else {
             appui.error();
@@ -585,6 +573,41 @@
         }, 500);
       }
     },
+    beforeMount(){
+      if (bbn.fn.isArray(this.source?.items)) {
+        this.normalizeItems(this.source.items);
+      }
+    },
+    mounted(){
+      const data = this.closest('bbn-router').closest('bbn-container').source;
+      if (!this.classicBlocks.length && !this.personalizedBlocks.length) {
+        if (!appui.cms?.blocks) {
+          bbn.fn.post(this.root + 'cms/data/blocks', d => {
+            if (d.blocks) {
+              if (!appui.cms) {
+                appui.cms = bbn.fn.createObject();
+              }
+              appui.cms.blocks = d.blocks;
+              appui.cms.pblocks = d.pblocks || [];
+            }
+            this.classicBlocks.push(...appui.cms.blocks);
+            this.personalizedBlocks.push(...appui.cms.pblocks);
+            this.data = data;
+          });
+        }
+        else {
+          this.classicBlocks.push(...appui.cms.blocks);
+          this.personalizedBlocks.push(...appui.cms.pblocks);
+          this.data = data;
+        }
+      }
+      else {
+        this.data = data;
+      }
+      if (!!this.source.items && !this.source.items.length) {
+        this.showWidgets = true;
+      }
+    },
     watch: {
       'source.items'() {
         setTimeout(() => {
@@ -625,41 +648,29 @@
       },
       ready() {
         this.mapY();
-      }
-    },
-    beforeMount(){
-      if (bbn.fn.isArray(this.source?.items)) {
-        this.normalizeItems(this.source.items);
-      }
-    },
-    mounted(){
-      const data = this.closest('bbn-router').closest('bbn-container').source;
-      if (!this.classicBlocks.length && !this.personalizedBlocks.length) {
-        if (!appui.cms?.blocks) {
-          bbn.fn.post(this.root + 'cms/data/blocks', d => {
-            if (d.blocks) {
-              if (!appui.cms) {
-                appui.cms = bbn.fn.createObject();
-              }
-              appui.cms.blocks = d.blocks;
-              appui.cms.pblocks = d.pblocks || [];
-            }
-            this.classicBlocks.push(...appui.cms.blocks);
-            this.personalizedBlocks.push(...appui.cms.pblocks);
-            this.data = data;
-          });
+      },
+      showWidgets(newVal){
+        if (!!newVal) {
+          this.showWidgetSettings = false;
+          this.showPageSettings = false;
+        }
+      },
+      showWidgetSettings(newVal){
+        if (!!newVal) {
+          this.showWidgets = false;
+          this.showPageSettings = false;
         }
         else {
-          this.classicBlocks.push(...appui.cms.blocks);
-          this.personalizedBlocks.push(...appui.cms.pblocks);
-          this.data = data;
+          this.currentEditing = null;
+          this.currentEditingKey = null;
+          this.currentEditingParent = null;
         }
-      }
-      else {
-        this.data = data;
-      }
-      if (!!this.source.items && !this.source.items.length) {
-        this.showWidgets = true;
+      },
+      showPageSettings(newVal){
+        if (!!newVal) {
+          this.showWidgetSettings = false;
+          this.showWidgets = false;
+        }
       }
     },
     components: {

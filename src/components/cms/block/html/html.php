@@ -1,8 +1,11 @@
 <!-- HTML Document -->
 
-<div :class="[componentClass, 'component-container', 'bbn-block-html']">
+<div :class="[componentClass, 'component-container', 'bbn-block-html', {
+       'bbn-overlay': isEditor
+     }]">
   <bbn-rte v-if="isEditor"
-           v-model="source.content"/>
+           v-model="source.content"
+           height="100%"/>
   <div v-else-if="!source.content && $parent.selectable"
         class="bbn-alt-background bbn-middle bbn-lpadded"
         style="overflow: hidden">

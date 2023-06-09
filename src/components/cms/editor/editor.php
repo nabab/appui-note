@@ -14,7 +14,7 @@
                       :notext="true"/>
           <bbn-button icon="nf nf-mdi-settings"
                       title="<?= _("Page's properties") ?>"
-                      @click="openSettings"
+                      @click="togglePageSettings"
                       :notext="true"/>
           <bbn-button icon="nf nf-mdi-widgets"
                       title="<?= _("widgets") ?>"
@@ -55,14 +55,35 @@
         </bbn-scroll>
       </div>
     </div>
-    <!--Wigets properties-->
-    <div :class="{slider: true, opened: showSlider}">
-      <bbn-scroll axis="y">
-        <div class="bbn-w-100"
-             v-if="currentEditing">
-          <h2 v-text="currentEditingTitle"
-              class="bbn-c" />
-          <div class="bbn-w-100 bbn-flex-width">
+
+    <!-- Slider -->
+    <div :class="['slider', 'bbn-flex-height', {opened: showSlider, maximized: !!sliderMaximized}]"
+         v-resizable.left="true"
+         ref="slider">
+      <div class="bbn-spadding bbn-vmiddle"
+           style="justify-content: space-between">
+        <i v-if="sliderMaximized"
+           class="nf nf-fa-window_restore bbn-p"
+           @click="sliderMaximized = false"/>
+        <i v-else
+           class="nf nf-fa-window_maximize bbn-p"
+           @click="sliderMaximized = true"/>
+        <i class="nf nf-fa-times bbn-p"
+           @click="showWidgetSettings = false"/>
+      </div>
+      <h2 class="bbn-c"
+          style="margin-top: 0">
+        <span v-if="showWidgetSettings"
+              v-text="currentEditingTitle"/>
+        <span v-else-if="showWidgets"
+              v-text="_('Widgets')"/>
+        <span v-else-if="showPageSettings"
+              v-text="_('Page Settings')"/>
+      </h2>
+      <div class="bbn-flex-fill">
+        <div v-if="showWidgetSettings && currentEditing"
+              class="bbn-flex-height">
+          <div class="bbn-flex-fill bbn-flex-width">
             <div class="bbn-spadding appui-note-cms-editor-position">
               <bbn-button :notext="true"
                           @click="scrollToSelected"
@@ -92,15 +113,20 @@
                             :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-mdi-arrow_collapse_down' : 'nf nf-mdi-arrow_collapse_right'"/>
               </template>
             </div>
-            <div class="bbn-flex-fill bbn-right-spadded">
-              <component	@configinit="setOriginalConfig"
-                          class="bbn-contain bbn-w-100"
-                          :source="currentEditing"
-                          :cfg="currentBlockConfig"
-                          ref="blockEditor"
-                          mode="edit"
-                          :is="currentEditing.type === 'container' ? 'appui-note-cms-container' : 'appui-note-cms-block'"
-                          :key="currentEditing._elementor.key"/>
+            <div class="bbn-flex-fill bbn-right-spadded"
+                  style="overflow: hidden">
+              <div class="bbn-100">
+                <bbn-scroll axis="y">
+                  <component	@configinit="setOriginalConfig"
+                              :class="['bbn-contain', 'bbn-w-100', {'bbn-overlay': currentEditing.type === 'html'}]"
+                              :source="currentEditing"
+                              :cfg="currentBlockConfig"
+                              ref="blockEditor"
+                              mode="edit"
+                              :is="currentEditing.type === 'container' ? 'appui-note-cms-container' : 'appui-note-cms-block'"
+                              :key="currentEditing._elementor.key"/>
+                </bbn-scroll>
+              </div>
             </div>
           </div>
           <div class="bbn-w-100 bbn-c bbn-padding">
@@ -113,33 +139,32 @@
                         icon="nf nf-fa-trash"/>
           </div>
         </div>
-      </bbn-scroll>
-      <div class="bbn-top-right bbn-p bbn-spadding"
-           @click="showSlider = false">
-        <i class="nf nf-fa-times"/>
-      </div>
-    </div>
-    <!--Widgets menu-->
-    <div :class="{slider: true, opened: showWidgets}">
-      <bbn-scroll axis="y">
-        <div class="bbn-lpadding bbn-grid grid-dropper bbn-unselectable">
-          <appui-note-cms-dropper v-for="(v, i) in allBlocks"
-                                  :key="v.id"
-                                  :description="v.description"
-                                  :class="'block-' + v.code"
-                                  :type="v.code"
-                                  :special="v.special"
-                                  :title="v.text"
-                                  :icon="v.icon"
-                                  :default-config="v.cfg"
-                                  @dragend="isDragging = false"
-                                  @dragstart="isDragging = true"/>
+        <bbn-scroll v-else-if="showWidgets"
+                    axis="y">
+          <div class="bbn-lpadding bbn-flex-wrap grid-dropper bbn-unselectable">
+            <appui-note-cms-dropper v-for="(v, i) in allBlocks"
+                                    :key="v.id"
+                                    :description="v.description"
+                                    :class="'block-' + v.code"
+                                    :type="v.code"
+                                    :special="v.special"
+                                    :title="v.text"
+                                    :icon="v.icon"
+                                    :default-config="v.cfg"
+                                    @dragend="isDragging = false"
+                                    @dragstart="isDragging = true"/>
+          </div>
+        </bbn-scroll>
+        <div v-else-if="showPageSettings"
+             class="bbn-overlay">
+          <slot v-if="$slots.default"/>
+          <appui-note-cms-settings v-else
+                                  :source="source"
+                                  :type-note="typeNote"
+                                  @clear="clearCache"/>
         </div>
-      </bbn-scroll>
-      <div class="bbn-top-right bbn-p bbn-spadding"
-           @click="showWidgets = false">
-        <i class="nf nf-fa-times"/>
       </div>
     </div>
+
   </div>
 </div>
