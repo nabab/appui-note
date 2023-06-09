@@ -4,28 +4,40 @@
   "icon": "nf nf-fa-sticky_note",
   "items": [
     {
-      "text": "Notes",
+      "text": "CMS",
       "num": 1,
-      "icon": "nf nf-fa-sticky_note_o",
-      "link": "notes"
+      "icon": "nf nf-dev-wordpress",
+      "link": "cms"
     },
     {
-      "text": "Table notes",
+      "text": "Medias",
       "num": 2,
-      "icon": "nf nf-mdi-table_large",
+      "icon": "nf nf-mdi-image_multiple",
+      "link": "media"
+    },
+    {
+      "text": "Image galleries",
+      "num": 3,
+      "icon": "nf nf-fa-list_ul",
       "link": "table_notes"
     },
     {
-      "text": "News",
-      "num": 3,
-      "icon": "nf nf-fa-rss_square",
-      "link": "news"
+      "text": "Notes list",
+      "num": 4,
+      "icon": "nf nf-dev-wordpress",
+      "link": "cms"
     },
     {
       "text": "Masks",
-      "num": 4,
-      "icon": "nf nf-fa-list_alt",
+      "num": 5,
+      "icon": "nf nf-md-domino_mask",
       "link": "masks"
+    },
+    {
+      "text": "News",
+      "num": 6,
+      "icon": "nf nf-fa-rss_square",
+      "link": "news"
     }
   ]
 }
