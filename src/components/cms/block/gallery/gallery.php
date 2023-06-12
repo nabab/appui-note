@@ -101,6 +101,43 @@
       </div>
     </div>
 
+    <label v-if="isConfig || !isInConfig('imageAlign')"><?=_('Image alignment')?></label>
+    <div v-if="isConfig || !isInConfig('imageAlign')">
+      <div class="bbn-block">
+        <bbn-radiobuttons :notext="true"
+                          v-model="source.imageAlign"
+                          :source="[{
+                            text: _('Align left'),
+                            value: 'left',
+                            icon: 'nf nf-fa-align_left'
+                          }, {
+                            text: _('Align center'),
+                            value: 'center',
+                            icon: 'nf nf-fa-align_center'
+                          }, {
+                            text: _('Align right'),
+                            value: 'right',
+                            icon: 'nf nf-fa-align_right'
+                          }, {
+                          text: _('Space between'),
+                          value: 'space-between',
+                          icon: 'nf nf-md-align_horizontal_distribute'
+                        }, {
+                          text: _('Space around'),
+                          value: 'space-around',
+                          icon: 'nf nf-md-align_horizontal_distribute'
+                        }, {
+                          text: _('Space evenly'),
+                          value: 'space-evenly',
+                          icon: 'nf nf-md-align_horizontal_distribute'
+                        }, {
+                            text: _('No value'),
+                            value: null,
+                            icon: 'nf nf-fa-times'
+                          }]"/>
+      </div>
+    </div>
+
     <label><?=_('Mode')?></label>
     <div class="bbn-block">
       <bbn-radiobuttons :notext="true"
@@ -172,7 +209,11 @@
   <div v-else
        class="bbn-flex">
     <div class="bbn-block"
-         :style="{'width': source.width, 'height': source.height}">
+         :style="{
+           'width': source.width,
+           'height': source.height
+           'justify-content': source.align || ''
+         }">
       <bbn-gallery :source="gallerySourceUrl"
                    :class="{'cropped' : source.crop}"
                    :data="{idGroup: source.content}"
@@ -189,7 +230,7 @@
                    item-width-unit="%"
                    :column-gap="source.columnGap"
                    :pager="!!source.pager"
-                   :align="source.align"/>
+                   :align="source.imageAlign"/>
     </div>
   </div>
 </div>
