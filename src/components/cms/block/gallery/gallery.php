@@ -211,7 +211,7 @@
     <div class="bbn-block"
          :style="{
            'width': source.width,
-           'height': source.height
+           'height': source.height,
            'justify-content': source.align || ''
          }">
       <bbn-gallery :source="gallerySourceUrl"
