@@ -81,22 +81,6 @@
                             text: _('Align right'),
                             value: 'right',
                             icon: 'nf nf-fa-align_right'
-                          }, {
-                          text: _('Space between'),
-                          value: 'space-between',
-                          icon: 'nf nf-md-align_horizontal_distribute'
-                        }, {
-                          text: _('Space around'),
-                          value: 'space-around',
-                          icon: 'nf nf-md-align_horizontal_distribute'
-                        }, {
-                          text: _('Space evenly'),
-                          value: 'space-evenly',
-                          icon: 'nf nf-md-align_horizontal_distribute'
-                        }, {
-                            text: _('No value'),
-                            value: null,
-                            icon: 'nf nf-fa-times'
                           }]"/>
       </div>
     </div>
@@ -119,18 +103,18 @@
                             value: 'right',
                             icon: 'nf nf-fa-align_right'
                           }, {
-                          text: _('Space between'),
-                          value: 'space-between',
-                          icon: 'nf nf-md-align_horizontal_distribute'
-                        }, {
-                          text: _('Space around'),
-                          value: 'space-around',
-                          icon: 'nf nf-md-align_horizontal_distribute'
-                        }, {
-                          text: _('Space evenly'),
-                          value: 'space-evenly',
-                          icon: 'nf nf-md-align_horizontal_distribute'
-                        }, {
+                            text: _('Space between'),
+                            value: 'space-between',
+                            icon: 'nf nf-md-align_horizontal_distribute'
+                          }, {
+                            text: _('Space around'),
+                            value: 'space-around',
+                            icon: 'nf nf-md-align_horizontal_distribute'
+                          }, {
+                            text: _('Space evenly'),
+                            value: 'space-evenly',
+                            icon: 'nf nf-md-align_horizontal_distribute'
+                          }, {
                             text: _('No value'),
                             value: null,
                             icon: 'nf nf-fa-times'
@@ -207,12 +191,12 @@
     <i class="bbn-xxxxl nf nf-fae-galery"/>
   </div>
   <div v-else
-       class="bbn-flex">
+       class="bbn-flex"
+       :style="{'justify-content': source.align || ''}">
     <div class="bbn-block"
          :style="{
            'width': source.width,
-           'height': source.height,
-           'justify-content': source.align || ''
+           'height': source.height
          }">
       <bbn-gallery :source="gallerySourceUrl"
                    :class="{'cropped' : source.crop}"
