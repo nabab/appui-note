@@ -74,7 +74,11 @@
     },
     created() {
       bbn.fn.log('created');
-      if (this.source.type && ((bbn.fn.numProperties(this.source) === 2) || (this.source.special && (bbn.fn.numProperties(this.source) === 2)))) {
+      if (this.source.type
+        && ((bbn.fn.numProperties(this.source) === 3)
+        || (this.source.special
+          && (bbn.fn.numProperties(this.source) === 3)))
+      ) {
         this.applyDefaultConfig();
       }
       const config = {};

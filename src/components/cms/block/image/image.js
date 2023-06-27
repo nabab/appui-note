@@ -53,7 +53,7 @@
         });
       },
       onSelection(img) {
-        this.source.content = img.data.path;
+        this.$set(this.source, 'content', img.data.path);
         this.getPopup().close();
       },
       toggleAutoWidth(){

@@ -69,7 +69,7 @@
            class="nf nf-fa-window_maximize bbn-p"
            @click="sliderMaximized = true"/>
         <i class="nf nf-fa-times bbn-p"
-           @click="showWidgetSettings = false"/>
+           @click="closeSlider"/>
       </div>
       <h2 class="bbn-c"
           style="margin-top: 0">
@@ -157,11 +157,13 @@
         </bbn-scroll>
         <div v-else-if="showPageSettings"
              class="bbn-overlay">
-          <slot v-if="$slots.default"/>
-          <appui-note-cms-settings v-else
-                                  :source="source"
-                                  :type-note="typeNote"
-                                  @clear="clearCache"/>
+          <bbn-scroll axis="y">
+            <slot v-if="$slots.default"/>
+            <appui-note-cms-settings v-else
+                                    :source="source"
+                                    :type-note="typeNote"
+                                    @clear="clearCache"/>
+          </bbn-scroll>
         </div>
       </div>
     </div>
