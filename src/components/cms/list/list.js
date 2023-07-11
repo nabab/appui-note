@@ -3,7 +3,7 @@
   let root = appui.plugins['appui-note'] + '/';
 
   return {
-    mixins: [bbn.vue.basicComponent],
+    mixins: [bbn.cp.mixins.basic],
     props: {
       source: {
         type: Object
@@ -474,8 +474,8 @@
             class="bbn-right-sspace">
         <i class="bbn-green bbn-xl nf nf-fa-check_circle_o"
            v-if="isPublished"/>
-        <i class="bbn-red bbn-xl nf nf-fa-times_circle_o"
-           v-else/>
+        <i v-else
+           class="bbn-red bbn-xl nf nf-fa-times_circle_o"/>
       </span>
       <span class="bbn-alt-text bbn-right-sspace"
             v-text="'v' + source.version"

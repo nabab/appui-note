@@ -2,7 +2,7 @@
 
 (() => {
   return {
-    mixins: [bbn.vue.basicComponent],
+    mixins: [bbn.cp.mixins.basic],
     data(){
       return {
         space: this.source.hr ||  null

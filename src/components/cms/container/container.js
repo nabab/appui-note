@@ -3,10 +3,9 @@
 ((bbn) => {
   return {
     /**
-     * @mixin bbn.vue.basicComponent
-     * @mixin bbn.vue.resizerComponent
+     * @mixin bbn.cp.mixins.basic
      */
-    mixins: [bbn.vue.basicComponent, bbn.vue.resizerComponent],
+    mixins: [bbn.cp.mixins.basic, bbn.cp.mixins.resizer],
     props: {
       source: {
         type: Object,
@@ -197,7 +196,7 @@
                   || (fromData.parentUid !== this._uid))
               ) {
                 deleted = fromData.parentSource.splice(oldIndex, 1);
-              }
+      }
               break;
             default:
               return;
@@ -279,8 +278,8 @@
         deep: true,
         handler(newVal){
           this.$set(this.source, 'layout', Object.values(newVal).join(' '));
-        }
-      },
+      }
+    },
       'source.items'(){
         this.setGridLayout();
       }

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  bbn.vue.init({
+  bbn.cp.init({
     env: {
       //lang: data.lang,
       connection_failures: 0,

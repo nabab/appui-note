@@ -2,8 +2,8 @@
 
 (() => {
   return {
-    mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
-    data(){
+    mixins: [bbn.cp.mixins.basic, bbn.cp.mixins['appui-note-cms-block']],
+   data(){
       return {
         defaultConfig: {
           content: "",

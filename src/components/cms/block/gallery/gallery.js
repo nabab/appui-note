@@ -1,7 +1,7 @@
 // Javascript Document
 (() => {
   return {
-    mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
+    mixins: [bbn.cp.mixins.basic, bbn.cp.mixins['appui-note-cms-block']],
     props: {
       settings: {
         type: Boolean,
@@ -68,7 +68,7 @@
         if (this.isMobile) {
           this.itemWidth = 49;
           return;
-        }
+      }
         else if (val) {
           let value = parseInt(val);
           if (bbn.fn.isString(val)) {

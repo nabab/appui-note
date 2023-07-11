@@ -3,6 +3,9 @@
 (() => {
   return {
     props: {
+      source: {
+        type: Object
+      },
       start: {
         type: Boolean,
         default: false

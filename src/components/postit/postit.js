@@ -6,7 +6,7 @@
  */
 (() => {
   return {
-    mixins: [bbn.vue.basicComponent],
+    mixins: [bbn.cp.mixins.basic],
     props: {
       showPinned: {
         type: Boolean,
@@ -107,6 +107,14 @@
     methods: {
       fdate: bbn.fn.fdate,
       html2text: bbn.fn.html2text,
+      onClickPostIt() {
+        this.$nextTick(() => {
+          const editor = this.getRef('editor');
+          if (editor) {
+            editor.focus();
+          }
+        });
+      },
       getObj() {
         return {
           title: this.currentTitle,

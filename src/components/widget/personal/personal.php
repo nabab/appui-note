@@ -7,12 +7,10 @@
               ref="form"
 							:scrollable="false"
               action="notes/actions/insert"
-              @success="afterSubmit"
-    >
+              @success="afterSubmit">
       <bbn-input v-model="formData.title"
                  placeholder="<?=_('Title')?>"
-                 style="margin-bottom: 10px; width: 100%"
-      ></bbn-input>
+                 style="margin-bottom: 10px; width: 100%"/>
       <!--<div class="bbn-c"
            style="margin-bottom: 10px"
       >
@@ -25,12 +23,10 @@
       <div class="bbn-w-100" style="width: 100%; height: 400px">
 					<bbn-rte v-model="formData.content"
 	                 required="required"
-									 height="100%"
-	        ></bbn-rte>
+									 height="100%"/>
       </div>
       <div class="bbn-w-100 bbn-r"
-					 style="margin-top: 20px"
-		  >
+					 style="margin-top: 20px">
         <bbn-button style="margin-right:0.5em"
                     @click="$refs.form.submit()"
 										icon="nf nf-fa-save"
@@ -43,29 +39,26 @@
     </bbn-form>
   </div>
   <div v-else class="bbn-padded">
-    <ul class="bbn-no-padding bbn-no-margin">
+    <ul class="bbn-no-padding bbn-no-margin"
+        v-if="source?.items">
       <div v-for="item in source.items"
            style="padding: 0.4em 0.6em"
-           class="bbn-vmiddle"
-      >
+           class="bbn-vmiddle">
         <bbn-initial width="20"
                      height="20"
                      :user-id="item.id_user"
-                     :title="userName(item.id_user)"
-        ></bbn-initial>
+                     :user-name="userName(item.id_user)"/>
         <span v-if="shorten(item.title, 50)"
               v-text="item.title"
               title="item.title"
               @click="openNote(item)"
               class="bbn-p"
-              style="margin-left: 5px"
-        ></span>
+              style="margin-left: 5px"/>
         <span v-else
               v-text="html2text(shorten(item.content, 50))"
               @click="openNote(item)"
               class="bbn-p"
-              style="margin-left: 5px"
-        ></span>
+              style="margin-left: 5px"/>
       </div>
     </ul>
   </div>

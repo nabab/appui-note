@@ -1,8 +1,8 @@
 (() => {
 	return {
     mixins: [
-      bbn.vue.basicComponent,
-      bbn.vue.listComponent
+      bbn.cp.mixins.basic,
+      bbn.cp.mixins.list
     ],
 		props: {
 			pinnable: {

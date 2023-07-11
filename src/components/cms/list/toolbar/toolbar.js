@@ -1,7 +1,7 @@
 (() => {
   return {
     props: ['source'],
-    mixins: [bbn.vue.basicComponent],
+    mixins: [bbn.cp.mixins.basic],
     data(){
       return {
         cp: appui.getRegistered('appuiCmsList'),

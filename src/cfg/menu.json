@@ -4,10 +4,10 @@
   "icon": "nf nf-fa-sticky_note",
   "items": [
     {
-      "text": "CMS",
+      "text": "Notes",
       "num": 1,
-      "icon": "nf nf-dev-wordpress",
-      "link": "cms"
+      "icon": "nf nf-fa-sticky_note_o",
+      "link": "notes"
     },
     {
       "text": "Medias",
@@ -16,28 +16,22 @@
       "link": "media"
     },
     {
-      "text": "Image galleries",
+      "text": "Table notes",
       "num": 3,
-      "icon": "nf nf-fa-list_ul",
+      "icon": "nf nf-mdi-table_large",
       "link": "table_notes"
     },
     {
-      "text": "Notes list",
+      "text": "News",
       "num": 4,
-      "icon": "nf nf-dev-wordpress",
-      "link": "cms"
+      "icon": "nf nf-fa-rss_square",
+      "link": "news"
     },
     {
       "text": "Masks",
       "num": 5,
-      "icon": "nf nf-md-domino_mask",
+      "icon": "nf nf-fa-list_alt",
       "link": "masks"
-    },
-    {
-      "text": "News",
-      "num": 6,
-      "icon": "nf nf-fa-rss_square",
-      "link": "news"
     }
   ]
 }

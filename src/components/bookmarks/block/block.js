@@ -3,7 +3,7 @@
 (() => {
   return {
     mixins: [
-      bbn.vue.keepCoolComponent
+      bbn.cp.mixins.keepCool
     ],
     props: {
       source: {

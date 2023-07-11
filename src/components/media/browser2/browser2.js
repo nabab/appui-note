@@ -1,7 +1,7 @@
 // Javascript Document
 (()=>{
   return{
-    mixins: [bbn.vue.basicComponent],
+    mixins: [bbn.cp.mixins.basic],
     props: {
       searchName: {
         type: String,
@@ -92,7 +92,7 @@
         type: [Array, Function]
       },
       buttonMenuComponent: {
-        type: [String, Object, Vue]
+        type: [String, Object, Object]
       },
       url: {
         type: String

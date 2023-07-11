@@ -4,9 +4,9 @@
   return {
     mixins:
     [
-      bbn.vue.basicComponent,
-      bbn.vue.eventsComponent,
-      bbn.vue.resizerComponent
+      bbn.cp.mixins.basic,
+      bbn.cp.mixins.events,
+      bbn.cp.mixins.resizer
     ],
     props: {
       source: {

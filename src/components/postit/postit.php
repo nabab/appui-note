@@ -1,33 +1,33 @@
 <div :class="[componentClass, 'bbn-margin']">
   <div :style="getStyle"
        :class="getComponentName() + '-container bbn-shadow'">
-    <div class="bbn-w-100 bbn-spadding">
+    <div class="bbn-overlay bbn-flex-height bbn-spadding">
       <div class="bbn-flex-width">
         <div :class="getComponentName() + '-buttons'">
           <div class="bbn-block bbn-nowrap">
-            <i @click="showCfg = !showCfg"
+            <i @click.stop="showCfg = !showCfg"
                ref="button"
                title="<?=_('Post-it configuration')?>"
                class="nf nf-fa-cog bbn-lg bbn-p"/>
-            <i @click="showInfo = !showInfo"
+            <i @click.stop="showInfo = !showInfo"
                ref="info"
                v-if="source.id"
                title="<?= _("Post-it information") ?>"
                class="nf nf-fa-info_circle bbn-lg bbn-p"/>
-            <i @click="remove(source.id)"
+            <i @click.stop="remove(source.id)"
                ref="info"
                v-if="source.id"
                title="<?= _("Delete this post-it") ?>"
                class="nf nf-fa-trash bbn-lg bbn-p"/>
           </div>
         </div>
-        <div tabindex="0"
-             title="<?=_('Edit Title')?>"
-             ref="title"
-             class="bbn-c bbn-p bbn-b bbn-lg bbn-b bbn-flex-fill bbn-spadded bbn-small-caps"
-             v-text="html2text(currentTitle)"
-             :contenteditable="true"
-             @blur="changeTitle"/>
+        <bbn-editable tabindex="0"
+                      title="<?=_('Edit Title')?>"
+                      ref="title"
+                      type="inline"
+                      class="bbn-c bbn-p bbn-b bbn-lg bbn-b bbn-flex-fill bbn-spadded bbn-small-caps"
+                      v-model="html2text(currentTitle)"
+                      @change="changeTitle"/>
         <div class="bbn-block bbn-nowrap">
           <i v-if="source.id"
              class="nf nf-fa-info_circle bbn-lg bbn-invisible"/>
@@ -37,6 +37,14 @@
              class="nf nf-fa-cog bbn-lg bbn-invisible"/>
         </div>
       </div>
+      <div class="bbn-flex-fill"
+           @click.stop="onClickPostIt">
+        <bbn-rte v-model="currentText"
+                 :floating="true"
+                 ref="editor"
+                 class="bbn-flex-fill"/>
+      </div>
+        
       <!--div title="<?=_('Edit Content')?>"
            class="bbn-p bbn-w-100"
            style="min-height: 50%"
@@ -44,9 +52,7 @@
            @click="editMode"
            :contenteditable="editing"
            @blur="changeText('text', $event)"/-->
-      <bbn-rte v-model="currentText"
-               :floating="true"/>
-    </div>
+      </div>
   </div>
   <bbn-floater v-if="ready && showInfo"
                :title="false"

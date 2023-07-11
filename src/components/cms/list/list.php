@@ -16,14 +16,14 @@
              :search-fields="['versions.title', 'bbn_url.url', 'bbn_notes.id', 'versions.excerpt']"
              :resizable="true"
              :order="[{
-               field: 'start',
-               dir: 'DESC'
-             }]"
+                   field: 'start',
+                   dir: 'DESC'
+                   }]"
   					 :toolbar="[{
-               icon: 'nf nf-fa-plus',
-               text: _('Insert Articles'),
-               action: insertNote
-             }]"
+                       icon: 'nf nf-fa-plus',
+                       text: _('Insert Articles'),
+                       action: insertNote
+                       }]"
 >
   </bbn-table>
 </div>

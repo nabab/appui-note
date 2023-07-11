@@ -64,7 +64,7 @@
 <bbn-button v-else icon="nf nf-fa-check bbn-lg bbn-red" @click="makeDefault"></bbn-button>`,
         methods: {
           getTable(){
-            return bbn.vue.closest(this, 'bbn-table');
+            return this.closest('bbn-table');
           },
           makeDefault(){
             this.post(root + 'actions/mask/default', {
@@ -104,7 +104,7 @@
         },
         methods: {
           getTable(){
-            return bbn.vue.closest(this, 'bbn-table');
+            return this.closest('bbn-table');
           },
           insert(){
         		this.getTable().insert({id_type: this.source.id_type}, bbn._('Creation of a standard letter for') + this.source.type, {
