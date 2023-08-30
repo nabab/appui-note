@@ -379,12 +379,14 @@
         this.getRef('table').updateData();
       }
     },
+    /*
     created(){
       appui.register('appuiCmsList', this);
     },
     beforeDestroy(){
       appui.unregister('appuiCmsList');
     },
+    */
     components: {
       browser :{
         props: ['source'],
@@ -510,7 +512,7 @@
         props: ['source'],
         data(){
           return {
-            name: bbn.fn.getField(appui.app.users, 'text', {value: this.source.id_user})
+            name: bbn.fn.getField(appui.app?.users|| [], 'text', {value: this.source.id_user})
           }
         },
         computed: {

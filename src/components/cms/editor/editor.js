@@ -26,7 +26,7 @@
     },
     data() {
       return {
-        isDev: appui.app.user.isDev,
+        isDev: bbn.env.isDev,
         data: null,
         oData: JSON.stringify(this.source),
         oConfig: null,
@@ -578,35 +578,40 @@
         this.normalizeItems(this.source.items);
       }
     },
-    mounted(){
-      const data = this.closest('bbn-router').closest('bbn-container').source;
-      if (!this.classicBlocks.length && !this.personalizedBlocks.length) {
-        if (!appui.cms?.blocks) {
-          bbn.fn.post(this.root + 'cms/data/blocks', d => {
-            if (d.blocks) {
-              if (!appui.cms) {
-                appui.cms = bbn.fn.createObject();
+    mounted() {
+      const cp = this;
+      setTimeout(() => {
+        const cms = appui.getRegistered('cms');
+        const data = cms.source;
+        if (!this.classicBlocks.length && !this.personalizedBlocks.length) {
+          if (!appui.cms?.blocks) {
+            bbn.fn.post(this.root + 'cms/data/blocks', d => {
+              bbn.fn.log(cp);
+              if (d.blocks) {
+                if (!appui.cms) {
+                  appui.cms = bbn.fn.createObject();
+                }
+                appui.cms.blocks = d.blocks || [];
+                appui.cms.pblocks = d.pblocks || [];
               }
-              appui.cms.blocks = d.blocks;
-              appui.cms.pblocks = d.pblocks || [];
-            }
+              cp.data = data;
+              this.classicBlocks.push(...appui.cms.blocks);
+              this.personalizedBlocks.push(...appui.cms.pblocks);
+            });
+          }
+          else {
+            cp.data = data;
             this.classicBlocks.push(...appui.cms.blocks);
             this.personalizedBlocks.push(...appui.cms.pblocks);
-            this.data = data;
-          });
+          }
         }
         else {
-          this.classicBlocks.push(...appui.cms.blocks);
-          this.personalizedBlocks.push(...appui.cms.pblocks);
-          this.data = data;
+          cp.data = data;
         }
-      }
-      else {
-        this.data = data;
-      }
-      if (!!this.source.items && !this.source.items.length) {
-        this.showWidgets = true;
-      }
+        if (!!this.source.items && !this.source.items.length) {
+          this.showWidgets = true;
+        }
+      }, 250);
     },
     watch: {
       'source.items'() {
