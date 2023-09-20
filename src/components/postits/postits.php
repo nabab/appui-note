@@ -7,11 +7,11 @@
              height="100%"
              @close="$emit('close')"
              ref="floater"
-             :scrollable="false">
-  <div class="bbn-overlay bbn-middle"
+             :scrollable="true">
+  <div class="bbn-w-100 bbn-middle bbn-lpadding"
        @click="onClick">
     <div class="bbn-flex bbn-l"
-         style="flex-wrap: wrap; max-width: 80%; align-items: center;">
+         style="flex-wrap: wrap; align-items: center;">
       <appui-note-postit v-for="(pi, idx) in source"
                          :source="pi"
                          @remove="onRemove"
