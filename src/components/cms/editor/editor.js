@@ -26,7 +26,7 @@
     },
     data() {
       return {
-        isDev: bbn.env.isDev,
+        isDev: appui.app.user.isDev,
         data: null,
         oData: JSON.stringify(this.source),
         oConfig: null,
