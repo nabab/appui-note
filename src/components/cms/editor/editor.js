@@ -26,7 +26,7 @@
     },
     data() {
       return {
-        isDev: appui.app.user.isDev,
+        isDev: appui.app.user?.isDev || appui.app.user?.isAdmin,
         data: null,
         oData: JSON.stringify(this.source),
         oConfig: null,
@@ -285,7 +285,8 @@
        * @return void
        */
       onDrop(ev) {
-        bbn.fn.log('DROP', ev, bbn.fn.clone(ev.detail.from.data));
+        return;
+        bbn.fn.log('DROPONEDITOR', ev, bbn.fn.clone(ev.detail.from.data));
         const block = bbn.fn.clone(ev.detail.from.data.source);
         this.currentBlockConfig = ev.detail.from.data.cfg || {};
         bbn.fn.iterate(this.currentBlockConfig, (a, n) => block[n] = a);

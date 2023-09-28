@@ -8,7 +8,7 @@
            class="bbn-w-100">
         <appui-note-cms-elementor-guide :visible="isDragging"
                                         v-droppable.data="!!preview ? false : {data: {index: i}}"
-                                        @drop.prevent="onDrop"/>
+                                        @drop.prevent.stop="onDrop"/>
         <appui-note-cms-container v-if="cfg.type === 'container'"
                                   :source="cfg"
                                   :ref="'block' + i"
@@ -36,18 +36,18 @@
                               @dragstart="currentDragging = true"
                               @dragend="onDragEnd"
                               v-droppable.data="!!preview ? false : {data: {index: i, replace: true, source: cfg}}"
-                              @drop.prevent="onDrop"
+                              @drop.prevent.stop="onDrop"
                               :key="cfg._elementor.key"/>
       </div>
       <appui-note-cms-elementor-guide :visible="isDragging"
                                       :force="isDragging && !source.length"
                                       v-droppable.data="!!preview ? false : {data: {index: source.length}}"
-                                      @drop.prevent="onDrop"/>
+                                      @drop.prevent.stop="onDrop"/>
     </template>
     <div v-if="dragging"
          class="appui-note-cms-elementor-droparea bbn-w-100 bbn-lpadded bbn-middle bbn-upper"
          v-droppable.data="{data: {index: source.length}}"
-         @drop.prevent="onDrop"
+         @drop.prevent.stop="onDrop"
          key="elementorDropArea">
       <i class="nf nf-fa-plus bbn-xl"/>
     </div>

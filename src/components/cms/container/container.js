@@ -131,7 +131,7 @@
               type: type,
               index: index,
               source: src,
-              parentUid: this._uid,
+              parentUid: this.$cid,
               parentSource: this.source.items
             },
             mode: 'clone'
@@ -193,10 +193,10 @@
               oldIndex = fromData.index;
               if ((fromData.parentSource !== undefined)
                 && (!!toData.replace
-                  || (fromData.parentUid !== this._uid))
+                  || (fromData.parentUid !== this.$cid))
               ) {
                 deleted = fromData.parentSource.splice(oldIndex, 1);
-      }
+              }
               break;
             default:
               return;
@@ -220,7 +220,7 @@
             || !!deleted
           ) {
             if (!!deleted
-              && (fromData.parentUid === this._uid)
+              && (fromData.parentUid === this.$cid)
               && (oldIndex < newIndex)
             ) {
               newIndex--;
@@ -230,7 +230,7 @@
             }
             this.source.items.splice(newIndex, toData.replace ? 1 : 0, newSource);
           }
-          else if ((fromData.parentUid === this._uid)
+          else if ((fromData.parentUid === this.$cid)
             && ((newIndex < oldIndex)
             || (newIndex > (oldIndex + 1)))
           ){
