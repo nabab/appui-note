@@ -1,9 +1,12 @@
-// Javascript Document// Javascript Document
+// Javascript Document
 (() => {
-  let root = appui.plugins['appui-note'] + '/';
-
   return {
     mixins: [bbn.cp.mixins.basic],
+    statics() {
+      return {
+        root: appui.plugins['appui-note'] + '/',
+      }
+    },
     props: {
       source: {
         type: Object
@@ -23,31 +26,45 @@
       },
       url: {
         type: String,
-        default: root + 'cms/cat/'
+        default() {
+          return appuiNoteCmsListCp.root + 'cms/cat/'
+        }
       },
       previewUrl: {
       	type: String,
-        default: root + 'cms/preview/'
+        default() {
+          return appuiNoteCmsListCp.root + 'cms/preview/'
+        }
       },
       mediaUrl: {
         type: String,
-        default: root + 'cms/actions/add_media'
+        default() {
+          return appuiNoteCmsListCp.root + 'cms/actions/add_media'
+        }
       },
       publishUrl: {
         type: String,
-        default: root + 'cms/actions/publish'
+        default() {
+          return appuiNoteCmsListCp.root + 'cms/actions/publish'
+        }
       },
       unpublishUrl: {
         type: String,
-        default: root + 'cms/actions/unpublish'
+        default() {
+          return appuiNoteCmsListCp.root + 'cms/actions/unpublish'
+        }
       },
       insertUrl: {
         type: String,
-        default: root + 'cms/actions/insert'
+        default() {
+          return appuiNoteCmsListCp.root + 'cms/actions/insert'
+        }
       },
       deleteUrl: {
         type: String,
-        default: root + 'cms/actions/delete'
+        default() {
+          return appuiNoteCmsListCp.root + 'cms/actions/delete'
+        }
       },
       editorUrl: {
         type: String
@@ -62,7 +79,9 @@
       },
       root: {
         type: [String],
-        default: root
+        default() {
+          return appuiNoteCmsListCp.root
+        }
       },
       actions: {
         type: [Array, Function]
