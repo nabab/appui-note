@@ -75,9 +75,10 @@
     created() {
       bbn.fn.log('created');
       if (this.source.type
+        && !!this.source._elementor
         && ((bbn.fn.numProperties(this.source) === 3)
-        || (this.source.special
-          && (bbn.fn.numProperties(this.source) === 3)))
+          || (this.source.special
+            && (bbn.fn.numProperties(this.source) === 3)))
       ) {
         this.applyDefaultConfig();
       }
@@ -153,7 +154,7 @@
         height: '100',
         //ready is important for the component template to be defined
         ready: true,
-        initialSource: null,
+        initialSource: bbn.fn.clone(this.source),
         currentClass: 'bbn-w-100'
       };
     },
