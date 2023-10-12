@@ -144,6 +144,7 @@
                 }
                 if (d.success && d.data) {
                   this.$nextTick(() => {
+                    this.normalizeMargins(d.data);
                     bbn.fn.each(d.data, data => {
                       let tmp = bbn.fn.clone(data);
                       tmp.style = this.source.style;
@@ -211,6 +212,24 @@
           }
         }
       },
+      normalizeMargins(data){
+        if (bbn.fn.isArray(data)) {
+          bbn.fn.each(data, d => {
+            if (d.style?.margin === undefined) {
+              if (d.style === undefined) {
+                this.$set(d, 'style', {});
+              }
+              this.$set(d.style, 'margin', this.source.margin || 0);
+            }
+            if (d.style?.marginMobile === undefined) {
+              if (d.style === undefined) {
+                this.$set(d, 'style', {});
+              }
+              this.$set(d.style, 'marginMobile', this.source.marginMobile || 0);
+            }
+          })
+        }
+      }
     },
     beforeMount(){
       if (!this.source.limit){
@@ -221,7 +240,12 @@
       }
       if (this.source.items !== undefined) {
         this.currentItems.splice(0, this.currentItems.length, ...this.source.items);
-        this.$delete(this.source, 'items');
+        if (!!this.source.margin || !!this.source.marginMobile) {
+          bbn.fn.each(this.source.items, it => {
+            this.normalizeMargins(it.data);
+          });
+        }
+        //this.$delete(this.source, 'items');
       }
       if (this.source.currentItems !== undefined) {
         this.$delete(this.source, 'currentItems');

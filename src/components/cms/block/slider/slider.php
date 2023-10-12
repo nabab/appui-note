@@ -56,7 +56,7 @@
       <label><?=_('Css class')?><small> <?=_('(Optional)')?></small></label>
       <bbn-input v-model="source.optionalClass"/>
 
-      <label><?=_('Height')?> (px)</label>
+      <label><?=_('Height')?></label>
       <bbn-range v-model="source.height"
                  :min="10"
                  :max="2000"
@@ -67,7 +67,7 @@
                  :nullable="true"
                  unit="px"/>
 
-      <label><?=_('Distance block below')?> (px)</label>
+      <label><?=_('Distance block below')?></label>
       <bbn-range v-model="source.blockDistance"
                  :min="0"
                  :max="200"
@@ -78,7 +78,7 @@
                  :nullable="true"
                  unit="px"/>
 
-      <label><?=_('Title distance')?> (px)</label>
+      <label><?=_('Title distance')?></label>
       <bbn-range v-model="source.margin"
                  :min="-200"
                  :max="200"
@@ -89,7 +89,7 @@
                  :nullable="true"
                  unit="px"/>
 
-      <label><?=_('Title distance (mobile)')?> (px)</label>
+      <label><?=_('Title distance (mobile)')?></label>
       <bbn-range v-model="source.marginMobile"
                  :min="-200"
                  :max="200"
