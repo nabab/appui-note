@@ -5,15 +5,14 @@ use bbn\X;
   [ "", "MarineCabos-Brullé", "marinecabos@yahoo.fr", ]
 
   Analyzes the xml files contained in the folder
-  articles and creates foreach html file a json file corresponding to 
+  articles and creates foreach html file a json file corresponding to
   the row of the table articles in db.
   */
 $fs = new bbn\File\System();
-if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
-  && $model->hasData('file')
-) {
+if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
   if ($model->data['action'] == 'undo') {
     $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'blocks', true);
+    $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'medias', true);
     return ['message' => 'Process undo successfully.'];
   }
   else {
@@ -21,7 +20,11 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
     if ($fs->exists(APPUI_NOTE_CMS_IMPORT_PATH.'blocks')) {
       $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'blocks', true);
     }
+    if ($fs->exists(APPUI_NOTE_CMS_IMPORT_PATH.'medias')) {
+      $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'medias', true);
+    }
     $fs->createPath(APPUI_NOTE_CMS_IMPORT_PATH.'blocks');
+    $fs->createPath(APPUI_NOTE_CMS_IMPORT_PATH.'medias');
     $path = APPUI_NOTE_CMS_IMPORT_PATH.'items/';
 
     $files = $fs->getFiles($path, false, false, 'xml');
@@ -36,8 +39,9 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
     $failedTag = [];
     $azerty = 0;
     $chrono = new bbn\Util\Timer();
-    $old_url = 'https://images.squarespace-cdn.com';
-    $old_url2 = 'http://static1.squarespace.com';
+    $mediaRegex = '/wp-content\/uploads\/[0-9]{4}\/[0-9]{2}\/(.*)/';
+    $medias = [];
+
     //$files = ['/home/thomas/domains/poc3.thomas.lan/app-ui/data/content/articles/marine-00997.html'];
     // check if $file is not null (When the parameter is neither an array nor an object with implemented Countable interface, 1 will be returned. There is one exception, if value is null, 0 will be returned.)
     if ( count($files) ){
@@ -54,7 +58,7 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
           */
 
         //per il blocco immagine registrare in db contenuto del tag figcaption se esiste, il tag a volte ha dentro un link.. meglio registrare come html
-        //x il contenuto del blocco html si possono togliere stili e classi dagli elementi 
+        //x il contenuto del blocco html si possono togliere stili e classi dagli elementi
         //X THOMAS, QUANDO VIENE IMPORTATO IL CONTENUTO HTML DELL'ARTICOLO SE UN (div.sqs-row) ha querySelectorAll('hr').length AGGIUNGI LA CLASSE has-hr al contenitore
 
         $res[$f]['title'] = (string)($dom->title ?? '');
@@ -145,15 +149,15 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
               $tmp = [];
               $tmp['node'] = $c;
               //@todo controllare attribute alt e in caso inserirlo nel tag
-              //Goes in all blocks to create the array of bbn configuration and the bbn html tag 
+              //Goes in all blocks to create the array of bbn configuration and the bbn html tag
               switch($c->tagName) {
                   // BLOCK TITLE
                 case 'h1':
-                case 'h2':  
-                case 'h3':  
-                case 'h4':  
-                case 'h5':  
-                case 'h6':  
+                case 'h2':
+                case 'h3':
+                case 'h4':
+                case 'h5':
+                case 'h6':
                   $tmp['tag'] = $c->tagName;
                   $tmp['type'] = 'title';
                   $tmp['content'] = $c->textContent;
@@ -166,7 +170,7 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
                 case 'hr':
                   $tmp['type'] = 'line';
                   //$tmp['style']['width'] = '100%';
-                  break;  
+                  break;
 
                   //BLOCK HTML
                   //IMPORTANT TAKE THE CONTENT OF STRONG, SUCH AS MORE INFORMATION: IN FILE 00005
@@ -271,7 +275,9 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
                             if ($slide->tagName && ($slide->tagName === 'div')){
                               $classes = explode(' ',$slide->getAttribute('class'));
                               if (in_array('slide', $classes) && !empty($slide->childNodes)) {
-                                if (($img = $slide->getElementsByTagName('img')) && ($tmp_src = $img[0]->getAttribute('src'))) {
+                                if (($img = $slide->getElementsByTagName('img'))
+                                  && ($tmp_src = $img[0]->getAttribute('src'))
+                                ) {
                                   $tmp2 = [];
                                   $img = $img[0];
                                   if ($link = $slide->getElementsByTagName('a')[0]){
@@ -285,13 +291,11 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
                                     }
                                   }
                                   $tmp2['src'] = $tmp_src;
-                                  if(strpos($tmp2['src'],$old_url) === 0){
-                                    $tmp2['src'] = str_replace($old_url,'',$tmp2['src']);
+                                  preg_match($mediaRegex, $tmp_src, $mediaMatches);
+                                  if (!empty($mediaMatches[1])) {
+                                    $medias[$mediaMatches[1]] = $tmp_src;
+                                    $tmp2['src'] = 'media/'.$mediaMatches[1];
                                   }
-                                  else if (strpos($tmp2['src'],$old_url2) === 0){
-                                    $tmp2['src'] = str_replace($old_url2,'',$tmp2['src']);
-                                  }
-
                                   $srcs[] = $tmp2['src'];
                                   if ($captions = $slide->getElementsByTagName('div')) {
                                     foreach ($captions as $c) {
@@ -315,11 +319,10 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
                       elseif (($child->tagName === 'img') && ($tmp_src = $child->getAttribute('src'))) {
                         //case of div without class containing a gallery of images
                         $tmp2['src'] = $tmp_src;
-                        if(strpos($tmp2['src'],$old_url) === 0){
-                          $tmp2['src'] = str_replace($old_url,'',$tmp_src);
-                        }
-                        else if (strpos($tmp2['src'],$old_url2) === 0){
-                          $tmp2['src'] = str_replace($old_url2,'',$tmp_src);
+                        preg_match($mediaRegex, $tmp_src, $mediaMatches);
+                        if (!empty($mediaMatches[1])) {
+                          $medias[$mediaMatches[1]] = $tmp_src;
+                          $tmp2['src'] = 'media/'.$mediaMatches[1];
                         }
                         $images[] = $tmp2;
                         $srcs[] = $tmp2['src'];
@@ -363,12 +366,10 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
                                       $link = $links[0];
                                       if ( !empty($link) && !empty($img) && $img->hasAttribute('data-src')  ){
                                         $image['src'] = $img->getAttribute('data-src');
-
-                                        if(strpos($image['src'],$old_url) === 0){
-                                          $image['src'] = str_replace($old_url,'',$image['src']);
-                                        }
-                                        else if (strpos($image['src'],$old_url2) === 0){
-                                          $image['src'] = str_replace($old_url2,'',$image['src']);
+                                        preg_match($mediaRegex, $image['src'], $mediaMatches);
+                                        if (!empty($mediaMatches[1])) {
+                                          $medias[$mediaMatches[1]] = $image['src'];
+                                          $image['src'] = 'media/'.$mediaMatches[1];
                                         }
                                         $srcs[] =  $image['src'];
 
@@ -456,11 +457,10 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
                           $tmp['href'] = $link->getAttribute('href');
                           $img = $link->getElementsByTagName('noscript')[0]->getElementsByTagName('img')[0];
                           $tmp['src'] = $img->getAttribute('src');
-                          if(strpos($tmp['src'],$old_url) === 0){
-                            $tmp['src'] = str_replace($old_url,'',$tmp['src']);
-                          }
-                          else if (strpos($tmp['src'],$old_url2) === 0){
-                            $tmp['src'] = str_replace($old_url2,'',$tmp['src']);
+                          preg_match($mediaRegex, $tmp['src'], $mediaMatches);
+                          if (!empty($mediaMatches[1])) {
+                            $medias[$mediaMatches[1]] = $tmp['src'];
+                            $tmp['src'] = 'media/'.$mediaMatches[1];
                           }
 
                           $srcs[] = $tmp['src'];
@@ -470,11 +470,10 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
                         if ( strpos($container->getAttribute('class'),'image-block-wrapper') > -1){
                           $img = $container->getElementsByTagName('noscript')[0]->getElementsByTagName('img')[0];
                           $tmp['src'] = $img->getAttribute('src');
-                          if(strpos($tmp['src'],$old_url) === 0){
-                            $tmp['src'] = str_replace($old_url,'',$tmp['src']);
-                          }
-                          else if (strpos($tmp['src'],$old_url2) === 0){
-                            $tmp['src'] = str_replace($old_url2,'',$tmp['src']);
+                          preg_match($mediaRegex, $tmp['src'], $mediaMatches);
+                          if (!empty($mediaMatches[1])) {
+                            $medias[$mediaMatches[1]] = $tmp['src'];
+                            $tmp['src'] = 'media/'.$mediaMatches[1];
                           }
 
                           $srcs[] =  $tmp['src'];
@@ -498,11 +497,10 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
                       $src = $src[0];
                       if ( $src && $src->getAttribute('data-src') ){
                         $tmp['src'] = $src->getAttribute('data-src');
-                        if(strpos($tmp['src'],$old_url) === 0){
-                          $tmp['src'] = str_replace($old_url,'',$tmp['src']);
-                        }
-                        else if (strpos($tmp['src'],$old_url2) === 0){
-                          $tmp['src'] = str_replace($old_url2,'',$tmp['src']);
+                        preg_match($mediaRegex, $tmp['src'], $mediaMatches);
+                        if (!empty($mediaMatches[1])) {
+                          $medias[$mediaMatches[1]] = $tmp['src'];
+                          $tmp['src'] = 'media/'.$mediaMatches[1];
                         }
 
                         $srcs[] = $tmp['src'];
@@ -522,10 +520,10 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
                           if (in_array('productDetails', $class)){
                             if ($d->getElementsByTagName('a') && ($a = $d->getElementsByTagName('a')[0]) ){
 
-                              $tmp['details_title'] = trim($a->textContent);   
-                            } 
+                              $tmp['details_title'] = trim($a->textContent);
+                            }
                             if ($d->getElementsByTagName('p') && ($p = $d->getElementsByTagName('p')[0]) ){
-                              $tmp['details'] = trim($p->textContent);   
+                              $tmp['details'] = trim($p->textContent);
                             }
                           }
                         }
@@ -546,11 +544,10 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
                           else if($o->getAttribute('data-src')){
                             $tmp2['src'] = $o->getAttribute('data-src');
                           }
-                          if(strpos($tmp2['src'],$old_url) === 0){
-                            $tmp2['src'] = str_replace($old_url,'',$tmp2['src']);
-                          }
-                          else if (strpos($tmp2['src'],$old_url2) === 0){
-                            $tmp2['src'] = str_replace($old_url2,'',$tmp2['src']);
+                          preg_match($mediaRegex, $tmp2['src'], $mediaMatches);
+                          if (!empty($mediaMatches[1])) {
+                            $medias[$mediaMatches[1]] = $tmp2['src'];
+                            $tmp2['src'] = 'media/'.$mediaMatches[1];
                           }
                           if ($o->parentNode->parentNode->tagName === 'a'){
                             $tmp2['details_title'] =  $o->parentNode->parentNode->getAttribute('data-title') ?? '';
@@ -656,7 +653,7 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
               //noSquare
               isset($block['noSquare']) ? ( $bbn_tag .= ':noSquare="' . boolval($block['noSquare']) .'" ' ) : false;
               //columns
-              isset($block['columns']) ? ( $bbn_tag .= 'columns="' . $block['columns'] .'" ' ) : false; 
+              isset($block['columns']) ? ( $bbn_tag .= 'columns="' . $block['columns'] .'" ' ) : false;
               //content
               if (isset($block['content'])) {
                 $bbn_tag .= 'content="' . $block['content'] .'" ';
@@ -725,7 +722,7 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
 
         $res[$f]['content'] = (string)($dom->{'content:encoded'} ?? '');
         $json_file = pathinfo($f)['filename'] . '.json';
-        if ( !empty( file_put_contents(BBN_DATA_PATH.'content/blocks/'.$json_file, json_encode($res[$f]), JSON_UNESCAPED_UNICODE)) ) {
+        if (file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'blocks/'.$json_file, json_encode($res[$f], JSON_UNESCAPED_UNICODE))) {
           $num_inserted++;
         }
         $res[$f] = null;
@@ -733,15 +730,13 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
       }
 
       //}
-      if ( !empty($ids) ){
-        file_put_contents(BBN_DATA_PATH.'ids2.json', json_encode($ids));
-      }
+      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'ids2.json', json_encode($ids));
 
       //creates json file of categories
+      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'categories.json', json_encode($categories));
 
-      if (!empty($categories)) {
-        file_put_contents(BBN_DATA_PATH.'categories.json', json_encode($categories));
-      }
+      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'medias.json', json_encode($medias));
+
 
     }
 

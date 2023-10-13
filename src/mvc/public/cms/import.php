@@ -11,13 +11,18 @@ $fs = new System();
 if (!$fs->exists(APPUI_NOTE_CMS_IMPORT_PATH)) {
   $fs->createPath(APPUI_NOTE_CMS_IMPORT_PATH);
 }
+$cfgFile = APPUI_NOTE_CMS_IMPORT_PATH.'cfg.json';
 
-if (!empty($ctrl->post['process'])
-  && !empty($ctrl->post['action'])
-  && !empty($ctrl->post['file'])
-  && is_file(APPUI_NOTE_CMS_IMPORT_PATH.$ctrl->post['file'])
+if (!empty($ctrl->post['action'])
+  && ($ctrl->post['action'] === 'reset')
 ) {
-  $cfgFile = APPUI_NOTE_CMS_IMPORT_PATH.'import_cfg.json';
+  $ctrl->obj->success = $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH, true);
+}
+else if (!empty($ctrl->post['process'])
+  && !empty($ctrl->post['action'])
+  && !empty($ctrl->post['file']['name'])
+  && is_file(APPUI_NOTE_CMS_IMPORT_PATH.$ctrl->post['file']['name'])
+) {
   if (!is_file($cfgFile)) {
     file_put_contents($cfgFile, json_encode([
       'creationDate' => date('Y-m-d H:i:s'),
@@ -28,7 +33,7 @@ if (!empty($ctrl->post['process'])
 
   /** @var array array with index creationDate and processes */
   $jsonCfg = json_decode(file_get_contents($cfgFile), true);
-  if ($jsonCfg['file'] === $ctrl->post['file']) {
+  if ($jsonCfg['file'] == $ctrl->post['file']) {
     $pluginUrl = $ctrl->pluginUrl().'/';
     // if processes not exist we create the new process*/
     if (!isset($jsonCfg['processes'][$ctrl->post['process']])) {
@@ -75,16 +80,29 @@ else if (!empty($ctrl->files)) {
     $ctrl->obj->success = 1;
     $ctrl->obj->fichier = [
       'name' => $filename,
-      'size' => filesize($path.'/'.$filename),
+      'size' => filesize(APPUI_NOTE_CMS_IMPORT_PATH.$filename),
       'extension' => '.'.\bbn\Str::fileExt($filename)
     ];
+    if (!is_file($cfgFile)) {
+      file_put_contents($cfgFile, json_encode([
+        'creationDate' => date('Y-m-d H:i:s'),
+        'file' => $ctrl->obj->fichier,
+        'processes' => []
+      ], JSON_PRETTY_PRINT));
+    }
   }
 }
 else {
   $fs->cd($ctrl->pluginPath().'/mvc/model/cms/import');
-  $fileList = array_map(function($a){ return basename($a, '.php');}, $fs->getFiles('.'));
+  $d = [
+    'cfg' => null,
+    'filesList' => array_map(function($a){ return basename($a, '.php');}, $fs->getFiles('.'))
+  ];
+  if (is_file($cfgFile)) {
+    $d['cfg'] = json_decode(file_get_contents($cfgFile), true);
+  }
 
-  $ctrl->combo("Importer", ['filesList' => $fileList]);
+  $ctrl->combo("Importer", $d);
 }
 
-
+$ctrl->setUrl($ctrl->pluginUrl('appui-note') . '/cms/import');

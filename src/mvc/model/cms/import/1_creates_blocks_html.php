@@ -19,7 +19,7 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
     return ['message' => $i ? 'Process undo successfully, folder deleted' : 'No folder to delete'];
   }
   else {
-    $st = file_get_contents(APPUI_NOTE_CMS_IMPORT_PATH.$model->data['file']);
+    $st = file_get_contents(APPUI_NOTE_CMS_IMPORT_PATH.$model->data['file']['name']);
     $bits = X::split($st, '<item>');
     $res = [];
     if ($fs->exists(APPUI_NOTE_CMS_IMPORT_PATH.'items/')) {
