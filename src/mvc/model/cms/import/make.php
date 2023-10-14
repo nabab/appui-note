@@ -1,5 +1,6 @@
 <?php
 use bbn\X;
+use bbn\File\Dir;
 
 //insert categories
 if ($model->data['action'] === 'undo') {
@@ -21,7 +22,7 @@ else {
   //INSERT ARTICLES IN DB AND CATEGORY IN ARTICLE_CATEGORIES
   if (
     ($articles = scandir(BBN_DATA_PATH.'content/blocks/')) &&
-    ($ids = json_decode( file_get_contents(BBN_DATA_PATH.'ids2.json'), true ))
+    ($ids = json_decode( file_get_contents(BBN_DATA_PATH.'ids.json'), true ))
   ) {
     foreach($articles as $idx => $article ){
       $r = json_decode(file_get_contents(BBN_DATA_PATH.'content/blocks/'.$article), true);

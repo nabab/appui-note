@@ -4,31 +4,39 @@
   return {
     name: 'appui-note-cms-import',
     data(){
+      let processesList = [{
+        text: bbn._("Select an XML file"),
+        value: 'file'
+      }, {
+        text: bbn._("Read XML file"),
+        value: 'read'
+      }, {
+        text: bbn._("Parse XML file"),
+        value: 'parse'
+      }, {
+        text: bbn._("Make items"),
+        value: 'make'
+      }, {
+        text: bbn._("Import medias"),
+        value: 'medias'
+      }, {
+        text: bbn._("Import categories, posts and pages"),
+        value: 'items'
+      }];
       return {
-        selectedProcess: null,
-        infoMessage: null,
-        message: null,
-        lastLaunch: null,
-        lastUndo: null,
-        cfg: this.source.cfg || {},
         root: appui.plugins['appui-note'] + '/',
         fileUploaded: !!this.source.cfg?.file ? [this.source.cfg.file] :  [],
-        processList: [{
-          text: bbn._("Select an XML file"),
-          value: 'file',
-          done: !!this.source.cfg?.file,
-          running: false
-        }, {
-          text: bbn._("Read XML file"),
-          value: 'parse',
-          done: false,
-          running: false
-        }, {
-          text: bbn._("Parse XML file"),
-          value: 'parse',
-          done: false,
-          running: false
-        }],
+        processesList: bbn.fn.map(processesList, p => {
+          let c = this.source.cfg?.processes || {};
+          c = c[p.value] || {};
+          return bbn.fn.extend(p, {
+            running: false,
+            done: !!c.done,
+            lastLaunch: c.lastLaunch || '',
+            lastUndo: c.lastUndo || '',
+            message: c.message || ''
+          });
+        }),
         runningProcess: false
       }
     },
@@ -51,66 +59,55 @@
           });
         });
       },
-      launchProcess(){
-        if (this.selectedProcess) {
+      launchProcess(process){
+        if (process) {
+          process.running = true;
           bbn.fn.post(this.root + 'cms/import', {
             action: 'launch',
             file: this.currentFile,
-            process: this.selectedProcess
+            process: process.value
           }, d => {
             if (d.data?.message) {
-              this.message = d.data.message;
+              process.message = d.data.message;
             }
             else {
-              this.message = '';
+              process.message = '';
             }
+            process.running = false;
+            process.done = true;
           })
         }
       },
-      undoProcess(){
-        if (this.selectedProcess) {
+      undoProcess(process){
+        if (process) {
           bbn.fn.post(this.root + 'cms/import', {
             action: 'undo',
             file: this.currentFile,
-            process: this.selectedProcess
+            process: process.value
           }, d => {
             if (d.data?.message) {
-              this.message = d.data.message;
+              process.message = d.data.message;
             }
             else {
-              this.message = '';
+              process.message = '';
             }
+            process.done = false;
           })
         }
-      },
-      selectProcess(val){
-        this.selectedProcess = val.text;
       }
     },
     created(){
       appui.register('appui-note-cms-import', this);
     },
     watch: {
-      selectedProcess(v) {
-        bbn.fn.post(this.root + 'cms/import', {
-          process: v,
-          file: this.currentFile,
-          action: 'info'
-        }, d => {
-          this.message = '';
-          this.infoMessage = d.lastMessage || '';
-          this.lastLaunch = d.lastLaunch || '';
-          this.lastUndo = d.lastUndo || '';
-        })
-      },
       currentFile(newVal){
-        bbn.fn.getRow(this.processList, 'value', 'file').done = !!newVal;
+        bbn.fn.getRow(this.processesList, 'value', 'file').done = !!newVal;
       }
     },
     components: {
-      processListItem: {
+      processesListItem: {
         template: `
-          <div :class="['bbn-flex-width', 'bbn-vmiddle', {'bbn-disabled': !source.done && !source.running}]">
+          <div :class="['bbn-flex-width', 'bbn-vmiddle', {'bbn-disabled': isDisabled}]">
             <i :class="['bbn-m', {
                  'nf nf-md-check_circle bbn-green': !!source.done,
                  'nf nf-md-play_circle bbn-blue': !!source.running,
@@ -123,6 +120,18 @@
         props: {
           source: {
             type: Object
+          },
+          list: {
+            type: Array
+          }
+        },
+        computed: {
+          isDisabled(){
+            const idx = bbn.fn.search(this.list, 'value', this.source.value);
+            return !this.source.done
+              && !this.source.running
+              && !!this.list[idx-1]
+              && !this.list[idx-1].done;
           }
         }
       }

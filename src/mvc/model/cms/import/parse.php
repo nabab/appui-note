@@ -11,21 +11,21 @@ use bbn\X;
 $fs = new bbn\File\System();
 if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
   if ($model->data['action'] == 'undo') {
-    $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'blocks', true);
+    $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'json', true);
     $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'medias', true);
     return ['message' => 'Process undo successfully.'];
   }
   else {
     $num_inserted = 0;
-    if ($fs->exists(APPUI_NOTE_CMS_IMPORT_PATH.'blocks')) {
-      $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'blocks', true);
+    if ($fs->exists(APPUI_NOTE_CMS_IMPORT_PATH.'json')) {
+      $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'json', true);
     }
     if ($fs->exists(APPUI_NOTE_CMS_IMPORT_PATH.'medias')) {
       $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'medias', true);
     }
-    $fs->createPath(APPUI_NOTE_CMS_IMPORT_PATH.'blocks');
+    $fs->createPath(APPUI_NOTE_CMS_IMPORT_PATH.'json');
     $fs->createPath(APPUI_NOTE_CMS_IMPORT_PATH.'medias');
-    $path = APPUI_NOTE_CMS_IMPORT_PATH.'items/';
+    $path = APPUI_NOTE_CMS_IMPORT_PATH.'xml/';
 
     $files = $fs->getFiles($path, false, false, 'xml');
     $res = [];
@@ -49,7 +49,7 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
       foreach ( $files as $i => $f ) {
         //if ($f === '/home/thomas/domains/poc.thomas.lan/app-ui/data/content/articles/marine-00002.html'){    $srcs = [];
         $st = $fs->getContents($f);
-        $dom = simplexml_load_string('<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL.'<root>'.$st.'</root>');
+        $dom = simplexml_load_string('<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL.'<root>'.$st.'</root>', null, LIBXML_NOERROR);
         $res[$f] = [];
         /*
           if ((string)$dom->link !== '/home') {
@@ -135,17 +135,17 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
             }
           }
         }
-        $res[$f]['photographer'] = ((string)$dom->{'wp:post_type'} === 'page') ? (string) $dom->title : '';
+
         if ( !empty($dom->{'content:encoded'} ) ){
 
           $blocks = [];
           $st = (string)$dom->{'content:encoded'};
           $dom2 = new \DOMDocument();
-          $dom2->loadHTML('<?xml encoding="UTF-8"?>'.$st);
+          $dom2->loadHTML('<?xml encoding="UTF-8"?>'.$st, LIBXML_NOERROR);
           $body = $dom2->getElementsByTagName('body')[0];
           foreach ( $body->childNodes as $childnodeIdx => $c ) {
 
-            if ( $c->tagName ){
+            if (!empty($c->tagName)) {
               $tmp = [];
               $tmp['node'] = $c;
               //@todo controllare attribute alt e in caso inserirlo nel tag
@@ -190,7 +190,9 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                         $text = '';
 
                         if( !empty($child->textContent) ) {
-                          if ( $child->tagName === 'strong' ) {
+                          if (!empty($child->tagName)
+                            && ($child->tagName === 'strong')
+                          ) {
                             $contents[] = '<strong>'.$child->textContent.'</strong><br>';
                           }
                           else {
@@ -268,64 +270,66 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                     $images = [];
 
                     foreach ($c->childNodes as $child) {
-                      if ( $child->tagName && ($child->tagName === 'div')) {
-                        $child_classes =  explode(' ', $child->getAttribute('class'));
-                        if (in_array('sqs-gallery', $child_classes) && !empty($child->childNodes)) {
-                          foreach ($child->childNodes as $slide) {
-                            if ($slide->tagName && ($slide->tagName === 'div')){
-                              $classes = explode(' ',$slide->getAttribute('class'));
-                              if (in_array('slide', $classes) && !empty($slide->childNodes)) {
-                                if (($img = $slide->getElementsByTagName('img'))
-                                  && ($tmp_src = $img[0]->getAttribute('src'))
-                                ) {
-                                  $tmp2 = [];
-                                  $img = $img[0];
-                                  if ($link = $slide->getElementsByTagName('a')[0]){
-                                    //if the domain in href is photography of china it removes the domain from url
-                                    $domain = parse_url($link->getAttribute('href'), PHP_URL_HOST);
-                                    if ( $domain === 'photographyofchina.com' ) {
-                                      $tmp2['href'] = parse_url($link->getAttribute('href'), PHP_URL_PATH);
+                      if (!empty($child->tagName)) {
+                        if ($child->tagName === 'div') {
+                          $child_classes =  explode(' ', $child->getAttribute('class'));
+                          if (in_array('sqs-gallery', $child_classes) && !empty($child->childNodes)) {
+                            foreach ($child->childNodes as $slide) {
+                              if ($slide->tagName && ($slide->tagName === 'div')){
+                                $classes = explode(' ',$slide->getAttribute('class'));
+                                if (in_array('slide', $classes) && !empty($slide->childNodes)) {
+                                  if (($img = $slide->getElementsByTagName('img'))
+                                    && ($tmp_src = $img[0]->getAttribute('src'))
+                                  ) {
+                                    $tmp2 = [];
+                                    $img = $img[0];
+                                    if ($link = $slide->getElementsByTagName('a')[0]){
+                                      //if the domain in href is photography of china it removes the domain from url
+                                      $domain = parse_url($link->getAttribute('href'), PHP_URL_HOST);
+                                      if ( $domain === 'photographyofchina.com' ) {
+                                        $tmp2['href'] = parse_url($link->getAttribute('href'), PHP_URL_PATH);
+                                      }
+                                      else{
+                                        $tmp2['href'] = $link->getAttribute('href');
+                                      }
                                     }
-                                    else{
-                                      $tmp2['href'] = $link->getAttribute('href');
+                                    $tmp2['src'] = $tmp_src;
+                                    preg_match($mediaRegex, $tmp_src, $mediaMatches);
+                                    if (!empty($mediaMatches[1])) {
+                                      $medias[$mediaMatches[1]] = $tmp_src;
+                                      $tmp2['src'] = 'media/'.$mediaMatches[1];
                                     }
-                                  }
-                                  $tmp2['src'] = $tmp_src;
-                                  preg_match($mediaRegex, $tmp_src, $mediaMatches);
-                                  if (!empty($mediaMatches[1])) {
-                                    $medias[$mediaMatches[1]] = $tmp_src;
-                                    $tmp2['src'] = 'media/'.$mediaMatches[1];
-                                  }
-                                  $srcs[] = $tmp2['src'];
-                                  if ($captions = $slide->getElementsByTagName('div')) {
-                                    foreach ($captions as $c) {
-                                      $cclasses = explode(' ',$c->getAttribute('class'));
-                                      if (in_array('image-slide-title', $cclasses)) {
-                                        $caption = trim($c->textContent);
-                                        if ($caption) {
-                                          $tmp2['caption'] = $caption;
-                                          break;
+                                    $srcs[] = $tmp2['src'];
+                                    if ($captions = $slide->getElementsByTagName('div')) {
+                                      foreach ($captions as $c) {
+                                        $cclasses = explode(' ',$c->getAttribute('class'));
+                                        if (in_array('image-slide-title', $cclasses)) {
+                                          $caption = trim($c->textContent);
+                                          if ($caption) {
+                                            $tmp2['caption'] = $caption;
+                                            break;
+                                          }
                                         }
                                       }
                                     }
+                                    $images[] = $tmp2;
                                   }
-                                  $images[] = $tmp2;
                                 }
                               }
                             }
                           }
                         }
-                      }
-                      elseif (($child->tagName === 'img') && ($tmp_src = $child->getAttribute('src'))) {
-                        //case of div without class containing a gallery of images
-                        $tmp2['src'] = $tmp_src;
-                        preg_match($mediaRegex, $tmp_src, $mediaMatches);
-                        if (!empty($mediaMatches[1])) {
-                          $medias[$mediaMatches[1]] = $tmp_src;
-                          $tmp2['src'] = 'media/'.$mediaMatches[1];
+                        elseif (($child->tagName === 'img') && ($tmp_src = $child->getAttribute('src'))) {
+                          //case of div without class containing a gallery of images
+                          $tmp2['src'] = $tmp_src;
+                          preg_match($mediaRegex, $tmp_src, $mediaMatches);
+                          if (!empty($mediaMatches[1])) {
+                            $medias[$mediaMatches[1]] = $tmp_src;
+                            $tmp2['src'] = 'media/'.$mediaMatches[1];
+                          }
+                          $images[] = $tmp2;
+                          $srcs[] = $tmp2['src'];
                         }
-                        $images[] = $tmp2;
-                        $srcs[] = $tmp2['src'];
                       }
                     }
                     $tmp['source'] = $images;
@@ -568,7 +572,30 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                       }
                     }
                   }
-
+                  break;
+                case 'img':
+                  if (empty($c->getAttribute('id')) || ($c->getAttribute('id') !== 'socialLinks')){
+                    if ($c->getAttribute('src')) {
+                      $tmp['content'] = $c->getAttribute('src');
+                    }
+                    else if ($c->getAttribute('data-src')) {
+                      $tmp['content'] = $c->getAttribute('data-src');
+                    }
+                    preg_match($mediaRegex, $tmp['content'], $mediaMatches);
+                    if (!empty($mediaMatches[1])) {
+                      $medias[$mediaMatches[1]] = $tmp['content'];
+                      $tmp['content'] = 'media/'.$mediaMatches[1];
+                    }
+                    if ($c->parentNode->tagName === 'a'){
+                      $tmp['details_title'] =  $c->parentNode->getAttribute('data-title') ?? '';
+                      $tmp['details'] = $c->parentNode->getAttribute('data-description') ?? '';
+                      $tmp['href'] = $c->parentNode->getAttribute('href');
+                    }
+                    if ($c->getAttribute('alt')){
+                      $tmp['alt'] = $c->getAttribute('alt');
+                    }
+                    $tmp['type'] = 'image';
+                  }
                   break;
               }
               if ( isset($tmp['type'])){
@@ -588,7 +615,11 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                 $tmp['align'] = (!empty($tmp['style']) && isset($tmp['style']['text-align'])) ? $tmp['style']['text-align'] : 'left';
               }
               else {
-                if (($c->tagName !== 'style' && $c->tagName !== 'div') || ($c->tagName === 'div' && $c->getAttribute('class') !== '')) {
+                if ((($c->tagName !== 'style')
+                    && ($c->tagName !== 'div'))
+                  || (($c->tagName === 'div')
+                    && ($c->getAttribute('class') !== ''))
+                ) {
                   $failedTag[$azerty] = $tmp;
                   $failedTag[$azerty]['tagName'] = $c->tagName;
                   $failedTag[$azerty]['file'] = basename($f);
@@ -596,18 +627,22 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                   $azerty += 1;
                   $failedPath = $model->contentPath().'failed/';
                   $fs->putContents($failedPath.basename($f), $st);
-                  if ($failedTag['tagCount'] === null) {
+                  if (!array_key_exists('tagCount', $failedTag)
+                    || is_null($failedTag['tagCount'])
+                  ) {
                     $failedTag['tagCount'] = [];
                   }
                   else {
-                    if ($failedTag['tagCount'][$c->tagName] === null) {
+                    if (!array_key_exists($c->tagName, $failedTag['tagCount'])
+                      || is_null($failedTag['tagCount'][$c->tagName])
+                    ) {
                       $failedTag['tagCount'][$c->tagName] = 1;
                     }
                     else {
                       $failedTag['tagCount'][$c->tagName] += 1;
                     }
                   }
-                } 
+                }
               }
               $blocks[] = $tmp;
             }
@@ -616,15 +651,17 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
           //if there's a block with the property inline=true analyze siblings and set the prop inline
 
           //detect if the block type TITLE is between HR, (it has a block type hr before and one after and align is center ONLY WAY TO KNOW IF THE TITLE IS IN HR)
-          foreach($blocks as $i => $block){
+          foreach ($blocks as $i => $block) {
             $before = $i - 1;
             $after = $i + 1;
-
-            if (
-              ($blocks[$i]['type'] === 'title') &&
-              ($blocks[$i]['align'] === 'center') &&
-              ($blocks[$i-1]['type'] === 'line') &&
-              ($blocks[$i+1]['type'] === 'line')
+            if (!empty($blocks[$i]['type'])
+              && ($blocks[$i]['type'] === 'title')
+              && !empty($blocks[$i]['align'])
+              && ($blocks[$i]['align'] === 'center')
+              && !empty($blocks[$i-1]['type'])
+              && ($blocks[$i-1]['type'] === 'line')
+              && !empty($blocks[$i+1]['type'])
+              && ($blocks[$i+1]['type'] === 'line')
             ) {
               $blocks[$i]['hr'] = (bool)true;
               //removes the first block hr from the array blocks
@@ -722,7 +759,7 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
 
         $res[$f]['content'] = (string)($dom->{'content:encoded'} ?? '');
         $json_file = pathinfo($f)['filename'] . '.json';
-        if (file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'blocks/'.$json_file, json_encode($res[$f], JSON_UNESCAPED_UNICODE))) {
+        if (file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'json/'.$json_file, json_encode($res[$f], JSON_UNESCAPED_UNICODE))) {
           $num_inserted++;
         }
         $res[$f] = null;
@@ -730,7 +767,7 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
       }
 
       //}
-      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'ids2.json', json_encode($ids));
+      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'ids.json', json_encode($ids));
 
       //creates json file of categories
       file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'categories.json', json_encode($categories));

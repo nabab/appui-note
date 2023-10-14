@@ -50,6 +50,9 @@ else if (!empty($ctrl->post['process'])
         $process['lastLaunch'] = date('Y-m-d H:i:s');
         // launch the controller of the given process in admin/import/
         $ctrl->obj->data = $ctrl->getModel($pluginUrl.'cms/import/'.$ctrl->post['process'], $ctrl->post);
+        if (!empty($ctrl->obj->data['success'])) {
+          $process['done'] = true;
+        }
         if (!empty($ctrl->obj->data['message'])) {
           $process['lastMessage'] = $ctrl->obj->data['message'];
         }
@@ -58,6 +61,9 @@ else if (!empty($ctrl->post['process'])
       case 'undo':
         $process['lastUndo'] = date('Y-m-d H:i:s');
         $ctrl->obj->data = $ctrl->getModel($pluginUrl.'cms/import/'.$ctrl->post['process'], $ctrl->post);
+        if (!empty($ctrl->obj->data['success'])) {
+          $process['done'] = false;
+        }
         if (!empty($ctrl->obj->data['message'])) {
           $process['lastMessage'] = $ctrl->obj->data['message'];
         }
@@ -67,6 +73,8 @@ else if (!empty($ctrl->post['process'])
         $ctrl->obj = X::toObject($process);
         break;
     }
+
+    $ctrl->obj->cfg = $jsonCfg;
 
     file_put_contents($cfgFile, json_encode($jsonCfg, JSON_PRETTY_PRINT));
   }
@@ -87,7 +95,12 @@ else if (!empty($ctrl->files)) {
       file_put_contents($cfgFile, json_encode([
         'creationDate' => date('Y-m-d H:i:s'),
         'file' => $ctrl->obj->fichier,
-        'processes' => []
+        'processes' => [
+          'file' => [
+            'done' => true,
+            'lastLaunch' => date('Y-m-d H:i:s'),
+          ]
+        ]
       ], JSON_PRETTY_PRINT));
     }
   }
