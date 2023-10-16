@@ -58,18 +58,25 @@
                             :notext="true"
                             style="height: 3rem; border-color: var(--default-background) !important"
                             class="bbn-tertiary"
-                            :disabled="pro.value === 'file'"/>
+                            :disabled="(pro.value === 'file') || !processesList[i-1].done || !!pro.done"/>
                 <bbn-button @click="undoProcess(pro)"
                             :title="_('Undo')"
                             icon="nf nf-md-restore bbn-xl"
                             :notext="true"
                             style="height: 3rem; border-color: var(--default-background) !important"
                             class="bbn-secondary"
-                            :disabled="pro.value === 'file'"/>
+                            :disabled="(pro.value === 'file') || !pro.done"/>
               </div>
               <div class="bbn-flex-fill">
-                <div v-text="pro.text"
-                     class="bbn-b bbn-spadded bbn-background bbn-radius-top-right"/>
+                <div class="bbn-flex-width bbn-b bbn-spadded bbn-background bbn-radius-top-right bbn-vmiddle">
+                  <i :class="['bbn-m', {
+                       'nf nf-md-check_circle bbn-green': !!pro.done,
+                       'nf nf-md-play_circle bbn-blue': !!pro.running,
+                       'nf nf-md-dots_circle': !pro.done && !pro.running
+                     }]"/>
+                  <div v-text="pro.text"
+                       class="bbn-flex-fill bbn-left-sspace"/>
+                </div>
                 <div class="bbn-w-100 bbn-spadded">
                   <span v-text="_('Last message')"/>
                   <span v-if="pro.message?.length"
@@ -79,15 +86,15 @@
                 </div>
                 <div class="bbn-w-100 bbn-spadded">
                   <span v-text="_('Last launch execution time')"/>
-                  <span v-if="pro.lastLaunch?.length"
-                        v-text="pro.lastLaunch"/>
+                  <span v-if="pro.launchDate?.length"
+                        v-text="pro.launchDate"/>
                   <span v-else
                         v-text="_('Never')"/>
                 </div>
                 <div class="bbn-w-100 bbn-spadded">
                   <span v-text="_('Last undo execution time')"/>
-                  <span v-if="pro.lastUndo?.length"
-                        v-text="pro.lastUndo"/>
+                  <span v-if="pro.undoDate?.length"
+                        v-text="pro.undoDate"/>
                   <span v-else
                         v-text="_('Never')"/>
                 </div>

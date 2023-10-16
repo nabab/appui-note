@@ -9,11 +9,12 @@
 //CREATES ONE FILE HTML FOREACH ARTICLE IN THE XML
 
 use bbn\X;
+use bbn\File\System;
 
 if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
   && $model->hasData('file')
 ) {
-  $fs = new bbn\File\System();
+  $fs = new System();
   if ($model->data['action'] == 'undo') {
     $i = $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'xml/', true);
     return ['message' => $i ? 'Process undo successfully, folder deleted' : 'No folder to delete'];

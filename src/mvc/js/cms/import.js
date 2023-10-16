@@ -32,8 +32,8 @@
           return bbn.fn.extend(p, {
             running: false,
             done: !!c.done,
-            lastLaunch: c.lastLaunch || '',
-            lastUndo: c.lastUndo || '',
+            launchDate: c.launchDate || '',
+            undoDate: c.undoDate || '',
             message: c.message || ''
           });
         }),
@@ -54,6 +54,13 @@
             if (d.success) {
               this.fileUploaded.splice(0);
               this.getRef('uploader').currentData.splice(0);
+              this.$set(this.source, 'cfg', {});
+              bbn.fn.each(this.processesList, pro => {
+                pro.done = false;
+                pro.launchDate = '';
+                pro.undoDate = '';
+                pro.message = '';
+              });
               appui.success();
             }
           });

@@ -14,26 +14,28 @@
 
 use bbn\X;
 use bbn\Str;
-$st = 'Set In Stone-14';
-$id_post_cat = $model->inc->options->fromCode('post', 'types', 'notes');
-$fs = new bbn\File\System();
+use bbn\File\System;
+use bbn\Appui\Medias;
+
+$fs = new System();
 if ($model->data['action'] === 'undo') {
-  $model->db->delete('bbn_medias_url', []);
-  $num = $model->db->delete('bbn_medias', []);
-  $num_files = $fs->delete($model->contentPath('appui-note').'media/2021', true);
+  
   return ['message' => "Deleted $num medias and $num_files files"];
 }
 else {
-  $medias = new \bbn\Appui\Medias($model->db);
+  $medias = new Medias($model->db);
   // the two domains of squarespace
-  $oldDomain = 'https://images.squarespace-cdn.com';
-  $oldDomain2= 'http://static1.squarespace.com';
   $agent = 'Mozilla/5.0 (Linux; Android 4.4.2; Nexus 4 Build/KOT49H) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.114 Mobile Safari/537.36';
-  $q = $model->db->query("SELECT * FROM articles");
-  $folder = BBN_DATA_PATH.'content/20211008/';
-  \bbn\File\Dir::createPath(BBN_DATA_PATH.'photographers');
-  $fs->cd($folder);
-  $all = $fs->getFiles('.');
+  $mediasList = $fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'medias.json');
+  if (!empty($mediasList)) {
+    $mediasList = json_decode($mediasList, true);
+    foreach ($mediasList as $mediaName => $mediaUrl) {
+      
+    }
+  }
+
+
+
   $lost = 0;
   $found = 0;
   while($a = $q->getRow()) {

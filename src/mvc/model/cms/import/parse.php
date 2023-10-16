@@ -1,5 +1,7 @@
 <?php
 use bbn\X;
+use bbn\File\System;
+use bbn\Util\Timer;
 /*
 
   [ "", "MarineCabos-Brullé", "marinecabos@yahoo.fr", ]
@@ -8,7 +10,7 @@ use bbn\X;
   articles and creates foreach html file a json file corresponding to
   the row of the table articles in db.
   */
-$fs = new bbn\File\System();
+$fs = new System();
 if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
   if ($model->data['action'] == 'undo') {
     $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'json', true);
@@ -31,22 +33,22 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
     $res = [];
     $ids = [];
 
-    $categories = [
-      'cats' => [],
-      'tags' => []
-    ];
+    $categories = [];
+    $tags = [];
 
     $failedTag = [];
     $azerty = 0;
-    $chrono = new bbn\Util\Timer();
+    $chrono = new Timer();
     $mediaRegex = '/wp-content\/uploads\/[0-9]{4}\/[0-9]{2}\/(.*)/';
     $medias = [];
+    $mediasPosts = [];
 
     //$files = ['/home/thomas/domains/poc3.thomas.lan/app-ui/data/content/articles/marine-00997.html'];
     // check if $file is not null (When the parameter is neither an array nor an object with implemented Countable interface, 1 will be returned. There is one exception, if value is null, 0 will be returned.)
     if ( count($files) ){
       // make string array with data for each file
       foreach ( $files as $i => $f ) {
+        $itemName = basename($f, '.xml');
         //if ($f === '/home/thomas/domains/poc.thomas.lan/app-ui/data/content/articles/marine-00002.html'){    $srcs = [];
         $st = $fs->getContents($f);
         $dom = simplexml_load_string('<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL.'<root>'.$st.'</root>', null, LIBXML_NOERROR);
@@ -117,7 +119,7 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
               if ( $att->getName() === 'domain' ){
                 if ((string)$attr === 'post_tag' ){
                   $nicename = (string)$attr->nicename;
-                  $categories['tags'][$nicename] = (string) $c;
+                  $tags[$nicename] = (string) $c;
                   $res[$f]['tags'][] = [
                     'code' => $nicename,
                     'value' => (string) $c
@@ -125,7 +127,7 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                 }
                 else if ( (string)$attr === 'category' ){
                   $nicename = (string)$attr->nicename;
-                  $categories['cats'][$nicename] = (string) $c;
+                  $categories[$nicename] = (string) $c;
                   $res[$f]['categories'][] = [
                     'code' => $nicename,
                     'value' => (string) $c
@@ -296,8 +298,15 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                                     $tmp2['src'] = $tmp_src;
                                     preg_match($mediaRegex, $tmp_src, $mediaMatches);
                                     if (!empty($mediaMatches[1])) {
-                                      $medias[$mediaMatches[1]] = $tmp_src;
-                                      $tmp2['src'] = 'media/'.$mediaMatches[1];
+                                      if (!in_array($tmp_src, $medias)) {
+                                        $medias[] = $tmp_src;
+                                      }
+                                      if (!isset($mediasPosts[$itemName])) {
+                                        $mediasPosts[$itemName] = [];
+                                      }
+                                      if (!in_array($tmp_src, $mediasPosts[$itemName])) {
+                                        $mediasPosts[$itemName][] = $tmp_src;
+                                      }
                                     }
                                     $srcs[] = $tmp2['src'];
                                     if ($captions = $slide->getElementsByTagName('div')) {
@@ -324,8 +333,15 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                           $tmp2['src'] = $tmp_src;
                           preg_match($mediaRegex, $tmp_src, $mediaMatches);
                           if (!empty($mediaMatches[1])) {
-                            $medias[$mediaMatches[1]] = $tmp_src;
-                            $tmp2['src'] = 'media/'.$mediaMatches[1];
+                            if (!in_array($tmp_src, $medias)) {
+                              $medias[] = $tmp_src;
+                            }
+                            if (!isset($mediasPosts[$itemName])) {
+                              $mediasPosts[$itemName] = [];
+                            }
+                            if (!in_array($tmp_src, $mediasPosts[$itemName])) {
+                              $mediasPosts[$itemName][] = $tmp_src;
+                            }
                           }
                           $images[] = $tmp2;
                           $srcs[] = $tmp2['src'];
@@ -372,8 +388,15 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                                         $image['src'] = $img->getAttribute('data-src');
                                         preg_match($mediaRegex, $image['src'], $mediaMatches);
                                         if (!empty($mediaMatches[1])) {
-                                          $medias[$mediaMatches[1]] = $image['src'];
-                                          $image['src'] = 'media/'.$mediaMatches[1];
+                                          if (!in_array($image['src'], $medias)) {
+                                            $medias[] = $image['src'];
+                                          }
+                                          if (!isset($mediasPosts[$itemName])) {
+                                            $mediasPosts[$itemName] = [];
+                                          }
+                                          if (!in_array($image['src'], $mediasPosts[$itemName])) {
+                                            $mediasPosts[$itemName][] = $image['src'];
+                                          }
                                         }
                                         $srcs[] =  $image['src'];
 
@@ -463,8 +486,15 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                           $tmp['src'] = $img->getAttribute('src');
                           preg_match($mediaRegex, $tmp['src'], $mediaMatches);
                           if (!empty($mediaMatches[1])) {
-                            $medias[$mediaMatches[1]] = $tmp['src'];
-                            $tmp['src'] = 'media/'.$mediaMatches[1];
+                            if (!in_array($tmp['src'], $medias)) {
+                              $medias[] = $tmp['src'];
+                            }
+                            if (!isset($mediasPosts[$itemName])) {
+                              $mediasPosts[$itemName] = [];
+                            }
+                            if (!in_array($tmp['src'], $mediasPosts[$itemName])) {
+                              $mediasPosts[$itemName][] = $tmp['src'];
+                            }
                           }
 
                           $srcs[] = $tmp['src'];
@@ -476,8 +506,15 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                           $tmp['src'] = $img->getAttribute('src');
                           preg_match($mediaRegex, $tmp['src'], $mediaMatches);
                           if (!empty($mediaMatches[1])) {
-                            $medias[$mediaMatches[1]] = $tmp['src'];
-                            $tmp['src'] = 'media/'.$mediaMatches[1];
+                            if (!in_array($tmp['src'], $medias)) {
+                              $medias[] = $tmp['src'];
+                            }
+                            if (!isset($mediasPosts[$itemName])) {
+                              $mediasPosts[$itemName] = [];
+                            }
+                            if (!in_array($tmp['src'], $mediasPosts[$itemName])) {
+                              $mediasPosts[$itemName][] = $tmp['src'];
+                            }
                           }
 
                           $srcs[] =  $tmp['src'];
@@ -503,8 +540,15 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                         $tmp['src'] = $src->getAttribute('data-src');
                         preg_match($mediaRegex, $tmp['src'], $mediaMatches);
                         if (!empty($mediaMatches[1])) {
-                          $medias[$mediaMatches[1]] = $tmp['src'];
-                          $tmp['src'] = 'media/'.$mediaMatches[1];
+                          if (!in_array($tmp['src'], $medias)) {
+                            $medias[] = $tmp['src'];
+                          }
+                          if (!isset($mediasPosts[$itemName])) {
+                            $mediasPosts[$itemName] = [];
+                          }
+                          if (!in_array($tmp['src'], $mediasPosts[$itemName])) {
+                            $mediasPosts[$itemName][] = $tmp['src'];
+                          }
                         }
 
                         $srcs[] = $tmp['src'];
@@ -550,8 +594,15 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                           }
                           preg_match($mediaRegex, $tmp2['src'], $mediaMatches);
                           if (!empty($mediaMatches[1])) {
-                            $medias[$mediaMatches[1]] = $tmp2['src'];
-                            $tmp2['src'] = 'media/'.$mediaMatches[1];
+                            if (!in_array($tmp2['src'], $medias)) {
+                              $medias[] = $tmp2['src'];
+                            }
+                            if (!isset($mediasPosts[$itemName])) {
+                              $mediasPosts[$itemName] = [];
+                            }
+                            if (!in_array($tmp2['src'], $mediasPosts[$itemName])) {
+                              $mediasPosts[$itemName][] = $tmp2['src'];
+                            }
                           }
                           if ($o->parentNode->parentNode->tagName === 'a'){
                             $tmp2['details_title'] =  $o->parentNode->parentNode->getAttribute('data-title') ?? '';
@@ -583,8 +634,15 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                     }
                     preg_match($mediaRegex, $tmp['content'], $mediaMatches);
                     if (!empty($mediaMatches[1])) {
-                      $medias[$mediaMatches[1]] = $tmp['content'];
-                      $tmp['content'] = 'media/'.$mediaMatches[1];
+                      if (!in_array($tmp['content'], $medias)) {
+                        $medias[] = $tmp['content'];
+                      }
+                      if (!isset($mediasPosts[$itemName])) {
+                        $mediasPosts[$itemName] = [];
+                      }
+                      if (!in_array($tmp['content'], $mediasPosts[$itemName])) {
+                        $mediasPosts[$itemName][] = $tmp['content'];
+                      }
                     }
                     if ($c->parentNode->tagName === 'a'){
                       $tmp['details_title'] =  $c->parentNode->getAttribute('data-title') ?? '';
@@ -727,7 +785,7 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
 
 
               //because only block image has the class to detect the inline view
-              $inlineIdx = bbn\X::find($blocks, ['inline' => true]);
+              $inlineIdx = X::find($blocks, ['inline' => true]);
               if (
                 isset($inlineIdx) &&
                 isset($block['type']) &&
@@ -768,15 +826,15 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
 
       //}
       file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'ids.json', json_encode($ids));
-
-      //creates json file of categories
       file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'categories.json', json_encode($categories));
-
+      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'tags.json', json_encode($tags));
       file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'medias.json', json_encode($medias));
-
-
+      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_medias.json', json_encode($mediasPosts));
     }
 
-    return ['test' => $failedTag, 'message' => 'Process launch successfully, '.$num_inserted.' JSON files created'];
+    return [
+      'test' => $failedTag,
+      'message' => 'Process launch successfully, '.$num_inserted.' JSON files created'
+    ];
   }
 }

@@ -2,10 +2,12 @@
 /** @var $this \bbn\mvc\model*/
 ini_set('user_agent','Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 6.0)');
 use bbn\X;
+use bbn\Appui\Note;
+use bbn\File\System;
 
 //$articles = $model->db->count('articles');
 $opt =& $model->inc->options;
-$notes = new \bbn\Appui\Note($model->db);
+$notes = new Note($model->db);
 
 if ($model->data['action'] == 'undo') {
   $model->db->delete('bbn_notes_tags', []);
@@ -17,7 +19,6 @@ if ($model->data['action'] == 'undo') {
   return ['message' => "Process undo successfully, $num notes deleted."];
 }
 else {
-  
   //Inserts the option tags
   //Id de appui-note
   $parent = $opt->fromCode('note', 'appui');
@@ -57,7 +58,7 @@ else {
     ]);
   }
 
-  $fs = new \bbn\File\System();
+  $fs = new System();
 
   //INSERT THE NOTES, NOTES_VERSIONS, URL AND EVENTS FOR POSTS AND PAGES
   //select all articles from db

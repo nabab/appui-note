@@ -47,25 +47,25 @@ else if (!empty($ctrl->post['process'])
     switch ($ctrl->post['action']) {
       case 'launch':
         // modifying last launch value for the current process
-        $process['lastLaunch'] = date('Y-m-d H:i:s');
+        $process['launchDate'] = date('Y-m-d H:i:s');
         // launch the controller of the given process in admin/import/
         $ctrl->obj->data = $ctrl->getModel($pluginUrl.'cms/import/'.$ctrl->post['process'], $ctrl->post);
         if (!empty($ctrl->obj->data['success'])) {
           $process['done'] = true;
         }
         if (!empty($ctrl->obj->data['message'])) {
-          $process['lastMessage'] = $ctrl->obj->data['message'];
+          $process['message'] = $ctrl->obj->data['message'];
         }
         break;
 
       case 'undo':
-        $process['lastUndo'] = date('Y-m-d H:i:s');
+        $process['undoDate'] = date('Y-m-d H:i:s');
         $ctrl->obj->data = $ctrl->getModel($pluginUrl.'cms/import/'.$ctrl->post['process'], $ctrl->post);
         if (!empty($ctrl->obj->data['success'])) {
           $process['done'] = false;
         }
         if (!empty($ctrl->obj->data['message'])) {
-          $process['lastMessage'] = $ctrl->obj->data['message'];
+          $process['message'] = $ctrl->obj->data['message'];
         }
         break;
 
@@ -91,18 +91,17 @@ else if (!empty($ctrl->files)) {
       'size' => filesize(APPUI_NOTE_CMS_IMPORT_PATH.$filename),
       'extension' => '.'.\bbn\Str::fileExt($filename)
     ];
-    if (!is_file($cfgFile)) {
-      file_put_contents($cfgFile, json_encode([
-        'creationDate' => date('Y-m-d H:i:s'),
-        'file' => $ctrl->obj->fichier,
-        'processes' => [
-          'file' => [
-            'done' => true,
-            'lastLaunch' => date('Y-m-d H:i:s'),
-          ]
+    file_put_contents($cfgFile, json_encode([
+      'creationDate' => date('Y-m-d H:i:s'),
+      'file' => $ctrl->obj->fichier,
+      'processes' => [
+        'file' => [
+          'done' => true,
+          'launchDate' => date('Y-m-d H:i:s'),
+          'message' => _("Done")
         ]
-      ], JSON_PRETTY_PRINT));
-    }
+      ]
+    ], JSON_PRETTY_PRINT));
   }
 }
 else {
