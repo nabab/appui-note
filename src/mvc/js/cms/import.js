@@ -36,8 +36,7 @@
             undoDate: c.undoDate || '',
             message: c.message || ''
           });
-        }),
-        runningProcess: false
+        })
       }
     },
     computed: {
@@ -80,8 +79,10 @@
             else {
               process.message = '';
             }
+            if (d.data?.success) {
+              process.done = true;
+            }
             process.running = false;
-            process.done = true;
           })
         }
       },

@@ -11,7 +11,10 @@ if ($model->data['action'] === 'undo') {
   Dir::delete(APPUI_NOTE_CMS_IMPORT_PATH.'posts.json');
   Dir::delete(APPUI_NOTE_CMS_IMPORT_PATH.'posts_categories.json');
   Dir::delete(APPUI_NOTE_CMS_IMPORT_PATH.'medias2.json');
-  return ['message' => 'Process undo successfully.'];
+  return [
+    'success' => true,
+    'message' => 'Process undo successfully.'
+  ];
 }
 else {
   //INSERT ARTICLES IN DB AND CATEGORY IN ARTICLE_CATEGORIES
@@ -22,7 +25,6 @@ else {
   ) {
     $mediaRegex = '/wp-content\/uploads\/[0-9]{4}\/[0-9]{2}\/(.*)/';
     $medias = [];
-    $posts = [];
     $postsCategories = [];
     foreach ($postsList as $idx => $post) {
       $r = json_decode($fs->getContents($post), true);
@@ -120,11 +122,13 @@ else {
     }
     */
 
-    file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'posts.json', json_encode(array_values($posts)));
-    file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_categories.json', json_encode($postsCategories));
-    file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'medias2.json', json_encode($medias));
+    file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_categories.json', json_encode($postsCategories, JSON_PRETTY_PRINT));
+    file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'medias2.json', json_encode($medias, JSON_PRETTY_PRINT));
 
-    return ['message' => 'Process launch successfully, '.(count($posts) + count($postsCategories)).' rows created'];
+    return [
+      'success' => true,
+      'message' => 'Process launch successfully, '.(count($posts) + count($postsCategories)).' rows created'
+    ];
   }
 
   return ['message' => 'Problem during the launch process'];

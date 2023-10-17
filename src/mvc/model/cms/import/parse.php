@@ -14,32 +14,41 @@ $fs = new System();
 if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
   if ($model->data['action'] == 'undo') {
     $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'json', true);
-    $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'medias', true);
-    return ['message' => 'Process undo successfully.'];
+    return [
+      'success' => true,
+      'message' => X::_('Process undo successfully.')
+    ];
   }
   else {
     $num_inserted = 0;
     if ($fs->exists(APPUI_NOTE_CMS_IMPORT_PATH.'json')) {
       $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'json', true);
     }
-    if ($fs->exists(APPUI_NOTE_CMS_IMPORT_PATH.'medias')) {
-      $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'medias', true);
-    }
-    $fs->createPath(APPUI_NOTE_CMS_IMPORT_PATH.'json');
-    $fs->createPath(APPUI_NOTE_CMS_IMPORT_PATH.'medias');
-    $path = APPUI_NOTE_CMS_IMPORT_PATH.'xml/';
 
+    $fs->createPath(APPUI_NOTE_CMS_IMPORT_PATH.'json');
+    $cfgFile = APPUI_NOTE_CMS_IMPORT_PATH.'cfg.json';
+    if (is_file($cfgFile)
+      && ($cfg = $fs->getContents($cfgFile))
+      && ($cfg = json_decode($cfg, true))
+      && !empty($cfg['baseUrl'])
+    ) {
+      $baseUrl = $cfg['baseUrl'];
+    }
+
+    if (empty($baseUrl)) {
+      throw new \Exception(_("No baseUrl"));
+    }
+
+    $path = APPUI_NOTE_CMS_IMPORT_PATH.'xml/';
     $files = $fs->getFiles($path, false, false, 'xml');
     $res = [];
     $ids = [];
-
     $categories = [];
     $tags = [];
-
     $failedTag = [];
     $azerty = 0;
     $chrono = new Timer();
-    $mediaRegex = '/wp-content\/uploads\/[0-9]{4}\/[0-9]{2}\/(.*)/';
+    $mediaRegex = '/'.preg_quote($baseUrl, '/').'\/wp-content\/uploads\/[0-9]{4}\/[0-9]{2}\/(.*)/';
     $medias = [];
     $mediasPosts = [];
 
@@ -825,16 +834,17 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
       }
 
       //}
-      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'ids.json', json_encode($ids));
-      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'categories.json', json_encode($categories));
-      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'tags.json', json_encode($tags));
-      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'medias.json', json_encode($medias));
-      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_medias.json', json_encode($mediasPosts));
+      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'ids.json', json_encode($ids, JSON_PRETTY_PRINT));
+      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'categories.json', json_encode($categories, JSON_PRETTY_PRINT));
+      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'tags.json', json_encode($tags, JSON_PRETTY_PRINT));
+      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'medias.json', json_encode($medias, JSON_PRETTY_PRINT));
+      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_medias.json', json_encode($mediasPosts, JSON_PRETTY_PRINT));
     }
 
     return [
+      'success' => true,
       'test' => $failedTag,
-      'message' => 'Process launch successfully, '.$num_inserted.' JSON files created'
+      'message' => X::_("Process launch successfully, %d JSON files created.", $num_inserted)
     ];
   }
 }

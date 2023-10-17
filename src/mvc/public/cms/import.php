@@ -32,7 +32,7 @@ else if (!empty($ctrl->post['process'])
   }
 
   /** @var array array with index creationDate and processes */
-  $jsonCfg = json_decode(file_get_contents($cfgFile), true);
+  $jsonCfg = json_decode($fs->getContents($cfgFile), true);
   if ($jsonCfg['file'] == $ctrl->post['file']) {
     $pluginUrl = $ctrl->pluginUrl().'/';
     // if processes not exist we create the new process*/
@@ -48,8 +48,11 @@ else if (!empty($ctrl->post['process'])
       case 'launch':
         // modifying last launch value for the current process
         $process['launchDate'] = date('Y-m-d H:i:s');
+        $fs->putContents($cfgFile, json_encode($jsonCfg, JSON_PRETTY_PRINT));
         // launch the controller of the given process in admin/import/
         $ctrl->obj->data = $ctrl->getModel($pluginUrl.'cms/import/'.$ctrl->post['process'], $ctrl->post);
+        $jsonCfg = json_decode($fs->getContents($cfgFile), true);
+        $process =& $jsonCfg['processes'][$ctrl->post['process']];
         if (!empty($ctrl->obj->data['success'])) {
           $process['done'] = true;
         }
@@ -60,7 +63,10 @@ else if (!empty($ctrl->post['process'])
 
       case 'undo':
         $process['undoDate'] = date('Y-m-d H:i:s');
+        $fs->putContents($cfgFile, json_encode($jsonCfg, JSON_PRETTY_PRINT));
         $ctrl->obj->data = $ctrl->getModel($pluginUrl.'cms/import/'.$ctrl->post['process'], $ctrl->post);
+        $jsonCfg = json_decode($fs->getContents($cfgFile), true);
+        $process =& $jsonCfg['processes'][$ctrl->post['process']];
         if (!empty($ctrl->obj->data['success'])) {
           $process['done'] = false;
         }
@@ -76,7 +82,7 @@ else if (!empty($ctrl->post['process'])
 
     $ctrl->obj->cfg = $jsonCfg;
 
-    file_put_contents($cfgFile, json_encode($jsonCfg, JSON_PRETTY_PRINT));
+    $fs->putContents($cfgFile, json_encode($jsonCfg, JSON_PRETTY_PRINT));
   }
 }
 else if (!empty($ctrl->files)) {
