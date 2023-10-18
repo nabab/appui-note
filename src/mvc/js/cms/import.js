@@ -20,8 +20,14 @@
         text: bbn._("Import medias"),
         value: 'medias'
       }, {
-        text: bbn._("Import categories, posts and pages"),
-        value: 'items'
+        text: bbn._("Import categories"),
+        value: 'categories'
+      }, {
+        text: bbn._("Import tags"),
+        value: 'tags'
+      }, {
+        text: bbn._("Import posts"),
+        value: 'posts'
       }];
       return {
         root: appui.plugins['appui-note'] + '/',
