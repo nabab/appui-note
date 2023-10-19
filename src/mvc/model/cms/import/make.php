@@ -13,7 +13,7 @@ if ($model->data['action'] === 'undo') {
   Dir::delete(APPUI_NOTE_CMS_IMPORT_PATH.'medias2.json');
   return [
     'success' => true,
-    'message' => 'Process undo successfully.'
+    'message' => _('Process undo successfully.')
   ];
 }
 else {
@@ -26,6 +26,7 @@ else {
     $mediaRegex = '/wp-content\/uploads\/[0-9]{4}\/[0-9]{2}\/(.*)/';
     $medias = [];
     $postsCategories = [];
+    $made = 0;
     foreach ($postsList as $idx => $post) {
       $r = json_decode($fs->getContents($post), true);
       if ((!isset($r['parent']) || is_null($r['parent'])) && ($r['type'] === 'attachment')) {
@@ -53,7 +54,7 @@ else {
             $r['url'] = 'media/'.$mediaMatches[1];
           }
         }
-        $fs->putContents(APPUI_NOTE_CMS_IMPORT_PATH.'posts/'.basename($post), json_encode([
+        if ($fs->putContents(APPUI_NOTE_CMS_IMPORT_PATH.'posts/'.basename($post), json_encode([
           'id' => $r['id'],
           'title' => $r['title'],
           'url' => $r['url'],
@@ -75,10 +76,12 @@ else {
           'categories' => empty($r['categories']) ? [] : array_map(fn($c) => $c['code'], $r['categories']),
           'bbn_cfg' => $r['bbn_cfg'],
           'bbn_elements' => $r['bbn_elements'] ?: null
-        ], JSON_UNESCAPED_UNICODE));
-        if (!empty($r['categories'])) {
-          foreach ($r['categories'] as $i => $c){
-            $postsCategories[$r['id']] = $c['code'];
+        ], JSON_UNESCAPED_UNICODE))) {
+          $made++;
+          if (!empty($r['categories'])) {
+            foreach ($r['categories'] as $i => $c){
+              $postsCategories[$r['id']] = $c['code'];
+            }
           }
         }
       }
@@ -127,11 +130,13 @@ else {
 
     return [
       'success' => true,
-      'message' => 'Process launch successfully, '.(count($posts) + count($postsCategories)).' rows created'
+      'message' => X::_("Process launch successfully, %d posts files created.", $made)
     ];
   }
 
-  return ['message' => 'Problem during the launch process'];
+  return [
+    'message' => _('Problem during the launch process')
+  ];
 }
 
 

@@ -108,6 +108,9 @@
             process.done = false;
           })
         }
+      },
+      formatDate(d){
+        return !!d ? dayjs(d).format('DD/MM/YYYY HH:mm:ss') : '';
       }
     },
     created(){

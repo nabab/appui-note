@@ -8,6 +8,7 @@ use bbn\File\System;
 //$articles = $model->db->count('articles');
 $opt =& $model->inc->options;
 $notes = new Note($model->db);
+$fs = new System();
 
 if ($model->data['action'] == 'undo') {
   $model->db->delete('bbn_notes_tags', []);
@@ -19,6 +20,30 @@ if ($model->data['action'] == 'undo') {
   return ['message' => "Process undo successfully, $num notes deleted."];
 }
 else {
+  $idsCatgs = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids_categories.json'), true);
+  $idsTags = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids_tags.json'), true);
+  $idsMedias = X::mergeArrays(
+    json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids_medias.json'), true),
+    json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids_medias2.json'), true)
+  );
+  $posts = $fs->getFiles(APPUI_NOTE_CMS_IMPORT_PATH.'posts');
+  $postsCats = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_categories.json'), true);
+  $postsTags = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_tags.json'), true);
+  $postsMedias = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_medias.json'), true);
+  $cfg = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'cfg.json'), true);
+  $baseUrl = $cfg['baseUrl'];
+  $idsPosts = [];
+
+  if (!empty($posts)) {
+    foreach ($posts as $postFile) {
+      if (($post = json_decode($fs->getContents($postFile)))
+      ) {
+        //$idNote = $notes->insert($post->title, $post->content);
+      }
+    }
+  }
+
+
   //Inserts the option tags
   //Id de appui-note
   $parent = $opt->fromCode('note', 'appui');

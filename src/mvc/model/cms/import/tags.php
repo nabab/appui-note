@@ -1,6 +1,7 @@
 <?php
 use bbn\X;
 use bbn\File\System;
+use bbn\Appui\Tag;
 
 $fs = new System();
 if ($model->data['action'] === 'undo') {
@@ -22,12 +23,17 @@ if ($model->data['action'] === 'undo') {
 else {
   if (is_file(APPUI_NOTE_CMS_IMPORT_PATH.'tags.json')) {
     $tags = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'tags.json'));
+    $tagCls = new Tag($model->db, defined('BBN_LANG') ? BBN_LANG : null);
     $idsTags = [];
     $added = 0;
     if (!empty($tags)) {
       foreach ($tags as $code => $text) {
-
-        
+        if (!$tagCls->get($text)
+          && ($idTag = $tagCls->add($text))
+        ) {
+          $added++;
+          $idsTags[$code] = $idTag;
+        }
       }
 
       if ($fs->putContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids_tags.json', json_encode($idsTags, JSON_PRETTY_PRINT))) {

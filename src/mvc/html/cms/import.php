@@ -77,24 +77,28 @@
                   <div v-text="pro.text"
                        class="bbn-flex-fill bbn-left-sspace"/>
                 </div>
-                <div class="bbn-w-100 bbn-spadded">
-                  <span v-text="_('Last message')"/>
+                <div class="bbn-w-100 bbn-hspadded bbn-top-spadded bbn-vmiddle">
+                  <i class="nf nf-md-android_messages bbn-xl bbn-right-xsspace"
+                     :title="_('Last message')"/>
                   <span v-if="pro.message?.length"
                         v-text="pro.message"/>
                   <span v-else
                         v-text="_('None')"/>
                 </div>
-                <div class="bbn-w-100 bbn-spadded">
-                  <span v-text="_('Last launch execution time')"/>
+                <div class="bbn-w-100 bbn-hspadded bbn-top-spadded bbn-vmiddle">
+                  <i class="nf nf-md-calendar_check bbn-xl bbn-right-xsspace"
+                     :title="_('Last launch execution time')"/>
                   <span v-if="pro.launchDate?.length"
-                        v-text="pro.launchDate"/>
+                        v-text="formatDate(pro.launchDate)"/>
                   <span v-else
                         v-text="_('Never')"/>
                 </div>
-                <div class="bbn-w-100 bbn-spadded">
-                  <span v-text="_('Last undo execution time')"/>
+                <div class="bbn-w-100 bbn-hspadded bbn-top-spadded bbn-vmiddle">
+                  <span v-text=""/>
+                  <i class="nf nf-md-calendar_refresh bbn-xl bbn-right-xsspace"
+                     :title="_('Last undo execution time')"/>
                   <span v-if="pro.undoDate?.length"
-                        v-text="pro.undoDate"/>
+                        v-text="formatDate(pro.undoDate)"/>
                   <span v-else
                         v-text="_('Never')"/>
                 </div>
