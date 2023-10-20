@@ -76,9 +76,12 @@ else {
             && ($idMedia = $medias->insert($path.$filename))
           ) {
             $found++;
-            $url = str_replace($cfg['baseUrl'], '', urldecode($media));
-            if (strpos($url, '/') === 0) {
-              $url = substr($url, 1);
+            $url = urldecode($media);
+            if (str_starts_with($url, $cfg['baseUrl'])) {
+              $url = substr($url, strlen($cfg['baseUrl']));
+              if (strpos($url, '/') === 0) {
+                $url = substr($url, 1);
+              }
             }
             $medias->setUrl($idMedia, $url);
             $idsMedias[$media] = $idMedia;

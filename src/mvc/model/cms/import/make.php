@@ -26,6 +26,7 @@ else {
     $mediaRegex = '/wp-content\/uploads\/[0-9]{4}\/[0-9]{2}\/(.*)/';
     $medias = [];
     $postsCategories = [];
+    $postsTags = [];
     $made = 0;
     foreach ($postsList as $idx => $post) {
       $r = json_decode($fs->getContents($post), true);
@@ -79,8 +80,15 @@ else {
         ], JSON_UNESCAPED_UNICODE))) {
           $made++;
           if (!empty($r['categories'])) {
+            $postsCategories[$r['id']] = [];
             foreach ($r['categories'] as $i => $c){
-              $postsCategories[$r['id']] = $c['code'];
+              $postsCategories[$r['id']][] = $c['code'];
+            }
+          }
+          if (!empty($r['tags'])) {
+            $postsTags[$r['id']] = [];
+            foreach ($r['tags'] as $i => $t){
+              $postsTags[$r['id']][] = $t['code'];
             }
           }
         }
@@ -126,6 +134,7 @@ else {
     */
 
     file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_categories.json', json_encode($postsCategories, JSON_PRETTY_PRINT));
+    file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_tags.json', json_encode($postsTags, JSON_PRETTY_PRINT));
     file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'medias2.json', json_encode($medias, JSON_PRETTY_PRINT));
 
     return [

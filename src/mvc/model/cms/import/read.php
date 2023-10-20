@@ -23,14 +23,27 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
   }
   else {
     $st = $fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.$model->data['file']['name']);
+    $xml = XMLReader::XML($st);
     $cfgFile = APPUI_NOTE_CMS_IMPORT_PATH.'cfg.json';
-    preg_match('/\<wp\:base\_site\_url\>(.*)\<\/wp\:base\_site\_url\>/', $st, $baseUrlMatch);
+    $baseUrlReg = '/\<wp\:base\_site\_url\>(.*)\<\/wp\:base\_site\_url\>/';
+    preg_match($baseUrlReg, $st, $baseUrlMatch);
     if (!empty($baseUrlMatch[1])
       && is_file($cfgFile)
       && ($cfg = $fs->getContents($cfgFile))
       && ($cfg = json_decode($cfg, true))
     ) {
       $cfg['baseUrl'] = $baseUrlMatch[1];
+      $authorsReg = '/\<wp\:author\>.*\<wp\:author\_login\>\<\!\[CDATA\[(.*)\]\]\>\<\/wp\:author\_login\>.*\<wp\:author\_email\>\<\!\[CDATA\[(.*)\]\]\>\<\/wp\:author\_email\>/';
+      preg_match_all($authorsReg, $st, $authorsMatch, PREG_SET_ORDER);
+      $authors = [];
+      if (!empty($authorsMatch)) {
+        foreach ($authorsMatch as $am) {
+          if (!empty($am[1]) && !empty($am[2])) {
+            $authors[$am[1]] = $am[2];
+          }
+        }
+      }
+      $fs->putContents(APPUI_NOTE_CMS_IMPORT_PATH.'authors.json', json_encode($authors, JSON_PRETTY_PRINT));
       $fs->putContents($cfgFile, json_encode($cfg, JSON_PRETTY_PRINT));
       $bits = X::split($st, '<item>');
       $res = [];
