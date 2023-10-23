@@ -27,7 +27,7 @@ else {
     $cats = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'categories.json'));
     $idsCats = [];
     $added = 0;
-    if (!empty($cats)) {
+    if (is_array($cats)) {
       $idAlias = $model->inc->options->fromCode('bbn-cms', 'editors', 'note', 'appui');
       if (empty($idAlias)) {
         throw new \Exception(_("No bbn-cms editor"));

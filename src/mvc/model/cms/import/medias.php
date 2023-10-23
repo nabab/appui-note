@@ -52,7 +52,7 @@ else {
   }
   $found = 0;
   $lost = 0;
-  if (!empty($mediasList)
+  if (is_array($mediasList)
     && !empty($cfg)
     && $fs->createPath($path)
   ) {

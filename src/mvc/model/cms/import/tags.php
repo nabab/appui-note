@@ -26,7 +26,7 @@ else {
     $tagCls = new Tag($model->db, defined('BBN_LANG') ? BBN_LANG : null);
     $idsTags = [];
     $added = 0;
-    if (!empty($tags)) {
+    if (is_array($tags)) {
       foreach ($tags as $code => $text) {
         if (!$tagCls->get($text)
           && ($idTag = $tagCls->add($text))
