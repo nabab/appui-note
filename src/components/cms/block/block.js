@@ -42,7 +42,7 @@
           if (this.source[n] === undefined) {
             this.$set(this.source, n, a);
           } else {
-            this.source[n] = a;
+            //this.source[n] = a;
           }
         });
       },
@@ -71,9 +71,7 @@
     created() {
       bbn.fn.log('created');
       if (this.source.type
-        && ((bbn.fn.numProperties(this.source) === 3)
-        || (this.source.special
-          && (bbn.fn.numProperties(this.source) === 3)))
+        && !!this.source._elementor
       ) {
         this.applyDefaultConfig();
       }
@@ -149,7 +147,7 @@
         height: '100',
         //ready is important for the component template to be defined
         ready: true,
-        initialSource: null,
+        initialSource: bbn.fn.clone(this.source),
         currentClass: 'bbn-w-100'
       };
     },

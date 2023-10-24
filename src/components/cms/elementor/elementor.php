@@ -8,7 +8,8 @@
            class="bbn-w-100">
         <appui-note-cms-elementor-guide :visible="isDragging"
                                         v-droppable.data="!!preview ? false : {data: {index: i}}"
-                                        @drop.prevent.stop="onDrop"/>
+                                        @drop.prevent.stop="onDrop"
+                                        v-show="!preview"/>
         <appui-note-cms-container v-if="cfg.type === 'container'"
                                   :source="cfg"
                                   :ref="'block' + i"
@@ -42,7 +43,8 @@
       <appui-note-cms-elementor-guide :visible="isDragging"
                                       :force="isDragging && !source.length"
                                       v-droppable.data="!!preview ? false : {data: {index: source.length}}"
-                                      @drop.prevent.stop="onDrop"/>
+                                      @drop.prevent.stop="onDrop"
+                                      v-show="!preview"/>
     </template>
     <div v-if="dragging"
          class="appui-note-cms-elementor-droparea bbn-w-100 bbn-lpadded bbn-middle bbn-upper"

@@ -1,0 +1,151 @@
+<?php
+/** @var $this \bbn\mvc\model*/
+ini_set('user_agent','Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 6.0)');
+use bbn\X;
+use bbn\Appui\Note;
+use bbn\File\System;
+use bbn\Appui\Tag;
+use bbn\Appui\Event;
+
+//$articles = $model->db->count('articles');
+$opt =& $model->inc->options;
+$noteCls = new Note($model->db);
+$fs = new System();
+$tagCls = new Tag($model->db, defined('BBN_LANG') ? BBN_LANG : null);
+$eventCls = new Event($model->db);
+
+if ($model->data['action'] == 'undo') {
+  $idsPosts = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids_posts.json'), true);
+  $deleted = 0;
+  foreach ($idsPosts as $idPost) {
+    $deleted += $model->db->delete('bbn_notes_tags', ['id_note' => $idPost]);
+    $deleted += $model->db->delete('bbn_notes_medias', ['id_note' => $idPost]);
+    $deleted += $model->db->delete('bbn_notes_events', ['id_note' => $idPost]);
+    $deleted += $model->db->delete('bbn_notes_url', ['id_note' => $idPost]);
+    $deleted += $model->db->delete('bbn_notes_versions', ['id_note' => $idPost]);
+    $deleted += $model->db->delete('bbn_notes', ['id' => $idPost]);
+  }
+
+  return [
+    'success' => true,
+    'message' => X::_("Deleted %d rows.", $deleted)
+  ];
+}
+else {
+  $idsCatgs = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids_categories.json'), true);
+  $idsTags = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids_tags.json'), true);
+  $idsMedias = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids_medias.json'), true);
+  $categories = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'categories.json'), true);
+  $tags = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'tags.json'), true);
+  $authors = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'authors.json'), true);
+  $posts = $fs->getFiles(APPUI_NOTE_CMS_IMPORT_PATH.'posts');
+  $postsCats = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_categories.json'), true);
+  $postsTags = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_tags.json'), true);
+  $postsMedias = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_medias.json'), true);
+  $cfg = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'cfg.json'), true);
+  $baseUrl = $cfg['baseUrl'];
+  $idsPosts = [];
+  $idsAuthors = [];
+  $pubEventType = $model->inc->options->fromCode('publication', 'types', 'event', 'appui');
+
+  if (!empty($posts)) {
+    foreach ($posts as $postFile) {
+      //die(var_dump(json_decode($fs->getContents($postFile))->bbn_cfg));
+      if (($post = json_decode($fs->getContents($postFile)))
+        && !empty($post->id)
+        && !empty($postsCats[$post->id])
+        && ($idCat = $idsCatgs[$postsCats[$post->id][0]])
+        // Note
+        && ($idNote = $noteCls->insert([
+          'title' => $post->title,
+          'content' => json_encode($post->bbn_cfg, JSON_UNESCAPED_UNICODE),
+          'id_type' => $idCat,
+          'mime' => 'json/bbn-cms'
+        ]))
+      ) {
+        $idsPosts[] = $idNote;
+
+        // Creation date
+        if (!empty($post->postDate)) {
+          $model->db->update('bbn_notes_versions', ['creation' => $post->postDate], ['id_note' => $idNote]);
+        }
+
+        // Categories
+        foreach ($postsCats[$post->id] as $c) {
+          if ($catText = $categories[$c]) {
+            $t = $tagCls->get($catText);
+            $idTag = empty($t) ? $tagCls->add($catText) : $t['id'];
+            if (!empty($idTag)) {
+              $idsTags[$c] = $idTag;
+              $model->db->insertIgnore('bbn_notes_tags', ['id_note' => $idNote, 'id_tag' => $idTag]);
+              $fs->putContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids_tags.json', json_encode($idsTags, JSON_PRETTY_PRINT));
+            }
+          }
+        }
+
+        // Tags
+        foreach ($postsCats[$post->id] ?? [] as $t) {
+          if (!empty($idsTags[$t])) {
+            $model->db->insertIgnore('bbn_notes_tags', ['id_note' => $idNote, 'id_tag' => $idsTags[$t]]);
+          }
+        }
+
+        // Medias
+        foreach ($postsMedias[$post->id] ?? [] as $m) {
+          if (!empty($idsMedias[$m])) {
+            $noteCls->addMediaToNote($idsMedias[$m], $idNote);
+          }
+        }
+
+        // Author
+        if (!empty($post->author)
+          && !empty($authors[$post->author])
+        ) {
+          $idAuthor = $idsAuthors[$post->author] ?? false;
+          if (empty($idAuthor)
+            && ($idAuthor = $model->db->selectOne('bbn_users', 'id', ['email' => $authors[$post->author]]))
+          ) {
+            $idsAuthors[$post->author] = $idAuthor;
+          }
+
+          if (!empty($idAuthor)) {
+            $model->db->update('bbn_notes', ['creator'=> $idAuthor], ['id' => $idNote]);
+            $model->db->update('bbn_notes_versions', ['id_user' => $idAuthor], ['id_note' => $idNote]);
+          }
+        }
+
+        // Publication
+        if (!empty($pubEventType)
+          && ($post->status === 'publish')
+          && !empty($post->pubDate)
+          && ($idEvent = $eventCls->insert([
+            'id_type' => $pubEventType,
+            'start' => $post->pubDate
+          ]))
+        ) {
+          $noteCls->insertNoteEvent($idNote, $idEvent);
+        }
+
+        // URL
+        if (!empty($post->url)) {
+          $url = $post->url;
+          if (str_starts_with($url, $baseUrl)) {
+            $url = substr($url, strlen($baseUrl));
+            if (strpos($url, '/') === 0) {
+              $url = substr($url, 1);
+            }
+          }
+          $noteCls->insertOrUpdateUrl($idNote, $url);
+        }
+
+      }
+    }
+  }
+
+  $fs->putContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids_posts.json', json_encode($idsPosts, JSON_PRETTY_PRINT));
+
+  return [
+    'success' => true,
+    'message' => X::_("Process launch successfully, %d posts inserted.", count($idsPosts))
+  ];
+}
