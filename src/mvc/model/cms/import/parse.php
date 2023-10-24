@@ -45,7 +45,6 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
     $ids = [];
     $categories = [];
     $tags = [];
-    $failedTag = [];
     $azerty = 0;
     $chrono = new Timer();
     $mediaRegex = '/'.preg_quote($baseUrl, '/').'\/wp-content\/uploads\/[0-9]{4}\/[0-9]{2}\/(.*)/';
@@ -178,11 +177,17 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
           $dom2->loadHTML('<?xml encoding="UTF-8"?>'.$st, LIBXML_NOERROR);
           $body = $dom2->getElementsByTagName('body')[0];
           foreach ($body->childNodes as $childnodeIdx => $c) {
-            if (!empty($c->tagName)) {
-              $tmp = [
-                'node' => $c
-              ];
-
+            $tmp = [];
+            if (($c->nodeType === XML_TEXT_NODE)
+              && !empty($c->textContent)
+            ) {
+              $textContent = trim(str_replace(PHP_EOL, '', $c->textContent));
+              if (!empty($textContent)) {
+                $tmp['type'] = 'text';
+                $tmp['content'] = $textContent;
+              }
+            }
+            else if ($c->nodeType === XML_ELEMENT_NODE) {
               // Get alt attribute
               if ($c->getAttribute('alt')) {
                 $tmp['alt'] = $c->getAttribute('alt');
@@ -210,383 +215,44 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                 case 'h4':
                 case 'h5':
                 case 'h6':
+                  if (!empty($c->childNodes)) {
+                    $tmp['type'] = 'html';
+                    $tmp['content'] = str_replace(PHP_EOL, '<br>', $dom2->saveHTML($c));
+                    if ($otherImg = $c->getElementsByTagName('img')) {
+                      foreach ($otherImg as $o) {
+                        if ($o->getAttribute('src')) {
+                          $tmpSrc = $o->getAttribute('src');
+                        }
+                        else if ($o->getAttribute('data-src')) {
+                          $tmpSrc = $o->getAttribute('data-src');
+                        }
+                        $getMediaSrc($tmpSrc, $res[$f]['id']);
+                      }
+                    }
+                    break;
+                  }
                   $tmp['tag'] = $c->tagName;
                   $tmp['type'] = 'title';
-                  $tmp['content'] = $c->textContent;
+                  $tmp['content'] = str_replace(PHP_EOL, '<br>', $c->textContent);
                   $tmp['hr'] = null;
                   $tmp['align'] = !empty($tmp['style']['text-align']) ? $tmp['style']['text-align'] : 'left';
                   break;
-
+  
                   //BLOCK LINE
                 case 'hr':
                   $tmp['type'] = 'line';
-                  //$tmp['style']['width'] = '100%';
+                  $tmp['hr'] = 'top';
+                  $tmp['width'] = '100%';
                   break;
-
-                  //BLOCK HTML
-                  //IMPORTANT TAKE THE CONTENT OF STRONG, SUCH AS MORE INFORMATION: IN FILE 00005
-                case 'p':
-                case 'span':
-                  //messo dentro ilblock html <a> non so se mi sbaglio
-                case 'a':
-                  //@todo controllare se i caratteri cinesi vengono convertiti, sono nel file marine-00003.html
-                  $href = '';
-                  $content = '';
-                  $contents = [];
-
-                  if ( ( $c->tagName === 'p' ) ){
-                    if ( !empty($c->childNodes) ){
-                      foreach($c->childNodes as $i => $child){
-                        //case of p containing only text
-                        $text = '';
-
-                        if( !empty($child->textContent) ) {
-                          if (!empty($child->tagName)
-                            && ($child->tagName === 'strong')
-                          ) {
-                            $contents[] = '<strong>'.$child->textContent.'</strong><br>';
-                          }
-                          else {
-                            $contents[] = $child->textContent;
-                          }
-                        }
-                        //case of p containing <a
-                        else if ( !empty($child->tagName) && ($c->parentNode->tagName !== 'body') && ($child->tagName === 'a') ){
-                          $contents[] = '<a '. ( !empty($child->getAttribute('href')) ? ('href="'.$child->getAttribute('href').'"') : '' ) .'>'.$child->textContent.'</a>';
-                        }
-                      }
-                    }
-                    if ( !empty($contents) ){
-                      $content .= '<' . $c->tagName.'>';
-                      $content .= implode($contents);
-                      $content .=  '</'.  $c->tagName . '>';
-                      $tmp['content'] = $content;
-                      $tmp['type'] = 'html';
-                    }
-                  }
-                  if ( $c->tagName === 'a' ){
-                    $content .= '<a';
-                    if ( $c->hasAttribute('href') ){
-                      $content  .= ' href="'.$c->getAttribute('href').'"';
-                    }
-                    if ( !empty($c->childNodes) ){
-                      foreach($c->childNodes as $child){
-                        //case of p containing only text
-                        $text = '';
-                        if ( empty($child->tagName) && !empty($child->wholeText) ){
-                          $contents[] = $child->wholeText;
-                        }
-
-                        //case of p containing <a
-                        else if ( !empty($child->tagName) && ($child->tagName === 'a') ){
-                          $contents[] = '<'.$child->tagName . ( !empty($child->getAttribute('href')) ? ('href="'.$child->getAttribute('href').'"') : '' ) .'>'.$child->textContent.'</'.$child->tagName.'>';
-                        }
-                      }
-                    }
-
-                    if ( !empty($contents) ){
-                      $content .= '>'.implode($contents);
-                    }
-                    $content .=  '</'.  $c->tagName . '>';
-                    $tmp['content'] = $content;
-                  }
-                  break;
-                  //CASE VIDEO
-                case 'iframe':
-                  if ( $tmp['src'] = $c->getAttribute('src') ){
-                    if(strpos($tmp['src'], '//') === 0){
-                      $tmp['src'] = 'https:'.$tmp['src'];
-                    }
-
-                    $tmp['type'] = 'video';
-                    $tmp['height'] = $c->getAttribute('height') ?: '';
-                    $tmp['width'] = $c->getAttribute('width') ?: '';
-                    $tmp['scrolling'] = $c->getAttribute('scrolling') ?: '';
-                    $tmp['frameborder'] = $c->getAttribute('frameborder') ?: '';
-                    $tmp['allowfullscreen'] = $c->getAttribute('allowfullscreen') ?: '';
-                  }
-                  break;
-                case 'div':
-                  //CASE GALLERY
-                  $attr_class = array_values(
-                    array_filter(
-                      array_map(
-                        fn($a) => trim($a),
-                        explode(' ', $c->getAttribute('class'))
-                      ),
-                      fn($a) => !empty($a)
-                    )
-                  );
-                  if (!empty($attr_class)
-                    && in_array('sqs-gallery-container', $attr_class)
-                  ) {
-                    $tmp['type'] = 'gallery';
-                    $images = [];
-                    foreach ($c->childNodes as $child) {
-                      if (!empty($child->tagName)) {
-                        if ($child->tagName === 'div') {
-                          $child_classes =  explode(' ', $child->getAttribute('class'));
-                          if (in_array('sqs-gallery', $child_classes) && !empty($child->childNodes)) {
-                            foreach ($child->childNodes as $slide) {
-                              if ($slide->tagName && ($slide->tagName === 'div')){
-                                $classes = explode(' ',$slide->getAttribute('class'));
-                                if (in_array('slide', $classes) && !empty($slide->childNodes)) {
-                                  if (($img = $slide->getElementsByTagName('img'))
-                                    && ($tmp_src = $img[0]->getAttribute('src'))
-                                  ) {
-                                    $tmp2 = [];
-                                    $img = $img[0];
-                                    if ($link = $slide->getElementsByTagName('a')[0]){
-                                      //if the domain in href is photography of china it removes the domain from url
-                                      $domain = parse_url($link->getAttribute('href'), PHP_URL_HOST);
-                                      if ( $domain === 'photographyofchina.com' ) {
-                                        $tmp2['href'] = parse_url($link->getAttribute('href'), PHP_URL_PATH);
-                                      }
-                                      else{
-                                        $tmp2['href'] = $link->getAttribute('href');
-                                      }
-                                    }
-                                    $tmp2['src'] = $getMediaSrc($tmp_src, $res[$f]['id']);
-                                    $srcs[] = $tmp2['src'];
-                                    if ($captions = $slide->getElementsByTagName('div')) {
-                                      foreach ($captions as $c) {
-                                        $cclasses = explode(' ',$c->getAttribute('class'));
-                                        if (in_array('image-slide-title', $cclasses)) {
-                                          $caption = trim($c->textContent);
-                                          if ($caption) {
-                                            $tmp2['caption'] = $caption;
-                                            break;
-                                          }
-                                        }
-                                      }
-                                    }
-                                    $images[] = $tmp2;
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                        elseif (($child->tagName === 'img') && ($tmp_src = $child->getAttribute('src'))) {
-                          //case of div without class containing a gallery of images
-                          $tmp2['src'] = $getMediaSrc($tmp_src, $res[$f]['id']);
-                          $images[] = $tmp2;
-                          $srcs[] = $tmp2['src'];
-                        }
-                      }
-                    }
-                    $tmp['source'] = $images;
-                  }
-
-                  //CASE CAROUSEL
-                  else if (!empty($attr_class)
-                    && in_array('sqs-gallery-design-carousel', $attr_class)
-                  ) {
-                    $tmp['type'] = 'carousel';
-                    $images = [];
-                    foreach ($c->childNodes as $child) {
-                      if ( $child->tagName && ($child->tagName === 'div')) {
-                        $child_classes =  explode(' ', $child->getAttribute('class'));
-
-                        if (in_array('sqs-gallery-container', $child_classes) && !empty($child->childNodes)) {
-
-                          foreach ($child->childNodes as $gallery) {
-                            if ($gallery->tagName && ($gallery->tagName === 'div')){
-
-                              $classes = explode(' ',$gallery->getAttribute('class'));
-                              if (in_array('sqs-gallery', $classes) && !empty($gallery->childNodes)) {
-                                foreach ($gallery->childNodes as $slide) {
-                                  if ($slide->tagName && ($slide->tagName === 'div')){
-                                    $item_classes = array_map(function($a){
-                                      if ( !empty($a) ){
-                                        return trim($a);
-                                      }
-                                    },explode(' ',$slide->getAttribute('class')));
-                                    if ( in_array('summary-item', $item_classes) && !empty($slide->childNodes) ){
-                                      $image = [];
-                                      $img = $slide->getElementsByTagName('img');
-                                      $img = $img[0];
-                                      $links = $slide->getElementsByTagName('a');
-                                      if($times = $slide->getElementsByTagName('time')){
-                                        $time = $times[0];
-                                        //for the carousels of the home!
-                                        $image['time'] = $time->textContent;
-                                      }
-                                      $link = $links[0];
-                                      if ( !empty($link) && !empty($img) && $img->hasAttribute('data-src')  ){
-                                        $image['src'] = $getMediaSrc($img->getAttribute('data-src'), $res[$f]['id']);
-                                        $srcs[] =  $image['src'];
-                                        //looking for the price
-                                        $price = '';
-                                        if( $slide->childNodes ){
-                                          foreach($slide->childNodes as $i => $pc){
-                                            if ( $pc->tagName &&  $pc->getAttribute('class') && in_array('summary-content',explode(' ',$pc->getAttribute('class')))){
-                                              if($pc->childNodes){
-                                                foreach($pc->childNodes as $n){
-                                                  if($n->tagName &&  $n->getAttribute('class') && in_array('summary-price',explode(' ',$n->getAttribute('class')))){
-                                                    foreach( $n->childNodes as $o ){
-                                                      if($o->tagName && $o->getAttribute('class') && in_array('product-price',explode(' ',$o->getAttribute('class')))){
-
-                                                        if( $o->textContent ){
-                                                          $full_price = trim($o->textContent);
-                                                          $number = '';
-                                                          $letters = '';
-                                                          $number = filter_var($image['price']);
-                                                          $tmpo = explode(' ',$full_price);
-                                                          foreach($tmpo as $t){
-                                                            if(is_numeric($t)){
-                                                              $number = '€ '.$t;
-                                                            }
-                                                            else{
-                                                              $letters = $t.' ';
-                                                            }
-                                                          }
-                                                          $image['price'] = $letters.$number;
-                                                          $image['is_product'] = true;
-
-                                                        }
-                                                      }
-                                                    }
-                                                  }
-                                                }
-                                              }
-                                            }
-                                          }
-                                        }
-
-                                        $image['href'] = $link->getAttribute('href');
-                                        $image['title'] = $link->getAttribute('data-title');
-                                        $images[] = $image;
-                                      }
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                    $tmp['source'] = $images;
-
-                  }
-                  //CASE IMAGE
-                  else if (!empty($attr_class)
-                    && in_array('image-block-outer-wrapper', $attr_class)
-                  ) {
-                    //template inline
-                    if(
-                      in_array('design-layout-inline',$attr_class) &&
-                      ($c->parentNode->tagName === 'body')
-                    ){
-                      $tmp['inline'] = true;
-                    }
-
-                    $image = [];
-                    if ( !empty($c->childNodes) && ($child = $c->getElementsByTagName('figure')[0])){
-                      if ( $child->hasAttribute('style') ){
-                        $tmp_style =  explode(';',$child->getAttribute('style'));
-                        if ( !empty($tmp_style) ){
-                          $style = [];
-                          foreach( $tmp_style as $t ){
-                            if (!empty($t)){
-                              $style[explode(':', $t)[0]] = explode(':', $t)[1];
-                            }
-                          }
-                          $tmp['style'] = $style;
-                        }
-                      }
-
-                      if ( $link = $child->getElementsByTagName('a')[0] ){
-                        if ( (strpos($link->getAttribute('class'), 'sqs-block-image-link') > -1) && $link->hasAttribute('href') ){
-                          $tmp['href'] = $link->getAttribute('href');
-                          $img = $link->getElementsByTagName('noscript')[0]->getElementsByTagName('img')[0];
-                          $tmp['src'] = $getMediaSrc($img->getAttribute('src'), $res[$f]['id']);
-                          $srcs[] = $tmp['src'];
-                        }
-                      }
-                      if ( !isset($tmp['src']) && ($container = $child->getElementsByTagName('div')[0]) ){
-                        if ( strpos($container->getAttribute('class'),'image-block-wrapper') > -1){
-                          $img = $container->getElementsByTagName('noscript')[0]->getElementsByTagName('img')[0];
-                          $tmp['src'] = $getMediaSrc($img->getAttribute('src'), $res[$f]['id']);
-                          $srcs[] =  $tmp['src'];
-                          $caption = $container->getElementsByTagName('figcaption');
-
-                        }
-                        if ( $child->getElementsByTagName('figcaption') ){
-                          $caption = $child->getElementsByTagName('figcaption')[0]->textContent;
-                          $tmp['caption'] = htmlentities($caption);
-                        }
-                      }
-                    }
-                    //the type of block is image only if it has the attr src
-                    if (!empty($tmp['src'])) {
-                      $tmp['type'] = 'image';
-                    }
-                  }
-                  else if(!empty($attr_class)
-                    && in_array('product-block', $attr_class)
-                  ) {
-                    if ( !empty($c->childNodes) && ($link = $c->getElementsByTagName('a')[0])){
-                      $src = $link->getElementsByTagName('img');
-                      $src = $src[0];
-                      if ( $src && $src->getAttribute('data-src') ){
-                        $tmp['src'] = $getMediaSrc($src->getAttribute('data-src'), $res[$f]['id']);
-                        $srcs[] = $tmp['src'];
-                      }
-                      if($link->getAttribute('href')){
-                        $tmp['href'] = $link->getAttribute('href');
-                      }
-                      if($src && $src->getAttribute('alt')){
-                        $tmp['alt'] = $src->getAttribute('alt');
-                      }
-                      if (!empty($tmp['src'])) {
-                        $tmp['type'] = 'image';
-                      }
-                      if ($div = $c->getElementsByTagName('div')) {
-                        foreach($div as $d){
-                          $class = explode(' ',$d->getAttribute('class'));
-                          if (in_array('productDetails', $class)){
-                            if ($d->getElementsByTagName('a') && ($a = $d->getElementsByTagName('a')[0]) ){
-
-                              $tmp['details_title'] = trim($a->textContent);
-                            }
-                            if ($d->getElementsByTagName('p') && ($p = $d->getElementsByTagName('p')[0]) ){
-                              $tmp['details'] = trim($p->textContent);
-                            }
-                          }
-                        }
-                      }
-
-                    }
-
-                  }
-
-                  //try to get other images that does not have way to be recognized
-                  else {
-                    if ($otherImg = $c->getElementsByTagName('img')) {
-                      foreach ($otherImg as $o) {
-                        if ($o->getAttribute('id') !== 'socialLinks') {
-                          if ($o->getAttribute('src')) {
-                            $tmpSrc = $o->getAttribute('src');
-                          }
-                          else if ($o->getAttribute('data-src')) {
-                            $tmpSrc = $o->getAttribute('data-src');
-                          }
-                          $getMediaSrc($tmpSrc, $res[$f]['id']);
-                        }
-                      }
-                    }
-                    $tmp['type'] = 'html';
-                    $tmp['content'] = $c->textContent;
-                  }
-                  break;
+  
                 case 'img':
-                case 'video':
-                  $tmp['type'] = $c->tagName === 'img' ? 'image' : 'video';
-                  $tmp['align'] = !empty($tmp['style']['text-align']) ? $tmp['style']['text-align'] : 'left';
-                  $tmp['width'] = isset($tmp['style']['width']) ? $tmp['style']['width'] : 'auto';
-                  $tmp['height'] = isset($tmp['style']['width']) ? $tmp['style']['height'] : 'auto';
+                  $tmp['type'] = 'image';
+                  $tmp['width'] = !empty($c->getAttribute('width')) ?
+                    $c->getAttribute('width').'px' :
+                    (isset($tmp['style']['width']) ? $tmp['style']['width'] : 'auto');
+                  $tmp['height'] = !empty($c->getAttribute('height')) ?
+                    $c->getAttribute('height').'px' :
+                    (isset($tmp['style']['width']) ? $tmp['style']['height'] : 'auto');
                   if ($c->getAttribute('src')) {
                     $tmp['content'] = $c->getAttribute('src');
                   }
@@ -594,143 +260,121 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                     $tmp['content'] = $c->getAttribute('data-src');
                   }
                   $tmp['content'] = $getMediaSrc($tmp['content'], $res[$f]['id']);
+                  $tmpClasses = $c->getAttribute('class');
+                  $tmp['align'] = 'left';
+                  if (!empty($tmpClasses)) {
+                    $tmpClasses = explode(' ', $tmpClasses);
+                    if (in_array('aligncenter', $tmpClasses)) {
+                      $tmp['align'] = 'center';
+                    }
+                    if (in_array('alignright', $tmpClasses)) {
+                      $tmp['align'] = 'right';
+                    }
+                  }
                   break;
-
+  
+                case 'video':
+                  $tmpClasses = $c->getAttribute('class');
+                  $tmp['type'] = 'video';
+                  $tmp['width'] = !empty($c->getAttribute('width')) ?
+                    $c->getAttribute('width').'px' :
+                    (isset($tmp['style']['width']) ? $tmp['style']['width'] : 'auto');
+                  $tmp['height'] = !empty($c->getAttribute('height')) ?
+                    $c->getAttribute('height').'px' :
+                    (isset($tmp['style']['width']) ? $tmp['style']['height'] : 'auto');
+                  if ($c->getAttribute('src')) {
+                    $tmp['content'] = $c->getAttribute('src');
+                  }
+                  else if ($c->getAttribute('data-src')) {
+                    $tmp['content'] = $c->getAttribute('data-src');
+                  }
+                  $tmp['content'] = $getMediaSrc($tmp['content'], $res[$f]['id']);
+                  $tmp['scrolling'] = $c->getAttribute('scrolling') ?: '';
+                  $tmp['frameborder'] = $c->getAttribute('frameborder') ?: '';
+                  $tmp['allowfullscreen'] = $c->getAttribute('allowfullscreen') ?: '';
+                  $tmpClasses = $c->getAttribute('class');
+                  $tmp['align'] = 'left';
+                  if (!empty($tmpClasses)) {
+                    $tmpClasses = explode(' ', $tmpClasses);
+                    if (in_array('aligncenter', $tmpClasses)) {
+                      $tmp['align'] = 'center';
+                    }
+                    if (in_array('alignright', $tmpClasses)) {
+                      $tmp['align'] = 'right';
+                    }
+                  }
+                  break;
+  
                 case 'button':
+                  if (!empty($c->childNodes)) {
+                    $tmp['type'] = 'html';
+                    $tmp['content'] = str_replace(PHP_EOL, '<br>', $dom2->saveHTML($c));
+                    if ($otherImg = $c->getElementsByTagName('img')) {
+                      foreach ($otherImg as $o) {
+                        if ($o->getAttribute('src')) {
+                          $tmpSrc = $o->getAttribute('src');
+                        }
+                        else if ($o->getAttribute('data-src')) {
+                          $tmpSrc = $o->getAttribute('data-src');
+                        }
+                        $getMediaSrc($tmpSrc, $res[$f]['id']);
+                      }
+                    }
+                    break;
+                  }
                   $tmp['type'] = 'button';
-                  $tmp['content'] = $c->textContent;
+                  $tmp['content'] = $c->innerHTML;
                   $tmp['align'] = !empty($tmp['style']['text-align']) ? $tmp['style']['text-align'] : 'left';
                   break;
-              }
-              if (!isset($tmp['type'])) {
-                if ((($c->tagName !== 'style')
-                    && ($c->tagName !== 'div'))
-                  || (($c->tagName === 'div')
-                    && ($c->getAttribute('class') !== ''))
-                ) {
-                  $failedTag[$azerty] = $tmp;
-                  $failedTag[$azerty]['tagName'] = $c->tagName;
-                  $failedTag[$azerty]['file'] = basename($f);
-                  $failedTag[$azerty]['class'] = $c->getAttribute('class');
-                  $azerty += 1;
-                  $failedPath = $model->contentPath().'failed/';
-                  $fs->putContents($failedPath.basename($f), $st);
-                  if (!array_key_exists('tagCount', $failedTag)
-                    || is_null($failedTag['tagCount'])
-                  ) {
-                    $failedTag['tagCount'] = [];
-                  }
-                  else {
-                    if (!array_key_exists($c->tagName, $failedTag['tagCount'])
-                      || is_null($failedTag['tagCount'][$c->tagName])
-                    ) {
-                      $failedTag['tagCount'][$c->tagName] = 1;
-                    }
-                    else {
-                      $failedTag['tagCount'][$c->tagName] += 1;
+  
+                default:
+                  $tmp['type'] = 'html';
+                  $tmp['content'] = str_replace(PHP_EOL, '<br>', $dom2->saveHTML($c));
+                  if ($otherImg = $c->getElementsByTagName('img')) {
+                    foreach ($otherImg as $o) {
+                      if ($o->getAttribute('src')) {
+                        $tmpSrc = $o->getAttribute('src');
+                      }
+                      else if ($o->getAttribute('data-src')) {
+                        $tmpSrc = $o->getAttribute('data-src');
+                      }
+                      $getMediaSrc($tmpSrc, $res[$f]['id']);
                     }
                   }
-                }
+                  break;
               }
-              $blocks[] = $tmp;
+
+              if (isset($tmp['style']['text-align']) && !empty($tmp['align'])) {
+                unset($tmp['style']['text-align']);
+              }
+
+              if (array_key_exists('style', $tmp) && empty($tmp['style'])) {
+                unset($tmp['style']);
+              }
             }
+
+            $blocks[] = $tmp;
           }
 
-          //if there's a block with the property inline=true analyze siblings and set the prop inline
-
-          //detect if the block type TITLE is between HR, (it has a block type hr before and one after and align is center ONLY WAY TO KNOW IF THE TITLE IS IN HR)
-          foreach ($blocks as $i => $block) {
-            $before = $i - 1;
-            $after = $i + 1;
-            if (!empty($blocks[$i]['type'])
-              && ($blocks[$i]['type'] === 'title')
-              && !empty($blocks[$i]['align'])
-              && ($blocks[$i]['align'] === 'center')
-              && !empty($blocks[$i-1]['type'])
-              && ($blocks[$i-1]['type'] === 'line')
-              && !empty($blocks[$i+1]['type'])
-              && ($blocks[$i+1]['type'] === 'line')
-            ) {
-              $blocks[$i]['hr'] = (bool)true;
-              //removes the first block hr from the array blocks
-              array_splice($blocks, $before, 1);
-              //removes the block hr after title in the array blocks ($after-1 because one index has already been deleted from the array)
-              array_splice($blocks, $after - 1, 1);
-            }
-          }
           //remove empty index from blocks
           $last_blocks = [];
           //CREATES the tag of the component to insert in db for each block
           $all_tag = '';
           //die(X::dump($blocks));
 
-          foreach( $blocks as $block ){
+          foreach ($blocks as $block) {
             if (!empty($block) && !empty($block['type'])) {
-              //*$block['bbn_tag'] = '';
-              $bbn_tag = '<bbn-cms-block ';
-              //type
-              $bbn_tag .= 'type="' . $block['type'] .'" ';
-
-              //align
-              isset($block['align']) ? ( $bbn_tag .= 'align="' . $block['align'] .'" ' ) : false;
-              //hr
-              isset($block['hr']) ? ( $bbn_tag .= ':hr="' . boolval($block['hr']) .'" ' ) : false;
-              //noSquare
-              isset($block['noSquare']) ? ( $bbn_tag .= ':noSquare="' . boolval($block['noSquare']) .'" ' ) : false;
-              //columns
-              isset($block['columns']) ? ( $bbn_tag .= 'columns="' . $block['columns'] .'" ' ) : false;
-              //content
-              if (isset($block['content'])) {
-                $bbn_tag .= 'content="' . $block['content'] .'" ';
-              }
-              //tag
-              isset($block['tag']) ? ( $bbn_tag .= 'tag="' . $block['tag'] .'" ' ) : false;
-              //src for image
-              isset($block['src']) ? ( $bbn_tag .= 'src="' . $block['src'] .'" ' ) : false;
-              //caption for image
-              if (isset($block['caption'])) {
-                $bbn_tag .= 'caption="' . $block['caption'] .'" ';
-              }
-
-              if (!empty($block['style'])) {
-                $style = '';
-                foreach($block['style'] as $prop => $val){
-                  $style .= $prop.':'.$val.';';
+              $bbn_tag = '<bbn-cms-block';
+              foreach ($block as $key => $val) {
+                $bbn_tag .= ' ';
+                if (!is_string($val)) {
+                  $bbn_tag .= ':';
                 }
-                $bbn_tag .= 'style="'.$style.'"';
-              }
-
-              if ( ($block['type'] === 'gallery') || ($block['type'] === 'carousel') && !empty($block['source'])){
-                $bbn_tag .= ':source="[';
-                foreach($block['source'] as $source ){
-                  $bbn_tag .= '{';
-                  foreach($source as $i => $s){
-                    $bbn_tag .= $i . ':\'' . $s . '\',';
-                  }
-                  $bbn_tag .= '},';
-
-                }
-                $bbn_tag .= ']"';
-              }
-
-
-              //because only block image has the class to detect the inline view
-              $inlineIdx = X::find($blocks, ['inline' => true]);
-              if (
-                isset($inlineIdx) &&
-                isset($block['type']) &&
-                ($block['type'] !== 'hr') &&
-                ($block['type'] !== 'title') &&
-                ($block['node']->parentNode->tagName === 'body')
-              ) {
-                $block['inline'] = true;
-                //inline
-                $bbn_tag .= ':inline="' . $block['inline'] .'" ';
+                $bbn_tag .= $key.'="'.(is_array($val) ? json_encode($val) : $val).'"';
               }
               $bbn_tag .= '></bbn-cms-block>';
               $all_tag .= $bbn_tag;
-              array_splice($block, 0, 1);
-              if(!empty($block['type'])){
+              if (!empty($block['type'])) {
                 $last_blocks[] = $block;
               }
 
@@ -743,7 +387,7 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
         }
 
         $res[$f]['bbn_elements'] = $all_tag;
-        $res[$f]['bbn_cfg'] = json_encode($last_blocks);
+        $res[$f]['bbn_cfg'] = $last_blocks;
 
         $res[$f]['content'] = (string)($dom->{'content:encoded'} ?? '');
         $json_file = pathinfo($f)['filename'] . '.json';
@@ -764,7 +408,6 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
 
     return [
       'success' => true,
-      'test' => $failedTag,
       'message' => X::_("Process launch successfully, %d JSON files created.", $num_inserted)
     ];
   }

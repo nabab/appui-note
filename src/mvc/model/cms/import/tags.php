@@ -22,7 +22,7 @@ if ($model->data['action'] === 'undo') {
 }
 else {
   if (is_file(APPUI_NOTE_CMS_IMPORT_PATH.'tags.json')) {
-    $tags = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'tags.json'));
+    $tags = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'tags.json'), true);
     $tagCls = new Tag($model->db, defined('BBN_LANG') ? BBN_LANG : null);
     $idsTags = [];
     $added = 0;

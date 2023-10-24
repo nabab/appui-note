@@ -98,41 +98,6 @@ else {
       }
     }
 
-
-    /** @todo To move to previous process */
-    /*
-    //removes the old domains in article cols bbn_cfg e bbn_elements
-    $old = '%https://images.squarespace-cdn.com/%';
-    $old2 = '%http://static1.squarespace.com%';
-    $articles = $model->db->rselectAll('articles', [], ['bbn_cfg' => $old]);
-    $articles2 =  $model->db->rselectAll('articles', [], ['bbn_cfg' => $old2]);
-    foreach ( $articles as $a ) {
-      $old = 'https://images.squarespace-cdn.com';
-      $escaped = 'https:\/\/images.squarespace-cdn.com';
-      $new_cfg = str_replace($escaped,'',$a['bbn_cfg']);
-      $new_bbn_elements = str_replace($old, '', $a['bbn_elements']);
-
-
-      $model->db->update('articles', [
-        'bbn_cfg' => $new_cfg,
-        'bbn_elements' => $new_bbn_elements
-      ], [ 'id'=> $a['id'] ]);
-
-    }
-    foreach ( $articles2 as $a ) {
-      $escaped = 'http:\/\/static1.squarespace.com';
-      $old = 'http://static1.squarespace.com';
-      $new_cfg = str_replace($escaped,'',$a['bbn_cfg']);
-      $new_bbn_elements = str_replace($old, '', $a['bbn_elements']);
-
-      $model->db->update('articles', [
-        'bbn_cfg' => $new_cfg,
-        'bbn_elements' => $new_bbn_elements
-      ], [ 'id'=> $a['id'] ]);
-      X::log($a['id'],'imgs');
-    }
-    */
-
     file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_categories.json', json_encode($postsCategories, JSON_PRETTY_PRINT));
     file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_tags.json', json_encode($postsTags, JSON_PRETTY_PRINT));
     file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'medias2.json', json_encode($medias, JSON_PRETTY_PRINT));

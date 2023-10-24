@@ -24,7 +24,7 @@ if ($model->data['action'] === 'undo') {
 }
 else {
   if (is_file(APPUI_NOTE_CMS_IMPORT_PATH.'categories.json')) {
-    $cats = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'categories.json'));
+    $cats = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'categories.json'), true);
     $idsCats = [];
     $added = 0;
     if (is_array($cats)) {

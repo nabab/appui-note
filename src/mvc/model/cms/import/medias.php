@@ -24,6 +24,11 @@ if ($model->data['action'] === 'undo') {
   if (is_file(APPUI_NOTE_CMS_IMPORT_PATH.'ids_medias.json')) {
     $idsMedias = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids_medias.json'), true);
     foreach ($idsMedias as $idMedia) {
+      if (($mediaUrl = $medias->getUrl($idMedia))
+        && $fs->exists(BBN_PUBLIC.$mediaUrl)
+      ) {
+        $fs->delete(BBN_PUBLIC.$mediaUrl);
+      }
       if ($medias->delete($idMedia)) {
         $deleted++;
       }

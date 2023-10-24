@@ -50,6 +50,7 @@ else {
 
   if (!empty($posts)) {
     foreach ($posts as $postFile) {
+      //die(var_dump(json_decode($fs->getContents($postFile))->bbn_cfg));
       if (($post = json_decode($fs->getContents($postFile)))
         && !empty($post->id)
         && !empty($postsCats[$post->id])
@@ -57,7 +58,7 @@ else {
         // Note
         && ($idNote = $noteCls->insert([
           'title' => $post->title,
-          'content' => $post->bbn_cfg,
+          'content' => json_encode($post->bbn_cfg, JSON_UNESCAPED_UNICODE),
           'id_type' => $idCat,
           'mime' => 'json/bbn-cms'
         ]))

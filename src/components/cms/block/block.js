@@ -46,7 +46,7 @@
           if (this.source[n] === undefined) {
             this.$set(this.source, n, a);
           } else {
-            this.source[n] = a;
+            //this.source[n] = a;
           }
         });
       },
@@ -76,9 +76,6 @@
       bbn.fn.log('created');
       if (this.source.type
         && !!this.source._elementor
-        && ((bbn.fn.numProperties(this.source) === 3)
-          || (this.source.special
-            && (bbn.fn.numProperties(this.source) === 3)))
       ) {
         this.applyDefaultConfig();
       }
