@@ -10,7 +10,7 @@
     },
     data() {
       return {
-        tags: ['h1', 'h2', 'h3', 'h4', 'h5'].map(a => {
+        tags: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].map(a => {
           return {
             text: bbn._("Title") + ' ' + a,
             value: a
