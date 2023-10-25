@@ -15,7 +15,11 @@ if ($model->hasData('id')) {
     'fields' => [
       'title',
       'id_note',
-      'id_type'
+      'id_type',
+      'start',
+      'end',
+      'url',
+      'creation'
     ],
     'join' => [
       [
@@ -29,30 +33,51 @@ if ($model->hasData('id')) {
             'value' => 1
           ]
         ]
+      ], [
+        'type' => 'left',
+        'table' => 'bbn_notes_events',
+        'on' => [
+          [
+            'field' => 'bbn_notes.id',
+            'exp' => 'bbn_notes_events.id_note'
+          ]
+        ]
+      ], [
+        'type' => 'left',
+        'table' => 'bbn_events',
+        'on' => [
+          [
+            'field' => 'bbn_events.id',
+            'exp' => 'bbn_notes_events.id_event'
+          ]
+        ]
+      ], [
+        'type' => 'left',
+        'table' => 'bbn_notes_url',
+        'on' => [
+          [
+            'field' => 'bbn_notes.id',
+            'exp' => 'bbn_notes_url.id_note'
+          ]
+        ]
+      ], [
+        'type' => 'left',
+        'table' => 'bbn_url',
+        'on' => [
+          [
+            'field' => 'bbn_notes_url.id_url',
+            'exp' => 'bbn_url.id'
+          ], [
+            'field' => 'bbn_url.redirect',
+            'operator' => 'isnull'
+          ]
+        ]
       ]
     ],
     'group_by' => ['bbn_notes.id']
   ];
   $ok = false;
   if (in_array($model->data['id'], ['pub', 'unpub'])) {
-    $cfg['join'][] = [
-      'table' => 'bbn_notes_events',
-      'on' => [
-        [
-          'field' => 'bbn_notes.id',
-          'exp' => 'bbn_notes_events.id_note'
-        ]
-      ]
-    ];
-    $cfg['join'][] = [
-      'table' => 'bbn_events',
-      'on' => [
-        [
-          'field' => 'bbn_events.id',
-          'exp' => 'bbn_notes_events.id_event'
-        ]
-      ]
-    ];
     if ($model->data['id'] === 'pub') {
       $cfg['where'] = [
         [
@@ -81,7 +106,7 @@ if ($model->hasData('id')) {
         'end' => 'ASC'
       ];
     }
-    array_push($cfg['fields'], 'start', 'end');
+
     $ok = true;
   }
   elseif ($option = $model->inc->options->option($model->data['id'])) {
@@ -91,6 +116,7 @@ if ($model->hasData('id')) {
     $cfg['order'] = [
       'creation' => 'DESC'
     ];
+
     $ok = true;
   }
 
