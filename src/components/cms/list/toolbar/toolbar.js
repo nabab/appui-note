@@ -1,19 +1,37 @@
 (() => {
   return {
-    props: ['source'],
-    mixins: [bbn.vue.basicComponent],
     data(){
       return {
-        cp: appui.getRegistered('appuiCmsList'),
+        cp: this.closest('appui-note-cms-list'),
+        searchValue: ''
+      }
+    },
+    computed: {
+      categories(){
+        return [{
+          text: bbn._('All'),
+          id: 'all'
+        }, ...this.cp.types];
       }
     },
     methods:{
       insertNote(){
-        return this.cp.insertNote();
+        if (!!this.cp) {
+          return this.cp.insertNote();
+        }
       }
     },
     mounted(){
-      alert('mouuu')
+      if (!!this.cp && !!this.cp.getRef('table')) {
+        this.searchValue = this.cp.getRef('table').searchValue;
+      }
+    },
+    watch: {
+      searchValue(newVal){
+        if (!!this.cp && !!this.cp.getRef('table')) {
+          this.cp.getRef('table').searchValue = newVal;
+        }
+      }
     }
   }
-})()
+})();

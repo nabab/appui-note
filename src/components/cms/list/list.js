@@ -70,7 +70,8 @@
     },
     data(){
       return {
-        users: appui.app.users
+        users: appui.app.users,
+        currentCategory: this.id_type || 'all'
       };
     },
     computed: {
@@ -384,6 +385,15 @@
     },
     beforeDestroy(){
       appui.unregister('appuiCmsList');
+    },
+    watch: {
+      currentCategory(){
+        this.$nextTick(() => {
+          if (this.getRef('table')) {
+            this.getRef('table').updateData();
+          }
+        });
+      }
     },
     components: {
       browser :{
