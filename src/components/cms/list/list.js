@@ -13,7 +13,7 @@
       },
       noteName: {
         type:String,
-        default: bbn._("Note")
+        default: bbn._("Post")
       },
       columns: {
         type: Array,
@@ -78,6 +78,17 @@
       types(){
         return this.source.types_notes;
       },
+      typesTextValue(){
+        return bbn.fn.map(bbn.fn.clone(this.types), t => {
+          return {
+            text: t.text,
+            value: t.id
+          }
+        });
+      },
+      currentType() {
+        return bbn.fn.getRow(this.types, {id: this.currentCategory});
+      },
       currentColumns() {
         let defaultColumns = [
           {
@@ -97,8 +108,7 @@
           }, {
             filterable: false,
             minWidth: 350,
-            width: 500,
-            title: bbn._("Article"),
+            title: bbn._("Post"),
             component: this.$options.components.titleCell
           }, {
             field: "version",
@@ -118,8 +128,8 @@
             title: bbn._("Cover image"),
             render: this.renderFrontImg,
             editable: false,
-            cls: "bbn-middle",
-            hidden: !this.currentType.front_img,
+            //cls: "bbn-middle",
+            hidden: (this.currentCategory !== 'all') && !this.currentType.front_img,
             width: 100
           }, {
             field: "url",
@@ -130,9 +140,9 @@
           }, {
             field: "id_type",
             title: bbn._("Type"),
-            width: 100,
-            source: this.types,
-            hidden: true,
+            width: 200,
+            source: this.typesTextValue,
+            hidden: this.currentCategory !== 'all',
             default: this.id_type
           }, {
             field: "id_option",
@@ -202,15 +212,12 @@
         });
 
         return defaultColumns;
-			},
-      currentType() {
-        return bbn.fn.getRow(this.types, {id: this.id_type});
-      }
+			}
     },
     methods: {
       renderFrontImg(a) {
         if (a.id_media) {
-          return '<img src="' + appui.plugins['appui-note'] + '/media/image/' + a.id_media + '?w=100">';
+          return '<img src="' + appui.plugins['appui-note'] + '/media/image/' + a.id_media + '?w=100" style="width: 100%; object-fit: scale-down">';
         }
 
         return '';
@@ -256,6 +263,13 @@
           text: bbn._("Delete"),
           icon: 'nf nf-fa-trash_o',
           key: 'e'
+        }, {
+          action: () => {
+            window.open(row.url);
+          },
+          text: bbn._("Open the article in a new window"),
+          icon: 'nf nf-mdi-open_in_new',
+          key: 'f'
         }];
       },
       //Methods call of the menu in toolbar
@@ -276,7 +290,8 @@
       },
       // methods each row of the table
       editNote(row) {
-        let url = this.editorUrl || (this.root + 'cms/cat/' + this.currentType.code + '/editor/');
+        let catCode = bbn.fn.getField(this.types, 'code', 'id', row.id_type);
+        let url = this.editorUrl || (this.root + 'cms/cat/' + catCode + '/editor/');
         bbn.fn.link(url + (row.id || row.id_note));
       },
       publishNote(row){
@@ -468,55 +483,65 @@
       },
       titleCell: {
         template: `
-<span class="bbn-nowrap">
-  <a :href="source.url"
-     target="_blank"
-     :title="_('Open the article in a new window')">
-	  <i class="nf nf-mdi-open_in_new"/>
-  </a> 
-  <span class="bbn-lg"
-        v-text="source.title"
-        :title="source.title"/><br>
-
-  <div class="bbn-w-100 bbn-top-xsspace">
-    <div class="bbn-w-50">
-      <span :title="publicationState"
-            class="bbn-right-sspace">
-        <i class="bbn-green bbn-xl nf nf-fa-check_circle_o"
-           v-if="isPublished"/>
-        <i class="bbn-red bbn-xl nf nf-fa-times_circle_o"
-           v-else/>
-      </span>
-      <span class="bbn-alt-text bbn-right-sspace"
-            v-text="'v' + source.version"
-            :title="_('Version') + ' ' + source.version"/> 
-      <span :title="_('Number of medias directly linked to this article')"
-            class="bbn-right-sspace">
-      	<i class="nf nf-fa-file_photo_o bbn-xl"/> 
-        <span v-text="source.num_medias"/>
-      </span> 
-      <span :title="_('Number of variants of this article')"
-            class="bbn-right-sspace">
-      	<i class="nf nf-fa-clone bbn-xl"/> 
-        <span v-text="source.num_variants"/>
-      </span> 
-      <span :title="_('Number of translations for this article')"
-            class="bbn-right-sspace">
-      	<i class="nf nf-mdi-translate bbn-xl"/> 
-        <span v-text="source.num_translations"/>
-      </span> 
-    </div>
-    <div class="bbn-w-50 bbn-r bbn-line-vmiddle">
-      <div>
-        <span v-text="_('Since') + ' ' + fdate(source.creation)"/> <br>
-        <span v-if="source.start" v-text="_('Published') + ' ' + fdate(source.start)"></span>
-      </div>
+<div class="bbn-nowrap">
+  <div class="bbn-vmiddle">
+    <span :title="publicationState"
+          class="bbn-right-space bbn-xl">
+      <i :class="{
+           'bbn-green nf nf-fa-check_circle_o': isPublished,
+           'bbn-red bbn-lg nf nf-fa-times_circle_o': !isPublished
+         }"/>
+    </span>
+    <span class="bbn-vmiddle bbn-right-space bbn-bordered bbn-radius bbn-right-xspadded">
       <bbn-initial :user-name="name"
-                   :width="24"
-                   class="bbn-xs"/>
-    </div>
+                    :width="18"
+                    class="bbn-xs bbn-right-xsspace"/>
+      <span v-text="name"/>
+    </span>
+    <span class="bbn-vmiddle bbn-right-space bbn-bordered bbn-radius bbn-right-xspadded"
+          :title="_('Since') + ' ' + fdate(source.creation)"
+          style="border-color: palegoldenrod !important">
+      <i class="nf nf-md-calendar_edit bbn-lg bbn-right-xsspace bbn-radius-left"
+         style="background-color: palegoldenrod"/>
+      <span v-text="fdate(source.creation)"/>
+    </span>
+    <span v-if="source.start"
+          class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space"
+          :title="_('Published') + ' ' + fdate(source.start)"
+          style="border-color: palegreen !important">
+      <i class="nf nf-md-calendar_check bbn-lg bbn-right-xsspace bbn-radius-left"
+         style="background-color: palegreen"/>
+      <span v-text="fdate(source.start)"/>
+    </span>
+    <span class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space"
+          :title="_('Version') + ' ' + source.version">
+      <i class="nf nf-cod-versions bbn-lg bbn-right-xsspace bbn-radius-left"
+         style="background-color: var(--default-border)"/>
+      <span v-text="source.version"/>
+    </span>
+    <span :title="_('Number of medias directly linked to this article')"
+          class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space">
+      <i class="nf nf-fa-file_photo_o bbn-lg bbn-right-xsspace bbn-radius-left"
+         style="background-color: var(--default-border)"/>
+      <span v-text="source.num_medias"/>
+    </span>
+    <span :title="_('Number of variants of this article')"
+          class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space">
+      <i class="nf nf-md-content_duplicate bbn-lg bbn-right-xsspace bbn-radius-left"
+         style="background-color: var(--default-border)"/>
+      <span v-text="source.num_variants"/>
+    </span>
+    <span :title="_('Number of translations for this article')"
+          class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space">
+      <i class="nf nf-mdi-translate bbn-lg bbn-right-xsspace bbn-radius-left"
+         style="background-color: var(--default-border)"/>
+      <span v-text="source.num_translations"/>
+    </span>
   </div>
-</span>`,
+  <div class="bbn-xl bbn-top-sspace"
+       v-text="source.title"
+       :title="source.title"/>
+</div>`,
         props: ['source'],
         data(){
           return {

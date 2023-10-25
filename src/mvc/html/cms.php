@@ -7,14 +7,24 @@
                  :static="true"
                  :source="source"
                  component="appui-note-cms-dashboard"
-                 title="<?= _("Home") ?>"/>
+                 :title="_('Home')"
+                 icon="nf nf-md-home"
+                 :notext="true"/>
   <bbn-container url="posts"
                  :static="true"
                  :source="source"
                  component="appui-note-cms-list"
-                 :title="_('Posts')"/>
-  <bbn-container url="import"
+                 :title="_('Posts')"
+                 icon="nf nf-md-format_list_text"
+                 :notext="true"
+                 fcolor="#FFF"
+                 bcolor="#063B69"/>
+  <bbns-container url="import"
                  :static="true"
                  :load="true"
-                 :title="_('WP Importer')"/>
+                 :title="_('WP Importer')"
+                 icon="nf nf-md-wordpress"
+                 :notext="true"
+                 fcolor="#FFF"
+                 bcolor="#063B69"/>
 </bbn-router>

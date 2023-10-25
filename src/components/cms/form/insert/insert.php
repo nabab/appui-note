@@ -23,11 +23,18 @@
            class="bbn-b">
       <?=_('Article type')?>
     </label>
-    <bbn-dropdown v-if="!id_type"
-                  v-model="formData.type"
-                  :source="types"
-                  class="bbn-w-100"
-                  :required="true"/>
+    <div class="bbn-flex-width">
+      <bbn-dropdown v-if="!id_type"
+                    v-model="formData.type"
+                    :source="types"
+                    class="bbn-flex-fill bbn-right-sspace"
+                    :required="true"
+                    source-value="id"/>
+      <bbn-button icon="nf nf-fa-plus"
+                  :notext="true"
+                  :text="_('Add')"
+                  @click="addCategory"/>
+    </div>
 
     <label class="bbn-b">
       <?=_('Language')?>
