@@ -17,6 +17,7 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')
   $fs = new System();
   if ($model->data['action'] == 'undo') {
     $i = $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'xml/', true);
+    $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'authors.json');
     return [
       'message' => $i ? X::_('Process undo successfully, folder deleted') : X::_('No folder to delete')
     ];
