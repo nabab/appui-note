@@ -1,12 +1,14 @@
 <!-- HTML Document -->
 
-<div class="bbn-w-100 bbn-flex-width">
+<div class="appui-note-widget-cms bbn-w-100 bbn-flex-width">
    <div class="bbn-flex-fill">
       <a :href="root + 'cms/cat/' + source.code + '/editor/' + source.id_note"
-         v-text="source.title"/>
+         v-text="source.title"
+         :class="{
+            'bbn-i': !isPublished
+         }"/>
    </div>
-   <div v-if="start"
-        class="bbn-block bbn-left-padding bbn-nowrap"
+   <div class="bbn-block bbn-left-padding bbn-nowrap bbn-s"
         v-text="fdate(source.start)"/>
    <div v-if="end"
         class="bbn-block bbn-left-padding bbn-nowrap"

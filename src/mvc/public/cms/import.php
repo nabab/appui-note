@@ -120,7 +120,5 @@ else {
     $d['cfg'] = json_decode(file_get_contents($cfgFile), true);
   }
 
-  $ctrl->combo(_("WP Importer"), $d);
+  $ctrl->combo('', $d);
 }
-
-//$ctrl->setUrl($ctrl->pluginUrl('appui-note') . '/cms/import');
