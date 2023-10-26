@@ -120,5 +120,5 @@ else {
     $d['cfg'] = json_decode(file_get_contents($cfgFile), true);
   }
 
-  $ctrl->combo('', $d);
+  $ctrl->combo(_('WP Import'), $d);
 }
