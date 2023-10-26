@@ -1,11 +1,11 @@
 <!-- HTML Document -->
 <div :class="['bbn-overlay', componentClass]">
   <bbn-table ref="table"
-             :source="url + id_type"
+             :source="url + currentCategory"
              :limit="25"
              :info="true"
              :columns="currentColumns"
-             :storage="true"
+             :storage="false"
              :selection="true"
              :pageable="true"
              :showable="true"
@@ -19,9 +19,5 @@
                    field: 'start',
                    dir: 'DESC'
                    }]"
-  					 :toolbar="[{
-                       icon: 'nf nf-fa-plus',
-                       text: _('Insert Articles'),
-                       action: insertNote
-                       }]"/>
+             toolbar="appui-note-cms-list-toolbar"/>
 </div>

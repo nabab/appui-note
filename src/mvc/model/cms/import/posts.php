@@ -50,13 +50,83 @@ else {
 
   if (!empty($posts)) {
     foreach ($posts as $postFile) {
+      //die(var_dump(json_decode($fs->getContents($postFile))->bbn_cfg));
       if (($post = json_decode($fs->getContents($postFile)))
         && !empty($post->id)
         && !empty($postsCats[$post->id])
         && ($idCat = $idsCatgs[$postsCats[$post->id][0]])
+        // Note
+        && ($idNote = $noteCls->insert([
+          'title' => $post->title,
+          'content' => json_encode($post->bbn_cfg, JSON_UNESCAPED_UNICODE),
+          'id_type' => $idCat,
+          'mime' => 'json/bbn-cms'
+        ]))
       ) {
+        $idsPosts[] = $idNote;
+
+        // Creation date
+        if (!empty($post->postDate)) {
+          $model->db->update('bbn_notes_versions', ['creation' => $post->postDate], ['id_note' => $idNote]);
+        }
+
+        // Categories
+        foreach ($postsCats[$post->id] as $c) {
+          if ($catText = $categories[$c]) {
+            $t = $tagCls->get($catText);
+            $idTag = empty($t) ? $tagCls->add($catText) : $t['id'];
+            if (!empty($idTag)) {
+              $idsTags[$c] = $idTag;
+              $model->db->insertIgnore('bbn_notes_tags', ['id_note' => $idNote, 'id_tag' => $idTag]);
+              $fs->putContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids_tags.json', json_encode($idsTags, JSON_PRETTY_PRINT));
+            }
+          }
+        }
+
+        // Tags
+        foreach ($postsCats[$post->id] ?? [] as $t) {
+          if (!empty($idsTags[$t])) {
+            $model->db->insertIgnore('bbn_notes_tags', ['id_note' => $idNote, 'id_tag' => $idsTags[$t]]);
+          }
+        }
+
+        // Medias
+        foreach ($postsMedias[$post->id] ?? [] as $m) {
+          if (!empty($idsMedias[$m])) {
+            $noteCls->addMediaToNote($idsMedias[$m], $idNote);
+          }
+        }
+
+        // Author
+        if (!empty($post->author)
+          && !empty($authors[$post->author])
+        ) {
+          $idAuthor = $idsAuthors[$post->author] ?? false;
+          if (empty($idAuthor)
+            && ($idAuthor = $model->db->selectOne('bbn_users', 'id', ['email' => $authors[$post->author]]))
+          ) {
+            $idsAuthors[$post->author] = $idAuthor;
+          }
+
+          if (!empty($idAuthor)) {
+            $model->db->update('bbn_notes', ['creator'=> $idAuthor], ['id' => $idNote]);
+            $model->db->update('bbn_notes_versions', ['id_user' => $idAuthor], ['id_note' => $idNote]);
+          }
+        }
+
+        // Publication
+        if (!empty($pubEventType)
+          && ($post->status === 'publish')
+          && !empty($post->pubDate)
+          && ($idEvent = $eventCls->insert([
+            'id_type' => $pubEventType,
+            'start' => $post->pubDate
+          ]))
+        ) {
+          $noteCls->insertNoteEvent($idNote, $idEvent);
+        }
+
         // URL
-        $url = false;
         if (!empty($post->url)) {
           $url = $post->url;
           if (str_starts_with($url, $baseUrl)) {
@@ -65,86 +135,8 @@ else {
               $url = substr($url, 1);
             }
           }
+          $noteCls->insertOrUpdateUrl($idNote, $url);
         }
-
-        if ((empty($url) || !$noteCls->urlToId($url))
-          // Note
-          && ($idNote = $noteCls->insert([
-            'title' => $post->title,
-            'content' => json_encode($post->bbn_cfg, JSON_UNESCAPED_UNICODE),
-            'id_type' => $idCat,
-            'mime' => 'json/bbn-cms'
-          ]))
-        ) {
-          $idsPosts[] = $idNote;
-
-          // Set URL
-          if (!empty($url)) {
-            $noteCls->insertOrUpdateUrl($idNote, $url);
-          }
-
-          // Creation date
-          if (!empty($post->postDate)) {
-            $model->db->update('bbn_notes_versions', ['creation' => $post->postDate], ['id_note' => $idNote]);
-          }
-
-          // Categories
-          foreach ($postsCats[$post->id] as $c) {
-            if (isset($categories[$c])) {
-              $t = $tagCls->get($categories[$c]);
-              $idTag = empty($t) ? $tagCls->add($categories[$c]) : $t['id'];
-              if (!empty($idTag)) {
-                $idsTags[$c] = $idTag;
-                $model->db->insertIgnore('bbn_notes_tags', ['id_note' => $idNote, 'id_tag' => $idTag]);
-                $fs->putContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids_tags.json', json_encode($idsTags, JSON_PRETTY_PRINT));
-              }
-            }
-          }
-
-          // Tags
-          foreach ($postsCats[$post->id] ?? [] as $t) {
-            if (!empty($idsTags[$t])) {
-              $model->db->insertIgnore('bbn_notes_tags', ['id_note' => $idNote, 'id_tag' => $idsTags[$t]]);
-            }
-          }
-
-          // Medias
-          foreach ($postsMedias[$post->id] ?? [] as $m) {
-            if (!empty($idsMedias[$m])) {
-              $noteCls->addMediaToNote($idsMedias[$m], $idNote);
-            }
-          }
-
-          // Author
-          if (!empty($post->author)
-            && !empty($authors[$post->author])
-          ) {
-            $idAuthor = $idsAuthors[$post->author] ?? false;
-            if (empty($idAuthor)
-              && ($idAuthor = $model->db->selectOne('bbn_users', 'id', ['email' => $authors[$post->author]]))
-            ) {
-              $idsAuthors[$post->author] = $idAuthor;
-            }
-
-            if (!empty($idAuthor)) {
-              $model->db->update('bbn_notes', ['creator'=> $idAuthor], ['id' => $idNote]);
-              $model->db->update('bbn_notes_versions', ['id_user' => $idAuthor], ['id_note' => $idNote]);
-            }
-          }
-
-          // Publication
-          if (!empty($pubEventType)
-            && ($post->status === 'publish')
-            && !empty($post->pubDate)
-            && ($idEvent = $eventCls->insert([
-              'id_type' => $pubEventType,
-              'start' => $post->pubDate
-            ]))
-          ) {
-            $noteCls->insertNoteEvent($idNote, $idEvent);
-          }
-        }
-
 
       }
     }

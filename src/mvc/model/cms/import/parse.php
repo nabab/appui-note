@@ -13,11 +13,6 @@ use bbn\Util\Timer;
 $fs = new System();
 if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
   if ($model->data['action'] == 'undo') {
-    $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'ids.json');
-    $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'categories.json');
-    $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'tags.json');
-    $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'medias.json');
-    $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'posts_medias.json');
     $fs->delete(APPUI_NOTE_CMS_IMPORT_PATH.'json', true);
     return [
       'success' => true,
@@ -164,13 +159,11 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
                 }
                 else if ( (string)$attr === 'category' ){
                   $nicename = (string)$attr->nicename;
+                  $categories[$nicename] = (string) $c;
                   $res[$f]['categories'][] = [
                     'code' => $nicename,
                     'value' => (string) $c
                   ];
-                  if (count($res[$f]['categories']) === 1) {
-                    $categories[$nicename] = (string) $c;
-                  }
                 }
               }
             }
@@ -398,7 +391,7 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
 
         $res[$f]['content'] = (string)($dom->{'content:encoded'} ?? '');
         $json_file = pathinfo($f)['filename'] . '.json';
-        if ($fs->putContents(APPUI_NOTE_CMS_IMPORT_PATH.'json/'.$json_file, json_encode($res[$f], JSON_UNESCAPED_UNICODE))) {
+        if (file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'json/'.$json_file, json_encode($res[$f], JSON_UNESCAPED_UNICODE))) {
           $num_inserted++;
         }
         $res[$f] = null;
@@ -406,11 +399,11 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
       }
 
       //}
-      $fs->putContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids.json', json_encode($ids, JSON_PRETTY_PRINT));
-      $fs->putContents(APPUI_NOTE_CMS_IMPORT_PATH.'categories.json', json_encode($categories, JSON_PRETTY_PRINT));
-      $fs->putContents(APPUI_NOTE_CMS_IMPORT_PATH.'tags.json', json_encode($tags, JSON_PRETTY_PRINT));
-      $fs->putContents(APPUI_NOTE_CMS_IMPORT_PATH.'medias.json', json_encode($medias, JSON_PRETTY_PRINT));
-      $fs->putContents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_medias.json', json_encode($mediasPosts, JSON_PRETTY_PRINT));
+      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'ids.json', json_encode($ids, JSON_PRETTY_PRINT));
+      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'categories.json', json_encode($categories, JSON_PRETTY_PRINT));
+      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'tags.json', json_encode($tags, JSON_PRETTY_PRINT));
+      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'medias.json', json_encode($medias, JSON_PRETTY_PRINT));
+      file_put_contents(APPUI_NOTE_CMS_IMPORT_PATH.'posts_medias.json', json_encode($mediasPosts, JSON_PRETTY_PRINT));
     }
 
     return [

@@ -42,12 +42,28 @@
         if (d.success && d.data) {
           if (d.data.id_note) {
             let code = bbn.fn.getField(this.types, 'code', {id: this.formData.type});
-            bbn.fn.log("CODE??", code);
             this.closest('bbn-floater').opener.getRef('table').reload();
             bbn.fn.link(this.root + 'cms/cat/' + code + '/editor/' + d.data.id_note);
           }
         }
+      },
+      addCategory(){
+        this.getPopup({
+          title: bbn._('New Category'),
+          width: 500,
+          component: 'appui-note-cms-form-category',
+          componentOptions: {
+            types: this.types,
+            source: {
+              text: '',
+              code: '',
+              front_img: 0,
+              prefix: ''
+            }
+          }
+        })
       }
+
     },
     watch: {
       "formData.type"() {
