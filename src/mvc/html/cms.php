@@ -19,12 +19,4 @@
                  :notext="true"
                  fcolor="#FFF"
                  bcolor="#063B69"/>
-  <bbns-container url="import"
-                 :static="true"
-                 :load="true"
-                 :title="_('WP Importer')"
-                 icon="nf nf-md-wordpress"
-                 :notext="true"
-                 fcolor="#FFF"
-                 bcolor="#063B69"/>
 </bbn-router>
