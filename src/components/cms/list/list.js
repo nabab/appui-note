@@ -217,7 +217,7 @@
     methods: {
       renderFrontImg(a) {
         if (a.id_media) {
-          return '<img src="' + appui.plugins['appui-note'] + '/media/image/' + a.id_media + '?w=100" style="width: 100%; object-fit: scale-down">';
+          return '<img src="' + appui.plugins['appui-note'] + '/media/image/' + a.id_media + '?w=100" style="width: 100%; object-fit: cover; aspect-ratio: 1">';
         }
 
         return '';
@@ -483,7 +483,7 @@
       },
       titleCell: {
         template: `
-<div class="bbn-nowrap">
+<div class="appui-note-cms-list-titlecell bbn-nowrap">
   <div class="bbn-vmiddle">
     <span :title="publicationState"
           class="bbn-right-space bbn-xl">
@@ -492,49 +492,44 @@
            'bbn-red bbn-lg nf nf-fa-times_circle_o': !isPublished
          }"/>
     </span>
-    <span class="bbn-vmiddle bbn-right-space bbn-bordered bbn-radius bbn-right-xspadded">
+    <span class="bbn-vmiddle bbn-right-space bbn-bordered bbn-radius bbn-right-xspadded bbn-background bbn-text"
+          :style="{borderColor: currentBorderColor + '!important'}">
       <bbn-initial :user-name="name"
                     :width="18"
-                    class="bbn-xs bbn-right-xsspace"/>
+                    class="bbn-xs bbn-right-xsspace"
+                    @hook:mounted="onInitialMounted"
+                    ref="initial"/>
       <span v-text="name"/>
     </span>
-    <span class="bbn-vmiddle bbn-right-space bbn-bordered bbn-radius bbn-right-xspadded"
-          :title="_('Since') + ' ' + fdate(source.creation)"
-          style="border-color: palegoldenrod !important">
-      <i class="nf nf-md-calendar_edit bbn-lg bbn-right-xsspace bbn-radius-left"
-         style="background-color: palegoldenrod"/>
+    <span class="bbn-vmiddle bbn-right-space bbn-bordered bbn-radius bbn-right-xspadded bbn-background bbn-text colorblock orange"
+          :title="_('Since') + ' ' + fdate(source.creation)">
+      <i class="nf nf-md-calendar_edit bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
       <span v-text="fdate(source.creation)"/>
     </span>
     <span v-if="source.start"
-          class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space"
-          :title="_('Published') + ' ' + fdate(source.start)"
-          style="border-color: palegreen !important">
-      <i class="nf nf-md-calendar_check bbn-lg bbn-right-xsspace bbn-radius-left"
-         style="background-color: palegreen"/>
+          class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space bbn-background bbn-text colorblock green"
+          :title="_('Published') + ' ' + fdate(source.start)">
+      <i class="nf nf-md-calendar_check bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
       <span v-text="fdate(source.start)"/>
     </span>
-    <span class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space"
+    <span class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space bbn-background bbn-text colorblock"
           :title="_('Version') + ' ' + source.version">
-      <i class="nf nf-cod-versions bbn-lg bbn-right-xsspace bbn-radius-left"
-         style="background-color: var(--default-border)"/>
+      <i class="nf nf-cod-versions bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
       <span v-text="source.version"/>
     </span>
     <span :title="_('Number of medias directly linked to this article')"
-          class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space">
-      <i class="nf nf-fa-file_photo_o bbn-lg bbn-right-xsspace bbn-radius-left"
-         style="background-color: var(--default-border)"/>
+          class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space bbn-background bbn-text colorblock">
+      <i class="nf nf-md-image_multiple bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
       <span v-text="source.num_medias"/>
     </span>
     <span :title="_('Number of variants of this article')"
-          class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space">
-      <i class="nf nf-md-content_duplicate bbn-lg bbn-right-xsspace bbn-radius-left"
-         style="background-color: var(--default-border)"/>
+          class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space bbn-background bbn-text colorblock">
+      <i class="nf nf-md-content_duplicate bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
       <span v-text="source.num_variants"/>
     </span>
     <span :title="_('Number of translations for this article')"
-          class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space">
-      <i class="nf nf-mdi-translate bbn-lg bbn-right-xsspace bbn-radius-left"
-         style="background-color: var(--default-border)"/>
+          class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space bbn-background bbn-text colorblock">
+      <i class="nf nf-md-translate bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
       <span v-text="source.num_translations"/>
     </span>
   </div>
@@ -545,7 +540,8 @@
         props: ['source'],
         data(){
           return {
-            name: bbn.fn.getField(appui.app.users, 'text', {value: this.source.id_user})
+            name: bbn.fn.getField(appui.app.users, 'text', {value: this.source.id_user}),
+            currentBorderColor: 'var(--default-border)'
           }
         },
         computed: {
@@ -584,7 +580,10 @@
           },
         },
         methods: {
-          fdate: bbn.fn.fdate
+          fdate: bbn.fn.fdate,
+          onInitialMounted(){
+            this.currentBorderColor = this.getRef('initial').currentColor;
+          }
         }
       },
       publication: {
