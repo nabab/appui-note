@@ -1,11 +1,18 @@
 <?php
-$res = [
-  'success' => false
-];
-$notes = new \bbn\Appui\Note($model->db);
-$cms = new \bbn\Appui\Cms($model->db);
-
-if ( !empty($model->data['id']) ){
-  $res['success'] = $cms->delete($model->data['id']);
+$suc = false;
+if ($model->hasData('id', true)) {
+  $cms = new \bbn\Appui\Cms($model->db);
+  if (is_array($model->data['id'])) {
+    $suc = true;
+    foreach ($model->data['id'] as $id) {
+      if (!$cms->delete($id)) {
+        $suc = false;
+      }
+    }
+  }
+  else {
+    $suc = $cms->delete($model->data['id']);
+  }
 }
-return $res;
+
+return ['success' => $suc];

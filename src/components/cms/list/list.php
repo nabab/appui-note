@@ -16,8 +16,9 @@
              :search-fields="['versions.title', 'bbn_url.url', 'bbn_notes.id', 'versions.excerpt']"
              :resizable="true"
              :order="[{
-                   field: 'start',
-                   dir: 'DESC'
-                   }]"
-             toolbar="appui-note-cms-list-toolbar"/>
+               field: 'start',
+               dir: 'DESC'
+             }]"
+             toolbar="appui-note-cms-list-toolbar"
+             uid="id_note"/>
 </div>
