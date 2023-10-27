@@ -295,39 +295,42 @@
         bbn.fn.link(url + (row.id || row.id_note));
       },
       publishNote(row){
-        let src =  bbn.fn.extend(row, {
-          action: this.publishUrl
-        });
-
         this.getPopup().open({
-          width: '100%',
-          title: false,
-          scrollable: false,
-          source: src,
-          modal: true,
+          width: 400,
+          title: bbn._('Post publication'),
           component: this.publishComponent,
           componentOptions: {
             url: this.publishUrl,
             list: this.getRef('table'),
-            source: src
+            source: bbn.fn.isObject(row) ? row.id_note : row
           }
         });
       },
       unpublishNote(row){
-        appui.confirm(bbn._('Are you sure you want to cease the publication of this note?'), () => {
-          bbn.fn.post(this.unpublishUrl,{id: row.id_note }, d =>{
-            if ( d.success ){
-              this.getRef('table').reload();
+        let mess = bbn.fn.isObject(row) ?
+          bbn._('Are you sure you want to cease the publication of this post?') :
+          bbn._('Are you sure you want to cease the publication of the selected posts?')
+        appui.confirm(mess, () => {
+          bbn.fn.post(this.unpublishUrl, {
+            id: bbn.fn.isObject(row) ? row.id_note : row
+          }, d =>{
+            if (d.success) {
               appui.success(bbn._('Successfully removed from publications'));
             }
-            else{
+            else {
               appui.error(bbn._('Error in this action'));
             }
+            if (bbn.fn.isArray(row)) {
+              this.getRef('table').currentSelected.splice(0);
+            }
+            this.getRef('table').updateData();
           });
         });
       },
       deleteNote(row){
-        let msg = bbn._('Are you sure to delete this note?');
+        let msg = bbn.fn.isArray(row) ?
+        bbn._('Are you sure you want to delete the selected posts?') :
+        bbn._('Are you sure to delete this post?');
         if (row.num_variants) {
           if (row.num_variants === 1) {
             msg += '<br>' + bbn._('There is also one variant');
@@ -335,41 +338,42 @@
           else {
             msg += '<br>' + bbn._('There are also %d variants', row.num_variants);
           }
-
-          if (row.num_translations) {
-            if (row.num_translations === 1) {
-              msg += '<br>' + bbn._('and also one translation');
-            }
-            else {
-              msg += '<br>' + bbn._('and also %d translations', row.num_translations);
-            }
-          }
-
-          msg += '<br>' + bbn._("which will be deleted too");
         }
-        else if (row.num_translations) {
+
+        if (row.num_translations) {
           if (row.num_translations === 1) {
-            msg += '<br>' + bbn._('There is also one translation');
+            msg += '<b r>' + (!!row.num_variants ?
+              bbn._('and also one translation') :
+              bbn._('There is also one translation'));
           }
           else {
-            msg += '<br>' + bbn._('There are also %d translations', row.num_translations);
+            msg += '<br>' + (!!row.num_variants ?
+              bbn._('and also %d translations', row.num_translations) :
+              bbn._('There are also %d translations', row.num_translations));
           }
-
-          msg += '<br>' + bbn._("which will be deleted too");
         }
+
+        msg += '<br>' + bbn._("which will be deleted too");
         appui.confirm(msg, () => {
-          bbn.fn.post(this.deleteUrl, {id: row.id || row.id_note }, (d) =>{
-            if ( d.success ){
-              this.getRef('table').reload();
+          bbn.fn.post(this.deleteUrl, {
+            id: bbn.fn.isObject(row) ? (row.id || row.id_note) : row
+          }, d =>{
+            if (d.success) {
               appui.success(bbn._('Successfully deleted'));
             }
             else{
               appui.error(bbn._('Error in deleting'));
             }
+            if (bbn.fn.isArray(row)) {
+              this.getRef('table').currentSelected.splice(0);
+            }
+            this.getRef('table').updateData();
           });
         });
       },
-      //SHOW
+      moveNote(row){
+
+      },
       filterTable(type){
         let table = this.getRef('table'),
             idx = bbn.fn.search(table.currentFilters.conditions, 'field', 'type');
@@ -626,9 +630,6 @@
             st += ".\n";
             if (this.source.start) {
               st += bbn._("Publication date") + ': ' + bbn.fn.fdate(this.source.start);
-            }
-            else {
-              st += bbn._("Never published");
             }
 
             if (this.source.end) {

@@ -1,11 +1,10 @@
 // Javascript Document
 
 (() => {
-  let root = appui.plugins['appui-note'] + '/';
   return {
     props: {
       source: {
-        type: Object
+        type: [String, Array]
       },
       url: {
         type: String,
@@ -19,23 +18,14 @@
       let now = bbn.fn.dateSQL();
       return {
         now: now,
-        formData: bbn.fn.extend({}, this.source, {
-          start: this.source.start || now,
-          end: this.source.end || null,
-        })
+        formData: {
+          id: this.source,
+          start: now,
+          end: null,
+        }
       };
     },
-    created() {
-      //this.closest()
-    },
     computed: {
-      minStart() {
-        if (this.source.start) {
-          return this.source.start;
-        }
-
-        return this.now;
-      },
       maxStart() {
         if (this.formData.end) {
           return this.formData.end;
@@ -45,15 +35,21 @@
         return bbn.fn.dateSQL(now.setFullYear(now.getFullYear() + 10));
       },
       minEnd() {
-        if (this.source.start) {
-          return this.now > this.formData.start ? this.now : this.formData.start
-        }
-        return undefined;
+        return bbn.fn.dateSQL(dayjs(this.formData.start).add(1, 'day').toDate());
       }
     },
     methods: {
-      success(){
+      success(d){
+        if (d.success) {
+          appui.success();
+        }
+        else {
+          appui.error();
+        }
         if (this.list) {
+          if (bbn.fn.isArray(this.source)) {
+            this.list.currentSelected.splice(0);
+          }
           this.list.updateData();
         }
       }

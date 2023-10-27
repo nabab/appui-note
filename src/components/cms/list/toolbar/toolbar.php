@@ -2,14 +2,25 @@
              :slot-before="true">
   <bbn-button icon="nf nf-fa-plus"
               :text="_('Insert post')"
-              :action="insertNote"/>
+              :action="insertNote"
+              class="bbn-right-space"/>
+  <span :class="['bbn-leftlabel', {
+          'bbn-disabled': groupActionsDisabled
+        }]"
+        v-text="_('Group actions')"/>
+  <bbn-dropdown :source="groupActions"
+                :placeholder="_('Choose')"
+                class="bbn-right-space bbn-l bbn-narrow"
+                :disabled="groupActionsDisabled"/>
   <template v-slot:right>
-    <span class="bbn-leftlabel"><?=_("Status")?></span>
+    <span class="bbn-leftlabel"
+          v-text="_('Status')"/>
     <bbn-dropdown :source="statusList"
                   class="bbn-right-space bbn-l"
                   v-model="currentStatus"
                   style="width: 10rem"/>
-    <span class="bbn-leftlabel"><?=_("Categories")?></span>
+    <span class="bbn-leftlabel"
+          v-text="_('Categories')"/>
     <bbn-dropdown :source="categories"
                   source-value="id"
                   class="bbn-right-space bbn-l bbn-wide"

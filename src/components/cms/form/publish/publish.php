@@ -1,42 +1,28 @@
 <!-- HTML Document -->
+<bbn-form :action="url"
+          :source="formData"
+          ref="form"
+          :prefilled="true"
+          @success="success"
+          class="<?= $componentName ?>">
+  <div class="bbn-grid-fields bbn-lpadded">
+    <div class="bbn-grid-full bbn-s bbn-c bbn-nowrap bbn-bottom-spadded">
+      <?= _("You can program the publication for now or the future") ?>
+    </div>
 
-<div class="bbn-overlay <?= $componentName ?> bbn-middle">
-  <div class="bbn-block bbn-lpadded bbn-lg bbn-bg-black bbn-white">
-    <bbn-form :action="url"
-              :source="formData"
-              :buttons="[]"
-              ref="form"
-              @success="success"
-              :scrollable="false">
-      <div class="bbn-grid-fields bbn-c">
-        <div class="bbn-grid-full bbn-s bbn-no-wrap bbn-vpadded">
-          <?= _("You can program the publication for now or the future") ?>
-        </div>
+    <label class="bbn-label"><?= _("Publication date") ?></label>
+    <bbn-datetimepicker v-model="formData.start"
+                        :min="now"
+                        :max="maxStart"
+                        :required="true"/>
 
-        <label><?= _("Publication date") ?></label>
-        <bbn-datetimepicker v-model="formData.start"
-                            class="bbn-darkgrey"
-                            :min="minStart"
-                            :max="maxStart"/>
+    <div class="bbn-grid-full bbn-s bbn-c bbn-nowrap bbn-vpadded">
+      <?= _("You can (or not) end a publication") ?>
+    </div>
 
-        <div class="bbn-grid-full bbn-s bbn-no-wrap bbn-vpadded">
-          <?= _("You can (or not) end a publication") ?>
-        </div>
-
-        <label><?= _("End of publication") ?></label>
-        <bbn-datetimepicker v-model="formData.end"
-                            :disabled="!formData.start"
-                            class="bbn-darkgrey"
-                            :min="minEnd"/>
-
-        <label> </label>
-        <div class="bbn-vpadded">
-          <bbn-button class="bbn-no-radius bbn-bg-black bbn-white"
-                      :text="_('Confirm')"
-                      icon="nf nf-mdi-file_send"
-                      @click="$refs.form.submit()"/>
-        </div>
-      </div>
-    </bbn-form>
+    <label class="bbn-label"><?= _("End of publication") ?></label>
+    <bbn-datetimepicker v-model="formData.end"
+                        :disabled="!formData.start"
+                        :min="minEnd"/>
   </div>
-</div>
+</bbn-form>
