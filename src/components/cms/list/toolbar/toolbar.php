@@ -4,6 +4,11 @@
               :text="_('Insert post')"
               :action="insertNote"/>
   <template v-slot:right>
+    <span class="bbn-leftlabel"><?=_("Status")?></span>
+    <bbn-dropdown :source="statusList"
+                  class="bbn-right-space bbn-l"
+                  v-model="currentStatus"
+                  style="width: 10rem"/>
     <span class="bbn-leftlabel"><?=_("Categories")?></span>
     <bbn-dropdown :source="categories"
                   source-value="id"

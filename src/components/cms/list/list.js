@@ -411,7 +411,78 @@
         return '-';
       },
       updateData() {
-        this.getRef('table').updateData();
+        if (this.getRef('table')) {
+          this.getRef('table').updateData();
+        }
+      },
+      setPublishedFilter(){
+        let table = this.getRef('table');
+        if (table) {
+          let filter = {
+            id: 'statusFilter',
+            conditions: [{
+              field: 'start',
+              operator: '<=',
+              value: bbn.fn.dateSQL()
+            }, {
+              logic: 'OR',
+              conditions: [{
+                field: 'end',
+                operator: 'isnull'
+              }, {
+                field: 'end',
+                operator: '>',
+                value: bbn.fn.dateSQL()
+              }]
+            }]
+          }
+          let idx = bbn.fn.search(table.currentFilters.conditions, 'id', 'statusFilter');
+          if (idx > -1) {
+            table.currentFilters.conditions.splice(idx, 1, filter);
+          }
+          else {
+            table.currentFilters.conditions.push(filter);
+          }
+        }
+      },
+      setUnpublishedFilter(){
+        let table = this.getRef('table');
+        if (table) {
+          let filter = {
+            id: 'statusFilter',
+            conditions: [{
+              logic: 'OR',
+              conditions: [{
+                field: 'start',
+                operator: 'isnull'
+              }, {
+                field: 'start',
+                operator: '>',
+                value: bbn.fn.dateSQL()
+              }, {
+                field: 'end',
+                operator: '<=',
+                value: bbn.fn.dateSQL()
+              }]
+            }]
+          }
+          let idx = bbn.fn.search(table.currentFilters.conditions, 'id', 'statusFilter');
+          if (idx > -1) {
+            table.currentFilters.conditions.splice(idx, 1, filter);
+          }
+          else {
+            table.currentFilters.conditions.push(filter);
+          }
+        }
+      },
+      unsetStatusFilter(){
+        let table = this.getRef('table');
+        if (table) {
+          let idx = bbn.fn.search(table.currentFilters.conditions, 'id', 'statusFilter');
+          if (idx > -1) {
+            table.currentFilters.conditions.splice(idx, 1);
+          }
+        }
       }
     },
     /*
@@ -425,9 +496,7 @@
     watch: {
       currentCategory(){
         this.$nextTick(() => {
-          if (this.getRef('table')) {
-            this.getRef('table').updateData();
-          }
+          this.updateData();
         });
       }
     },
