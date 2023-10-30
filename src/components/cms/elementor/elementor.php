@@ -1,5 +1,5 @@
 <!-- HTML Document -->
-<div class="appui-note-cms-elementor bbn-overlay"
+<div class="appui-note-cms-elementor bbn-w-100"
      @click="unselect"
      @dragend="onDragEnd">
   <div class="bbn-padding bbn-w-100">

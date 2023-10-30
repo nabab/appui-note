@@ -3,7 +3,8 @@
   <div class="bbn-overlay bbn-flex-width"
        v-if="data">
     <!--Elementor-->
-    <div class="bbn-flex-fill bbn-flex-height">
+    <div class="bbn-flex-fill bbn-flex-height"
+         style="background-color: var(--white); color: var(--black)">
       <!-- Dock -->
       <div class="bbn-middle">
         <div class="appui-note-cms-editor-dock bbn-middle bbn-spadding bbn-radius-bottom bbn-xl">
