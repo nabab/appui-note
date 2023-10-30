@@ -3,15 +3,6 @@
 (() => {
   return {
     mixins: [bbn.cp.mixins.basic, bbn.cp.mixins['appui-note-cms-block']],
-    
-    computed: {
-      align(){
-        let style = {};
-        style['text-align'] = this.source.align
-        
-        return style;
-      }
-    },
     methods: {
 	  	selectDesktopGrid(a){
         this.source.elements = a[1]
@@ -33,6 +24,14 @@
       onSelection(img) {
         this.source.content = img.data.path;
         this.getPopup().close();
+      },
+      toggleAutoWidth(){
+        let isActive = (this.source.width === 'auto') || (this.source.width === '') || (this.source.width === undefined);
+        this.$set(this.source, 'width', isActive ? '10' + this.getRef('widthRange').currentUnit : 'auto');
+      },
+      toggleAutoHeight(){
+        let isActive = (this.source.height === 'auto') || (this.source.height === '') || (this.source.height === undefined);
+        this.$set(this.source, 'height', isActive ? '10' + this.getRef('heightRange').currentUnit : 'auto');
       }
     },
         components: {
