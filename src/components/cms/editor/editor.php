@@ -30,7 +30,7 @@
                       title="<?= _("Preview") ?>"
                       :notext="true"
                       @click="preview = !preview"/>
-          <bbn-button icon="nf nf-fa-eye"
+          <bbn-button icon="nf nf-cod-preview"
                       :class="{'bbn-primary': fullPreview}"
                       title="<?= _("Full preview") ?>"
                       :notext="true"
