@@ -48,6 +48,7 @@
         dataElementor: {},
         containerPosition: {},
         preview: false,
+        fullPreview: false,
         showJSON: false,
         currentContainer: null,
         originalConfig: null,
