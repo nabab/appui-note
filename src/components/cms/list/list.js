@@ -12,7 +12,7 @@
         type: String
       },
       noteName: {
-        type:String,
+        type: String,
         default: bbn._("Post")
       },
       columns: {
@@ -71,6 +71,10 @@
       toolbarComponent: {
         type: [String, Object],
         default: 'appui-note-cms-list-toolbar'
+      },
+      toolbarTypes: {
+        type: Boolean,
+        default: true
       },
       root: {
         type: [String],
