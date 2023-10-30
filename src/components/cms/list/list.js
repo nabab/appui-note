@@ -89,6 +89,10 @@
         type: [String, Object],
         default: 'appui-note-cms-list-toolbar'
       },
+      toolbarTypes: {
+        type: Boolean,
+        default: true
+      },
       root: {
         type: [String],
         default() {
