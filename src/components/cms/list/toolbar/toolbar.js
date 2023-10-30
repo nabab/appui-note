@@ -1,8 +1,42 @@
 (() => {
   return {
     data(){
+      let cp = this.closest('appui-note-cms-list');
+      let actions = [];
+      if (cp.publishUrl?.length) {
+        actions.push({
+          text: bbn._('Publish'),
+          action: this.publishGroup,
+          icon: 'nf nf-fa-chain'
+        });
+      }
+
+      if (cp.unpublishUrl?.length) {
+        actions.push({
+          text: bbn._('Unpublish'),
+          action: this.unpublishGroup,
+          icon: 'nf nf-fa-chain_broken'
+        });
+      }
+
+      if (cp.moveUrl?.length) {
+        actions.push({
+          text: bbn._('Move to another category'),
+          action: this.moveGroup,
+          icon: 'nf nf-md-folder_move bbn-lg'
+        });
+      }
+
+      if (cp.deleteUrl?.length) {
+        actions.push({
+          text: bbn._('Delete'),
+          action: this.deleteGroup,
+          icon: 'nf nf-fa-trash_o'
+        });
+      }
+
       return {
-        cp: this.closest('appui-note-cms-list'),
+        cp: cp,
         searchValue: '',
         currentStatus: 'all',
         statusList: [{
@@ -16,19 +50,7 @@
           value: 'unpublished'
         }],
         groupActionsDisabled: true,
-        groupActions: [{
-          text: bbn._('Publish'),
-          action: this.publishGroup
-        }, {
-          text: bbn._('Unpublish'),
-          action: this.unpublishGroup
-        }/* , {
-          text: bbn._('Move to another category'),
-          action: this.moveGroups
-        } */, {
-          text: bbn._('Delete'),
-          action: this.deleteGroup
-        }]
+        groupActions: actions
       }
     },
     computed: {

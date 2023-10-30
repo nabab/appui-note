@@ -66,6 +66,10 @@
           return appuiNoteCmsListCp.root + 'cms/actions/delete'
         }
       },
+      moveUrl: {
+        type: String,
+        default: root + 'cms/actions/move'
+      },
       editorUrl: {
         type: String
       },
@@ -76,6 +80,14 @@
       insertComponent: {
         type: [String, Object],
         default: 'appui-note-cms-form-insert'
+      },
+      moveComponent: {
+        type: [String, Object],
+        default: 'appui-note-cms-form-move'
+      },
+      toolbarComponent: {
+        type: [String, Object],
+        default: 'appui-note-cms-list-toolbar'
       },
       root: {
         type: [String],
@@ -257,42 +269,41 @@
             this.editNote(row);
           },
           icon: 'nf nf-fa-edit',
-          text: bbn._("Edit"),
-          key: 'a'
+          text: bbn._("Edit")
+        }, {
+          action: () => {
+            this.moveNote(row);
+          },
+          icon: 'nf nf-md-folder_move',
+          text: bbn._("Move to another category")
         }, {
           action: () => {
             this.publishNote(row);
           },
           icon: 'nf nf-fa-chain',
           text: bbn._("Publish"),
-          disabled: this.isPublished(row),
-          key: 'b'
+          disabled: this.isPublished(row)
         }, {
           action: () => {
             this.unpublishNote(row);
           },
           icon: 'nf nf-fa-chain_broken',
           text: bbn._("Unpublish"),
-          disabled: !this.isPublished(row),
-          key: 'c'
+          disabled: !this.isPublished(row)
         }, {
           action: () => {
             this.deleteNote(row);
           },
           text: bbn._("Delete"),
-          icon: 'nf nf-fa-trash_o',
-          key: 'e'
+          icon: 'nf nf-fa-trash_o'
         }, {
           action: () => {
             window.open(row.url);
           },
-          text: bbn._("Open the article in a new window"),
-          icon: 'nf nf-mdi-open_in_new',
-          key: 'f'
+          text: bbn._("Open in a new window"),
+          icon: 'nf nf-mdi-open_in_new'
         }];
       },
-      //Methods call of the menu in toolbar
-      //FILE
       insertNote(){
         this.getPopup({
           width: 800,
@@ -307,7 +318,6 @@
           }
         });
       },
-      // methods each row of the table
       editNote(row) {
         let catCode = bbn.fn.getField(this.types, 'code', 'id', row.id_type);
         let url = this.editorUrl || (this.root + 'cms/cat/' + catCode + '/editor/');
@@ -342,7 +352,7 @@
             if (bbn.fn.isArray(row)) {
               this.getRef('table').currentSelected.splice(0);
             }
-            this.getRef('table').updateData();
+            this.updateData();
           });
         });
       },
@@ -391,7 +401,15 @@
         });
       },
       moveNote(row){
-
+        this.getPopup().open({
+          width: 400,
+          title: bbn._('Move post to another category'),
+          component: this.moveComponent,
+          componentOptions: {
+            url: this.moveUrl,
+            source: bbn.fn.isObject(row) ? row.id_note : row
+          }
+        });
       },
       filterTable(type){
         let table = this.getRef('table'),
@@ -715,32 +733,7 @@
             name: bbn.fn.getField(appui.app.users, 'text', {value: this.source.id_user})
           }
         }
-      },
-      toolbar: {
-        template: `
-  <bbn-toolbar class="bbn-header bbn-hspadded bbn-h-100 bg-colored">
-    <div class="bbn-flex-width">
-      <bbn-button icon="nf nf-fa-plus"
-                  :text="_('Insert Articles')"
-                  :action="insertNote"
-      ></bbn-button>
-      <div class="bbn-xl bbn-b bbn-flex-fill bbn-r bbn-white">
-        <?=_("The Content Management System")?>
-      </div>
-    </div>
-  </bbn-toolbar>`,
-        props: ['source'],
-        data(){
-          return {
-            cp: appui.getRegistered('appuiCmsList'),
-          }
-        },
-        methods:{
-          insertNote(){
-            return this.cp.insertNote();
-          }
-        }
-      },
+      }
     }
   }
 })();
