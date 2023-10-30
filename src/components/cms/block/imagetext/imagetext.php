@@ -27,21 +27,35 @@
           </div>
         </div>
         <label v-text="_('Width')"></label>
-				<bbn-range v-model="source.width"
-									 :min="10"
-									 :max="2000"
-									 :step="10"
-									 :show-reset="false"
-									 :show-numeric="true"
-									 :show-units="true"/>
+        <div>
+          <bbn-range v-model="source.width"
+                     :min="10"
+                     :max="2000"
+                     :step="10"
+                     :show-reset="false"
+                     :show-numeric="true"
+                     :show-units="true"/>
+          <bbn-button :class="['bbn-upper', 'bbn-w-100', 'bbn-s', 'bbn-top-sspace', {
+                        'bbn-state-active': (source.width === 'auto') || (source.width === '') || (source.width === undefined)
+                      }]"
+                      @click="toggleAutoWidth"
+                      :text="_('Auto')"/>
+        </div>
 				<label><?=_('Height')?></label>
-				<bbn-range v-model="source.height"
-									 :min="10"
-									 :max="2000"
-									 :step="10"
-									 :show-reset="false"
-									 :show-numeric="true"
-									 :show-units="true"/>
+        <div>
+          <bbn-range v-model="source.height"
+                     :min="10"
+                     :max="2000"
+                     :step="10"
+                     :show-reset="false"
+                     :show-numeric="true"
+                     :show-units="true"/>
+          <bbn-button :class="['bbn-upper', 'bbn-w-100', 'bbn-s', 'bbn-top-sspace', {
+                        'bbn-state-active': (source.height === 'auto') || (source.height === '') || (source.height === undefined)
+                      }]"
+                      @click="toggleAutoHeight"
+                      :text="_('Auto')"/>
+        </div>
         <label v-text="_('Alignment')"></label>
         <div>
         	<div class="bbn-block">
@@ -86,18 +100,24 @@
   </div>
   <div v-else>
 		<div class="bbn-flex image-text-container"
-				 :style="align">
+				 :style="{textAlign: source.align}">
 			<a v-if="!!source.href"
 				 target="_self"
 				 :href="$parent.linkURL ? $parent.linkURL : '' + source.href"
 				 class="bbn-c">
 				<img :src="$parent.path + source.content"
-			    	 :style="source.style"
+			    	 :style="{
+               width: source.width,
+               height: source.height
+             }"
 						 :alt="source.alt ? source.alt : ''">
 			</a>
 			<div v-else-if="!!source.content">
 				<img class="bbn-vsmargin"
-						 :style="source.style"
+             :style="{
+               width: source.width,
+               height: source.height
+             }"
 						 :src="source.content"
 						 :alt="source.alt ? source.alt : ''">
 			</div>
