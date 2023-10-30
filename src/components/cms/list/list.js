@@ -280,7 +280,7 @@
           title: bbn._('New') + ' ' + this.noteName,
           component: this.insertComponent,
           componentOptions: {
-            id_type: this.id_type || '',
+            id_type: this.currentCategory !== 'all' ? this.currentCategory : '',
             source: {
               url: this.insertUrl,
             },
