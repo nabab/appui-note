@@ -34,12 +34,16 @@
                       :class="{'bbn-primary': fullPreview}"
                       title="<?= _("Full preview") ?>"
                       :notext="true"
-                      @click="fullPreview = !fullPreview"/>
+                      @click="() => toggleFullPreview()"/>
+          <bbn-button icon="nf nf-fa-external_link"
+                      title="<?= _("Full preview in new window") ?>"
+                      :notext="true"
+                      @click="externalFullPreview"/>
         </div>
       </div>
       <div class="bbn-flex-fill">
-        <iframe v-if="fullPreview"
-                :src="source.url"
+        <iframe v-if="!!fullPreview"
+                :src="fullPreview"
                 class="bbn-100"/>
         <bbn-scroll v-else
                     class="bbn-overlay"

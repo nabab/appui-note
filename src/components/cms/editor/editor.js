@@ -572,6 +572,29 @@
         setTimeout(() => {
           this.mapY();
         }, 500);
+      },
+      toggleFullPreview(ext){
+        if (!ext && !!this.fullPreview) {
+          this.fullPreview = false;
+        }
+        else {
+          return this.post(this.root + 'cms/actions/fullpreview', {
+            url: this.source.url
+          }, d => {
+            if (d.success && d.previewUrl) {
+              if (!ext) {
+                this.fullPreview = d.previewUrl;
+              }
+            }
+          });
+        }
+      },
+      externalFullPreview(){
+        this.toggleFullPreview(true).then(d => {
+          if (d.data.success && d.data.previewUrl) {
+            window.open(d.data.previewUrl);
+          }
+        })
       }
     },
     beforeMount(){
