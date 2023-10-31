@@ -19,6 +19,6 @@
                field: 'start',
                dir: 'DESC'
              }]"
-             toolbar="toolbarComponent"
+             :toolbar="toolbarComponent"
              uid="id_note"/>
 </div>

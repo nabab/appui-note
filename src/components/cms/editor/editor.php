@@ -31,10 +31,23 @@
                       title="<?= _("Preview") ?>"
                       :notext="true"
                       @click="preview = !preview"/>
+          <bbn-button icon="nf nf-cod-preview"
+                      :class="{'bbn-primary': fullPreview}"
+                      title="<?= _("Full preview") ?>"
+                      :notext="true"
+                      @click="() => toggleFullPreview()"/>
+          <bbn-button icon="nf nf-fa-external_link"
+                      title="<?= _("Full preview in new window") ?>"
+                      :notext="true"
+                      @click="externalFullPreview"/>
         </div>
       </div>
       <div class="bbn-flex-fill">
-        <bbn-scroll class="bbn-overlay"
+        <iframe v-if="!!fullPreview"
+                :src="fullPreview"
+                class="bbn-100"/>
+        <bbn-scroll v-else
+                    class="bbn-overlay"
                     @scroll="scrollElementor">
           <bbn-json-editor v-if="showJSON && isDev"
                            :expanded="1"
@@ -58,7 +71,8 @@
     </div>
 
     <!-- Slider -->
-    <div :class="['slider', 'bbn-flex-height', {opened: showSlider, maximized: !!sliderMaximized}]"
+    <div v-if="!fullPreview"
+         :class="['slider', 'bbn-flex-height', {opened: showSlider, maximized: !!sliderMaximized}]"
          v-resizable.left="true"
          ref="slider">
       <div class="bbn-spadding bbn-vmiddle"
