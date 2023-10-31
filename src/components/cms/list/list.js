@@ -400,7 +400,7 @@
             if (bbn.fn.isArray(row)) {
               this.getRef('table').currentSelected.splice(0);
             }
-            this.getRef('table').updateData();
+            this.updateData();
           });
         });
       },
@@ -511,14 +511,12 @@
         }
       }
     },
-    /*
     created(){
       appui.register('appuiCmsList', this);
     },
     beforeDestroy(){
       appui.unregister('appuiCmsList');
     },
-    */
     watch: {
       currentCategory(){
         this.$nextTick(() => {

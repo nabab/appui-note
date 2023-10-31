@@ -19,6 +19,6 @@
                field: 'start',
                dir: 'DESC'
              }]"
-             toolbar="appui-note-cms-list-toolbar"
+             toolbar="toolbarComponent"
              uid="id_note"/>
 </div>
