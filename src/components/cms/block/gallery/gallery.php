@@ -39,10 +39,10 @@
                :show-units="true"/>
 
     <label v-if="isConfig || !isInConfig('crop')"><?=_('Crop Image')?></label>
-    <bbn-checkbox v-if="isConfig || !isInConfig('crop')"
-                  v-model="source.crop"
-                  :value="1"
-                  :novalue="0"/>
+    <bbn-switch v-if="isConfig || !isInConfig('crop')"
+                v-model="source.crop"
+                :value="1"
+                :novalue="0"/>
 
     <label v-if="isConfig || !isInConfig('imageWidth')"><?=_('Image width')?> (%)</label>
     <bbn-range v-if="isConfig || !isInConfig('imageWidth')"
@@ -138,35 +138,35 @@
     </div>
 
     <label v-if="isConfig || !isInConfig('scrollable')"><?=_('Scrollable')?></label>
-    <bbn-checkbox v-if="isConfig || !isInConfig('acrollable')"
-                  v-model="source.scrollable"
-                  :value="1"
-                  :novalue="0"/>
+    <bbn-switch v-if="isConfig || !isInConfig('acrollable')"
+                v-model="source.scrollable"
+                :value="1"
+                :novalue="0"/>
 
 
     <label v-if="isConfig || !isInConfig('pageable')"><?=_('Pageable')?></label>
-    <bbn-checkbox v-if="isConfig || !isInConfig('pageable')"
-                  v-model="source.pageable"
-                  :value="1"
-                  :novalue="0"/>
+    <bbn-switch v-if="isConfig || !isInConfig('pageable')"
+                v-model="source.pageable"
+                :value="1"
+                :novalue="0"/>
 
     <label v-if="isConfig || !isInConfig('footer')"><?=_('Footer')?></label>
-    <bbn-checkbox v-if="isConfig || !isInConfig('footer')"
-                  v-model="source.pager"
-                  :value="1"
-                  :novalue="0"/>
+    <bbn-switch v-if="isConfig || !isInConfig('footer')"
+                v-model="source.pager"
+                :value="1"
+                :novalue="0"/>
 
     <label v-if="isConfig || !isInConfig('zoomable')"><?=_('Zoomable')?></label>
-    <bbn-checkbox v-if="isConfig || !isInConfig('zoomable')"
-                  v-model="source.zoomable"
-                  :value="1"
-                  :novalue="0"/>
+    <bbn-switch v-if="isConfig || !isInConfig('zoomable')"
+                v-model="source.zoomable"
+                :value="1"
+                :novalue="0"/>
 
     <label v-if="(isConfig || !isInConfig('info')) && !!source.zoomable"><?=_('Info')?></label>
-    <bbn-checkbox v-if="(isConfig || !isInConfig('info')) && !!source.zoomable"
-                  v-model="source.info"
-                  :value="1"
-                  :novalue="0"/>
+    <bbn-switch v-if="(isConfig || !isInConfig('info')) && !!source.zoomable"
+                v-model="source.info"
+                :value="1"
+                :novalue="0"/>
 
     <label v-if="(isConfig || !isInConfig('sourceInfo')) && !!source.info"><?=_('Info field')?></label>
     <bbn-dropdown v-if="(isConfig || !isInConfig('sourceInfo')) && !!source.info"
@@ -174,16 +174,16 @@
                   :source="sourceInfoList"/>
 
     <label v-if="isConfig || !isInConfig('resizable')"><?=_('Resizable')?></label>
-    <bbn-checkbox v-if="isConfig || !isInConfig('resizable')"
-                  v-model="source.resizable"
-                  :value="1"
-                  :novalue="0"/>
+    <bbn-switch v-if="isConfig || !isInConfig('resizable')"
+                v-model="source.resizable"
+                :value="1"
+                :novalue="0"/>
 
     <label v-if="isConfig || !isInConfig('toolbar')"><?=_('Toolbar')?></label>
-    <bbn-checkbox v-if="isConfig || !isInConfig('toolbar')"
-                  v-model="source.toolbar"
-                  :value="1"
-                  :novalue="0"/>
+    <bbn-switch v-if="isConfig || !isInConfig('toolbar')"
+                v-model="source.toolbar"
+                :value="1"
+                :novalue="0"/>
   </div>
   <div v-else-if="!source.content && $parent.selectable"
         class="bbn-alt-background bbn-middle bbn-lpadded"

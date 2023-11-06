@@ -1,52 +1,32 @@
 <!-- HTML Document -->
-<div :class="componentClass">
+<div :class="[componentClass, {'bbn-w-100': mode === 'edit'}]">
   <div v-if="mode === 'edit'"
        class="bbn-grid-fields bbn-w-100">
     <label v-text="_('Video source')"/>
     <bbn-input v-model="source.content"/>
-    <label><?=_('Muted')?></label>
+    <label><?=_('Width')?></label>
+    <bbn-range v-model="source.width"
+              :min="10"
+              :max="2000"
+              :step="10"
+              :show-reset="false"
+              :show-numeric="true"
+              :show-units="true"/>
+    <label><?=_('Height')?></label>
+    <bbn-range v-model="source.height"
+               :disabled="disableHeight"
+               :min="10"
+               :max="2000"
+               :step="10"
+               :show-reset="false"
+               :show-numeric="true"
+               :show-units="true"/>
+    <label><?=_('Aspect ratio')?></label>
     <div>
-      <bbn-button :notext="true"
-                  :title="_('Mute the video')"
-                  @click="source.muted = !!source.muted ? 0 : 1"
-                  :icon="source.muted ? 'nf nf-oct-mute' : 'nf nf-oct-unmute'"
-                  :class="['bbn-white', {
-                      'bbn-bg-green': !!source.muted,
-                      'bbn-bg-red': !source.muted
-                    }]"/>
-    </div>
-    <label><?=_('Autoplay')?></label>
-    <div>
-      <bbn-button :notext="true"
-                  :title="_('Autoplay')"
-                  @click="source.autoplay = !!source.autoplay ? 0 : 1"
-                  :icon="source.autoplay ? 'nf nf-fa-pause' : 'nf nf-fa-play'"
-                  :class="['bbn-white', {
-                      'bbn-bg-green': !!source.autoplay,
-                      'bbn-bg-red': !source.autoplay
-                    }]"/>
-    </div>
-    <label><?=_('Controls')?></label>
-    <div>
-      <bbn-button :notext="true"
-                  :title="_('Controls')"
-                  @click="source.controls = !!source.controls ? 0 : 1"
-                  icon="nf nf-mdi-play_pause"
-                  :class="['bbn-white', {
-                    'bbn-bg-green': !!source.controls,
-                    'bbn-bg-red': !source.controls
-                  }]"/>
-    </div>
-    <label><?=_('Loop')?></label>
-    <div>
-      <bbn-button :notext="true"
-                  :title="_('Loop')"
-                  @click="source.loop = !!source.loop ? 0 : 1"
-                  icon="nf nf-mdi-loop"
-                  :class="['bbn-white', {
-                    'bbn-bg-green': !!source.loop,
-                    'bbn-bg-red': !source.loop
-                  }]"/>
+      <div class="bbn-block">
+        <bbn-radiobuttons :source="ratios"
+                          v-model="source.aspectRatio"/>
+      </div>
     </div>
     <label><?=_('Alignment')?></label>
     <div>
@@ -68,27 +48,38 @@
                           }]"/>
       </div>
     </div>
-    <label><?=_('Width')?></label>
-    <bbn-range v-model="source.width"
-              :min="10"
-              :max="2000"
-              :step="10"
-              :show-reset="false"
-              :show-numeric="true"
-              :show-units="true"/>
-    <label><?=_('Height')?></label>
-    <bbn-range v-model="source.height"
-               :disabled="disableHeight"
-               :min="10"
-               :max="2000"
-               :step="10"
-               :show-reset="false"
-               :show-numeric="true"
-               :show-units="true"/>
-    <label><?=_('Aspect ratio')?></label>
-    <bbn-dropdown :source="ratios"
-                  :nullable="true"
-                  v-model="source.aspectRatio"/>
+    <label><?=_('Muted')?></label>
+    <bbn-switch v-model="source.muted"
+                :title="_('Mute the video')"
+                :value="1"
+                :novalue="0"
+                :no-icon="false"
+                on-icon="nf nf-md-volume_mute"
+                off-icon="nf nf-md-volume_high"/>
+    <label><?=_('Autoplay')?></label>
+    <bbn-switch v-model="source.autoplay"
+                :title="_('Autoplay')"
+                :value="1"
+                :novalue="0"
+                :no-icon="false"
+                on-icon="nf nf-md-play"
+                off-icon="nf nf-md-pause"/>
+    <label><?=_('Controls')?></label>
+    <bbn-switch v-model="source.controls"
+                :title="_('Controls')"
+                :value="1"
+                :novalue="0"
+                :no-icon="false"
+                on-icon="nf nf-md-play_pause"
+                off-icon="nf nf-md-play_pause"/>
+    <label><?=_('Loop')?></label>
+    <bbn-switch v-model="source.loop"
+                :title="_('Loop')"
+                :value="1"
+                :novalue="0"
+                :no-icon="false"
+                on-icon="nf nf-md-repeat_variant"
+                off-icon="nf nf-md-repeat_variant"/>
   </div>
   <div v-else
        class="bbn-flex"

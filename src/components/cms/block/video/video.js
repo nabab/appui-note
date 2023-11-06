@@ -23,6 +23,9 @@
         aspectRatio: null,
         disableHeight: false,
         ratios: [{
+          text: bbn._('None'),
+          value: ''
+        }, {
           text: '1:1',
           value: '1/1'
         },{
@@ -37,19 +40,16 @@
         },{
           text: '8:5',
           value: '8/5'
-        }
-                ]
-
+        }]
       }
     },
     methods:{
       isNull: bbn.fn.isNull
-
     },
     computed: {
       youtube(){
         let reg = /^https?:\/\/w{0,3}\.?youtu\.?be(-nocookie)?(\.com)?\//gm;
-        return this.source.content.search(reg) > -1;
+        return this.source.content?.search(reg) > -1;
       },
       align(){
         let style = {};

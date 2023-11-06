@@ -1,7 +1,7 @@
 <!-- HTML Document -->
 <div :class="componentClass">
   <div v-if="mode === 'edit'"
-       class="bbn-grid-fields">
+       class="bbn-grid-fields bbn-w-100">
     <label><?=_('Gallery')?></label>
     <div class="bbn-vmiddle">
       <bbn-dropdown :source="galleryListUrl"
@@ -68,29 +68,45 @@
                         }]"/>
     </div>
     <label><?=_('Autoplay')?></label>
-    <bbn-checkbox v-model="source.autoplay"
-                  :value="1"
-                  :novalue="0"/>
+    <bbn-switch v-model="source.autoplay"
+                :value="1"
+                :novalue="0"
+                :title="_('Autoplay')"
+                :no-icon="false"
+                on-icon="nf nf-md-play"
+                off-icon="nf nf-md-pause"/>
     <label><?=_('Arrows')?></label>
-    <bbn-checkbox v-model="source.arrows"
-                  :value="1"
-                  :novalue="0"/>
+    <bbn-switch v-model="source.arrows"
+                :value="1"
+                :novalue="0"
+                :no-icon="false"
+                on-icon="nf nf-oct-arrow_switch"
+                off-icon="nf nf-oct-arrow_switch"/>
     <label v-if="!!source.arrows"><?=_('Arrows position')?></label>
     <bbn-dropdown v-if="!!source.arrows"
                   v-model="source.arrowsPosition"
                   :source="arrowsPositions"/>
     <label><?=_('Preview')?></label>
-    <bbn-checkbox v-model="source.preview"
-                  :value="1"
-                  :novalue="0"/>
+    <bbn-switch v-model="source.preview"
+                :value="1"
+                :novalue="0"
+                :no-icon="false"
+                on-icon="nf nf-md-table_row"
+                off-icon="nf nf-md-table_row"/>
     <label><?=_('Loop')?></label>
-    <bbn-checkbox v-model="source.loop"
-                  :value="1"
-                  :novalue="0"/>
+    <bbn-switch v-model="source.loop"
+                :value="1"
+                :novalue="0"
+                :no-icon="false"
+                on-icon="nf nf-md-repeat_variant"
+                off-icon="nf nf-md-repeat_variant"/>
     <label><?=_('Show info')?></label>
-    <bbn-checkbox v-model="source.info"
-                  :value="1"
-                  :novalue="0"/>
+    <bbn-switch v-model="source.info"
+                :value="1"
+                :novalue="0"
+                :no-icon="false"
+                on-icon="nf nf-fa-info"
+                off-icon="nf nf-fa-info"/>
   </div>
   <div v-else-if="!source.content && $parent.selectable"
         class="bbn-alt-background bbn-middle bbn-lpadded"

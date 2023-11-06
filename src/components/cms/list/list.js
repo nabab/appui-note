@@ -386,7 +386,9 @@
           }
         }
 
-        msg += '<br>' + bbn._("which will be deleted too");
+        if (!!row.num_variants || !!row.num_translations) {
+          msg += '<br>' + bbn._("which will be deleted too");
+        }
         appui.confirm(msg, () => {
           bbn.fn.post(this.deleteUrl, {
             id: bbn.fn.isObject(row) ? (row.id || row.id_note) : row
