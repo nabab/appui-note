@@ -3,67 +3,66 @@
 
 <!-- HTML Document -->
 <div :class="[componentClass, 'bbn-w-100']">
-  <div v-if="mode === 'edit'">
-    <div class='bbn-w-100 bbn-padding bbn-grid-fields'>
-      <label class="bbn-l"><?=_("Product Picker")?></label>
-        <div class="bbn-l">
-          <bbn-search :source="shopRoot + 'products/list'"
-                      source-text="title"
-                      source-value="id"
-                      component="appui-note-search-item"
-                      source-url=""
-                      :placeholder="placeholder"
-                      @select="select"/>
-        </div>
+  <div v-if="mode === 'edit'"
+       class='bbn-w-100 bbn-grid-fields'>
+    <label class="bbn-l"><?=_("Product Picker")?></label>
+      <div class="bbn-l">
+        <bbn-search :source="shopRoot + 'products/list'"
+                    source-text="title"
+                    source-value="id"
+                    component="appui-note-search-item"
+                    source-url=""
+                    :placeholder="placeholder"
+                    @select="select"/>
+      </div>
 
-        <label class="bbn-l"><?=_("Show image")?></label>
-        <div class="bbn-l">
-          <bbn-switch v-model="source.showImage"
-                      :value="true"
-                      :novalue="false"
-                      class="bbn-left-space"/>
-        </div>
-
-        <label class="bbn-l"><?=_("Show price")?></label>
-        <div class="bbn-l">
-          <bbn-switch v-model="source.showPrice"
+      <label class="bbn-l"><?=_("Show image")?></label>
+      <div class="bbn-l">
+        <bbn-switch v-model="source.showImage"
                     :value="true"
                     :novalue="false"
                     class="bbn-left-space"/>
-        </div>
+      </div>
 
-        <label class="bbn-l"><?=_("Show edition")?></label>
-        <div class="bbn-l">
-          <bbn-switch v-model="source.showEdition"
+      <label class="bbn-l"><?=_("Show price")?></label>
+      <div class="bbn-l">
+        <bbn-switch v-model="source.showPrice"
+                  :value="true"
+                  :novalue="false"
+                  class="bbn-left-space"/>
+      </div>
+
+      <label class="bbn-l"><?=_("Show edition")?></label>
+      <div class="bbn-l">
+        <bbn-switch v-model="source.showEdition"
+                  :value="true"
+                  :novalue="false"
+                  class="bbn-left-space"/>
+      </div>
+
+      <label class="bbn-l"><?=_("Show type")?></label>
+      <div class="bbn-l">
+        <bbn-switch v-model="source.showType"
+                  :value="true"
+                  :novalue="false"
+                  class="bbn-left-space"/>
+      </div>
+
+      <label class="bbn-l"><?=_("Show Sold out")?></label>
+      <div class="bbn-l">
+        <bbn-switch v-model="source.showSoldOut"
                     :value="true"
                     :novalue="false"
                     class="bbn-left-space"/>
-        </div>
+      </div>
 
-        <label class="bbn-l"><?=_("Show type")?></label>
-        <div class="bbn-l">
-          <bbn-switch v-model="source.showType"
+      <label class="bbn-l"><?=_("Show 'Add to cart' button ")?></label>
+      <div class="bbn-l">
+        <bbn-switch v-model="source.showButton"
                     :value="true"
                     :novalue="false"
                     class="bbn-left-space"/>
-        </div>
-
-        <label class="bbn-l"><?=_("Show Sold out")?></label>
-        <div class="bbn-l">
-          <bbn-switch v-model="source.showSoldOut"
-                      :value="true"
-                      :novalue="false"
-                      class="bbn-left-space"/>
-        </div>
-
-        <label class="bbn-l"><?=_("Show 'Add to cart' button ")?></label>
-        <div class="bbn-l">
-          <bbn-switch v-model="source.showButton"
-                      :value="true"
-                      :novalue="false"
-                      class="bbn-left-space"/>
-        </div>
-    </div>
+      </div>
   </div>
   <div v-else
        class="bbn-w-100">

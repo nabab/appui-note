@@ -1,27 +1,28 @@
 <!-- HTML Document -->
 
 <div :class="[componentClass, 'bbn-w-100']">
-  <div v-if="mode === 'edit'">
-    <div class="bbn-button-group">
-      <bbn-button :text="_('TOP')" 
-                  @click="line = 'top'" 
-                  :class="{'bbn-state-active': line === 'top'}"/>
-      <bbn-button	:text="_('BOTTOM')"
-                  @click="line = 'bottom'"
-                  :class="{'bbn-state-active': line === 'bottom'}"/>
-      <bbn-button :text="_('BOTH')"
-                  @click="line = 'both'"
-                  :class="{'bbn-state-active': line === 'both'}"/>
-      <bbn-button :text="_('NONE')"
-                  @click="line = null"
-                  :class="{'bbn-state-active': !line}"/>
-    </div>
-    <div v-if="details"
-         class="bbn-grid-fields bbn-w-100">
+  <div v-if="mode === 'edit'"
+        class="bbn-grid-fields bbn-w-100">
+    <bbn-radiobuttons class="bbn-grid-full"
+                      v-model="source.hr"
+                      :source="[{
+                        text: _('Top'),
+                        value: 'top'
+                      }, {
+                        text: _('Bottom'),
+                        value: 'bottom'
+                      }, {
+                        text: _('Both'),
+                        value: 'both'
+                      }, {
+                        text: _('None'),
+                        value: null
+                      }]"/>
+    <template v-if="details">
       <label v-text="_('Width')"></label>
       <bbn-range v-model="source.width"
                   :min="10"
-                  :max="2000" 
+                  :max="2000"
                   :step="10"
                   :show-reset="false"
                   :show-numeric="true"
@@ -29,7 +30,7 @@
       <label><?=_('Height')?></label>
       <bbn-range v-model="source.height"
                   :min="10"
-                  :max="2000" 
+                  :max="2000"
                   :step="10"
                   :show-reset="false"
                   :show-numeric="true"
@@ -54,7 +55,7 @@
                             }]"/>
         </div>
       </div>
-    </div>
+    </template>
   </div>
   <div v-else
        class="bbn-w-100">

@@ -144,14 +144,18 @@
               </div>
             </div>
           </div>
-          <div class="bbn-w-100 bbn-c bbn-padding">
+          <div class="bbn-w-100 bbn-c bbn-padding bbn-middle bbn-grid-xsgap">
             <bbn-button @click="saveConfig"
                         text="<?= _("Create new block type") ?>"
+                        title="<?= _("Create new block type") ?>"
                         icon="nf nf-fa-save"
-                        :disabled="!isConfigChanged"/>
+                        :disabled="!isConfigChanged"
+                        class="bbn-ellipsis"/>
             <bbn-button @click="deleteCurrentSelected"
-                        text="<?= _("Delete this block") ?>"
-                        icon="nf nf-fa-trash"/>
+                        text="<?= _("Delete block") ?>"
+                        title="<?= _("Delete this block") ?>"
+                        icon="nf nf-fa-trash"
+                        class="bbn-ellipsis"/>
           </div>
         </div>
         <bbn-scroll v-else-if="showWidgets"
