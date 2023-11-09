@@ -1,10 +1,11 @@
 // Javascript Document
 (() => {
+  const root = appui.plugins['appui-note'] + '/';
   return {
     mixins: [bbn.cp.mixins.basic],
     statics() {
       return {
-        root: appui.plugins['appui-note'] + '/',
+        root
       }
     },
     props: {
@@ -27,48 +28,48 @@
       url: {
         type: String,
         default() {
-          return appui.plugins['appui-note'] + 'cms/cat/'
+          return root + 'cms/cat/'
         }
       },
       previewUrl: {
       	type: String,
         default() {
-          return appui.plugins['appui-note'] + 'cms/preview/'
+          return root + 'cms/preview/'
         }
       },
       mediaUrl: {
         type: String,
         default() {
-          return appui.plugins['appui-note'] + 'cms/actions/add_media'
+          return root + 'cms/actions/add_media'
         }
       },
       publishUrl: {
         type: String,
         default() {
-          return appui.plugins['appui-note'] + 'cms/actions/publish'
+          return root + 'cms/actions/publish'
         }
       },
       unpublishUrl: {
         type: String,
         default() {
-          return appui.plugins['appui-note'] + 'cms/actions/unpublish'
+          return root + 'cms/actions/unpublish'
         }
       },
       insertUrl: {
         type: String,
         default() {
-          return appui.plugins['appui-note'] + 'cms/actions/insert'
+          return root + 'cms/actions/insert'
         }
       },
       deleteUrl: {
         type: String,
         default() {
-          return appui.plugins['appui-note'] + 'cms/actions/delete'
+          return root + 'cms/actions/delete'
         }
       },
       moveUrl: {
         type: String,
-        default: appui.plugins['appui-note'] + 'cms/actions/move'
+        default: root + 'cms/actions/move'
       },
       editorUrl: {
         type: String
@@ -96,7 +97,7 @@
       root: {
         type: [String],
         default() {
-          return appui.plugins['appui-note']
+          return root
         }
       },
       actions: {
@@ -324,7 +325,7 @@
       },
       editNote(row) {
         let catCode = bbn.fn.getField(this.types, 'code', 'id', row.id_type);
-        let url = this.editorUrl || (this.root + 'cms/cat/' + catCode + '/editor/');
+        let url = this.editorUrl || (root + 'cms/cat/' + catCode + '/editor/');
         bbn.fn.link(url + (row.id || row.id_note));
       },
       publishNote(row){
@@ -386,9 +387,7 @@
           }
         }
 
-        if (!!row.num_variants || !!row.num_translations) {
-          msg += '<br>' + bbn._("which will be deleted too");
-        }
+        msg += '<br>' + bbn._("which will be deleted too");
         appui.confirm(msg, () => {
           bbn.fn.post(this.deleteUrl, {
             id: bbn.fn.isObject(row) ? (row.id || row.id_note) : row
@@ -402,7 +401,7 @@
             if (bbn.fn.isArray(row)) {
               this.getRef('table').currentSelected.splice(0);
             }
-            this.updateData();
+            this.getRef('table').updateData();
           });
         });
       },
@@ -417,7 +416,7 @@
           }
         });
       },
-      filterTable(type){
+      filterTable(type) {
         let table = this.getRef('table'),
             idx = bbn.fn.search(table.currentFilters.conditions, 'field', 'type');
         if ( idx > -1 ){
@@ -513,12 +512,14 @@
         }
       }
     },
+    /*
     created(){
       appui.register('appuiCmsList', this);
     },
     beforeDestroy(){
       appui.unregister('appuiCmsList');
     },
+    */
     watch: {
       currentCategory(){
         this.$nextTick(() => {
@@ -654,9 +655,9 @@
        :title="source.title"/>
 </div>`,
         props: ['source'],
-        data(){
+        data() {
           return {
-            name: bbn.fn.getField(appui.app.users, 'text', {value: this.source.id_user}),
+            name: bbn.fn.getField(appui.app.users || [], 'text', {value: this.source.id_user}) || bbn._("Unknown"),
             currentBorderColor: 'var(--default-border)'
           }
         },
