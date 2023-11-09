@@ -27,48 +27,48 @@
       url: {
         type: String,
         default() {
-          return appuiNoteCmsListCp.root + 'cms/cat/'
+          return appui.plugins['appui-note'] + 'cms/cat/'
         }
       },
       previewUrl: {
       	type: String,
         default() {
-          return appuiNoteCmsListCp.root + 'cms/preview/'
+          return appui.plugins['appui-note'] + 'cms/preview/'
         }
       },
       mediaUrl: {
         type: String,
         default() {
-          return appuiNoteCmsListCp.root + 'cms/actions/add_media'
+          return appui.plugins['appui-note'] + 'cms/actions/add_media'
         }
       },
       publishUrl: {
         type: String,
         default() {
-          return appuiNoteCmsListCp.root + 'cms/actions/publish'
+          return appui.plugins['appui-note'] + 'cms/actions/publish'
         }
       },
       unpublishUrl: {
         type: String,
         default() {
-          return appuiNoteCmsListCp.root + 'cms/actions/unpublish'
+          return appui.plugins['appui-note'] + 'cms/actions/unpublish'
         }
       },
       insertUrl: {
         type: String,
         default() {
-          return appuiNoteCmsListCp.root + 'cms/actions/insert'
+          return appui.plugins['appui-note'] + 'cms/actions/insert'
         }
       },
       deleteUrl: {
         type: String,
         default() {
-          return appuiNoteCmsListCp.root + 'cms/actions/delete'
+          return appui.plugins['appui-note'] + 'cms/actions/delete'
         }
       },
       moveUrl: {
         type: String,
-        default: root + 'cms/actions/move'
+        default: appui.plugins['appui-note'] + 'cms/actions/move'
       },
       editorUrl: {
         type: String
@@ -96,7 +96,7 @@
       root: {
         type: [String],
         default() {
-          return appuiNoteCmsListCp.root
+          return appui.plugins['appui-note']
         }
       },
       actions: {
