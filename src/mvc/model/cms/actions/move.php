@@ -1,18 +1,20 @@
 <?php
-$suc = false;
+$suc = [
+  'success' => false
+];
 if ($model->hasData(['id', 'type'], true)) {
   $cms = new \bbn\Appui\Cms($model->db);
   if (is_array($model->data['id'])) {
-    $suc = true;
+    $suc['success'] = true;
     foreach ($model->data['id'] as $id) {
       if (!$cms->setType($id, $model->data['type'])) {
-        $suc = false;
+        $suc['message'] = _("One or more posts could not be moved in category");
       }
     }
   }
   else {
-    $suc = (bool)$cms->setType($model->data['id'], $model->data['type']);
+    $suc['success'] = (bool)$cms->setType($model->data['id'], $model->data['type']);
   }
 }
 
-return ['success' => $suc];
+return $res;
