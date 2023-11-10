@@ -450,7 +450,7 @@
             conditions: [{
               field: 'start',
               operator: '<=',
-              value: bbn.fn.dateSQL()
+              exp: 'NOW()'
             }, {
               logic: 'OR',
               conditions: [{
@@ -459,7 +459,7 @@
               }, {
                 field: 'end',
                 operator: '>',
-                value: bbn.fn.dateSQL()
+                exp: 'NOW()'
               }]
             }]
           }
@@ -485,11 +485,11 @@
               }, {
                 field: 'start',
                 operator: '>',
-                value: bbn.fn.dateSQL()
+                exp: 'NOW()'
               }, {
                 field: 'end',
                 operator: '<=',
-                value: bbn.fn.dateSQL()
+                exp: 'NOW()'
               }]
             }]
           }
