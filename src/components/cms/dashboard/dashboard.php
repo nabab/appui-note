@@ -1,3 +1,4 @@
 <!-- HTML Document -->
 
-<bbn-dashboard :source="widgets"></bbn-dashboard>
+<bbn-dashboard :source="widgets"
+               class="appui-note-cms-dashboard bbn-alt-background"/>
