@@ -349,7 +349,7 @@
             id: bbn.fn.isObject(row) ? row.id_note : row
           }, d =>{
             if (d.success) {
-              appui.success(bbn._('Successfully removed from publications'));
+              appui.success(d.message || bbn._('Successfully removed from publications'));
             }
             else {
               appui.error(bbn._('Error in this action'));
@@ -393,7 +393,7 @@
             id: bbn.fn.isObject(row) ? (row.id || row.id_note) : row
           }, d =>{
             if (d.success) {
-              appui.success(bbn._('Successfully deleted'));
+              appui.success(d.message || bbn._('Successfully deleted'));
             }
             else{
               appui.error(bbn._('Error in deleting'));

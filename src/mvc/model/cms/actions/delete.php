@@ -1,18 +1,20 @@
 <?php
-$suc = false;
+$suc = [
+  'success' => false
+];
 if ($model->hasData('id', true)) {
   $cms = new \bbn\Appui\Cms($model->db);
   if (is_array($model->data['id'])) {
-    $suc = true;
+    $suc['success'] = true;
     foreach ($model->data['id'] as $id) {
       if (!$cms->delete($id)) {
-        $suc = false;
+        $suc['message'] = _("One or more posts could not be deleted");
       }
     }
   }
   else {
-    $suc = $cms->delete($model->data['id']);
+    $res['success'] = $cms->delete($model->data['id']);
   }
 }
 
-return ['success' => $suc];
+return $res;

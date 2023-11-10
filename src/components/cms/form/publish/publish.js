@@ -41,7 +41,7 @@
     methods: {
       success(d){
         if (d.success) {
-          appui.success();
+          appui.success(d.message || '');
         }
         else {
           appui.error();
