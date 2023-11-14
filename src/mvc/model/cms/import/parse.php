@@ -188,7 +188,8 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
             if (($c->nodeType === XML_TEXT_NODE)
               && !empty($c->textContent)
             ) {
-              $textContent = trim(str_replace(PHP_EOL, '', $c->textContent));
+              //$textContent = trim(str_replace(PHP_EOL, '', $c->textContent));
+              $textContent = trim($c->textContent);
               if (!empty($textContent)) {
                 $tmp['type'] = 'text';
                 $tmp['content'] = $textContent;
