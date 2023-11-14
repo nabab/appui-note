@@ -13,6 +13,7 @@ $noteCls = new Note($model->db);
 $fs = new System();
 $tagCls = new Tag($model->db, defined('BBN_LANG') ? BBN_LANG : null);
 $eventCls = new Event($model->db);
+$replaceExists = true;
 
 if ($model->data['action'] == 'undo') {
   $idsPosts = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids_posts.json'), true);
@@ -68,19 +69,32 @@ else {
             }
           }
 
-          if ((empty($url) || !$noteCls->urlToId($url))
-            // Note
-            && ($idNote = $noteCls->insert([
+          $idNote = false;
+          if (!empty($replaceExists)
+            && ($idNote = $noteCls->urlToId($url))
+          ) {
+            $model->db->update('bbn_notes_versions', [
+              'title' => $post->title,
+              'content' => json_encode($post->bbn_cfg, JSON_UNESCAPED_UNICODE)
+            ], [
+              'id_note' => $idNote,
+              'latest' => 1
+            ]);
+          }
+          else if (empty($url) || !$noteCls->urlToId($url)) {
+            $idNote = $noteCls->insert([
               'title' => $post->title,
               'content' => json_encode($post->bbn_cfg, JSON_UNESCAPED_UNICODE),
               'id_type' => $idCat,
               'mime' => 'json/bbn-cms'
-            ]))
-          ) {
+            ]);
+          }
+
+          if (!empty($idNote)) {
             $idsPosts[] = $idNote;
 
             // Set URL
-            if (!empty($url)) {
+            if (!empty($url) && !$noteCls->urlExists($url)) {
               $noteCls->insertOrUpdateUrl($idNote, $url);
             }
 
@@ -134,7 +148,8 @@ else {
             }
 
             // Publication
-            if (!empty($pubEventType)
+            if (empty($replaceExists)
+              && !empty($pubEventType)
               && ($post->status === 'publish')
               && !empty($post->pubDate)
               && ($idEvent = $eventCls->insert([

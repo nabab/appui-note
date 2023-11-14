@@ -14,6 +14,7 @@
        class="bbn-rel"
        :style="{
          color: source.color ? source.color : undefined,
-         textAlign: source.align ? source.align : undefined
+         textAlign: source.align ? source.align : undefined,
+         whiteSpace: 'pre-wrap'
        }"/>
 </div>
