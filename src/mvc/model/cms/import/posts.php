@@ -148,7 +148,8 @@ else {
             }
 
             // Publication
-            if (!empty($pubEventType)
+            if (empty($replaceExists)
+              && !empty($pubEventType)
               && ($post->status === 'publish')
               && !empty($post->pubDate)
               && ($idEvent = $eventCls->insert([
