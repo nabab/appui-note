@@ -113,10 +113,10 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
         $res[$f]['postDate'] = (string)($dom->{'wp:post_date'} ?? '');
         $res[$f]['postDateGMT'] = (string)($dom->{'wp:post_date_gmt'} ?? '');
         // if global file wp:post_type attribute equal to "post" and wp:postmeta->wp:metavalue is not null
-        if (
-          ((string)$dom->{'wp:post_type'} === 'post') &&
-          isset($dom->{'wp:postmeta'}->{'wp:meta_value'})
-        ){
+        if ((((string)$dom->{'wp:post_type'} === 'post')
+            || ((string)$dom->{'wp:post_type'} === 'page'))
+          && isset($dom->{'wp:postmeta'}->{'wp:meta_value'})
+        ) {
           // set a meta_value in ids array with wp:post_id of global file
           $meta_value = (string)$dom->{'wp:postmeta'}->{'wp:meta_value'};
           $ids[$meta_value] = (string) $dom->{'wp:post_id'};
