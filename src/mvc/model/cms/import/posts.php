@@ -13,7 +13,7 @@ $noteCls = new Note($model->db);
 $fs = new System();
 $tagCls = new Tag($model->db, defined('BBN_LANG') ? BBN_LANG : null);
 $eventCls = new Event($model->db);
-$replaceExists = true;
+$replaceExists = false;
 
 if ($model->data['action'] == 'undo') {
   $idsPosts = json_decode($fs->getContents(APPUI_NOTE_CMS_IMPORT_PATH.'ids_posts.json'), true);
