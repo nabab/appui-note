@@ -123,7 +123,7 @@ if ($model->hasData('id')) {
   if ($ok) {
     $grid = new Grid($model->db, $model->data, $cfg);
     $data = $grid->getDatatable();
-    if ($option) {
+    if (!empty($option)) {
       array_walk($data['data'], function (&$a) use (&$option){
         $a['code'] = $option['code'];
       });

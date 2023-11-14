@@ -630,9 +630,10 @@
       <span v-text="source.num_translations"/>
     </span>
   </div>
-  <div class="bbn-xl bbn-top-sspace"
+  <div class="bbn-xl bbn-top-sspace bbn-p"
        v-text="source.title"
-       :title="source.title"/>
+       :title="source.title"
+       @click="editPost"/>
 </div>`,
         props: ['source'],
         data(){
@@ -677,6 +678,12 @@
           fdate: bbn.fn.fdate,
           onInitialMounted(){
             this.currentBorderColor = this.getRef('initial').currentColor;
+          },
+          editPost(){
+            const list = appui.getRegistered('appuiCmsList');
+            if (list) {
+              list.editNote(this.source);
+            }
           }
         }
       },
