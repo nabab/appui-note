@@ -17,3 +17,11 @@ if ($ctrl->hasArguments()) {
     //$ctrl->combo(_("Publications"), $ctrl->getCachedModel('notes/wp_categories'));
   }
 }
+else if (!empty($ctrl->post['data']['type'])
+  && isset($ctrl->post['limit'], $ctrl->post['start'])
+) {
+  $ctrl->addData([
+    'cat' => $ctrl->post['data']['type']
+  ]);
+  $ctrl->action();
+}

@@ -1,11 +1,13 @@
 <!-- HTML Document -->
 <div :class="['bbn-overlay', componentClass]">
   <bbn-table ref="table"
-             :source="url + currentCategory"
+             :source="url"
+             :data="{type: currentCategory}"
              :limit="25"
              :info="true"
              :columns="currentColumns"
-             :storage="false"
+             :storage="true"
+             storage-full-name="appui-cms-list"
              :selection="true"
              :pageable="true"
              :showable="true"
