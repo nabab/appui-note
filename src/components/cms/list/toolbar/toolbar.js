@@ -35,10 +35,20 @@
         });
       }
 
+      let storage = window.localStorage.getItem('appui-cms-list');
+      let currentStatus = 'all';
+      if (storage) {
+        storage = JSON.parse(storage).value;
+        if (storage.filters?.conditions?.length){
+          currentStatus = bbn.fn.getField(storage.filters.conditions, 'val', 'id', 'statusFilter') || 'all'
+        }
+      }
+
       return {
         cp: cp,
         searchValue: '',
-        currentStatus: 'all',
+        currentStatus: currentStatus,
+        currentCategory: cp.currentCategory,
         statusList: [{
           text: bbn._('All'),
           value: 'all'
@@ -116,6 +126,11 @@
       searchValue(newVal){
         if (!!this.cp && !!this.cp.getRef('table')) {
           this.cp.getRef('table').searchValue = newVal;
+        }
+      },
+      currentCategory(newVal){
+        if (!!this.cp) {
+          this.cp.currentCategory = newVal;
         }
       },
       currentStatus(newVal){

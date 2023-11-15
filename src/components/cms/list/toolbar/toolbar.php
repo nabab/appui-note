@@ -28,7 +28,7 @@
       <bbn-dropdown :source="categories"
                     source-value="id"
                     class="bbn-l bbn-wide"
-                    v-model="cp.currentCategory"/>
+                    v-model="currentCategory"/>
     </div>
     <bbn-input :nullable="true"
                button-right="nf nf-fa-search"

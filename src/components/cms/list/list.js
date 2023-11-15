@@ -28,7 +28,7 @@
       url: {
         type: String,
         default() {
-          return root + 'cms/cat/'
+          return root + 'cms/cat'
         }
       },
       previewUrl: {
@@ -105,9 +105,20 @@
       },
     },
     data(){
+      let storage = window.localStorage.getItem('appui-cms-list');
+      let currentCategory = this.id_type || 'all'
+      if (storage) {
+        storage = JSON.parse(storage).value;
+        if (storage.filters?.conditions?.length){
+          let cc = bbn.fn.getField(storage.filters.conditions, 'value', 'field', 'id_type');
+          if (!!cc) {
+            currentCategory = cc;
+          }
+        }
+      }
       return {
         users: appui.app.users,
-        currentCategory: this.id_type || 'all'
+        currentCategory: currentCategory
       };
     },
     computed: {
@@ -417,16 +428,23 @@
         });
       },
       filterTable(type) {
-        let table = this.getRef('table'),
-            idx = bbn.fn.search(table.currentFilters.conditions, 'field', 'type');
-        if ( idx > -1 ){
-          table.$set(table.currentFilters.conditions[idx], 'value', type);
+        let table = this.getRef('table');
+        let idx = bbn.fn.search(table.currentFilters.conditions, 'field', 'id_type');
+        if (type === 'all') {
+          if (idx > -1) {
+            table.currentFilters.conditions.splice(idx, 1);
+          }
         }
         else {
-          table.currentFilters.conditions.push({
-            field: 'type',
-            value: type
-          });
+          if (idx > -1) {
+            table.$set(table.currentFilters.conditions[idx], 'value', type);
+          }
+          else {
+            table.currentFilters.conditions.push({
+              field: 'id_type',
+              value: type
+            });
+          }
         }
       },
       // function of render
@@ -447,6 +465,7 @@
         if (table) {
           let filter = {
             id: 'statusFilter',
+            val: 'published',
             conditions: [{
               field: 'start',
               operator: '<=',
@@ -477,6 +496,7 @@
         if (table) {
           let filter = {
             id: 'statusFilter',
+            val: 'unpublished',
             conditions: [{
               logic: 'OR',
               conditions: [{
@@ -521,10 +541,23 @@
     },
     */
     watch: {
-      currentCategory(){
+      currentCategory(newVal){
         this.$nextTick(() => {
-          this.updateData();
+          this.filterTable(newVal);
         });
+      },
+      currentColumns(newVal){
+        this.$nextTick(() => {
+          let table = this.getRef('table');
+          bbn.fn.each(newVal, (c, i) => {
+            if (!!c.hidden && !table.currentHidden.includes(i)) {
+              table.currentHidden.push(i);
+            }
+            else if (!c.hidden && !!table.currentHidden.includes(i)) {
+              table.currentHidden.splice(table.currentHidden.indexOf(i), 1);
+            }
+          });
+        })
       }
     },
     components: {
