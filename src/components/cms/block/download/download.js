@@ -81,7 +81,9 @@
                              :limit="50"
                              path-name="path"
                              :upload="root + 'media/actions/save'"
-                             :remove="root + 'media/actions/remove'"/>
+                             :remove="root + 'media/actions/remove'"
+                             :info="true"
+                             overlay-name="name"/>
 </div>
         `,
         props: {

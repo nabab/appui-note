@@ -235,7 +235,6 @@
                 source: {},
                 url: this.upload || this.url
               },
-              height: '400px',
               width: '500px',
               onOpen: pop => {
                 pop.$on('added', this.onAdded);
