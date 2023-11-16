@@ -10,73 +10,88 @@
       return {
         emptyObj: obj,
         defaultConfig: {
-          content: [bbn.fn.clone(obj)]
-        }
+          content: [bbn.fn.clone(obj)],
+          orientation: 'vertical'
+        },
+        types: [{
+          text: bbn._('Media'),
+          value: 'media'
+        }, {
+          text: bbn._('URL'),
+          value: 'url'
+        }]
       };
+    },
+    computed: {
+      currentStyle(){
+        return {
+          flexDirection: this.source.orientation === 'vertical' ? 'column' : 'row',
+          gridGap: 'var(--sspace)'
+        };
+      }
     },
     methods: {
       addItem(){
         this.source.content.push(bbn.fn.clone(this.emptyObj));
+      },
+      openExplorer(file){
+        this.getPopup().open({
+          component: this.$options.components.gallery,
+          componentOptions: {
+            onSelection: media => this.onSelection(media, file)
+          },
+          title: bbn._('Select a media'),
+          width: '90%',
+          height: '90%'
+        });
+      },
+      onSelection(media, file) {
+        bbn.fn.log('seelected', media)
+        this.$set(file, 'value', media.data.path);
+        this.$set(file, 'text', media.data.name);
+        this.$set(file, 'filename', media.data.name);
+        this.getPopup().close();
+      },
+      onChangeType(file){
+        bbn.fn.log('aaaa', file)
+        this.$set(file, 'value', '');
+        this.$set(file, 'text', '');
+        if (file.type === 'url') {
+          this.$delete(file, 'filename');
+        }
+      },
+      onDownload(file){
+        if (file.type === 'media') {
+          bbn.fn.download(file.value);
+        }
+        else {
+          bbn.fn.link(file.value);
+        }
       }
     },
     components: {
-      file: {
+      gallery: {
         template: `
-<div class="bbn-bordered bbn-radius bbn-spadded bbn-grid-fields"
-     style="border-style: dashed">
-  <label>` + bbn._('Type') + `</label>
-  <bbn-radiobuttons :source="types"
-                    v-model="source.type"/>
-  <template v-if="source.type === 'media'">
-    <label>` + bbn._('Media') + `</label>
-    <div class="appui-note-cms-block-download-preview bbn-flex">
-      <bbn-button icon="nf nf-fae-galery"
-                  :notext="true"
-                  @click="openExplorer"
-                  title="<?=_('Select a media')?>"
-                  class="bbn-right-sspace"/>
-      <!--<img class="bbn-bordered bbn-radius"
-            :src="source.content"
-            v-if="!!source.content">-->
-    </div>
-  </template>
-  <template v-if="source.type === 'url'">
-    <label>` + bbn._('URL') + `</label>
-    <bbn-input v-model="source.value"
-              class="bbn-w-100"/>
-  </template>
-  <label>` + bbn._('Text') + `</label>
-  <bbn-input v-model="source.text"
-             class="bbn-w-100"/>
-</div>`,
+<div>
+  <appui-note-media-browser2 :source="root + 'media/data/browser'"
+                             @selection="onSelection"
+                             @clickItem="onSelection"
+                             :zoomable="false"
+                             :selection="false"
+                             :limit="50"
+                             path-name="path"
+                             :upload="root + 'media/actions/save'"
+                             :remove="root + 'media/actions/remove'"/>
+</div>
+        `,
         props: {
-          source: {
-            type: Object,
-            required: true
+          onSelection: {
+            type: Function
           }
         },
         data(){
           return {
-            types: [{
-              text: bbn._('Media'),
-              value: 'media'
-            }, {
-              text: bbn._('URL'),
-              value: 'url'
-            }]
-          }
-        },
-        methods: {
-          openExplorer(){
-            this.getPopup().open({
-              component: this.$options.components.gallery,
-              componentOptions: {
-                onSelection: this.onSelection
-              },
-              title: bbn._('Select a media'),
-              width: '90%',
-              height: '90%'
-            });
+            root: appui.plugins['appui-note'] + '/'
           }
         }
       }
