@@ -57,6 +57,20 @@
                     }
                 },
                 {
+                  "text": "Download",
+                  "code": "download",
+                  "description": "A simple files download blocks",
+                  "icon": "nf nf-mdi-download",
+                  "configuration": {
+                    "orientation": "horizontal",
+                    "content": [{
+                      "type": "media",
+                      "text": "",
+                      "value": ""
+                    }]
+                  }
+                },
+                {
                     "text": "Feature",
                     "code": "feature",
                     "description": "A simple feature block",

@@ -1,68 +1,70 @@
-// Javascript Document
-
 (() => {
   return {
-    mixins: [bbn.cp.mixins.basic, bbn.cp.mixins['appui-note-cms-block']],
-    props: {
-      config: {
-        type: Object
-      }
-    },
+    mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
     data() {
+      let obj = {
+        type: 'media',
+        text: '',
+        value: ''
+      };
       return {
+        emptyObj: obj,
         defaultConfig: {
-          content: '',
-          alt: '',
-          href: '',
-          caption: '',
-          details_title: '',
-          details: '',
-          width: '100%',
-          height: '100%',
-          align: 'center'
-        }
+          content: [bbn.fn.clone(obj)],
+          orientation: 'vertical'
+        },
+        types: [{
+          text: bbn._('Media'),
+          value: 'media'
+        }, {
+          text: bbn._('URL'),
+          value: 'url'
+        }]
       };
     },
     computed: {
-      align(){
-        let style = {};
-        switch (this.source.align) {
-          case 'left':
-            style.justifyContent = 'flex-start';
-            break;
-          case 'center':
-            style.justifyContent = 'center';
-            break;
-          case 'right':
-            style.justifyContent = 'flex-end';
-            break;
-        }
-        return style;
+      currentStyle(){
+        return {
+          flexDirection: this.source.orientation === 'vertical' ? 'column' : 'row',
+          gridGap: 'var(--sspace)'
+        };
       }
     },
     methods: {
-      openGallery(){
+      addItem(){
+        this.source.content.push(bbn.fn.clone(this.emptyObj));
+      },
+      openExplorer(file){
         this.getPopup().open({
           component: this.$options.components.gallery,
           componentOptions: {
-            onSelection: this.onSelection
+            onSelection: media => this.onSelection(media, file)
           },
-          title: bbn._('Select an image'),
+          title: bbn._('Select a media'),
           width: '90%',
           height: '90%'
         });
       },
-      onSelection(img) {
-        this.$set(this.source, 'content', img.data.path);
+      onSelection(media, file) {
+        this.$set(file, 'value', media.data.path);
+        this.$set(file, 'text', media.data.name);
+        this.$set(file, 'filename', media.data.name);
         this.getPopup().close();
       },
-      toggleAutoWidth(){
-        let isActive = (this.source.width === 'auto') || (this.source.width === '') || (this.source.width === undefined);
-        this.$set(this.source, 'width', isActive ? '10' + this.getRef('widthRange').currentUnit : 'auto');
+      onChangeType(file){
+        this.$set(file, 'value', '');
+        this.$set(file, 'text', '');
+        if (file.type === 'url') {
+          this.$delete(file, 'filename');
+        }
       },
-      toggleAutoHeight(){
-        let isActive = (this.source.height === 'auto') || (this.source.height === '') || (this.source.height === undefined);
-        this.$set(this.source, 'height', isActive ? '10' + this.getRef('heightRange').currentUnit : 'auto');
+      onDownload(file){
+        if (file.type === 'media') {
+          bbn.fn.download(file.value);
+        }
+        else {
+          bbn.fn.link(file.value);
+        }
       }
     },
     components: {
@@ -78,8 +80,9 @@
                              path-name="path"
                              :upload="root + 'media/actions/save'"
                              :remove="root + 'media/actions/delete'"
-                             ref="mediabrowser"
-                             @delete="onDelete"/>
+                             overlay-name="name"
+                             @delete="onDelete"
+                             ref="mediabrowser"/>
 </div>
         `,
         props: {
