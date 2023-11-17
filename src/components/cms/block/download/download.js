@@ -46,14 +46,12 @@
         });
       },
       onSelection(media, file) {
-        bbn.fn.log('seelected', media)
         this.$set(file, 'value', media.data.path);
         this.$set(file, 'text', media.data.name);
         this.$set(file, 'filename', media.data.name);
         this.getPopup().close();
       },
       onChangeType(file){
-        bbn.fn.log('aaaa', file)
         this.$set(file, 'value', '');
         this.$set(file, 'text', '');
         if (file.type === 'url') {
@@ -81,9 +79,10 @@
                              :limit="50"
                              path-name="path"
                              :upload="root + 'media/actions/save'"
-                             :remove="root + 'media/actions/remove'"
-                             :info="true"
-                             overlay-name="name"/>
+                             :remove="root + 'media/actions/delete'"
+                             overlay-name="name"
+                             @delete="onDelete"
+                             ref="mediabrowser"/>
 </div>
         `,
         props: {
@@ -94,6 +93,20 @@
         data(){
           return {
             root: appui.plugins['appui-note'] + '/'
+          }
+        },
+        methods: {
+          onDelete(obj){
+            let id = bbn.fn.isArray(obj.media) ? bbn.fn.map(obj.media, m => m.id) : (obj.media.id || false);
+            this.post(this.root + 'media/actions/delete', {id: id}, d => {
+              if (d.success) {
+                this.getRef('mediabrowser').refresh();
+                appui.success();
+              }
+              else {
+                appui.error();
+              }
+            });
           }
         }
       }

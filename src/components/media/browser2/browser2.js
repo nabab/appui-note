@@ -285,7 +285,7 @@
         this.$emit('beforeremove', ev, m);
         if (!ev.defaultPrevented) {
           this.$emit('delete', {
-            id_note: !!this.data && !!this.data.id_note ? this.data.id_note : false,
+            id_note: !!this.data?.id_note ? this.data.id_note : false,
             media: m
           });
           /*this.confirm(

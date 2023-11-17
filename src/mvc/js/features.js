@@ -176,7 +176,9 @@
                              :limit="50"
                              path-name="path"
                              :upload="root + 'media/actions/save'"
-                             :remove="root + 'media/actions/remove'"/>
+                             :remove="root + 'media/actions/delete'"
+                             ref="mediabrowser"
+                             @delete="onDelete"/>
 </div>
         `,
         props: {
@@ -201,6 +203,18 @@
                   this.$set(this.item, "media", img.data);
                 }
                 floater.close();
+              }
+            });
+          },
+          onDelete(obj){
+            let id = bbn.fn.isArray(obj.media) ? bbn.fn.map(obj.media, m => m.id) : (obj.media.id || false);
+            this.post(this.root + 'media/actions/delete', {id: id}, d => {
+              if (d.success) {
+                this.getRef('mediabrowser').refresh();
+                appui.success();
+              }
+              else {
+                appui.error();
               }
             });
           }
