@@ -13,7 +13,7 @@ if ($model->hasData(['file', 'ref'], true)) {
         if (empty($media['private'])
           && empty($media['url'])
         ) {
-          $medias->addUrl($id, 'img/' . $id . '/' . $media['name']);
+          $medias->addUrl($id, (!empty($media['is_image']) ? 'img/' : APPUI_NOTE_ROOT.'media/download/') . $id . '/' . $media['name']);
           $media = $medias->getMedia($id, true);
         }
         if (!empty($media['content']) && \bbn\Str::isJson($media['content'])) {
