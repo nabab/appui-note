@@ -39,7 +39,7 @@
                       :title="_('Select a media')"
                       class="bbn-right-sspace"/>
           <span v-text="f.filename"
-                style="align-self: center"/>
+                style="align-self: center; word-break: break-all"/>
         </div>
       </template>
       <template v-if="f.type === 'url'">
