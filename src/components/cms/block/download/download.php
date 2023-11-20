@@ -24,32 +24,39 @@
       <div/>
     </div>
     <div v-for="(f, i) in source.content"
-         class="bbn-top-space bbn-bordered bbn-radius bbn-spadded bbn-grid-fields"
+         class="bbn-w-100 bbn-top-space bbn-bordered bbn-radius bbn-flex-width"
          style="border-style: dashed">
-      <label v-text="_('Type')"/>
-      <bbn-radiobuttons :source="types"
-                        v-model="f.type"
-                        @input="onChangeType(f)"/>
-      <template v-if="f.type === 'media'">
-        <label v-text="_('Media')"/>
-        <div class="bbn-flex">
-          <bbn-button icon="nf nf-cod-file_media"
-                      :notext="true"
-                      @click="openExplorer(f)"
-                      :title="_('Select a media')"
-                      class="bbn-right-sspace"/>
-          <span v-text="f.filename"
-                style="align-self: center; word-break: break-all"/>
-        </div>
-      </template>
-      <template v-if="f.type === 'url'">
-        <label v-text="_('URL')"/>
-        <bbn-input v-model="f.value"
-                   class="bbn-w-100"/>
-      </template>
-      <label v-text="_('Text')"/>
-      <bbn-input v-model="f.text"
-                class="bbn-w-100"/>
+      <div class="bbn-grid-fields bbn-spadded bbn-flex-fill">
+        <label v-text="_('Type')"/>
+        <bbn-radiobuttons :source="types"
+                          v-model="f.type"
+                          @input="onChangeType(f)"/>
+        <template v-if="f.type === 'media'">
+          <label v-text="_('Media')"/>
+          <div class="bbn-flex">
+            <bbn-button icon="nf nf-cod-file_media"
+                        :notext="true"
+                        @click="openExplorer(f)"
+                        :title="_('Select a media')"
+                        class="bbn-right-sspace"/>
+            <span v-text="f.filename"
+                  style="align-self: center; word-break: break-all"/>
+          </div>
+        </template>
+        <template v-if="f.type === 'url'">
+          <label v-text="_('URL')"/>
+          <bbn-input v-model="f.value"
+                     class="bbn-w-100"/>
+        </template>
+        <label v-text="_('Text')"/>
+        <bbn-input v-model="f.text"
+                  class="bbn-w-100"/>
+      </div>
+      <div class="bbn-middle bbn-xspadded bbn-background bbn-radius-right bbn-reactive bbn-p"
+           @click="removeItem(i)"
+           v-if="source.content?.length > 1">
+        <i class="nf nf-fa-trash bbn-red"/>
+      </div>
     </div>
   </div>
   <div v-else-if="$parent.selectable && (!source.content?.length || ((source.content.length === 1) && !source.content[0].value?.length))"

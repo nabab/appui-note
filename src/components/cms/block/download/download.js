@@ -34,6 +34,11 @@
       addItem(){
         this.source.content.push(bbn.fn.clone(this.emptyObj));
       },
+      removeItem(idx){
+        this.confirm(bbn._('Are you sure you want to remove this file?'), () => {
+          this.source.content.splice(idx, 1);
+        });
+      },
       openExplorer(file){
         this.getPopup().open({
           component: this.$options.components.gallery,

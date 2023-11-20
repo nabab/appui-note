@@ -8,9 +8,16 @@
             'bbn-i': !isPublished
          }"/>
    </div>
-   <div class="bbn-block bbn-left-padding bbn-nowrap bbn-s"
-        v-text="fdate(source.start)"/>
-   <div v-if="end"
-        class="bbn-block bbn-left-padding bbn-nowrap"
-        v-text="fdate(source.end)"/>
+   <div class="bbn-block bbn-left-padding ">
+    <div class="bbn-nowrap bbn-s"
+         v-text="fdate(source.creation)"
+         :title="_('Last modification date')"/>
+    <div class="bbn-nowrap bbn-s bbn-green"
+         v-text="fdate(source.start)"
+         :title="_('Publication date')"/>
+    <div v-if="end"
+         class="bbn-nowrap bbn-s bbn-red"
+         v-text="fdate(source.end)"
+         :title="_('Unpublication date')"/>
+   </div>
 </div>
