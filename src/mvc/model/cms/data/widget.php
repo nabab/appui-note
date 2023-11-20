@@ -87,7 +87,7 @@ if ($model->hasData('id')) {
         ]
       ];
       $cfg['order'] = [
-        'start' => 'ASC'
+        'start' => 'DESC'
       ];
     }
     else {

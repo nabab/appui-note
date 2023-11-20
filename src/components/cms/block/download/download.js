@@ -1,6 +1,6 @@
 (() => {
   return {
-    mixins: [bbn.vue.basicComponent, bbn.vue.mixins['appui-note-cms-block']],
+    mixins: [bbn.cp.mixins.basic, bbn.cp.mixins['appui-note-cms-block']],
     data() {
       let obj = {
         type: 'media',
@@ -33,6 +33,11 @@
     methods: {
       addItem(){
         this.source.content.push(bbn.fn.clone(this.emptyObj));
+      },
+      removeItem(idx){
+        this.confirm(bbn._('Are you sure you want to remove this file?'), () => {
+          this.source.content.splice(idx, 1);
+        });
       },
       openExplorer(file){
         this.getPopup().open({
