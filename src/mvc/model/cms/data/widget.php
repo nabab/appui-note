@@ -74,7 +74,7 @@ if ($model->hasData('id')) {
         ]
       ]
     ],
-    //'group_by' => ['bbn_notes.id']
+    'group_by' => ['bbn_notes.id']
   ];
   $ok = false;
   if (in_array($model->data['id'], ['pub', 'unpub'])) {
