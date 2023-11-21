@@ -51,7 +51,8 @@
         });
       },
       onSelection(media, file) {
-        this.$set(file, 'value', media.data.path);
+        bbn.fn.log('media', media);
+        this.$set(file, 'value', media.data.id);
         this.$set(file, 'text', media.data.name);
         this.$set(file, 'filename', media.data.name);
         this.getPopup().close();
@@ -65,10 +66,10 @@
       },
       onDownload(file){
         if (file.type === 'media') {
-          bbn.fn.download(file.value);
+          bbn.fn.download(appui.plugins['appui-note'] + '/media/download/' + file.value);
         }
         else {
-          bbn.fn.link(file.value);
+          window.open(file.value);
         }
       }
     },
