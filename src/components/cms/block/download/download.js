@@ -65,10 +65,10 @@
       },
       onDownload(file){
         if (file.type === 'media') {
-          bbn.fn.download(file.value);
+          bbn.fn.download(appui.plugins['appui-note'] + '/media/download/' + file.value);
         }
         else {
-          bbn.fn.link(file.value);
+          window.open(file.value);
         }
       }
     },
