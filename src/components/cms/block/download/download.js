@@ -51,7 +51,6 @@
         });
       },
       onSelection(media, file) {
-        bbn.fn.log('media', media);
         this.$set(file, 'value', media.data.id);
         this.$set(file, 'text', media.data.name);
         this.$set(file, 'filename', media.data.name);
