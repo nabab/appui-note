@@ -5,7 +5,7 @@
 <div :class="[componentClass, 'bbn-w-100']">
   <div v-if="mode === 'edit'"
        class='bbn-w-100 bbn-grid-fields'>
-    <label class="bbn-l"><?=_("Product Picker")?></label>
+    <label class="bbn-l"><?= _("Product Picker") ?></label>
       <div class="bbn-l">
         <bbn-search :source="shopRoot + 'products/list'"
                     source-text="title"
@@ -16,7 +16,7 @@
                     @select="select"/>
       </div>
 
-      <label class="bbn-l"><?=_("Show image")?></label>
+      <label class="bbn-l"><?= _("Show image") ?></label>
       <div class="bbn-l">
         <bbn-switch v-model="source.showImage"
                     :value="true"
@@ -24,7 +24,7 @@
                     class="bbn-left-space"/>
       </div>
 
-      <label class="bbn-l"><?=_("Show price")?></label>
+      <label class="bbn-l"><?= _("Show price") ?></label>
       <div class="bbn-l">
         <bbn-switch v-model="source.showPrice"
                   :value="true"
@@ -32,7 +32,7 @@
                   class="bbn-left-space"/>
       </div>
 
-      <label class="bbn-l"><?=_("Show edition")?></label>
+      <label class="bbn-l"><?= _("Show edition") ?></label>
       <div class="bbn-l">
         <bbn-switch v-model="source.showEdition"
                   :value="true"
@@ -40,7 +40,7 @@
                   class="bbn-left-space"/>
       </div>
 
-      <label class="bbn-l"><?=_("Show type")?></label>
+      <label class="bbn-l"><?= _("Show type") ?></label>
       <div class="bbn-l">
         <bbn-switch v-model="source.showType"
                   :value="true"
@@ -48,7 +48,7 @@
                   class="bbn-left-space"/>
       </div>
 
-      <label class="bbn-l"><?=_("Show Sold out")?></label>
+      <label class="bbn-l"><?= _("Show Sold out") ?></label>
       <div class="bbn-l">
         <bbn-switch v-model="source.showSoldOut"
                     :value="true"
@@ -56,7 +56,7 @@
                     class="bbn-left-space"/>
       </div>
 
-      <label class="bbn-l"><?=_("Show 'Add to cart' button ")?></label>
+      <label class="bbn-l"><?= _("Show 'Add to cart' button ") ?></label>
       <div class="bbn-l">
         <bbn-switch v-model="source.showButton"
                     :value="true"
@@ -102,7 +102,7 @@
               v-if="source.showButton"
               @click="addToCart"
               :disabled="disabled">
-        <?=_("Add to cart")?>
+        <?= _("Add to cart") ?>
       </button>
     </div>
     <div v-else-if="$parent.selectable"

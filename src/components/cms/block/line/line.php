@@ -27,7 +27,7 @@
                   :show-reset="false"
                   :show-numeric="true"
                   :show-units="true"/>
-      <label><?=_('Height')?></label>
+      <label><?= _('Height') ?></label>
       <bbn-range v-model="source.height"
                   :min="10"
                   :max="2000"

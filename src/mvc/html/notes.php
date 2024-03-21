@@ -2,7 +2,7 @@
   <!--div class="bbn-w-100 bbn-block bbn-c bbn-vmargin"
        style="height: 80px">
     <bbn-input class="bbn-xxl"
-               placeholder="<?=_("Search")?>"
+               placeholder="<?= _("Search") ?>"
                autocomplete="off"
                style="width: 75%"/>
   </div-->

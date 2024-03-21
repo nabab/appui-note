@@ -4,7 +4,7 @@
            :info="true"
            :limit="25"
            :toolbar="[{
-             text: '<?=_('New message')?>',
+             text: '<?= _('New message') ?>',
              icon: 'nf nf-fa-plus',
              action: insert
            }]"
@@ -22,52 +22,52 @@
   ></bbns-column>
   <bbns-column field="title"
                title="<i class='nf nf-fa-newspaper_o bbn-xl'></i>"
-               ftitle="<?=_("Title")?>"
+               ftitle="<?= _("Title") ?>"
   ></bbns-column>
   <bbns-column field="id_user"
                title="<i class='nf nf-fa-user bbn-xl'></i>"
-               ftitle="<?=_("Author")?>"
+               ftitle="<?= _("Author") ?>"
                :width="300"
                :source="users"
   ></bbns-column>
   <bbns-column field="content"
                title="<i class='nf nf-fa-comment bbn-xl'></i>"
-               ftitle="<?=_("Text")?>"
+               ftitle="<?= _("Text") ?>"
                :hidden="true"
   ></bbns-column>
   <bbns-column field="creation"
                title="<i class='nf nf-fa-calendar bbn-xl'></i>"
-               ftitle="<?=_("Creation date")?>"
+               ftitle="<?= _("Creation date") ?>"
                :width="120"
                type="date"
                cls="bbn-c"
   ></bbns-column>
   <bbns-column field="start"
                title="<i class='nf nf-fa-calendar_check_o bbn-xl'></i>"
-               ftitle="<?=_("Start date")?>"
+               ftitle="<?= _("Start date") ?>"
                :width="120"
                type="date"
                cls="bbn-c"
   ></bbns-column>
   <bbns-column field="end"
                title="<i class='nf nf-fa-calendar_times_o bbn-xl'></i>"
-               ftitle="<?=_("End date")?>"
+               ftitle="<?= _("End date") ?>"
                :width="120"
                type="date"
                cls="bbn-c"
   ></bbns-column>
   <bbns-column :width="100"
                cls="bbn-c"
-               ftitle="<?=_("Actions")?>"
+               ftitle="<?= _("Actions") ?>"
                :buttons="[{
                  action: see,
                  icon: 'nf nf-fa-eye',
-                 text: '<?=_("See")?>',
+                 text: '<?= _("See") ?>',
                  notext: true
                }, {
                  action: edit,
                  icon: 'nf nf-fa-edit',
-                 text: '<?=_("Mod.")?>',
+                 text: '<?= _("Mod.") ?>',
                  notext: true
                }]"
                :filterable="false"
@@ -86,13 +86,13 @@
   >    
     <div class="bbn-grid-fields bbn-lpadded">
       <label>
-        <?=_("Title")?>
+        <?= _("Title") ?>
       </label>
       <bbn-input required="required"
                  v-model="source.row.title"
       ></bbn-input>
       <label>
-        <?=_("Publication date")?>
+        <?= _("Publication date") ?>
       </label>
       <div>
         <bbn-datetimepicker v-model="source.row.start"
@@ -100,7 +100,7 @@
         ></bbn-datetimepicker>
       </div>
       <label>
-        <?=_("End date")?>
+        <?= _("End date") ?>
       </label>
       <div>
         <bbn-datetimepicker v-model="source.row.end"
@@ -108,7 +108,7 @@
         ></bbn-datetimepicker>
       </div>
       <label>
-        <?=_("Text")?>
+        <?= _("Text") ?>
       </label>
       <div style="overflow: inherit; height: 400px">
         <bbn-rte v-model="source.row.content"

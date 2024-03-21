@@ -2,7 +2,7 @@
 <div :class="componentClass">
   <div v-if="mode === 'edit'"
        class="bbn-grid-fields bbn-w-100">
-    <label><?=_('Gallery')?></label>
+    <label><?= _('Gallery') ?></label>
     <div class="bbn-vmiddle">
       <bbn-dropdown :source="galleryListUrl"
                     source-value="id"
@@ -15,9 +15,9 @@
                   :notext="true"
                   @click="openMediasGroups"
                   class="bbn-left-sspace"
-                  title="<?=_('Open galleries management')?>"/>
+                  title="<?= _('Open galleries management') ?>"/>
     </div>
-    <label><?=_('Width')?></label>
+    <label><?= _('Width') ?></label>
     <bbn-range v-model="source.width"
 									 :min="10"
 									 :max="2000" 
@@ -25,7 +25,7 @@
 									 :show-reset="false"
 									 :show-numeric="true"
 									 :show-units="true"/>
-    <label><?=_('Height')?></label>
+    <label><?= _('Height') ?></label>
     <bbn-range v-model="source.height"
 									 :min="10"
 									 :max="2000" 
@@ -33,7 +33,7 @@
 									 :show-reset="false"
 									 :show-numeric="true"
 									 :show-units="true"/>
-    <label><?=_('Alignment')?></label>
+    <label><?= _('Alignment') ?></label>
     <div>
       <div class="bbn-block">
         <bbn-radiobuttons :notext="true"
@@ -53,7 +53,7 @@
                           }]"/>
       </div>
     </div>
-    <label><?=_('Mode')?></label>
+    <label><?= _('Mode') ?></label>
     <div class="bbn-block">
       <bbn-radiobuttons :notext="true"
                         v-model="source.mode"
@@ -67,7 +67,7 @@
                           icon: 'nf nf-mdi-fullscreen'
                         }]"/>
     </div>
-    <label><?=_('Autoplay')?></label>
+    <label><?= _('Autoplay') ?></label>
     <bbn-switch v-model="source.autoplay"
                 :value="1"
                 :novalue="0"
@@ -75,32 +75,32 @@
                 :no-icon="false"
                 on-icon="nf nf-md-play"
                 off-icon="nf nf-md-pause"/>
-    <label><?=_('Arrows')?></label>
+    <label><?= _('Arrows') ?></label>
     <bbn-switch v-model="source.arrows"
                 :value="1"
                 :novalue="0"
                 :no-icon="false"
                 on-icon="nf nf-oct-arrow_switch"
                 off-icon="nf nf-oct-arrow_switch"/>
-    <label v-if="!!source.arrows"><?=_('Arrows position')?></label>
+    <label v-if="!!source.arrows"><?= _('Arrows position') ?></label>
     <bbn-dropdown v-if="!!source.arrows"
                   v-model="source.arrowsPosition"
                   :source="arrowsPositions"/>
-    <label><?=_('Preview')?></label>
+    <label><?= _('Preview') ?></label>
     <bbn-switch v-model="source.preview"
                 :value="1"
                 :novalue="0"
                 :no-icon="false"
                 on-icon="nf nf-md-table_row"
                 off-icon="nf nf-md-table_row"/>
-    <label><?=_('Loop')?></label>
+    <label><?= _('Loop') ?></label>
     <bbn-switch v-model="source.loop"
                 :value="1"
                 :novalue="0"
                 :no-icon="false"
                 on-icon="nf nf-md-repeat_variant"
                 off-icon="nf nf-md-repeat_variant"/>
-    <label><?=_('Show info')?></label>
+    <label><?= _('Show info') ?></label>
     <bbn-switch v-model="source.info"
                 :value="1"
                 :novalue="0"

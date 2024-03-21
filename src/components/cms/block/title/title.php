@@ -6,17 +6,17 @@
                     class="bbn-w-100"/>
     </div>
     <div class="bbn-grid-fields bbn-vpadded bbn-w-100">
-      <label><?=_('Tag')?></label>
+      <label><?= _('Tag') ?></label>
       <div>
         <bbn-dropdown :source="tags"
                       v-model="source.tag"
                       :component="$options.components.tag"/>
       </div>
-      <label><?=_('Color')?></label>
+      <label><?= _('Color') ?></label>
       <div>
         <bbn-colorpicker v-model="source.color"/>
       </div>
-      <label><?=_('Alignment')?></label>
+      <label><?= _('Alignment') ?></label>
       <div>
         <div class="bbn-block">
           <bbn-radiobuttons :notext="true"
@@ -36,9 +36,9 @@
                             }]"/>
         </div>
       </div>
-      <label><?=_('Style')?></label>
+      <label><?= _('Style') ?></label>
       <div>
-        <bbn-button title="<?=_('Italic')?>"
+        <bbn-button title="<?= _('Italic') ?>"
                     @click="source.fontStyle = source.fontStyle === 'italic' ? 'normal' : 'italic'"
                     :notext="true"
                     icon="nf nf-fa-italic"
@@ -46,7 +46,7 @@
                       'bbn-state-active': source.fontStyle === 'italic'
                     }"/>
       </div>
-      <label><?=_('Decoration')?></label>
+      <label><?= _('Decoration') ?></label>
       <div>
         <div class="bbn-block">
           <bbn-radiobuttons :notext="true"
@@ -66,7 +66,7 @@
                             }]"/>
         </div>
       </div>
-      <label><?=_('Horizontal rule')?></label>
+      <label><?= _('Horizontal rule') ?></label>
       <div>
         <appui-note-cms-block-line :source="source"
                                    mode="edit"

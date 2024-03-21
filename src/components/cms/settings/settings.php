@@ -13,7 +13,7 @@
 
   <label v-if="typeNote && typeNote.front_img"
           style="margin-top:10px">
-    <?=_('Front Image')?>
+    <?= _('Front Image') ?>
   </label>
   <appui-note-media-field v-if="typeNote && typeNote.front_img"
                           v-model="source.id_media"
@@ -44,7 +44,7 @@
   <label  class="bbn-label"><?= _("Tags") ?></label>
   <bbn-values v-model="source.tags"/>
 
-  <label  class="bbn-label"><?=_('Cache')?></label>
+  <label  class="bbn-label"><?= _('Cache') ?></label>
   <div>
     <bbn-button :text="_('Clear')"
                 icon="nf nf-mdi-cached"

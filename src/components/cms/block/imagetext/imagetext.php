@@ -15,7 +15,7 @@
               <bbn-button icon="nf nf-fae-galery"
                           :notext="false"
                           @click="openGallery"
-                          title="<?=_('Select an image')?>"
+                          title="<?= _('Select an image') ?>"
                           class="bbn-right-sspace"/>
             </div>
             <div class="bbn-flex-fill">
@@ -41,7 +41,7 @@
                       @click="toggleAutoWidth"
                       :text="_('Auto')"/>
         </div>
-				<label><?=_('Height')?></label>
+				<label><?= _('Height') ?></label>
         <div>
           <bbn-range v-model="source.height"
                      :min="10"
@@ -86,12 +86,12 @@
 				<div>
 					<div>
 						<bbn-input v-model="source.details_title"
-											 placeholder="<?=_('Title')?>"
+											 placeholder="<?= _('Title') ?>"
 											 class="bbn-w-100"/>
 					</div>
 					<div>
 						<bbn-input v-model="source.details"
-											 placeholder="<?=_('Content')?>"
+											 placeholder="<?= _('Content') ?>"
 											 class="bbn-w-100"/>
 					</div>
 				</div>

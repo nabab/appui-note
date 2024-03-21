@@ -10,7 +10,7 @@
                  class="bbn-flex-fill"/>
       </div>
         
-      <!--div title="<?=_('Edit Content')?>"
+      <!--div title="<?= _('Edit Content') ?>"
            class="bbn-p bbn-w-100"
            style="min-height: 50%"
            v-text="html2text(currentText)"
@@ -24,7 +24,7 @@
           <div class="bbn-block bbn-nowrap bbn-spadding">
             <i @click.stop="showCfg = !showCfg"
                ref="button"
-               title="<?=_('Post-it configuration')?>"
+               title="<?= _('Post-it configuration') ?>"
                class="nf nf-fa-cog bbn-lg bbn-p bbn-right-smargin"/>
             <i @click.stop="showInfo = !showInfo"
                ref="info"
@@ -39,7 +39,7 @@
           </div>
         </div>
         <bbn-editable tabindex="0"
-                      title="<?=_('Edit Title')?>"
+                      title="<?= _('Edit Title') ?>"
                       ref="title"
                       type="inline"
                       class="bbn-c bbn-p bbn-b bbn-lg bbn-b bbn-flex-fill bbn-spadded bbn-small-caps"

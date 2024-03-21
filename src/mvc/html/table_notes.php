@@ -24,7 +24,7 @@
 
   <bbns-column field="title"
                :editable="false"
-               title="<?=_("Title")?>"
+               title="<?= _("Title") ?>"
                :render="title"/>
 
   <bbns-column field="version"
@@ -39,47 +39,47 @@
 
   <bbns-column field="creator"
                :editable="false"
-               title="<?=_("Creator")?>"
+               title="<?= _("Creator") ?>"
                :source="users"
                :hidden="true"
                :width="160"/>
 
   <bbns-column field="id_user"
                :editable="false"
-               title="<?=_("Last version user")?>"
+               title="<?= _("Last version user") ?>"
                :source="users"
                :hidden="true"
                :width="160"/>
 
   <bbns-column field="creation"
                :editable="false"
-               title="<?=_("Creation")?>"
+               title="<?= _("Creation") ?>"
                type="date"
                cls="bbn-c"
                :width="100"/>
 
   <bbns-column field="last_edit"
                :editable="false"
-               title="<?=_("Last edit")?>"
+               title="<?= _("Last edit") ?>"
                type="date"
                :hidden="true"
                cls="bbn-c"
                :width="100"/>
 
   <bbns-column field="id_type"
-               title="<?=_("Type")?>"
+               title="<?= _("Type") ?>"
                :render="getType"
                :source="source.options"
                :width="120"/>
 
   <bbns-column field="id_option"
                :editable="false"
-               title="<?=_("Option")?>"
+               title="<?= _("Option") ?>"
                :render="getOption"
                :width="120"/>
 
   <bbns-column :width="90"
-               title="<?=_("Actions")?>"
+               title="<?= _("Actions") ?>"
                cls="bbn-c"
                :buttons="['edit']"/>
 
@@ -96,7 +96,7 @@
 <script type="text/x-template" id="apst-new-note">
 <bbn-form :data="source"
           ref="form"
-          confirm-leave="<?=_("Are you sure you want to leave this form without saving your changes?")?>"
+          confirm-leave="<?= _("Are you sure you want to leave this form without saving your changes?") ?>"
           :action="'adherent/actions/notes/' + ( source.id ? 'update' : 'insert')"
           :buttons="['submit', 'cancel', 'close']"
           @success="success"
@@ -106,7 +106,7 @@
 
 
     <label class="bbn-form-label">
-      <?=_("Category")?>
+      <?= _("Category") ?>
   </label>
     <div class="bbn-form-field">
       <bbn-dropdown name="id_type_note"
@@ -117,7 +117,7 @@
   </div>
 
     <label class="bbn-form-label">
-      <?=_("Text")?>
+      <?= _("Text") ?>
   </label>
     <div class="bbn-form-field">
       <bbn-rte v-model="source.texte"
@@ -129,7 +129,7 @@
   </div>
 
     <label class="bbn-form-label" v-if="isOwner">
-      <?=_("Blocked")?>
+      <?= _("Blocked") ?>
   </label>
     <div class="bbn-form-field" v-if="isOwner">
       <bbn-checkbox v-model="source.confidentiel"

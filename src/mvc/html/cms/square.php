@@ -20,7 +20,7 @@
                        v-if="line.type"
             >
             </bbn-cms-block>
-            <span v-else class="bbn-c bbn-medium bbn-green"><?=('Select a block type')?></span>
+            <span v-else class="bbn-c bbn-medium bbn-green"><?= ('Select a block type') ?></span>
           </div>
         </div>
       </bbn-scroll>

@@ -70,7 +70,7 @@
                 <bbn-button icon="nf nf-fae-galery"
 										  :notext="false"
 					 						@click="openGallery(item)"
-											title="<?=_('Select an image')?>"
+											title="<?= _('Select an image') ?>"
 											class="bbn-right-sspace"/>
                 <bbn-button @click="removeNote(item.id)"
                             icon="nf nf-fa-trash_o"

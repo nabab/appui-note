@@ -2,7 +2,7 @@
 <div :class="componentClass">
   <div v-if="mode === 'edit'"
        class="bbn-grid-fields">
-    <label v-if="!isConfig"><?=_('Gallery')?></label>
+    <label v-if="!isConfig"><?= _('Gallery') ?></label>
     <div v-if="!isConfig"
          class="bbn-vmiddle">
       <bbn-dropdown :source="galleryListUrl"
@@ -16,10 +16,10 @@
                   :notext="true"
                   @click="openMediasGroups"
                   class="bbn-left-sspace"
-                  title="<?=_('Open galleries management')?>"/>
+                  title="<?= _('Open galleries management') ?>"/>
     </div>
 
-    <label v-if="isConfig || !isInConfig('style')"><?=_('Width')?></label>
+    <label v-if="isConfig || !isInConfig('style')"><?= _('Width') ?></label>
     <bbn-range v-if="isConfig || !isInConfig('style')"
                v-model="source.width"
                :min="10"
@@ -28,7 +28,7 @@
                :show-reset="false"
                :show-numeric="true"
                :show-units="true"/>
-    <label v-if="isConfig || !isInConfig('style')"><?=_('Height')?></label>
+    <label v-if="isConfig || !isInConfig('style')"><?= _('Height') ?></label>
     <bbn-range v-if="isConfig || !isInConfig('style')"
                v-model="source.height"
                :min="10"
@@ -38,13 +38,13 @@
                :show-numeric="true"
                :show-units="true"/>
 
-    <label v-if="isConfig || !isInConfig('crop')"><?=_('Crop Image')?></label>
+    <label v-if="isConfig || !isInConfig('crop')"><?= _('Crop Image') ?></label>
     <bbn-switch v-if="isConfig || !isInConfig('crop')"
                 v-model="source.crop"
                 :value="1"
                 :novalue="0"/>
 
-    <label v-if="isConfig || !isInConfig('imageWidth')"><?=_('Image width')?> (%)</label>
+    <label v-if="isConfig || !isInConfig('imageWidth')"><?= _('Image width') ?> (%)</label>
     <bbn-range v-if="isConfig || !isInConfig('imageWidth')"
                v-model="source.imageWidth"
                :min="5"
@@ -54,7 +54,7 @@
                :show-numeric="true"
                unit="%"/>
 
-    <label v-if="isConfig || !isInConfig('columnGap')"><?=_('Column gap')?></label>
+    <label v-if="isConfig || !isInConfig('columnGap')"><?= _('Column gap') ?></label>
     <bbn-range v-if="isConfig || !isInConfig('columnGap')"
                v-model="source.columnGap"
                :min="0"
@@ -64,7 +64,7 @@
                :show-reset="false"
                :show-numeric="true"/>
 
-    <label v-if="isConfig || !isInConfig('align')"><?=_('Alignment')?></label>
+    <label v-if="isConfig || !isInConfig('align')"><?= _('Alignment') ?></label>
     <div v-if="isConfig || !isInConfig('align')">
       <div class="bbn-block">
         <bbn-radiobuttons :notext="true"
@@ -85,7 +85,7 @@
       </div>
     </div>
 
-    <label v-if="isConfig || !isInConfig('imageAlign')"><?=_('Image alignment')?></label>
+    <label v-if="isConfig || !isInConfig('imageAlign')"><?= _('Image alignment') ?></label>
     <div v-if="isConfig || !isInConfig('imageAlign')">
       <div class="bbn-block">
         <bbn-radiobuttons :notext="true"
@@ -122,7 +122,7 @@
       </div>
     </div>
 
-    <label><?=_('Mode')?></label>
+    <label><?= _('Mode') ?></label>
     <div class="bbn-block">
       <bbn-radiobuttons :notext="true"
                         v-model="source.mode"
@@ -137,49 +137,49 @@
                         }]"/>
     </div>
 
-    <label v-if="isConfig || !isInConfig('scrollable')"><?=_('Scrollable')?></label>
+    <label v-if="isConfig || !isInConfig('scrollable')"><?= _('Scrollable') ?></label>
     <bbn-switch v-if="isConfig || !isInConfig('acrollable')"
                 v-model="source.scrollable"
                 :value="1"
                 :novalue="0"/>
 
 
-    <label v-if="isConfig || !isInConfig('pageable')"><?=_('Pageable')?></label>
+    <label v-if="isConfig || !isInConfig('pageable')"><?= _('Pageable') ?></label>
     <bbn-switch v-if="isConfig || !isInConfig('pageable')"
                 v-model="source.pageable"
                 :value="1"
                 :novalue="0"/>
 
-    <label v-if="isConfig || !isInConfig('footer')"><?=_('Footer')?></label>
+    <label v-if="isConfig || !isInConfig('footer')"><?= _('Footer') ?></label>
     <bbn-switch v-if="isConfig || !isInConfig('footer')"
                 v-model="source.pager"
                 :value="1"
                 :novalue="0"/>
 
-    <label v-if="isConfig || !isInConfig('zoomable')"><?=_('Zoomable')?></label>
+    <label v-if="isConfig || !isInConfig('zoomable')"><?= _('Zoomable') ?></label>
     <bbn-switch v-if="isConfig || !isInConfig('zoomable')"
                 v-model="source.zoomable"
                 :value="1"
                 :novalue="0"/>
 
-    <label v-if="(isConfig || !isInConfig('info')) && !!source.zoomable"><?=_('Info')?></label>
+    <label v-if="(isConfig || !isInConfig('info')) && !!source.zoomable"><?= _('Info') ?></label>
     <bbn-switch v-if="(isConfig || !isInConfig('info')) && !!source.zoomable"
                 v-model="source.info"
                 :value="1"
                 :novalue="0"/>
 
-    <label v-if="(isConfig || !isInConfig('sourceInfo')) && !!source.info"><?=_('Info field')?></label>
+    <label v-if="(isConfig || !isInConfig('sourceInfo')) && !!source.info"><?= _('Info field') ?></label>
     <bbn-dropdown v-if="(isConfig || !isInConfig('sourceInfo')) && !!source.info"
                   v-model="source.sourceInfo"
                   :source="sourceInfoList"/>
 
-    <label v-if="isConfig || !isInConfig('resizable')"><?=_('Resizable')?></label>
+    <label v-if="isConfig || !isInConfig('resizable')"><?= _('Resizable') ?></label>
     <bbn-switch v-if="isConfig || !isInConfig('resizable')"
                 v-model="source.resizable"
                 :value="1"
                 :novalue="0"/>
 
-    <label v-if="isConfig || !isInConfig('toolbar')"><?=_('Toolbar')?></label>
+    <label v-if="isConfig || !isInConfig('toolbar')"><?= _('Toolbar') ?></label>
     <bbn-switch v-if="isConfig || !isInConfig('toolbar')"
                 v-model="source.toolbar"
                 :value="1"

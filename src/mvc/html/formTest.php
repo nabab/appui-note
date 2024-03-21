@@ -3,7 +3,7 @@
 <form>
   <div class="bbn-w-100 bbn-flex-height">
     <div class="bbn-w-100 bbn-left-padded bbn-top-lpadded bbn-bottom-spadded bbn-grid-full">
-      <label class="bbn-w-100"><?=_("URL")?></label>
+      <label class="bbn-w-100"><?= _("URL") ?></label>
       <bbn-input v-model="currentData.url"
                  class="bbn-lpadded bbn-w-40"></bbn-input>
       <bbn-button class="bbn-w-2"
@@ -11,7 +11,7 @@
                   text="Go to"></bbn-button>
     </div>
     <div class="bbn-w-20 bbn-left-padded bbn-bottom-spadded">
-      <label class="bbn-w-100"><?=_("In which file ?")?></label>
+      <label class="bbn-w-100"><?= _("In which file ?") ?></label>
       <bbn-dropdown :source="source.parents"
                     v-model="idParent"
                     class="bbn-lpadded"
@@ -19,12 +19,12 @@
                     > </bbn-dropdown>
     </div>
     <div class="bbn-w-50 bbn-left-padded bbn-bottom-spadded">
-      <label class="bbn-l bbn-w-100"><?=_("Title")?></label>
+      <label class="bbn-l bbn-w-100"><?= _("Title") ?></label>
       <bbn-input v-model="currentData.title"
                  placeholder="Name of the URL"></bbn-input>
     </div>
     <div class="bbn-left-padded bbn-bottom-lpadded bbn-w-100">
-      <label class="bbn-l bbn-w-100"><?=_("URL's description")?></label>
+      <label class="bbn-l bbn-w-100"><?= _("URL's description") ?></label>
       <bbn-textarea class="bbn-w-40" v-model="currentData.description"></bbn-textarea>
     </div>
     <div>

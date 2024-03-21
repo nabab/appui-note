@@ -6,21 +6,21 @@
           :prefilled="true">
   <div class="bbn-grid-fields bbn-lpadded bbn-lg">
     <label class="bbn-b">
-      <?=_('Title')?>
+      <?= _('Title') ?>
     </label>
     <bbn-input v-model="formData.title"
                class="bbn-w-100"
                :required="true"/>
 
     <label class="bbn-b">
-      <?=_('URL')?>
+      <?= _('URL') ?>
     </label>
     <appui-note-field-url :source="formData"
                           :prefix="prefix"
                           v-model="formData.url"/>
 
     <label class="bbn-b">
-      <?=_('Article type')?>
+      <?= _('Article type') ?>
     </label>
     <div class="bbn-flex-width">
       <bbn-dropdown v-model="formData.type"
@@ -35,14 +35,14 @@
     </div>
 
     <label class="bbn-b">
-      <?=_('Language')?>
+      <?= _('Language') ?>
     </label>
     <bbn-dropdown v-model="formData.lang"
                   :source="['en', 'fr']"
                   :required="true"/>
 
     <label class="bbn-b">
-      <?=_('Excerpt')?>
+      <?= _('Excerpt') ?>
     </label>
     <bbn-textarea v-model="formData.excerpt"
                   style="height: 10em; max-height: 20vh"/>

@@ -16,7 +16,7 @@
           <bbn-button icon="nf nf-fae-galery"
 										  :notext="false"
 					 						@click="openGallery"
-											title="<?=_('Select an image')?>"
+											title="<?= _('Select an image') ?>"
 											class="bbn-right-sspace"/>
 					<img class="bbn-bordered bbn-radius"
 					 		 :src="source.source"
@@ -30,7 +30,7 @@
 									 :show-reset="false"
 									 :show-numeric="true"
 									 :show-units="true"/>
-				<label><?=_('Height')?></label>
+				<label><?= _('Height') ?></label>
 				<bbn-range v-model="source.style.height"
 									 :min="10"
 									 :max="2000" 
@@ -68,12 +68,12 @@
 				<div>
 					<div>
 						<bbn-input v-model="source.details_title"
-											 placeholder="<?=_('Title')?>"
+											 placeholder="<?= _('Title') ?>"
 											 class="bbn-w-100"/>
 					</div>
 					<div>
 						<bbn-input v-model="source.details"
-											 placeholder="<?=_('Content')?>"
+											 placeholder="<?= _('Content') ?>"
 											 class="bbn-w-100"/>
 					</div>
 				</div>

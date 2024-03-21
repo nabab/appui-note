@@ -33,7 +33,7 @@
               :style="{textDecoration: !source.parent_active ? 'line-through' : 'none'}"/>
         <span v-if="!source.parent_active"
               class="bbn-right-xspadded bbn-i bbn-s bbn-vxspadded">
-          <?=_('deleted')?>
+          <?= _('deleted') ?>
         </span>
       </span>
     </div>
@@ -48,21 +48,21 @@
          class="appui-note-forum-topic-post-minwidth bbn-s bbn-vmiddle bbn-radius bbn-xspadded bbn-alt-background bbn-alt-text bbn-right-sspace bbn-bordered"
          v-text="category"/>
     <div v-if="source.files && source.files.length"
-         title="<?=_('Files')?>"
+         title="<?= _('Files') ?>"
          class="appui-note-forum-topic-post-minwidth appui-note-forum-topic-post-darkgray bbn-radius bbn-vmiddle bbn-right-sspace bbn-xspadded bbn-bordered">
       <i class="nf nf-md-attachment"/>
       <span class="bbn-b bbn-s bbn-left-xsspace"
             v-text="source.files.length"/>
     </div>
     <div v-if="source.links && source.links.length"
-         title="<?=_('Links')?>"
+         title="<?= _('Links') ?>"
          class="appui-note-forum-topic-post-minwidth appui-note-forum-topic-post-darkgray bbn-radius bbn-vmiddle bbn-right-sspace bbn-xspadded bbn-bordered">
       <i class="nf nf-md-link_variant"/>
       <span class="bbn-b bbn-s bbn-left-xsspace"
             v-text="source.links.length"/>
     </div>
     <div v-if="!isTopic"
-         title="<?=_('Replies')?>"
+         title="<?= _('Replies') ?>"
          class="appui-note-forum-topic-post-minwidth bbn-alt-background bbn-alt-text bbn-radius bbn-vmiddle bbn-right-sspace bbn-xspadded bbn-bordered">
       <i class="nf nf-md-forum_outline"/>
       <span :class="['bbn-b', 'bbn-s', 'bbn-left-xsspace', {
@@ -77,7 +77,7 @@
   </div>
   <div class="bbn-flex-width bbn-top-sspace">
     <div v-if="isTopic && forum.replies">
-      <div title="<?=_('Replies')?>"
+      <div title="<?= _('Replies') ?>"
            class="bbn-alt-background bbn-alt-text bbn-radius bbn-p bbn-xspadded bbn-vmiddle bbn-bordered bbn-reactive bbn-right-sspace"
            @click="topic.toggleReplies()">
         <i class="nf nf-md-forum_outline bbn-lg"/>
@@ -116,7 +116,7 @@
         <div v-if="source.links && source.links.length && !!contentVisible"
              class="bbn-top-sspace">
           <fieldset class="bbn-background bbn-no-border">
-            <legend class="bbn-tertiary bbn-radius bbn-hxspadded"><?=_("Links")?></legend>
+            <legend class="bbn-tertiary bbn-radius bbn-hxspadded"><?= _("Links") ?></legend>
             <div v-for="l in source.links"
                  style="margin-top: 10px">
               <div class="bbn-flex-width"
@@ -198,7 +198,7 @@
                     icon="nf nf-fa-trash"
                     :notext="true"
                     @click="forum.removeEnabled ? forum.$emit('remove', source, _self, topic) : false"
-                    title="<?=_('Delete')?>"
+                    title="<?= _('Delete') ?>"
                     :disabled="!forum.removeEnabled"/>
         <!-- Edit -->
         <bbn-button v-if="(source.creator === forum.currentUser) || !source.locked || forum.canLock"
@@ -206,7 +206,7 @@
                     icon="nf nf-fa-edit"
                     :notext="true"
                     @click="forum.editEnabled ? forum.$emit('edit', source, _self, topic) : false"
-                    title="<?=_('Edit')?>"
+                    title="<?= _('Edit') ?>"
                     :disabled="!forum.editEnabled"/>
         <!-- Pin|Unpin -->
         <bbn-button v-if="isTopic && forum.pinnable"
@@ -214,7 +214,7 @@
                     :icon="'nf nf-mdi-' + (source.pinned ? 'pin_off' : 'pin')"
                     :notext="true"
                     @click="topic.togglePinned"
-                    :title="source.pinned ? '<?=_('Unpin')?>' : '<?=_('Pin')?>'"
+                    :title="source.pinned ? '<?= _('Unpin')?>' : '<?=_('Pin') ?>'"
                     :style="{
                       backgroundColor: source.pinned ? 'var(--active-background)' : 'var(--alt-background)',
                       color: source.pinned ? 'var(--active-text)' : 'var(--alt-text)'
@@ -225,7 +225,7 @@
                     icon="nf nf-fa-reply"
                     :notext="true"
                     @click="forum.replyEnabled ? forum.$emit('reply', source, _self, topic) : false"
-                    title="<?=_('Reply')?>"
+                    title="<?= _('Reply') ?>"
                     :disabled="!forum.replyEnabled"/>
       </div>
     </div>

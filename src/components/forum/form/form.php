@@ -92,7 +92,7 @@
                           style="display: inline-block;"
                           @click="linkRemove(idx)"
                           icon="nf nf-fa-times"
-                          title="<?=_('Remove')?>"/>
+                          title="<?= _('Remove') ?>"/>
             </div>
           </div>
         </div>

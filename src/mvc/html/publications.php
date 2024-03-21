@@ -8,7 +8,7 @@
         ></bbn-menu>
       </div>
       <div class="bbn-hpadded bbn-vspadded bbn-xl bbn-b bbn-flex-fill bbn-c">
-        <?=_("Publications' management")?>
+        <?= _("Publications' management") ?>
       </div>
     </div>
   </bbn-toolbar>
@@ -38,14 +38,14 @@
     <div class="bbn-overlay bbn-flex-height">        
       <div class="bbn-grid-fields bbn-lpadded">
         <label class="bbn-b">
-          <?=_('Title')?>
+          <?= _('Title') ?>
         </label>
         <bbn-input v-model="formData.title"
                   required="required"
                   class="bbn-w-50"
         ></bbn-input>
         <label class="bbn-b">
-          <?=_('Pub. date')?>
+          <?= _('Pub. date') ?>
         </label>
         <bbn-datetimepicker v-model="formData.start"
                             required="required"

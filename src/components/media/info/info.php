@@ -79,12 +79,12 @@
     </div>
 
     <div v-if="source.url">
-      <span><?=_('Cache')?></span>
+      <span><?= _('Cache') ?></span>
       <bbn-button class="bbn-bg-red bbn-white"
                   icon="nf nf-fa-trash"
                   :notext="true"
                   @click="clearCache(source.url, true)"
-                  title="<?=_('Clear all cache')?>"
+                  title="<?= _('Clear all cache') ?>"
                   v-if="!!source.cacheFiles && source.cacheFiles.length > 1"/>
     </div>
     <div class="bbn-nowrap bbn-grid-fields"
@@ -94,7 +94,7 @@
                       icon="nf nf-fa-trash"
                       :notext="true"
                       @click="clearCache(f.file, false)"
-                      title="<?=_('Remove')?>"/>
+                      title="<?= _('Remove') ?>"/>
           <div>
             <span class="bbn-s bbn-i">({{fdatetime(f.modified)}})</span>
             <span v-text="f.name"

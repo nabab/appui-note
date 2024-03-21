@@ -9,7 +9,7 @@
               action="notes/actions/insert"
               @success="afterSubmit">
       <bbn-input v-model="formData.title"
-                 placeholder="<?=_('Title')?>"
+                 placeholder="<?= _('Title') ?>"
                  style="margin-bottom: 10px; width: 100%"/>
       <!--<div class="bbn-c"
            style="margin-bottom: 10px"
@@ -30,10 +30,10 @@
         <bbn-button style="margin-right:0.5em"
                     @click="$refs.form.submit()"
 										icon="nf nf-fa-save"
-        ><?=_('Add')?></bbn-button>
+        ><?= _('Add') ?></bbn-button>
         <bbn-button @click="closeForm"
 										icon="nf nf-fa-times"
-				><?=_('Cancel')?></bbn-button>
+				><?= _('Cancel') ?></bbn-button>
       </div>
 
     </bbn-form>

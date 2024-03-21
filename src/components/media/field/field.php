@@ -7,14 +7,14 @@
         <bbn-button icon="nf nf-fae-galery"
                     :notext="true"
                     @click="openGallery"
-                    title="<?=_('Browse the images')?>"/>
+                    title="<?= _('Browse the images') ?>"/>
       </div><br>
       <div class="bbn-iblock bbn-bottom-smargin">
         <bbn-button v-if="currentIndex > -1"
                     icon="nf nf-mdi-information_outline"
                     :notext="true"
                     @click="openInfo(source[currentIndex])"
-                    title="<?=_('Show media information')?>"/>
+                    title="<?= _('Show media information') ?>"/>
       </div>
     </div>
     <div>

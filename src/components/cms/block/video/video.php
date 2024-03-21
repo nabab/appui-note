@@ -4,7 +4,7 @@
        class="bbn-grid-fields bbn-w-100">
     <label v-text="_('Video source')"/>
     <bbn-input v-model="source.content"/>
-    <label><?=_('Width')?></label>
+    <label><?= _('Width') ?></label>
     <bbn-range v-model="source.width"
               :min="10"
               :max="2000"
@@ -12,7 +12,7 @@
               :show-reset="false"
               :show-numeric="true"
               :show-units="true"/>
-    <label><?=_('Height')?></label>
+    <label><?= _('Height') ?></label>
     <bbn-range v-model="source.height"
                :disabled="disableHeight"
                :min="10"
@@ -21,14 +21,14 @@
                :show-reset="false"
                :show-numeric="true"
                :show-units="true"/>
-    <label><?=_('Aspect ratio')?></label>
+    <label><?= _('Aspect ratio') ?></label>
     <div>
       <div class="bbn-block">
         <bbn-radiobuttons :source="ratios"
                           v-model="source.aspectRatio"/>
       </div>
     </div>
-    <label><?=_('Alignment')?></label>
+    <label><?= _('Alignment') ?></label>
     <div>
       <div class="bbn-block">
         <bbn-radiobuttons :notext="true"
@@ -48,7 +48,7 @@
                           }]"/>
       </div>
     </div>
-    <label><?=_('Muted')?></label>
+    <label><?= _('Muted') ?></label>
     <bbn-switch v-model="source.muted"
                 :title="_('Mute the video')"
                 :value="1"
@@ -56,7 +56,7 @@
                 :no-icon="false"
                 on-icon="nf nf-md-volume_mute"
                 off-icon="nf nf-md-volume_high"/>
-    <label><?=_('Autoplay')?></label>
+    <label><?= _('Autoplay') ?></label>
     <bbn-switch v-model="source.autoplay"
                 :title="_('Autoplay')"
                 :value="1"
@@ -64,7 +64,7 @@
                 :no-icon="false"
                 on-icon="nf nf-md-play"
                 off-icon="nf nf-md-pause"/>
-    <label><?=_('Controls')?></label>
+    <label><?= _('Controls') ?></label>
     <bbn-switch v-model="source.controls"
                 :title="_('Controls')"
                 :value="1"
@@ -72,7 +72,7 @@
                 :no-icon="false"
                 on-icon="nf nf-md-play_pause"
                 off-icon="nf nf-md-play_pause"/>
-    <label><?=_('Loop')?></label>
+    <label><?= _('Loop') ?></label>
     <bbn-switch v-model="source.loop"
                 :title="_('Loop')"
                 :value="1"

@@ -11,13 +11,13 @@
               @success="afterSubmit">
       <div class="bbn-grid-fields" 
            style="margin-bottom: 10px; padding: 0">
-        <div><?=_('Title')?></div>
+        <div><?= _('Title') ?></div>
         <bbn-input v-model="formData.title"
                    required="required"/>
-        <div><?=_("Pub. date")?></div>
+        <div><?= _("Pub. date") ?></div>
         <bbn-datetimepicker v-model="formData.start"
                             required="required"/>
-        <div><?=_("End date")?></div>
+        <div><?= _("End date") ?></div>
         <bbn-datetimepicker v-model="formData.end"/>
         <!--<div class="bbn-c"
            style="margin-bottom: 10px"
@@ -45,10 +45,10 @@
         <bbn-button style="margin-right:0.5em"
                     @click="$refs.form.submit()"
 										icon="nf nf-fa-save"
-        ><?=_('Add')?></bbn-button>
+        ><?= _('Add') ?></bbn-button>
         <bbn-button @click="closeForm"
 										icon="nf nf-fa-times"
-				><?=_('Cancel')?></bbn-button>
+				><?= _('Cancel') ?></bbn-button>
       </div>
     </bbn-form>
   </div>

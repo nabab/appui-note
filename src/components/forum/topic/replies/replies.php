@@ -1,7 +1,7 @@
 <div class="appui-note-forum-topic-replies">
   <div v-if="isLoading"
        class="bbn-middle bbn-padded">
-    <?=_('LOADING')?>...
+    <?= _('LOADING') ?>...
   </div>
   <div v-else>
     <appui-note-forum-topic-post v-for="(d, i) in filteredData"

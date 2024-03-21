@@ -14,7 +14,7 @@
 		<div v-if="files.length && !isEdit"
 				 class="bbn-vmiddle bbn-bottom-space"
 				 style="justify-content: flex-end">
-			<span><?=_('Customize titles/descriptions')?></span>
+			<span><?= _('Customize titles/descriptions') ?></span>
 			<bbn-switch v-model="showTitles"
 									:value="true"
 									:novalue="false"
@@ -23,13 +23,13 @@
 		<div class="bbn-grid-fields bbn-padded">
 			<template v-for="(f, i) in files"
 								v-if="showTitles || isEdit">
-				<div><?=_('Filename')?>:</div>
+				<div><?= _('Filename') ?>:</div>
 				<div v-text="f.name"></div>
 
-        <div><?=_('Title')?>:</div>
+        <div><?= _('Title') ?>:</div>
 				<bbn-input v-model="f.title"/>
 
-        <div class="bbn-bottom-space"><?=_('Description')?>:</div>
+        <div class="bbn-bottom-space"><?= _('Description') ?>:</div>
 				<bbn-textarea v-model="f.description"
 									 		class="bbn-bottom-space"/>
 
@@ -37,7 +37,7 @@
         <bbn-values v-model="source.tags"/-->
 			</template>
 
-      <div><?=_('Media')?>:</div>
+      <div><?= _('Media') ?>:</div>
 			<div>
 				<bbn-upload :json="asJson"
 										v-model="files"
