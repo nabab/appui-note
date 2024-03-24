@@ -31,14 +31,14 @@
         return this.usersNumber > 1;
       },
       usersNames(){
-        let ret = appui.app.getUserName(this.source.creator.toLowerCase()) || bbn._('Unknown'),
+        let ret = appui.getUserName(this.source.creator.toLowerCase()) || bbn._('Unknown'),
             u;
         if (this.source.users) {
           u = this.source.users.split(',');
           if (u.length > 1) {
             u.forEach((v) => {
               if (v !== this.source.creator) {
-                ret += ', ' + appui.app.getUserName(v.toLowerCase()) || bbn._('Unknown');
+                ret += ', ' + appui.getUserName(v.toLowerCase()) || bbn._('Unknown');
               }
             });
           }
@@ -49,7 +49,7 @@
         return bbn.fn.html2text(this.source.content).replace(/\n/g, ' ');
       },
       creatorName(){
-        return appui.app.getUserName(this.source.creator);
+        return appui.getUserName(this.source.creator);
       },
       isEdited(){
         return this.source.creation !== this.source.last_edit;
@@ -78,7 +78,7 @@
       }
     },
     methods: {
-      getUserName: appui.app.getUserName,
+      getUserName: appui.getUserName,
       unfoldContent(){
         this.contentVisible = true;
       },
@@ -86,7 +86,7 @@
         this.contentVisible = false;
       },
       isYou(id){
-        return id === appui.app.user.id;
+        return id === appui.user.id;
       },
       setUnsetImportant(){
         this.post(appui.plugins['appui-note'] + '/actions/update', {

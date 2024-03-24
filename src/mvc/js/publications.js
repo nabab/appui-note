@@ -38,7 +38,7 @@
             width: 150,
             field: 'id_user',            
             title: bbn._('Creator'),
-            source: appui.app.users
+            source: appui.users
           },{
             width: 300,
             field: 'url',

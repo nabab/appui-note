@@ -5,7 +5,7 @@
       return {
         action: '',
         root: appui.plugins['appui-note'] + '/',
-        users: bbn.fn.order(appui.app.users, {text: 'asc'}),
+        users: bbn.fn.order(appui.users, {text: 'asc'}),
         span: '<span title="' + bbn._('Click on the first column of this row to view full content') + '">...</span>'
       }
     },
@@ -63,10 +63,10 @@
         return this.$refs.table.edit(row, bbn._("Editing a mailing"));
       },
       creator(row){
-        return  appui.app.getUserName(row.creator);
+        return  appui.getUserName(row.creator);
       },
       last_mod_user(row){
-        return  appui.app.getUserName(row.id_user);
+        return  appui.getUserName(row.id_user);
       },
       title(row){
         //return row.title

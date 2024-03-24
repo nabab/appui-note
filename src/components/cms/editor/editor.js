@@ -26,7 +26,7 @@
     },
     data() {
       return {
-        isDev: appui.app.user?.isDev || appui.app.user?.isAdmin,
+        isDev: appui.user?.isDev || appui.user?.isAdmin,
         data: null,
         oData: JSON.stringify(this.source),
         oConfig: null,

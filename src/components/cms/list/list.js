@@ -117,7 +117,7 @@
         }
       }
       return {
-        users: appui.app.users,
+        users: appui.users,
         currentCategory: currentCategory
       };
     },
@@ -691,7 +691,7 @@
         props: ['source'],
         data() {
           return {
-            name: bbn.fn.getField(appui.app.users || [], 'text', {value: this.source.id_user}) || bbn._("Unknown"),
+            name: bbn.fn.getField(appui.users || [], 'text', {value: this.source.id_user}) || bbn._("Unknown"),
             currentBorderColor: 'var(--default-border)'
           }
         },
@@ -751,7 +751,7 @@
         props: ['source'],
         data(){
           return {
-            name: bbn.fn.getField(appui.app.users, 'text', {value: this.source.id_user})
+            name: bbn.fn.getField(appui.users, 'text', {value: this.source.id_user})
           }
         },
         computed: {
@@ -775,7 +775,7 @@
         props: ['source'],
         data(){
           return {
-            name: bbn.fn.getField(appui.app.users, 'text', {value: this.source.id_user})
+            name: bbn.fn.getField(appui.users, 'text', {value: this.source.id_user})
           }
         }
       }

@@ -7,7 +7,7 @@
     data(){
       return {
         root: appui.plugins['appui-note'] + '/',
-        users: appui.app.users
+        users: appui.users
       };
     },
     computed: {

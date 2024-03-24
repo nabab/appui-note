@@ -9,7 +9,7 @@
     props: ['source'],
     data(){
       return {
-        users: bbn.fn.order(appui.app.users, 'text', 'ASC'),
+        users: bbn.fn.order(appui.users, 'text', 'ASC'),
       }
     },
     methods: {

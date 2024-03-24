@@ -66,7 +66,7 @@
 		},
 		data(){
 			return {
-			  currentUser: appui.app.user.id,
+			  currentUser: appui.user.id,
 				mediaFileType: appui.options.media_types.file.id,
         mediaLinkType: appui.options.media_types.link.id
 			}
