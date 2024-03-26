@@ -88,6 +88,11 @@
       bbn.fn.log('source when mounted', this.source);
     }
   };
+  bbn.cp.addUrlAsPrefix(
+    'appui-note-cms-block-',
+    'components/',
+    [bbn.cp.mixins.basic, bbn.cp.mixins['appui-note-cms-block']]
+  );
 
   return {
     /**

@@ -7,7 +7,7 @@
                 ref="list"
                 @select="a => id_type = a.id"
                 @ready="selectDefault"
-                placeholder="<?= Str::escape(_('Pick a type')) ?>"/>
+                placeholder="<?= st::escape(_('Pick a type')) ?>"/>
     </div>
   </div>
   <div class="bbn-flex-fill bbn-padded bbn-middle">
@@ -53,7 +53,7 @@
           <bbn-dropdown source-value="id"
                         :source="source.editors"
                         v-model="currentType.id_alias"
-                        placeholder="<?= Str::escape(_('Pick one...'), true) ?>"/>
+                        placeholder="<?= st::escape(_('Pick one...'), true) ?>"/>
 
           <div class="bbn-grid-full bbn-c"
                v-if="currentEditor && (currentEditor.code === 'bbn-cms')">
@@ -61,7 +61,7 @@
             <div class="bbn-bottom-space">
               <bbn-dropdown :source="source.blocks"
                             v-model="blocktype"
-                            placeholder="<?= Str::escape(_('Select a blocktype here'), true) ?>"/>
+                            placeholder="<?= st::escape(_('Select a blocktype here'), true) ?>"/>
             </div>
           </div>
           <template v-if="currentBlockConfig">
@@ -69,13 +69,13 @@
               <div class="bbn-label bbn-nowrap"
                    v-text="title"/>
               <div class="bbn-iflex-width">
-                <bbn-checkbox label="<?= Str::escape(_('Leave default'), true) ?>"
+                <bbn-checkbox label="<?= st::escape(_('Leave default'), true) ?>"
                               @check=""/>
                 <bbn-dropdown :source="[{
-                                       text: '<?= Str::escape(_('Set value'), true) ?>',
+                                       text: '<?= st::escape(_('Set value'), true) ?>',
                                        value: 'set'
                                        }, {
-                                       text: '<?= Str::escape(_('Let user decide'), true) ?>',
+                                       text: '<?= st::escape(_('Let user decide'), true) ?>',
                                        value: 'user'
                                        }]"/>
               </div>

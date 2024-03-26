@@ -100,7 +100,7 @@
   </div>
   <div v-else>
 		<div class="bbn-flex image-text-container"
-				 :style="align">
+				 :style="{textAlign: source.align}">
 			<a v-if="!!source.href"
 				 target="_self"
 				 :href="$parent.linkURL ? $parent.linkURL : '' + source.href"

@@ -238,9 +238,7 @@
         this.currentDragging = false;
       },
       onDrop(ev){
-        bbn.fn.log('DROPONELEMENTOR', ev)
-        ev.preventDefault();
-        this.onDragEnd();
+                this.onDragEnd();
         let fromData = ev.detail.from.data;
         if (!!fromData.type && (fromData.source !== undefined)) {
           let newSource = bbn.fn.clone(fromData.source);
@@ -336,10 +334,7 @@
       }
     },
     mounted(){
-      bbn.fn.log('BEFORESET', bbn.fn.clone(this.closest('appui-note-cms-editor')))
       this.$set(this, 'editor', this.closest('appui-note-cms-editor'));
-      //this.editor = this.closest('appui-note-cms-editor');
-      bbn.fn.log('AFTERSET', bbn.fn.clone(this.editor))
     }
   };
 })();

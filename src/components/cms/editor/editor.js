@@ -63,20 +63,20 @@
       currentEditingTitle() {
         if (this.currentEditing) {
           if (this.currentEditing.special) {
-            let txt = bbn.fn.getField(this.allBlocks, 'text', {special: this.currentEditing.special});
+            let txt = bbn.fn.getField(this.allBlocks, 'text', { special: this.currentEditing.special });
             if (!txt) {
               this.$delete(this.currentEditing, 'special');
             } else {
               return txt;
             }
           }
-          return bbn.fn.getField(this.allBlocks, 'text', {special: null, code: this.currentEditing.type});
+          return bbn.fn.getField(this.allBlocks, 'text', { special: null, code: this.currentEditing.type });
         }
       },
       allBlocks() {
         const arr = [];
         bbn.fn.each(this.personalizedBlocks, a => {
-          const block = bbn.fn.clone(bbn.fn.getRow(this.classicBlocks, {id: a.id_alias}));
+          const block = bbn.fn.clone(bbn.fn.getRow(this.classicBlocks, { id: a.id_alias }));
           if (!block) {
             bbn.fn.error(bbn._("The block doesn't exist"));
           }
@@ -100,7 +100,7 @@
       },
       typeNote() {
         if (this.source.id_type) {
-          return bbn.fn.getRow(this.types, {id: this.source.id_type});
+          return bbn.fn.getRow(this.types, { id: this.source.id_type });
         }
         return {};
       },
@@ -127,26 +127,26 @@
         }
         return isChanged;
       },
-      currentEditingParentItems(){
+      currentEditingParentItems() {
         if (!!this.currentEditingParent) {
           return this.currentEditingParent.source.items;
         }
         return null;
       },
-      currentEditingIndex(){
+      currentEditingIndex() {
         if (!!this.currentEditingKey && !!this.currentEditingParentItems) {
           return bbn.fn.search(this.currentEditingParentItems, '_elementor.key', this.currentEditingKey);
         }
         return -1;
       },
-      showSlider(){
+      showSlider() {
         return !!this.showPageSettings || !!this.showWidgetSettings || !!this.showWidgets;
       }
     },
     methods: {
       randomString: bbn.fn.randomString,
       scrollToSelected() {
-        
+
       },
       unselectElements() {
         this.currentEditing = null;
@@ -165,9 +165,9 @@
         });
       },
       getBlockTitle(id) {
-        return bbn.fn.getField(this.allBlocks, 'text', {id});
+        return bbn.fn.getField(this.allBlocks, 'text', { id });
       },
-      save(){
+      save() {
         let src = bbn.fn.clone(this.source);
         this.clearItem(src);
         return this.post(this.action, src, d => {
@@ -180,7 +180,7 @@
           }
         });
       },
-      clearItem(item){
+      clearItem(item) {
         if (!!item.items) {
           bbn.fn.each(item.items, this.clearItem);
         }
@@ -193,7 +193,7 @@
         }
         return item;
       },
-      normalizeItems(items){
+      normalizeItems(items) {
         bbn.fn.each(items, (v, i) => {
           if ((v.type === 'container') && !!v.items) {
             this.normalizeItems(v.items);
@@ -202,7 +202,7 @@
         });
         return items;
       },
-      getElementorDefaultObj(index){
+      getElementorDefaultObj(index) {
         return {
           key: bbn.fn.randomString(32, 32)
         }
@@ -212,7 +212,7 @@
        */
       clearCache() {
         this.confirm(bbn._('Are you sure?'), () => {
-          this.post(this.root + 'cms/actions/clear_cache', {id: this.source.id}, d => {
+          this.post(this.root + 'cms/actions/clear_cache', { id: this.source.id }, d => {
             if (d.success) {
               appui.success();
             }
@@ -222,13 +222,13 @@
           });
         });
       },
-      toggleWidgets(){
+      toggleWidgets() {
         this.showWidgets = !this.showWidgets;
       },
-      togglePageSettings(){
+      togglePageSettings() {
         this.showPageSettings = !this.showPageSettings;
       },
-      closeSlider(){
+      closeSlider() {
         this.showWidgets = false;
         this.showWidgetSettings = false;
         this.showPageSettings = false;
@@ -286,8 +286,7 @@
        * @return void
        */
       onDrop(ev) {
-        return;
-        bbn.fn.log('DROPONEDITOR', ev, bbn.fn.clone(ev.detail.from.data));
+        bbn.fn.log('DROP', ev, bbn.fn.clone(ev.detail.from.data));
         const block = bbn.fn.clone(ev.detail.from.data.source);
         this.currentBlockConfig = ev.detail.from.data.cfg || {};
         bbn.fn.iterate(this.currentBlockConfig, (a, n) => block[n] = a);
@@ -465,7 +464,7 @@
                     divider.style.left = mapContainer[0].rect.left + 'px';
                   }
                   // If we are at the end of the container
-                  if (this.currentPosition.x > (mapContainer.at(-1).rect.x + (3*mapContainer.at(-1).rect.width / 4))) {
+                  if (this.currentPosition.x > (mapContainer.at(-1).rect.x + (3 * mapContainer.at(-1).rect.width / 4))) {
                     setDividerStyle = true;
                     this.nextContainerPosition = 0;
                     divider.style.width = '3px';
@@ -476,7 +475,7 @@
                     setDividerStyle = true;
                     this.nextContainerPosition = idx + 1;
                     divider.style.width = block.width + 'px';
-                    divider.style.left = (block.right - block.width/2)  + 'px';
+                    divider.style.left = (block.right - block.width / 2) + 'px';
                   }
                   if (setDividerStyle) {
                     divider.style.display = "block";
@@ -485,13 +484,13 @@
                   }
                 });
               } else {
-                if (this.currentPosition.x < rect.width/2) {
+                if (this.currentPosition.x < rect.width / 2) {
                   this.nextContainerPosition = 0;
                   divider.style.left = block.left + 'px';
                 }
-                else if (this.currentPosition.x > rect.width/2) {
+                else if (this.currentPosition.x > rect.width / 2) {
                   this.nextContainerPosition = -1;
-                  divider.style.left = Math.round(rect.width/2) + 10 + 'px';
+                  divider.style.left = Math.round(rect.width / 2) + 10 + 'px';
                 }
                 divider.style.display = "block";
                 divider.style.height = block.height - 4 + 'px';
@@ -555,7 +554,7 @@
             });
             this.map = tmp_arr.slice();
           }
-					else {
+          else {
             bbn.fn.log('false mapper', ele.$el, idx);
           }
         });
@@ -574,7 +573,7 @@
           this.mapY();
         }, 500);
       },
-      toggleFullPreview(ext){
+      toggleFullPreview(ext) {
         if (!ext && !!this.fullPreview) {
           this.fullPreview = false;
         }
@@ -590,7 +589,7 @@
           });
         }
       },
-      externalFullPreview(){
+      externalFullPreview() {
         this.toggleFullPreview(true).then(d => {
           if (d.data.success && d.data.previewUrl) {
             window.open(d.data.previewUrl);
@@ -598,45 +597,40 @@
         })
       }
     },
-    beforeMount(){
+    beforeMount() {
       if (bbn.fn.isArray(this.source?.items)) {
         this.normalizeItems(this.source.items);
       }
     },
     mounted() {
-      const cp = this;
-      setTimeout(() => {
-        const cms = appui.getRegistered('cms');
-        const data = cms.source;
-        if (!this.classicBlocks.length && !this.personalizedBlocks.length) {
-          if (!appui.cms?.blocks) {
-            bbn.fn.post(this.root + 'cms/data/blocks', d => {
-              bbn.fn.log(cp);
-              if (d.blocks) {
-                if (!appui.cms) {
-                  appui.cms = bbn.fn.createObject();
-                }
-                appui.cms.blocks = d.blocks || [];
-                appui.cms.pblocks = d.pblocks || [];
+      const data = this.closest('bbn-router').closest('bbn-container').source;
+      if (!this.classicBlocks.length && !this.personalizedBlocks.length) {
+        if (!appui.cms?.blocks) {
+          bbn.fn.post(this.root + 'cms/data/blocks', d => {
+            if (d.blocks) {
+              if (!appui.cms) {
+                appui.cms = bbn.fn.createObject();
               }
-              cp.data = data;
-              this.classicBlocks.push(...appui.cms.blocks);
-              this.personalizedBlocks.push(...appui.cms.pblocks);
-            });
-          }
-          else {
-            cp.data = data;
+              appui.cms.blocks = d.blocks;
+              appui.cms.pblocks = d.pblocks || [];
+            }
             this.classicBlocks.push(...appui.cms.blocks);
             this.personalizedBlocks.push(...appui.cms.pblocks);
-          }
+            this.data = data;
+          });
         }
         else {
-          cp.data = data;
+          this.classicBlocks.push(...appui.cms.blocks);
+          this.personalizedBlocks.push(...appui.cms.pblocks);
+          this.data = data;
         }
-        if (!!this.source.items && !this.source.items.length) {
-          this.showWidgets = true;
-        }
-      }, 250);
+      }
+      else {
+        this.data = data;
+      }
+      if (!!this.source.items && !this.source.items.length) {
+        this.showWidgets = true;
+      }
     },
     watch: {
       'source.items'() {
@@ -647,7 +641,7 @@
       'editedSource.type'(v, ov) {
         let tmp = this.editedSource;
         if (v && (ov !== undefined) && this.editedSource && this.realSourceArray.length) {
-          let cfg = bbn.fn.getField(types, 'default', {value:v});
+          let cfg = bbn.fn.getField(types, 'default', { value: v });
           if (cfg) {
             for (let n in cfg) {
               if ((n !== 'type') && (tmp[n] === undefined)) {
@@ -679,13 +673,13 @@
       ready() {
         this.mapY();
       },
-      showWidgets(newVal){
+      showWidgets(newVal) {
         if (!!newVal) {
           this.showWidgetSettings = false;
           this.showPageSettings = false;
         }
       },
-      showWidgetSettings(newVal){
+      showWidgetSettings(newVal) {
         if (!!newVal) {
           this.showWidgets = false;
           this.showPageSettings = false;
@@ -696,7 +690,7 @@
           this.currentEditingParent = null;
         }
       },
-      showPageSettings(newVal){
+      showPageSettings(newVal) {
         if (!!newVal) {
           this.showWidgetSettings = false;
           this.showWidgets = false;
@@ -705,7 +699,7 @@
     },
     components: {
       configForm: {
-        template:`
+        template: `
 <bbn-form :action="root + 'cms/actions/config/insert'"
 					:source="formData">
 	<div class="bbn-grid-fields bbn-lg bbn-lpadding">

@@ -177,7 +177,7 @@
         <div v-else-if="showPageSettings"
              class="bbn-overlay">
           <bbn-scroll axis="y">
-            <slot v-if="$slots.default && $slots.default.length"/>
+            <slot v-if="$slots.default?.length"/>
             <appui-note-cms-settings v-else
                                     :source="source"
                                     :type-note="typeNote"

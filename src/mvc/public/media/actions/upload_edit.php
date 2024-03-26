@@ -8,11 +8,7 @@ use bbn\Appui\Medias;
 
 /*copy($ctrl->files['img']['tmp_name'], BBN_DATA_PATH.Str::genpwd().".png");
 X::ddump(is_file($ctrl->files['img']['tmp_name']));
-X::ddump($ctrl->data, $ctrl->files, $_FILES, $_POST);
-
-@todo Fix
-*/
-die("The file location is wrong, repair this script!");
+X::ddump($ctrl->data, $ctrl->files, $_FILES, $_POST);*/
 
 $success = false;
 if (!empty($ctrl->post['id'])
