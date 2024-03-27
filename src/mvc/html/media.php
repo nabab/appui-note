@@ -12,7 +12,7 @@
                   icon="nf nf-oct-file_media"
                   fcolor="#ccffcc"
                   bcolor="#009688"
-                  :static="true">
+                  :fixed="true">
     <div class="bbn-overlay">
       <appui-note-media-browser2 v-bind="browserOptions"
                                  :source="root + 'media/data/browser'"

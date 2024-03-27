@@ -16,9 +16,6 @@
 			max(){
 				return this.closest('appui-note-cms-block-slider').source.max;
 			},
-			mode(){
-				return this.closest('appui-note-cms-block-slider').source.mode;
-			},
 			columns(){
 				return 'repeat(auto-fit, minmax(110px,1fr))'
 			}
