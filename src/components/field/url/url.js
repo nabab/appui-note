@@ -14,7 +14,7 @@
         /*
         validator(v) {
           if (v && (bbn.fn.substr(v, -1) !== '/')) {
-            throw new Error(bbn._("The prefix must finish with a slash"));
+            throw Error(bbn._("The prefix must finish with a slash"));
           }
 
           return true;
