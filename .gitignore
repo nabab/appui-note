@@ -1,5 +1,7 @@
 composer.phar
 /vendor/
+.history
+.vscode
 *.DS_Store
 *._.DS_Store
 
