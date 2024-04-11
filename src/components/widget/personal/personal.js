@@ -58,7 +58,7 @@
         this.showForm = !this.showForm;
       },
       userName(usr){
-        return appui.app?.getUserName ? appui.app?.getUserName(usr) : 'xx';
+        return appui?.getUserName ? appui.getUserName(usr) : 'xx';
       }
     }
   };
