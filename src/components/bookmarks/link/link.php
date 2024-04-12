@@ -4,45 +4,44 @@
           :buttons="[]"
 >
   <div class="bbn-grid-fields info-container">
-    <bbn-input class="bbn-grid-full" type="hidden" :value="parent"></bbn-input>
+    <bbn-input class="bbn-grid-full"
+               type="hidden"
+               :value="parent"/>
     <div class="bbn-grid-full">
-      <i class="nf nf-fa-times bbn-p" v-if="parent !== 'ROOT'" @click="removeParent" title="<?= _("Create the link at root") ?>"></i>
-      <span class="bbn-green bbn-b" v-text="formHeader">
-      </span>  
-      
-    </div>  
+      <i class="nf nf-fa-times bbn-p"
+         v-if="parent !== 'ROOT'"
+         @click="removeParent"
+         title="<?= _("Create the link at root") ?>"/>
+      <span class="bbn-green bbn-b"
+            v-text="formHeader"/>
+    </div>
     <div>
-      <span><?= _("Text") ?></span>  
+      <span><?= _("Text") ?></span>
     </div>
     <div>
       <bbn-input ref="text"
                 placeholder="<?= _("Link title") ?>"
                 class="bbn-w-100"
-                v-model="source.text"
-      ></bbn-input>
+                v-model="source.text"/>
     </div>
     <div>
-      <span><?= _("Description") ?></span>      
+      <span><?= _("Description") ?></span>
     </div>
     <div>
       <bbn-textarea class="bbn-w-100"
                     style="width:100%"
-                    v-model="source.description"
-      ></bbn-textarea>
-    
+                    v-model="source.description"/>
     </div>
     <div>
       <span><?= _("Url") ?></span>
     </div>
     <div>
       <bbn-input ref="link"
-                 @keydown.enter.prevent.stop="linkEnter" 
+                 @keydown.enter.prevent.stop="linkEnter"
                  placeholder="<?= _("Type or paste your URL and press Enter to valid") ?>"
                  class="bbn-w-100"
-                 v-model="source.url"
-                
-      ></bbn-input>
-    </div>          
+                 v-model="source.url"/>
+    </div>
     <div class="appui-note-bookmarks-links-container bbn-widget bbn-grid-full"
          ref="linksContainer"
          v-if="source.image"
@@ -81,25 +80,19 @@
                         style="display: inline-block;"
                         @click="linkRemove"
                         icon="nf nf-fa-times"
-                        title="<?= _('Remove') ?>"
-            ></bbn-button>
+                        title="<?= _('Remove') ?>"/>
           </div>
         </div>
       </div>
     </div>
-   
+
   </div>
   <div class="bbn-l bbn-padded">
-    <bbn-button text="<?= _("Cancel") ?>" 
+    <bbn-button text="<?= _("Cancel") ?>"
                 icon="nf nf-fa-times"
-                @click="closeForm"
-    >
-    </bbn-button>
-    <bbn-button text="<?= _("Save") ?>" 
+                @click="closeForm"/>
+    <bbn-button text="<?= _("Save") ?>"
                 icon="nf nf-fa-check"
-                @click="submit"
-    >
-    </bbn-button>
+                @click="submit"/>
   </div>
-  
 </bbn-form>

@@ -23,22 +23,6 @@
       special: {
         type: String
       }
-    },
-    computed: {
-      draggableCfg(){
-        return {
-          data: {
-            type: 'cmsDropper',
-            source: {
-              type: this.type,
-              special: this.special
-            },
-            cfg: this.defaultConfig,
-            parendUid: this.$cid || false
-          },
-          mode: 'clone'
-        }
-      }
     }
   };
 })();

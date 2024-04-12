@@ -487,7 +487,7 @@
             "content": {
                 "type": "mediumtext",
                 "null": 0,
-                "signed": true
+                "signed": 1
             },
             "excerpt": {
                 "type": "text",
@@ -504,7 +504,7 @@
             "creation": {
                 "type": "datetime",
                 "null": 0,
-                "signed": true
+                "signed": 1
             }
         }
     },
@@ -616,7 +616,7 @@
                 "type": "tinyint",
                 "null": 0,
                 "default": 0,
-                "signed": false,
+                "signed": 0,
                 "maxlength": 1
             },
             "created": {
@@ -890,7 +890,7 @@
             "description": {
                 "type": "text",
                 "null": 0,
-                "signed": true
+                "signed": 1
             },
             "url": {
                 "type": "varchar",

@@ -8,7 +8,6 @@
           <div class="bbn-100 bbn-flex">
             <img v-if="d.content?.length" :src="d.content" alt="" :style="imgStyle" >
           </div>
-          
         </div>
         <div class="bbn-block-gallery-caption bbn-l slider-title"
              :style="'margin-top:' + ( (d.style?.margin && !isMobile) ? d.style.margin : (d.style?.marginMobile && isMobile) ? d.style.marginMobile : '' )"

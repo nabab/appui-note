@@ -66,7 +66,7 @@
         currentTitle: this.source.title || '',
         currentPinned: this.source.pinned || false,
         currentCreation: this.source.creation || bbn.fn.dateSQL(),
-        actualRotation: bbn.fn.randomInt(-30, 30)/10,
+        actualRotation: bbn.fn.randomInt(-30, 30) / 10,
         saveTimeout: false
       }
     },
@@ -150,7 +150,7 @@
         }
       },
       remove() {
-        this.post(appui.plugins['appui-note'] + '/actions/delete',{id_note: this.source.id}, d => {
+        this.post(appui.plugins['appui-note'] + '/actions/delete', {id_note: this.source.id}, d => {
           if ( d.success ){
             appui.success(bbn._('Delete'));
             bbn.fn.log(this.source);

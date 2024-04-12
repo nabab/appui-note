@@ -68,7 +68,7 @@
         if (this.isMobile) {
           this.itemWidth = 49;
           return;
-      }
+        }
         else if (val) {
           let value = parseInt(val);
           if (bbn.fn.isString(val)) {

@@ -44,11 +44,13 @@
 					 style="margin-top: 20px">
         <bbn-button style="margin-right:0.5em"
                     @click="$refs.form.submit()"
-										icon="nf nf-fa-save"
-        ><?= _('Add') ?></bbn-button>
+										icon="nf nf-fa-save">
+          <?= _('Add') ?>
+        </bbn-button>
         <bbn-button @click="closeForm"
-										icon="nf nf-fa-times"
-				><?= _('Cancel') ?></bbn-button>
+										icon="nf nf-fa-times">
+          <?= _('Cancel') ?>
+        </bbn-button>
       </div>
     </bbn-form>
   </div>

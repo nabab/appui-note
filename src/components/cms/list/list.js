@@ -16,7 +16,7 @@
         type: String
       },
       noteName: {
-        type:String,
+        type: String,
         default: bbn._("Post")
       },
       columns: {
@@ -335,9 +335,11 @@
         });
       },
       editNote(row) {
-        let catCode = bbn.fn.getField(this.types, 'code', 'id', row.id_type);
-        let url = this.editorUrl || (root + 'cms/cat/' + catCode + '/editor/');
-        bbn.fn.link(url + (row.id || row.id_note));
+        if (!!row.id || !!row.id_note) {
+          let catCode = bbn.fn.getField(this.types, 'code', 'id', row.id_type);
+          let url = this.editorUrl || (root + 'cms/cat/' + catCode + '/editor/');
+          bbn.fn.link(url + (row.id || row.id_note));
+        }
       },
       publishNote(row){
         this.getPopup().open({
@@ -534,14 +536,12 @@
         }
       }
     },
-    /*
     created(){
-      appui.register('appuiCmsList', this);
+      appui.register('appui-note-cms-list', this);
     },
     beforeDestroy(){
-      appui.unregister('appuiCmsList');
+      appui.unregister('appui-note-cms-list');
     },
-    */
     watch: {
       currentCategory(newVal){
         this.$nextTick(() => {
@@ -735,10 +735,7 @@
             this.currentBorderColor = this.getRef('initial').currentColor;
           },
           editPost(){
-            const list = appui.getRegistered('appuiCmsList');
-            if (list) {
-              list.editNote(this.source);
-            }
+            appui.getRegistered('appui-note-cms-list').editNote(this.source);
           }
         }
       },

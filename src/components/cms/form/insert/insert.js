@@ -63,7 +63,6 @@
           }
         })
       }
-
     },
     watch: {
       "formData.type"() {

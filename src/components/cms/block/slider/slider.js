@@ -172,16 +172,33 @@
         }
 
       },
-      adaptView() {
+      adaptView(){
         if (this.currentItems && this.currentItems.length) {
           this.currentItems.splice(0);
         }
-        const isMobile = bbn.fn.isMobileDevice();
-        for (let i = 0; i < this.mapped.length; i += this.source.max) {
-          this.currentItems.push({
-            component: 'appui-note-cms-block-slider-slide',
-            data: this.mapped.slice(i, this.source[isMobile ? 'min' : 'max'] + i)
-          });
+        if (bbn.fn.isDesktopDevice() || bbn.fn.isTabletDevice()) {
+          let start = 0;
+          for (let i = 0; i < this.mapped.length; i += this.source.max) {
+            start = i,
+            data = this.mapped.slice(start, this.source.max + start);
+            this.currentItems.push({
+              //mode : 'full',
+              component: 'appui-note-cms-block-slider-slide',
+              data: data
+            });
+          }
+        }
+        else if (bbn.fn.isMobileDevice()) {
+          let start = 0;
+          for (let i = 0; i < this.mapped.length; i += this.source.min) {
+            start = i,
+            data =  this.mapped.slice(start, this.source.min + start);
+            this.currentItems.push({
+              //mode : 'full',
+              component: 'appui-note-cms-block-slider-slide',
+              data: data
+            });
+          }
         }
         if (this.source._elementor?.key) {
           let comps = appui.findAllByKey(this.source._elementor.key, '.appui-note-cms-block');

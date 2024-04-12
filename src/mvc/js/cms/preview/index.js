@@ -10,14 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   new Vue({
     el: 'div.appui-cms-preview',
-    props: ['source'],
     data(){
       return{
+        source: data,
         logo: false,
         note: {},
         message: false//'Message opzionale'
       }
-    }, 
+    },
     computed:{
       info(){
         let st = '';

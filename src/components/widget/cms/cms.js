@@ -3,6 +3,9 @@
 (() => {
   return {
     props: {
+      source:{
+        type: Object
+      },
       start: {
         type: Boolean,
         default: false
@@ -20,8 +23,8 @@
     computed: {
       isPublished() {
         const d = bbn.fn.dateSQL();
-        if (this.source.start && (this.source.start <= d)) {
-          if (this.source.end && (this.source.end <= d)) {
+        if (this.source?.start && (this.source.start <= d)) {
+          if (this.source?.end && (this.source.end <= d)) {
             return false;
           }
           return true;

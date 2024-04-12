@@ -29,195 +29,195 @@
     "icon": "nf nf-fa-pencil_square_o",
     "plugin": true,
     "items": [
-	    {
-            "text": "Blocks",
-            "code": "blocks",
-            "items": [
-                {
-                    "text": "Button",
-                    "code": "button",
-                    "description": "A simple button block",
-                    "icon": "nf nf-md-gesture_tap_button"
-                },
-                {
-                    "text": "Carousel",
-                    "code": "carousel",
-                    "description": "A simple carousel block",
-                    "icon": "nf nf-mdi-view_carousel"
-                },
-                {
-                    "text": "Container",
-                    "code": "container",
-                    "description": "A simple container with multiple blocks",
-                    "icon": "nf nf-md-dots_square",
-                    "configuration": {
-                      "items": [],
-                      "orientation": "horizontal",
-                      "layout": ""
-                    }
-                },
-                {
-                  "text": "Download",
-                  "code": "download",
-                  "description": "A simple files download blocks",
-                  "icon": "nf nf-mdi-download",
-                  "configuration": {
-                    "orientation": "horizontal",
-                    "content": [{
-                      "type": "media",
-                      "text": "",
-                      "value": ""
-                    }]
-                  }
-                },
-                {
-                    "text": "Feature",
-                    "code": "feature",
-                    "description": "A simple feature block",
-                    "icon": "nf nf-mdi-new_box"
-                },
-                {
-                    "text": "Gallery",
-                    "code": "gallery",
-                    "description": "A simple media gallery",
-                    "icon": "nf nf-fae-galery"
-                },
-                {
-                    "text": "Html",
-                    "code": "html",
-                    "description": "A simple HTML block",
-                    "icon": "nf nf-fa-html5"
-                },
-                {
-                    "text": "Image",
-                    "code": "image",
-                    "description": "A simple image block",
-                    "icon": "nf nf-fa-image"
-                },
-                {
-                    "text": "Line",
-                    "code": "line",
-                    "description": "A simple line delimiter",
-                    "icon": "nf nf-cod-horizontal_rule"
-                },
-                {
-                    "text": "Product",
-                    "code": "product",
-                    "description": "A simple product block",
-                    "icon": "nf nf-cod-package"
-                },
-                {
-                    "text": "Slider",
-                    "code": "slider",
-                    "description": "A simple slider block",
-                    "icon": "nf nf-md-table_row"
-                },
-                {
-                    "text": "Social",
-                    "code": "social",
-                    "description": "A simple social media block",
-                    "icon": "nf nf-fa-facebook_square"
-                },
-                {
-                    "text": "Space",
-                    "code": "space",
-                    "description": "An empty space block",
-                    "icon": "nf nf-fa-paragraph"
-                },
-                {
-                    "text": "Text",
-                    "code": "text",
-                    "description": "A simple text block",
-                    "icon": "nf nf-seti-text"
-                },
-                {
-                    "text": "Title",
-                    "code": "title",
-                    "description": "A configurable title block",
-                    "icon": "nf nf-mdi-format_title"
-                },
-                {
-                    "text": "Video",
-                    "code": "video",
-                    "description": "A simple video block",
-                    "icon": "nf nf-md-video_vintage"
-                }
-            ],
-            "cfg": {
-                "show_code": 1,
-                "show_icon": 1,
-                "allow_children": 1,
-                "schema": [
-                    {
-                        "field": "description",
-                        "type": "textarea",
-                        "title": "Description"
-                    }
-                ]
+      {
+        "text": "Blocks",
+        "code": "blocks",
+        "items": [
+          {
+            "text": "Button",
+            "code": "button",
+            "description": "A simple button block",
+            "icon": "nf nf-md-gesture_tap_button"
+          },
+          {
+            "text": "Carousel",
+            "code": "carousel",
+            "description": "A simple carousel block",
+            "icon": "nf nf-mdi-view_carousel"
+          },
+          {
+            "text": "Container",
+            "code": "container",
+            "description": "A simple container with multiple blocks",
+            "icon": "nf nf-md-dots_square",
+            "configuration": {
+              "items": [],
+              "orientation": "horizontal",
+              "layout": ""
             }
-        },
+          },
+          {
+            "text": "Download",
+            "code": "download",
+            "description": "A simple files download blocks",
+            "icon": "nf nf-mdi-download",
+            "configuration": {
+              "orientation": "horizontal",
+              "content": [{
+                "type": "media",
+                "text": "",
+                "value": ""
+              }]
+            }
+          },
+          {
+            "text": "Feature",
+            "code": "feature",
+            "description": "A simple feature block",
+            "icon": "nf nf-mdi-new_box"
+          },
+          {
+            "text": "Gallery",
+            "code": "gallery",
+            "description": "A simple media gallery",
+            "icon": "nf nf-fae-galery"
+          },
+          {
+            "text": "Html",
+            "code": "html",
+            "description": "A simple HTML block",
+            "icon": "nf nf-fa-html5"
+          },
+          {
+            "text": "Image",
+            "code": "image",
+            "description": "A simple image block",
+            "icon": "nf nf-fa-image"
+          },
+          {
+            "text": "Line",
+            "code": "line",
+            "description": "A simple line delimiter",
+            "icon": "nf nf-cod-horizontal_rule"
+          },
+          {
+            "text": "Product",
+            "code": "product",
+            "description": "A simple product block",
+            "icon": "nf nf-cod-package"
+          },
+          {
+            "text": "Slider",
+            "code": "slider",
+            "description": "A simple slider block",
+            "icon": "nf nf-md-table_row"
+          },
+          {
+            "text": "Social",
+            "code": "social",
+            "description": "A simple social media block",
+            "icon": "nf nf-fa-facebook_square"
+          },
+          {
+            "text": "Space",
+            "code": "space",
+            "description": "An empty space block",
+            "icon": "nf nf-fa-paragraph"
+          },
+          {
+            "text": "Text",
+            "code": "text",
+            "description": "A simple text block",
+            "icon": "nf nf-seti-text"
+          },
+          {
+            "text": "Title",
+            "code": "title",
+            "description": "A configurable title block",
+            "icon": "nf nf-mdi-format_title"
+          },
+          {
+            "text": "Video",
+            "code": "video",
+            "description": "A simple video block",
+            "icon": "nf nf-md-video_vintage"
+          }
+        ],
+        "cfg": {
+          "show_code": 1,
+          "show_icon": 1,
+          "allow_children": 1,
+          "schema": [
+            {
+              "field": "description",
+              "type": "textarea",
+              "title": "Description"
+            }
+          ]
+        }
+      },
       {
         "text": "Editors",
         "code": "editors",
         "icon": "nf nf-fa-edit",
         "items": [
-            {
-                "text": "CMS content",
-                "code": "bbn-cms",
-                "mime": "json\/bbn-cms",
-                "component": "appui-note-cms-editor"
-            },
-            {
-                "text": "JSON",
-                "code": "json",
-                "mime": "application\/json",
-                "component": "bbn-json-editor"
-            },
-            {
-                "text": "Markdown",
-                "code": "markdown",
-                "mime": "text\/markdown",
-                "component": "bbn-markdown"
-            },
-            {
-                "text": "Rich text",
-                "code": "rich",
-                "mime": "text\/html",
-                "component": "bbn-rte"
-            },
-            {
-                "text": "Simple text",
-                "code": "multilines",
-                "mime": "text\/plain",
-                "component": "bbn-textarea"
-            }
+          {
+            "text": "CMS content",
+            "code": "bbn-cms",
+            "mime": "json\/bbn-cms",
+            "component": "appui-note-cms-editor"
+          },
+          {
+            "text": "JSON",
+            "code": "json",
+            "mime": "application\/json",
+            "component": "bbn-json-editor"
+          },
+          {
+            "text": "Markdown",
+            "code": "markdown",
+            "mime": "text\/markdown",
+            "component": "bbn-markdown"
+          },
+          {
+            "text": "Rich text",
+            "code": "rich",
+            "mime": "text\/html",
+            "component": "bbn-rte"
+          },
+          {
+            "text": "Simple text",
+            "code": "multilines",
+            "mime": "text\/plain",
+            "component": "bbn-textarea"
+          }
         ],
         "cfg": {
-            "show_code": 1,
-            "allow_children": 1,
-            "schema": [
-                {
-                    "title": "Component",
-                    "field": "component",
-                    "required": true
-                },
-                {
-                    "title": "MIME type",
-                    "field": "mime",
-                    "required": true
-                }
-            ]
+          "show_code": 1,
+          "allow_children": 1,
+          "schema": [
+            {
+              "title": "Component",
+              "field": "component",
+              "required": true
+            },
+            {
+              "title": "MIME type",
+              "field": "mime",
+              "required": true
+            }
+          ]
         }
-    },
-    {
-      "cfg": {
-        "allow_children": 1,
-        "show_code": 1
       },
-      "text": "Features",
-      "code": "features"
-    },
-    {
+      {
+        "cfg": {
+          "allow_children": 1,
+          "show_code": 1
+        },
+        "text": "Features",
+        "code": "features"
+      },
+      {
         "cfg": {
           "show_code": 1
         },
@@ -450,8 +450,8 @@
                   {
                     "text": "News",
                     "code": "news",
-                    "limit":5,
-                    "closable":false,
+                    "limit": 5,
+                    "closable": false,
                     "component": "appui-note-widget-news",
                     "buttonsRight": [
                       {

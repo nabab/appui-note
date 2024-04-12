@@ -51,7 +51,7 @@
         });
       },
       onSelection(media, file) {
-        this.$set(file, 'value', media.data.path);
+        this.$set(file, 'value', media.data.id);
         this.$set(file, 'text', media.data.name);
         this.$set(file, 'filename', media.data.name);
         this.getPopup().close();

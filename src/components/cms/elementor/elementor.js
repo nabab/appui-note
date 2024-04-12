@@ -238,7 +238,7 @@
         this.currentDragging = false;
       },
       onDrop(ev){
-                this.onDragEnd();
+        this.onDragEnd();
         let fromData = ev.detail.from.data;
         if (!!fromData.type && (fromData.source !== undefined)) {
           let newSource = bbn.fn.clone(fromData.source);
@@ -272,7 +272,7 @@
                 type: 'container',
                 _elementor: this.editor.getElementorDefaultObj()
               },
-              bbn.fn.getRow(appui.cms.blocks, 'code', 'container').configuration
+              bbn.fn.getRow(appui.getRegistered('appui-note-cms').blocks, 'code', 'container').configuration
             );
             if (ns.items === undefined) {
               ns.items = [];

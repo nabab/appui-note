@@ -28,7 +28,7 @@ if ($model->hasData(['id', 'ref', 'file'], true)) {
       }
       $res['media'] = $medias->replaceContent($id, $tmpPath . $model->data['name']);
       if (empty($res['media'])) {
-        throw Error(_('Error while replacing the media'));
+        throw new Error(_('Error while replacing the media'));
       }
 
     }
@@ -38,12 +38,12 @@ if ($model->hasData(['id', 'ref', 'file'], true)) {
         $model->data['title'] = trim(str_replace(['-', '_', '+'], ' ', \bbn\X::basename($model->data['name'], ".$ext")));
       }
       if (!$medias->setTitle($id, $model->data['title'])) {
-        throw Error(_('Error while replacing the media title'));
+        throw new Error(_('Error while replacing the media title'));
       }
     }
     if ($oldMedia['description'] !== $model->data['description']) {
       if (!$medias->setDescription($id, $model->data['description'])) {
-        throw Error(_('Error while replacing the media description'));
+        throw new Error(_('Error while replacing the media description'));
       }
     }
 

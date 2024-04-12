@@ -16,6 +16,9 @@
       },
       blocks: {
         type: Array,
+        default() {
+          return [];
+        }
       },
       pblocks: {
         type: Array,
@@ -25,9 +28,17 @@
       }
     },
     data() {
+      let cms = appui.getRegistered('appui-note-cms');
+      let pblocks = bbn.fn.isArray(this.pblocks) ? this.pblocks.slice() : [];
+      let blocks = this.blocks || [];
+      if (!blocks.length && !pblocks.length) {
+        blocks = cms.blocks;
+        pblocks = cms.pblocks;
+      }
+
       return {
-        isDev: appui.user?.isDev || appui.user?.isAdmin,
-        data: null,
+        isDev: appui.user?.isDev,
+        data: cms.source,
         oData: JSON.stringify(this.source),
         oConfig: null,
         ready: false,
@@ -54,8 +65,8 @@
         originalConfig: null,
         isReady: false,
         currentBlockConfig: null,
-        personalizedBlocks: this.pblocks.slice(),
-        classicBlocks: this.blocks || [],
+        personalizedBlocks: pblocks,
+        classicBlocks: blocks,
         isDragging: false
       };
     },
@@ -63,20 +74,20 @@
       currentEditingTitle() {
         if (this.currentEditing) {
           if (this.currentEditing.special) {
-            let txt = bbn.fn.getField(this.allBlocks, 'text', { special: this.currentEditing.special });
+            let txt = bbn.fn.getField(this.allBlocks, 'text', {special: this.currentEditing.special});
             if (!txt) {
               this.$delete(this.currentEditing, 'special');
             } else {
               return txt;
             }
           }
-          return bbn.fn.getField(this.allBlocks, 'text', { special: null, code: this.currentEditing.type });
+          return bbn.fn.getField(this.allBlocks, 'text', {special: null, code: this.currentEditing.type});
         }
       },
       allBlocks() {
         const arr = [];
         bbn.fn.each(this.personalizedBlocks, a => {
-          const block = bbn.fn.clone(bbn.fn.getRow(this.classicBlocks, { id: a.id_alias }));
+          const block = bbn.fn.clone(bbn.fn.getRow(this.classicBlocks, {id: a.id_alias}));
           if (!block) {
             bbn.fn.error(bbn._("The block doesn't exist"));
           }
@@ -100,7 +111,7 @@
       },
       typeNote() {
         if (this.source.id_type) {
-          return bbn.fn.getRow(this.types, { id: this.source.id_type });
+          return bbn.fn.getRow(this.types, {id: this.source.id_type});
         }
         return {};
       },
@@ -145,9 +156,7 @@
     },
     methods: {
       randomString: bbn.fn.randomString,
-      scrollToSelected() {
-
-      },
+      scrollToSelected() {},
       unselectElements() {
         this.currentEditing = null;
         this.currentEditingKey = null;
@@ -165,7 +174,7 @@
         });
       },
       getBlockTitle(id) {
-        return bbn.fn.getField(this.allBlocks, 'text', { id });
+        return bbn.fn.getField(this.allBlocks, 'text', {id});
       },
       save() {
         let src = bbn.fn.clone(this.source);
@@ -212,7 +221,7 @@
        */
       clearCache() {
         this.confirm(bbn._('Are you sure?'), () => {
-          this.post(this.root + 'cms/actions/clear_cache', { id: this.source.id }, d => {
+          this.post(this.root + 'cms/actions/clear_cache', {id: this.source.id}, d => {
             if (d.success) {
               appui.success();
             }
@@ -603,31 +612,6 @@
       }
     },
     mounted() {
-      const data = this.closest('bbn-router').closest('bbn-container').source;
-      if (!this.classicBlocks.length && !this.personalizedBlocks.length) {
-        if (!appui.cms?.blocks) {
-          bbn.fn.post(this.root + 'cms/data/blocks', d => {
-            if (d.blocks) {
-              if (!appui.cms) {
-                appui.cms = bbn.fn.createObject();
-              }
-              appui.cms.blocks = d.blocks;
-              appui.cms.pblocks = d.pblocks || [];
-            }
-            this.classicBlocks.push(...appui.cms.blocks);
-            this.personalizedBlocks.push(...appui.cms.pblocks);
-            this.data = data;
-          });
-        }
-        else {
-          this.classicBlocks.push(...appui.cms.blocks);
-          this.personalizedBlocks.push(...appui.cms.pblocks);
-          this.data = data;
-        }
-      }
-      else {
-        this.data = data;
-      }
       if (!!this.source.items && !this.source.items.length) {
         this.showWidgets = true;
       }
@@ -641,7 +625,7 @@
       'editedSource.type'(v, ov) {
         let tmp = this.editedSource;
         if (v && (ov !== undefined) && this.editedSource && this.realSourceArray.length) {
-          let cfg = bbn.fn.getField(types, 'default', { value: v });
+          let cfg = bbn.fn.getField(types, 'default', {value: v});
           if (cfg) {
             for (let n in cfg) {
               if ((n !== 'type') && (tmp[n] === undefined)) {

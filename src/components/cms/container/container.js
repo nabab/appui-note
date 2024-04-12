@@ -4,6 +4,7 @@
   return {
     /**
      * @mixin bbn.cp.mixins.basic
+     * @mixin bbn.cp.mixins.resizer
      */
     mixins: [bbn.cp.mixins.basic, bbn.cp.mixins.resizer],
     props: {
@@ -208,7 +209,7 @@
                 type: 'container',
                 _elementor: this.editor.getElementorDefaultObj()
               },
-              bbn.fn.getRow(appui.cms.blocks, 'code', 'container').configuration
+              bbn.fn.getRow(appui.getRegistered('appui-note-cms').blocks, 'code', 'container').configuration
             );
             if (ns.items === undefined) {
               ns.items = [];
@@ -242,7 +243,9 @@
         }
       },
       getWidgetName(type){
-        let blocks = (appui.cms?.blocks || []).concat(appui.cms?.pblocks || []);
+        let b = appui.getRegistered('appui-note-cms').blocks || [];
+        let pb = appui.getRegistered('appui-note-cms').pblocks || [];
+        let blocks = b.concat(pb);
         return bbn.fn.getField(blocks, 'text', 'code', type) || bbn._('Unknown');
       },
       setGridLayout(){
@@ -278,8 +281,8 @@
         deep: true,
         handler(newVal){
           this.$set(this.source, 'layout', Object.values(newVal).join(' '));
-      }
-    },
+        }
+      },
       'source.items'(){
         this.setGridLayout();
       }

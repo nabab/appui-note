@@ -9,14 +9,12 @@
                       class="bbn-padded star"
                       @click="showFormLinkM"
                       title="<?= _('New bookmark') ?>"
-                      text="<?= _('New bookmark') ?>"
-                      ></bbn-button>
+                      text="<?= _('New bookmark') ?>"/>
           <bbn-button icon="nf nf-fa-folder_plus"
                       class="bbn-padded"
                       @click="showFormFolderM"
                       title="<?= _('New folder') ?>"
-                      text="<?= _('New folder') ?>"
-          ></bbn-button>
+                      text="<?= _('New folder') ?>"/>
         </div>
         <div class="bbn-100">
           <bbn-tree v-if="!remakeTree"

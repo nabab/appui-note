@@ -7,7 +7,6 @@
 <!--[if gt IE 9]><!--><html class="no-js" lang="<?= $lang ?>"><!--<![endif]-->
 <base href="<?= $site_url ?>" target="_self">
 <meta charset="utf-8">
-
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="author" content="BBN Solutions">
 <meta name="Copyright" content="<?= _("All rights reserved.") ?>">
@@ -33,26 +32,30 @@
 <meta name="msapplication-TileImage" content="<?= $static_path ?>img/favicon/mstile-144x144.png">
 <meta name="theme-color" content="#ffffff">
 <meta name="viewport" content="initial-scale=0.66, User-scalable=no">
-<title><?= BBN_SITE_TITLE ?></title>
-<div class="appui-cms-preview bbn-overlay bbn-lpadded bg-fuxia" style="transition: opacity 5s">
-  <div class=" bbn-header bbn-flex-width" style="height:60px">
-    <div :class="['bbn-w-10', 'fuxia', 'bbn-b', 'bbn-xspadded',{
-                 'bbn-middle' : (note.start === null)
-                 }]" v-html="info">
+<title><?= $title . ' - ' . constant('BBN_SITE_TITLE') ?></title>
+
+<div id="container" style="opacity: 0">
+  <div class="appui-cms-preview bbn-overlay bbn-lpadded bbn-bg-white" style="transition: opacity 5s">
+    <h1 v-if="source.title"
+        v-html="source.title"
+        class="bbn-vpadded bbn-margin bbn-c"></h1>
+    <div v-for="(cfg, i) in source.items">
+      <appui-note-cms-block :source="cfg"
+                            :ref="'block' + i"
+                            :selectable="false"
+                            :overable="false"></appui-note-cms-block>
     </div>
-		<div class="bbn-flex-fill bbn-h-100 bbn-large bbn-middle bbn-b bbn-l bbn-hpadded" v-text="note.title">
-    </div>    
-  </div>
-  <div class="content bbn-w-100 bbn-padded bbn-bg-white bbn-black bbn-h-100 ">
-    <bbn-scroll>
-      <div class="bbn-100" v-html="note.content">
-        
-      </div>
-    </bbn-scroll>
   </div>
 </div>
-<script type="text/javascript" src="<?= BBN_SHARED_PATH ?>?<?=http_build_query([
+<script type="text/javascript" src="<?=BBN_SHARED_PATH?>?<?=http_build_query([
   'lang' => BBN_LANG,
-  'lib' => 'nerd-fonts,bbnjs|latest|'.BBN_THEME.',bbn-vue,font-awesome',
+  'lib' => 'animate-css,bbn-css|master|' . BBN_THEME . ',bbn-vue,font-mfizz,webmin-font,jsPDF,html2canvas',
   'test' => BBN_IS_DEV
 ])?>"></script>
+<script>
+  const data = <?= json_encode($data) ?>;
+  document.addEventListener("DOMContentLoaded", () => {
+    <?= $script ?>
+    document.getElementById('container').style.opacity = 1;
+  });
+</script>

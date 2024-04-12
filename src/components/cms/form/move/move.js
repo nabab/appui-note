@@ -10,7 +10,7 @@
     },
     data(){
       return {
-        cp: appui.getRegistered('appuiCmsList'),
+        cp: appui.getRegistered('appui-note-cms-list'),
         formData: {
           type: '',
           id: this.source

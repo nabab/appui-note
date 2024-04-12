@@ -28,7 +28,7 @@
               :width="50"
               :editable="false"
               ></bbns-column>
-  <bbns-column :title="_('Letter's type')"
+  <bbns-column :title="_('Letter\'s type')"
               field="id_type"
               :editable="false"
               :component="$options.components.cat"
