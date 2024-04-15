@@ -1,7 +1,7 @@
 <!-- HTML Document -->
 
 <section class="appui-note-bookmarks-item">
-  <bbn-context v-if="isVisible"
+  <bbn-context bbn-if="isVisible"
                :context="true"
                :source="contextMenu(source)"
                tag="div"
@@ -17,10 +17,10 @@
         {{source.text}}
       </span>
     </div>
-    <img v-if="source.cover"
+    <img bbn-if="source.cover"
          :src="source.cover"
          :text="_('Open the link')"/>
-    <div v-else
+    <div bbn-else
          class="default-image"
          :text="_('Open the link')"
          />

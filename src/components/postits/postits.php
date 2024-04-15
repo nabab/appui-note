@@ -12,13 +12,13 @@
        @click="onClick">
     <div class="bbn-flex bbn-l"
          style="flex-wrap: wrap; align-items: center;">
-      <appui-note-postit v-for="(pi, idx) in source"
+      <appui-note-postit bbn-for="(pi, idx) in source"
                          :source="pi"
                          @remove="onRemove"
                          @save="onSave($event, idx)"
                          :key="pi.id"/>
       <div style="width: 15rem; height: 15rem; margin: 2.5rem"
-           v-if="!hasNew"
+           bbn-if="!hasNew"
            class="bbn-p bbn-white bbn-bordered bbn-reactive bbn-radius"
            @click.stop.prevent="add">
         <div class="bbn-100 bbn-middle">

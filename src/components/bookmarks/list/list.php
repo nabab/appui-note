@@ -13,11 +13,11 @@
             <bbn-tree :source="source.data"
                       ref="tree"
                       @select="selectTree"
-                      v-if="source.data.length"
+                      bbn-if="source.data.length"
                       :draggable="true"
                       @dragEnd="isDragEnd"
                       ></bbn-tree>
-            <label class="bbn-w-100" v-else><?= _("No Bookmarks yet") ?></label>
+            <label class="bbn-w-100" bbn-else><?= _("No Bookmarks yet") ?></label>
           </div>
         </div>
       </div>

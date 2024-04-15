@@ -1,7 +1,7 @@
 <div class="bbn-flex-height bbn-background bbn-lpadded bbn-overlay" ref="browser">
   <div class="bbn-line-breaker bbn-middle bbn-c bbn-padded">
     <bbn-input placeholder="Search in media"
-               v-model="searchMedia"
+               bbn-model="searchMedia"
                class="search bbn-xl bbn-w-50"
                ref="search"
     ></bbn-input>
@@ -13,14 +13,14 @@
   </div>
   
   <div class="bbn-h-100 bbn-flex-fill appui-note-media-browser"
-       v-if="medias.length"
+       bbn-if="medias.length"
   >
   	<bbn-scroll ref="scroll">
       <ul ref="ul">
-        <li v-if="medias.length" 
+        <li bbn-if="medias.length" 
             class="bbn-block media-block" 
             @mouseover="showList = i" 
-            v-for="(m, i) in medias">
+            bbn-for="(m, i) in medias">
         	<component :is="$options.components['block']"
                      :data="{media:m, idx:i}"
                      :key="i"
@@ -30,7 +30,7 @@
           <component :is="$options.components['list']"
                      :data="{media:m, idx:i}"
                      :key="i + 1000"
-                     v-if="showList === i"
+                     bbn-if="showList === i"
   				></component> 
         </li>     
 			</ul>  
@@ -44,19 +44,19 @@
            :style="data.media.is_image ? 'padding: 0' : ''"
            @click="routeClick(data.media)"
         >
-        <i v-if="!data.media.is_image && icons[data.media.content.extension] "
+        <i bbn-if="!data.media.is_image && icons[data.media.content.extension] "
            :class="['bbn-xxxl',
                    icons[data.media.content.extension] 
                    ]">
         </i>
-        <div v-if="!data.media.is_image && !icons[data.media.content.extension]"
-             v-text="data.media.content.extension"
+        <div bbn-if="!data.media.is_image && !icons[data.media.content.extension]"
+             bbn-text="data.media.content.extension"
              class="bbn-large bbn-badge"
              style="margin-top:50%"
              >
 
         </div>
-        <div v-else 
+        <div bbn-else 
              class="media-img-preview bbn-middle"
         >
           <img :src="root + '/image/'+ data.media.id">
@@ -64,13 +64,13 @@
       </div>
       <div class="media-title">
         <div @click.right="editinline = true"
-              v-text="cutted"
+              bbn-text="cutted"
               :title="data.media.title"
-              v-if="!editinline"
+              bbn-if="!editinline"
               ></div>
-        <bbn-input v-if="editinline" 
+        <bbn-input bbn-if="editinline" 
                     @click.stop.prevent="focusInput"
-                    v-model="data.media.title"
+                    bbn-model="data.media.title"
                     @mouseleave="exitEdit"
                     @keyup.enter="exitEdit"
                     @blur="exitEdit"

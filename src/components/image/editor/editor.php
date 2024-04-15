@@ -4,10 +4,10 @@
   <div class="editor_container bbn-100">
   </div>
   <div class="bbn-modal bbn-overlay"
-       v-if="showFloater">
+       bbn-if="showFloater">
   </div>
   <bbn-floater :modal="true"
-               v-if="showFloater">
+               bbn-if="showFloater">
     <appui-note-image-form :file-info="img.imageData"
                            @close="close"
                            @sendinfo="saveInfo"/>

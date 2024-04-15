@@ -616,7 +616,7 @@
     <i class='nf nf-fa-calendar bbn-lg'
        title="source.title"/>
   </span>
-  <bbn-floater v-if="showFilter"
+  <bbn-floater bbn-if="showFilter"
                :auto-hide="true"
                @beforeClose="showFilter = false"
                @close="showFilter = false"
@@ -651,42 +651,42 @@
                     class="bbn-xs bbn-right-xsspace"
                     @hook:mounted="onInitialMounted"
                     ref="initial"/>
-      <span v-text="name"/>
+      <span bbn-text="name"/>
     </span>
     <span class="bbn-vmiddle bbn-right-space bbn-bordered bbn-radius bbn-right-xspadded bbn-background bbn-text colorblock orange"
           :title="_('Since') + ' ' + fdate(source.creation)">
       <i class="nf nf-md-calendar_edit bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
-      <span v-text="fdate(source.creation)"/>
+      <span bbn-text="fdate(source.creation)"/>
     </span>
-    <span v-if="source.start"
+    <span bbn-if="source.start"
           class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space bbn-background bbn-text colorblock green"
           :title="_('Published') + ' ' + fdate(source.start)">
       <i class="nf nf-md-calendar_check bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
-      <span v-text="fdate(source.start)"/>
+      <span bbn-text="fdate(source.start)"/>
     </span>
     <span class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space bbn-background bbn-text colorblock"
           :title="_('Version') + ' ' + source.version">
       <i class="nf nf-cod-versions bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
-      <span v-text="source.version"/>
+      <span bbn-text="source.version"/>
     </span>
     <span :title="_('Number of medias directly linked to this article')"
           class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space bbn-background bbn-text colorblock">
       <i class="nf nf-md-image_multiple bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
-      <span v-text="source.num_medias"/>
+      <span bbn-text="source.num_medias"/>
     </span>
     <span :title="_('Number of variants of this article')"
           class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space bbn-background bbn-text colorblock">
       <i class="nf nf-md-content_duplicate bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
-      <span v-text="source.num_variants"/>
+      <span bbn-text="source.num_variants"/>
     </span>
     <span :title="_('Number of translations for this article')"
           class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space bbn-background bbn-text colorblock">
       <i class="nf nf-md-translate bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
-      <span v-text="source.num_translations"/>
+      <span bbn-text="source.num_translations"/>
     </span>
   </div>
   <div class="bbn-xl bbn-top-sspace bbn-p"
-       v-text="source.title"
+       bbn-text="source.title"
        :title="source.title"
        @click="editPost"/>
 </div>`,
@@ -743,9 +743,9 @@
         template: `
 <span class="bbn-nowrap">
   <i class="bbn-green bbn-xl nf nf-fa-check_circle_o"
-  	 v-if="isPublished"/>
+  	 bbn-if="isPublished"/>
   <i class="bbn-red bbn-xl nf nf-fa-times_circle_o"
-  	 v-else/>
+  	 bbn-else/>
 </span>`,
         props: ['source'],
         data(){

@@ -7,14 +7,9 @@
        	}
       ]"
       tabindex="0"
-     	@click="onClick"
       @mouseenter="over = true"
-      @mouseleave="over = false"
-      @dragstart.stop="e => $emit('dragstart', e)"
-      @dragend="e => $emit('dragend', e)"
-      @beforedrop="e => $emit('beforedrop', e)"
-      @drop="e => $emit('drop', e)">
-  <component v-if="ready"
+      @mouseleave="over = false">
+  <component bbn-if="ready"
              @configinit="configInit"
              :is="currentComponent"
              :cfg="cfg"
@@ -28,33 +23,33 @@
                         '<?= $componentName ?>-selected': selectable && selected
                        }
                      ]"/>
-  <div v-if="selectable"
+  <div bbn-if="selectable"
        class="bbn-overlay bbn-p"/>
-  <div v-if="editable"
+  <div bbn-if="editable"
        class="<?= $componentName ?>-icons bbn-vmiddle">
     <div class="bbn-nowrap bbn-block">
       <i class="bbn-p nf nf-fa-edit inline bbn-xxlarge bbn-white bbn-hxsmargin"
           @click="editMode"
-          v-if="isAdmin && editing && !edit"></i>
+          bbn-if="isAdmin && editing && !edit"></i>
       <i class="bbn-p nf nf-fa-check inline bbn-xxlarge bbn-white bbn-hxsmargin"
           @click="editBlock"
-          v-if="changed"></i>
+          bbn-if="changed"></i>
       <i class="bbn-p nf nf-fa-close inline bbn-xxlarge bbn-white bbn-hxsmargin"
           @click="cancelEdit"
-          v-if="changed"></i>
+          bbn-if="changed"></i>
     </div>
     <div class="bbn-overlay bbn-modal"></div>
     <div class="bbn-overlay bbn-vmiddle">
       <div class="bbn-nowrap bbn-block">
         <i class="bbn-p nf nf-fa-edit inline bbn-xxlarge bbn-white bbn-hxsmargin"
            @click="editMode"
-           v-if="isAdmin && editing && !edit"></i>
+           bbn-if="isAdmin && editing && !edit"></i>
         <i class="bbn-p nf nf-fa-check inline bbn-xxlarge bbn-white bbn-hxsmargin"
            @click="editBlock"
-           v-if="changed"></i>
+           bbn-if="changed"></i>
         <i class="bbn-p nf nf-fa-close inline bbn-xxlarge bbn-white bbn-hxsmargin"
            @click="cancelEdit"
-           v-if="changed"></i>
+           bbn-if="changed"></i>
       </div>
     </div>
   </div>

@@ -3,7 +3,7 @@
 <div class="bbn-w-100 bbn-flex-height">
   <div class="bbn-w-100 bbn-left-padded bbn-top-lpadded bbn-bottom-spadded bbn-grid-full">
     <label class="bbn-w-100"><?= _("URL") ?></label>
-    <bbn-input v-model="currentData.url"
+    <bbn-input bbn-model="currentData.url"
                class="bbn-lpadded bbn-w-40"></bbn-input>
     <bbn-button class="bbn-w-2"
                 @click="openUrl"
@@ -12,31 +12,31 @@
   <div class="bbn-w-20 bbn-left-padded bbn-bottom-spadded">
     <label class="bbn-w-100"><?= _("In which file ?") ?></label>
     <bbn-dropdown :source="source.parents"
-                  v-model="idParent"
+                  bbn-model="idParent"
                   class="bbn-lpadded"
                   placeholder="Is there a parent ?"
                   > </bbn-dropdown>
   </div>
   <div class="bbn-w-50 bbn-left-padded bbn-bottom-spadded">
     <label class="bbn-l bbn-w-100"><?= _("Title") ?></label>
-    <bbn-input v-model="currentData.title"
+    <bbn-input bbn-model="currentData.title"
                placeholder="Name of the URL"></bbn-input>
   </div>
   <div class="bbn-left-padded bbn-bottom-lpadded bbn-w-100">
     <label class="bbn-l bbn-w-100"><?= _("URL's description") ?></label>
-    <bbn-textarea class="bbn-w-40" v-model="currentData.description"></bbn-textarea>
+    <bbn-textarea class="bbn-w-40" bbn-model="currentData.description"></bbn-textarea>
   </div>
-  <div v-if="currentData.cover"
+  <div bbn-if="currentData.cover"
        class="bbn-flex-fill bbn-bottom-spadded bbn-w-100">
     <img :src="currentData.cover"
          style="max-width: 300px; height: 300px; width: auto; height: auto"
          class="bbn-flex-fill bbn-bottom-spadded bbn-w-100">
     <div class="bbn-flex-fill bbn-bottom-spadded bbn-lpadded bbn-w-100">
-      <bbn-button v-if="currentData.images"
+      <bbn-button bbn-if="currentData.images"
                   @click="showGallery = true"
                   class="bbn-flex-fill bbn-bottom-spadded bbn-spaded bbn-w-20"
                   text="change cover picture"></bbn-button>
-      <bbn-floater v-if="showGallery"
+      <bbn-floater bbn-if="showGallery"
                    :title="_('Pick a cover picture')"
                    :closable="true"
                    :width="500"
@@ -51,12 +51,12 @@
                      :scrollable="true"
                      ></bbn-gallery>
       </bbn-floater>
-      <bbn-button	v-if="currentData.id_screenshot"
+      <bbn-button	bbn-if="currentData.id_screenshot"
                   @click="showScreenshot"
                   class="bbn-padded"
                   text="show screenshot"
                   ></bbn-button>
-      <bbn-floater v-if="visible"
+      <bbn-floater bbn-if="visible"
                    :closable="true"
                    :width="800"
                    :height="600"
@@ -70,10 +70,10 @@
     </div>
   </div>
   <div>
-    <div class="bbn-w-100 bbn-padded" v-if="currentData.id === null">
+    <div class="bbn-w-100 bbn-padded" bbn-if="currentData.id === null">
       <bbn-button class="bbn-padded " text="<?= _('Add Link') ?>" @click="add"></bbn-button>
     </div>
-    <div class="bbn-w-100 bbn-lpadded" v-else>
+    <div class="bbn-w-100 bbn-lpadded" bbn-else>
       <bbn-button class="bbn-lpadded " text="<?= _('Modify Link') ?>" @click="modify"></bbn-button>
       <bbn-button class="bbn-lpadded"
                   text="<?= _('Delete Link') ?>"

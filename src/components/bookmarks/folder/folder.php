@@ -6,17 +6,17 @@
   <div class="bbn-padded bbn-grid-fields">
     <div class="bbn-grid-full">
       <i class="nf nf-fa-times bbn-p"
-         v-if="parent !== 'ROOT'"
+         bbn-if="parent !== 'ROOT'"
          @click="removeParent"
          title="<?= _("Create the link at root") ?>"/>
       <span class="bbn-green bbn-b"
-            v-text="( parent !== 'ROOT' ) ? '<?= _('Create the folder in')?>' +  ' ' + path : '<?=_('Create the folder at root or select a folder from the tree') ?>'"/>
+            bbn-text="( parent !== 'ROOT' ) ? '<?= _('Create the folder in')?>' +  ' ' + path : '<?=_('Create the folder at root or select a folder from the tree') ?>'"/>
     </div>
     <div class="bbn-padded">
       <span><?= _("New folder") ?></span>
     </div>
     <div class="bbn-padded">
-      <bbn-input v-model="text"
+      <bbn-input bbn-model="text"
                  @keydown.enter.prevent.stop="submit"
       ></bbn-input>
     </div>

@@ -36,10 +36,10 @@
 
 <div id="container" style="opacity: 0">
   <div class="appui-cms-preview bbn-overlay bbn-lpadded bbn-bg-white" style="transition: opacity 5s">
-    <h1 v-if="source.title"
-        v-html="source.title"
+    <h1 bbn-if="source.title"
+        bbn-html="source.title"
         class="bbn-vpadded bbn-margin bbn-c"></h1>
-    <div v-for="(cfg, i) in source.items">
+    <div bbn-for="(cfg, i) in source.items">
       <appui-note-cms-block :source="cfg"
                             :ref="'block' + i"
                             :selectable="false"

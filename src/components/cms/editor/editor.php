@@ -1,7 +1,7 @@
 <!-- HTML Document -->
 <div :class="[componentClass, 'bbn-overlay']">
   <div class="bbn-overlay bbn-flex-width"
-       v-if="data">
+       bbn-if="data">
     <!--Elementor-->
     <div class="bbn-flex-fill bbn-flex-height"
          style="background-color: var(--white); color: var(--black)">
@@ -22,7 +22,7 @@
                       :notext="true"
                       @click="toggleWidgets"/>
           <bbn-button icon="nf nf-md-code_json"
-                      v-if="isDev"
+                      bbn-if="isDev"
                       title="<?= _("See JSON") ?>"
                       @click="showJSON = !showJSON"
                       :notext="true"/>
@@ -43,16 +43,16 @@
         </div>
       </div>
       <div class="bbn-flex-fill">
-        <iframe v-if="!!fullPreview"
+        <iframe bbn-if="!!fullPreview"
                 :src="fullPreview"
                 class="bbn-100"/>
-        <bbn-scroll v-else
+        <bbn-scroll bbn-else
                     class="bbn-overlay"
                     @scroll="scrollElementor">
-          <bbn-json-editor v-if="showJSON && isDev"
+          <bbn-json-editor bbn-if="showJSON && isDev"
                            :expanded="1"
-                           v-model="source.items"/>
-          <appui-note-cms-elementor v-else
+                           bbn-model="source.items"/>
+          <appui-note-cms-elementor bbn-else
                                     :source="source.items"
                                     @hook:mounted="ready = true"
                                     ref="editor"
@@ -71,16 +71,16 @@
     </div>
 
     <!-- Slider -->
-    <div v-if="!fullPreview"
+    <div bbn-if="!fullPreview"
          :class="['slider', 'bbn-flex-height', {opened: showSlider, maximized: !!sliderMaximized}]"
-         v-resizable.left="true"
+         bbn-resizable.left="true"
          ref="slider">
       <div class="bbn-spadding bbn-vmiddle"
            style="justify-content: space-between">
-        <i v-if="sliderMaximized"
+        <i bbn-if="sliderMaximized"
            class="nf nf-fa-window_restore bbn-p"
            @click="sliderMaximized = false"/>
-        <i v-else
+        <i bbn-else
            class="nf nf-fa-window_maximize bbn-p"
            @click="sliderMaximized = true"/>
         <i class="nf nf-fa-times bbn-p"
@@ -88,15 +88,15 @@
       </div>
       <h2 class="bbn-c"
           style="margin-top: 0">
-        <span v-if="showWidgetSettings"
-              v-text="currentEditingTitle"/>
-        <span v-else-if="showWidgets"
-              v-text="_('Widgets')"/>
-        <span v-else-if="showPageSettings"
-              v-text="_('Page Settings')"/>
+        <span bbn-if="showWidgetSettings"
+              bbn-text="currentEditingTitle"/>
+        <span bbn-else-if="showWidgets"
+              bbn-text="_('Widgets')"/>
+        <span bbn-else-if="showPageSettings"
+              bbn-text="_('Page Settings')"/>
       </h2>
       <div class="bbn-flex-fill">
-        <div v-if="showWidgetSettings && currentEditing"
+        <div bbn-if="showWidgetSettings && currentEditing"
               class="bbn-flex-height">
           <div class="bbn-flex-fill bbn-flex-width">
             <div class="bbn-spadding appui-note-cms-editor-position">
@@ -104,7 +104,7 @@
                           @click="scrollToSelected"
                           text="<?= _("Scroll to selected element") ?>"
                           icon="nf nf-mdi-target"/>
-              <template v-if="currentEditingParentItems?.length > 1"
+              <template bbn-if="currentEditingParentItems?.length > 1"
                         class="bbn-padding appui-note-cms-editor-position">
                 <bbn-button :notext="true"
                             @click="move('start')"
@@ -158,10 +158,10 @@
                         class="bbn-ellipsis"/>
           </div>
         </div>
-        <bbn-scroll v-else-if="showWidgets"
+        <bbn-scroll bbn-else-if="showWidgets"
                     axis="y">
           <div class="bbn-lpadding bbn-flex-wrap grid-dropper bbn-unselectable">
-            <appui-note-cms-dropper v-for="(v, i) in allBlocks"
+            <appui-note-cms-dropper bbn-for="(v, i) in allBlocks"
                                     :key="v.id"
                                     :description="v.description"
                                     :class="'block-' + v.code"
@@ -174,11 +174,11 @@
                                     @dragstart="isDragging = true"/>
           </div>
         </bbn-scroll>
-        <div v-else-if="showPageSettings"
+        <div bbn-else-if="showPageSettings"
              class="bbn-overlay">
           <bbn-scroll axis="y">
-            <slot v-if="$slots.default?.length"/>
-            <appui-note-cms-settings v-else
+            <slot bbn-if="$slots.default?.length"/>
+            <appui-note-cms-settings bbn-else
                                     :source="source"
                                     :type-note="typeNote"
                                     @clear="clearCache"/>

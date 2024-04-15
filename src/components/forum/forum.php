@@ -1,28 +1,28 @@
 <div class="appui-note-forum bbn-overlay bbn-background bbn-bordered">
 	<div class="bbn-overlay bbn-flex-height">
-		<div v-if="toolbar || search"
+		<div bbn-if="toolbar || search"
 				 class="appui-note-forum-toolbar bbn-header bbn-flex-width bbn-no-border-top bbn-no-border-left bbn-no-border-right bbn-vmiddle"
 				 ref="toolbar">
 		  <!-- Toolbar -->
-      <div v-if="toolbar"
+      <div bbn-if="toolbar"
            class="bbn-flex-fill">
-        <div v-if="toolbarButtons.length"
+        <div bbn-if="toolbarButtons.length"
              class="bbn-xspadded">
-          <bbn-button v-for="(button, i) in toolbarButtons"
+          <bbn-button bbn-for="(button, i) in toolbarButtons"
                       class="bbn-right-sspace"
                       :key="i"
-                      v-bind="button"/>
+                      bbn-bind="button"/>
         </div>
-        <div v-else-if="typeof(toolbar) === 'function'"
-             v-html="toolbar()"/>
-        <component v-else
+        <div bbn-else-if="typeof(toolbar) === 'function'"
+             bbn-html="toolbar()"/>
+        <component bbn-else
                    :is="toolbar"/>
       </div>
-      <div v-if="search"
+      <div bbn-if="search"
            class="bbn-spadded bbn-vmiddle">
-        <span v-text="_('Rechercher')"
+        <span bbn-text="_('Rechercher')"
               class="bbn-right-sspace"/>
-        <bbn-input v-model="filterString"
+        <bbn-input bbn-model="filterString"
                    class="bbn-wide"
                    :button-right="filterString.length ? 'nf nf-fa-close' : 'nf nf-fa-search'"
                    :action-right="clearSearch"/>
@@ -30,9 +30,9 @@
 		</div>
 		<!-- Main -->
 		<div class="bbn-w-100 bbn-flex-fill">
-			<bbn-scroll v-if="!isLoading"
+			<bbn-scroll bbn-if="!isLoading"
                   axis="y">
-        <appui-note-forum-topic v-for="(d, i) in filteredData"
+        <appui-note-forum-topic bbn-for="(d, i) in filteredData"
                                 :key="d.key"
                                 :source="d.data"
                                 :index="d.index"

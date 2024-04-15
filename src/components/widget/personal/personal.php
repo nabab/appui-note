@@ -1,5 +1,5 @@
 <div class="appui-note-widget-personal">
-  <div v-if="showForm">
+  <div bbn-if="showForm">
     <bbn-form style="height: 500px"
               :buttons="[]"
               :fixedFooter="false"
@@ -8,20 +8,20 @@
 							:scrollable="false"
               action="notes/actions/insert"
               @success="afterSubmit">
-      <bbn-input v-model="formData.title"
+      <bbn-input bbn-model="formData.title"
                  placeholder="<?= _('Title') ?>"
                  style="margin-bottom: 10px; width: 100%"/>
       <!--<div class="bbn-c"
            style="margin-bottom: 10px"
       >
-        <bbn-checkbox v-model="formData.postit"
+        <bbn-checkbox bbn-model="formData.postit"
                       value="1"
                       novalue="0"
                       label="<i class='nf nf-fa-eye_slash'></i> <?/*=_('Post-it')*/?>"
         ></bbn-checkbox>
       </div>-->
       <div class="bbn-w-100" style="width: 100%; height: 400px">
-					<bbn-rte v-model="formData.content"
+					<bbn-rte bbn-model="formData.content"
 	                 required="required"
 									 height="100%"/>
       </div>
@@ -38,24 +38,24 @@
 
     </bbn-form>
   </div>
-  <div v-else class="bbn-padded">
+  <div bbn-else class="bbn-padded">
     <ul class="bbn-no-padding bbn-no-margin"
-        v-if="source?.items">
-      <div v-for="item in source.items"
+        bbn-if="source?.items">
+      <div bbn-for="item in source.items"
            style="padding: 0.4em 0.6em"
            class="bbn-vmiddle">
         <bbn-initial width="20"
                      height="20"
                      :user-id="item.id_user"
                      :user-name="userName(item.id_user)"/>
-        <span v-if="shorten(item.title, 50)"
-              v-text="item.title"
+        <span bbn-if="shorten(item.title, 50)"
+              bbn-text="item.title"
               title="item.title"
               @click="openNote(item)"
               class="bbn-p"
               style="margin-left: 5px"/>
-        <span v-else
-              v-text="html2text(shorten(item.content, 50))"
+        <span bbn-else
+              bbn-text="html2text(shorten(item.content, 50))"
               @click="openNote(item)"
               class="bbn-p"
               style="margin-left: 5px"/>

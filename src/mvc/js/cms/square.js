@@ -103,7 +103,7 @@
               </bbn-button>
             </bbn-context>
             <bbn-button :notext="true"
-                        v-if="$parent.$parent.lines[index] && $parent.$parent.lines[index]['type']"
+                        bbn-if="$parent.$parent.lines[index] && $parent.$parent.lines[index]['type']"
                         icon="nf nf-fa-edit"
 												@click="editBlock"
 												:title="_('Edit blocks in this row')"
@@ -134,7 +134,7 @@
       currentBlockType(val){
         bbn.fn.error('error here')
         if ( ( this.focused > -1 ) && ( this.focused !== this.source.lines.length ) ){
-      		//for the bbn-block template to be defined based on the type of block there's a v-if on the prop ready on the html of the component bbn-block
+      		//for the bbn-block template to be defined based on the type of block there's a bbn-if on the prop ready on the html of the component bbn-block
           this.$refs['block'][this.focused].edit = false;
           this.$refs['block'][this.focused].ready = false;
           this.$refs['block'][this.focused].source.type = val;

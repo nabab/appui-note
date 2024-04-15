@@ -5,7 +5,7 @@
           :buttons="['submit']"
           @success="afterSubmit"
 >
-  <bbn-markdown v-model="source.content"
+  <bbn-markdown bbn-model="source.content"
                 :spellChecker="true"
                 class="bbn-100"
   ></bbn-markdown>

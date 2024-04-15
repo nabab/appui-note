@@ -1,26 +1,26 @@
 <!-- HTML Document -->
 <div :class="[componentClass, 'bbn-w-100']">
-  <div v-if="mode === 'edit'">
+  <div bbn-if="mode === 'edit'">
     <div class="bbn-w-100">
-      <bbn-textarea v-model="source.content"
+      <bbn-textarea bbn-model="source.content"
                     class="bbn-w-100"/>
     </div>
     <div class="bbn-grid-fields bbn-vpadded bbn-w-100">
       <label><?= _('Tag') ?></label>
       <div>
         <bbn-dropdown :source="tags"
-                      v-model="source.tag"
+                      bbn-model="source.tag"
                       :component="$options.components.tag"/>
       </div>
       <label><?= _('Color') ?></label>
       <div>
-        <bbn-colorpicker v-model="source.color"/>
+        <bbn-colorpicker bbn-model="source.color"/>
       </div>
       <label><?= _('Alignment') ?></label>
       <div>
         <div class="bbn-block">
           <bbn-radiobuttons :notext="true"
-                            v-model="source.align"
+                            bbn-model="source.align"
                             :source="[{
                               text: _('Align left'),
                               value: 'left',
@@ -50,7 +50,7 @@
       <div>
         <div class="bbn-block">
           <bbn-radiobuttons :notext="true"
-                            v-model="source.textDecoration"
+                            bbn-model="source.textDecoration"
                             :source="[{
                               text: _('Underlined'),
                               value: 'underline',
@@ -74,20 +74,20 @@
       </div>
     </div>
   </div>
-  <div v-else
+  <div bbn-else
        class="bbn-w-100">
     <appui-note-cms-block-line :source="source"
                                mode="read"
                                :details="false">
-      <div v-if="$parent.selectable && !source.content"
+      <div bbn-if="$parent.selectable && !source.content"
            class="bbn-alt-background bbn-middle bbn-lpadded"
            style="overflow: hidden">
         <i class="bbn-xxxxl nf nf-md-format_title"/>
       </div>
-      <component v-else
+      <component bbn-else
                  :is="source.tag"
                  :style="currentStyle"
-                 v-html="source.content"/>
+                 bbn-html="source.content"/>
     </appui-note-cms-block-line>
   </div>
 </div>

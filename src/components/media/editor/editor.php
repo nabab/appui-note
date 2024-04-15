@@ -12,25 +12,25 @@
   <div class="bbn-grid-fields bbn-padded">
 
     <label><?= _('Title') ?></label>
-    <bbn-input v-model="source.title"/>
+    <bbn-input bbn-model="source.title"/>
 
     <label class="bbn-bottom-space"><?= _('Description') ?></label>
-    <bbn-textarea v-model="source.description"
+    <bbn-textarea bbn-model="source.description"
                   class="bbn-bottom-space"/>
 
     <label><?= _("Tags") ?></label>
-    <bbn-values v-model="source.tags"/>
+    <bbn-values bbn-model="source.tags"/>
 
     <label><?= _('File') ?></label>
     <div>
-      <span v-text="source.name"/>
-      (<span v-text="formattedSize"/>)
-      <span v-text="source.mimetype"
+      <span bbn-text="source.name"/>
+      (<span bbn-text="formattedSize"/>)
+      <span bbn-text="source.mimetype"
             class="bbn-left-space"/>
 
       <!--bbn-upload :json="asJson"
                   :paste="true"
-                  v-model="currentFiles"
+                  bbn-model="currentFiles"
                   :multiple="false"
                   :save-url="root + 'media/actions/upload_save/' + ref"
                   @beforeRemove="onRemove"
@@ -42,24 +42,24 @@
     </div>
 
     <label><?= _('URL') ?></label>
-    <div v-text="source.url"/>
+    <div bbn-text="source.url"/>
 
-    <template v-if="source.url">
+    <template bbn-if="source.url">
       <label>
         <i class="bbn-p bbn-red nf nf-fa-trash"
            @click="clearCache(source.url, true)"
            title="<?= _('Clear all cache') ?>"
-           v-if="!!source.cacheFiles && source.cacheFiles.length > 1"/>
+           bbn-if="!!source.cacheFiles && source.cacheFiles.length > 1"/>
         <span><?= _('Cache') ?></span>
       </label>
       <div class="bbn-grid-fields"
            style="grid-column-gap: 0.5rem">
-        <template v-for="f in source.cacheFiles">
+        <template bbn-for="f in source.cacheFiles">
           <i class="bbn-p bbn-red nf nf-fa-trash"
              @click="clearCache(f.file, false)"
              title="<?= _('Remove') ?>"/>
           <div>
-            <span v-text="f.name"
+            <span bbn-text="f.name"
                   :title="f.name"/>
             <span class="bbn-s bbn-i">({{fdatetime(f.modified)}})</span>
           </div>

@@ -19,32 +19,32 @@
       </bbn-pane>
       <bbn-pane :scrollable="!!selected">
         <div class="bbn-w-100"
-             v-if="selected">
+             bbn-if="selected">
           <div class="bbn-grid-fields bbn-m bbn-padding bbn-margin-bottom">
             <label> <?= _("Title") ?></label>
-            <bbn-input v-model="selectedText"
+            <bbn-input bbn-model="selectedText"
                        @change="updateOption"/>
 
             <label> <?= _("Code") ?></label>
-            <bbn-input v-model="selectedCode"
+            <bbn-input bbn-model="selectedCode"
                        @change="updateOption"/>
 
             <label> <?= _("Order") ?></label>
-            <bbn-dropdown v-model="selectedOrder"
+            <bbn-dropdown bbn-model="selectedOrder"
                           :source="orderModes"
                           @change="updateOption"/>
           </div>
           <div class="bbn-w-100 bbn-spadding"
-               v-if="featureItems.length">
+               bbn-if="featureItems.length">
             <div class="bbn-bordered bbn-bottom-margin bbn-flex-width"
-                 v-for="item in featureItems"
+                 bbn-for="item in featureItems"
                  :key="item.id">
               <div style="width: 150px; max-width: 25vw; min-width: 80px"
                    class="bbn-spadding bbn-block">
-                <img v-if="item.media"
+                <img bbn-if="item.media"
                      style="width: 100%; height: auto"
                      :src="item.media.url || item.media.path">
-                <div v-else
+                <div bbn-else
                      class="bbn-w-100 bbn-ratio bbn-middle">
                   <div class="bbn-block">
                     <?= _("No image") ?>
@@ -52,16 +52,16 @@
                 </div>
               </div>
               <div class="bbn-spadding bbn-flex-fill">
-                <div v-text="item.title"
+                <div bbn-text="item.title"
                      class="bbn-lg"/>
-                <div v-if="selectedOrder === 'manual'">
-                  <div v-text="'order: ' + item.num"/>
-                  <bbn-button v-if="item.num !== 1"
+                <div bbn-if="selectedOrder === 'manual'">
+                  <div bbn-text="'order: ' + item.num"/>
+                  <bbn-button bbn-if="item.num !== 1"
                               icon="nf nf-fa-arrow_up"
                               @click="setOrderFeature(item.id, item.num - 1)"
                               :notext="true"
                               text="<?= _("Move up") ?>"/>
-                  <bbn-button v-if="item.num < featureItems.length"
+                  <bbn-button bbn-if="item.num < featureItems.length"
                               icon="nf nf-fa-arrow_down"
                               @click="setOrderFeature(item.id, item.num + 1)"
                               :notext="true"
@@ -85,7 +85,7 @@
                                class="bbn-lg bbn-w-100"/>
           </div>
         </div>
-        <div v-else
+        <div bbn-else
              class="bbn-overlay bbn-middle">
           <div class="bbn-label">
             <?= _("Pick a feature") ?>

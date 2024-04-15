@@ -13,42 +13,42 @@
                 @click="edit"
                 :text="'<?= _("Edit this") ?>' + ' ' + selectedType"/>
   </div>
-  <div v-if="selectedType === 'link'"
+  <div bbn-if="selectedType === 'link'"
        class="bbn-grid-fields">
-    <span v-if="source.showLink.path"
+    <span bbn-if="source.showLink.path"
           class="bbn-green bbn-medium">
       <?= _("Path") ?>
     </span>
-    <div v-if="source.showLink.path"
+    <div bbn-if="source.showLink.path"
         class="bbn-green bbn-medium"
-        v-text="(source.showLink.path !== '/') ? source.showLink.path : 'Root'"/>
-    <span v-if="source.showLink.text"
+        bbn-text="(source.showLink.path !== '/') ? source.showLink.path : 'Root'"/>
+    <span bbn-if="source.showLink.text"
           class="bbn-medium">
       <?= _("Text") ?>
     </span>
-    <div v-if="source.showLink.text"
-        v-text="source.showLink.text"
+    <div bbn-if="source.showLink.text"
+        bbn-text="source.showLink.text"
         class="bbn-medium"/>
-    <span v-if="source.showLink.url"
+    <span bbn-if="source.showLink.url"
           class="bbn-medium">
       <?= _("Url") ?>
     </span>
     <div class="bbn-medium">
       <a :src="renderUrl(source.showLink.url)"
-          v-text="renderUrl(source.showLink.url)"
+          bbn-text="renderUrl(source.showLink.url)"
           class="bbn-p bbn-medium"/>
     </div>
 
-    <span v-if="source.showLink.description"
+    <span bbn-if="source.showLink.description"
           class="bbn-medium">
       <?= _("Description") ?>
     </span>
-    <div v-if="source.showLink.description"
-         v-text="source.showLink.description ? source.showLink.description : '' "
+    <div bbn-if="source.showLink.description"
+         bbn-text="source.showLink.description ? source.showLink.description : '' "
          class="bbn-medium"/>
     <div class="appui-note-bookmarks-links-container bbn-widget bbn-grid-full"
           ref="linksContainer"
-          v-if="source.showLink.image"
+          bbn-if="source.showLink.image"
           style="border:1px solid"
     >
       <div :class="['k-file', {
@@ -58,42 +58,42 @@
             }]"
       >
         <div class="bbn-flex-width">
-          <div v-if="source.showLink.image.img_path && source.showLink.image.image"
+          <div bbn-if="source.showLink.image.img_path && source.showLink.image.image"
               class="appui-note-bookmarks-link-image">
             <img :src="imageDom + source.showLink.image.img_path + source.showLink.image.image"
             >
           </div>
-          <div v-else class="appui-note-bookmarks-link-noimage">
+          <div bbn-else class="appui-note-bookmarks-link-noimage">
             <i class="nf nf-fa-link bbn-xl"></i>
           </div>
           <div class="appui-note-bookmarks-link-title bbn-flex-fill">
             <strong>
               <a :href="source.showLink.image.content.url"
                   class="bbn-p"
-                  v-text="source.showLink.image.title || source.showLink.image.content.url"
+                  bbn-text="source.showLink.image.title || source.showLink.image.content.url"
               ></a>
             </strong>
             <br>
-            <span v-if="source.showLink.image.content && source.showLink.image.content.description"
-                  v-text="source.showLink.image.content.description"
+            <span bbn-if="source.showLink.image.content && source.showLink.image.content.description"
+                  bbn-text="source.showLink.image.content.description"
             ></span>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div v-else-if="source.showFolder" class="bbn-grid-fields bbn-medium">
-    <span v-if="source.showFolder.items && source.showFolder.items.length" 
-          v-html="'The folder contains' + ' ' +'<span class=\'bbn-green\'>' + source.showFolder.items.length + 'items' + '</span>' "
+  <div bbn-else-if="source.showFolder" class="bbn-grid-fields bbn-medium">
+    <span bbn-if="source.showFolder.items && source.showFolder.items.length" 
+          bbn-html="'The folder contains' + ' ' +'<span class=\'bbn-green\'>' + source.showFolder.items.length + 'items' + '</span>' "
           class="bbn-grid-full"
     ></span>
-    <span v-else
+    <span bbn-else
           class="bbn-grid-full">
       <?= _("This folder is empty") ?>
     </span>
     <span><?= _("Folder name") ?></span>
-    <span v-text="source.showFolder.text"/>
+    <span bbn-text="source.showFolder.text"/>
     <span><?= _("Parent") ?></span>
-    <span v-text="source.showFolder.parent"/>
+    <span bbn-text="source.showFolder.parent"/>
   </div>
 </div>

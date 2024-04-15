@@ -1,11 +1,11 @@
 <!-- HTML Document -->
 
 <div :class="componentClass">
-  <div v-if="mode === 'edit'"
+  <div bbn-if="mode === 'edit'"
        class="bbn-w-100">
     <div class="bbn-padded bbn-w-100">
       <div class="bbn-grid-fields">
-        <label v-text="_('Image')"></label>
+        <label bbn-text="_('Image')"></label>
         <div class="appui-note-cms-block-image-preview bbn-flex">
           <bbn-button icon="nf nf-fae-galery"
 										  :notext="true"
@@ -14,11 +14,11 @@
 											class="bbn-right-sspace"/>
 					<img class="bbn-bordered bbn-radius"
 					 		 :src="source.content"
-							 v-if="!!source.content">
+							 bbn-if="!!source.content">
         </div>
-        <label v-text="_('Width')"></label>
+        <label bbn-text="_('Width')"></label>
         <div>
-          <bbn-range v-model="source.width"
+          <bbn-range bbn-model="source.width"
                      :show-reset="false"
                      :show-numeric="true"
                      :show-units="true"
@@ -32,7 +32,7 @@
         </div>
 				<label><?= _('Height') ?></label>
         <div>
-          <bbn-range v-model="source.height"
+          <bbn-range bbn-model="source.height"
                      :show-reset="false"
                      :show-numeric="true"
                      :show-units="true"
@@ -44,11 +44,11 @@
                       @click="toggleAutoHeight"
                       :text="_('Auto')"/>
         </div>
-        <label v-text="_('Alignment')"></label>
+        <label bbn-text="_('Alignment')"></label>
         <div>
         	<div class="bbn-block">
           	<bbn-radiobuttons :notext="true"
-                              v-model="source.align"
+                              bbn-model="source.align"
                               :source="[{
                                  text: _('Align left'),
                                  value: 'left',
@@ -64,21 +64,21 @@
                               }]"/>
 					</div>
         </div>
-				<label v-text="_('Alt')"></label>
-				<bbn-input v-model="source.alt"/>
-				<label v-text="_('Link')"></label>
-				<bbn-input v-model="source.href"/>
-				<label v-text="_('Caption')"></label>
-				<bbn-input v-model="source.caption"/>
-				<label v-text="_('Details')"></label>
+				<label bbn-text="_('Alt')"></label>
+				<bbn-input bbn-model="source.alt"/>
+				<label bbn-text="_('Link')"></label>
+				<bbn-input bbn-model="source.href"/>
+				<label bbn-text="_('Caption')"></label>
+				<bbn-input bbn-model="source.caption"/>
+				<label bbn-text="_('Details')"></label>
 				<div>
 					<div>
-						<bbn-input v-model="source.details_title"
+						<bbn-input bbn-model="source.details_title"
 											 placeholder="<?= _('Title') ?>"
 											 class="bbn-w-100"/>
 					</div>
 					<div>
-						<bbn-input v-model="source.details"
+						<bbn-input bbn-model="source.details"
 											 placeholder="<?= _('Content') ?>"
 											 class="bbn-w-100"/>
 					</div>
@@ -86,15 +86,15 @@
       </div>
     </div>
   </div>
-  <div v-else>
+  <div bbn-else>
 		<div class="bbn-flex"
 				 :style="align">
-      <div v-if="$parent.selectable && !source.content"
+      <div bbn-if="$parent.selectable && !source.content"
            class="bbn-alt-background bbn-middle bbn-lpadded bbn-w-100"
            style="overflow: hidden">
         <i class="bbn-xxxxl nf nf-fa-image"/>
       </div>
-			<a v-if="!!source.href && !!source.content"
+			<a bbn-if="!!source.href && !!source.content"
          :style="{width: source.width, height: source.height}"
 				 target="_self"
 				 :href="$parent.linkURL ? $parent.linkURL + source.href : source.href"
@@ -102,22 +102,22 @@
 				<img :src="$parent.path + source.content"
 						 :alt="source.alt ? source.alt : ''">
 			</a>
-			<img v-else-if="!!source.content"
+			<img bbn-else-if="!!source.content"
            :style="{'width': source.width, 'height': source.height}"
 				 	 :src="source.content"
 				 	 :alt="source.alt ? source.alt : ''">
 			<p class="image-caption bbn-l bbn-s bbn-vsmargin"
-				 v-if="!!source.caption"
-				 v-html="source.caption"/>
+				 bbn-if="!!source.caption"
+				 bbn-html="source.caption"/>
 			<!--error when using decodeuricomponent on details of home image-->
 			<a class="image-details-title bbn-l bbn-vsmargin bbn-w-100"
-				 v-if="!!source.details_title"
-				 v-html="(source.details_title)"
+				 bbn-if="!!source.details_title"
+				 bbn-html="(source.details_title)"
 				 :href="source.href"
 				 target="_blank"/>
 			<p class="image-details bbn-l bbn-vsmargin"
-				 v-if="!!source.details"
-				 v-html="source.details"/>
+				 bbn-if="!!source.details"
+				 bbn-html="source.details"/>
 		</div>
   </div>
 </div>

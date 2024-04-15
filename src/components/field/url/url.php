@@ -1,7 +1,7 @@
 <!-- HTML Document -->
 
 <div :class="componentClass">
-  <bbn-input v-model="source.url"
+  <bbn-input bbn-model="source.url"
              :nullable="urlEdited"
              :disabled="disabled"
              :readonly="readonly"

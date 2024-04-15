@@ -2,19 +2,19 @@
   <div class="bbn-flex-width bbn-vmiddle">
     <div class="bbn-flex-fill">
       <span><?= _('Version') ?>: </span>
-      <span v-text="currentVersion"></span>
+      <span bbn-text="currentVersion"></span>
       <span class="bbn-hsmargin">|</span>
-      <span v-text="currentDate"></span>
+      <span bbn-text="currentDate"></span>
       <span class="bbn-hsmargin">|</span>
-      <span v-text="currentCreator"></span>
+      <span bbn-text="currentCreator"></span>
     </div>
-    <div v-if="hasVersions">
+    <div bbn-if="hasVersions">
       <span><?= _('Versions') ?>: </span>
       <bbn-dropdown :source="dataUrl"
                     :data="{
                       id: data.id
                     }"
-                    v-model="currentVersion"
+                    bbn-model="currentVersion"
                     :map="map"
       ></bbn-dropdown>
     </div>

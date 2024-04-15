@@ -270,13 +270,11 @@
               true,
               {
                 type: 'container',
-                _elementor: this.editor.getElementorDefaultObj()
+                _elementor: this.editor.getElementorDefaultObj(),
+                items: []
               },
               bbn.fn.getRow(appui.getRegistered('appui-note-cms').blocks, 'code', 'container').configuration
             );
-            if (ns.items === undefined) {
-              ns.items = [];
-            }
             ns.items.push(toData.source, newSource);
             newSource = ns;
           }
@@ -334,7 +332,7 @@
       }
     },
     mounted(){
-      this.$set(this, 'editor', this.closest('appui-note-cms-editor'));
+      this.editor = this.closest('appui-note-cms-editor');
     }
   };
 })();

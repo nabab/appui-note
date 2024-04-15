@@ -2,6 +2,7 @@
 
 (() => {
   return {
+    mixins: [bbn.cp.mixins.basic],
     props: {
       title: {
         type: String,
@@ -23,6 +24,11 @@
       special: {
         type: String
       }
+    },
+    data(){
+      return {
+        cid: this.$cid
+      };
     }
   };
 })();

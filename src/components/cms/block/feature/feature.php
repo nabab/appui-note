@@ -2,5 +2,5 @@
 
 <div class='bbn-w-100 bbn-padding'>
   	Note Picker
-  <appui-note-picker v-model='content'/>
+  <appui-note-picker bbn-model='content'/>
 </div>

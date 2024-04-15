@@ -3,15 +3,15 @@
   <appui-search-result-item :source="source">
     <span slot="title">
       <span class="bbn-s"
-            v-text="source.type"/><br>
-      <span v-text="_('V') + ' ' + source.version"
+            bbn-text="source.type"/><br>
+      <span bbn-text="_('V') + ' ' + source.version"
             :title="_('Version number') + ' (' + (source.latest ? _('This is the latest version') : _('This is not the latest version')) + ')'"
             :class="[
                     'bbn-right-margin',
                     {'bbn-b': source.latest}
                     ]"/>
       <span slot="content"
-            v-text="source.title"
+            bbn-text="source.title"
             class="bbn-light"/>
     </span>
   </appui-search-result-item>

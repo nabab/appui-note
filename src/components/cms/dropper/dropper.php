@@ -5,18 +5,16 @@
        'bbn-tertiary': !!special,
        'bbn-background bbn-text': !special
      }]"
-     v-draggable.data.mode="{
+     bbn-draggable.data.mode="{
        data: {
          type: 'cmsDropper',
          source: {type, special},
          cfg: defaultConfig,
-         parendUid: _uid
+         parendUid: cid
        },
        mode: 'clone'
-     }"
-     @dragend="e => $emit('dragend', e)"
-     @dragstart="e => $emit('dragstart', e)">
+     }">
   <i :class="[icon, ' bbn-xl']"/>
   <span class="bbn-s bbn-top-smargin"
-        v-text="title"/>
+        bbn-text="title"/>
 </div>

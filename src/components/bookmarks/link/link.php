@@ -9,11 +9,11 @@
                :value="parent"/>
     <div class="bbn-grid-full">
       <i class="nf nf-fa-times bbn-p"
-         v-if="parent !== 'ROOT'"
+         bbn-if="parent !== 'ROOT'"
          @click="removeParent"
          title="<?= _("Create the link at root") ?>"/>
       <span class="bbn-green bbn-b"
-            v-text="formHeader"/>
+            bbn-text="formHeader"/>
     </div>
     <div>
       <span><?= _("Text") ?></span>
@@ -22,7 +22,7 @@
       <bbn-input ref="text"
                 placeholder="<?= _("Link title") ?>"
                 class="bbn-w-100"
-                v-model="source.text"/>
+                bbn-model="source.text"/>
     </div>
     <div>
       <span><?= _("Description") ?></span>
@@ -30,7 +30,7 @@
     <div>
       <bbn-textarea class="bbn-w-100"
                     style="width:100%"
-                    v-model="source.description"/>
+                    bbn-model="source.description"/>
     </div>
     <div>
       <span><?= _("Url") ?></span>
@@ -40,11 +40,11 @@
                  @keydown.enter.prevent.stop="linkEnter"
                  placeholder="<?= _("Type or paste your URL and press Enter to valid") ?>"
                  class="bbn-w-100"
-                 v-model="source.url"/>
+                 bbn-model="source.url"/>
     </div>
     <div class="appui-note-bookmarks-links-container bbn-widget bbn-grid-full"
          ref="linksContainer"
-         v-if="source.image"
+         bbn-if="source.image"
          :style="link  ? 'border:1px solid' : 'border:none'"
     >
       <div :class="['bbn-file', {
@@ -54,25 +54,25 @@
             }]"
       >
         <div class="bbn-flex-width">
-          <div v-if="imageDom && source.image.image"
+          <div bbn-if="imageDom && source.image.image"
                class="appui-note-bookmarks-link-image"
           >
             <img :src="imageDom + ( source.image.img_path ? source.image.img_path : ref ) + '/' + source.image.image"
             >
           </div>
-           <div v-else class="appui-note-bookmarks-link-noimage">
+           <div bbn-else class="appui-note-bookmarks-link-noimage">
             <i class="nf nf-fa-link bbn-xl"></i>
           </div>
           <div class="appui-note-bookmarks-link-title bbn-flex-fill">
             <strong>
               <a :href="source.image.content.url"
                   class="bbn-p"
-                  v-text="source.image.content.url"
+                  bbn-text="source.image.content.url"
               ></a>
             </strong>
             <br>
-            <span v-if="source.image.content && source.image.content.description"
-                  v-text="source.image.content.description"
+            <span bbn-if="source.image.content && source.image.content.description"
+                  bbn-text="source.image.content.description"
             ></span>
           </div>
           <div class="appui-note-bookmarks-link-actions bbn-vmiddle">

@@ -134,28 +134,28 @@
 	<bbn-form :validation="validation" :source="source" :data="{ref:ref}" :action="root + (source.edit ? 'media/actions/edit' : 'media/actions/save')" @success="success">
 		<div class="bbn-grid-fields">
 			<div>Title: </div>
-			<bbn-input v-model="source.media.title" @blur="checkTitle"
+			<bbn-input bbn-model="source.media.title" @blur="checkTitle"
 								 :disabled="source.edit ? false : (!source.media.file.length ?true : false )"
 			></bbn-input>
 
 			<div>Filename: </div>
-			<bbn-input v-model="source.media.name"
+			<bbn-input bbn-model="source.media.name"
 								 :disabled="source.edit ? false : (!source.media.file.length ?true : false )"
 			></bbn-input>
 
 			<div>Media: </div>
 			<div>
-				<bbn-upload v-if="source.edit"
+				<bbn-upload bbn-if="source.edit"
 										:json="true"
-										v-model="content"
+										bbn-model="content"
 										:paste="true"
 										:multiple="false"
 										:save-url="root + 'media/actions/upload_save/' + ref"
 										@remove="setRemovedFile"
 										:remove-url="root + 'media/actions/delete_file/'+ source.media.id"
 				></bbn-upload>
-				<bbn-upload v-model="source.media.file"
-										v-else
+				<bbn-upload bbn-model="source.media.file"
+										bbn-else
 									  @success="uploadSuccess"
 										:paste="true"
 										:multi="false"
@@ -294,27 +294,27 @@
 <div>
 	<div class="bbn-grid-fields bbn-padded">
 		<div>Title:</div>
-		<div v-text="source.title"></div>
+		<div bbn-text="source.title"></div>
 		<div>Filename:</div>
-		<div v-text="source.name"></div>
+		<div bbn-text="source.name"></div>
 		<div>Type:</div>
-		<div v-text="source.type"></div>
+		<div bbn-text="source.type"></div>
 		<div>User:</div>
-		<div v-text="getField(users, 'text', {value: source.id_user})"></div>
+		<div bbn-text="getField(users, 'text', {value: source.id_user})"></div>
 		<div>Size:</div>
-    <div v-text="formatBytes(source.content.size)"></div>
+    <div bbn-text="formatBytes(source.content.size)"></div>
     <div>Extension:</div>
-    <div v-text="source.content.extension"></div>
-    <div class="bbn-grid-full bbn-bordered bbn-radius bbn-spadded bbn-vmargin" v-for="n in source.notes">
+    <div bbn-text="source.content.extension"></div>
+    <div class="bbn-grid-full bbn-bordered bbn-radius bbn-spadded bbn-vmargin" bbn-for="n in source.notes">
       <div class="bbn-grid-fields">
         <div>Note title:</div>
-        <div v-text="n.title"></div>
+        <div bbn-text="n.title"></div>
         <div>Creation:</div>
-        <div v-text="n.creation"></div>
+        <div bbn-text="n.creation"></div>
         <div>Version:</div>
-        <div v-text="n.version"></div>
+        <div bbn-text="n.version"></div>
 				<div>Published:</div>
-        <div v-text="n.is_published ? _('Yes') : _('No') "></div>
+        <div bbn-text="n.is_published ? _('Yes') : _('No') "></div>
         <div>Content:</div>
         <i class="nf nf-mdi-comment_text bbn-medium bbn-p" title="Note content" @click="show_note_content(n)"></i>
       </div>

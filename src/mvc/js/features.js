@@ -251,11 +251,11 @@
                            style="min-width: 20em">
                       	<div class="bbn-label">text</div>
                         <bbn-input title="text"
-                        					 v-model="newCategory.text"
+                        					 bbn-model="newCategory.text"
                                    :required="true"/>
                       	<div class="bbn-label">code</div>
                         <bbn-input title="code"
-                                   v-model="newCategory.code"
+                                   bbn-model="newCategory.code"
                                    :required="true"/>
                       </div>
                     </bbn-form>`

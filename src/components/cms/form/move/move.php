@@ -6,6 +6,6 @@
     <label class="bbn-label"><?= _('Category') ?></label>
     <bbn-dropdown placeholder="<?= _('Choose') ?>"
                   :source="cp.typesTextValue"
-                  v-model="formData.type"/>
+                  bbn-model="formData.type"/>
   </div>
 </bbn-form>

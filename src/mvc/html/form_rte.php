@@ -4,7 +4,7 @@
           action="/bbn/appui/notes/insert"
           :buttons="['submit']"
 >
-  <bbn-rte v-model="source.content"
+  <bbn-rte bbn-model="source.content"
            class="bbn-100"
   ></bbn-rte>
 </bbn-form>

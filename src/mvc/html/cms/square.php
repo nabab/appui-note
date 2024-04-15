@@ -7,7 +7,7 @@
     <div class="bbn-100">
       <bbn-scroll>
         <div class="bbn-grid-fields"
-             v-for="(line, i) in lines"
+             bbn-for="(line, i) in lines"
              tabindex="0">
           <div class="bbn-padded"
                style="width: 160px">
@@ -17,10 +17,10 @@
             <bbn-cms-block :source="line"
                        ref="block"
                        :index="i"
-                       v-if="line.type"
+                       bbn-if="line.type"
             >
             </bbn-cms-block>
-            <span v-else class="bbn-c bbn-medium bbn-green"><?= ('Select a block type') ?></span>
+            <span bbn-else class="bbn-c bbn-medium bbn-green"><?= ('Select a block type') ?></span>
           </div>
         </div>
       </bbn-scroll>

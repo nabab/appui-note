@@ -7,21 +7,21 @@
   <!--TO TAKE IMAGE FROM THE INDEX-->
   <img :src="path + source.src" :alt="source.alt ? source.alt : ''"
        :style="$parent.style">
-  <div v-if="source.caption || (source.title && (type === 'carousel'))" 
+  <div bbn-if="source.caption || (source.title && (type === 'carousel'))" 
        :class="['bbn-block-gallery-caption',$parent.alignClass]"
-       v-html="(source.caption && (type === 'gallery')) ? source.caption : source.title"
+       bbn-html="(source.caption && (type === 'gallery')) ? source.caption : source.title"
        ></div>
-  <div v-if="source.details_title" 
+  <div bbn-if="source.details_title" 
        :class="['image-details-title',$parent.alignClass]"
-       v-html="source.details_title"
+       bbn-html="source.details_title"
        ></div>
-  <div v-if="source.details" 
+  <div bbn-if="source.details" 
        :class="['image-details',$parent.alignClass]"
-       v-html="source.details"
+       bbn-html="source.details"
        ></div>
-  <div v-if="source.price" 
+  <div bbn-if="source.price" 
        :class="['image-price',$parent.alignClass]"
-       v-text="source.price"
+       bbn-text="source.price"
        ></div>
-  <time v-if="source.time" v-text="source.time" :class="$parent.alignClass"></time>
+  <time bbn-if="source.time" bbn-text="source.time" :class="$parent.alignClass"></time>
 </a>

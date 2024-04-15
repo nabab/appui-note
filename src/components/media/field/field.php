@@ -10,7 +10,7 @@
                     title="<?= _('Browse the images') ?>"/>
       </div><br>
       <div class="bbn-iblock bbn-bottom-smargin">
-        <bbn-button v-if="currentIndex > -1"
+        <bbn-button bbn-if="currentIndex > -1"
                     icon="nf nf-mdi-information_outline"
                     :notext="true"
                     @click="openInfo(source[currentIndex])"
@@ -18,17 +18,17 @@
       </div>
     </div>
     <div>
-      <img v-if="value"
+      <img bbn-if="value"
            class="bbn-bordered bbn-radius bbn-p"
            @click="showImage()"
            style="max-height: 8em; width: min(auto, 100%); max-width: 8em; height: min(auto, 100%)"
            :src="root + 'media/image/' + value + '?w=200'">
     </div>
   </div>
-  <div v-if="source !== undefined"
+  <div bbn-if="source !== undefined"
        class="bbn-w-100 bbn-flex-items"
        style="flex-wrap: wrap; gap: var(--sspace)">
-    <div v-for="(img, i) in source"
+    <div bbn-for="(img, i) in source"
          class="bbn-p"
          @click="emitInput(img.id)"
          @mouseenter="overImg = img.id"
@@ -40,7 +40,7 @@
              :src="root + 'media/image/' + img.id + '?w=200'">
         <div class="bbn-bottom-left bbn-w-100 bbn-modal bbn-white bbn-c"
              style="height: 1.5em"
-             v-show="overImg === img.id"
+             bbn-show="overImg === img.id"
              @click.stop>
           <div class="bbn-iblock bbn-xspadded bbn-p bbn-text-reactive"
                @click="showImage(img)">
@@ -64,6 +64,6 @@
           </div>
         </div>
       </div>
-    </div-->
+    </dibbn-->
   </div>
 </div>

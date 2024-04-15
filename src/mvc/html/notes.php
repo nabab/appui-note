@@ -5,16 +5,16 @@
                placeholder="<?= _("Search") ?>"
                autocomplete="off"
                style="width: 75%"/>
-  </div-->
+  </dibbn-->
   <div class="bbn-w-100 bbn-flex-fill">
     <bbn-scroll>
       <div class="bbn-lpadding bbn-postit-container bbn-w-100 bbn-flex"
            style="justify-content: center; align-items: center; flex-wrap: wrap; min-height: 100%">
-        <appui-note-postit v-if="newPostIt"
+        <appui-note-postit bbn-if="newPostIt"
                            :source="newPostIt"
                            @save="onSave"/>
         <div style="width: 20em; height: 20em;"
-             v-else
+             bbn-else
              class="bbn-p bbn-bordered bbn-reactive bbn-radius"
              @click.stop.prevent="add">
           <div class="bbn-100 bbn-middle">
@@ -24,7 +24,7 @@
             </div>
           </div>
         </div>
-        <appui-note-postit v-for="note in source.notes"
+        <appui-note-postit bbn-for="note in source.notes"
                            :key="note.id"
                            :uid="note.id"
                            :show-pinned="true"

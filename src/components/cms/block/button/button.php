@@ -1,16 +1,16 @@
 <!-- HTML Document -->
 
 <div :class="[componentClass, 'bbn-w-100']">
-  <div v-if="mode === 'edit'"
+  <div bbn-if="mode === 'edit'"
        class="bbn-grid-fields bbn-w-100">
-    <label v-text="_('Text')"></label>
-    <bbn-input  v-model="source.content" />
-    <label v-text="_('Link')"></label>
-    <bbn-input  v-model="source.url" />
-    <label v-text="_('Dimensions')"></label>
+    <label bbn-text="_('Text')"></label>
+    <bbn-input  bbn-model="source.content" />
+    <label bbn-text="_('Link')"></label>
+    <bbn-input  bbn-model="source.url" />
+    <label bbn-text="_('Dimensions')"></label>
     <div>
       <div class="bbn-block bbn-s">
-        <bbn-radiobuttons v-model="source.dimensions"
+        <bbn-radiobuttons bbn-model="source.dimensions"
                           :source="[{
                               text: _('Default'),
                               value: '',
@@ -35,10 +35,10 @@
                           }]"/>
       </div>
     </div>
-    <label v-text="_('Space')"></label>
+    <label bbn-text="_('Space')"></label>
     <div>
       <div class="bbn-block bbn-s">
-        <bbn-radiobuttons v-model="source.padding"
+        <bbn-radiobuttons bbn-model="source.padding"
                           :source="[
                             {
                               text: _('No space'),
@@ -58,11 +58,11 @@
                           }]"/>
       </div>
     </div>
-    <label v-text="_('Alignment')"></label>
+    <label bbn-text="_('Alignment')"></label>
     <div>
       <div class="bbn-block">
         <bbn-radiobuttons :notext="true"
-                          v-model="source.align"
+                          bbn-model="source.align"
                           :source="[{
                               text: _('Align left'),
                               value: 'left',
@@ -78,15 +78,15 @@
                           }]"/>
       </div>
     </div>
-    <label v-text="_('Class')"/>
-    <bbn-input  v-model="source.class"/>
+    <label bbn-text="_('Class')"/>
+    <bbn-input  bbn-model="source.class"/>
   </div>
-  <div v-else-if="!source.content && $parent.selectable"
+  <div bbn-else-if="!source.content && $parent.selectable"
         class="bbn-alt-background bbn-middle bbn-lpadded"
         style="overflow: hidden">
     <i class="bbn-xxxxl nf nf-md-gesture_tap_button"/>
   </div>
-  <div v-else
+  <div bbn-else
        class="bbn-w-100" :style="'text-align:'+source.align">
     <bbn-button :url="source.url"
                 :text="source.content"

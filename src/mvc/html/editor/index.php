@@ -5,7 +5,7 @@
 </head>
 <body>
   <div class="bbn-container">
-    <bbn-rte @input="log" v-model="text"></bbn-rte>
+    <bbn-rte @input="log" bbn-model="text"></bbn-rte>
   </div>
   <script>
     new Vue({

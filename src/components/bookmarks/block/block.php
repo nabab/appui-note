@@ -3,7 +3,7 @@
 <div class="bbn-overlay bbn-flex-height appui-note-bookmarks-block">
   <div class="bbn-padded bbn-b bbn-grid-fields">
     <bbn-input placeholder="Search a link"
-               v-model="search"></bbn-input>
+               bbn-model="search"></bbn-input>
     <div class="bbn-m">
       <span>
         {{currentData.length}}
@@ -18,8 +18,8 @@
                 @resize="resize"
                 @ready="update"
                 @reachBottom="addItems">
-      <appui-note-bookmarks-item v-for="(block, i) in currentData"
-                                 v-if="i < numberShown"
+      <appui-note-bookmarks-item bbn-for="(block, i) in currentData"
+                                 bbn-if="i < numberShown"
                                  :source="block"
                                  :key="block.id"
                                  :scroll-size="scrollSize"

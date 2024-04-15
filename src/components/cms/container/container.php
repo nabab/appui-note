@@ -11,11 +11,6 @@
       tabindex="0"
       @mouseenter="over = true"
       @mouseleave="over = false"
-     	@click="$emit('click', $event)"
-      @dragstart="e => $emit('dragstart', e)"
-      @dragend="e => $emit('dragend', e)"
-      @beforedrop="e => $emit('beforedrop', e)"
-      @drop="e => $emit('drop', e)"
       :style="{
         width: (mode === 'read') && !!source.width ? source.width : '',
         height: (mode === 'read') && !!source.height ? source.height : ''
@@ -26,18 +21,18 @@
          'bbn-p': selectable,
          '<?= $componentName ?>-selected': selectable && selected
        }]">
-    <template v-if="mode === 'read'">
-      <div v-if="!selectable || !!source.items?.length"
+    <template bbn-if="mode === 'read'">
+      <div bbn-if="!selectable || !!source.items?.length"
            :class="['bbn-grid', {
              'bbn-vmargin': selectable && !isVertical,
              'bbn-hmargin': selectable && isVertical
            }]"
            :style="gridStyle"
            key="containerGrid">
-        <template v-for="(item, i) in source.items">
-          <appui-note-cms-elementor-guide v-if="overable"
+        <template bbn-for="(item, i) in source.items">
+          <appui-note-cms-elementor-guide bbn-if="overable"
                                           :visible="isDragging"
-                                          v-droppable.data="{data: {index: i}}"
+                                          bbn-droppable.data="{data: {index: i}}"
                                           @drop.prevent.stop="onDrop"
                                           :vertical="!isVertical"/>
           <!--<div @mouseenter="overItem = i"
@@ -47,7 +42,7 @@
                  'bbn-hmargin': selectable && isVertical
                }">
             <div class="bbn-100">-->
-              <appui-note-cms-container v-if="item.type === 'container'"
+              <appui-note-cms-container bbn-if="item.type === 'container'"
                                         :source="item"
                                         :selectable="selectable"
                                         :overable="selectable"
@@ -57,13 +52,13 @@
                                         @click.stop="selectBlock(item._elementor.key, item, _self, $event)"
                                         @selectblock="selectBlock"
                                         :key="overable ? item._elementor.key : i"
-                                        v-draggable.data.mode="getDraggableData(i, item, 'cmsContainer')"
+                                        bbn-draggable.data.mode="getDraggableData(i, item, 'cmsContainer')"
                                         @dragstart="onDragStart"
                                         @dragend="onDragEnd"
                                         :dragging="isDragging"
                                         @mouseenter="overItem = i"
                                         @mouseleave="overItem = -1"/>
-              <appui-note-cms-block v-else
+              <appui-note-cms-block bbn-else
                                     @click="selectBlock(item._elementor.key, item, _self, $event)"
                                     @config-init="configInit"
                                     :path="path"
@@ -75,15 +70,15 @@
                                     :source="item"
                                     :data-index="index"
                                     :data-container-index="i"
-                                    v-draggable.data.mode="getDraggableData(i, item, 'cmsContainerBlock')"
+                                    bbn-draggable.data.mode="getDraggableData(i, item, 'cmsContainerBlock')"
                                     @dragstart="onDragStart"
                                     @dragend="onDragEnd"
-                                    v-droppable.data="!!overable ? {data: {index: i, replace: true, source: item}} : false"
-                                    @drop.prevent="onDrop"
+                                    bbn-droppable.data="!!overable ? {data: {index: i, replace: true, source: item}} : false"
+                                    @drop.prevent.stop="onDrop"
                                     :key="overable ? item._elementor.key : i"
                                     @mouseenter="overItem = i"
                                     @mouseleave="overItem = -1"/>
-              <!--<div v-if="overable && (mode === 'read')"
+              <!--<div bbn-if="overable && (mode === 'read')"
                    :class="['bbn-bottom-right', 'bbn-xspadding', {'bbn-hidden': overItem !== i}]"
                    @mouseenter="overItem = i"
                    @mouseleave="overItem = -1">
@@ -95,24 +90,24 @@
             <!--</div>
           </div>-->
         </template>
-        <appui-note-cms-elementor-guide v-if="overable"
+        <appui-note-cms-elementor-guide bbn-if="overable"
                                         :visible="isDragging"
-                                        v-droppable.data="{data: {index: source.items?.length ? source.items.length : 0}}"
+                                        bbn-droppable.data="{data: {index: source.items?.length ? source.items.length : 0}}"
                                         @drop.prevent.stop="onDrop"
                                         :vertical="!isVertical"/>
       </div>
-      <div v-else-if="selectable"
+      <div bbn-else-if="selectable"
            class="<?= $componentName ?>-droparea bbn-100 bbn-lpadded bbn-middle bbn-upper"
-           v-droppable.data="{data: {index: 0}}"
+           bbn-droppable.data="{data: {index: 0}}"
            @drop.prevent.stop="onDrop"
            key="containerDropArea">
         <i class="bbn-xl nf nf-fa-plus"/>
       </div>
     </template>
-    <div v-else
+    <div bbn-else
          class="appui-note-cms-container-editor bbn-grid-fields bbn-w-100">
-      <label v-text="_('Orientation')"/>
-      <bbn-radiobuttons v-model="source.orientation"
+      <label bbn-text="_('Orientation')"/>
+      <bbn-radiobuttons bbn-model="source.orientation"
                         :notext="true"
                         :source="[{
                           text: _('Horizontal'),
@@ -123,9 +118,9 @@
                           value: 'vertical',
                           icon: 'nf nf-cod-split_vertical'
                         }]"/>
-      <label v-text="_('Height')"/>
+      <label bbn-text="_('Height')"/>
       <div>
-        <bbn-radiobuttons v-model="source.height"
+        <bbn-radiobuttons bbn-model="source.height"
                           class="bbn-bottom-sspace bbn-s"
                           :source="[{
                             text: 'AUTO',
@@ -140,12 +135,12 @@
                             title: '100%',
                             value: '100%'
                           }]"/>
-        <bbn-input v-model="source.height"
+        <bbn-input bbn-model="source.height"
                    style="width: 100%"/>
       </div>
-      <label v-text="_('Width')"/>
+      <label bbn-text="_('Width')"/>
       <div>
-        <bbn-radiobuttons v-model="source.width"
+        <bbn-radiobuttons bbn-model="source.width"
                           class="bbn-bottom-sspace bbn-s"
                           :source="[{
                             text: 'AUTO',
@@ -160,11 +155,11 @@
                             title: '100%',
                             value: '100%'
                           }]"/>
-        <bbn-input v-model="source.width"
+        <bbn-input bbn-model="source.width"
                    style="width: 100%"/>
       </div>
-      <label v-text="_('Horizontal Alignment')"/>
-      <bbn-radiobuttons v-model="source.align"
+      <label bbn-text="_('Horizontal Alignment')"/>
+      <bbn-radiobuttons bbn-model="source.align"
                         :notext="true"
                         :source="[{
                           text: _('None'),
@@ -196,8 +191,8 @@
                           icon: 'nf nf-md-align_horizontal_distribute'
                         }]"
                         style="flex-wrap: wrap"/>
-      <label v-text="_('Vertical Alignment')"/>
-      <bbn-radiobuttons v-model="source.valign"
+      <label bbn-text="_('Vertical Alignment')"/>
+      <bbn-radiobuttons bbn-model="source.valign"
                         :notext="true"
                         :source="[{
                           text: _('None'),
@@ -220,15 +215,15 @@
                           value: 'stretch',
                           icon: 'nf nf-md-align_vertical_distribute'
                         }]"/>
-      <template v-if="source.items?.length && Object.keys(gridLayout).length">
-        <label v-text="_('Layout')"/>
+      <template bbn-if="source.items?.length && Object.keys(gridLayout).length">
+        <label bbn-text="_('Layout')"/>
         <div>
-          <div v-for="(it, i) in source.items"
+          <div bbn-for="(it, i) in source.items"
                :class="{'bbn-bottom-space': !!source.items[i+1]}">
             <div class="bbn-bottom-sspace">
               {{i + 1}} - {{getWidgetName(it.type)}}
             </div>
-            <bbn-radiobuttons v-model="gridLayout[i]"
+            <bbn-radiobuttons bbn-model="gridLayout[i]"
                               class="bbn-bottom-sspace bbn-s"
                               :source="[{
                                 text: 'AUTO',
@@ -243,7 +238,7 @@
                                 title: _('Fraction'),
                                 value: '1fr'
                               }]"/>
-            <bbn-input v-model="gridLayout[i]"
+            <bbn-input bbn-model="gridLayout[i]"
                        style="width: 100%"/>
           </div>
         </div>

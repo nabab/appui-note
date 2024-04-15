@@ -8,7 +8,7 @@
     <label class="bbn-b">
       <?= _('Title') ?>
     </label>
-    <bbn-input v-model="formData.title"
+    <bbn-input bbn-model="formData.title"
                class="bbn-w-100"
                :required="true"/>
 
@@ -17,13 +17,13 @@
     </label>
     <appui-note-field-url :source="formData"
                           :prefix="prefix"
-                          v-model="formData.url"/>
+                          bbn-model="formData.url"/>
 
     <label class="bbn-b">
       <?= _('Article type') ?>
     </label>
     <div class="bbn-flex-width">
-      <bbn-dropdown v-model="formData.type"
+      <bbn-dropdown bbn-model="formData.type"
                     :source="types"
                     class="bbn-flex-fill bbn-right-sspace"
                     :required="true"
@@ -37,14 +37,14 @@
     <label class="bbn-b">
       <?= _('Language') ?>
     </label>
-    <bbn-dropdown v-model="formData.lang"
+    <bbn-dropdown bbn-model="formData.lang"
                   :source="['en', 'fr']"
                   :required="true"/>
 
     <label class="bbn-b">
       <?= _('Excerpt') ?>
     </label>
-    <bbn-textarea v-model="formData.excerpt"
+    <bbn-textarea bbn-model="formData.excerpt"
                   style="height: 10em; max-height: 20vh"/>
 
   </div>

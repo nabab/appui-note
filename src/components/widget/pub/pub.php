@@ -1,5 +1,5 @@
 <!-- HTML Document -->
 
 <div :class="[componentClass, 'bbn-w-100', 'bbn-spadded']">
-  <a :href="source.url" v-text="source.title"/>
+  <a :href="source.url" bbn-text="source.title"/>
 </div>

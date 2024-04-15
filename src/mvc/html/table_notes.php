@@ -88,7 +88,7 @@
 <script type="text/x-template" id="apst-notes-content">
 <div style="height: 300px; margin-right:30px; position:relative">
   <input type="hidden" :value="source.id_notes">
-  <div  v-html="source.content ? source.content : 'no content'" style="height:100%;
+  <div  bbn-html="source.content ? source.content : 'no content'" style="height:100%;
                                                                        width:100%"></div>
   </div>
 </script>
@@ -111,7 +111,7 @@
     <div class="bbn-form-field">
       <bbn-dropdown name="id_type_note"
                     required="required"
-                    v-model="source.id_type_note"
+                    bbn-model="source.id_type_note"
                     :source="options.notes"
                     ></bbn-dropdown>
   </div>
@@ -120,7 +120,7 @@
       <?= _("Text") ?>
   </label>
     <div class="bbn-form-field">
-      <bbn-rte v-model="source.texte"
+      <bbn-rte bbn-model="source.texte"
                name="texte"
                required="required"
                class="bbn-100"
@@ -128,11 +128,11 @@
   </bbn-rte>
   </div>
 
-    <label class="bbn-form-label" v-if="isOwner">
+    <label class="bbn-form-label" bbn-if="isOwner">
       <?= _("Blocked") ?>
   </label>
-    <div class="bbn-form-field" v-if="isOwner">
-      <bbn-checkbox v-model="source.confidentiel"
+    <div class="bbn-form-field" bbn-if="isOwner">
+      <bbn-checkbox bbn-model="source.confidentiel"
                     name="confidentiel"
                     id="t4Wo9nnuXZb4wXifPahWB"
                     :checked="source.confidentiel ? true : false"

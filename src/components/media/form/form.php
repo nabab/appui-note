@@ -14,39 +14,39 @@
 						@success="success"
 						:scrollable="scrollable"
 						:buttons="buttons">
-		<div v-if="files.length && !isEdit"
+		<div bbn-if="files.length && !isEdit"
 				 class="bbn-vmiddle bbn-bottom-space"
 				 style="justify-content: flex-end">
 			<span><?= _('Customize titles/descriptions') ?></span>
-			<bbn-switch v-model="showTitles"
+			<bbn-switch bbn-model="showTitles"
 									:value="true"
 									:novalue="false"
 									class="bbn-left-space"/>
 		</div>
 		<div class="bbn-grid-fields bbn-padded">
-			<template v-for="(f, i) in files"
-								v-if="showTitles || isEdit">
+			<template bbn-for="(f, i) in files"
+								bbn-if="showTitles || isEdit">
 				<div><?= _('Filename') ?>:</div>
-				<div v-text="f.name"></div>
+				<div bbn-text="f.name"></div>
 
         <div><?= _('Title') ?>:</div>
-				<bbn-input v-model="f.title"/>
+				<bbn-input bbn-model="f.title"/>
 				
-				<div v-if="isMediaGroup"><?= _('Link') ?>:</div>
-				<bbn-input v-if="isMediaGroup" v-model="source.link"/>
+				<div bbn-if="isMediaGroup"><?= _('Link') ?>:</div>
+				<bbn-input bbn-if="isMediaGroup" bbn-model="source.link"/>
 
         <div class="bbn-bottom-space"><?= _('Description') ?>:</div>
-				<bbn-textarea v-model="f.description"
+				<bbn-textarea bbn-model="f.description"
 									 		class="bbn-bottom-space"/>
 
         <!--label><?= _("Tags") ?></label>
-        <bbn-values v-model="source.tags"/-->
+        <bbn-values bbn-model="source.tags"/-->
 			</template>
 
       <div><?= _('Media') ?>:</div>
 			<div>
 				<bbn-upload :json="asJson"
-										v-model="files"
+										bbn-model="files"
 										:paste="true"
 										:multiple="!isEdit"
 										:save-url="root + 'media/actions/upload_save/' + ref"

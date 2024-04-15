@@ -2,12 +2,12 @@
 
 <bbn-form :action="formAction"
           :source="currentData"
-          v-model="currentData"
+          bbn-model="currentData"
           class="bbn-m">
   <div class="bbn-padded bbn-grid-fields" >
     <label><?= _("URL") ?></label>
     <div class="bbn-flex-width">
-      <bbn-input v-model="currentData.url"
+      <bbn-input bbn-model="currentData.url"
                  class="bbn-flex-fill bbn-right-space"></bbn-input>
       <bbn-button class="bbn-w-2"
                   @click="openUrl"
@@ -17,29 +17,29 @@
     <label><?= _("In which file ?") ?></label>
     <bbn-dropdown :source="bookmarkCp.parents"
                   class="bbn-wider"
-                  v-model="idParent"
+                  bbn-model="idParent"
                   placeholder="Is there a parent ?"
                   ></bbn-dropdown>
 
     <label><?= _("Title") ?></label>
-    <bbn-input v-model="currentData.title"
+    <bbn-input bbn-model="currentData.title"
                :required="true"
                placeholder="Name of the URL"></bbn-input>
 
     <label><?= _("URL's description") ?></label>
-    <bbn-textarea v-model="currentData.description"></bbn-textarea>
+    <bbn-textarea bbn-model="currentData.description"></bbn-textarea>
 
-    <div v-if="currentData.cover">
+    <div bbn-if="currentData.cover">
       <img :src="currentData.cover"
            style="max-width: 200px; max-height: 200px; width: auto; height: auto">
     </div>
-    <div v-if="currentData.cover">
-      <bbn-button v-if="currentData.images"
+    <div bbn-if="currentData.cover">
+      <bbn-button bbn-if="currentData.images"
                   @click="showGallery = true"
                   text="change cover picture"></bbn-button>
     </div>
     <div>
-      <bbn-floater v-if="showGallery"
+      <bbn-floater bbn-if="showGallery"
                    :title="_('Pick a cover picture')"
                    :closable="true"
                    :width="500"
@@ -57,12 +57,12 @@
     </div>
 
 		<div>
-      <bbn-button	v-if="currentData.id_screenshot"
+      <bbn-button	bbn-if="currentData.id_screenshot"
                 @click="showScreenshot"
                 class="bbn-padded"
                 text="show screenshot"
                 ></bbn-button>
-    <bbn-floater v-if="visible"
+    <bbn-floater bbn-if="visible"
                  :closable="true"
                  :width="800"
                  :height="600"

@@ -40,30 +40,30 @@
         <label class="bbn-b">
           <?= _('Title') ?>
         </label>
-        <bbn-input v-model="formData.title"
+        <bbn-input bbn-model="formData.title"
                   required="required"
                   class="bbn-w-50"
         ></bbn-input>
         <label class="bbn-b">
           <?= _('Pub. date') ?>
         </label>
-        <bbn-datetimepicker v-model="formData.start"
+        <bbn-datetimepicker bbn-model="formData.start"
                             required="required"
                             class="bbn-w-20"
         ></bbn-datetimepicker>
-        <label class="bbn-b" v-text="_('End date') + ':'"></label>
-        <bbn-datetimepicker v-model="formData.end"
+        <label class="bbn-b" bbn-text="_('End date') + ':'"></label>
+        <bbn-datetimepicker bbn-model="formData.end"
                             class="bbn-w-20"
         ></bbn-datetimepicker>
 
-        <label class="bbn-b" v-text="_('Url') + ':'"></label>
-        <bbn-input v-model="formData.url"
+        <label class="bbn-b" bbn-text="_('Url') + ':'"></label>
+        <bbn-input bbn-model="formData.url"
                    required="required"
                    class="bbn-w-100"
         ></bbn-input>
       </div>
       <div class="bbn-flex-fill bbn-lpadded">
-        <bbn-rte v-model="formData.content"
+        <bbn-rte bbn-model="formData.content"
                 required="required"
                 height="100%"                  
         ></bbn-rte>

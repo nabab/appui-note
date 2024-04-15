@@ -26,7 +26,7 @@
                />
     <bbn-dropdown class="bbn-narrow"
                   :readonly="selected"
-                  v-model="extension"
+                  bbn-model="extension"
                   :source="[
                            {text: '.png', value: 'png'},
                            {text: '.jpg', value: 'jpg'},
@@ -49,7 +49,7 @@
                    placeholder="#"
                    @change="updateWidth"
                    />
-        <i v-bind:class="[locked ? 'nf nf-fa-lock' : 'nf nf-fa-unlock_alt', 'bbn-center']"
+        <i bbn-bind:class="[locked ? 'nf nf-fa-lock' : 'nf nf-fa-unlock_alt', 'bbn-center']"
            @click="lockSize"/>
         <i class="nf nf-mdi-backup_restore bbn-center bbn-left-spadding bbn-xl"
            @click="resetSize"/>

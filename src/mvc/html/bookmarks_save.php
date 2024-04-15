@@ -17,7 +17,7 @@
                       text="<?= _('New folder') ?>"/>
         </div>
         <div class="bbn-100">
-          <bbn-tree v-if="!remakeTree"
+          <bbn-tree bbn-if="!remakeTree"
                     :source="filter"
                     @select="select"
                     class="bbn-medium"
@@ -26,14 +26,14 @@
       </div>
     </bbn-pane>
     <bbn-pane>
-      <appui-note-bookmarks-link v-if="showFormLink && !showFormFolder" :source="showLink"
+      <appui-note-bookmarks-link bbn-if="showFormLink && !showFormFolder" :source="showLink"
       >
       </appui-note-bookmarks-link>
-      <appui-note-bookmarks-folder v-else-if="showFormFolder && !showFormLink" :source="showFolder"
+      <appui-note-bookmarks-folder bbn-else-if="showFormFolder && !showFormLink" :source="showFolder"
       ></appui-note-bookmarks-folder>
-      <!--appui-note-bookmarks-list v-else-if="currentNode && (selectedType === 'folder') && !showFormFolder && !showFormLink">
+      <!--appui-note-bookmarks-list bbn-else-if="currentNode && (selectedType === 'folder') && !showFormFolder && !showFormLink">
       </appui-note-bookmarks-list-->
-      <appui-note-bookmarks-show v-else-if="(showLink.text || showFolder.text) && !showFormFolder && !showFormLink"
+      <appui-note-bookmarks-show bbn-else-if="(showLink.text || showFolder.text) && !showFormFolder && !showFormLink"
                                   :source="{showLink: showLink,showFolder:showFolder}"
       >
       </appui-note-bookmarks-show>

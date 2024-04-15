@@ -89,13 +89,13 @@
         <?= _("Title") ?>
       </label>
       <bbn-input required="required"
-                 v-model="source.row.title"
+                 bbn-model="source.row.title"
       ></bbn-input>
       <label>
         <?= _("Publication date") ?>
       </label>
       <div>
-        <bbn-datetimepicker v-model="source.row.start"
+        <bbn-datetimepicker bbn-model="source.row.start"
                             required="required"
         ></bbn-datetimepicker>
       </div>
@@ -103,7 +103,7 @@
         <?= _("End date") ?>
       </label>
       <div>
-        <bbn-datetimepicker v-model="source.row.end"
+        <bbn-datetimepicker bbn-model="source.row.end"
                             :min="source.row.start"
         ></bbn-datetimepicker>
       </div>
@@ -111,7 +111,7 @@
         <?= _("Text") ?>
       </label>
       <div style="overflow: inherit; height: 400px">
-        <bbn-rte v-model="source.row.content"
+        <bbn-rte bbn-model="source.row.content"
                  required="required"
         ></bbn-rte>
       </div>

@@ -4,7 +4,7 @@
     <div class="bbn-overlay bbn-flex-height bbn-spadding">
       <div class="bbn-flex-fill bbn-top-lmargin"
            @click.stop="onClickPostIt">
-        <bbn-rte v-model="currentText"
+        <bbn-rte bbn-model="currentText"
                  :floating="true"
                  ref="editor"
                  class="bbn-flex-fill"/>
@@ -13,7 +13,7 @@
       <!--div title="<?= _('Edit Content') ?>"
            class="bbn-p bbn-w-100"
            style="min-height: 50%"
-           v-text="html2text(currentText)"
+           bbn-text="html2text(currentText)"
            @click="editMode"
            :contenteditable="editing"
            @blur="changeText('text', $event)"/-->
@@ -28,12 +28,12 @@
                class="nf nf-fa-cog bbn-lg bbn-p bbn-right-smargin"/>
             <i @click.stop="showInfo = !showInfo"
                ref="info"
-               v-if="source.id"
+               bbn-if="source.id"
                title="<?= _("Post-it information") ?>"
                class="nf nf-fa-info_circle bbn-lg bbn-p bbn-right-smargin"/>
             <i @click.stop="remove(source.id)"
                ref="info"
-               v-if="source.id"
+               bbn-if="source.id"
                title="<?= _("Delete this post-it") ?>"
                class="nf nf-fa-trash bbn-lg bbn-p"/>
           </div>
@@ -43,21 +43,21 @@
                       ref="title"
                       type="inline"
                       class="bbn-c bbn-p bbn-b bbn-lg bbn-b bbn-flex-fill bbn-spadded bbn-small-caps"
-                      v-model="currentTitle"
+                      bbn-model="currentTitle"
                       @change="changeTitle"/>
         <div class="bbn-block bbn-nowrap">
-          <i v-if="source.id"
+          <i bbn-if="source.id"
              class="nf nf-fa-info_circle bbn-lg bbn-invisible"/>
-          <i v-if="currentPinned"
+          <i bbn-if="currentPinned"
              class="nf nf-oct-pin bbn-m"/>
-          <i v-else
+          <i bbn-else
              class="nf nf-fa-cog bbn-lg bbn-invisible"/>
         </div>
       </div>
 
     </div>
   </div>
-  <bbn-floater v-if="ready && showInfo"
+  <bbn-floater bbn-if="ready && showInfo"
                :title="false"
                @close="showInfo = false"
                :element="$refs.info"
@@ -70,18 +70,18 @@
         <div>
           <?= _("Version") ?>
         </div>
-        <div v-text="source.version"/>
+        <div bbn-text="source.version"/>
 
         <div>
           <?= _("Created") ?>
         </div>
-        <div v-text="fdate(source.creation)"/>
+        <div bbn-text="fdate(source.creation)"/>
 
       </div>
     </div>
 
   </bbn-floater>
-  <bbn-floater v-if="ready && showCfg"
+  <bbn-floater bbn-if="ready && showCfg"
                :title="false"
                @close="showCfg = false"
                :element="$refs.button"
@@ -102,7 +102,7 @@
                                  columns: 5,
                                  tileSize: 32
                                  }"
-                           v-model="currentBcolor"
+                           bbn-model="currentBcolor"
                            ref="colorpicker"/>
         </div>
 
@@ -117,20 +117,20 @@
                                  columns: 5,
                                  tileSize: 32
                                  }"
-                           v-model="currentFcolor"
+                           bbn-model="currentFcolor"
                            ref="fcolorpicker"/>
         </div>
 
-        <div v-if="showPinned"
+        <div bbn-if="showPinned"
              class="bbn-nowrap">
           <?= _("Pinned") ?><br>
-          <span v-if="currentPinned"><?= _('It will be removed from the Pinned post-its panel') ?></span>
-          <span v-else><?= _('It will be added to the pinned post-its panel') ?></span>
+          <span bbn-if="currentPinned"><?= _('It will be removed from the Pinned post-its panel') ?></span>
+          <span bbn-else><?= _('It will be added to the pinned post-its panel') ?></span>
         </div>
-        <div v-if="showPinned">
+        <div bbn-if="showPinned">
           <bbn-checkbox :value="1"
                         :novalue="0"
-                        v-model="currentPinned"/>
+                        bbn-model="currentPinned"/>
         </div>
 
       </div>

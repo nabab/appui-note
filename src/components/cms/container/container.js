@@ -76,6 +76,10 @@
         let style = {};
         let elements = this.source.layout?.length ? this.source.layout.split(' ') : [];
         let arr = [];
+        const numItems = this.source.items?.length || 0;
+        if (numItems > elements.length) {
+          elements = elements.concat(Array.from({length: numItems - elements.length}, a => '1fr'));
+        }
         if (this.overable && !!elements) {
           bbn.fn.each(elements, (e, i) => {
             arr.splice(i * 2, 0, 'max-content', e);

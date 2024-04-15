@@ -192,7 +192,7 @@
                 :source="note + '/cms/data/search'"
                 class="bbn-w-100"/>
     <i class="nf nf-fa-close bbn-m bbn-p"
-       v-if="source.link"
+       bbn-if="source.link"
        @click="source.link = ''"
     />
   </div>
@@ -235,7 +235,7 @@
           :source="source"
           @success="onSuccess">
   <div class="bbn-padded bbn-w-100">
-    <bbn-input v-model="source.text"
+    <bbn-input bbn-model="source.text"
                placeholder="` + bbn._('Name') + `"
                :required="true"
                class="bbn-w-100"/>

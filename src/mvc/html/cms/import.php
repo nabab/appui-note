@@ -6,11 +6,11 @@
 	<bbn-pane :size="400">
     <div class="bbn-overlay bbn-flex-height bbn-right-space">
       <div class="bbn-m bbn-upper bbn-b bbn-spadded bbn-alt-background bbn-radius bbn-c bbn-bottom-xsspace bbn-secondary-text-alt"
-           v-text="_('Steps')"/>
+           bbn-text="_('Steps')"/>
       <div class="bbn-flex-fill bbn-spadded">
         <bbn-scroll axis="y">
           <div class="bbn-alt-background bbn-spadded bbn-radius">
-            <processes-list-item v-for="(pro, i) in processesList"
+            <processes-list-item bbn-for="(pro, i) in processesList"
                                :key="i"
                                :source="pro"
                                :class="{'bbn-bottom-sspace': !!processesList[i+1]}"
@@ -23,7 +23,7 @@
   <bbn-pane>
     <div class="bbn-overlay bbn-flex-height">
       <div class="bbn-m bbn-upper bbn-b bbn-spadded bbn-alt-background bbn-radius bbn-c bbn-bottom-xsspace bbn-secondary-text-alt"
-           v-text="_('Wordpress XML export file')"/>
+           bbn-text="_('Wordpress XML export file')"/>
       <div class="bbn-spadded bbn-alt-background bbn-radius bbn-flex-width">
         <bbn-button :text="_('Reset import')"
                     icon="nf nf-md-restart bbn-lg"
@@ -33,7 +33,7 @@
                     style="border-color: var(--default-background) !important"/>
         <bbn-upload :save-url="root + 'cms/import'"
                     :multi="false"
-                    v-model="fileUploaded"
+                    bbn-model="fileUploaded"
                     :eliminable="false"
                     accept=".xml"
                     :extensions="['xml']"
@@ -45,9 +45,9 @@
       <div class="bbn-flex-fill">
         <bbn-scroll>
           <div class="bbn-m bbn-upper bbn-b bbn-spadded bbn-alt-background bbn-radius bbn-c bbn-bottom-xsspace bbn-top-space bbn-secondary-text-alt"
-               v-text="_('Processes output')"/>
+               bbn-text="_('Processes output')"/>
           <div class="bbn-spadded bbn-alt-background bbn-radius bbn-w-100">
-            <div v-for="(pro, i) in processesList"
+            <div bbn-for="(pro, i) in processesList"
                  :class="['bbn-bordered', 'bbn-radius', 'bbn-flex-width', {'bbn-bottom-sspace': !!processesList[i+1]}]"
                  style="border-color: var(--default-background) !important">
               <div class="bbn-middle bbn-background bbn-spadded bbn-radius-left"
@@ -74,33 +74,33 @@
                        'nf nf-md-play_circle bbn-blue': !!pro.running,
                        'nf nf-md-dots_circle': !pro.done && !pro.running
                      }]"/>
-                  <div v-text="pro.text"
+                  <div bbn-text="pro.text"
                        class="bbn-flex-fill bbn-left-sspace"/>
                 </div>
                 <div class="bbn-w-100 bbn-hspadded bbn-top-spadded bbn-vmiddle">
                   <i class="nf nf-md-android_messages bbn-xl bbn-right-xsspace"
                      :title="_('Last message')"/>
-                  <span v-if="pro.message?.length"
-                        v-text="pro.message"/>
-                  <span v-else
-                        v-text="_('None')"/>
+                  <span bbn-if="pro.message?.length"
+                        bbn-text="pro.message"/>
+                  <span bbn-else
+                        bbn-text="_('None')"/>
                 </div>
                 <div class="bbn-w-100 bbn-hspadded bbn-top-spadded bbn-vmiddle">
                   <i class="nf nf-md-calendar_check bbn-xl bbn-right-xsspace"
                      :title="_('Last launch execution time')"/>
-                  <span v-if="pro.launchDate?.length"
-                        v-text="formatDate(pro.launchDate)"/>
-                  <span v-else
-                        v-text="_('Never')"/>
+                  <span bbn-if="pro.launchDate?.length"
+                        bbn-text="formatDate(pro.launchDate)"/>
+                  <span bbn-else
+                        bbn-text="_('Never')"/>
                 </div>
                 <div class="bbn-w-100 bbn-hspadded bbn-top-spadded bbn-vmiddle">
-                  <span v-text=""/>
+                  <span bbn-text=""/>
                   <i class="nf nf-md-calendar_refresh bbn-xl bbn-right-xsspace"
                      :title="_('Last undo execution time')"/>
-                  <span v-if="pro.undoDate?.length"
-                        v-text="formatDate(pro.undoDate)"/>
-                  <span v-else
-                        v-text="_('Never')"/>
+                  <span bbn-if="pro.undoDate?.length"
+                        bbn-text="formatDate(pro.undoDate)"/>
+                  <span bbn-else
+                        bbn-text="_('Never')"/>
                 </div>
               </div>
             </div>

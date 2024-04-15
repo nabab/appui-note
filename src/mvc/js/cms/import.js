@@ -131,7 +131,7 @@
                  'nf nf-md-dots_circle': !source.done && !source.running
                }]"/>
             <div class="bbn-flex-fill bbn-left-sspace"
-                 v-text="source.text"/>
+                 bbn-text="source.text"/>
           </div>
         `,
         props: {

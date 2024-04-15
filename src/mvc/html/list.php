@@ -4,7 +4,7 @@
     <bbn-dropdown :source="source.types"
                   :placeholder="_('All categories')"
                   :nullable="true"
-                  v-model="type"/>
+                  bbn-model="type"/>
   </bbn-toolbar>
   <div class="bbn-flex-fill">
     <bbn-table :sortable="true"

@@ -2,7 +2,7 @@
   <appui-note-forum-topic-post :source="source"
                                ref="post"/>
   <!-- Replies -->
-  <appui-note-forum-topic-replies v-if="showReplies"
+  <appui-note-forum-topic-replies bbn-if="showReplies"
                                   :source="forum.source"
                                   :data="{id_alias: source.id}"
                                   ref="replies"

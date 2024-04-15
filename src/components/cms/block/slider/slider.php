@@ -1,39 +1,39 @@
 <div :class="[componentClass, source.optionalClass, 'bbn-w-100']"
      :style="source.blockDistance ? ('margin-bottom:' + source.blockDistance) : ''">
-  <div v-if="mode === 'edit'"
+  <div bbn-if="mode === 'edit'"
        class="bbn-w-100 bbn-grid-fields">
 
     <label><?= _('Mode') ?></label>
-    <bbn-radio v-model="source.mode"
+    <bbn-radio bbn-model="source.mode"
                 :source="radioSource"
                 :vertical="true"/>
 
-    <template v-if="isPublications">
+    <template bbn-if="isPublications">
       <label><?= _('Type of articles') ?></label>
       <bbn-dropdown :source="noteRoot + 'cms/data/types_notes'"
-                    v-model="source.noteType"
+                    bbn-model="source.noteType"
                     @change="getSlideshowSource"
                     ref="publicationdropdown"/>
 
-      <label v-if="showRootAlias"><?= _('Category') ?></label>
-      <bbn-dropdown v-if="showRootAlias"
+      <label bbn-if="showRootAlias"><?= _('Category') ?></label>
+      <bbn-dropdown bbn-if="showRootAlias"
                     :source="noteRoot + 'cms/data/types_notes/' + source.id_root_alias"
-                    v-model="source.content"
+                    bbn-model="source.content"
                     :nullable="true"
                     sourceValue="id"
                     @change="getSlideshowSource"/>
 
       <label><?= _('Ordered by') ?></label>
       <bbn-dropdown :source="orderFields"
-                    v-model="source.order"
+                    bbn-model="source.order"
                     @change="getSlideshowSource"/>
     </template>
 
-    <label v-if="isGallery"><?= _('Gallery') ?></label>
-    <div v-if="isGallery" class="bbn-vmiddle">
+    <label bbn-if="isGallery"><?= _('Gallery') ?></label>
+    <div bbn-if="isGallery" class="bbn-vmiddle">
       <bbn-dropdown :source="galleryListUrl"
                     source-value="id"
-                    v-model="source.content"
+                    bbn-model="source.content"
                     ref="galleryList"
                     @change="getSlideshowSource"
                     :suggest="true"
@@ -46,18 +46,18 @@
                   title="<?= _('Open galleries management') ?>"/>
     </div>
 
-    <label v-if="isFeatures"><?= _('Feature') ?></label>
-    <bbn-dropdown v-if="isFeatures"
+    <label bbn-if="isFeatures"><?= _('Feature') ?></label>
+    <bbn-dropdown bbn-if="isFeatures"
                   :source="noteRoot + 'cms/data/features'"
-                  v-model="source.content"
+                  bbn-model="source.content"
                   @change="getSlideshowSource"
                   source-value="id"/>
 
     <label><?= _('Css class')?><br><small><?=_('(Optional)') ?></small></label>
-    <bbn-input v-model="source.optionalClass"/>
+    <bbn-input bbn-model="source.optionalClass"/>
 
     <label><?= _('Height') ?></label>
-    <bbn-range v-model="source.height"
+    <bbn-range bbn-model="source.height"
                 :min="10"
                 :max="2000"
                 :step="10"
@@ -68,7 +68,7 @@
                 unit="px"/>
 
     <label><?= _('Distance block below') ?></label>
-    <bbn-range v-model="source.blockDistance"
+    <bbn-range bbn-model="source.blockDistance"
                 :min="0"
                 :max="200"
                 :step="5"
@@ -79,7 +79,7 @@
                 unit="px"/>
 
     <label><?= _('Title distance') ?></label>
-    <bbn-range v-model="source.margin"
+    <bbn-range bbn-model="source.margin"
                 :min="-200"
                 :max="200"
                 :step="5"
@@ -90,7 +90,7 @@
                 unit="px"/>
 
     <label><?= _('Title distance')?><br><small><?=_("(mobile)") ?></small></label>
-    <bbn-range v-model="source.marginMobile"
+    <bbn-range bbn-model="source.marginMobile"
                 :min="-200"
                 :max="200"
                 :step="5"
@@ -103,11 +103,11 @@
 
     <label><?= _('Image fit') ?></label>
     <bbn-radiobuttons :source="fitSource"
-                      v-model="source.fit"/>
+                      bbn-model="source.fit"/>
 
 
     <label><?= _('Max slide in line') ?></label>
-    <bbn-numeric v-model="source.max"
+    <bbn-numeric bbn-model="source.max"
                   :step="1"
                   :min="1"
                   :default="1"
@@ -115,22 +115,22 @@
                   :max="5"/>
 
     <label><?= _('Min slide in line')?><br><small><?=_("(mobile)") ?></small></label>
-    <bbn-numeric v-model="source.min"
+    <bbn-numeric bbn-model="source.min"
                 :step="1"
                 :min="1"
                 :default="1"
                 :max="5"
                 :nullable="false"/>
 
-    <label v-if="!isGallery"><?= _('Limits') ?></label>
-    <bbn-numeric v-if="!isGallery"
-                  v-model="source.limit"
+    <label bbn-if="!isGallery"><?= _('Limits') ?></label>
+    <bbn-numeric bbn-if="!isGallery"
+                  bbn-model="source.limit"
                   :min="source.max"
                   :nullable="false"
                   @change="getSlideshowSource"/>
 
     <label><?= _('Autoplay') ?></label>
-    <bbn-switch v-model="source.autoplay"
+    <bbn-switch bbn-model="source.autoplay"
                 :value="1"
                 :novalue="0"
                 :title="_('Autoplay')"
@@ -139,20 +139,20 @@
                 off-icon="nf nf-md-pause"/>
 
     <label><?= _('Arrows') ?></label>
-    <bbn-switch v-model="source.arrows"
+    <bbn-switch bbn-model="source.arrows"
                 :value="1"
                 :novalue="0"
                 :no-icon="false"
                 on-icon="nf nf-oct-arrow_switch"
                 off-icon="nf nf-oct-arrow_switch"/>
 
-    <label v-if="!!source.arrows"><?= _('Arrows position') ?></label>
-    <bbn-dropdown v-if="!!source.arrows"
-                  v-model="source.arrowsPosition"
+    <label bbn-if="!!source.arrows"><?= _('Arrows position') ?></label>
+    <bbn-dropdown bbn-if="!!source.arrows"
+                  bbn-model="source.arrowsPosition"
                   :source="arrowsPositions"/>
 
     <label><?= _('Preview') ?></label>
-    <bbn-switch v-model="source.preview"
+    <bbn-switch bbn-model="source.preview"
                 :value="1"
                 :novalue="0"
                 :no-icon="false"
@@ -160,7 +160,7 @@
                 off-icon="nf nf-md-table_row"/>
 
     <label><?= _('Loop') ?></label>
-    <bbn-switch v-model="source.loop"
+    <bbn-switch bbn-model="source.loop"
                 :value="1"
                 :novalue="0"
                 :no-icon="false"
@@ -168,25 +168,25 @@
                 off-icon="nf nf-md-repeat_variant"/>
 
     <label><?= _('Show info') ?></label>
-    <bbn-switch v-model="source.info"
+    <bbn-switch bbn-model="source.info"
                 :value="1"
                 :novalue="0"
                 :no-icon="false"
                 on-icon="nf nf-fa-info"
                 off-icon="nf nf-fa-info"/>
   </div>
-  <div v-else-if="$parent.selectable && !source.content"
+  <div bbn-else-if="$parent.selectable && !source.content"
        class="bbn-alt-background bbn-middle bbn-lpadded bbn-w-100"
        style="overflow: hidden">
     <i class="bbn-xxxxl nf nf-md-table_row"/>
   </div>
-  <div v-else
+  <div bbn-else
        class="bbn-w-100"
        :style="{
          height: source.height ? source.height : '',
          width: source.width ? source.width :''
        }">
-    <bbn-slideshow v-if="currentItems"
+    <bbn-slideshow bbn-if="currentItems"
                    :source="currentItems"
                    ref="slideshow"
                    :arrows="!!source.arrows"
@@ -195,7 +195,7 @@
                    :loop="!!source.loop"
                    :preview="!!source.preview"
                    :show-info="!!source.info"/>
-    <div v-else
+    <div bbn-else
          class="bbn-light bbn-lg">
       <?= _("No items") ?>
     </div>

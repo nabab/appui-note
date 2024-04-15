@@ -3,20 +3,20 @@
           :source="source"
 					:data="formData"
           @success="formSuccess">
-  <appui-note-toolbar-version v-if="data.id && source.hasVersions"
+  <appui-note-toolbar-version bbn-if="data.id && source.hasVersions"
                               :source="source"
                               :data="data"
                               @version="changeVersion"/>
   <div class="bbn-grid-fields bbn-padded">
-    <template v-if="source.title !== undefined">
+    <template bbn-if="source.title !== undefined">
       <label><?= _("Title") ?></label>
-      <bbn-input v-model="source.title"/>
+      <bbn-input bbn-model="source.title"/>
     </template>
 
-    <template v-if="(source.category !== undefined) && categories">
+    <template bbn-if="(source.category !== undefined) && categories">
       <label><?= _("Category") ?></label>
       <bbn-dropdown required="required"
-                    v-model="source.category"
+                    bbn-model="source.category"
                     :source="categories"/>
     </template>
 
@@ -33,7 +33,7 @@
       <div class="bbn-w-100">
         <component :is="editorType"
                    ref="editor"
-                   v-model="source.text"
+                   bbn-model="source.text"
                    style="min-height: 450px; width: 100%;"
                    required="required"
                    class="bbn-w-100"
@@ -41,12 +41,12 @@
       </div>
     </div>
 
-    <template v-if="fileSave && fileRemove">
+    <template bbn-if="fileSave && fileRemove">
       <label><?= _("Files") ?></label>
       <div class="bbn-task-files-container">
         <bbn-upload :save-url="fileSave + ref"
                     :remove-url="fileRemove + ref"
-                    v-model="source.files"
+                    bbn-model="source.files"
                     :paste="true"
                     :show-filesize="false"/>
       </div>
@@ -63,8 +63,8 @@
       </div>
       <div class="appui-note-forum-links-container bbn-widget bbn-w-100"
            ref="linksContainer"
-           v-if="source.links && source.links.length">
-        <div v-for="(l, idx) in source.links"
+           bbn-if="source.links && source.links.length">
+        <div bbn-for="(l, idx) in source.links"
              :class="['bbn-spadded', {
                'link-progress': l.inProgress && !l.error,
                'link-success': !l.inProgress && !l.error,
@@ -72,20 +72,20 @@
                'bbn-bordered-top': idx > 0
              }]">
           <div class="bbn-flex-width">
-            <div v-if="imageDom"
+            <div bbn-if="imageDom"
                  class="appui-note-forum-link-image">
-              <img v-if="l.image"
+              <img bbn-if="l.image"
                    :src="imageDom + ref + '/' + l.image">
-              <i v-else class="nf nf-fa-link"> </i>
+              <i bbn-else class="nf nf-fa-link"> </i>
             </div>
             <div class="appui-note-forum-link-title bbn-flex-fill">
               <strong>
                 <a :href="l.content.url"
-                   v-text="l.title || l.content.url"/>
+                   bbn-text="l.title || l.content.url"/>
               </strong>
               <br>
-              <span v-if="l.content && l.content.description"
-                    v-text="l.content.description"/>
+              <span bbn-if="l.content && l.content.description"
+                    bbn-text="l.content.description"/>
             </div>
             <div class="appui-note-forum-link-actions bbn-vmiddle">
               <bbn-button class="bbn-button-icon-only"
@@ -101,14 +101,14 @@
 
     <label><?= _("Important") ?></label>
     <div>
-      <bbn-checkbox v-model="source.important"
+      <bbn-checkbox bbn-model="source.important"
                     :value="1"
                     :novalue="0"/>
     </div>
-    <template v-if="canLock">
+    <template bbn-if="canLock">
       <label><?= _("Locked") ?></label>
       <div>
-        <bbn-checkbox v-model="source.locked"
+        <bbn-checkbox bbn-model="source.locked"
                       :value="1"
                       :novalue="0"/>
       </div>

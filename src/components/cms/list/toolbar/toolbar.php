@@ -7,32 +7,32 @@
     <span :class="['bbn-leftlabel', {
             'bbn-disabled': groupActionsDisabled
           }]"
-          v-text="_('Group actions')"/>
+          bbn-text="_('Group actions')"/>
     <bbn-dropdown :source="groupActions"
                   :placeholder="_('Choose')"
                   class="bbn-l bbn-narrow"
                   :disabled="groupActionsDisabled"/>
   </div>
-  <template v-slot:right>
+  <template bbn-slot:right>
     <div>
       <span class="bbn-leftlabel bbn-nowrap"
-            v-text="_('Status')"/>
+            bbn-text="_('Status')"/>
       <bbn-dropdown :source="statusList"
                     class="bbn-l"
-                    v-model="currentStatus"
+                    bbn-model="currentStatus"
                     style="width: 10rem"/>
     </div>
-    <div v-if="cp?.toolbarTypes">
+    <div bbn-if="cp?.toolbarTypes">
       <span class="bbn-leftlabel bbn-nowrap"
-            v-text="_('Categories')"/>
+            bbn-text="_('Categories')"/>
       <bbn-dropdown :source="categories"
                     source-value="id"
                     class="bbn-l bbn-wide"
-                    v-model="currentCategory"/>
+                    bbn-model="currentCategory"/>
     </div>
     <bbn-input :nullable="true"
                button-right="nf nf-fa-search"
                class="bbn-wide bbn-l"
-               v-model="searchValue"/>
+               bbn-model="searchValue"/>
   </template>
 </bbn-toolbar>

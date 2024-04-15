@@ -15,13 +15,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="n in prove_notes">
-        <td v-text="n.id"></td>
-        <td v-text="n.id_parent"></td>
-        <td v-text="n.title ? n.title : 'No Title'" id="title">{{colorText}}</td>
-        <td v-text="n.medias"></td>
-        <td v-text="n.num_children"></td>
-        <td v-text="(!n.medias) || (n.num_children) ? 'isFolder' : ''" ></td>
+      <tr bbn-for="n in prove_notes">
+        <td bbn-text="n.id"></td>
+        <td bbn-text="n.id_parent"></td>
+        <td bbn-text="n.title ? n.title : 'No Title'" id="title">{{colorText}}</td>
+        <td bbn-text="n.medias"></td>
+        <td bbn-text="n.num_children"></td>
+        <td bbn-text="(!n.medias) || (n.num_children) ? 'isFolder' : ''" ></td>
       </tr>
     </tbody>
   </table-->

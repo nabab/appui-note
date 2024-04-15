@@ -261,7 +261,7 @@
        * @param {Object} source the source object of the current selected block
        */
       handleSelected(key, source, parent) {
-        bbn.fn.log('select', key, source)
+        bbn.fn.log('select', key, source, parent)
         if (this.currentEditingKey !== key) {
           this.currentEditingKey = key;
           this.currentEditing = source;
@@ -295,6 +295,7 @@
        * @return void
        */
       onDrop(ev) {
+        return ;
         bbn.fn.log('DROP', ev, bbn.fn.clone(ev.detail.from.data));
         const block = bbn.fn.clone(ev.detail.from.data.source);
         this.currentBlockConfig = ev.detail.from.data.cfg || {};
@@ -687,8 +688,8 @@
 <bbn-form :action="root + 'cms/actions/config/insert'"
 					:source="formData">
 	<div class="bbn-grid-fields bbn-lg bbn-lpadding">
-  	<div v-text="_('Name of your block')"/>
-    <bbn-input v-model="formData.name"
+  	<div bbn-text="_('Name of your block')"/>
+    <bbn-input bbn-model="formData.name"
     					 :required="true"/>
   </div>
 </bbn-form>

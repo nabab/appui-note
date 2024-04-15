@@ -1,4 +1,4 @@
-<appui-note-postits v-if="showPostIt"
+<appui-note-postits bbn-if="showPostIt"
                     @close="showPostIt = false"
                     :storage="true"
                     :source="postits"

@@ -60,8 +60,8 @@
       def: {
         props: ['source'],
         template: `
-<i v-if="source.default" class="nf nf-fa-check bbn-lg bbn-green"></i>
-<bbn-button v-else icon="nf nf-fa-check bbn-lg bbn-red" @click="makeDefault"></bbn-button>`,
+<i bbn-if="source.default" class="nf nf-fa-check bbn-lg bbn-green"></i>
+<bbn-button bbn-else icon="nf nf-fa-check bbn-lg bbn-red" @click="makeDefault"></bbn-button>`,
         methods: {
           getTable(){
             return this.closest('bbn-table');
@@ -87,8 +87,8 @@
         template: `
 <div class="bbn-w-100">
   <div class="bbn-block">
-		<span v-text="source.type"></span>
-		(<span v-text="num"></span>)
+		<span bbn-text="source.type"></span>
+		(<span bbn-text="num"></span>)
 	</div>
   <div class="bbn-block" style="float: right">
     <bbn-button @click="insert"

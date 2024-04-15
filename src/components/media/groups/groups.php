@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="bbn-bordered-bottom bbn-bottom-space bbn-spadded bbn-flex-width bbn-vmiddle">
-      <bbn-input v-model="search"
+      <bbn-input bbn-model="search"
                  class="bbn-flex-fill bbn-no-border bbn-no-radius"
                  placeholder="<?= _('Search') ?>"/>
       <i :class="['bbn-lg', 'bbn-p', {
@@ -51,14 +51,14 @@
       </bbn-scroll>
     </div>
     <div class="bbn-top-space">
-      <bbn-pager v-if="listMounted"
+      <bbn-pager bbn-if="listMounted"
                  :element="getRef('list')"
                  :limit="false"
                  :extra-controls="false"/>
     </div>
   </div>
   <div class="bbn-flex-fill bbn-rel">
-    <appui-note-media-browser2 v-if="current"
+    <appui-note-media-browser2 bbn-if="current"
                                ref="mediaBrowser"
                                :source="groupMediasUrl"
                                source-action=""
@@ -84,7 +84,7 @@
                                source-order="position"
                                :server-sorting="false"
                                @sort="sort"/>
-    <div v-else
+    <div bbn-else
          :class="['bbn-middle', {'bbn-overlay': scrollable}]">
       <div class="bbn-vmiddle">
         <i class="nf nf-fa-long_arrow_left bbn-lg bbn-right-xsspace"/>

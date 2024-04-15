@@ -9,7 +9,7 @@
     <div class="bbn-100 bbn-middle">
       <div class="bbn-block bbn-nowrap">
         <span class="bbn-bottom-space"
-              v-text="source.media.dimensions.w + ' px x ' + source.media.dimensions.h + ' px'"/><br>
+              bbn-text="source.media.dimensions.w + ' px x ' + source.media.dimensions.h + ' px'"/><br>
         <div class="bbn-block">
           <img :src="source.media.path">
         </div>
@@ -18,9 +18,9 @@
   </div>
   <div class="bbn-w-100 bbn-middle bbn-top-space">
     <div class="bbn-flex-items">
-      <div v-for="t in source.media.thumbs"
+      <div bbn-for="t in source.media.thumbs"
            class="bbn-c">
-        <!--<span v-text="t + ' px'"/><br>-->
+        <!--<span bbn-text="t + ' px'"/><br>-->
         <img :src="t">
       </div>
     </div>

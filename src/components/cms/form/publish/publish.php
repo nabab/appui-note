@@ -11,7 +11,7 @@
     </div>
 
     <label class="bbn-label"><?= _("Publication date") ?></label>
-    <bbn-datetimepicker v-model="formData.start"
+    <bbn-datetimepicker bbn-model="formData.start"
                         :min="now"
                         :max="maxStart"
                         :required="true"/>
@@ -21,7 +21,7 @@
     </div>
 
     <label class="bbn-label"><?= _("End of publication") ?></label>
-    <bbn-datetimepicker v-model="formData.end"
+    <bbn-datetimepicker bbn-model="formData.end"
                         :disabled="!formData.start"
                         :min="minEnd"/>
   </div>

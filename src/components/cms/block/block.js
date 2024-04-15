@@ -249,9 +249,6 @@
       },
       configInit(config) {
         this.$emit('configinit', config);
-      },
-      onClick(ev){
-        this.$emit('click', ev, this.source)
       }
     },
     mounted(){

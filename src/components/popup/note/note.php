@@ -8,13 +8,13 @@
                    :user-id="source.id_user"
                    style="margin-right: 5px"
       ></bbn-initial>
-      <span v-text="userName"></span>
+      <span bbn-text="userName"></span>
       <span style="margin-left: 1em"><i class="nf nf-fa-calendar_alt"></i> {{creationDate}} <i class="nf nf-fa-clock"></i> {{creationTime}}</span>
     </div>
     <div class="bbn-flex-fill bbn-block">
       <bbn-scroll>
         <div class="bbn-padded"
-             v-html="source.content"
+             bbn-html="source.content"
         ></div>
       </bbn-scroll>
     </div>

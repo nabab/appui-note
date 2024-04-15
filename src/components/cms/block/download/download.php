@@ -1,8 +1,8 @@
 <div :class="componentClass">
-  <div v-if="mode === 'edit'">
+  <div bbn-if="mode === 'edit'">
     <div class="bbn-grid-fields">
-      <label v-text="_('Orientation')"/>
-      <bbn-radiobuttons v-model="source.orientation"
+      <label bbn-text="_('Orientation')"/>
+      <bbn-radiobuttons bbn-model="source.orientation"
                         :notext="true"
                         :source="[{
                           text: _('Horizontal'),
@@ -15,7 +15,7 @@
                         }]"/>
       <div>
         <span class="bbn-right-sspace"
-              v-text="_('Files')"/>
+              bbn-text="_('Files')"/>
         <bbn-button icon="nf nf-fa-plus"
                     :title="_('Add more')"
                     @click="addItem"
@@ -23,56 +23,56 @@
       </div>
       <div/>
     </div>
-    <div v-for="(f, i) in source.content"
+    <div bbn-for="(f, i) in source.content"
          class="bbn-w-100 bbn-top-space bbn-bordered bbn-radius bbn-flex-width"
          style="border-style: dashed">
       <div class="bbn-grid-fields bbn-spadded bbn-flex-fill">
-        <label v-text="_('Type')"/>
+        <label bbn-text="_('Type')"/>
         <bbn-radiobuttons :source="types"
-                          v-model="f.type"
+                          bbn-model="f.type"
                           @input="onChangeType(f)"/>
-        <template v-if="f.type === 'media'">
-          <label v-text="_('Media')"/>
+        <template bbn-if="f.type === 'media'">
+          <label bbn-text="_('Media')"/>
           <div class="bbn-flex">
             <bbn-button icon="nf nf-cod-file_media"
                         :notext="true"
                         @click="openExplorer(f)"
                         :title="_('Select a media')"
                         class="bbn-right-sspace"/>
-            <span v-text="f.filename"
+            <span bbn-text="f.filename"
                   style="align-self: center; word-break: break-all"/>
           </div>
         </template>
-        <template v-if="f.type === 'url'">
-          <label v-text="_('URL')"/>
-          <bbn-input v-model="f.value"
+        <template bbn-if="f.type === 'url'">
+          <label bbn-text="_('URL')"/>
+          <bbn-input bbn-model="f.value"
                      class="bbn-w-100"/>
         </template>
-        <label v-text="_('Text')"/>
-        <bbn-input v-model="f.text"
+        <label bbn-text="_('Text')"/>
+        <bbn-input bbn-model="f.text"
                   class="bbn-w-100"/>
       </div>
       <div class="bbn-middle bbn-xspadded bbn-background bbn-radius-right bbn-reactive bbn-p"
            @click="removeItem(i)"
-           v-if="source.content?.length > 1">
+           bbn-if="source.content?.length > 1">
         <i class="nf nf-fa-trash bbn-red"/>
       </div>
     </div>
   </div>
-  <div v-else-if="$parent.selectable && (!source.content?.length || ((source.content.length === 1) && !source.content[0].value?.length))"
+  <div bbn-else-if="$parent.selectable && (!source.content?.length || ((source.content.length === 1) && !source.content[0].value?.length))"
         class="bbn-alt-background bbn-middle bbn-lpadded"
         style="overflow: hidden">
     <i class="bbn-xxxxl nf nf-md-download_box"/>
   </div>
-  <div v-else
+  <div bbn-else
        class="bbn-flex-wrap"
        :style="currentStyle">
-    <span v-for="(f, i) in source.content"
+    <span bbn-for="(f, i) in source.content"
           class="bbn-p bbn-xspadded bbn-bordered bbn-radius bbn-reactive"
           @click="onDownload(f)"
           style="width: max-content">
       <i class="nf nf-md-download"/>
-      <span v-text="f.text"/>
+      <span bbn-text="f.text"/>
     </span>
   </div>
 </div>

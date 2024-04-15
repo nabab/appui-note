@@ -3,7 +3,7 @@
 
 <!-- HTML Document -->
 <div :class="[componentClass, 'bbn-w-100']">
-  <div v-if="mode === 'edit'"
+  <div bbn-if="mode === 'edit'"
        class='bbn-w-100 bbn-grid-fields'>
     <label class="bbn-l"><?= _("Product Picker") ?></label>
       <div class="bbn-l">
@@ -18,7 +18,7 @@
 
       <label class="bbn-l"><?= _("Show image") ?></label>
       <div class="bbn-l">
-        <bbn-switch v-model="source.showImage"
+        <bbn-switch bbn-model="source.showImage"
                     :value="true"
                     :novalue="false"
                     class="bbn-left-space"/>
@@ -26,7 +26,7 @@
 
       <label class="bbn-l"><?= _("Show price") ?></label>
       <div class="bbn-l">
-        <bbn-switch v-model="source.showPrice"
+        <bbn-switch bbn-model="source.showPrice"
                   :value="true"
                   :novalue="false"
                   class="bbn-left-space"/>
@@ -34,7 +34,7 @@
 
       <label class="bbn-l"><?= _("Show edition") ?></label>
       <div class="bbn-l">
-        <bbn-switch v-model="source.showEdition"
+        <bbn-switch bbn-model="source.showEdition"
                   :value="true"
                   :novalue="false"
                   class="bbn-left-space"/>
@@ -42,7 +42,7 @@
 
       <label class="bbn-l"><?= _("Show type") ?></label>
       <div class="bbn-l">
-        <bbn-switch v-model="source.showType"
+        <bbn-switch bbn-model="source.showType"
                   :value="true"
                   :novalue="false"
                   class="bbn-left-space"/>
@@ -50,7 +50,7 @@
 
       <label class="bbn-l"><?= _("Show Sold out") ?></label>
       <div class="bbn-l">
-        <bbn-switch v-model="source.showSoldOut"
+        <bbn-switch bbn-model="source.showSoldOut"
                     :value="true"
                     :novalue="false"
                     class="bbn-left-space"/>
@@ -58,32 +58,32 @@
 
       <label class="bbn-l"><?= _("Show 'Add to cart' button ") ?></label>
       <div class="bbn-l">
-        <bbn-switch v-model="source.showButton"
+        <bbn-switch bbn-model="source.showButton"
                     :value="true"
                     :novalue="false"
                     class="bbn-left-space"/>
       </div>
   </div>
-  <div v-else
+  <div bbn-else
        class="bbn-w-100">
-    <div v-if="showProduct"
+    <div bbn-if="showProduct"
          class="bbn-w-100 bbn-padded">
       <div class="bbn-container-ratio-4-3 bbn-bottom-smargin">
-        <a v-if="productData.url"
+        <a bbn-if="productData.url"
            :href="productData.url">
           <img :src="imageSrc"
                class="bbn-top-left product-img"
-               v-if="source.showImage">
+               bbn-if="source.showImage">
         </a>
       </div>
-      <a v-if="productData.url"
+      <a bbn-if="productData.url"
          class="bbn-large"
          :href="productData.url"
-         v-html="productData.title"/>
-      <p v-if="source.showPrice"
+         bbn-html="productData.title"/>
+      <p bbn-if="source.showPrice"
          class="product-price bbn-flex">
-        <span v-if="productData.num_variants > 1"
-              v-html="_('From') + '&nbsp;'"></span>
+        <span bbn-if="productData.num_variants > 1"
+              bbn-html="_('From') + '&nbsp;'"></span>
         <bbn-field :value="productData.price"
                     field="example"
                     mode="read"
@@ -92,20 +92,20 @@
                     unit="€"/>
       </p>
       <p class="product-desc"
-         v-if="source.showType"
-         v-text="type"/>
+         bbn-if="source.showType"
+         bbn-text="type"/>
       <p class="product-desc"
-         v-if="source.showEdition"
-         v-html="edition"/>
-      <poc-product-soldout v-if="!productData.stock && source.showSoldOut"/>
+         bbn-if="source.showEdition"
+         bbn-html="edition"/>
+      <poc-product-soldout bbn-if="!productData.stock && source.showSoldOut"/>
       <button :class="['add-to-cart bbn-p bbn-upper bbn-vsmargin', {'bbn-disabled': disabled, 'bbn-p':!disabled}]"
-              v-if="source.showButton"
+              bbn-if="source.showButton"
               @click="addToCart"
               :disabled="disabled">
         <?= _("Add to cart") ?>
       </button>
     </div>
-    <div v-else-if="$parent.selectable"
+    <div bbn-else-if="$parent.selectable"
          class="bbn-alt-background bbn-middle bbn-lpadded bbn-w-100"
          style="overflow: hidden">
       <i class="bbn-xxxxl nf nf-cod-package"/>
