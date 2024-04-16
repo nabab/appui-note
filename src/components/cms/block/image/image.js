@@ -69,9 +69,9 @@
       gallery: {
         template: `
 <div>
-  <appui-note-media-browser2 :source="root + 'media/data/browser'"
+  <appui-note-media-browser :source="root + 'media/data/browser'"
                              @selection="onSelection"
-                             @clickItem="onSelection"
+                             @clickitem="onSelection"
                              :zoomable="false"
                              :selection="false"
                              :limit="50"

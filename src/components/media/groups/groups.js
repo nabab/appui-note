@@ -1,5 +1,6 @@
 (() => {
   return {
+    mixins: [bbn.cp.mixins.basic],
     props: {
       /**
        * @prop {Boolean} [true] scrollable
@@ -43,7 +44,7 @@
     },
     methods: {
       create(){
-        this.getPopup().open({
+        this.getPopup({
           title: bbn._('Create new medias group'),
           width: '300px',
           component: this.$options.components.form,
@@ -53,7 +54,7 @@
         });
       },
       rename(){
-        this.getPopup().open({
+        this.getPopup({
           title: bbn._('Rename'),
           width: '300px',
           component: this.$options.components.form,
@@ -100,7 +101,7 @@
         return this.getRef('list').updateData();
       },
       openAddMediaForm(){
-        this.getPopup().open({
+        this.getPopup({
           width: '90%',
           height: '90%',
           title: bbn._('Select media(s)'),
@@ -133,19 +134,13 @@
       },
       insertLink(a){
         console.log(a)
-        this.getPopup().open({
+        this.getPopup({
           title: a.data.link ? bbn._('Edit Link') : bbn._('Insert Link'),
           width: '300px',
           component: this.$options.components.formLink,
           source: a.data
         });
       }
-    },
-    mounted(){
-      appui.register('appui-note-media-groups', this);
-    },
-    beforeDestroy() {
-      appui.unregister('appui-note-media-groups');
     },
     watch: {
       current: {
@@ -180,8 +175,7 @@
           :source="source"
           @success="onSuccess"
           :data="{
-            id_group: mainComponent.current.id,
-            
+            id_group: mainComponent.current.id
           }">
   <div class="bbn-padded bbn-w-100 bbn-grid-fields">
     <bbn-search source-text="title"
@@ -204,18 +198,19 @@
             required: true
           }
         },
+        data(){
+          return {
+            note: appui.plugins['appui-note'],
+            mainComponent: this.closest('bbn-popup').find('appui-note-media-groups')
+          }
+        },
         computed: {
           placeholder(){
             if(this.source.link){
               return this.source.link
             }
+
             return bbn._('Pick a link')
-          },
-          note(){
-            return appui.plugins['appui-note']
-          },
-          mainComponent(){
-            return appui.getRegistered('appui-note-media-groups');
           }
         },
         methods: {
@@ -248,9 +243,9 @@
             required: true
           }
         },
-        computed: {
-          mainComponent(){
-            return appui.getRegistered('appui-note-media-groups');
+        data(){
+          return {
+            mainComponent: this.closest('bbn-popup').find('appui-note-media-groups')
           }
         },
         methods: {
@@ -274,7 +269,7 @@
       },
       addForm: {
         template: `
-<appui-note-media-browser2 :source="mainComponent.mediasUrl"
+<appui-note-media-browser :source="mainComponent.mediasUrl"
                             @selection="onSelection"
                             @clickItem="onSelection"
                             :zoomable="false"
@@ -289,9 +284,9 @@
             required: true
           }
         },
-        computed: {
-          mainComponent(){
-            return appui.getRegistered('appui-note-media-groups');
+        data(){
+          return {
+            mainComponent: this.closest('bbn-popup').find('appui-note-media-groups')
           }
         },
         methods: {

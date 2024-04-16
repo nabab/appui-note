@@ -15,7 +15,7 @@
                       @select="selectTree"
                       bbn-if="source.data.length"
                       :draggable="true"
-                      @dragEnd="isDragEnd"
+                      @dragend="isDragEnd"
                       ></bbn-tree>
             <label class="bbn-w-100" bbn-else><?= _("No Bookmarks yet") ?></label>
           </div>

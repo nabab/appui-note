@@ -45,14 +45,14 @@
         }
       },
       addMediaToNote(m){
-        this.closest('appui-note-media-browser2').currentSelected = m;
-        this.closest('appui-note-media-browser2').$emit('select',m)
+        this.closest('appui-note-media-browser').currentSelected = m;
+        this.closest('appui-note-media-browser').$emit('select',m)
       },
       showFileInfo(m){
-        this.closest('appui-note-media-browser2').showFileInfo(m)
+        this.closest('appui-note-media-browser').showFileInfo(m)
       },
       editMedia(m){
-        this.closest('appui-note-media-browser2').editMedia(m, this.dataIdx)
+        this.closest('appui-note-media-browser').editMedia(m, this.dataIdx)
       },
       removeMedia(m){
         this.closest('bbn-container').getComponent().removeMedia(m)
@@ -107,7 +107,7 @@
       }
     },
     mounted(){
-      this.cp = this.closest('appui-note-media-browser2');
+      this.cp = this.closest('appui-note-media-browser');
       this.select = this.cp.select
       this.initialTitle = this.data.media.title
       this.data.media.removedFile = false;

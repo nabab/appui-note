@@ -45,7 +45,7 @@
                    @close="showGallery = false">
         <bbn-gallery :source="currentData.images"
                      class="bbn-overlay"
-                     @clickItem="selectImage"
+                     @clickitem="selectImage"
                      :selecting-mode="true"
                      :zoomable="false"
                      :scrollable="true"

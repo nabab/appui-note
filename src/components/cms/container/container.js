@@ -168,7 +168,7 @@
         }
       },
       configInit(config) {
-        this.$emit('config-init', config);
+        this.$emit('configinit', config);
       },
       onDragStart(ev){
         this.currentDragging = true;

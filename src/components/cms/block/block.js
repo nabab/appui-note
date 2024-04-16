@@ -40,7 +40,8 @@
         bbn.fn.log('apply default config');
         bbn.fn.iterate(bbn.fn.extend({}, this.defaultConfig, this.cfg || {}), (a, n) => {
           if (this.source[n] === undefined) {
-            this.$set(this.source, n, a);
+            //this.$set(this.source, n, a);
+            this.source[n] = a;
           } else {
             //this.source[n] = a;
           }
@@ -75,6 +76,7 @@
       ) {
         this.applyDefaultConfig();
       }
+
       const config = {};
       bbn.fn.iterate(this.source, (a, n) => {
         if (!this.ignoredFields.includes(n)) {

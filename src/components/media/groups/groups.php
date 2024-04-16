@@ -58,7 +58,7 @@
     </div>
   </div>
   <div class="bbn-flex-fill bbn-rel">
-    <appui-note-media-browser2 bbn-if="current"
+    <appui-note-media-browser bbn-if="current"
                                ref="mediaBrowser"
                                :source="groupMediasUrl"
                                source-action=""
@@ -75,7 +75,7 @@
                                :selection="false"
                                :limit="50"
                                path-name="path"
-                               @clickItem="insertLink"
+                               @clickitem="insertLink"
                                :zoomable="false"
                                @delete="removeMedia"
                                :edit="actionsUrl + 'edit'"

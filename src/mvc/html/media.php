@@ -14,7 +14,7 @@
                   bcolor="#009688"
                   :fixed="true">
     <div class="bbn-overlay">
-      <appui-note-media-browser2 bbn-bind="browserOptions"
+      <appui-note-media-browser bbn-bind="browserOptions"
                                  :source="root + 'media/data/browser'"
                                  @delete="onDelete"
                                  ref="mediabrowser"/>

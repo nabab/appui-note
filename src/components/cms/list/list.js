@@ -618,7 +618,7 @@
   </span>
   <bbn-floater bbn-if="showFilter"
                :auto-hide="true"
-               @beforeClose="showFilter = false"
+               @beforeclose="showFilter = false"
                @close="showFilter = false"
                :element="$refs.icon">
     <div class="bbn-padded">

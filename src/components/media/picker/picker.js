@@ -213,7 +213,7 @@
       },
       emitClickItem(item) {
         bbn.fn.log("EMITTING CLICKITEM");
-        this.$emit('clickItem', item);
+        this.$emit('clickitem', item);
       },
       showImage(img){
         this.getPopup().open({

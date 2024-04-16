@@ -102,7 +102,7 @@
         "No item": "Nessun elemento",
         "Refresh": "Aggiorna"
     },
-    "components\/media\/browser2": {
+    "components\/media\/browser": {
         "Edit": "Modifica",
         "Delete": "Elimina",
         "Info": "Info",

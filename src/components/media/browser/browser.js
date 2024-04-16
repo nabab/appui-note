@@ -1,49 +1,141 @@
 // Javascript Document
 (()=>{
   return{
+    mixins: [bbn.cp.mixins.basic],
     props: {
-      'select': {
-        default: false,
-        type: Boolean,
-      },
-      limit: {
-      	type: Number,
-        default: 50
+      searchName: {
+        type: String,
+        default: 'title'
       },
       mediaType: {
         type: String,
         default: null
+      },
+      source: {
+        type: [String, Array]
+      },
+      data: {
+        type: Object
+      },
+      limit: {
+        type: Number,
+        default: 25
+      },
+      upload: {
+        type: [Boolean, String],
+        default: true
+      },
+      download: {
+        type: [Boolean, String],
+        default: true
+      },
+      remove: {
+        type: [Boolean, String],
+        default: true
+      },
+      edit: {
+        type: [Boolean, String],
+        default: true
+      },
+      detail: {
+        type: String
+      },
+      pageable: {
+        type: Boolean,
+        default: true
+      },
+      filterable: {
+        type: Boolean,
+        default: true
+      },
+      sortable: {
+        type: Boolean,
+        default: false
+      },
+      serverSorting: {
+        type: Boolean,
+        default: true
+      },
+      sourceOrder: {
+        type: String
+      },
+      sourceAction: {
+        type: String
+      },
+      zoomable: {
+        type: Boolean,
+        default: true
+      },
+      info: {
+        type: Boolean,
+        default: true
+      },
+      pathName: {
+        type: String
+      },
+      overlay: {
+        type: Boolean,
+        default: true
+      },
+      overlayName: {
+        type: String
+      },
+      selection: {
+        type: Boolean,
+        default: true
+      },
+      clickItem: {
+        type: Boolean,
+        default: true
+      },
+      buttonMenu: {
+        type: [Array, Function]
+      },
+      buttonMenuComponent: {
+        type: [String, Object, bbnCp]
+      },
+      url: {
+        type: String
+      },
+      single: {
+        type: Boolean,
+        default: false
+      },
+      toolbarButtons: {
+        type: Array
+      },
+      scrollable: {
+        type: Boolean,
+        default: true
       }
     },
     data(){
       return {
+        cp: this,
         searchMedia: '',
-        medias: [],
-        currentMedias: [],
         current: {},
         showList: false,
-        selected: false,
-      }
-    },
-    beforeMount(){
-      this.post(
-        appui.plugins['appui-note'] + '/media/browser',
-        {
-          start: 0,
-          limit: this.limit
-        },
-        (d) => {
-          this.medias = d.medias
-          //need a copy of medias to manipulate it during the search 
-          this.currentMedias = d.medias
-	      }
-      );
-      /** @todo WTF?? */
-      if (this.closest('bbn-router').selectingMedia) {
-        this.select = true;
+        isPicker: false,
+        root: appui.plugins['appui-note'] + '/',
       }
     },
     computed: {
+      currentItems() {
+        bbn.fn.log("source", this.source);
+        return this.source;
+      },
+      downloadEnabled(){
+        return !!this.download && (!!this.url || bbn.fn.isString(this.download));
+      },
+      uploadEnabled(){
+        return !!this.upload && (!!this.url || bbn.fn.isString(this.upload));
+      },
+      removeEnabled(){
+        return !!this.remove && (!!this.url || bbn.fn.isString(this.remove));
+      },
+      editEnabled(){
+        return !!this.edit && (!!this.url || bbn.fn.isString(this.edit));
+      },
       extensions() {
         let res = [];
         bbn.fn.each(bbn.opt.extensions, (v, i) => {
@@ -53,61 +145,191 @@
       }
     },
     methods: {
-      editMedia(m, a){
-        this.getPopup().open({
-          title: bbn._('Edit media'),
-          component: this.$options.components['form'],
-          height: '400px',
-          width: '400px',
-          source: {
-            media: m,
-            edit: true,
-            removedFile: false,
-            oldName: ''
-          },
-        })
+      getButtonMenu(data){
+        let res = [];
+        if (this.detail) {
+          res.push({
+            text: bbn._('Info'),
+            icon: 'nf nf-fa-info',
+            action: () => {
+              this.openDetail(data);
+            }
+          });
+        }
+        if (this.editEnabled) {
+          res.push({
+            text: bbn._('Edit'),
+            icon: 'nf nf-fa-edit',
+            action: () => {
+              this.editMedia(data);
+            }
+          });
+          if (data.is_image) {
+            res.push({
+              text: bbn._('Edit image'),
+              icon: 'nf nf-fa-image',
+              action: () => {
+                this.openImageEditor(data);
+              }
+            });
+          }
+        }
+        if (this.downloadEnabled) {
+          res.push({
+            text: bbn._('Download'),
+            icon: 'nf nf-fa-download',
+            action: () => {
+              this.downloadMedia(data);
+            }
+          });
+        }
+        if (this.removeEnabled) {
+          res.push({
+            text: bbn._('Delete'),
+            icon: 'nf nf-fa-trash',
+            action: () => {
+              this.removeMedia(data);
+            }
+          });
+        }
+        return res;
+      },
+      editMedia(m){
+        if (this.editEnabled) {
+          let ev = new CustomEvent('beforeedit', {
+            cancelable: true
+          });
+          this.$emit('beforeedit', ev, m);
+          if (!ev.defaultPrevented) {
+            if(bbn.fn.isString(m.content)){
+              m.content = JSON.parse(m.content)
+            }
+            this.getPopup().open({
+              title: bbn._('Edit media'),
+              component: 'appui-note-media-form',
+              componentOptions: {
+                source: m,
+                multiple: false,
+                url: this.edit || this.url
+              },
+              height: '400px',
+              width: '500px',
+              onOpen: pop => {
+                pop.$on('edited', this.onEdited);
+              }
+            });
+          }
+        }
       },
       addMedia(){
-        this.getPopup().open({
-          title: bbn._('Add new media'),
-          component: this.$options.components['form'],
-          height: '400px',
-          width: '400px',
-          source: {
-            media: {
-              title: '',
-              file: [],
-              name: ''
-        		}
+        if (this.uploadEnabled) {
+          let ev = new CustomEvent('beforeadd', {
+            cancelable: true
+          });
+          this.$emit('beforeadd', ev);
+          if (!ev.defaultPrevented) {
+            this.getPopup().open({
+              title: bbn._('Add new media'),
+              component: 'appui-note-media-form',
+              componentOptions: {
+                source: {},
+                url: this.upload || this.url
+              },
+              width: '500px',
+              onOpen: pop => {
+                pop.$on('added', this.onAdded);
+              }
+            });
           }
-        })
+        }
+      },
+      onAdded(media){
+        let gallery = this.getRef('gallery');
+        if (!gallery.isAjax) {
+          if (bbn.fn.isArray(media)) {
+            gallery.source.push(...media);
+          }
+          else {
+            gallery.source.push(media);
+          }
+        }
+        gallery.updateData();
+        appui.success(bbn._('Media(s) successfully added'));
+      },
+      onEdited(media){
+        let gallery = this.getRef('gallery');
+        if (!gallery.isAjax) {
+          let idx = bbn.fn.search(gallery.source, {id: media.id});
+          if (idx > -1) {
+            gallery.source.splice(idx, 1, media);
+          }
+        }
+        gallery.updateData();
+        appui.success(bbn._('Media successfully edited'));
+      },
+      openDetail(media){
+        if (media && media.id && this.detail) {
+          bbn.fn.link(this.detail + (bbn.fn.substr(this.detail, -1, 1) !== '/' ? '/' : '') + media.id);
+        }
+      },
+      openImageEditor(media){
+        if (media && media.id) {
+          bbn.fn.link(appui.plugins['appui-note'] + '/media/editor/' + media.id);
+        }
       },
       formatBytes: bbn.fn.formatBytes,
-      deleteMedia(m){
-        this.confirm(
-          m.notes.length ?
-	          bbn._("The media you're going to delete is linked to a note, are you sure you want to remove it?") :
-          	bbn._("Are you sure you want to delete this media?"),
-          () => {
-            this.post(
-              appui.plugins['appui-note'] + '/media/actions/delete',
-              m,
-              (d) => {
-                if (d.success){
-                  let idx = bbn.fn.search(this.medias, 'id', m.id),
-                      cIdx = bbn.fn.search(this.currentMedias, 'id', m.id);
-                  if ( (idx > -1) && (cIdx > -1) ){
-                    this.medias.splice(idx, 1);
+      removeMedia(m){
+        let ev = new CustomEvent('beforeremove', {
+          cancelable: true
+        });
+        this.$emit('beforeremove', ev, m);
+        if (!ev.defaultPrevented) {
+          this.$emit('delete', {
+            id_note: !!this.data?.id_note ? this.data.id_note : false,
+            media: m
+          });
+          /*this.confirm(
+            (m.notes && m.notes.length) ?
+              bbn._("The media you're going to delete is linked to a note, are you sure you want to remove it?") :
+              bbn._("Are you sure you want to delete this media?"),
+            () => {
+              this.$emit('delete', {'id_note':this.data.id_note, 'id': m.id} );
+              this.post(
+                appui.plugins['appui-note'] + '/media/actions/delete',
+                m,
+                (d) => {
+                  if (d.success){
+                    let idx = bbn.fn.search(this.currentData, {id: m.id});
+                    if (idx > -1) {
+                      this.currentData.splice(idx, 1);
+                    }
+                    appui.success(bbn._('Media successfully deleted :)'))
                   }
-                  appui.success(bbn._('Media successfully deleted :)'))
+                  else{
+                    appui.error(bbn._('Something went wrong while deleting the media :('))
+                  }
                 }
-                else{
-                  appui.error(bbn._('Something went wrong while deleting the media :('))
-                }
-              }
-            )
+              )
+            }
+          )*/
+        }
+      },
+      downloadMedia(a, b){
+        this.$emit('download', a)
+        /* this.post(this.root + 'media/actions/file/download', a, (d) => { 
+          if(d.success){
+            appui.success(a.name +' '+ bbn._( +'downloaded'))
           }
-        )
+          else{
+            appui.error(bbn._('Something went wrong while downloading the file'))
+          }
+        })*/
+      },
+      selectMedia(a){
+        this.$emit('selection', a)
+      },
+      emitClickItem(item) {
+        this.$emit('clickitem', item)
       },
       showImage(img){
         this.getPopup().open({
@@ -123,422 +345,31 @@
         this.getPopup().open({
           title: m.title,
           source: m,
-          component: this.$options.components['info'],
+          component: 'appui-note-media-info',
           width: 400,
         })
+      },
+      refresh(){
+        this.getRef('gallery').updateData();
+      },
+      sort(ev, ids){
+        this.$emit('sort', ev, ids);
       }
+    },
+    beforeMount(){
+      /** @todo WTF?? */
+      if (this.closest('bbn-router').selectingMedia) {
+        this.isPicker = true;
+      }
+    },
+    mounted(){
+      this.ready = true;
     },
     watch: {
-      select(val){
-        let rSelect = this.closest('bbn-router').selectingMedia
-        if (!val && rSelect){
-          delete(this.closest('bbn-router').selectingMedia )
-        }
-      },
       searchMedia(val){
-        this.medias = bbn.fn.filter(this.currentMedias, (a) => {
-          return a.title.toLowerCase().indexOf(val.toLowerCase()) > -1
-        })
-      }
-    },
-    components: {
-      'form': {
-        props: ['source'],
-        template: `
-<div class="bbn-padded">
-	<bbn-form :validation="validation" :source="source" :data="{ref:ref}" :action="root + (source.edit ? 'media/actions/edit' : 'media/actions/save')" @success="success">
-		<div class="bbn-grid-fields">
-			<div>Title: </div>
-			<bbn-input bbn-model="source.media.title" @blur="checkTitle"
-								 :disabled="source.edit ? false : (!source.media.file.length ?true : false )"
-			></bbn-input>
-
-			<div>Filename: </div>
-			<bbn-input bbn-model="source.media.name"
-								 :disabled="source.edit ? false : (!source.media.file.length ?true : false )"
-			></bbn-input>
-
-			<div>Media: </div>
-			<div>
-				<bbn-upload bbn-if="source.edit"
-										:json="true"
-										bbn-model="content"
-										:paste="true"
-										:multiple="false"
-										:save-url="root + 'media/actions/upload_save/' + ref"
-										@remove="setRemovedFile"
-										:remove-url="root + 'media/actions/delete_file/'+ source.media.id"
-				></bbn-upload>
-				<bbn-upload bbn-model="source.media.file"
-										bbn-else
-									  @success="uploadSuccess"
-										:paste="true"
-										:multi="false"
-										:save-url="root + 'media/actions/upload_save/' + ref"
-				></bbn-upload></div>
-		</div>
-	</bbn-form>
-</div>`,
-        data(){
-          return {
-            browser: {},
-            root: appui.plugins['appui-note'] + '/',
-            ref: (new Date()).getTime(),
-            validTitle: true,
-            content: [],
-            //the idx of the media in medias of the container
-            removedFile: false,
-            mediaIdx:false
-          }
-        },
-			  methods: {
-          setRemovedFile(){
-            this.source.removedFile = true
-            this.removedFile = true
-          },
-          /** @todo Check it out */
-          validation(a){
-            if (a.media.file
-                && a.media.file[0]
-                && a.media.file[0].extension
-            ) {
-            	if ((a.media.name.indexOf(a.media.file[0].extension) > -1)
-                  && a.media.name.replace(a.media.file[0].extension, '').length
-                  && (a.media.name.replace(a.media.file[0].extension, '') !== '.')
-              ) {
-                return true;
-              }
-            }
-            else if (a.media.content
-                     && a.media.content.extension
-                     && (a.media.name.indexOf(a.media.content.extension) > -1)
-                     && a.media.name.replace(a.media.content.extension, '').length
-                     && (a.media.name.replace(a.media.content.extension, '') !== '.')
-            ) {
-              return true;
-            }
-            else{
-              this.alert(bbn._("The extension in the title or in the filename doesn't match the extension of the file inserted!"))
-              return false;
-            }
-          },
-          uploadSuccess(){
-            this.$nextTick(() => {
-              if(this.source.media.file && this.source.media.file[0]){
-                this.source.media.title = this.source.media.file[0].name
-                this.source.media.name = this.source.media.file[0].name
-              }
-            })
-          },
-          setContent(){
-            let res = [];
-            if(this.source.edit){
-              if ( bbn.fn.isObject(this.source.media.content)){
-                this.source.media.content.name = this.source.media.name;
-                res.push(this.source.media.content)
-                this.content = JSON.stringify(res)
-              }
-            }
-          },
-         	checkTitle(){
-            if ( this.source.media.title.indexOf('.') < 0 ){
-              let extension = this.source.edit ? this.source.media.content.extension : this.source.media.file.extension
-              if ( extension){
-                this.source.media.title += '.' + this.source.media.content.extension
-              }
-              else{
-                //CASE INSERT
-                this.validTitle = false;
-                this.alert(bbn._('The title must contain the extension of the file'))
-              }
-            }
-          },
-          success(d){
-            if(d.success && d.media){
-              if ( !this.source.edit ){
-                this.browser.medias.push(d.media);
-                appui.success(bbn._('Media successfully added to media browser'));
-              }
-              else{
-                this.browser.medias[this.mediaIdx].content['name'] = d.media.name
-                if (d.media.is_image ){
-                  this.browser.medias[this.mediaIdx].isImage = d.media.isImage
-                }
-                if ( this.removedFile ){
-                  if(bbn.fn.isString(d.media.content)){
-                    d.media.content = JSON.parse(d.media.content)
-                  }
-                  bbn.fn.log('before',this.mediaIdx)
-                  let thatMediaIdx = this.mediaIdx
-                  //the block has to disappear to show the new picture uploaded
-                  this.browser.medias.splice(this.mediaIdx, 1);
-                  setTimeout(() => {
-                    this.browser.medias.splice(thatMediaIdx, 0, d.media);
-                    bbn.fn.log('after',thatMediaIdx, d.media, JSON.stringify(d.media))
-                  }, 50);
-                }
-                appui.success(bbn._('Media successfully updated'));
-              }
-            }
-            else{
-              appui.error(bbn._('Something went wrong while adding the media to the media broser'))
-            }
-          }
-        },
-        mounted(){
-          this.browser = this.closest('bbn-container').find('appui-note-media-browser')
-          this.mediaIdx =  bbn.fn.search(this.browser.medias, 'id', this.source.media.id);
-          this.setContent();
-          this.source.edit ? (this.source.oldName = this.source.media.content.name) : ''
-        },
-        watch: {
-          content(val, oldVal){
-            if(val){
-              let tmp = JSON.parse(val)
-              if(tmp[0]){
-                this.source.media.content = tmp[0];
-              }
-            }
-          }
-        }
-      },
-      'info': {
-          template:
-`
-<div>
-	<div class="bbn-grid-fields bbn-padded">
-		<div>Title:</div>
-		<div bbn-text="source.title"></div>
-		<div>Filename:</div>
-		<div bbn-text="source.name"></div>
-		<div>Type:</div>
-		<div bbn-text="source.type"></div>
-		<div>User:</div>
-		<div bbn-text="getField(users, 'text', {value: source.id_user})"></div>
-		<div>Size:</div>
-    <div bbn-text="formatBytes(source.content.size)"></div>
-    <div>Extension:</div>
-    <div bbn-text="source.content.extension"></div>
-    <div class="bbn-grid-full bbn-bordered bbn-radius bbn-spadded bbn-vmargin" bbn-for="n in source.notes">
-      <div class="bbn-grid-fields">
-        <div>Note title:</div>
-        <div bbn-text="n.title"></div>
-        <div>Creation:</div>
-        <div bbn-text="n.creation"></div>
-        <div>Version:</div>
-        <div bbn-text="n.version"></div>
-				<div>Published:</div>
-        <div bbn-text="n.is_published ? _('Yes') : _('No') "></div>
-        <div>Content:</div>
-        <i class="nf nf-mdi-comment_text bbn-medium bbn-p" title="Note content" @click="show_note_content(n)"></i>
-      </div>
-    </div>
-  </div>
-</div>
-`,
-        props: ['source'],
-        data(){
-          return {
-            users: appui.users
-          }
-        },
-        methods: {
-          show_note_content(n){
-            this.getPopup().open({
-              title: n.title,
-              content: n.content
-            })
-          },
-          formatBytes: bbn.fn.formatBytes,
-          getField: bbn.fn.getField,
-        }
-      },
-      'block': {
-        template: '#block',
-        props: ['source', 'data'],
-        data(){
-          return {
-            icons: {
-               pdf: 'nf nf-fa-file_pdf_o',
-               docx: 'nf nf-mdi-file_document',
-               xls: 'nf nf-fa-file_excel_o',
-               odt: 'nf nf-mdi-file_word'
-            },
-            cp: {},
-            adjustTop: '',
-            adjustWidth: '',
-            canShow: false,
-            editinline:false,
-            initialTitle: '',
-            root: 'notes/media',
-            select: '',
-            removedFile: false,
-          }
-        },
-        computed: {
-          isMobile: bbn.fn.isMobile,
-          cutted(){
-            if (this.data.media.title.length > 20) {
-              return bbn.fn.substr(this.data.media.title, 0, 20);
-            }
-
-            return this.data.media.title;
-          },
-        },
-        methods:{
-          routeClick(m){
-            if ( this.select ){
-              this.addMediaToNote(m);
-            }
-            else{
-              if(m.is_image){
-                this.cp.showImage(m)
-              }
-            }
-          },
-          addMediaToNote(m){
-            this.closest('appui-note-media-browser').selected = m;
-            this.closest('appui-note-media-browser').$emit('select',m)
-          },
-          showFileInfo(m){
-            this.closest('appui-note-media-browser').showFileInfo(m)
-          },
-          editMedia(m){
-            this.closest('appui-note-media-browser').editMedia(m, this.dataIdx)
-          },
-          deleteMedia(m){
-            this.closest('bbn-container').getComponent().deleteMedia(m)
-          },
-          focusInput(){
-            this.$nextTick(()=>{
-              this.find('bbn-input').focus()
-            })
-          },
-          adjustTitle(){
-            if ( this.data.media.title.indexOf('.') < 0 ){
-              if ( this.data.media.content.extension ){
-                this.data.media.title += '.' + this.data.media.content.extension;
-                return true;
-              }
-              else{
-                //CASE INSERT
-                this.validTitle = false;
-                this.data.media.title = this.initialTitle;
-                this.alert(bbn._('The title must contain the extension of the file'))
-                return false;
-              }
-            }
-            return false;
-          },
-
-          //change the title inline and exit from edit mode
-          exitEdit(){
-            this.editinline = false;
-            if( this.data.media.title !== this.initialTitle ){
-              let title = this.data.media.title;
-              let ext_title = bbn.fn.substr(title, title.lastIndexOf('.') + 1, title.length - 1 );
-       			  if (ext_title === this.data.media.content.extension) {
-                this.post('notes/media/actions/edit_title', {
-                  id: this.data.media.id,
-                  title: this.data.media.title
-                }, (d) => {
-                  if ( d.success ){
-                    this.initialTitle = this.data.media.title;
-                    appui.success(bbn._('Media title successfully changed!'))
-                  }
-                  else {
-                    appui.error(bbn._('Something went wrong while changing the media title'))
-                  }
-                })
-              }
-              else {
-                this.data.media.title = this.initialTitle
-                this.alert(bbn._('The title must end with the same extension of the file'))
-              }
-            }
-          }
-        },
-        mounted(){
-          this.cp = this.closest('appui-note-media-browser');
-          this.select = this.cp.select
-          this.initialTitle = this.data.media.title
-          this.data.media.removedFile = false;
-        },
-        watch: {
-          isMobile(val){
-            if(!val){
-          //    this.find('bbn-context').showFloater = false;
-            }
-          },
-          editinline(val){
-            if(val){
-              this.$nextTick( ()=>{
-                if(this.adjustTitle()){
-                  this.find('bbn-input').focus();
-                }
-							})
-            }
-          }
-        }
-      },
-      'list': {
-        template: `
-<bbn-list :source="btns"
-           class="media-floating-list bbn-bordered"
-           >
- </bbn-list>
-`,
-        props: ['source','data'],
-        data(){
-          return{
-            mediaIdx: false,
-            //at mounted know if browser is open in selecting mode
-            select: false
-          }
-        },
-        computed :{
-          btns(){
-            let res = [{
-             icon: 'nf nf-fa-info',
-             title: 'Get more info', //bbn._('Get more info'),
-             action: () => {
-               this.showFileInfo(this.data.media)
-             	},
-            }, {
-             icon: 'nf nf-fa-edit',
-             title: bbn._('Edit media'),
-             action: () => {
-             	 this.editMedia(this.data.media)
-             }
-            }, {
-             icon: 'nf nf-fa-trash_o',
-             title: bbn._('Delete media'),
-             action: () => {
-             	 this.deleteMedia(this.data.media)
-             }
-            }];
-            return res;
-          },
-        },
-       	methods:{
-          showFileInfo(m){
-            this.closest('appui-note-media-browser').showFileInfo(m)
-          },
-          editMedia(m){
-            this.closest('appui-note-media-browser').editMedia(m)
-          },
-          deleteMedia(m){
-            this.closest('appui-note-media-browser').deleteMedia(m)
-          }
-        },
-        mounted(){
-          if ( this.closest('appui-note-media-browser').select ){
-            this.closest('appui-note-media-browser').selected = false
-          }
-          if (this.data.media.id){
-            this.mediaIdx = bbn.fn.search(this.closest('appui-note-media-browser').medias, 'id', this.data.media.id)
-          }
-        }
+        this.medias = bbn.fn.filter(this.currentData, (a) => {
+          return a.title.toLowerCase().indexOf(val.toLowerCase()) > -1;
+        });
       }
     }
   }

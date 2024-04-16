@@ -33,7 +33,7 @@
                   bbn-model="currentFiles"
                   :multiple="false"
                   :save-url="root + 'media/actions/upload_save/' + ref"
-                  @beforeRemove="onRemove"
+                  @beforeremove="onRemove"
                   :remove-url="root + 'media/actions/delete_file/'+ ref"
                   :data="{
                          ref: ref,

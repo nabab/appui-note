@@ -17,7 +17,7 @@
                 @scroll="scrolling"
                 @resize="resize"
                 @ready="update"
-                @reachBottom="addItems">
+                @reachbottom="addItems">
       <appui-note-bookmarks-item bbn-for="(block, i) in currentData"
                                  bbn-if="i < numberShown"
                                  :source="block"

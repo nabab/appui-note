@@ -36,21 +36,21 @@
     },
     methods:{
       showFileInfo(m){
-        this.closest('appui-note-media-browser2').showFileInfo(m);
+        this.closest('appui-note-media-browser').showFileInfo(m);
       },
       editMedia(m){
-        this.closest('appui-note-media-browser2').editMedia(m);
+        this.closest('appui-note-media-browser').editMedia(m);
       },
       removeMedia(m){
-        this.closest('appui-note-media-browser2').removeMedia(m);
+        this.closest('appui-note-media-browser').removeMedia(m);
       }
     },
     mounted(){
-      if ( this.closest('appui-note-media-browser2').select ){
-        this.closest('appui-note-media-browser2').currentSelected = false;
+      if ( this.closest('appui-note-media-browser').select ){
+        this.closest('appui-note-media-browser').currentSelected = false;
       }
       if (this.data.media.id){
-        this.mediaIdx = this.closest('appui-note-media-browser2').getIndex({id: this.data.media.id});
+        this.mediaIdx = this.closest('appui-note-media-browser').getIndex({id: this.data.media.id});
       }
     }
   };

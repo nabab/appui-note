@@ -102,7 +102,7 @@
         "No item": "Aucun \u00e9l\u00e9ment",
         "Refresh": "Rafra\u00eechir"
     },
-    "components\/media\/browser2": {
+    "components\/media\/browser": {
         "Edit": "Modifier",
         "Delete": "Supprimer",
         "Info": "Info",

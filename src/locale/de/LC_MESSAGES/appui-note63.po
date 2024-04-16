@@ -17,7 +17,7 @@ msgstr ""
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/bookmarks.js
 msgid "Edit"
 msgstr ""
@@ -26,7 +26,7 @@ msgstr ""
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/item/item.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/forum.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.php
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/picker/picker.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.js
@@ -573,7 +573,7 @@ msgid "Zoomable"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "Info"
 msgstr ""
 
@@ -1289,7 +1289,7 @@ msgid "The title must end with the same extension of the file"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/list/list.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/picker/picker.js
@@ -1297,7 +1297,7 @@ msgid "Edit media"
 msgstr ""
 
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser3/browser3.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/picker/picker.js
 msgid "Add new media"
@@ -1365,20 +1365,20 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "Edit image"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 #: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/picker/picker.js
 msgid "Download"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "Media(s) successfully added"
 msgstr ""
 
-#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser2/browser2.js
+#: /home/okrim/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
 msgid "Media successfully edited"
 msgstr ""
 

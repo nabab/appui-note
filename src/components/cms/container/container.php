@@ -60,7 +60,7 @@
                                         @mouseleave="overItem = -1"/>
               <appui-note-cms-block bbn-else
                                     @click="selectBlock(item._elementor.key, item, _self, $event)"
-                                    @config-init="configInit"
+                                    @configinit="configInit"
                                     :path="path"
                                     :editable="editable"
                                     :selectable="selectable"
