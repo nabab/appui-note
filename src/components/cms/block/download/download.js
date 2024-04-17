@@ -40,21 +40,13 @@
         });
       },
       openExplorer(file){
-        this.getPopup().open({
-          component: this.$options.components.gallery,
-          componentOptions: {
-            onSelection: media => this.onSelection(media, file)
-          },
+        this.getPopup({
+          component: this.$options.components.browser,
+          source: file,
           title: bbn._('Select a media'),
           width: '90%',
           height: '90%'
         });
-      },
-      onSelection(media, file) {
-        this.$set(file, 'value', media.data.id);
-        this.$set(file, 'text', media.data.name);
-        this.$set(file, 'filename', media.data.name);
-        this.getPopup().close();
       },
       onChangeType(file){
         this.$set(file, 'value', '');
@@ -73,7 +65,7 @@
       }
     },
     components: {
-      gallery: {
+      browser: {
         template: `
 <div>
   <appui-note-media-browser :source="root + 'media/data/browser'"
@@ -90,9 +82,11 @@
                              ref="mediabrowser"/>
 </div>
         `,
+        mixins: [bbn.cp.mixins.basic],
         props: {
-          onSelection: {
-            type: Function
+          source: {
+            type: Object,
+            required: true
           }
         },
         data(){
@@ -101,6 +95,12 @@
           }
         },
         methods: {
+          onSelection(media) {
+            this.$set(this.source, 'value', media.data.id);
+            this.$set(this.source, 'text', media.data.name);
+            this.$set(this.source, 'filename', media.data.name);
+            this.getPopup().close();
+          },
           onDelete(obj){
             let id = bbn.fn.isArray(obj.media) ? bbn.fn.map(obj.media, m => m.id) : (obj.media.id || false);
             this.post(this.root + 'media/actions/delete', {id: id}, d => {

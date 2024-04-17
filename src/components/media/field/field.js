@@ -33,10 +33,8 @@
       },
       openGallery(){
         this.getPopup({
-          component: this.$options.components.gallery,
-          componentOptions: {
-            onSelection: this.onSelection
-          },
+          component: this.$options.components.browser,
+          source: this.source,
           title: bbn._('Select an image'),
           width: '90%',
           height: '90%'
@@ -62,11 +60,10 @@
         })
       },
       onSelection(img) {
-        this.emitInput(img.data.id);
         if (!bbn.fn.getRow(this.source, {id: img.data.id})) {
-          bbn.fn.log(img.data);
           this.source.push(img.data);
         }
+        this.emitInput(img.data.id);
         this.getPopup().close();
       }
     },
@@ -91,7 +88,7 @@
           }
         }
       },
-      gallery: {
+      browser: {
         template: `
 <div>
   <appui-note-media-browser :source="root + '/media/data/browser'"
@@ -107,17 +104,16 @@
                              @delete="onDelete"/>
 </div>
         `,
-        methods: {
-          onSelection() {
-            this.closest('bbn-floater').opener.onSelection(...arguments);
-          }
-        },
+        mixins: [bbn.cp.mixins.basic],
         data(){
           return {
             root: appui.plugins['appui-note'] + '/'
           };
         },
         methods: {
+          onSelection(media) {
+            this.closest('bbn-floater').opener.onSelection(media);
+          },
           onDelete(obj){
             let id = bbn.fn.isArray(obj.media) ? bbn.fn.map(obj.media, m => m.id) : (obj.media.id || false);
             this.post(this.root + 'media/actions/delete', {id: id}, d => {

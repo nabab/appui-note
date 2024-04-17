@@ -271,13 +271,14 @@
         template: `
 <appui-note-media-browser :source="mainComponent.mediasUrl"
                             @selection="onSelection"
-                            @clickItem="onSelection"
+                            @clickitem="onSelection"
                             :zoomable="false"
                             :limit="50"
                             path-name="path"
                             :upload="mainComponent.mediasUploadUrl"
                             :remove="mainComponent.mediasRemoveUrl"/>
         `,
+        mixins: [bbn.cp.mixins.basic],
         props: {
           source: {
             type: Object,

@@ -44,17 +44,11 @@
       openGallery(){
         this.getPopup().open({
           component: this.$options.components.gallery,
-          componentOptions: {
-            onSelection: this.onSelection
-          },
+          source: this.source,
           title: bbn._('Select an image'),
           width: '90%',
           height: '90%'
         });
-      },
-      onSelection(img) {
-        this.$set(this.source, 'content', img.data.path);
-        this.getPopup().close();
       },
       toggleAutoWidth(){
         let isActive = (this.source.width === 'auto') || (this.source.width === '') || (this.source.width === undefined);
@@ -82,9 +76,11 @@
                              @delete="onDelete"/>
 </div>
         `,
+        mixins: [bbn.cp.mixins.basic],
         props: {
-          onSelection: {
-            type: Function
+          source: {
+            type: Object,
+            required: true
           }
         },
         data(){
@@ -93,6 +89,10 @@
           }
         },
         methods: {
+          onSelection(img) {
+            this.$set(this.source, 'content', img.data.path);
+            this.getPopup().close();
+          },
           onDelete(obj){
             let id = bbn.fn.isArray(obj.media) ? bbn.fn.map(obj.media, m => m.id) : (obj.media.id || false);
             this.post(this.root + 'media/actions/delete', {id: id}, d => {
