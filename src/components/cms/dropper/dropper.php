@@ -10,7 +10,7 @@
          type: 'cmsDropper',
          source: {type, special},
          cfg: defaultConfig,
-         parendUid: cid
+         parendUid: $cid
        },
        mode: 'clone'
      }">

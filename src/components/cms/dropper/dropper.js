@@ -24,11 +24,6 @@
       special: {
         type: String
       }
-    },
-    data(){
-      return {
-        cid: this.$cid
-      };
     }
   };
 })();
