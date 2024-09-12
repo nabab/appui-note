@@ -24,8 +24,9 @@ if ($model->hasData(['id', 'ref', 'file'], true)) {
       && is_file($tmpPath . $model->data['name'])
     ) {
       if (!empty($oldMedia['url'])) {
-        $model->getModel($model->pluginUrl('appui-note'), '/media/actions/clear_chache', ['file' => $oldMedia['url'], 'all' => true]);
+        $model->getModel($model->pluginUrl('appui-note'), '/media/actions/clear_cache', ['file' => $oldMedia['url'], 'all' => true]);
       }
+
       $res['media'] = $medias->replaceContent($id, $tmpPath . $model->data['name']);
       if (empty($res['media'])) {
         throw new Error(_('Error while replacing the media'));
@@ -34,9 +35,12 @@ if ($model->hasData(['id', 'ref', 'file'], true)) {
     }
     if ($oldMedia['title'] !== $model->data['title']) {
       if (empty($model->data['title'])) {
+        
+
         $ext = \bbn\Str::fileExt($model->data['name']);
         $model->data['title'] = trim(str_replace(['-', '_', '+'], ' ', \bbn\X::basename($model->data['name'], ".$ext")));
       }
+
       if (!$medias->setTitle($id, $model->data['title'])) {
         throw new Error(_('Error while replacing the media title'));
       }

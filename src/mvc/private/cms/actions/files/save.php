@@ -4,21 +4,21 @@
  *
  **/
 
+use bbn\Str;
 
-  die(var_dump('lo', $ctrl->arguments[0]));
+die(var_dump('lo', $ctrl->arguments[0]));
 if ( isset($ctrl->files['file'], $ctrl->arguments[0]) &&
-  \bbn\Str::isInteger($ctrl->arguments[0])
+  Str::isInteger($ctrl->arguments[0])
 ){
   
   $f =& $ctrl->files['file'];
   $path = BBN_USER_PATH.'tmp/'.$ctrl->arguments[0];
-  $new = !empty($_REQUEST['name']) && ($_REQUEST['name'] !== $f['name']) ?
-    \bbn\Str::encodeFilename($_REQUEST['name'], \bbn\Str::fileExt($_REQUEST['name'])) :
-    \bbn\Str::encodeFilename($f['name'], \bbn\Str::fileExt($f['name']));
+  $name = $_REQUEST['name'] ?? $f['name'];
+  $new = Str::encodeFilename($name, Str::fileExt($name));
   $file = $path.'/'.$new;
   if ( \bbn\File\Dir::createPath($path) &&
     move_uploaded_file($f['tmp_name'], $file) ){
-    $tmp = \bbn\Str::fileExt($new, 1);
+    $tmp = Str::fileExt($new, 1);
     $fname = $tmp[0];
     $ext = $tmp[1];
     $ctrl->obj->success = 1;
@@ -40,7 +40,7 @@ if ( isset($ctrl->files['file'], $ctrl->arguments[0]) &&
     }
     $ctrl->obj->files = [];
     foreach ( $files as $f ){
-      $tmp = \bbn\Str::fileExt($f, 1);
+      $tmp = Str::fileExt($f, 1);
       $fname = $tmp[0];
       $ext = $tmp[1];
       $res = [

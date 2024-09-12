@@ -42,10 +42,11 @@
       return {
         root: appui.plugins['appui-note'] + '/',
         ref: (new Date()).getTime(),
-        files: files,
+        files,
         showTitles: false,
         oldTitle: '',
         oldDescription: '',
+        oldCount: files.length
       };
     },
     computed: {
@@ -65,6 +66,12 @@
       }
     },
     methods: {
+      onUploadSuccess(id, name, data, all) {
+        bbn.fn.log("onUploadSuccess", id, name, data, all);
+        this.$nextTick(() => {
+          this.files[0].title = bbn.fn.substr(data.original, 0, - data.extension.length);
+        });
+      },
       success(d){
         if (d.success && d.media) {
           let floater = this.closest('bbn-floater');
@@ -83,16 +90,27 @@
       }
     },
     watch: {
-      showTitles(newVal){
+      showTitles(newVal) {
         if (!this.isEdit && !newVal) {
-          bbn.fn.each(this.files, f => f.title = '');
+          bbn.fn.each(this.files, f => {if (undefined === !f.title) {f.title = ''}});
         }
+
+        this.$nextTick(() => {
+          this.closest('bbn-floater').fullResize();
+        });
       },
       'source.link'(val){
         this.files[0].link = val;
       },
-      files(newVal, oldVal){
-        if (this.isEdit && !oldVal.length) {
+      files(newVal) {
+        if (this.oldCount !== newVal.length) {
+          this.oldCount = newVal.length;
+          this.$nextTick(() => {
+            this.closest('bbn-floater').fullResize();
+          });
+        }
+
+        if (this.isEdit && !this.oldCount) {
           newVal[0].title = this.oldTitle;
           newVal[0].description = this.oldDescription;
           this.oldTitle = '';

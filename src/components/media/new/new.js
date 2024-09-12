@@ -28,10 +28,7 @@
     },
     data(){
       let files = [];
-      if (!!this.source
-        && !!this.source.id &&
-        !!this.source.id.length
-      ) {
+      if (this.source?.id?.length) {
         files.push({
           name: this.source.name,
           title: this.source.title,
@@ -43,7 +40,7 @@
       return {
         root: appui.plugins['appui-note'] + '/',
         ref: (new Date()).getTime(),
-        files: files,
+        files,
         showTitles: false,
         oldTitle: '',
         oldDescription: '',
@@ -82,11 +79,13 @@
         }
       },
       files(newVal, oldVal){
-        if (this.isEdit && !oldVal.length) {
-          newVal[0].title = this.oldTitle;
-          newVal[0].description = this.oldDescription;
-          this.oldTitle = '';
-          this.oldDescription = '';
+        if (this.isEdit) {
+          if (!oldVal.length) {
+            newVal[0].title = this.oldTitle;
+            newVal[0].description = this.oldDescription;
+            this.oldTitle = '';
+            this.oldDescription = '';
+          }
         }
       }
     }

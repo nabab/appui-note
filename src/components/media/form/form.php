@@ -48,6 +48,8 @@
 				<bbn-upload :json="asJson"
 										bbn-model="files"
 										:paste="true"
+										ref="upload"
+										@success="onUploadSuccess"
 										:multiple="!isEdit"
 										:save-url="root + 'media/actions/upload_save/' + ref"
 										@beforeRemove="onRemove"

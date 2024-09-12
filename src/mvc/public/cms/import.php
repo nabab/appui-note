@@ -1,6 +1,7 @@
 <?php
 
 use bbn\X;
+use bbn\Str;
 use bbn\File\System;
 
 if (!defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
@@ -87,19 +88,19 @@ else if (!empty($ctrl->post['process'])
 }
 else if (!empty($ctrl->files)) {
   $f = $ctrl->files['file'];
-  $filename = !empty($_REQUEST['name']) && ($_REQUEST['name'] !== $f['name']) ?
-    \bbn\Str::encodeFilename($_REQUEST['name'], \bbn\Str::fileExt($_REQUEST['name'])) :
-    \bbn\Str::encodeFilename($f['name'], \bbn\Str::fileExt($f['name']));
+  $name = $_REQUEST['name'] ?? $f['name'];
+  $filename = Str::encodeFilename($name, Str::fileExt($name));
   if (rename($f['tmp_name'], APPUI_NOTE_CMS_IMPORT_PATH.$filename)) {
     $ctrl->obj->success = 1;
-    $ctrl->obj->fichier = [
+    $ctrl->obj->uploaded = [
       'name' => $filename,
+      'original' => $name,
       'size' => filesize(APPUI_NOTE_CMS_IMPORT_PATH.$filename),
-      'extension' => '.'.\bbn\Str::fileExt($filename)
+      'extension' => '.' . Str::fileExt($filename)
     ];
     file_put_contents($cfgFile, json_encode([
       'creationDate' => date('Y-m-d H:i:s'),
-      'file' => $ctrl->obj->fichier,
+      'file' => $ctrl->obj->uploaded,
       'processes' => [
         'file' => [
           'done' => true,
