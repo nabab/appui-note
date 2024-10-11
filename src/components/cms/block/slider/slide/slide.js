@@ -5,18 +5,18 @@
 			isMobile(){
         return bbn.fn.isMobile()
       },
-			imgStyle(){
+			imgStyle() {
 				let fit = this.closest('appui-note-cms-block-slider').source.fit;
 				let st = (fit === 'contain') ? ';object-position:top;' : ''
 				return 'object-fit:' + fit + st
 			},
-			min(){
+			min() {
 				return this.closest('appui-note-cms-block-slider').source.min;
 			},
-			max(){
+			max() {
 				return this.closest('appui-note-cms-block-slider').source.max;
 			},
-			mode(){
+			currentMode() {
 				return this.closest('appui-note-cms-block-slider').source.mode;
 			},
 			columns(){

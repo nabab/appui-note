@@ -179,24 +179,24 @@
         if (bbn.fn.isDesktopDevice() || bbn.fn.isTabletDevice()) {
           let start = 0;
           for (let i = 0; i < this.mapped.length; i += this.source.max) {
-            start = i,
-            data = this.mapped.slice(start, this.source.max + start);
+            start = i;
+            const data = this.mapped.slice(start, this.source.max + start);
             this.currentItems.push({
               //mode : 'full',
               component: 'appui-note-cms-block-slider-slide',
-              data: data
+              data
             });
           }
         }
         else if (bbn.fn.isMobileDevice()) {
           let start = 0;
           for (let i = 0; i < this.mapped.length; i += this.source.min) {
-            start = i,
-            data =  this.mapped.slice(start, this.source.min + start);
+            start = i;
+            const data =  this.mapped.slice(start, this.source.min + start);
             this.currentItems.push({
               //mode : 'full',
               component: 'appui-note-cms-block-slider-slide',
-              data: data
+              data
             });
           }
         }
