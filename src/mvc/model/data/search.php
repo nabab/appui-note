@@ -5,7 +5,7 @@
  **/
 use bbn\Appui\Note;
 
-/** @var $model \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 
 if ($model->hasData('filters', true) && !empty($model->data['filters']['conditions']) && !empty($model->data['filters']['conditions'][0]['value'])) {
   $note = new Note($model->db);

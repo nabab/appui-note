@@ -3,7 +3,7 @@
 use bbn\X;
 use bbn\Appui\Search;
 
-/** @var $ctrl \bbn\Mvc\Controller */
+/** @var bbn\Mvc\Controller $ctrl */
 
 $types_cond = array_map(
   function($b) {

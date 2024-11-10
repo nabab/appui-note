@@ -6,7 +6,7 @@
 
 use bbn\X;
 use bbn\Str;
-/** @var $model \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 
 if ($model->hasData('id', true)) {
   $cms = new \bbn\Appui\Cms($model->db);

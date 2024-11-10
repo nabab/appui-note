@@ -4,7 +4,7 @@ use bbn\X;
 use bbn\Str;
 use bbn\File\Dir;
 use bbn\Appui\Medias;
-/** @var $ctrl \bbn\Mvc\Controller */
+/** @var bbn\Mvc\Controller $ctrl */
 
 /*copy($ctrl->files['img']['tmp_name'], BBN_DATA_PATH.Str::genpwd().".png");
 X::ddump(is_file($ctrl->files['img']['tmp_name']));

@@ -6,7 +6,7 @@
 
 use bbn\Appui\Cms;
 
-/** @var $model \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 $res['success'] = false;
 
 if ($model->hasData('url', true)) {

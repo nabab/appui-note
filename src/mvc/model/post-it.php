@@ -1,5 +1,5 @@
 <?php
-/** @var $model \bbn\Mvc\Model */
+/** @var bbn\Mvc\Model $model */
 $notes = new \bbn\Appui\Note($model->db);
 return [
   'notes' => $notes->getByType(

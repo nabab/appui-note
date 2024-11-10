@@ -7,7 +7,7 @@
 use bbn\X;
 use bbn\Str;
 use bbn\Appui\Note;
-/** @var $model \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 
 $res = ['success' => false];
 if ($model->hasData('action', true)) {

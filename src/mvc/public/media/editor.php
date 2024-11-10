@@ -2,7 +2,7 @@
 
 use bbn\X;
 use bbn\Str;
-/** @var $ctrl \bbn\Mvc\Controller */
+/** @var bbn\Mvc\Controller $ctrl */
 
 if (!empty($ctrl->arguments[0])
   && \bbn\Str::isUid($ctrl->arguments[0])

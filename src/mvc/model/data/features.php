@@ -6,7 +6,7 @@
 
 use bbn\X;
 use bbn\Str;
-/** @var $model \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 
 if ($model->hasData('id_option', true)) {
   $note = new bbn\Appui\Note($model->db);

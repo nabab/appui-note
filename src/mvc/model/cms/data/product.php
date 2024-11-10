@@ -6,7 +6,7 @@
 use bbn\Str;
 use bbn\Shop\Product;
 use bbn\Appui\Cms;
-/** @var $model \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 $res['success'] = false;
 if ($model->hasData('id', true)) {
   $prod = new Product($model->db);

@@ -1,6 +1,6 @@
 <?php
 
-/** @var $ctrl \bbn\Mvc\Controller */
+/** @var bbn\Mvc\Controller $ctrl */
 
 $ctrl->setColor('#063B69', '#FFF')
   ->setIcon('nf nf-fa-wordpress')

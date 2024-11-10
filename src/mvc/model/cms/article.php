@@ -4,7 +4,7 @@
  *
  **/
 
-/** @var $model \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 
 if ($model->hasData('id', true)) {
   $data = $model->db->select('articles', ['bbn_cfg', 'title', 'url'], ['id' => $model->data['id']]);

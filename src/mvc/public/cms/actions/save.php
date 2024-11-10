@@ -1,5 +1,5 @@
 <?php
-/** @var $ctrl \bbn\Mvc\Controller */
+/** @var bbn\Mvc\Controller $ctrl */
 if ($m = $ctrl->getPluginModel('cms/actions/save', $ctrl->post)) {
   $ctrl->obj = $m;
 }

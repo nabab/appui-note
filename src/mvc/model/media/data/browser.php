@@ -1,5 +1,5 @@
 <?php
-/** @var $model \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 
 if ($model->hasData('limit', true) && $model->hasData('start')) {
   $medias = new \bbn\Appui\Medias($model->db);

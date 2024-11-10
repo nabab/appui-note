@@ -4,4 +4,4 @@
  *
  **/
 
-/** @var $ctrl \bbn\Mvc\Controller */
+/** @var bbn\Mvc\Controller $ctrl */
