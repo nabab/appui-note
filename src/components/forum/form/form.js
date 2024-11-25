@@ -148,6 +148,11 @@
           this.$set(this.source, 'links', d.links);
           this.$forceUpdate();
         }
+      },
+      onFormSuccess(d, ev) {
+        if (this.formSuccess) {
+          this.formSuccess(d, ev);
+        }
       }
     },
     mounted(){

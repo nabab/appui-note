@@ -2,7 +2,7 @@
           :action="formAction"
           :source="source"
 					:data="formData"
-          @success="formSuccess">
+          @success="onFormSuccess">
   <appui-note-toolbar-version bbn-if="data.id && source.hasVersions"
                               :source="source"
                               :data="data"
