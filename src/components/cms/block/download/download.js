@@ -52,7 +52,7 @@
         this.$set(file, 'value', '');
         this.$set(file, 'text', '');
         if (file.type === 'url') {
-          this.$delete(file, 'filename');
+          delete file.filename;
         }
       },
       onDownload(file){

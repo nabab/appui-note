@@ -76,7 +76,7 @@
           if (this.currentEditing.special) {
             let txt = bbn.fn.getField(this.allBlocks, 'text', {special: this.currentEditing.special});
             if (!txt) {
-              this.$delete(this.currentEditing, 'special');
+              delete this.currentEditing.special;
             } else {
               return txt;
             }

@@ -245,10 +245,10 @@
             this.normalizeMargins(it.data);
           });
         }
-        //this.$delete(this.source, 'items');
+        //delete this.source.items;
       }
       if (this.source.currentItems !== undefined) {
-        this.$delete(this.source, 'currentItems');
+        delete this.source.currentItems;
       }
       if (!this.source.max){
         this.$set(this.source, 'max', 3);
@@ -277,11 +277,11 @@
     },
     mounted(){
       if (this.isFeatures) {
-        this.$delete(this.source, 'noteType');
+        delete this.source.noteType;
         this.okMode = true;
       }
       else if (this.isGallery) {
-        this.$delete(this.source, 'noteType');
+        delete this.source.noteType;
         this.okMode = true;
       }
       else if (this.isPublications) {
@@ -301,18 +301,18 @@
             }
             else{
               //this.showRootAlias = false ;
-              this.$delete(this.source, 'id_root_alias');
+              delete this.source.id_root_alias;
             }
           }
         }
       },
       'source.mode'(val){
         if (val === 'features') {
-          this.$delete(this.source, 'noteType');
+          delete this.source.noteType;
           this.okMode = true;
         }
         else if (val === 'gallery') {
-          this.$delete(this.source, 'noteType');
+          delete this.source.noteType;
           this.okMode = true;
         }
         else {
