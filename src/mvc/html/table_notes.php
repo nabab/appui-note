@@ -102,7 +102,7 @@
           @success="success"
           @failure="failure"
           >
-  <div class="bbn-padded bbn-w-100" style="min-height: 500px">
+  <div class="bbn-padding bbn-w-100" style="min-height: 500px">
 
 
     <label class="bbn-form-label">

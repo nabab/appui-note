@@ -67,7 +67,7 @@
   <div bbn-else
        class="bbn-w-100">
     <div bbn-if="showProduct"
-         class="bbn-w-100 bbn-padded">
+         class="bbn-w-100 bbn-padding">
       <div class="bbn-container-ratio-4-3 bbn-bottom-smargin">
         <a bbn-if="productData.url"
            :href="productData.url">
@@ -106,7 +106,7 @@
       </button>
     </div>
     <div bbn-else-if="$parent.selectable"
-         class="bbn-alt-background bbn-middle bbn-lpadded bbn-w-100"
+         class="bbn-alt-background bbn-middle bbn-lpadding bbn-w-100"
          style="overflow: hidden">
       <i class="bbn-xxxxl nf nf-cod-package"/>
     </div>

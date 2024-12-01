@@ -186,7 +186,7 @@
                 :novalue="0"/>
   </div>
   <div bbn-else-if="!source.content && $parent.selectable"
-        class="bbn-alt-background bbn-middle bbn-lpadded"
+        class="bbn-alt-background bbn-middle bbn-lpadding"
         style="overflow: hidden">
     <i class="bbn-xxxxl nf nf-fae-galery"/>
   </div>

@@ -4,7 +4,7 @@
           :source="formData"
           @success="afterSubmit"
           :prefilled="true">
-  <div class="bbn-grid-fields bbn-lpadded bbn-lg">
+  <div class="bbn-grid-fields bbn-lpadding bbn-lg">
     <label class="bbn-b">
       <?= _('Title') ?>
     </label>

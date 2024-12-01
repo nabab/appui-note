@@ -1,6 +1,6 @@
 <!-- HTML Document -->
 <div class="bbn-overlay appui-note-square bbn-flex-height">
-  <bbn-toolbar class="bbn-spadded">
+  <bbn-toolbar class="bbn-spadding">
     <control :source="blockChoice"/>
   </bbn-toolbar>
   <div class="bbn-flex-fill">
@@ -9,11 +9,11 @@
         <div class="bbn-grid-fields"
              bbn-for="(line, i) in lines"
              tabindex="0">
-          <div class="bbn-padded"
+          <div class="bbn-padding"
                style="width: 160px">
             <control :source="blockChoice" :index="i"/>
           </div>
-          <div class="bbn-padded">
+          <div class="bbn-padding">
             <bbn-cms-block :source="line"
                        ref="block"
                        :index="i"

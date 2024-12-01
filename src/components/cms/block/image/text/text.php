@@ -2,8 +2,8 @@
 
 <div :class="componentClass">
   <div bbn-if="mode === 'edit'">
-    <div class="bbn-padded">
-      <div class="bbn-grid-fields bbn-vspadded">
+    <div class="bbn-padding">
+      <div class="bbn-grid-fields bbn-vspadding">
         <label bbn-text="_('Columns (Desktop)')"></label>
         <bbn-grid-configuration :cols="5" :rows="1" @select="selectDesktopGrid"></bbn-grid-configuration>
                                                                                                  
@@ -18,7 +18,7 @@
 					 						@click="openGallery"
 											title="<?= _('Select an image') ?>"
 											class="bbn-right-sspace"/>
-					<img class="bbn-bordered bbn-radius"
+					<img class="bbn-border bbn-radius"
 					 		 :src="source.source"
 							 bbn-if="!!source.source">
         </div>

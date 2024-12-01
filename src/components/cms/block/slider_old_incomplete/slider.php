@@ -1,6 +1,6 @@
 <div :class="[componentClass, 'bbn-w-100']">
 	<div bbn-if="mode === 'edit'"
-			 class="bbn-grid-fields bbn-padded"
+			 class="bbn-grid-fields bbn-padding"
 	>
 		<label><?= _('Type of articles') ?></label>
 		<bbn-dropdown :source="typesNote"

@@ -24,9 +24,9 @@
       <div/>
     </div>
     <div bbn-for="(f, i) in source.content"
-         class="bbn-w-100 bbn-top-space bbn-bordered bbn-radius bbn-flex-width"
+         class="bbn-w-100 bbn-top-space bbn-border bbn-radius bbn-flex-width"
          style="border-style: dashed">
-      <div class="bbn-grid-fields bbn-spadded bbn-flex-fill">
+      <div class="bbn-grid-fields bbn-spadding bbn-flex-fill">
         <label bbn-text="_('Type')"/>
         <bbn-radiobuttons :source="types"
                           bbn-model="f.type"
@@ -52,7 +52,7 @@
         <bbn-input bbn-model="f.text"
                   class="bbn-w-100"/>
       </div>
-      <div class="bbn-middle bbn-xspadded bbn-background bbn-radius-right bbn-reactive bbn-p"
+      <div class="bbn-middle bbn-xspadding bbn-background bbn-radius-right bbn-reactive bbn-p"
            @click="removeItem(i)"
            bbn-if="source.content?.length > 1">
         <i class="nf nf-fa-trash bbn-red"/>
@@ -60,7 +60,7 @@
     </div>
   </div>
   <div bbn-else-if="$parent.selectable && (!source.content?.length || ((source.content.length === 1) && !source.content[0].value?.length))"
-        class="bbn-alt-background bbn-middle bbn-lpadded"
+        class="bbn-alt-background bbn-middle bbn-lpadding"
         style="overflow: hidden">
     <i class="bbn-xxxxl nf nf-md-download_box"/>
   </div>
@@ -68,7 +68,7 @@
        class="bbn-flex-wrap"
        :style="currentStyle">
     <span bbn-for="(f, i) in source.content"
-          class="bbn-p bbn-xspadded bbn-bordered bbn-radius bbn-reactive"
+          class="bbn-p bbn-xspadding bbn-border bbn-radius bbn-reactive"
           @click="onDownload(f)"
           style="width: max-content">
       <i class="nf nf-md-download"/>

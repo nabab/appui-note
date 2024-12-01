@@ -97,7 +97,7 @@
                                         :vertical="!isVertical"/>
       </div>
       <div bbn-else-if="selectable"
-           class="<?= $componentName ?>-droparea bbn-100 bbn-lpadded bbn-middle bbn-upper"
+           class="<?= $componentName ?>-droparea bbn-100 bbn-lpadding bbn-middle bbn-upper"
            bbn-droppable.data="{data: {index: 0}}"
            @drop.prevent.stop="onDrop"
            key="containerDropArea">

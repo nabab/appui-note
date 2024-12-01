@@ -109,7 +109,7 @@
                 off-icon="nf nf-fa-info"/>
   </div>
   <div bbn-else-if="!source.content && $parent.selectable"
-        class="bbn-alt-background bbn-middle bbn-lpadded"
+        class="bbn-alt-background bbn-middle bbn-lpadding"
         style="overflow: hidden">
     <i class="bbn-xxxxl nf nf-mdi-view_carousel"/>
   </div>

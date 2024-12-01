@@ -1,4 +1,4 @@
-<div class="bbn-header bbn-spadded bbn-vmiddle">
+<div class="bbn-header bbn-spadding bbn-vmiddle">
   <div class="bbn-flex-width bbn-vmiddle">
     <div class="bbn-flex-fill">
       <span><?= _('Version') ?>: </span>

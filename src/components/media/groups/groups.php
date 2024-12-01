@@ -1,6 +1,6 @@
 <div class="appui-note-media-groups bbn-flex-width">
-  <div class="bbn-flex-height appui-note-media-groups-panel bbn-bordered-right">
-    <div class="bbn-spadded bbn-header bbn-flex-width bbn-vmiddle appui-note-media-groups-toolbar">
+  <div class="bbn-flex-height appui-note-media-groups-panel bbn-border-right">
+    <div class="bbn-spadding bbn-header bbn-flex-width bbn-vmiddle appui-note-media-groups-toolbar">
       <bbn-button title="<?= _('New') ?>"
                   icon="nf nf-fa-plus"
                   :notext="true"
@@ -24,7 +24,7 @@
                     @click="refresh"/>
       </div>
     </div>
-    <div class="bbn-bordered-bottom bbn-bottom-space bbn-spadded bbn-flex-width bbn-vmiddle">
+    <div class="bbn-border-bottom bbn-bottom-space bbn-spadding bbn-flex-width bbn-vmiddle">
       <bbn-input bbn-model="search"
                  class="bbn-flex-fill bbn-no-border bbn-no-radius"
                  placeholder="<?= _('Search') ?>"/>

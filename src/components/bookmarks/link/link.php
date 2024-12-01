@@ -87,7 +87,7 @@
     </div>
 
   </div>
-  <div class="bbn-l bbn-padded">
+  <div class="bbn-l bbn-padding">
     <bbn-button text="<?= _("Cancel") ?>"
                 icon="nf nf-fa-times"
                 @click="closeForm"/>

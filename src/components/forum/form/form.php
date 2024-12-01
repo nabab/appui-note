@@ -7,7 +7,7 @@
                               :source="source"
                               :data="data"
                               @version="changeVersion"/>
-  <div class="bbn-grid-fields bbn-padded">
+  <div class="bbn-grid-fields bbn-padding">
     <template bbn-if="source.title !== undefined">
       <label><?= _("Title") ?></label>
       <bbn-input bbn-model="source.title"/>
@@ -65,11 +65,11 @@
            ref="linksContainer"
            bbn-if="source.links && source.links.length">
         <div bbn-for="(l, idx) in source.links"
-             :class="['bbn-spadded', {
+             :class="['bbn-spadding', {
                'link-progress': l.inProgress && !l.error,
                'link-success': !l.inProgress && !l.error,
                'link-error': l.error,
-               'bbn-bordered-top': idx > 0
+               'bbn-border-top': idx > 0
              }]">
           <div class="bbn-flex-width">
             <div bbn-if="imageDom"

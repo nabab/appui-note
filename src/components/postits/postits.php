@@ -19,7 +19,7 @@
                          :key="pi.id"/>
       <div style="width: 15rem; height: 15rem; margin: 2.5rem"
            bbn-if="!hasNew"
-           class="bbn-p bbn-white bbn-bordered bbn-reactive bbn-radius"
+           class="bbn-p bbn-white bbn-border bbn-reactive bbn-radius"
            @click.stop.prevent="add">
         <div class="bbn-100 bbn-middle">
           <div class="bbn-block">

@@ -5,8 +5,8 @@
           :prefilled="true"
           @success="success"
           class="<?= $componentName ?>">
-  <div class="bbn-grid-fields bbn-lpadded">
-    <div class="bbn-grid-full bbn-s bbn-c bbn-nowrap bbn-bottom-spadded">
+  <div class="bbn-grid-fields bbn-lpadding">
+    <div class="bbn-grid-full bbn-s bbn-c bbn-nowrap bbn-bottom-spadding">
       <?= _("You can program the publication for now or the future") ?>
     </div>
 
@@ -16,7 +16,7 @@
                         :max="maxStart"
                         :required="true"/>
 
-    <div class="bbn-grid-full bbn-s bbn-c bbn-nowrap bbn-vpadded">
+    <div class="bbn-grid-full bbn-s bbn-c bbn-nowrap bbn-vpadding">
       <?= _("You can (or not) end a publication") ?>
     </div>
 

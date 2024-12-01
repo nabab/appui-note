@@ -1,17 +1,17 @@
-<div class="appui-note-forum-topic-post bbn-bordered bbn-background bbn-radius bbn-spadded">
+<div class="appui-note-forum-topic-post bbn-border bbn-background bbn-radius bbn-spadding">
   <div class="bbn-flex-width bbn-vmiddle">
     <div :class="['appui-note-forum-topic-post-minwidth', 'bbn-unselectable', 'bbn-vmiddle', {'bbn-flex-fill': userFlexFill}]">
-      <span class="bbn-vmiddle bbn-right-xspadded bbn-radius bbn-alt-background bbn-bordered"
+      <span class="bbn-vmiddle bbn-right-xspadding bbn-radius bbn-alt-background bbn-border"
             :title="usersNames">
         <bbn-initial :user-name="creatorName"
                      width="1.5rem"
                      height="1.5rem"
                      font-size="0.7rem"
                      class="appui-note-forum-topic-post-norightradius"/>
-        <span class="bbn-xspadded bbn-s bbn-unselectable"
+        <span class="bbn-xspadding bbn-s bbn-unselectable"
               bbn-text="isYou(source.creator) ? _('You') : creatorName"/>
         <span bbn-if="hasEditUsers"
-              class="bbn-right-xspadded bbn-b bbn-s bbn-webblue">
+              class="bbn-right-xspadding bbn-b bbn-s bbn-webblue">
           +{{usersNumber}}
         </span>
       </span>
@@ -19,20 +19,20 @@
     <div bbn-if="!isTopic && isSubReply"
          class="appui-note-forum-topic-post-minwidth bbn-flex-fill bbn-vmiddle bbn-hsspace">
       <i class="nf nf-fa-reply bbn-right-xsspace icon-flip"/>
-      <span class="bbn-vmiddle bbn-right-xspadded bbn-radius bbn-alt-background bbn-alt-text bbn-bordered">
+      <span class="bbn-vmiddle bbn-right-xspadding bbn-radius bbn-alt-background bbn-alt-text bbn-border">
         <bbn-initial :user-id="source.parent_creator"
                      width="1.5rem"
                      height="1.5rem"
                      font-size="0.7rem"
                      class="appui-note-forum-topic-post-norightradius"/>
-        <span class="bbn-xspadded bbn-s bbn-unselectable"
+        <span class="bbn-xspadding bbn-s bbn-unselectable"
               bbn-text="isYou(source.parent_creator) ? _('You') : getUserName(source.parent_creator)"
               :style="{textDecoration: !source.parent_active ? 'line-through' : 'none'}"/>
         <span bbn-text="ndatetime(source.parent_creation)"
-              class="bbn-s bbn-right-xspadded bbn-vxspadded"
+              class="bbn-s bbn-right-xspadding bbn-vxspadding"
               :style="{textDecoration: !source.parent_active ? 'line-through' : 'none'}"/>
         <span bbn-if="!source.parent_active"
-              class="bbn-right-xspadded bbn-i bbn-s bbn-vxspadded">
+              class="bbn-right-xspadding bbn-i bbn-s bbn-vxspadding">
           <?= _('deleted') ?>
         </span>
       </span>
@@ -41,29 +41,29 @@
          class="bbn-vmiddle bbn-flex-fill bbn-hsspace bbn-s"
          style="overflow: hidden;">
       <span bbn-text="shorten(source.title, 120)"
-            class="bbn-xspadded bbn-b bbn-ellipsis bbn-m"
+            class="bbn-xspadding bbn-b bbn-ellipsis bbn-m"
             :title="source.title"/>
     </div>
     <div bbn-if="isTopic && !!category"
-         class="appui-note-forum-topic-post-minwidth bbn-s bbn-vmiddle bbn-radius bbn-xspadded bbn-alt-background bbn-alt-text bbn-right-sspace bbn-bordered"
+         class="appui-note-forum-topic-post-minwidth bbn-s bbn-vmiddle bbn-radius bbn-xspadding bbn-alt-background bbn-alt-text bbn-right-sspace bbn-border"
          bbn-text="category"/>
     <div bbn-if="source.files && source.files.length"
          title="<?= _('Files') ?>"
-         class="appui-note-forum-topic-post-minwidth appui-note-forum-topic-post-darkgray bbn-radius bbn-vmiddle bbn-right-sspace bbn-xspadded bbn-bordered">
+         class="appui-note-forum-topic-post-minwidth appui-note-forum-topic-post-darkgray bbn-radius bbn-vmiddle bbn-right-sspace bbn-xspadding bbn-border">
       <i class="nf nf-md-attachment"/>
       <span class="bbn-b bbn-s bbn-left-xsspace"
             bbn-text="source.files.length"/>
     </div>
     <div bbn-if="source.links && source.links.length"
          title="<?= _('Links') ?>"
-         class="appui-note-forum-topic-post-minwidth appui-note-forum-topic-post-darkgray bbn-radius bbn-vmiddle bbn-right-sspace bbn-xspadded bbn-bordered">
+         class="appui-note-forum-topic-post-minwidth appui-note-forum-topic-post-darkgray bbn-radius bbn-vmiddle bbn-right-sspace bbn-xspadding bbn-border">
       <i class="nf nf-md-link_variant"/>
       <span class="bbn-b bbn-s bbn-left-xsspace"
             bbn-text="source.links.length"/>
     </div>
     <div bbn-if="!isTopic"
          title="<?= _('Replies') ?>"
-         class="appui-note-forum-topic-post-minwidth bbn-alt-background bbn-alt-text bbn-radius bbn-vmiddle bbn-right-sspace bbn-xspadded bbn-bordered">
+         class="appui-note-forum-topic-post-minwidth bbn-alt-background bbn-alt-text bbn-radius bbn-vmiddle bbn-right-sspace bbn-xspadding bbn-border">
       <i class="nf nf-md-forum_outline"/>
       <span :class="['bbn-b', 'bbn-s', 'bbn-left-xsspace', {
               'bbn-red': !source.num_replies,
@@ -73,12 +73,12 @@
     </div>
     <div bbn-text="(source.version > 1 ? 'V' + source.version + ' - ' : '') + ndatetime(isEdited ? source.last_edit : source.creation)"
          :title="dateTitle"
-         class="appui-note-forum-topic-post-minwidth bbn-s bbn-radius bbn-xspadded bbn-alt-background bbn-bordered"/>
+         class="appui-note-forum-topic-post-minwidth bbn-s bbn-radius bbn-xspadding bbn-alt-background bbn-border"/>
   </div>
   <div class="bbn-flex-width bbn-top-sspace">
     <div bbn-if="isTopic && forum.replies">
       <div title="<?= _('Replies') ?>"
-           class="bbn-alt-background bbn-alt-text bbn-radius bbn-p bbn-xspadded bbn-vmiddle bbn-bordered bbn-reactive bbn-right-sspace"
+           class="bbn-alt-background bbn-alt-text bbn-radius bbn-p bbn-xspadding bbn-vmiddle bbn-border bbn-reactive bbn-right-sspace"
            @click="topic.toggleReplies()">
         <i class="nf nf-md-forum_outline bbn-lg"/>
         <span :class="['bbn-s', 'bbn-b', {
@@ -110,13 +110,13 @@
           <div class="bbn-flex-fill"
                style="overflow: hidden">
             <div bbn-html="!contentVisible ? cutContent : source.content"
-                 :class="['bbn-background', 'bbn-text', 'bbn-radius', 'bbn-xspadded', {'bbn-ellipsis': !contentVisible}]"/>
+                 :class="['bbn-background', 'bbn-text', 'bbn-radius', 'bbn-xspadding', {'bbn-ellipsis': !contentVisible}]"/>
           </div>
         </div>
         <div bbn-if="source.links && source.links.length && !!contentVisible"
              class="bbn-top-sspace">
           <fieldset class="bbn-background bbn-no-border">
-            <legend class="bbn-tertiary bbn-radius bbn-hxspadded"><?= _("Links") ?></legend>
+            <legend class="bbn-tertiary bbn-radius bbn-hxspadding"><?= _("Links") ?></legend>
             <div bbn-for="l in source.links"
                  style="margin-top: 10px">
               <div class="bbn-flex-width"
@@ -152,14 +152,14 @@
         <div bbn-if="source.files && source.files.length && !!contentVisible"
              class="bbn-flex-width">
           <div class="bbn-top-sspace bbn-flex">
-            <span class="bbn-tertiary bbn-radius bbn-xspadded bbn-right-sspace"
+            <span class="bbn-tertiary bbn-radius bbn-xspadding bbn-right-sspace"
                   bbn-text="_('Files')"/>
           </div>
           <div class="bbn-flex-fill bbn-flex"
                style="flex-wrap: wrap">
             <span bbn-for="f in source.files"
                   :title="f.title"
-                  class="bbn-p bbn-alt-background bbn-alt-text bbn-radius bbn-xspadded bbn-right-sspace bbn-top-sspace bbn-vmiddle bbn-bordered">
+                  class="bbn-p bbn-alt-background bbn-alt-text bbn-radius bbn-xspadding bbn-right-sspace bbn-top-sspace bbn-vmiddle bbn-border">
               <i class="nf nf-fa-download bbn-right-sspace"
                  @click="forum.downloadMedia(f.id)"/>
               <i bbn-if="f.isImage"

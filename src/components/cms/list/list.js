@@ -621,7 +621,7 @@
                @beforeclose="showFilter = false"
                @close="showFilter = false"
                :element="$refs.icon">
-    <div class="bbn-padded">
+    <div class="bbn-padding">
     	Hello!
     </div>
   </bbn-floater>
@@ -644,7 +644,7 @@
            'bbn-red bbn-lg nf nf-fa-times_circle_o': !isPublished
          }"/>
     </span>
-    <span class="bbn-vmiddle bbn-right-space bbn-bordered bbn-radius bbn-right-xspadded bbn-background bbn-text"
+    <span class="bbn-vmiddle bbn-right-space bbn-border bbn-radius bbn-right-xspadding bbn-background bbn-text"
           :style="{borderColor: currentBorderColor + '!important'}">
       <bbn-initial :user-name="name"
                     :width="18"
@@ -653,35 +653,35 @@
                     ref="initial"/>
       <span bbn-text="name"/>
     </span>
-    <span class="bbn-vmiddle bbn-right-space bbn-bordered bbn-radius bbn-right-xspadded bbn-background bbn-text colorblock orange"
+    <span class="bbn-vmiddle bbn-right-space bbn-border bbn-radius bbn-right-xspadding bbn-background bbn-text colorblock orange"
           :title="_('Since') + ' ' + fdate(source.creation)">
-      <i class="nf nf-md-calendar_edit bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
+      <i class="nf nf-md-calendar_edit bbn-lg bbn-right-xsspace bbn-hxxspadding"/>
       <span bbn-text="fdate(source.creation)"/>
     </span>
     <span bbn-if="source.start"
-          class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space bbn-background bbn-text colorblock green"
+          class="bbn-vmiddle bbn-border bbn-radius bbn-right-xspadding bbn-right-space bbn-background bbn-text colorblock green"
           :title="_('Published') + ' ' + fdate(source.start)">
-      <i class="nf nf-md-calendar_check bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
+      <i class="nf nf-md-calendar_check bbn-lg bbn-right-xsspace bbn-hxxspadding"/>
       <span bbn-text="fdate(source.start)"/>
     </span>
-    <span class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space bbn-background bbn-text colorblock"
+    <span class="bbn-vmiddle bbn-border bbn-radius bbn-right-xspadding bbn-right-space bbn-background bbn-text colorblock"
           :title="_('Version') + ' ' + source.version">
-      <i class="nf nf-cod-versions bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
+      <i class="nf nf-cod-versions bbn-lg bbn-right-xsspace bbn-hxxspadding"/>
       <span bbn-text="source.version"/>
     </span>
     <span :title="_('Number of medias directly linked to this article')"
-          class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space bbn-background bbn-text colorblock">
-      <i class="nf nf-md-image_multiple bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
+          class="bbn-vmiddle bbn-border bbn-radius bbn-right-xspadding bbn-right-space bbn-background bbn-text colorblock">
+      <i class="nf nf-md-image_multiple bbn-lg bbn-right-xsspace bbn-hxxspadding"/>
       <span bbn-text="source.num_medias"/>
     </span>
     <span :title="_('Number of variants of this article')"
-          class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space bbn-background bbn-text colorblock">
-      <i class="nf nf-md-content_duplicate bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
+          class="bbn-vmiddle bbn-border bbn-radius bbn-right-xspadding bbn-right-space bbn-background bbn-text colorblock">
+      <i class="nf nf-md-content_duplicate bbn-lg bbn-right-xsspace bbn-hxxspadding"/>
       <span bbn-text="source.num_variants"/>
     </span>
     <span :title="_('Number of translations for this article')"
-          class="bbn-vmiddle bbn-bordered bbn-radius bbn-right-xspadded bbn-right-space bbn-background bbn-text colorblock">
-      <i class="nf nf-md-translate bbn-lg bbn-right-xsspace bbn-hxxspadded"/>
+          class="bbn-vmiddle bbn-border bbn-radius bbn-right-xspadding bbn-right-space bbn-background bbn-text colorblock">
+      <i class="nf nf-md-translate bbn-lg bbn-right-xsspace bbn-hxxspadding"/>
       <span bbn-text="source.num_translations"/>
     </span>
   </div>

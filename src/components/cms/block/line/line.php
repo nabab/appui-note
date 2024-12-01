@@ -65,7 +65,7 @@
     <hr bbn-if="['both', 'bottom', true].includes(line)"
         :style="style">
     <div bbn-if="!line && $parent.selectable"
-         class="bbn-alt-background bbn-middle bbn-lpadded bbn-w-100"
+         class="bbn-alt-background bbn-middle bbn-lpadding bbn-w-100"
          style="overflow: hidden">
       <i class="bbn-xxxxl nf nf-cod-horizontal_rule"/>
     </div>

@@ -23,7 +23,7 @@
 									:novalue="false"
 									class="bbn-left-space"/>
 		</div>
-		<div class="bbn-grid-fields bbn-padded">
+		<div class="bbn-grid-fields bbn-padding">
 			<template bbn-for="(f, i) in files"
 								bbn-if="showTitles || isEdit">
 				<div><?= _('Filename') ?>:</div>

@@ -1,7 +1,7 @@
 <!-- HTML Document -->
 
 <div :class="componentClass">
-  <div class="bbn-grid-fields bbn-padded">
+  <div class="bbn-grid-fields bbn-padding">
     <div class="bbn-grid-full bbn-c">
       <h3>
         <?= _("General Information") ?>
@@ -123,7 +123,7 @@
       </div>
 
       <div bbn-if="hasImage"
-           class="bbn-grid-full bbn-c bbn-vpadded">
+           class="bbn-grid-full bbn-c bbn-vpadding">
         <img :src="imageSrc">
       </div>
 
@@ -135,7 +135,7 @@
       </bbn-button>
     </div>
 
-    <div class="bbn-grid-full bbn-bordered bbn-radius bbn-spadded bbn-vmargin"
+    <div class="bbn-grid-full bbn-border bbn-radius bbn-spadding bbn-vmargin"
          bbn-for="n in source.notes">
       <div class="bbn-grid-fields">
         <div><?= _("Note title") ?></div>

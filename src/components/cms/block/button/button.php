@@ -45,16 +45,16 @@
                               value: 'bbn-no-padding',
                           }, {
                               text: _('XS'),
-                              value: 'bbn-xspadded',
+                              value: 'bbn-xspadding',
                           },{
                               text: _('S'),
-                              value: 'bbn-spadded',
+                              value: 'bbn-spadding',
                           }, {
                               text: _('L'),
-                              value: 'bbn-lpadded',
+                              value: 'bbn-lpadding',
                           }, {
                               text: _('XL'),
-                              value: 'bbn-xlpadded',
+                              value: 'bbn-xlpadding',
                           }]"/>
       </div>
     </div>
@@ -82,7 +82,7 @@
     <bbn-input  bbn-model="source.class"/>
   </div>
   <div bbn-else-if="!source.content && $parent.selectable"
-        class="bbn-alt-background bbn-middle bbn-lpadded"
+        class="bbn-alt-background bbn-middle bbn-lpadding"
         style="overflow: hidden">
     <i class="bbn-xxxxl nf nf-md-gesture_tap_button"/>
   </div>

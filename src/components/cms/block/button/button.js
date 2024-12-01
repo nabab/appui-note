@@ -12,7 +12,7 @@
         defaultConfig: {
           url: '',
           content: '',
-          padding: 'bbn-xspadded',
+          padding: 'bbn-xspadding',
           dimensions: '',
           align: 'left'
         },

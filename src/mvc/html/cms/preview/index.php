@@ -35,10 +35,10 @@
 <title><?= $title . ' - ' . constant('BBN_SITE_TITLE') ?></title>
 
 <div id="container" style="opacity: 0">
-  <div class="appui-cms-preview bbn-overlay bbn-lpadded bbn-bg-white" style="transition: opacity 5s">
+  <div class="appui-cms-preview bbn-overlay bbn-lpadding bbn-bg-white" style="transition: opacity 5s">
     <h1 bbn-if="source.title"
         bbn-html="source.title"
-        class="bbn-vpadded bbn-margin bbn-c"></h1>
+        class="bbn-vpadding bbn-margin bbn-c"></h1>
     <div bbn-for="(cfg, i) in source.items">
       <appui-note-cms-block :source="cfg"
                             :ref="'block' + i"

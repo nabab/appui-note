@@ -9,7 +9,7 @@
           :action="url"
           @success="success"
           ref="form">
-  <div class="bbn-grid-fields bbn-padded">
+  <div class="bbn-grid-fields bbn-padding">
 
     <label><?= _('Title') ?></label>
     <bbn-input bbn-model="source.title"/>

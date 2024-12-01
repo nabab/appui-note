@@ -1,4 +1,4 @@
-<div class="appui-note-forum bbn-overlay bbn-background bbn-bordered">
+<div class="appui-note-forum bbn-overlay bbn-background bbn-border">
 	<div class="bbn-overlay bbn-flex-height">
 		<div bbn-if="toolbar || search"
 				 class="appui-note-forum-toolbar bbn-header bbn-flex-width bbn-no-border-top bbn-no-border-left bbn-no-border-right bbn-vmiddle"
@@ -7,7 +7,7 @@
       <div bbn-if="toolbar"
            class="bbn-flex-fill">
         <div bbn-if="toolbarButtons.length"
-             class="bbn-xspadded">
+             class="bbn-xspadding">
           <bbn-button bbn-for="(button, i) in toolbarButtons"
                       class="bbn-right-sspace"
                       :key="i"
@@ -19,7 +19,7 @@
                    :is="toolbar"/>
       </div>
       <div bbn-if="search"
-           class="bbn-spadded bbn-vmiddle">
+           class="bbn-spadding bbn-vmiddle">
         <span bbn-text="_('Rechercher')"
               class="bbn-right-sspace"/>
         <bbn-input bbn-model="filterString"
@@ -36,7 +36,7 @@
                                 :key="d.key"
                                 :source="d.data"
                                 :index="d.index"
-                                :class="{'bbn-bottom-spadded': !filteredData[i+1]}"/>
+                                :class="{'bbn-bottom-spadding': !filteredData[i+1]}"/>
 			</bbn-scroll>
 		</div>
 		<!-- Footer -->

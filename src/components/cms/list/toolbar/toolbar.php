@@ -1,4 +1,4 @@
-<bbn-toolbar class="appui-note-cms-list-toolbar bbn-header bbn-spadded bbn-h-100 bg-colored"
+<bbn-toolbar class="appui-note-cms-list-toolbar bbn-header bbn-spadding bbn-h-100 bg-colored"
              :slot-before="true">
   <bbn-button icon="nf nf-fa-plus"
               :text="_('Insert')"

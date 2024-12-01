@@ -1,6 +1,6 @@
 <!-- HTML Document -->
 
-<div class="appui-note-cms-settings bbn-grid-fields bbn-padded">
+<div class="appui-note-cms-settings bbn-grid-fields bbn-padding">
   <label class="bbn-label"><?= _("Title") ?></label>
   <bbn-input bbn-model="source.title"
               :required="true"/>

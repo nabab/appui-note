@@ -2,7 +2,7 @@
           ref="form"
           :source="source"
           @success="onSuccess">
-  <div class="bbn-grid-fields bbn-padded">
+  <div class="bbn-grid-fields bbn-padding">
     <label class="bbn-label"
            bbn-text="_('Text')"/>
     <bbn-input bbn-model="source.text"

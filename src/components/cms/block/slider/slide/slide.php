@@ -2,7 +2,7 @@
   <div class="component-container bbn-block-carousel bbn-w-100" :style="'grid-template-columns:' + columns">
     <div bbn-for="d in data"
          bbn-if="data.length"
-         :class="['bbn-hspadded', d.class ? d.class +' slider-image-section' : 'slider-image-section']">
+         :class="['bbn-hspadding', d.class ? d.class +' slider-image-section' : 'slider-image-section']">
       <a :href="d.url ? d.url : ''" class="bbn-100 block-slide-link" bbn-if="(d.id || d.id_note)">
         <div class="bbn-container-ratio">
           <div class="bbn-100 bbn-flex">

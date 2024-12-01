@@ -5,7 +5,7 @@
                   style="min-height: 20vh; height: 20em; width: 100%"/>
   </div>
   <div bbn-else-if="!currentContent && $parent.selectable"
-       class="bbn-rel bbn-alt-background bbn-middle bbn-lpadded"
+       class="bbn-rel bbn-alt-background bbn-middle bbn-lpadding"
        style="overflow: hidden">
     <i class="bbn-xxxxl nf nf-md-text_box"/>
   </div>

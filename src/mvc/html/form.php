@@ -3,7 +3,7 @@
             :source="formData"
             :scrollable="true"
             @success="afterSubmit">
-    <div class="bbn-padded bbn-grid-fields">
+    <div class="bbn-padding bbn-grid-fields">
       <label><?= _('Type') ?></label>
       <div>
         <bbn-dropdown bbn-model="formData.id_type"

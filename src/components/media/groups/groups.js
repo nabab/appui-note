@@ -177,7 +177,7 @@
           :data="{
             id_group: mainComponent.current.id
           }">
-  <div class="bbn-padded bbn-w-100 bbn-grid-fields">
+  <div class="bbn-padding bbn-w-100 bbn-grid-fields">
     <bbn-search source-text="title"
                 component="appui-note-search-item"
                 source-url=""
@@ -229,7 +229,7 @@
 <bbn-form :action="mainComponent.actionsUrl + (!!source.id ? 'rename' : 'create')"
           :source="source"
           @success="onSuccess">
-  <div class="bbn-padded bbn-w-100">
+  <div class="bbn-padding bbn-w-100">
     <bbn-input bbn-model="source.text"
                placeholder="` + bbn._('Name') + `"
                :required="true"

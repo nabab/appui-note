@@ -1,4 +1,4 @@
-<div class="bbn-overlay bbn-padded">
+<div class="bbn-overlay bbn-padding">
   <div class="bbn-flex-height">
     <div class="bbn-middle"
          style="padding-bottom: 1em"
@@ -13,7 +13,7 @@
     </div>
     <div class="bbn-flex-fill bbn-block">
       <bbn-scroll>
-        <div class="bbn-padded"
+        <div class="bbn-padding"
              bbn-html="source.content"
         ></div>
       </bbn-scroll>

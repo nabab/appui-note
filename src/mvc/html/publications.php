@@ -7,7 +7,7 @@
                   :source="sourceMenu"
         ></bbn-menu>
       </div>
-      <div class="bbn-hpadded bbn-vspadded bbn-xl bbn-b bbn-flex-fill bbn-c">
+      <div class="bbn-hpadding bbn-vspadding bbn-xl bbn-b bbn-flex-fill bbn-c">
         <?= _("Publications' management") ?>
       </div>
     </div>
@@ -36,7 +36,7 @@
             @success="afterSubmit"    
   >
     <div class="bbn-overlay bbn-flex-height">        
-      <div class="bbn-grid-fields bbn-lpadded">
+      <div class="bbn-grid-fields bbn-lpadding">
         <label class="bbn-b">
           <?= _('Title') ?>
         </label>
@@ -62,7 +62,7 @@
                    class="bbn-w-100"
         ></bbn-input>
       </div>
-      <div class="bbn-flex-fill bbn-lpadded">
+      <div class="bbn-flex-fill bbn-lpadding">
         <bbn-rte bbn-model="formData.content"
                 required="required"
                 height="100%"                  

@@ -1,6 +1,6 @@
 <div class="appui-note-forum-topic-replies">
   <div bbn-if="isLoading"
-       class="bbn-middle bbn-padded">
+       class="bbn-middle bbn-padding">
     <?= _('LOADING') ?>...
   </div>
   <div bbn-else>

@@ -76,7 +76,7 @@
 
 
 <script type="text/x-template" id="appui-note-news-new">
-  <bbn-form class="bbn-lpadded"
+  <bbn-form class="bbn-lpadding"
             :source="source.row"
             :data="source.data"
             ref="form"
@@ -84,7 +84,7 @@
             @success="success"
             :validation="checkDate"
   >    
-    <div class="bbn-grid-fields bbn-lpadded">
+    <div class="bbn-grid-fields bbn-lpadding">
       <label>
         <?= _("Title") ?>
       </label>

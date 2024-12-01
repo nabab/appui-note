@@ -1,4 +1,4 @@
-<div class="appui-note-forum-topic bbn-w-100 bbn-hspadded bbn-top-spadded">
+<div class="appui-note-forum-topic bbn-w-100 bbn-hspadding bbn-top-spadding">
   <appui-note-forum-topic-post :source="source"
                                ref="post"/>
   <!-- Replies -->

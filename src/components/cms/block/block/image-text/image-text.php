@@ -2,8 +2,8 @@
 
 <div :class="componentClass">
   <div bbn-if="mode === 'edit'">
-    <div class="bbn-padded">
-      <div class="bbn-grid-fields bbn-vspadded">
+    <div class="bbn-padding">
+      <div class="bbn-grid-fields bbn-vspadding">
         <label bbn-text="_('Image')"></label>
         <div class="appui-note-cms-block-image-preview bbn-flex">
           <bbn-button icon="nf nf-fae-galery"
@@ -11,7 +11,7 @@
 					 						@click="openGallery"
 											title="<?= _('Select an image') ?>"
 											class="bbn-right-sspace"/>
-					<img class="bbn-bordered bbn-radius"
+					<img class="bbn-border bbn-radius"
 					 		 :src="source.source"
 							 bbn-if="!!source.source">
         </div>

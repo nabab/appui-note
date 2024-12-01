@@ -2,7 +2,7 @@
 
 <div :class="componentClass">
   <div bbn-if="mode === 'edit'">
-    <div class="bbn-padded">
+    <div class="bbn-padding">
       <div class="bbn-grid-fields">
         <!--label bbn-text="_('Columns (Desktop)')"></label>
         <bbn-grid-configuration :cols="5" :rows="1" @select="selectDesktopGrid"></bbn-grid-configuration>
@@ -19,7 +19,7 @@
                           class="bbn-right-sspace"/>
             </div>
             <div class="bbn-flex-fill">
-              <img class="bbn-bordered bbn-radius"
+              <img class="bbn-border bbn-radius"
                    :src="source.content"
                    style="max-width: 100%; height: auto"
                    bbn-if="!!source.content">
@@ -129,10 +129,10 @@
 				 class="bbn-u"
 				 target="_self"
 				 :href="$parent.linkURL ? $parent.linkURL : '' + source.href">
-				<h4 class="image-details-title bbn-w-100 bbn-vpadded bbn-no-margin"
+				<h4 class="image-details-title bbn-w-100 bbn-vpadding bbn-no-margin"
 						bbn-html="(source.details_title)"/>
 			</a>
-			<h4 class="image-details-title bbn-w-100 bbn-vpadded bbn-no-margin"
+			<h4 class="image-details-title bbn-w-100 bbn-vpadding bbn-no-margin"
 					bbn-else-if="!source.href && !!source.details_title"
 					bbn-html="(source.details_title)"
 				/>

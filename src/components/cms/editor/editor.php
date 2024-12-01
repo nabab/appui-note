@@ -128,7 +128,7 @@
                             :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-mdi-arrow_collapse_down' : 'nf nf-mdi-arrow_collapse_right'"/>
               </template>
             </div>
-            <div class="bbn-flex-fill bbn-right-spadded"
+            <div class="bbn-flex-fill bbn-right-spadding"
                   style="overflow: hidden">
               <div class="bbn-100">
                 <bbn-scroll axis="y">

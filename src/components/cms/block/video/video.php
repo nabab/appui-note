@@ -85,7 +85,7 @@
        class="bbn-flex"
        :style="align">
     <div bbn-if="$parent.selectable && !source.content"
-         class="bbn-alt-background bbn-middle bbn-lpadded bbn-w-100"
+         class="bbn-alt-background bbn-middle bbn-lpadding bbn-w-100"
          style="overflow: hidden">
       <i class="bbn-xxxxl nf nf-md-video_vintage"/>
     </div>

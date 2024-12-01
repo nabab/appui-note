@@ -4,7 +4,7 @@
           :source="currentData"
           bbn-model="currentData"
           class="bbn-m">
-  <div class="bbn-padded bbn-grid-fields" >
+  <div class="bbn-padding bbn-grid-fields" >
     <label><?= _("URL") ?></label>
     <div class="bbn-flex-width">
       <bbn-input bbn-model="currentData.url"
@@ -59,7 +59,7 @@
 		<div>
       <bbn-button	bbn-if="currentData.id_screenshot"
                 @click="showScreenshot"
-                class="bbn-padded"
+                class="bbn-padding"
                 text="show screenshot"
                 ></bbn-button>
     <bbn-floater bbn-if="visible"

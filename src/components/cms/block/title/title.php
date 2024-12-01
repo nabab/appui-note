@@ -5,7 +5,7 @@
       <bbn-textarea bbn-model="source.content"
                     class="bbn-w-100"/>
     </div>
-    <div class="bbn-grid-fields bbn-vpadded bbn-w-100">
+    <div class="bbn-grid-fields bbn-vpadding bbn-w-100">
       <label><?= _('Tag') ?></label>
       <div>
         <bbn-dropdown :source="tags"
@@ -80,7 +80,7 @@
                                mode="read"
                                :details="false">
       <div bbn-if="$parent.selectable && !source.content"
-           class="bbn-alt-background bbn-middle bbn-lpadded"
+           class="bbn-alt-background bbn-middle bbn-lpadding"
            style="overflow: hidden">
         <i class="bbn-xxxxl nf nf-md-format_title"/>
       </div>

@@ -5,7 +5,7 @@
                              @hook:mounted="setOn"
                              ref="form"/>
   </div>
-  <div class="bbn-flex-fill bbn-padded">
+  <div class="bbn-flex-fill bbn-padding">
     <div class="bbn-100 bbn-middle">
       <div class="bbn-block bbn-nowrap">
         <span class="bbn-bottom-space"

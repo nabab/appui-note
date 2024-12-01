@@ -3,7 +3,7 @@
 <div :class="componentClass">
   <div bbn-if="mode === 'edit'"
        class="bbn-w-100">
-    <div class="bbn-padded bbn-w-100">
+    <div class="bbn-padding bbn-w-100">
       <div class="bbn-grid-fields">
         <label bbn-text="_('Image')"></label>
         <div class="appui-note-cms-block-image-preview bbn-flex">
@@ -12,7 +12,7 @@
 					 						@click="openGallery"
 											title="<?= _('Select an image') ?>"
 											class="bbn-right-sspace"/>
-					<img class="bbn-bordered bbn-radius"
+					<img class="bbn-border bbn-radius"
 					 		 :src="source.content"
 							 bbn-if="!!source.content">
         </div>
@@ -90,7 +90,7 @@
 		<div class="bbn-flex"
 				 :style="align">
       <div bbn-if="$parent.selectable && !source.content"
-           class="bbn-alt-background bbn-middle bbn-lpadded bbn-w-100"
+           class="bbn-alt-background bbn-middle bbn-lpadding bbn-w-100"
            style="overflow: hidden">
         <i class="bbn-xxxxl nf nf-fa-image"/>
       </div>

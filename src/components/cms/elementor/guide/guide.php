@@ -1,8 +1,8 @@
 <div :class="['appui-note-cms-elementor-guide', {
        'bbn-w-100': !vertical,
-       'bbn-vspadded': !vertical,
+       'bbn-vspadding': !vertical,
        'bbn-h-100': !!vertical,
-       'bbn-hspadded': !!vertical,
+       'bbn-hspadding': !!vertical,
        'vertical': !!vertical
      }]"
      @mouseover="isOver = true"

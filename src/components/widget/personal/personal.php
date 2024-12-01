@@ -38,7 +38,7 @@
 
     </bbn-form>
   </div>
-  <div bbn-else class="bbn-padded">
+  <div bbn-else class="bbn-padding">
     <ul class="bbn-no-padding bbn-no-margin"
         bbn-if="source?.items">
       <div bbn-for="item in source.items"

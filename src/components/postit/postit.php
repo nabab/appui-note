@@ -42,7 +42,7 @@
                       title="<?= _('Edit Title') ?>"
                       ref="title"
                       type="inline"
-                      class="bbn-c bbn-p bbn-b bbn-lg bbn-b bbn-flex-fill bbn-spadded bbn-small-caps"
+                      class="bbn-c bbn-p bbn-b bbn-lg bbn-b bbn-flex-fill bbn-spadding bbn-small-caps"
                       bbn-model="currentTitle"
                       @change="changeTitle"/>
         <div class="bbn-block bbn-nowrap">

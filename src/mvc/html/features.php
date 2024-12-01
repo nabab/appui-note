@@ -1,7 +1,7 @@
 <!-- HTML Document -->
 
 <div class="bbn-overlay bbn-flex-height">
-  <bbn-toolbar class="bbn-lg bbn-padded">
+  <bbn-toolbar class="bbn-lg bbn-padding">
     <div>
       <bbn-button text="<?= _("Add a new feature") ?>"
                   icon="nf nf-fa-plus"
@@ -36,7 +36,7 @@
           </div>
           <div class="bbn-w-100 bbn-spadding"
                bbn-if="featureItems.length">
-            <div class="bbn-bordered bbn-bottom-margin bbn-flex-width"
+            <div class="bbn-border bbn-bottom-margin bbn-flex-width"
                  bbn-for="item in featureItems"
                  :key="item.id">
               <div style="width: 150px; max-width: 25vw; min-width: 80px"

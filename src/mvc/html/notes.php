@@ -15,7 +15,7 @@
                            @save="onSave"/>
         <div style="width: 20em; height: 20em;"
              bbn-else
-             class="bbn-p bbn-bordered bbn-reactive bbn-radius"
+             class="bbn-p bbn-border bbn-reactive bbn-radius"
              @click.stop.prevent="add">
           <div class="bbn-100 bbn-middle">
             <div class="bbn-block">

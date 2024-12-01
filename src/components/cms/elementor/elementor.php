@@ -47,7 +47,7 @@
                                       bbn-show="!preview"/>
     </template>
     <div bbn-if="dragging"
-         class="appui-note-cms-elementor-droparea bbn-w-100 bbn-lpadded bbn-middle bbn-upper"
+         class="appui-note-cms-elementor-droparea bbn-w-100 bbn-lpadding bbn-middle bbn-upper"
          bbn-droppable.data="{data: {index: source.length}}"
          @drop.prevent.stop="onDrop"
          key="elementorDropArea">

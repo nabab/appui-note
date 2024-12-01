@@ -1,7 +1,7 @@
 <!-- HTML Document -->
 <div class="bbn-flex-width">
-  <div class="bbn-block bbn-padded bbn-c">
-    <div class="bbn-vspadded bbn-lg">
+  <div class="bbn-block bbn-padding bbn-c">
+    <div class="bbn-vspadding bbn-lg">
       <bbn-list source-value="id"
                 :source="source.types"
                 ref="list"
@@ -10,8 +10,8 @@
                 placeholder="<?= Str::escape(_('Pick a type')) ?>"/>
     </div>
   </div>
-  <div class="bbn-flex-fill bbn-padded bbn-middle">
-    <div class="bbn-bordered bbn-border2 bbn-margin bbn-lpadded bbn-radius"
+  <div class="bbn-flex-fill bbn-padding bbn-middle">
+    <div class="bbn-border bbn-border2 bbn-margin bbn-lpadding bbn-radius"
          style="width: 35em; min-width: 30vw; max-width: 90vw"
          bbn-if="id_type">
       <bbn-form :action="root + 'cms/actions/settings'"
