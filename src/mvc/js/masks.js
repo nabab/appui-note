@@ -11,11 +11,11 @@
           height: '100%'
         });
       },
-      remove(row){
+      removeItem(row){
         this.popup().confirm(bbn._("Are you sure you want to delete this standard letter?"), () => {
           this.post(this.source.root + 'actions/mask/delete', {id_note: row.id_note}, (d) => {
             if ( d.success ){
-              this.$refs.table.remove(row);
+              this.$refs.table.removeItem(row);
             }
           });
         });

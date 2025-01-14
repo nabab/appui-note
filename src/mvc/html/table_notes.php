@@ -20,7 +20,7 @@
                    }]">
   <bbns-column field="id_note"
                :editable="false"
-               :hidden="true"/>
+               :invisible="true"/>
 
   <bbns-column field="title"
                :editable="false"

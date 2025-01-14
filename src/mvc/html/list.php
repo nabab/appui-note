@@ -19,7 +19,7 @@
                :pageable="true"
                :source="source.root + 'data/notes'">
       <bbns-column field="id"
-                   :hidden="true"/>
+                   :invisible="true"/>
       <bbns-column field="title"/>
       <bbns-column field="author"/>
     </bbn-table>

@@ -15,7 +15,7 @@
            }"
            :filterable="true"
 >
-  <bbns-column :hidden="true"
+  <bbns-column :invisible="true"
                field="id_note"
                :editable="false"
                :filterable="false"

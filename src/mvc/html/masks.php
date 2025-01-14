@@ -12,7 +12,7 @@
   <bbns-column :label="_('ID')"
               field="id_note"
               :width="100"
-              :hidden="true"
+              :invisible="true"
               :editable="false"
               ></bbns-column>
   <bbns-column :label="_('Default')"
@@ -54,7 +54,7 @@
   <bbns-column :label="_('Text')"
               field="content"
               editor="bbn-rte"
-              :hidden="true"
+              :invisible="true"
               ></bbns-column>
   <bbns-column width='160'
               :label="_('Actions')"
