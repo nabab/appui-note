@@ -32,7 +32,7 @@
       getNewPostIt() {
         return {
           text: bbn._("Write here your content"),
-          title: bbn._("Don't forget!"),
+          label: bbn._("Don't forget!"),
           date: bbn.fn.dateSQL(),
           bcolor: '#fbf7ae',
           fcolor: '#000000'

@@ -19,10 +19,10 @@
     </div>
     <img bbn-if="source.cover"
          :src="source.cover"
-         :text="_('Open the link')"/>
+         :label="_('Open the link')"/>
     <div bbn-else
          class="default-image"
-         :text="_('Open the link')"
+         :label="_('Open the link')"
          />
     </div>
   </bbn-context>

@@ -14,19 +14,19 @@
       btns(){
         let res = [{
           icon: 'nf nf-fa-info',
-          title: 'Get more info', //bbn._('Get more info'),
+          label: 'Get more info', //bbn._('Get more info'),
           action: () => {
             this.showFileInfo(this.data.media);
           },
         }, {
           icon: 'nf nf-fa-edit',
-          title: bbn._('Edit media'),
+          label: bbn._('Edit media'),
           action: () => {
             this.editMedia(this.data.media);
           }
         }, {
           icon: 'nf nf-fa-trash_o',
-          title: bbn._('Delete media'),
+          label: bbn._('Delete media'),
           action: () => {
             this.removeMedia(this.data.media);
           }

@@ -28,14 +28,14 @@
         this.getPopup({
           component: 'appui-note-media-info',
           source: media,
-          title: false
+          label: false
         });
       },
       openGallery(){
         this.getPopup({
           component: this.$options.components.browser,
           source: this.source,
-          title: bbn._('Select an image'),
+          label: bbn._('Select an image'),
           width: '90%',
           height: '90%'
         });
@@ -49,7 +49,7 @@
         }
 
         appui.getPopup({
-          title: false,
+          label: false,
           component: this.$options.components.viewer,
           componentOptions: {source: img},
           width: '100%',

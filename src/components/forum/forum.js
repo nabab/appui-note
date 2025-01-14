@@ -122,7 +122,7 @@
 			seeImage(img){
         if (!!img.id && !!img.name && this.imageDom) {
           this.getPopup({
-            title: img.name,
+            label: img.name,
             width: '100%',
             height: '100%',
             scrollable: false,

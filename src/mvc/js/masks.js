@@ -6,7 +6,7 @@
     methods: {
       edit(row){
         this.$refs.table.edit(row, {
-          title: _('Modification of the standard letter'),
+          label: _('Modification of the standard letter'),
           width: '100%',
           height: '100%'
         });
@@ -22,7 +22,7 @@
       },
       insert(id_type){
         this.$refs.table.insert({id_type: id_type}, {
-          title: _('Creation of a standard letter'),
+          label: _('Creation of a standard letter'),
           width: '100%',
           height: '100%'
         });
@@ -45,10 +45,10 @@
     },
     mounted(){
       this.$nextTick(() => {
-        this.getPopup().open({
+        this.getPopup({
           width: 850,
           height: 200,
-          title: bbn._("Warning on standard letters"),
+          label: bbn._("Warning on standard letters"),
           content: '<div class="bbn-overlay bbn-padding"><div class="bbn-b">Warning!</div><br>' + bbn._('Here you can modify the standard letters but they use a system of "templates" with which you have to be very cautious.') + ' ' + 
           bbn._('The best is to duplicate an existing standard letter and modify it.') + ' ' +
           bbn._('Once finished, put it in default if it is used on a feature without choice (eg certificates), and will test it in context.') + ' ' + 
@@ -93,7 +93,7 @@
   <div class="bbn-block" style="float: right">
     <bbn-button @click="insert"
                 icon="nf nf-fa-plus"
-                :text="_('Add a standard letter')"
+                :label="_('Add a standard letter')"
     ></bbn-button>
   </div>
 </div>`,

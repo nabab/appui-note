@@ -33,32 +33,32 @@
         //for table note
         cols: [{ 
             field: 'title',            
-            title: bbn._('Title'),
+            label: bbn._('Title'),
           }, {
             width: 150,
             field: 'id_user',            
-            title: bbn._('Creator'),
+            label: bbn._('Creator'),
             source: appui.users
           },{
             width: 300,
             field: 'url',
-            title: bbn._('URL'),
+            label: bbn._('URL'),
             render: this.renderUrl,
             cls: 'bbn-c'
           }, {
             width: 600,
             field: 'content',            
-            title: bbn._('Content'),            
+            label: bbn._('Content'),            
             filterable: false
           }, {
             width: 100,           
             field: 'creation',            
             type: 'date',            
-            title: bbn._('Creation')            
+            label: bbn._('Creation')            
           }, {
             width : 50,
             field: 'version',            
-            title: bbn._('Version'),
+            label: bbn._('Version'),
             cls: 'bbn-c'
         }]
       }
@@ -67,10 +67,10 @@
       //Methods call of the menu in toolbar    
       //FILE
       insertPage(){
-        this.getPopup().open({
+        this.getPopup({
           width: 800,
           height: 600,
-          title: bbn._('New Note'),
+          label: bbn._('New Note'),
           component: this.$options.components['new-page'],
         })
       },
@@ -80,11 +80,11 @@
       },
       //TOOLS
       importPage(){
-        this.getPopup().open({
+        this.getPopup({
           width: '90%',
           height: '90%',
           scrollable: false,
-          title: bbn._('New Note'),
+          label: bbn._('New Note'),
           component: this.$options.components['import-page'],
           source: this.source
         })
@@ -147,54 +147,54 @@
             colsTable: [
               { 
                 field: "ID",
-                title: bbn._("ID"),            
+                label: bbn._("ID"),            
                 cls: "bbn-c",                          
                 width: 50    
               }, {              
                 field: 'post_type',            
-                title: bbn._('Type'),
+                label: bbn._('Type'),
                 cls: 'bbn-c',
                 source: this.source.types
               }, {              
                 field: 'post_name',            
-                title: bbn._('Post name'),            
+                label: bbn._('Post name'),            
                 cls: 'bbn-c'              
               }, {           
                 field: 'url_complete',
-                title: bbn._('URL'),  
+                label: bbn._('URL'),  
                 render: this.renderUrl,
                 minWidth : 300
               }, {              
                 field: 'post_title',            
-                title: bbn._('Post title')
+                label: bbn._('Post title')
               }, {
                 field: 'post_content',
-                title: bbn._('Content'),
+                label: bbn._('Content'),
                 cls: 'bbn-c',
                 minWidth : 300,
                 filterable: false
               }, {
                 field: 'display_name',
-                title: bbn._('Author'),
+                label: bbn._('Author'),
                 width: 150,
               }, {
                 field: 'post_date',            
-                title: bbn._('Date'),
+                label: bbn._('Date'),
                 type: 'date',
                 width : 90,
               }, {
                 field: 'post_date_gmt',
-                title: bbn._('Date GMT'),
+                label: bbn._('Date GMT'),
                 type: 'date',
                 width: 90,
               }, {
                 field: 'post_modified',            
-                title: bbn._('Modified'),
+                label: bbn._('Modified'),
                 type: 'date',
                 width: 90,
               }, {
                 field: 'post_status',
-                title: bbn._('Post Status'),            
+                label: bbn._('Post Status'),            
                 width: 100,
                 cls: "bbn-c",
                 source: this.source.statuses

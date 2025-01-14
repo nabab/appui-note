@@ -43,7 +43,7 @@
       },
       openDetails() {
         this.getPopup({
-          title: false,
+          label: false,
           url: this.root + 'media/detail/' + this.source.id,
           width: '100%',
           height: '100%'
@@ -55,8 +55,8 @@
         });
       },
       show_note_content(n){
-        this.getPopup().open({
-          title: n.title,
+        this.getPopup({
+          label: n.title,
           content: n.content
         });
       },

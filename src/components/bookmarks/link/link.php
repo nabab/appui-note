@@ -88,10 +88,10 @@
 
   </div>
   <div class="bbn-l bbn-padding">
-    <bbn-button text="<?= _("Cancel") ?>"
+    <bbn-button label="<?= _("Cancel") ?>"
                 icon="nf nf-fa-times"
                 @click="closeForm"/>
-    <bbn-button text="<?= _("Save") ?>"
+    <bbn-button label="<?= _("Save") ?>"
                 icon="nf nf-fa-check"
                 @click="submit"/>
   </div>

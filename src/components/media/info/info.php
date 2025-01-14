@@ -42,7 +42,7 @@
     <div bbn-if="source.path"><?= _("URL") ?></div>
     <div bbn-if="source.path"
          class="bbn-nowrap">
-      <bbn-button text="<?= _("Copy") ?>"
+      <bbn-button label="<?= _("Copy") ?>"
                   icon="nf nf-fa-copy"
                   :notext="true"
                   @click="copyPath"/>
@@ -56,7 +56,7 @@
 
     <div><?= _("Real path") ?></div>
     <div class="bbn-nowrap">
-      <bbn-button text="<?= _("Copy") ?>"
+      <bbn-button label="<?= _("Copy") ?>"
                   icon="nf nf-fa-copy"
                   :notext="true"
                   @click="copyFile"/>
@@ -68,7 +68,7 @@
 
     <div><?= _("ID") ?></div>
     <div class="bbn-nowrap">
-      <bbn-button text="<?= _("Copy") ?>"
+      <bbn-button label="<?= _("Copy") ?>"
                   icon="nf nf-fa-copy"
                   :notext="true"
                   @click="copyId"/>

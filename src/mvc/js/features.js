@@ -126,7 +126,7 @@
       },
       openCategoryForm() {
         this.getPopup({
-          title: bbn._("New category"),
+          label: bbn._("New category"),
           component: this.$options.components.form
         });
       },
@@ -136,7 +136,7 @@
           componentOptions: {
             item: item
           },
-          title: bbn._('Select an image'),
+          label: bbn._('Select an image'),
           width: '90%',
           height: '90%'
         });

@@ -15,21 +15,21 @@
     methods: {
       insert(){
         this.$refs.table.insert({}, {
-          title: bbn._('New message'),
+          label: bbn._('New message'),
           width: '70%',
           height: '70%'
         });
       },
       edit(row, col, idx){
         this.$refs.table.edit(row, {
-          title: bbn._('Edit message'),
+          label: bbn._('Edit message'),
           width: 800,
           height: 600
         }, idx);
       },
       see(row){
-        this.getPopup().open({
-          title: row.title,
+        this.getPopup({
+          label: row.title,
           width: 800,
           height: 600,
           component: 'appui-note-popup-note',

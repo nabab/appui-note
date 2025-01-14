@@ -8,7 +8,7 @@
                  class="bbn-lpadding bbn-w-40"></bbn-input>
       <bbn-button class="bbn-w-2"
                   @click="openUrl"
-                  text="Go to"></bbn-button>
+                  label="Go to"></bbn-button>
     </div>
     <div class="bbn-w-20 bbn-left-padding bbn-bottom-spadding">
       <label class="bbn-w-100"><?= _("In which file ?") ?></label>
@@ -29,12 +29,12 @@
     </div>
     <div>
       <div class="bbn-w-100 bbn-padding" bbn-if="currentData.id === null">
-        <bbn-button class="bbn-padding " text="<?= _('Add Link') ?>" @click="add"></bbn-button>
+        <bbn-button class="bbn-padding " label="<?= _('Add Link') ?>" @click="add"></bbn-button>
       </div>
       <div class="bbn-w-100 bbn-lpadding" bbn-else>
-        <bbn-button class="bbn-lpadding " text="<?= _('Modify Link') ?>" @click="modify"></bbn-button>
+        <bbn-button class="bbn-lpadding " label="<?= _('Modify Link') ?>" @click="modify"></bbn-button>
         <bbn-button class="bbn-lpadding"
-                    text="<?= _('Delete Link') ?>"
+                    label="<?= _('Delete Link') ?>"
                     @click="deletePreference"></bbn-button>
       </div>
     </div>

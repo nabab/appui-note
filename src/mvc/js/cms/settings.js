@@ -36,10 +36,10 @@
         })
       },
       browseAlias() {
-        this.getPopup().open({
+        this.getPopup({
           width: 500,
           height: 600,
-          title: bbn._('Options'),
+          label: bbn._('Options'),
           component: 'appui-option-browse',
           source: {
             data: this.currentType

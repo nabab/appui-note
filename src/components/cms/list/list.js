@@ -139,7 +139,7 @@
       currentColumns() {
         let defaultColumns = [
           {
-            title: " ",
+            label: " ",
             buttons: this.rowMenu,
             filterable: false,
             showable: false,
@@ -151,28 +151,28 @@
             field: "id",
             hidden: true,
             minWidth: 130,
-            title: bbn._("ID")
+            label: bbn._("ID")
           }, {
             filterable: false,
             minWidth: 350,
-            title: bbn._("Post"),
+            label: bbn._("Post"),
             component: this.$options.components.titleCell
           }, {
             field: "version",
             width: 40,
             hidden: true,
-            title: "V",
-            ftitle: bbn._("Version"),
+            label: "V",
+            flabel: bbn._("Version"),
             cls: "bbn-c"
           }, {
             field: "title",
             minWidth: 350,
             width: 500,
-            title: bbn._("Title"),
+            label: bbn._("Title"),
             hidden: true,
           }, {
             field: "id_media",
-            title: bbn._("Cover image"),
+            label: bbn._("Cover image"),
             render: this.renderFrontImg,
             editable: false,
             //cls: "bbn-middle",
@@ -180,13 +180,13 @@
             width: 100
           }, {
             field: "url",
-            title: bbn._("URL"),
+            label: bbn._("URL"),
             minWidth: 200,
             render: this.renderUrl,
             hidden: true
           }, {
             field: "id_type",
-            title: bbn._("Type"),
+            label: bbn._("Type"),
             width: 200,
             source: this.typesTextValue,
             hidden: this.currentCategory !== 'all',
@@ -196,34 +196,34 @@
             hidden: !this.currentType.option,
             width: 250,
             source: this.currentType.options || [],
-            title: this.currentType.option_title || bbn._("Category")
+            label: this.currentType.option_title || bbn._("Category")
           }, {
             field: "excerpt",
             hidden: true,
             width: 250,
-            title: bbn._("Excerpt")
+            label: bbn._("Excerpt")
           }, {
             field: "start",
             type: "date",
             width: 100,
-            title: bbn._("Start of publication"),
+            label: bbn._("Start of publication"),
             hidden: true
           }, {
             field: "end",
             type: "date",
             width: 100,
-            title: bbn._("End of publication"),
+            label: bbn._("End of publication"),
             hidden: true
           }, {
             field: "creation",
             type: "date",
             width: 100,
             hidden: true,
-            title: bbn._("Since")
+            label: bbn._("Since")
           }, {
             field: "id_user",
-            ftitle: bbn._("Creator"),
-            title: '<<i class="nf nf-fa-user"></i>',
+            flabel: bbn._("Creator"),
+            label: '<<i class="nf nf-fa-user"></i>',
             cls: 'bbn-c',
             hidden: true,
             width: 50,
@@ -231,8 +231,8 @@
           }, {
             field: "num_medias",
             width: 50,
-            title: "<i class='nf nf-fa-file_photo_o bbn-lg'> </i>",
-            ftitle: bbn._("Number of medias associated with this entry"),
+            label: "<i class='nf nf-fa-file_photo_o bbn-lg'> </i>",
+            flabel: bbn._("Number of medias associated with this entry"),
             hidden: true,
             type: "number",
             cls: "bbn-c"
@@ -323,7 +323,7 @@
       insertNote(){
         this.getPopup({
           width: 800,
-          title: bbn._('New') + ' ' + this.noteName,
+          label: bbn._('New') + ' ' + this.noteName,
           component: this.insertComponent,
           componentOptions: {
             id_type: this.currentCategory !== 'all' ? this.currentCategory : '',
@@ -342,9 +342,9 @@
         }
       },
       publishNote(row){
-        this.getPopup().open({
+        this.getPopup({
           width: 400,
-          title: bbn._('Post publication'),
+          label: bbn._('Post publication'),
           component: this.publishComponent,
           componentOptions: {
             url: this.publishUrl,
@@ -421,9 +421,9 @@
         });
       },
       moveNote(row){
-        this.getPopup().open({
+        this.getPopup({
           width: 400,
-          title: bbn._('Move post to another category'),
+          label: bbn._('Move post to another category'),
           component: this.moveComponent,
           componentOptions: {
             url: this.moveUrl,

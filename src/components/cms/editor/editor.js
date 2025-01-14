@@ -170,7 +170,7 @@
         this.getPopup({
           component: this.$options.components.configForm,
           source: this.currentEditing,
-          title: false
+          label: false
         });
       },
       getBlockTitle(id) {

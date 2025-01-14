@@ -58,9 +58,9 @@
   </div>
   <div class="bbn-top-lmargin"
        style="margin-inline: auto;">
-    <bbn-button text="Cancel"
+    <bbn-button label="Cancel"
                 @click="cancel"/>
-    <bbn-button text="Save"
+    <bbn-button label="Save"
                 class="bbn-bg-webblue"
                 @click="saveImage"/>
   </div>

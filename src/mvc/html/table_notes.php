@@ -24,62 +24,62 @@
 
   <bbns-column field="title"
                :editable="false"
-               title="<?= _("Title") ?>"
+               label="<?= _("Title") ?>"
                :render="title"/>
 
   <bbns-column field="version"
-               title="#"
+               label="#"
                :editable="false"
                :width="50"
                cls="bbn-c"/>
 
-  <bbns-column title="<?= _("Resume") ?>"
+  <bbns-column label="<?= _("Resume") ?>"
                :editable="false"
                :render="getResume"/>
 
   <bbns-column field="creator"
                :editable="false"
-               title="<?= _("Creator") ?>"
+               label="<?= _("Creator") ?>"
                :source="users"
                :hidden="true"
                :width="160"/>
 
   <bbns-column field="id_user"
                :editable="false"
-               title="<?= _("Last version user") ?>"
+               label="<?= _("Last version user") ?>"
                :source="users"
                :hidden="true"
                :width="160"/>
 
   <bbns-column field="creation"
                :editable="false"
-               title="<?= _("Creation") ?>"
+               label="<?= _("Creation") ?>"
                type="date"
                cls="bbn-c"
                :width="100"/>
 
   <bbns-column field="last_edit"
                :editable="false"
-               title="<?= _("Last edit") ?>"
+               label="<?= _("Last edit") ?>"
                type="date"
                :hidden="true"
                cls="bbn-c"
                :width="100"/>
 
   <bbns-column field="id_type"
-               title="<?= _("Type") ?>"
+               label="<?= _("Type") ?>"
                :render="getType"
                :source="source.options"
                :width="120"/>
 
   <bbns-column field="id_option"
                :editable="false"
-               title="<?= _("Option") ?>"
+               label="<?= _("Option") ?>"
                :render="getOption"
                :width="120"/>
 
   <bbns-column :width="90"
-               title="<?= _("Actions") ?>"
+               label="<?= _("Actions") ?>"
                cls="bbn-c"
                :buttons="['edit']"/>
 

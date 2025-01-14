@@ -86,7 +86,7 @@
         this.fullScreenImg = false;      },
       openMediasGroups(){
         this.getPopup().load({
-          title: bbn._('Medias Groups Management'),
+          label: bbn._('Medias Groups Management'),
           url: appui.plugins['appui-note'] + '/media/groups',
           width: '90%',
           height: '90%',

@@ -87,7 +87,7 @@
           componentOptions: {
             source: bookmark
           },
-          title: bookmark.id ? bbn._("Edit Form") : bbn._("New Form")
+          label: bookmark.id ? bbn._("Edit Form") : bbn._("New Form")
         });
       },
       openUrlSource(source) {

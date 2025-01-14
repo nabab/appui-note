@@ -52,10 +52,10 @@
         bbn.fn.link('notes/form_rte/' + row.id_note);
       },
       insert(){
-        this.getPopup().open({
+        this.getPopup({
             width: 800,
             height: 600,
-            title: bbn._("New Note") ,
+            label: bbn._("New Note") ,
             component: 'apst-adherent-form-note',
         })
       },

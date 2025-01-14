@@ -8,7 +8,7 @@
             :nav="true"
             :autoload="true">
 	<bbn-container url="browser"
-                  :title="_('Browser')"
+                  :label="_('Browser')"
                   icon="nf nf-oct-file_media"
                   fcolor="#ccffcc"
                   bcolor="#009688"

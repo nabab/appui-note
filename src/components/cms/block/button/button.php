@@ -89,7 +89,7 @@
   <div bbn-else
        class="bbn-w-100" :style="'text-align:'+source.align">
     <bbn-button :url="source.url"
-                :text="source.content"
+                :label="source.content"
                 :class="[source.dimensions, source.padding, source.class]"/>
   </div>
 </div>

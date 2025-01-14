@@ -11,7 +11,7 @@
                  class="bbn-flex-fill bbn-right-space"></bbn-input>
       <bbn-button class="bbn-w-2"
                   @click="openUrl"
-                  text="Go to"></bbn-button>
+                  label="Go to"></bbn-button>
     </div>
 
     <label><?= _("In which file ?") ?></label>
@@ -36,7 +36,7 @@
     <div bbn-if="currentData.cover">
       <bbn-button bbn-if="currentData.images"
                   @click="showGallery = true"
-                  text="change cover picture"></bbn-button>
+                  label="change cover picture"></bbn-button>
     </div>
     <div>
       <bbn-floater bbn-if="showGallery"
@@ -60,7 +60,7 @@
       <bbn-button	bbn-if="currentData.id_screenshot"
                 @click="showScreenshot"
                 class="bbn-padding"
-                text="show screenshot"
+                label="show screenshot"
                 ></bbn-button>
     <bbn-floater bbn-if="visible"
                  :closable="true"

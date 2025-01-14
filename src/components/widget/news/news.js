@@ -40,7 +40,7 @@
       },
       openNote(note){
         this.closest('bbn-container').getPopup({
-          title: note.title,
+          label: note.title,
           width: '70%',
           height: '70%',
           component: 'appui-note-popup-note',

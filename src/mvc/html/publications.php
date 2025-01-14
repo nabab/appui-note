@@ -95,14 +95,14 @@
       <div class="bbn-w-100 bbn-flex-width">
         <div class="bbn-w-50">
           <bbn-button class="bbn-w-100"          
-							        :text="_('Cancel')"							      
+							        :label="_('Cancel')"							      
 							        icon="nf nf-fa-times_circle"
                       @click="closePopUp"
           ></bbn-button>
         </div> 
         <div class="bbn-flex-fill">
           <bbn-button class="bbn-w-100"          
-							        :text="_('Import')"							      
+							        :label="_('Import')"							      
 							        icon="nf nf-mdi-import"
                       @click="importPage"
                       :disabled="!selected"

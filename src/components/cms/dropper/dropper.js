@@ -4,7 +4,7 @@
   return {
     mixins: [bbn.cp.mixins.basic],
     props: {
-      title: {
+      label: {
         type: String,
         required: true
       },

@@ -90,7 +90,7 @@
     </div>
     <bbn-button icon="nf nf-fa-exclamation"
                 :notext="true"
-                :text="_('Important')"
+                :label="_('Important')"
                 :class="['bbn-right-sspace', {'bbn-bg-red bbn-white': !!source.important}]"
                 @click="setUnsetImportant"
                 style="min-width: 1.4em; max-width: 1.4em"/>

@@ -3,7 +3,7 @@
 <div class="bbn-overlay bbn-flex-height">
   <bbn-toolbar class="bbn-lg bbn-padding">
     <div>
-      <bbn-button text="<?= _("Add a new feature") ?>"
+      <bbn-button label="<?= _("Add a new feature") ?>"
                   icon="nf nf-fa-plus"
                   @click="openCategoryForm"/>
     </div>
@@ -60,12 +60,12 @@
                               icon="nf nf-fa-arrow_up"
                               @click="setOrderFeature(item.id, item.num - 1)"
                               :notext="true"
-                              text="<?= _("Move up") ?>"/>
+                              label="<?= _("Move up") ?>"/>
                   <bbn-button bbn-if="item.num < featureItems.length"
                               icon="nf nf-fa-arrow_down"
                               @click="setOrderFeature(item.id, item.num + 1)"
                               :notext="true"
-                              text="<?= _("Move down") ?>"/>
+                              label="<?= _("Move down") ?>"/>
                 </div>
                 <bbn-button icon="nf nf-fae-galery"
 										  :notext="false"
@@ -75,7 +75,7 @@
                 <bbn-button @click="removeNote(item.id)"
                             icon="nf nf-fa-trash_o"
                             :notext="true"
-                            text="<?= _("Delete") ?>"/>
+                            label="<?= _("Delete") ?>"/>
               </div>
             </div>
           </div>

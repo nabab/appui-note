@@ -204,8 +204,8 @@
             if(bbn.fn.isString(m.content)){
               m.content = JSON.parse(m.content)
             }
-            this.getPopup().open({
-              title: bbn._('Edit media'),
+            this.getPopup({
+              label: bbn._('Edit media'),
               component: 'appui-note-media-form',
               componentOptions: {
                 source: m,
@@ -228,8 +228,8 @@
           });
           this.$emit('beforeadd', ev);
           if (!ev.defaultPrevented) {
-            this.getPopup().open({
-              title: bbn._('Add new media'),
+            this.getPopup({
+              label: bbn._('Add new media'),
               component: 'appui-note-media-form',
               componentOptions: {
                 source: {},
@@ -332,8 +332,8 @@
         this.$emit('clickitem', item)
       },
       showImage(img){
-        this.getPopup().open({
-          title: ' '/*img.name*/,
+        this.getPopup({
+          label: ' '/*img.name*/,
           source: img,
           content: '<div class="bbn-overlay bbn-middle"><img src="' + appui.plugins['appui-note'] + '/media/image/' + img.id + '/' + img.content.path + '" style="max-width: 100%; max-height: 100%"></div>',
           height: '70%',
@@ -342,8 +342,8 @@
         })
       },
       showFileInfo(m){
-        this.getPopup().open({
-          title: m.title,
+        this.getPopup({
+          label: m.title,
           source: m,
           component: 'appui-note-media-info',
           width: 400,

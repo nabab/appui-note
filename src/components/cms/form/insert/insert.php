@@ -30,7 +30,7 @@
                     source-value="id"/>
       <bbn-button icon="nf nf-fa-plus"
                   :notext="true"
-                  :text="_('Add')"
+                  :label="_('Add')"
                   @click="addCategory"/>
     </div>
 

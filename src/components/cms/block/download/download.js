@@ -43,7 +43,7 @@
         this.getPopup({
           component: this.$options.components.browser,
           source: file,
-          title: bbn._('Select a media'),
+          label: bbn._('Select a media'),
           width: '90%',
           height: '90%'
         });

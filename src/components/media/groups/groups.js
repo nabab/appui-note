@@ -45,7 +45,7 @@
     methods: {
       create(){
         this.getPopup({
-          title: bbn._('Create new medias group'),
+          label: bbn._('Create new medias group'),
           width: '300px',
           component: this.$options.components.form,
           source: {
@@ -55,7 +55,7 @@
       },
       rename(){
         this.getPopup({
-          title: bbn._('Rename'),
+          label: bbn._('Rename'),
           width: '300px',
           component: this.$options.components.form,
           source: this.current
@@ -104,7 +104,7 @@
         this.getPopup({
           width: '90%',
           height: '90%',
-          title: bbn._('Select media(s)'),
+          label: bbn._('Select media(s)'),
           component: this.$options.components.addForm,
           source: {
             idGroup: this.current.id,
@@ -135,7 +135,7 @@
       insertLink(a){
         console.log(a)
         this.getPopup({
-          title: a.data.link ? bbn._('Edit Link') : bbn._('Insert Link'),
+          label: a.data.link ? bbn._('Edit Link') : bbn._('Insert Link'),
           width: '300px',
           component: this.$options.components.formLink,
           source: a.data

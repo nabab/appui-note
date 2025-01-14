@@ -21,44 +21,44 @@
                :filterable="false"
   ></bbns-column>
   <bbns-column field="title"
-               title="<i class='nf nf-fa-newspaper_o bbn-xl'></i>"
-               ftitle="<?= _("Title") ?>"
+               label="<i class='nf nf-fa-newspaper_o bbn-xl'></i>"
+               flabel="<?= _("Title") ?>"
   ></bbns-column>
   <bbns-column field="id_user"
-               title="<i class='nf nf-fa-user bbn-xl'></i>"
-               ftitle="<?= _("Author") ?>"
+               label="<i class='nf nf-fa-user bbn-xl'></i>"
+               flabel="<?= _("Author") ?>"
                :width="300"
                :source="users"
   ></bbns-column>
   <bbns-column field="content"
-               title="<i class='nf nf-fa-comment bbn-xl'></i>"
-               ftitle="<?= _("Text") ?>"
+               label="<i class='nf nf-fa-comment bbn-xl'></i>"
+               flabel="<?= _("Text") ?>"
                :hidden="true"
   ></bbns-column>
   <bbns-column field="creation"
-               title="<i class='nf nf-fa-calendar bbn-xl'></i>"
-               ftitle="<?= _("Creation date") ?>"
+               label="<i class='nf nf-fa-calendar bbn-xl'></i>"
+               flabel="<?= _("Creation date") ?>"
                :width="120"
                type="date"
                cls="bbn-c"
   ></bbns-column>
   <bbns-column field="start"
-               title="<i class='nf nf-fa-calendar_check_o bbn-xl'></i>"
-               ftitle="<?= _("Start date") ?>"
+               label="<i class='nf nf-fa-calendar_check_o bbn-xl'></i>"
+               flabel="<?= _("Start date") ?>"
                :width="120"
                type="date"
                cls="bbn-c"
   ></bbns-column>
   <bbns-column field="end"
-               title="<i class='nf nf-fa-calendar_times_o bbn-xl'></i>"
-               ftitle="<?= _("End date") ?>"
+               label="<i class='nf nf-fa-calendar_times_o bbn-xl'></i>"
+               flabel="<?= _("End date") ?>"
                :width="120"
                type="date"
                cls="bbn-c"
   ></bbns-column>
   <bbns-column :width="100"
                cls="bbn-c"
-               ftitle="<?= _("Actions") ?>"
+               flabel="<?= _("Actions") ?>"
                :buttons="[{
                  action: see,
                  icon: 'nf nf-fa-eye',

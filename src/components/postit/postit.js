@@ -117,7 +117,7 @@
       },
       getObj() {
         return {
-          title: this.currentTitle,
+          label: this.currentTitle,
           text: this.currentText,
           bcolor: this.currentBcolor,
           fcolor: this.currentFcolor,

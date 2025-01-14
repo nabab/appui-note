@@ -42,10 +42,10 @@
     },
     methods: {
       openGallery(){
-        this.getPopup().open({
+        this.getPopup({
           component: this.$options.components.gallery,
           source: this.source,
-          title: bbn._('Select an image'),
+          label: bbn._('Select an image'),
           width: '90%',
           height: '90%'
         });

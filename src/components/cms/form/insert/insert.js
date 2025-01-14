@@ -49,7 +49,7 @@
       },
       addCategory(){
         this.getPopup({
-          title: bbn._('New Category'),
+          label: bbn._('New Category'),
           width: 500,
           component: 'appui-note-cms-form-category',
           componentOptions: {

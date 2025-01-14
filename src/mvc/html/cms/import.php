@@ -25,7 +25,7 @@
       <div class="bbn-m bbn-upper bbn-b bbn-spadding bbn-alt-background bbn-radius bbn-c bbn-bottom-xsspace bbn-secondary-text-alt"
            bbn-text="_('Wordpress XML export file')"/>
       <div class="bbn-spadding bbn-alt-background bbn-radius bbn-flex-width">
-        <bbn-button :text="_('Reset import')"
+        <bbn-button :label="_('Reset import')"
                     icon="nf nf-md-restart bbn-lg"
                     @click="reset"
                     class="bbn-right-space"

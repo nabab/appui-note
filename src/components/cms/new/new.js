@@ -16,7 +16,7 @@
     data(){
       return {
         formData: {
-          title: '',
+          label: '',
           type: '',
           url: '',
           lang: bbn.env.lang,

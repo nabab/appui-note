@@ -39,7 +39,7 @@
                         'bbn-state-active': (source.width === 'auto') || (source.width === '') || (source.width === undefined)
                       }]"
                       @click="toggleAutoWidth"
-                      :text="_('Auto')"/>
+                      :label="_('Auto')"/>
         </div>
 				<label><?= _('Height') ?></label>
         <div>
@@ -54,7 +54,7 @@
                         'bbn-state-active': (source.height === 'auto') || (source.height === '') || (source.height === undefined)
                       }]"
                       @click="toggleAutoHeight"
-                      :text="_('Auto')"/>
+                      :label="_('Auto')"/>
         </div>
         <label bbn-text="_('Alignment')"></label>
         <div>
