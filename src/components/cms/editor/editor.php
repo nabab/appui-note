@@ -13,11 +13,11 @@
                       :disabled="!isChanged"
                       @click="save"
                       :notext="true"/>
-          <bbn-button icon="nf nf-mdi-settings"
+          <bbn-button icon="nf nf-md-settings"
                       title="<?= _("Page's properties") ?>"
                       @click="togglePageSettings"
                       :notext="true"/>
-          <bbn-button icon="nf nf-mdi-widgets"
+          <bbn-button icon="nf nf-md-widgets"
                       title="<?= _("widgets") ?>"
                       :notext="true"
                       @click="toggleWidgets"/>
@@ -103,29 +103,29 @@
               <bbn-button :notext="true"
                           @click="scrollToSelected"
                           label="<?= _("Scroll to selected element") ?>"
-                          icon="nf nf-mdi-target"/>
+                          icon="nf nf-md-target"/>
               <template bbn-if="currentEditingParentItems?.length > 1"
                         class="bbn-padding appui-note-cms-editor-position">
                 <bbn-button :notext="true"
                             @click="move('start')"
                             label="<?= _("Move to start") ?>"
                             :disabled="currentEditingIndex < 1"
-                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-mdi-arrow_collapse_up' : 'nf nf-mdi-arrow_collapse_left'"/>
+                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-md-arrow_collapse_up' : 'nf nf-md-arrow_collapse_left'"/>
                 <bbn-button :notext="true"
                             @click="move('before')"
                             :label="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? _('Move up') : _('Move left')"
                             :disabled="!currentEditingIndex"
-                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-mdi-arrow_up' : 'nf nf-mdi-arrow_left'"/>
+                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-md-arrow_up' : 'nf nf-md-arrow_left'"/>
                 <bbn-button :notext="true"
                             @click="move('after')"
                             :label="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? _('Move down') : _('Move right')"
                             :disabled="currentEditingIndex === (currentEditingParentItems.length - 1)"
-                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-mdi-arrow_down' : 'nf nf-mdi-arrow_right'"/>
+                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-md-arrow_down' : 'nf nf-md-arrow_right'"/>
                 <bbn-button :notext="true"
                             @click="move('end')"
                             label="<?= _("Move to end") ?>"
                             :disabled="currentEditingIndex === (currentEditingParentItems.length - 1)"
-                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-mdi-arrow_collapse_down' : 'nf nf-mdi-arrow_collapse_right'"/>
+                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-md-arrow_collapse_down' : 'nf nf-md-arrow_collapse_right'"/>
               </template>
             </div>
             <div class="bbn-flex-fill bbn-right-spadding"

@@ -64,7 +64,7 @@
                         }, {
                           text: _('Fullscreen'),
                           value: 'fullscreen',
-                          icon: 'nf nf-mdi-fullscreen'
+                          icon: 'nf nf-md-fullscreen'
                         }]"/>
     </div>
     <label><?= _('Autoplay') ?></label>
@@ -111,7 +111,7 @@
   <div bbn-else-if="!source.content && $parent.selectable"
         class="bbn-alt-background bbn-middle bbn-lpadding"
         style="overflow: hidden">
-    <i class="bbn-xxxxl nf nf-mdi-view_carousel"/>
+    <i class="bbn-xxxxl nf nf-md-view_carousel"/>
   </div>
   <div bbn-else
        class="bbn-flex"

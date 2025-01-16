@@ -29,15 +29,15 @@
             }
           }, {
             text: 'Image gallery',
-           // icon: 'nf nf-mdi-image_multiple',
-            icon: 'nf nf-mdi-view_grid',
+           // icon: 'nf nf-md-image_multiple',
+            icon: 'nf nf-md-view_grid',
             code: 'gallery',
             action:() => {
               this.currentBlockType = 'gallery'
             }
           },{
             text: 'Image',
-            icon: 'nf nf-mdi-image',
+            icon: 'nf nf-md-image',
             code: 'image',
             action:() => {
               this.currentBlockType = 'image'
@@ -51,7 +51,7 @@
             }
           },{
             text: 'Line',
-            icon: 'nf nf-mdi-border_horizontal',
+            icon: 'nf nf-md-border_horizontal',
             code: 'line',
             action:() => {
               this.currentBlockType = 'line'
@@ -59,7 +59,7 @@
           },
           {
             text: 'Button',
-            icon: 'nf nf-mdi-cursor_pointer',
+            icon: 'nf nf-md-cursor_pointer',
             code: 'button',
             action:() => {
               this.currentBlockType = 'button'

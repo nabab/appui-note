@@ -317,7 +317,7 @@
             window.open(row.url);
           },
           text: bbn._("Open in a new window"),
-          icon: 'nf nf-mdi-open_in_new'
+          icon: 'nf nf-md-open_in_new'
         }];
       },
       insertNote(){
@@ -610,7 +610,7 @@
         template: `
 <span>
   <span class="bbn-nowrap">
-    <i class="nf nf-mdi-filter_variant bbn-p"
+    <i class="nf nf-md-filter_variant bbn-p"
        @click="showFilter = !showFilter"
        ref="icon"/> 
     <i class='nf nf-fa-calendar bbn-lg'

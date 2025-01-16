@@ -47,7 +47,7 @@
   <label  class="bbn-label"><?= _('Cache') ?></label>
   <div>
     <bbn-button :label="_('Clear')"
-                icon="nf nf-mdi-cached"
+                icon="nf nf-md-cached"
                 @click="emitClearCache"/>
   </div>
 </div>

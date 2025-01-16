@@ -103,7 +103,7 @@
         <div class="bbn-flex-fill">
           <bbn-button class="bbn-w-100"          
 							        :label="_('Import')"							      
-							        icon="nf nf-mdi-import"
+							        icon="nf nf-md-import"
                       @click="importPage"
                       :disabled="!selected"
           ></bbn-button>

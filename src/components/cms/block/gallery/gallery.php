@@ -133,7 +133,7 @@
                         }, {
                           text: _('Fullscreen'),
                           value: 'fullscreen',
-                          icon: 'nf nf-mdi-fullscreen'
+                          icon: 'nf nf-md-fullscreen'
                         }]"/>
     </div>
 

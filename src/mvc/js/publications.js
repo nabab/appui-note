@@ -21,12 +21,12 @@
           },{
             text: bbn._('Tools'),
             items: [{
-              icon: 'nf nf-mdi-import',
-              text: "<i class='nf nf-mdi-import'></i>" + bbn._('Import'),
+              icon: 'nf nf-md-import',
+              text: "<i class='nf nf-md-import'></i>" + bbn._('Import'),
               action: this.importPage
             }, {
-              icon: 'nf nf-mdi-export',
-              text: "<i class='nf nf-mdi-export'></i>" + bbn._('Export'),
+              icon: 'nf nf-md-export',
+              text: "<i class='nf nf-md-export'></i>" + bbn._('Export'),
               action: this.exportPage              
             }]
         }], 

@@ -8,7 +8,7 @@ if (defined('BBN_BASEURL') && $ctrl->hasData('root')) {
   if (empty(BBN_BASEURL)) {
     $ctrl->setUrl($ctrl->data['root'].'media')
       ->setColor('#ccffcc', '#009688')
-      ->setIcon('nf nf-mdi-folder_multiple_image')
+      ->setIcon('nf nf-md-folder_multiple_image')
       ->combo(_("Medias"));
   }
   else {

@@ -11,7 +11,7 @@
       </div><br>
       <div class="bbn-iblock bbn-bottom-smargin">
         <bbn-button bbn-if="currentIndex > -1"
-                    icon="nf nf-mdi-information_outline"
+                    icon="nf nf-md-information_outline"
                     :notext="true"
                     @click="openInfo(source[currentIndex])"
                     title="<?= _('Show media information') ?>"/>
@@ -44,11 +44,11 @@
              @click.stop>
           <div class="bbn-iblock bbn-xspadding bbn-p bbn-text-reactive"
                @click="showImage(img)">
-            <i class="nf nf-mdi-magnify_plus_outline"/>
+            <i class="nf nf-md-magnify_plus_outline"/>
           </div>
           <div class="bbn-iblock bbn-xspadding bbn-p bbn-text-reactive"
                @click="openInfo(img)">
-            <i class="nf nf-mdi-information"/>
+            <i class="nf nf-md-information"/>
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@
         <div class="bbn-border bbn-radius bbn-middle bbn-50 bbn-primary">
           <div class="bbn-iblock bbn-xspadding bbn-p bbn-text-reactive bbn-lg bbn-b"
                @click="() => {}">
-            <i class="nf nf-mdi-plus"/>
+            <i class="nf nf-md-plus"/>
           </div>
         </div>
       </div>

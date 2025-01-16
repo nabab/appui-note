@@ -211,7 +211,7 @@
         <!-- Pin|Unpin -->
         <bbn-button bbn-if="isTopic && forum.pinnable"
                     class="bbn-left-sspace"
-                    :icon="'nf nf-mdi-' + (source.pinned ? 'pin_off' : 'pin')"
+                    :icon="'nf nf-md-' + (source.pinned ? 'pin_off' : 'pin')"
                     :notext="true"
                     @click="topic.togglePinned"
                     :title="source.pinned ? '<?= _('Unpin')?>' : '<?=_('Pin') ?>'"

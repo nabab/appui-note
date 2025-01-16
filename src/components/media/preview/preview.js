@@ -6,9 +6,9 @@
       return {
         icons: {
           pdf: 'nf nf-fa-file_pdf_o', 
-          docx: 'nf nf-mdi-file_document', 
+          docx: 'nf nf-md-file_document', 
           xls: 'nf nf-fa-file_excel_o', 
-          odt: 'nf nf-mdi-file_word', 
+          odt: 'nf nf-md-file_word', 
         },
         initialTitle: '',
       }

@@ -54,15 +54,15 @@
                             :source="[{
                               text: _('Underlined'),
                               value: 'underline',
-                              icon: 'nf nf-mdi-format_underline'
+                              icon: 'nf nf-md-format_underline'
                             }, {
                               text: _('Strikethrough'),
                               value: 'line-through',
-                              icon: 'nf nf-mdi-format_strikethrough_variant'
+                              icon: 'nf nf-md-format_strikethrough_variant'
                             }, {
                               text: _('None'),
                               value: 'none',
-                              icon: 'nf nf-mdi-format_title'
+                              icon: 'nf nf-md-format_title'
                             }]"/>
         </div>
       </div>

@@ -7,13 +7,13 @@
     <div class="bbn-40 bbn-spadding bbn-flex"
          :style="[selected ? {'border': '1px solid orange'} : {'border': '1px solid gray'}, {'flex-direction': 'column'}, {'cursor': 'pointer'}]"
          @click="changeSelect(true)">
-      <i class="nf nf-mdi-content_save bbn-xxl bbn-webblue"/>
+      <i class="nf nf-md-content_save bbn-xxl bbn-webblue"/>
       <span>Save original</span>
     </div>
     <div class="bbn-40 bbn-spadding bbn-flex"
          :style="[selected ? {'border': '1px solid gray'} : {'border': '1px solid orange'}, {'flex-direction': 'column'}, {'cursor': 'pointer'}]"
          @click="changeSelect(false)">
-      <i class="nf nf-mdi-content_save_settings bbn-xxl bbn-webblue"/>
+      <i class="nf nf-md-content_save_settings bbn-xxl bbn-webblue"/>
       <span>Save as new file</span>
     </div>
   </div>
@@ -51,7 +51,7 @@
                    />
         <i bbn-bind:class="[locked ? 'nf nf-fa-lock' : 'nf nf-fa-unlock_alt', 'bbn-center']"
            @click="lockSize"/>
-        <i class="nf nf-mdi-backup_restore bbn-center bbn-left-spadding bbn-xl"
+        <i class="nf nf-md-backup_restore bbn-center bbn-left-spadding bbn-xl"
            @click="resetSize"/>
       </div>
     </div>

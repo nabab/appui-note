@@ -151,7 +151,7 @@
         <div bbn-text="n.is_published ? _('Yes') : _('No') "></div>
 
         <div><?= _("Content") ?></div>
-        <i class="nf nf-mdi-comment_text bbn-medium bbn-p"
+        <i class="nf nf-md-comment_text bbn-medium bbn-p"
            title="<?= _("Note content") ?>"
            @click="show_note_content(n)"/>
       </div>
