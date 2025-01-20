@@ -339,6 +339,11 @@
                 "key": "MUL",
                 "maxlength": 16
             },
+            "version": {
+                "type": "int",
+                "null": 0,
+                "signed": 0
+            },
             "id_media": {
                 "type": "binary",
                 "null": 0,
@@ -637,104 +642,6 @@
                 "default": "NULL",
                 "defaultExpression": 1,
                 "maxlength": 16
-            }
-        }
-    },
-    "bbn_events": {
-        "keys": {
-            "PRIMARY": {
-                "columns": [
-                    "id"
-                ],
-                "ref_table": "bbn_history_uids",
-                "ref_column": "bbn_uid",
-                "update": "CASCADE",
-                "delete": "CASCADE",
-                "unique": 1
-            },
-            "id_type": {
-                "columns": [
-                    "id_type"
-                ],
-                "ref_table": "bbn_options",
-                "ref_column": "id",
-                "update": "CASCADE",
-                "delete": "RESTRICT",
-                "unique": 0
-            },
-            "id_parent": {
-                "columns": [
-                    "id_parent"
-                ],
-                "ref_table": "bbn_events",
-                "ref_column": "id",
-                "update": "CASCADE",
-                "delete": "CASCADE",
-                "unique": 0
-            }
-        },
-        "cols": {
-            "id": [
-                "PRIMARY"
-            ],
-            "id_type": [
-                "id_type"
-            ],
-            "id_parent": [
-                "id_parent"
-            ]
-        },
-        "fields": {
-            "id": {
-                "type": "binary",
-                "null": 0,
-                "key": "PRI",
-                "maxlength": 16
-            },
-            "id_parent": {
-                "type": "binary",
-                "null": 1,
-                "key": "MUL",
-                "default": "NULL",
-                "defaultExpression": 1,
-                "maxlength": 16
-            },
-            "id_type": {
-                "type": "binary",
-                "null": 0,
-                "key": "MUL",
-                "maxlength": 16
-            },
-            "start": {
-                "type": "datetime",
-                "null": 1,
-                "default": "NULL",
-                "defaultExpression": 1
-            },
-            "end": {
-                "type": "datetime",
-                "null": 1,
-                "default": "NULL",
-                "defaultExpression": 1
-            },
-            "name": {
-                "type": "varchar",
-                "null": 1,
-                "default": "NULL",
-                "defaultExpression": 1,
-                "maxlength": 255
-            },
-            "recurring": {
-                "type": "tinyint",
-                "null": 0,
-                "default": 0,
-                "maxlength": 1
-            },
-            "cfg": {
-                "type": "mediumtext",
-                "null": 1,
-                "default": "NULL",
-                "defaultExpression": 1
             }
         }
     },
@@ -1178,6 +1085,21 @@
                 "null": 0,
                 "key": "PRI",
                 "maxlength": 16
+            },
+            "position": {
+                "type": "int",
+                "null": 1,
+                "key": null,
+                "signed": 0,
+                "maxlength": 4
+            },
+            "link": {
+                "type": "varchar",
+                "null": 1,
+                "key": null,
+                "default": "NULL",
+                "defaultExpression": false,
+                "maxlength": 255
             }
         }
     },
