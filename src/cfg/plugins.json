@@ -1,0 +1,58 @@
+[
+    {
+        "text": "Dashboard",
+        "code": "dashboard",
+        "items": [
+            {
+                "text": "Widgets",
+                "code": "widgets",
+                "id_alias": [
+                    "widgets",
+                    "dashboard",
+                    "appui"
+                ],
+                "icon": "nf nf-mdi-widgets",
+                "items": [
+                    {
+                        "text": "News",
+                        "code": "news",
+                        "limit": 5,
+                        "closable": false,
+                        "component": "appui-note-widget-news",
+                        "buttonsRight": [
+                            {
+                                "icon": "nf nf-fa-sticky_note",
+                                "text": "Create a news",
+                                "action": "toggleForm"
+                            },
+                            {
+                                "icon": "nf nf-fa-list_ul",
+                                "text": "News",
+                                "action": "openNews"
+                            }
+                        ]
+                    },
+                    {
+                        "text": "My notes",
+                        "code": "personal",
+                        "limit": 5,
+                        "closable": false,
+                        "component": "appui-note-widget-personal",
+                        "buttonsRight": [
+                            {
+                                "icon": "nf nf-fa-sticky_note",
+                                "text": "New note",
+                                "action": "toggleForm"
+                            },
+                            {
+                                "icon": "nf nf-fa-list_ul",
+                                "text": "Post-it",
+                                "action": "openPostit"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+]
