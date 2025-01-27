@@ -17,7 +17,7 @@
       <?= _('URL') ?>
     </label>
     <appui-note-cms-url :source="formData"
-                        :prefix="prefix"/>
+                        :pref="pref"/>
 
     <label class="bbn-b">
       <?= _('Article type') ?>

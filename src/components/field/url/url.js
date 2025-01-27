@@ -8,7 +8,7 @@
         type: Object,
         required: true
       },
-      prefix: {
+      pref: {
         type: String,
         default: '',
         /*
@@ -41,18 +41,18 @@
         return '';
       },
       updateURL() {
-        this.emitInput(this.prefix + this.url);
+        this.emitInput(this.pref + this.url);
       }
     },
     watch: {
       url(v) {
         bbn.fn.log(v);
         if (!this.urlEdited) {
-          this.emitInput(this.prefix + v);
+          this.emitInput(this.pref + v);
         }
       },
       value(v) {
-        if (!v || (this.makeURL(v.substr(this.prefix.length)) === this.url)) {
+        if (!v || (this.makeURL(v.substr(this.pref.length)) === this.url)) {
           if (this.urlEdited) {
             this.urlEdited = false;
           }

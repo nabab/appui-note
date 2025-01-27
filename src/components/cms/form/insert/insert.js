@@ -25,7 +25,7 @@
           lang: bbn.env.lang,
           excerpt: ''
         },
-        prefix: this.id_type ? bbn.fn.getField(this.types, 'prefix', {id: this.id_type}) : '',
+        pref: this.id_type ? bbn.fn.getField(this.types, 'prefix', {id: this.id_type}) : '',
         root: appui.plugins['appui-note'] + '/'
       };
     },

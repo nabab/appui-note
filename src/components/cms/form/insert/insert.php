@@ -16,7 +16,7 @@
       <?= _('URL') ?>
     </label>
     <appui-note-field-url :source="formData"
-                          :prefix="prefix"
+                          :pref="pref"
                           bbn-model="formData.url"/>
 
     <label class="bbn-b">

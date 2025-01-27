@@ -22,6 +22,7 @@
           lang: bbn.env.lang,
           prefix: ''
         },
+        pref: '',
         root: appui.plugins['appui-note'] + '/'
       };
     },
@@ -33,7 +34,7 @@
     methods: {
       updatePrefix() {
         bbn.fn.log("UPDATING PREFIX", this.formData.type)
-        this.prefix = this.formData.type ? bbn.fn.getField(this.types, 'prefix', {value: this.formData.type}) : '';
+        this.pref = this.formData.type ? bbn.fn.getField(this.types, 'prefix', {value: this.formData.type}) : '';
       },
       afterSubmit(d) {
         if (d.success && d.data) {

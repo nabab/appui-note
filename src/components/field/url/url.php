@@ -5,7 +5,7 @@
              :nullable="urlEdited"
              :disabled="disabled"
              :readonly="readonly"
-             :prefix="prefix"
+             :pref="pref"
              class="bbn-w-100"
              :button-right="readonly ? '' : 'nf nf-fa-refresh'"
              :action-right="updateURL"
