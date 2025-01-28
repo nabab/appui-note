@@ -149,7 +149,7 @@
             cls: "bbn-c"
           }, {
             field: "id",
-            hidden: true,
+            invisible: true,
             minWidth: 130,
             label: bbn._("ID")
           }, {
@@ -160,7 +160,7 @@
           }, {
             field: "version",
             width: 40,
-            hidden: true,
+            invisible: true,
             label: "V",
             flabel: bbn._("Version"),
             cls: "bbn-c"
@@ -169,37 +169,37 @@
             minWidth: 350,
             width: 500,
             label: bbn._("Title"),
-            hidden: true,
+            invisible: true,
           }, {
             field: "id_media",
             label: bbn._("Cover image"),
             render: this.renderFrontImg,
             editable: false,
             //cls: "bbn-middle",
-            hidden: (this.currentCategory !== 'all') && !this.currentType.front_img,
+            invisible: (this.currentCategory !== 'all') && !this.currentType.front_img,
             width: 100
           }, {
             field: "url",
             label: bbn._("URL"),
             minWidth: 200,
             render: this.renderUrl,
-            hidden: true
+            invisible: true
           }, {
             field: "id_type",
             label: bbn._("Type"),
             width: 200,
             source: this.typesTextValue,
-            hidden: this.currentCategory !== 'all',
+            invisible: this.currentCategory !== 'all',
             default: this.id_type
           }, {
             field: "id_option",
-            hidden: !this.currentType.option,
+            invisible: !this.currentType.option,
             width: 250,
             source: this.currentType.options || [],
             label: this.currentType.option_title || bbn._("Category")
           }, {
             field: "excerpt",
-            hidden: true,
+            invisible: true,
             width: 250,
             label: bbn._("Excerpt")
           }, {
@@ -207,25 +207,25 @@
             type: "date",
             width: 100,
             label: bbn._("Start of publication"),
-            hidden: true
+            invisible: true
           }, {
             field: "end",
             type: "date",
             width: 100,
             label: bbn._("End of publication"),
-            hidden: true
+            invisible: true
           }, {
             field: "creation",
             type: "date",
             width: 100,
-            hidden: true,
+            invisible: true,
             label: bbn._("Since")
           }, {
             field: "id_user",
             flabel: bbn._("Creator"),
             label: '<<i class="nf nf-fa-user"></i>',
             cls: 'bbn-c',
-            hidden: true,
+            invisible: true,
             width: 50,
             component: this.$options.components.initial
           }, {
@@ -233,7 +233,7 @@
             width: 50,
             label: "<i class='nf nf-fa-file_photo_o bbn-lg'> </i>",
             flabel: bbn._("Number of medias associated with this entry"),
-            hidden: true,
+            invisible: true,
             type: "number",
             cls: "bbn-c"
           }
@@ -552,10 +552,10 @@
         this.$nextTick(() => {
           let table = this.getRef('table');
           bbn.fn.each(newVal, (c, i) => {
-            if (!!c.hidden && !table.currentHidden.includes(i)) {
+            if (!!c.invisible && !table.currentHidden.includes(i)) {
               table.currentHidden.push(i);
             }
-            else if (!c.hidden && !!table.currentHidden.includes(i)) {
+            else if (!c.invisible && !!table.currentHidden.includes(i)) {
               table.currentHidden.splice(table.currentHidden.indexOf(i), 1);
             }
           });

@@ -32,7 +32,7 @@
           this.$set(this.source, 'hr', v);
         }
       },
-      style(){
+      currentStyle(){
         if (!this.details) {
           return {};
         }

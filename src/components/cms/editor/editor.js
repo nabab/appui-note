@@ -11,7 +11,7 @@
         type: String,
         default: appui.plugins['appui-note'] + '/' + 'cms/actions/save'
       },
-      prefix: {
+      pref: {
         type: String
       },
       blocks: {
@@ -552,7 +552,7 @@
         let tmp_arr = [];
         this.source.items.map((v, idx) => {
           let ele = editor.getRef('block' + idx.toString());
-          if (ele?.$el && ele.$el.getBoundingClientRect) {
+          if (ele?.$el?.getBoundingClientRect) {
             let detail = ele.$el.getBoundingClientRect();
             tmp_arr.push({
               y: detail.y,
@@ -565,7 +565,7 @@
             this.map = tmp_arr.slice();
           }
           else {
-            bbn.fn.log('false mapper', ele.$el, idx);
+            bbn.fn.log('false mapper', ele, idx);
           }
         });
       },

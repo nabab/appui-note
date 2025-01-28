@@ -60,10 +60,10 @@
   <div bbn-else
        class="bbn-w-100">
     <hr bbn-if="['both', 'top', true].includes(line)"
-      :style="style">
+      :style="currentStyle">
     <slot></slot>
     <hr bbn-if="['both', 'bottom', true].includes(line)"
-        :style="style">
+        :style="currentStyle">
     <div bbn-if="!line && $parent.selectable"
          class="bbn-alt-background bbn-middle bbn-lpadding bbn-w-100"
          style="overflow: hidden">

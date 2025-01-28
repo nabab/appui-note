@@ -13,7 +13,7 @@
                       :disabled="!isChanged"
                       @click="save"
                       :notext="true"/>
-          <bbn-button icon="nf nf-md-settings"
+          <bbn-button icon="nf nf-fa-gear"
                       title="<?= _("Page's properties") ?>"
                       @click="togglePageSettings"
                       :notext="true"/>
@@ -60,7 +60,6 @@
                                     @changes="handleSelected"
                                     @drop.prevent="onDrop"
                                     :preview="preview"
-                                    @dragoverdroppable="dragOver"
                                     :position="nextPosition"
                                     @dragstart="dragStart"
                                     @unselect="unselectElements"
@@ -132,14 +131,23 @@
                   style="overflow: hidden">
               <div class="bbn-100">
                 <bbn-scroll axis="y">
-                  <component	@configinit="setOriginalConfig"
-                              :class="['bbn-contain', 'bbn-w-100', {'bbn-overlay': currentEditing.type === 'html'}]"
-                              :source="currentEditing"
-                              :cfg="currentBlockConfig"
-                              ref="blockEditor"
-                              mode="edit"
-                              :is="currentEditing.type === 'container' ? 'appui-note-cms-container' : 'appui-note-cms-block'"
-                              :key="currentEditing._elementor.key"/>
+                  <appui-note-cms-container bbn-if="currentEditing.type === 'container'"
+                                            @configinit="setOriginalConfig"
+                                            class="bbn-contain bbn-w-100"
+                                            :source="currentEditing"
+                                            ref="blockEditor"
+                                            mode="edit"
+                                            :key="currentEditing._elementor.key"/>
+                  <appui-note-cms-block bbn-else
+                                        @configinit="setOriginalConfig"
+                                        :class="['bbn-contain', 'bbn-w-100', {
+                                          'bbn-overlay': currentEditing.type === 'html'
+                                        }]"
+                                        :source="currentEditing"
+                                        :cfg="currentBlockConfig"
+                                        ref="blockEditor"
+                                        mode="edit"
+                                        :key="currentEditing._elementor.key"/>
                 </bbn-scroll>
               </div>
             </div>
@@ -167,7 +175,7 @@
                                     :class="'block-' + v.code"
                                     :type="v.code"
                                     :special="v.special"
-                                    :title="v.text"
+                                    :label="v.text"
                                     :icon="v.icon"
                                     :default-config="v.cfg"
                                     @dragend="isDragging = false"

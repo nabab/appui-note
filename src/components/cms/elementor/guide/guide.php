@@ -9,5 +9,5 @@
      @mouseleave="isOver = false"
      @drop="onDrop">
   <div class="bbn-100"
-       :style="{visibility: isVisible ? 'visible' : 'hidden'}"/>
+       :style="currentStyle"/>
 </div>

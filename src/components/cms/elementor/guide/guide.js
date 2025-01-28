@@ -22,6 +22,11 @@
     computed: {
       isVisible(){
         return this.visible && (this.force || this.isOver);
+      },
+      currentStyle(){
+        return {
+          visibility: this.isVisible ? 'visible' : 'hidden'
+        }
       }
     },
     methods: {

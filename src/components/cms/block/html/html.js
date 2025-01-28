@@ -14,7 +14,7 @@
       isValid() {
         return !!this.source.content;
       },
-      style(){
+      currentStyle(){
         let style = bbn.fn.extend(true, {}, this.source.style);
         if (this.source.align) {
           style['text-align'] = this.source.align;

@@ -13,5 +13,5 @@
   </div>
   <div bbn-else
 	     bbn-html="source.content"
-       :style="style"/>
+       :style="currentStyle"/>
 </div>

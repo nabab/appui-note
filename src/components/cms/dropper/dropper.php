@@ -1,6 +1,6 @@
 <!-- HTML Document -->
 
-<div :title="title + ' - ' + description"
+<div :title="label + ' - ' + description"
      :class="['appui-note-cms-dropper', 'bbn-spadding', 'bbn-radius', 'bbn-smargin', 'bbn-reactive', 'bbn-middle', {
        'bbn-tertiary': !!special,
        'bbn-background bbn-text': !special
@@ -16,5 +16,5 @@
      }">
   <i :class="[icon, ' bbn-xl']"/>
   <span class="bbn-s bbn-top-smargin"
-        bbn-text="title"/>
+        bbn-text="label"/>
 </div>

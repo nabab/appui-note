@@ -36,7 +36,7 @@
     },
     methods: {
       updatePrefix() {
-        this.prefix = this.formData.type ? bbn.fn.getField(this.types, 'prefix', {id: this.formData.type}) : '';
+        this.pref = this.formData.type ? bbn.fn.getField(this.types, 'prefix', {id: this.formData.type}) : '';
       },
       afterSubmit(d) {
         if (d.success && d.data) {

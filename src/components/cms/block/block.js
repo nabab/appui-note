@@ -37,7 +37,6 @@
     },
     methods: {
       applyDefaultConfig() {
-        bbn.fn.log('apply default config');
         bbn.fn.iterate(bbn.fn.extend({}, this.defaultConfig, this.cfg || {}), (a, n) => {
           if (this.source[n] === undefined) {
             //this.$set(this.source, n, a);
@@ -70,7 +69,6 @@
       }
     },
     created() {
-      bbn.fn.log('created');
       if (this.source.type
         && !!this.source._elementor
       ) {
@@ -87,7 +85,6 @@
     },
     mounted() {
       this.ready = true;
-      bbn.fn.log('source when mounted', this.source);
     }
   };
   bbn.cp.addUrlAsPrefix(
@@ -256,7 +253,7 @@
     mounted(){
       this.ready = true;
     },
-    watch: {
+    watch: {
       currentComponent(v) {
         this.ready = false;
         setTimeout(() => {

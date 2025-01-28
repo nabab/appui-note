@@ -6,10 +6,10 @@
     <template bbn-if="source.length">
       <div bbn-for="(cfg, i) in source"
            class="bbn-w-100">
-        <appui-note-cms-elementor-guide :visible="isDragging"
-                                        bbn-droppable.data="!!preview ? false : {data: {index: i}}"
-                                        @drop.prevent.stop="onDrop"
-                                        bbn-show="!preview"/>
+        <appui-note-cms-elementor-guide bbn-show="!preview"
+                                        :visible="isDragging"
+                                        bbn-droppable.data="preview || !isDragging ? false : {data: {index: i}}"
+                                        @drop.prevent.stop="onDrop"/>
         <appui-note-cms-container bbn-if="cfg.type === 'container'"
                                   :source="cfg"
                                   :ref="'block' + i"
@@ -36,21 +36,21 @@
                               bbn-draggable.data.mode="getDraggableData(i, cfg, 'cmsBlock')"
                               @dragstart="currentDragging = true"
                               @dragend="onDragEnd"
-                              bbn-droppable.data="!!preview ? false : {data: {index: i, replace: true, source: cfg}}"
+                              bbn-droppable.data="preview || !isDragging ? false : {data: {index: i, replace: true, source: cfg}}"
                               @drop.prevent.stop="onDrop"
                               :key="cfg._elementor.key"/>
       </div>
-      <appui-note-cms-elementor-guide :visible="isDragging"
+      <appui-note-cms-elementor-guide bbn-show="!preview"
+                                      :visible="isDragging"
                                       :force="isDragging && !source.length"
-                                      bbn-droppable.data="!!preview ? false : {data: {index: source.length}}"
-                                      @drop.prevent.stop="onDrop"
-                                      bbn-show="!preview"/>
+                                      bbn-droppable.data="preview || !isDragging ? false : {data: {index: source.length}}"
+                                      @drop.prevent.stop="onDrop"/>
     </template>
     <div bbn-if="dragging"
          class="appui-note-cms-elementor-droparea bbn-w-100 bbn-lpadding bbn-middle bbn-upper"
          bbn-droppable.data="{data: {index: source.length}}"
          @drop.prevent.stop="onDrop"
-         key="elementorDropArea">
+         @dragoverdroppable="mirko">
       <i class="nf nf-fa-plus bbn-xl"/>
     </div>
   </div>
