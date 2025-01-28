@@ -33,7 +33,7 @@
   <bbns-column field="content"
                label="<i class='nf nf-fa-comment bbn-xl'></i>"
                flabel="<?= _("Text") ?>"
-               :hidden="true"
+               :invisible="true"
   ></bbns-column>
   <bbns-column field="creation"
                label="<i class='nf nf-fa-calendar bbn-xl'></i>"

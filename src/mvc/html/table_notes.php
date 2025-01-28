@@ -41,14 +41,14 @@
                :editable="false"
                label="<?= _("Creator") ?>"
                :source="users"
-               :hidden="true"
+               :invisible="true"
                :width="160"/>
 
   <bbns-column field="id_user"
                :editable="false"
                label="<?= _("Last version user") ?>"
                :source="users"
-               :hidden="true"
+               :invisible="true"
                :width="160"/>
 
   <bbns-column field="creation"
@@ -62,7 +62,7 @@
                :editable="false"
                label="<?= _("Last edit") ?>"
                type="date"
-               :hidden="true"
+               :invisible="true"
                cls="bbn-c"
                :width="100"/>
 
