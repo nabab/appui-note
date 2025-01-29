@@ -49,8 +49,7 @@
     <div bbn-if="dragging"
          class="appui-note-cms-elementor-droparea bbn-w-100 bbn-lpadding bbn-middle bbn-upper"
          bbn-droppable.data="{data: {index: source.length}}"
-         @drop.prevent.stop="onDrop"
-         @dragoverdroppable="mirko">
+         @drop.prevent.stop="onDrop">
       <i class="nf nf-fa-plus bbn-xl"/>
     </div>
   </div>

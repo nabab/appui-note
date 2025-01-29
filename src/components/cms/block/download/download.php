@@ -39,7 +39,7 @@
                         @click="openExplorer(f)"
                         :title="_('Select a media')"
                         class="bbn-right-sspace"/>
-            <span bbn-text="f.filename"
+            <span bbn-text="f.filename || f.text"
                   style="align-self: center; word-break: break-all"/>
           </div>
         </template>

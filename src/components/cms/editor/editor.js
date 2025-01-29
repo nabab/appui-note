@@ -261,7 +261,6 @@
        * @param {Object} source the source object of the current selected block
        */
       handleSelected(key, source, parent) {
-        bbn.fn.log('select', key, source, parent)
         if (this.currentEditingKey !== key) {
           this.currentEditingKey = key;
           this.currentEditing = source;
@@ -416,7 +415,6 @@
        * @param {Event} e the event triggered
        */
       dragOver(e) {
-        bbn.fn.log('draOver', e)
         return;
         let elementor = this.getRef('editor');
         let guide = elementor.getRef('guide');

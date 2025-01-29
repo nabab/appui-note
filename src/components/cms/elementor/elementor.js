@@ -212,9 +212,6 @@
       }
     },
     methods: {
-      mirko(ev) {
-        bbn.fn.log('mirko', ev, bbn.fn.clone(ev.target));
-      },
       unselect() {
         this.$emit('unselect');
       },
@@ -241,7 +238,6 @@
         this.currentDragging = false;
       },
       onDrop(ev){
-        bbn.fn.log('DROPPPPP', ev);
         this.onDragEnd();
         let fromData = ev.detail.from.data;
         if (!!fromData.type && (fromData.source !== undefined)) {

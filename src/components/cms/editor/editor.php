@@ -103,7 +103,7 @@
                           @click="scrollToSelected"
                           label="<?= _("Scroll to selected element") ?>"
                           icon="nf nf-md-target"/>
-              <template bbn-if="currentEditingParentItems?.length > 1"
+              <template bbn-if="!!currentEditingParent && (currentEditingParentItems?.length > 1)"
                         class="bbn-padding appui-note-cms-editor-position">
                 <bbn-button :notext="true"
                             @click="move('start')"

@@ -92,7 +92,7 @@
         type: [Array, Function]
       },
       buttonMenuComponent: {
-        type: [String, Object, bbnCp]
+        type: [String, Object]
       },
       url: {
         type: String
