@@ -422,6 +422,8 @@
         }
     },
     "bbn_notes_versions": {
+        "charset": "utf8mb4",
+        "collation": "utf8mb4_unicode_ci",
         "keys": {
             "PRIMARY": {
                 "columns": [
@@ -492,13 +494,17 @@
             "content": {
                 "type": "mediumtext",
                 "null": 0,
-                "signed": 1
+                "signed": 1,
+                "charset": "utf8mb4",
+                "collation": "utf8mb4_unicode_ci"
             },
             "excerpt": {
                 "type": "text",
                 "null": 1,
                 "default": "NULL",
-                "defaultExpression": 1
+                "defaultExpression": 1,
+                "charset": "utf8mb4",
+                "collation": "utf8mb4_unicode_ci"
             },
             "id_user": {
                 "type": "binary",
