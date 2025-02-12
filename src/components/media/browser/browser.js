@@ -29,7 +29,7 @@
         type: [Boolean, String],
         default: true
       },
-      remove: {
+      removed: {
         type: [Boolean, String],
         default: true
       },
@@ -131,7 +131,7 @@
         return !!this.upload && (!!this.url || bbn.fn.isString(this.upload));
       },
       removeEnabled(){
-        return !!this.remove && (!!this.url || bbn.fn.isString(this.remove));
+        return !!this.removed && (!!this.url || bbn.fn.isString(this.removed));
       },
       editEnabled(){
         return !!this.edit && (!!this.url || bbn.fn.isString(this.edit));

@@ -61,7 +61,7 @@
                              :limit="50"
                              path-name="path"
                              :upload="root + 'media/actions/save'"
-                             :remove="root + 'media/actions/delete'"
+                             :removed="root + 'media/actions/delete'"
                              ref="mediabrowser"
                              @delete="onDelete"/>
 </div>

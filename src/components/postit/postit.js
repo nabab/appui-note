@@ -149,7 +149,7 @@
           );
         }
       },
-      remove() {
+      removeItem() {
         this.post(appui.plugins['appui-note'] + '/actions/delete', {id_note: this.source.id}, d => {
           if ( d.success ){
             appui.success(bbn._('Delete'));

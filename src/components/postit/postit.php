@@ -31,7 +31,7 @@
                bbn-if="source.id"
                title="<?= _("Post-it information") ?>"
                class="nf nf-fa-info_circle bbn-lg bbn-p bbn-right-smargin"/>
-            <i @click.stop="remove(source.id)"
+            <i @click.stop="removeItem(source.id)"
                ref="info"
                bbn-if="source.id"
                title="<?= _("Delete this post-it") ?>"

@@ -61,7 +61,7 @@
           source: this.current
         });
       },
-      remove(){
+      removeItem(){
         if (!!this.current && this.current.id) {
           this.confirm(bbn._('Are you sure you want to delete this medias group?'), () => {
             this.post(this.actionsUrl + 'delete', {id: this.current.id}, d => {
@@ -276,7 +276,7 @@
                             :limit="50"
                             path-name="path"
                             :upload="mainComponent.mediasUploadUrl"
-                            :remove="mainComponent.mediasRemoveUrl"/>
+                            :removed="mainComponent.mediasRemoveUrl"/>
         `,
         mixins: [bbn.cp.mixins.basic],
         props: {

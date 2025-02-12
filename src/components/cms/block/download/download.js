@@ -76,7 +76,7 @@
                              :limit="50"
                              path-name="path"
                              :upload="root + 'media/actions/save'"
-                             :remove="root + 'media/actions/delete'"
+                             :removed="root + 'media/actions/delete'"
                              overlay-name="name"
                              @delete="onDelete"
                              ref="mediabrowser"/>

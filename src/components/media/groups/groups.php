@@ -65,7 +65,7 @@
                                :data="{
                                  idGroup: current.id
                                }"
-                               :remove="actionsUrl + 'remove'"
+                               :removed="actionsUrl + 'remove'"
                                :toolbar-buttons="[{
                                  title: _('Insert'),
                                  icon: 'nf nf-fa-plus',
