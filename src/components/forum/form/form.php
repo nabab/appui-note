@@ -31,13 +31,19 @@
     <label><?= _("Text") ?></label>
     <div>
       <div class="bbn-w-100">
-        <component :is="editorType"
+        <bbn-rte ref="editor"
+                 bbn-model="source.text"
+                 style="min-height: 450px; width: 100%;"
+                 required="required"
+                 class="bbn-w-100"
+                 height="450px"/>
+        <!-- <component :is="editorType"
                    ref="editor"
                    bbn-model="source.text"
                    style="min-height: 450px; width: 100%;"
                    required="required"
                    class="bbn-w-100"
-                   height="450px"/>
+                   height="450px"/> -->
       </div>
     </div>
 
