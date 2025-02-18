@@ -596,7 +596,7 @@
                 "null": 1,
                 "default": "NULL",
                 "defaultExpression": 1,
-                "maxlength": 30
+                "maxlength": 100
             },
             "name": {
                 "type": "varchar",
