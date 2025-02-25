@@ -13,7 +13,7 @@
                 "text": "Carousel",
                 "code": "carousel",
                 "description": "A simple carousel block",
-                "icon": "nf nf-mdi-view_carousel"
+                "icon": "nf nf-md-view_carousel"
             },
             {
                 "text": "Container",
@@ -30,7 +30,7 @@
                 "text": "Download",
                 "code": "download",
                 "description": "A simple files download blocks",
-                "icon": "nf nf-mdi-download",
+                "icon": "nf nf-md-download",
                 "configuration": {
                     "orientation": "horizontal",
                     "content": [
@@ -46,7 +46,7 @@
                 "text": "Feature",
                 "code": "feature",
                 "description": "A simple feature block",
-                "icon": "nf nf-mdi-new_box"
+                "icon": "nf nf-md-new_box"
             },
             {
                 "text": "Gallery",
@@ -106,7 +106,7 @@
                 "text": "Title",
                 "code": "title",
                 "description": "A configurable title block",
-                "icon": "nf nf-mdi-format_title"
+                "icon": "nf nf-md-format_title"
             },
             {
                 "text": "Video",
@@ -427,7 +427,7 @@
         ],
         "text": "Masks",
         "code": "masks",
-        "icon": "nf nf-mdi-guy_fawkes_mask",
+        "icon": "nf nf-md-guy_fawkes_mask",
         "tekname": "ltypes"
     }
 ]
