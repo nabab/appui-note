@@ -185,7 +185,7 @@
                 "virtual": false,
                 "generation": null,
                 "default": 0,
-                "defaultExpression": false,
+                "defaultExpression": 1,
                 "maxlength": 1
             },
             "creator": {
@@ -1104,7 +1104,7 @@
                 "null": 1,
                 "key": null,
                 "default": "NULL",
-                "defaultExpression": false,
+                "defaultExpression": 1,
                 "maxlength": 255
             }
         }
@@ -1167,6 +1167,7 @@
                 "null": 0,
                 "signed": false,
                 "maxlength": 10,
+                "defaultExpression": true,
                 "default": 0
             },
             "type_url": {
