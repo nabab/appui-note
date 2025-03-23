@@ -26,7 +26,7 @@
     },
     data() {
       return {
-        root: appui.plugins['appui-note'] + '/',
+        root: appui.plugins['appui-bookmark'] + '/',
         checkTimeout: 0,
         delId: "",
         idParent: "",
@@ -81,7 +81,7 @@
     methods: {
       importing() {
         this.getPopup({
-          component: "appui-note-bookmarks-uploader",
+          component: "appui-bookmark-uploader",
           componentOptions: null,
           label: false,
         });
@@ -146,7 +146,7 @@
       },
       openEditor(bookmark) {
         this.getPopup({
-          component: "appui-note-bookmarks-form",
+          component: "appui-bookmark-form",
           componentOptions: {
             source: bookmark
           },

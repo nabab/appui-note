@@ -25,7 +25,7 @@
     },
     data() {
       return {
-        root: appui.plugins['appui-note'] + '/',
+        root: appui.plugins['appui-bookmark'] + '/',
         checkTimeout: 0,
         delId: "",
         idParent: "",
@@ -75,10 +75,7 @@
         return (this.root + "actions/bookmarks/" + (this.currentData.id ? "modify" : "add"));
       },
       treeParents() {
-        if (this.bookmarkCp) {
-          return this.bookmarkCp.parents;
-        }
-        return null;
+        return this.bookmarkCp?.parents || null;
       }
     },
     methods: {

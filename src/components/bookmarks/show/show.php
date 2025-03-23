@@ -46,11 +46,10 @@
     <div bbn-if="source.showLink.description"
          bbn-text="source.showLink.description ? source.showLink.description : '' "
          class="bbn-medium"/>
-    <div class="appui-note-bookmarks-links-container bbn-widget bbn-grid-full"
+    <div class="appui-bookmarks-links-container bbn-widget bbn-grid-full"
           ref="linksContainer"
           bbn-if="source.showLink.image"
-          style="border:1px solid"
-    >
+          style="border:1px solid">
       <div :class="['k-file', {
               'link-progress': source.showLink.image.inProgress && !source.showLink.image.error,
               'link-success': !source.showLink.image.inProgress && !source.showLink.image.error,
@@ -59,14 +58,14 @@
       >
         <div class="bbn-flex-width">
           <div bbn-if="source.showLink.image.img_path && source.showLink.image.image"
-              class="appui-note-bookmarks-link-image">
+              class="appui-bookmarks-link-image">
             <img :src="imageDom + source.showLink.image.img_path + source.showLink.image.image"
             >
           </div>
-          <div bbn-else class="appui-note-bookmarks-link-noimage">
+          <div bbn-else class="appui-bookmarks-link-noimage">
             <i class="nf nf-fa-link bbn-xl"></i>
           </div>
-          <div class="appui-note-bookmarks-link-title bbn-flex-fill">
+          <div class="appui-bookmarks-link-title bbn-flex-fill">
             <strong>
               <a :href="source.showLink.image.content.url"
                   class="bbn-p"

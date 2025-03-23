@@ -14,8 +14,9 @@
                   label="Go to"></bbn-button>
     </div>
 
-    <label><?= _("In which file ?") ?></label>
-    <bbn-dropdown :source="bookmarkCp.parents"
+    <label bbn-if="bookmarkCp"><?= _("In which file ?") ?></label>
+    <bbn-dropdown bbn-if="bookmarkCp"
+                  :source="bookmarkCp.parents"
                   class="bbn-wider"
                   bbn-model="idParent"
                   placeholder="Is there a parent ?"
@@ -40,7 +41,7 @@
     </div>
     <div>
       <bbn-floater bbn-if="showGallery"
-                   :title="_('Pick a cover picture')"
+                   :label="_('Pick a cover picture')"
                    :closable="true"
                    :width="500"
                    :height="500"
@@ -67,7 +68,7 @@
                  :width="800"
                  :height="600"
                  :resizable="true"
-                 :title="_('a screenshot from the site')"
+                 :label="_('a screenshot from the site')"
                  @close="visible = false">
       <img :src="root + 'media/image/' + currentData.id_screenshot">
     </bbn-floater>

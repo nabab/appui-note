@@ -1,6 +1,6 @@
 <!-- HTML Document -->
 
-<div class="bbn-overlay appui-note-bookmarks-list">
+<div class="bbn-overlay appui-bookmark-list">
   <bbn-splitter orientation="horizontal"
                 :resizable="true">
 
@@ -25,7 +25,7 @@
 
     <bbn-pane>
 
-      <appui-note-bookmarks-block :source="blockSource" ></appui-note-bookmarks-block>
+      <appui-bookmark-block :source="blockSource" ></appui-bookmark-block>
     </bbn-pane>
   </bbn-splitter>
 </div>

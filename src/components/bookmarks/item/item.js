@@ -36,7 +36,7 @@
     },
     data() {
       return {
-        root: appui.plugins['appui-note'] + '/',
+        root: appui.plugins['appui-bookmark'] + '/',
         currentData: {
           url: "",
           title: "", //input
@@ -83,7 +83,7 @@
       },
       openEditor(bookmark) {
         this.getPopup({
-          component: "appui-note-bookmarks-form",
+          component: "appui-bookmark-form",
           componentOptions: {
             source: bookmark
           },
@@ -110,7 +110,7 @@
                     this.source.cover = d.data.path;
                   }
                 }
-                this.closest('appui-note-bookmarks-block').updateData();
+                this.closest('appui-bookmark-block').updateData();
               }
             }
           );

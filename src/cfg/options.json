@@ -267,10 +267,7 @@
                 "text": "Events",
                 "code": "events",
                 "prefix": "event\/",
-                "font_img": 1,
-                "option": null,
-                "option_title": null,
-                "id_root_alias": null
+                "front_img": 1
             },
             {
                 "id_alias": [
