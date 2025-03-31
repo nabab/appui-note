@@ -20,6 +20,7 @@ $url = $model->pluginUrl('appui-note');
 return Search::register(function($search) use ($url, $types_cond){
   $fields = ['id_note', 'version', 'id_type', 'code', 'type' => 'bbn_options.text', 'title', 'latest', 'match' => 'title'];
   return [
+    'name' => X::_("Articles' titles"),
     'score' => 45,
     'component' => 'appui-note-search-item',
     'url' => $url . '/cms/cat/{{code}}/editor/{{id_note}}',

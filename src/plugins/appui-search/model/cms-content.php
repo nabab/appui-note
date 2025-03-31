@@ -1,5 +1,6 @@
 <?php
 
+use bbn\X;
 use bbn\Appui\Search;
 
 /** @var bbn\Mvc\Controller $ctrl */
@@ -19,6 +20,7 @@ $url = $model->pluginUrl('appui-note');
 return Search::register(function($search) use ($url, $types_cond) {
   $fields = ['id_note', 'version', 'id_type', 'code', 'type' => 'bbn_options.text', 'title', 'latest', 'match' => "'" . _('Found in content') . "'"];
   return [
+    'name' => X::_("Articles' contents"),
     'score' => 2,
     'component' => 'appui-note-search-item',
     'url' => $url . '/cms/cat/{{code}}/editor/{{id_note}}',
