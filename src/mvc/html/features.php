@@ -45,7 +45,7 @@
                      style="width: 100%; height: auto"
                      :src="item.media.url || item.media.path">
                 <div bbn-else
-                     class="bbn-w-100 bbn-ratio bbn-middle">
+                     class="bbn-w-100 bbn-container-ratio bbn-middle">
                   <div class="bbn-block">
                     <?= _("No image") ?>
                   </div>
