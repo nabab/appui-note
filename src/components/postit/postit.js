@@ -100,7 +100,7 @@
           '-o-transform: rotate(' + this.actualRotation + '); ' +
           '-ms-transform: rotate(' + this.actualRotation + 'deg); ' +
           'transform: rotate(' + this.actualRotation + 'deg); ' +
-          'backgroundColor: ' + this.currentBcolor + '; ' +
+          'background-color: ' + this.currentBcolor + '; ' +
           'color: ' + this.currentFcolor;
       }
     },
@@ -117,7 +117,7 @@
       },
       getObj() {
         return {
-          label: this.currentTitle,
+          title: this.currentTitle,
           text: this.currentText,
           bcolor: this.currentBcolor,
           fcolor: this.currentFcolor,
@@ -136,6 +136,7 @@
             },
             d => {
               if ( d.success ){
+                bbn.fn.extend(this.source, d.data);
                 appui.success(bbn._('Post-it saved'));
                 let hash2 = bbn.fn.md5(JSON.stringify(this.getObj()));
                 if (hash === hash2) {

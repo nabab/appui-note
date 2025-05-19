@@ -41,7 +41,7 @@
       getNewPostIt() {
         return {
           text: bbn._("Write here your content"),
-          label: bbn._("Don't forget!"),
+          title: '',
           date: bbn.fn.dateSQL(),
           bcolor: '#fbf7ae',
           fcolor: '#000000',
@@ -50,7 +50,7 @@
         };
       },
       add() {
-        this.source.push(this.getNewPostIt());
+        this.source.unshift(this.getNewPostIt());
       }
     }
   }
