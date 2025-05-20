@@ -8,6 +8,10 @@
   return {
     mixins: [bbn.cp.mixins.basic],
     props: {
+      drag: {
+        type: Boolean,
+        default: false
+      },
       showPinned: {
         type: Boolean,
         default: false
@@ -174,6 +178,14 @@
         this.saveTimeout = setTimeout(() => {
           this.save();
         }, 2000)
+      },
+      pin(unpin) {
+        if ((unpin === true && this.currentPinned) || (unpin !== true && !this.currentPinned)){
+          this.currentPinned = !this.currentPinned;
+        }
+      },
+      unpin() {
+        this.pin(true);
       }
     },
     mounted(){

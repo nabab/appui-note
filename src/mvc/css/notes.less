@@ -1,35 +1,44 @@
-/*I use display flex on the parent div because bbn-masonry doesn't work*/
-.appui-note-postit-container {
-  column-count: auto;
-  column-width: 30em;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  .appui-note-postit{
-    padding-left: 5px;
-    padding-right: 5px;
-    background:#FFFFA5;
-    font-family: 'Gloria Hallelujah', cursive;
-    font-size:15px;
-    color: #000;
-    word-wrap: break-word;
-    //width: 60%;
-    //margin: 2% 15%;
-    //padding: 5%;
-    overflow-y: auto;
+.appui-note-notes-browser {
+  /*I use display flex on the parent div because bbn-masonry doesn't work*/
+  .bbn-block-list {
+    width: auto;
+    .bbn-block-list-content {
+      width: auto
+    }
   }
-}
-::-webkit-scrollbar
-{
-  width: 6px;  /* for vertical scrollbars */
-}
-
-::-webkit-scrollbar-track
-{
-  background: rgba(0, 0, 0, 0.1);
-}
-
-::-webkit-scrollbar-thumb
-{
-  background: rgba(0, 0, 0, 0.5);
+  .appui-note-postit-container {
+    column-count: auto;
+    column-width: 30em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    .appui-note-postit{
+      padding-left: 5px;
+      padding-right: 5px;
+      font-size:15px;
+      color: #000;
+      word-wrap: break-word;
+      //width: 60%;
+      //margin: 2% 15%;
+      //padding: 5%;
+      overflow-y: auto;
+    }
+    .bbn-block-list-items {
+      margin-top: 0;
+    }
+  }
+  ::-webkit-scrollbar
+  {
+    width: 6px;  /* for vertical scrollbars */
+  }
+  
+  ::-webkit-scrollbar-track
+  {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  
+  ::-webkit-scrollbar-thumb
+  {
+    background: rgba(0, 0, 0, 0.5);
+  }
 }

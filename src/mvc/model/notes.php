@@ -2,7 +2,9 @@
 use bbn\Str;
 use bbn\Appui\Note;
 
-$notes = new Note($model->db);
-return [
-  'notes' => $notes->getPostIts(1000)
-];
+if ($model->hasData(['data'])) {
+  $notes = new Note($model->db);
+  return [
+    'data' => $notes->getPostIts($model->data)
+  ];
+}

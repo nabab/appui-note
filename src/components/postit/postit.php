@@ -1,4 +1,5 @@
-<div :class="[componentClass, 'bbn-margin']">
+<div :class="[componentClass, 'bbn-margin']"
+     bbn-draggable.mode.helper.container="!!drag && ready ? {mode: 'copy', helper: $el, container: $el.closest('bbn-container')} : false">
   <div :style="getStyle"
        :class="getComponentName() + '-container bbn-shadow'">
     <div class="bbn-overlay bbn-flex-height bbn-spadding">
@@ -18,7 +19,7 @@
            :contenteditable="editing"
            @blur="changeText('text', $event)"/-->
     </div>
-    <div class="bbn-top-left">
+    <div class="bbn-top-left bbn-top-right">
       <div class="bbn-flex-width">
         <div :class="getComponentName() + '-buttons'">
           <div class="bbn-block bbn-nowrap bbn-spadding">
@@ -44,14 +45,11 @@
                       type="inline"
                       class="bbn-c bbn-p bbn-b bbn-lg bbn-b bbn-flex-fill bbn-spadding bbn-small-caps"
                       bbn-model="currentTitle"
+                      placeholder="<?= _('Untitled') ?>"
                       @change="changeTitle"/>
-        <div class="bbn-block bbn-nowrap">
-          <i bbn-if="source.id"
-             class="nf nf-fa-info_circle bbn-lg bbn-invisible"/>
+        <div class="bbn-block bbn-nowrap bbn-spadding">
           <i bbn-if="currentPinned"
-             class="nf nf-oct-pin bbn-m"/>
-          <i bbn-else
-             class="nf nf-fa-cog bbn-lg bbn-invisible"/>
+             class="nf nf-md-pin_outline bbn-lg"/>
         </div>
       </div>
 
