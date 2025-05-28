@@ -12,9 +12,9 @@
                     uid="id"
                     :drag="true"
                     @move="onMove"
-                    @registernode="onRegisterNode"
                     @beforeselect="onSelect"
                     @beforeunselect="onUnselect"
+                    :droppable="true"
                     :menu="folderMenu"
                     ref="tree"/>
         </div>
