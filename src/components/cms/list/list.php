@@ -15,7 +15,7 @@
              :filterable="true"
              button-mode="menu"
              :search="true"
-             :search-fields="['versions.title', 'bbn_url.url', 'bbn_notes.id', 'versions.excerpt']"
+             :search-fields="['bbn_notes_versions.title', 'bbn_url.url', 'bbn_notes.id', 'bbn_notes_versions.excerpt']"
              :resizable="true"
              :order="[{
                field: 'start',
