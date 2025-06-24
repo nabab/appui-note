@@ -635,60 +635,69 @@
       },
       titleCell: {
         template: `
-<div class="appui-note-cms-list-titlecell bbn-nowrap">
-  <div class="bbn-vmiddle">
-    <span :title="publicationState"
-          class="bbn-right-space bbn-xl">
-      <i :class="{
-           'bbn-green nf nf-fa-check_circle_o': isPublished,
-           'bbn-red bbn-lg nf nf-fa-times_circle_o': !isPublished
-         }"/>
-    </span>
-    <span class="bbn-vmiddle bbn-right-space bbn-border bbn-radius bbn-right-xspadding bbn-background bbn-text"
-          :style="{borderColor: currentBorderColor + '!important'}">
-      <bbn-initial :user-name="name"
-                    :width="18"
-                    class="bbn-xs bbn-right-xsspace"
-                    @hook:mounted="onInitialMounted"
-                    ref="initial"/>
-      <span bbn-text="name"/>
-    </span>
-    <span class="bbn-vmiddle bbn-right-space bbn-border bbn-radius bbn-right-xspadding bbn-background bbn-text colorblock orange"
-          :title="_('Since') + ' ' + fdate(source.creation)">
-      <i class="nf nf-md-calendar_edit bbn-lg bbn-right-xsspace bbn-hxxspadding"/>
-      <span bbn-text="fdate(source.creation)"/>
-    </span>
-    <span bbn-if="source.start"
-          class="bbn-vmiddle bbn-border bbn-radius bbn-right-xspadding bbn-right-space bbn-background bbn-text colorblock green"
-          :title="_('Published') + ' ' + fdate(source.start)">
-      <i class="nf nf-md-calendar_check bbn-lg bbn-right-xsspace bbn-hxxspadding"/>
-      <span bbn-text="fdate(source.start)"/>
-    </span>
-    <span class="bbn-vmiddle bbn-border bbn-radius bbn-right-xspadding bbn-right-space bbn-background bbn-text colorblock"
-          :title="_('Version') + ' ' + source.version">
-      <i class="nf nf-cod-versions bbn-lg bbn-right-xsspace bbn-hxxspadding"/>
-      <span bbn-text="source.version"/>
-    </span>
-    <span :title="_('Number of medias directly linked to this article')"
-          class="bbn-vmiddle bbn-border bbn-radius bbn-right-xspadding bbn-right-space bbn-background bbn-text colorblock">
-      <i class="nf nf-md-image_multiple bbn-lg bbn-right-xsspace bbn-hxxspadding"/>
-      <span bbn-text="source.num_medias"/>
-    </span>
-    <span :title="_('Number of variants of this article')"
-          class="bbn-vmiddle bbn-border bbn-radius bbn-right-xspadding bbn-right-space bbn-background bbn-text colorblock">
-      <i class="nf nf-md-content_duplicate bbn-lg bbn-right-xsspace bbn-hxxspadding"/>
-      <span bbn-text="source.num_variants"/>
-    </span>
-    <span :title="_('Number of translations for this article')"
-          class="bbn-vmiddle bbn-border bbn-radius bbn-right-xspadding bbn-right-space bbn-background bbn-text colorblock">
-      <i class="nf nf-md-translate bbn-lg bbn-right-xsspace bbn-hxxspadding"/>
-      <span bbn-text="source.num_translations"/>
-    </span>
+<div class="appui-note-cms-list-titlecell bbn-rel"
+     style="display: block">
+  <div class="bbn-flex-width bbn-xspadding">
+    <div class="bbn-flex-fill bbn-right-padding bbn-vmiddle bbn-nowrap">
+      <span class="bbn-vmiddle bbn-right-space bbn-border bbn-radius bbn-right-xspadding bbn-background bbn-text"
+            :style="{borderColor: currentBorderColor + '!important'}">
+        <bbn-initial :user-name="name"
+                      :width="18"
+                      class="bbn-xs bbn-right-xsspace"
+                      @hook:mounted="onInitialMounted"
+                      ref="initial"/>
+        <span bbn-text="name"/>
+      </span>
+      <span class="bbn-vmiddle bbn-border bbn-radius bbn-right-xspadding bbn-right-space bbn-background bbn-text colorblock"
+            :title="_('Version') + ' ' + source.version">
+        <i class="nf nf-cod-versions bbn-m bbn-right-xsspace bbn-hxxspadding"/>
+        <span bbn-text="source.version"/>
+      </span>
+      <span :title="_('Number of medias directly linked to this article')"
+            class="bbn-vmiddle bbn-border bbn-radius bbn-right-xspadding bbn-right-space bbn-background bbn-text colorblock">
+        <i class="nf nf-md-image_multiple bbn-lg bbn-right-xsspace bbn-hxxspadding"/>
+        <span bbn-text="source.num_medias"/>
+      </span>
+      <span :title="_('Number of variants of this article')"
+            class="bbn-vmiddle bbn-border bbn-radius bbn-right-xspadding bbn-right-space bbn-background bbn-text colorblock">
+        <i class="nf nf-md-content_duplicate bbn-m bbn-right-xsspace bbn-hxxspadding"/>
+        <span bbn-text="source.num_variants"/>
+      </span>
+      <span :title="_('Number of translations for this article')"
+            class="bbn-vmiddle bbn-border bbn-radius bbn-right-xspadding bbn-right-space bbn-background bbn-text colorblock">
+        <i class="nf nf-md-translate bbn-m bbn-right-xsspace bbn-hxxspadding"/>
+        <span bbn-text="source.num_translations"/>
+      </span>
+    </div>
+    <div class="bbn-vmiddle bbn-nowrap">
+      <span class="bbn-vmiddle bbn-right-space bbn-border bbn-radius bbn-right-xspadding bbn-background bbn-text colorblock orange"
+            :title="_('Since') + ' ' + fdate(source.creation)">
+        <i class="nf nf-md-calendar_edit bbn-m bbn-right-xsspace bbn-hxxspadding"/>
+        <span bbn-text="fdate(source.creation)"/>
+      </span>
+      <span bbn-if="source.start"
+            class="bbn-vmiddle bbn-border bbn-radius bbn-right-xspadding bbn-background bbn-text colorblock green"
+            :title="_('Published') + ' ' + fdate(source.start)">
+        <i class="nf nf-md-calendar_check bbn-m bbn-right-xsspace bbn-hxxspadding"/>
+        <span bbn-text="fdate(source.start)"/>
+      </span>
+    </div>
   </div>
-  <div class="bbn-xl bbn-top-sspace bbn-p"
-       bbn-text="source.title"
-       :title="source.title"
-       @click="editPost"/>
+  <div class="bbn-xspadding bbn-flex-width">
+    <div>
+      <span :title="publicationState"
+            class="bbn-right-space bbn-xl">
+        <i :class="{
+            'bbn-green nf nf-fa-check_circle_o': isPublished,
+            'bbn-red bbn-lg nf nf-fa-times_circle_o': !isPublished
+          }"/>
+      </span>
+    </div>
+    <div class="bbn-flex-fill bbn-xl bbn-p"
+        bbn-text="source.title"
+        :title="source.title"
+        @click="editPost"/>
+  </div>
 </div>`,
         props: ['source'],
         data() {
