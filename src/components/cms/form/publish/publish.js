@@ -11,7 +11,7 @@
         required: true
       },
       list: {
-        type: Object
+        type: HTMLElement
       }
     },
     data() {
