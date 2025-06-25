@@ -94,10 +94,6 @@
         if (!this.isEdit && !newVal) {
           bbn.fn.each(this.files, f => {if (undefined === !f.title) {f.title = ''}});
         }
-
-        this.$nextTick(() => {
-          this.closest('bbn-floater').fullResize();
-        });
       },
       'source.link'(val){
         this.files[0].link = val;
@@ -105,9 +101,6 @@
       files(newVal) {
         if (this.oldCount !== newVal.length) {
           this.oldCount = newVal.length;
-          this.$nextTick(() => {
-            this.closest('bbn-floater').fullResize();
-          });
         }
 
         if (this.isEdit && !this.oldCount) {

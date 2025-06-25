@@ -1,7 +1,4 @@
-<!-- HTML Document -->
-
 <div :class="componentClass">
-	
 	<bbn-form :source="{file: files}"
 						:data="{
 							ref: ref,
@@ -15,7 +12,7 @@
 						:scrollable="scrollable"
 						:buttons="buttons">
 		<div bbn-if="files.length && !isEdit"
-				 class="bbn-vmiddle bbn-bottom-space"
+				 class="bbn-vmiddle bbn-spadding"
 				 style="justify-content: flex-end">
 			<span><?= _('Customize titles/descriptions') ?></span>
 			<bbn-switch bbn-model="showTitles"
@@ -31,7 +28,7 @@
 
         <div><?= _('Title') ?>:</div>
 				<bbn-input bbn-model="f.title"/>
-				
+
 				<div bbn-if="isMediaGroup"><?= _('Link') ?>:</div>
 				<bbn-input bbn-if="isMediaGroup" bbn-model="source.link"/>
 
