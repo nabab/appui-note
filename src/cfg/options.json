@@ -123,7 +123,7 @@
                 {
                     "field": "description",
                     "type": "textarea",
-                    "title": "Description"
+                    "label": "Description"
                 }
             ]
         }
@@ -169,12 +169,12 @@
             "allow_children": 1,
             "schema": [
                 {
-                    "title": "Component",
+                    "label": "Component",
                     "field": "component",
                     "required": true
                 },
                 {
-                    "title": "MIME type",
+                    "label": "MIME type",
                     "field": "mime",
                     "required": true
                 }
@@ -374,26 +374,26 @@
             "schema": [
                 {
                     "field": "prefix",
-                    "title": "URL prefix",
+                    "label": "URL prefix",
                     "width": "20em"
                 },
                 {
                     "field": "front_img",
-                    "title": "Front image",
+                    "label": "Front image",
                     "type": "bool"
                 },
                 {
-                    "title": "Option",
+                    "label": "Option",
                     "field": "option",
                     "type": "bool"
                 },
                 {
                     "field": "option_title",
-                    "title": "Option's title"
+                    "label": "Option's title"
                 },
                 {
                     "field": "id_root_alias",
-                    "title": "Option's root"
+                    "label": "Option's root"
                 }
             ],
             "alias_name": "Editor",
