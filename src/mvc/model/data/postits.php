@@ -10,4 +10,4 @@ use bbn\Appui\Note;
 /** @var bbn\Mvc\Model $model */
 
 $notes = new Note($model->db);
-return ['data' => $notes->getPostIts(50, 0, $model->hasData('pinned', true))];
+return ['data' => $notes->getPostIts(['limit' => 50, 'start' => 0], $model->hasData('pinned', true))];
