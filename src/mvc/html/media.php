@@ -1,9 +1,4 @@
 <!-- HTML Document -->
-
-<?php
-/* Static classes xx and st are available as aliases of bbn\X and bbn\Str respectively */
-?>
-
 <bbn-router default="browser"
             :nav="true"
             :autoload="true">
