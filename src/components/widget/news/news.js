@@ -51,14 +51,22 @@
         bbn.fn.link(appui.plugins['appui-note'] + '/news');
       },
       toggleForm(){
+        let id_type = appui.options.notes_types ? bbn.fn.getField(appui.options.notes_types, 'value', {code: 'news'}) : this.source?.id_type;
+        let evType = bbn.fn.getField(appui.options.evenements, 'value', {code: 'NEWS'});
+        if (!id_type) {
+          appui.error(bbn._("There doesn't seem to be a 'news' type of note in the system"));
+          return;
+        }
+
         let obj = {
           title: '',
           content: '',
           private: 0,
           locked: 0,
-          type: this.source.id_type,
+          id_type,
+          type: evType,
           start: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-          end: dayjs().add(10, 'minutes').format('YYYY-MM-DD HH:mm:ss')
+          end: dayjs().add(14, 'days').format('YYYY-MM-DD HH:mm:ss')
         };
         this.$set(this, 'formData', obj);
         this.showForm = !this.showForm;

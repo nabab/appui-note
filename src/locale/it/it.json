@@ -10,8 +10,7 @@
         "Edit Form": "Modifica Formulario",
         "New Form": "Nuovo Formulario",
         "Edit": "Modifica",
-        "Delete": "Elimina",
-        "Open the link": "Apri il collegamento"
+        "Delete": "Elimina"
     },
     "components\/bookmarks\/list": {
         "Edit Form": "Modifica Formulario",
@@ -20,23 +19,18 @@
         "Are you sure you want to delete all your bookmarks ?": "Sei sicuro di voler eliminare tutti i tuoi segnalibri?",
         "No Bookmarks yet": "Nessun Segnalibro ancora"
     },
-    "mvc\/bookmarks": {
-        "Edit Form": "Modifica Formulario",
-        "New Form": "Nuovo Formulario",
-        "Edit": "Modifica"
-    },
     "components\/cms\/list": {
         "Edit": "Modifica",
         "Delete": "Elimina",
         "URL": "URL",
         "Title": "Titolo",
         "Category": "Categoria",
-        "Note": "Nota",
+        "Unknown": "Sconosciuto",
         "Excerpt": "Estratto",
         "Publication date": "Data di pubblicazione",
         "End of publication": "Fine della pubblicazione",
+        "Post": "",
         "ID": "ID",
-        "Article": "Articolo",
         "Version": "Versione",
         "Cover image": "Immagine di copertina",
         "Type": "Tipo",
@@ -44,79 +38,70 @@
         "Since": "Da",
         "Creator": "Creatore",
         "Number of medias associated with this entry": "Numero di media associati a questa voce",
+        "Move to another category": "",
         "Publish": "Pubblica",
         "Unpublish": "Togli pubblicazione",
+        "Open in a new window": "",
         "New": "Nuovo",
-        "Are you sure you want to cease the publication of this note?": "Sei sicuro di voler cessare la pubblicazione di questa nota?",
+        "Post publication": "",
+        "Are you sure you want to cease the publication of this post?": "",
+        "Are you sure you want to cease the publication of the selected posts?": "",
         "Successfully removed from publications": "Rimosso con successo dalle pubblicazioni",
         "Error in this action": "Errore in questa azione",
-        "Are you sure to delete this note?": "Sei sicuro di eliminare questa nota?",
+        "Are you sure you want to delete the selected posts?": "",
+        "Are you sure to delete this post?": "",
         "There is also one variant": "C'\u00e8 anche una variante",
         "There are also %d variants": "Ci sono anche %d varianti",
         "and also one translation": "e anche una traduzione",
-        "and also %d translations": "e anche %d traduzioni",
-        "which will be deleted too": "che verr\u00e0 anch'esso cancellato",
         "There is also one translation": "C'\u00e8 anche una traduzione",
+        "and also %d translations": "e anche %d traduzioni",
         "There are also %d translations": "Ci sono anche %d traduzioni",
+        "which will be deleted too": "che verr\u00e0 anch'esso cancellato",
         "Successfully deleted": "Eliminato con successo",
         "Error in deleting": "Errore nell'eliminazione",
+        "Move post to another category": "",
         "Media correctly added to the note": "Elemento multimediale correttamente aggiunto alla nota",
         "Something went wrong while adding the media to the note": "Qualcosa \u00e8 andato storto durante l'aggiunta dell'elemento multimediale alla nota",
         "Currently published": "Attualmente pubblicato",
-        "Currently not published": "Attualmente non pubblicato",
-        "Never published": "Mai pubblicato",
-        "Open the article in a new window": "Apri l'articolo in una nuova finestra",
-        "Number of medias directly linked to this article": "Numero di elementi multimediali direttamente collegati a questo articolo",
-        "Number of variants of this article": "Numero di varianti di questo articolo",
-        "Number of translations for this article": "Numero di traduzioni per questo articolo",
-        "Published": "Pubblicato",
-        "Insert Articles": "Inserisci Articoli"
+        "Currently not published": "Attualmente non pubblicato"
     },
-    "components\/forum": {
+    "components\/forum\/topic\/post": {
         "Edit": "Modifica",
         "Delete": "Elimina",
         "Unknown": "Sconosciuto",
-        "Error while updating the data": "Errore durante l'aggiornamento dei dati",
-        "Replies": "Risposte",
-        "Show full text": "Mostra il testo completo",
-        "Hidden full text": "Testo completo nascosto",
-        "Links:": "Collegamenti:",
-        "Files:": "File:",
-        "unpin": "Sblocca",
-        "pin": "Fissa",
-        "Reply": "Rispondi",
-        "Created": "Creata",
-        "Edited": "Modificato",
-        "LOADING": "CARICAMENTO",
+        "Files": "File",
+        "Links": "Collegamenti",
+        "Created at %s": "",
+        "Updated at %s": "",
         "deleted": "Eliminato",
-        "Go to the first page": "Vai alla prima pagina",
-        "Go to the previous page": "Vai alla pagina precedente",
-        "Page": "Pagina",
-        "of": "di",
-        "Go to the next page": "Vai alla pagina successiva",
-        "Go to the last page": "Vai all'ultima pagina",
-        "items per page": "elementi per pagina",
-        "Display items": "Mostra elementi",
-        "Total": "Totale",
-        "items": "elementi",
-        "No item": "Nessun elemento",
-        "Refresh": "Aggiorna"
+        "Replies": "Risposte",
+        "Unpin": "",
+        "Pin": "",
+        "Reply": "Rispondi"
     },
     "components\/media\/browser": {
         "Edit": "Modifica",
         "Delete": "Elimina",
         "Info": "Info",
-        "Edit media": "Modifica elemento multimediale",
-        "Add new media": "Aggiungi nuovo elemento multimediale",
         "Edit image": "Modifica immagine",
         "Download": "Scarica",
+        "Edit media": "Modifica elemento multimediale",
+        "Add new media": "Aggiungi nuovo elemento multimediale",
         "Media(s) successfully added": "Elemento(i) multimediale(i) aggiunto(i) con successo",
         "Media successfully edited": "Elemento multimediale modificato con successo"
+    },
+    "components\/cms\/list\/toolbar": {
+        "Delete": "Elimina",
+        "Move to another category": "",
+        "Publish": "Pubblica",
+        "Unpublish": "Togli pubblicazione",
+        "All": "",
+        "Published": "Pubblicato",
+        "Unpublished": ""
     },
     "components\/media\/groups": {
         "Delete": "Elimina",
         "New": "Nuovo",
-        "Refresh": "Aggiorna",
         "Create new medias group": "Crea nuovo gruppo di elementi multimediali",
         "Rename": "Rinomina",
         "Are you sure you want to delete this medias group?": "Sei sicuro di voler eliminare questo gruppo di elementi multimediali?",
@@ -127,27 +112,28 @@
         "Pick a link": "Scegli un collegamento",
         "Link saved": "Collegamento salvato",
         "Name": "Nome",
+        "Refresh": "Aggiorna",
         "Search": "Ricerca",
-        "Select one or create new": "Seleziona o crea nuovo",
-        "Insert": "Inserisci"
+        "Select one or create new": "Seleziona o crea nuovo"
     },
     "components\/media\/picker": {
         "Delete": "Elimina",
+        "Download": "Scarica",
         "Edit media": "Modifica elemento multimediale",
-        "Add new media": "Aggiungi nuovo elemento multimediale",
-        "Download": "Scarica"
+        "Add new media": "Aggiungi nuovo elemento multimediale"
     },
     "components\/postit": {
         "Delete": "Elimina",
         "Version": "Versione",
-        "Created": "Creata",
         "Post-it saved": "Post-it salvato",
         "Error while deleting": "Errore durante l'eliminazione",
+        "Edit Content": "Modifica Contenuto",
         "Post-it configuration": "Configurazione post-it",
         "Post-it information": "Informazioni post-it",
         "Delete this post-it": "Elimina questo post-it",
         "Edit Title": "Modifica Titolo",
-        "Edit Content": "Modifica Contenuto",
+        "Untitled": "",
+        "Created": "Creata",
         "Post-it color": "Colore post-it",
         "Pen color": "Colore penna",
         "Pinned": "Fissato",
@@ -158,12 +144,12 @@
         "Delete": "Elimina",
         "Title": "Titolo",
         "Select an image": "Seleziona un'immagine",
-        "Move up": "Sposta in alto",
-        "Move down": "Sposta in basso",
         "Add a new feature": "Aggiungi una nuova funzionalit\u00e0",
         "Code": "Codice",
         "Order": "Ordine",
         "No image": "Nessuna immagine",
+        "Move up": "Sposta in alto",
+        "Move down": "Sposta in basso",
         "Search for a note to feature in this category": "Cerca una nota da includere in questa categoria",
         "Pick a feature": "Scegli una funzionalit\u00e0",
         "Random": "Casuale",
@@ -200,47 +186,24 @@
         "Remove": "Rimuovi",
         "Save": "Salva"
     },
-    "mvc\/bookmarks_save": {
-        "New folder": "Nuova cartella",
-        "Link": "Collegamento",
-        "New bookmark": "Nuovo segnalibro",
-        "Folder": "Cartella",
-        "correctly inserted": "Inserito correttamente",
-        "Are you sure you want to delete this folder": "Sei sicuro di voler eliminare questa cartella",
-        "and all it's content?": "e tutto il suo contenuto?",
-        "Folder successfully deleted": "Cartella eliminata con successo",
-        "Something went wrong while deleting the folder": "Qualcosa \u00e8 andato storto durante l'eliminazione della cartella",
-        "Are you sure you want to delete this link?": "Sei sicuro di voler eliminare questo collegamento?",
-        "Link successfully deleted": "Collegamento eliminato con successo",
-        "Something went wrong while deleting the link": "Qualcosa \u00e8 andato storto durante l'eliminazione del collegamento"
-    },
-    "components\/cms\/settings": {
-        "Cancel": "Annulla",
-        "Title": "Titolo",
-        "Description": "Descrizione",
-        "Save": "Salva",
-        "Category": "Categoria",
-        "Page's properties": "Propriet\u00e0 della pagina",
-        "End of publication": "Fine della pubblicazione",
-        "Start of publication": "Inizio della pubblicazione",
-        "Front Image": "Immagine Frontale",
-        "Public URL": "URL Pubblico",
-        "Tags": "Etichette",
-        "Cache": "Cache",
-        "Clear": "Pulisci"
-    },
     "components\/widget\/news": {
         "Cancel": "Annulla",
         "Title": "Titolo",
         "Saved": "Salvato",
         "Enter a title for the note": "Immetti un titolo per la nota",
+        "There doesn't seem to be a 'news' type of note in the system": "",
         "Pub. date": "Data pub.",
         "End date": "Data fine",
-        "Add": "Aggiungi"
+        "For who": "",
+        "Add": "Aggiungi",
+        "Here you can add": "",
+        "news or internal com": "",
+        "for all users": ""
     },
     "components\/widget\/personal": {
         "Cancel": "Annulla",
         "Title": "Titolo",
+        "Unknown": "Sconosciuto",
         "Saved": "Salvato",
         "Add": "Aggiungi"
     },
@@ -248,14 +211,19 @@
         "URL": "URL",
         "In which file ?": "In quale file?",
         "Title": "Titolo",
-        "URL's description": "Descrizione della URL",
-        "Pick a cover picture": "Scegli un'immagine di copertina",
-        "a screenshot from the site": "uno screenshot dal sito"
+        "URL's description": "Descrizione della URL"
+    },
+    "components\/cms\/block\/download": {
+        "URL": "URL",
+        "Media": "elemento multimediale",
+        "Are you sure you want to remove this file?": "",
+        "Select a media": ""
     },
     "components\/cms\/form\/insert": {
         "URL": "URL",
         "Title": "Titolo",
         "Note": "Nota",
+        "New Category": "",
         "Article type": "Tipo articolo",
         "Language": "Lingua",
         "Excerpt": "Estratto"
@@ -285,14 +253,11 @@
         "Description": "Descrizione",
         "Remove": "Rimuovi",
         "Content": "Contenuto",
-        "Dimensions": "Dimensioni",
         "Are you sure?": "Sei sicuro?",
         "ID": "ID",
         "Version": "Versione",
         "Published": "Pubblicato",
         "Cache": "Cache",
-        "Yes": "Si",
-        "No": "No",
         "Clear all cache": "Cancella tutta la cache",
         "Filename": "Nome del file",
         "General Information": "Informazioni Generali",
@@ -304,6 +269,7 @@
         "Copy": "Copia",
         "Real path": "Percorso reale",
         "Image Information": "Informazioni Immagine",
+        "Dimensions": "Dimensioni",
         "Thumbnails": "Miniature",
         "Show details": "Mostra dettagli",
         "Note title": "Titolo della nota",
@@ -315,8 +281,6 @@
         "In which file ?": "In quale file?",
         "Title": "Titolo",
         "URL's description": "Descrizione della URL",
-        "Pick a cover picture": "Scegli un'immagine di copertina",
-        "a screenshot from the site": "uno screenshot dal sito",
         "Add Link": "Aggiungi Collegamento",
         "Modify Link": "Modifica Collegamento",
         "Delete Link": "Elimina Collegamento"
@@ -353,7 +317,6 @@
         "Type": "Tipo",
         "Creator": "Creatore",
         "New": "Nuovo",
-        "Page": "Pagina",
         "Creation": "Creazione",
         "Enter a title for the note": "Immetti un titolo per la nota",
         "Pub. date": "Data pub.",
@@ -363,6 +326,7 @@
         "Date": "Data",
         "Date GMT": "Data GMT",
         "Post Status": "Stato della pubblicazione",
+        "Page": "Pagina",
         "Show": "Mostra",
         "Find": "Trova",
         "Tools": "Strumenti",
@@ -377,38 +341,24 @@
     },
     "components\/cms\/block\/block\/image-text": {
         "Title": "Titolo",
-        "Align left": "Allinea a sinistra",
-        "Align center": "Allinea al centro",
-        "Align right": "Allinea a destra",
         "Select an image": "Seleziona un'immagine",
         "Height": "Altezza",
-        "Content": "Contenuto",
-        "Image": "Immagine",
-        "Width": "Larghezza",
-        "Alignment": "Allineamento",
-        "Alt": "Alt",
-        "Link": "Collegamento",
-        "Caption": "Didascalia",
-        "Details": "Dettagli"
+        "Content": "Contenuto"
     },
     "components\/cms\/block\/gallery": {
         "Title": "Titolo",
         "Description": "Descrizione",
-        "Align left": "Allinea a sinistra",
-        "Align center": "Allinea al centro",
-        "Align right": "Allinea a destra",
         "Height": "Altezza",
-        "Width": "Larghezza",
-        "Alignment": "Allineamento",
-        "Link": "Collegamento",
         "Medias Groups Management": "Gestione Gruppi Media",
         "Gallery": "Galleria",
         "Open galleries management": "Apri gestione gallerie",
+        "Width": "Larghezza",
+        "Alignment": "Allineamento",
         "Mode": "Modo",
-        "Fullscreen": "A schermo intero",
         "Crop Image": "Ritaglia immagine",
         "Image width": "Larghezza immagine",
         "Column gap": "Spazio colonna",
+        "Image alignment": "",
         "Scrollable": "Scrollabile",
         "Pageable": "Paginabile",
         "Footer": "Pi\u00e8 di pagina",
@@ -416,85 +366,87 @@
         "Info": "Info",
         "Info field": "Campo informazioni",
         "Resizable": "Ridimensionabile",
-        "Toolbar": "Barra degli strumenti",
-        "No value": "Nessun valore"
+        "Toolbar": "Barra degli strumenti"
     },
     "components\/cms\/block\/image": {
         "Title": "Titolo",
-        "Align left": "Allinea a sinistra",
-        "Align center": "Allinea al centro",
-        "Align right": "Allinea a destra",
         "Select an image": "Seleziona un'immagine",
         "Height": "Altezza",
-        "Content": "Contenuto",
-        "Image": "Immagine",
-        "Width": "Larghezza",
-        "Alignment": "Allineamento",
-        "Alt": "Alt",
-        "Link": "Collegamento",
-        "Caption": "Didascalia",
-        "Details": "Dettagli"
+        "Content": "Contenuto"
     },
     "components\/cms\/block\/image\/text": {
         "Title": "Titolo",
-        "Align left": "Allinea a sinistra",
-        "Align center": "Allinea al centro",
-        "Align right": "Allinea a destra",
         "Select an image": "Seleziona un'immagine",
         "Height": "Altezza",
-        "Content": "Contenuto",
-        "Image": "Immagine",
-        "Width": "Larghezza",
-        "Alignment": "Allineamento",
-        "Alt": "Alt",
-        "Link": "Collegamento",
-        "Caption": "Didascalia",
-        "Details": "Dettagli",
-        "Columns (Desktop)": "Colonne (Desktop)",
-        "Columns (Mobile)": "Colonne (Mobile)"
+        "Content": "Contenuto"
     },
     "components\/cms\/block\/imagetext": {
         "Title": "Titolo",
-        "Align left": "Allinea a sinistra",
-        "Align center": "Allinea al centro",
-        "Align right": "Allinea a destra",
         "Select an image": "Seleziona un'immagine",
         "Height": "Altezza",
-        "Content": "Contenuto",
-        "Image": "Immagine",
-        "Width": "Larghezza",
-        "Alignment": "Allineamento",
-        "Alt": "Alt",
-        "Link": "Collegamento",
-        "Caption": "Didascalia",
-        "Details": "Dettagli"
+        "Content": "Contenuto"
+    },
+    "components\/cms\/block\/slider": {
+        "Title": "Titolo",
+        "Height": "Altezza",
+        "Default": "Predefinito",
+        "Top": "In alto",
+        "Top-Left": "In alto a sinistra",
+        "Top-Right": "In alto a destra",
+        "Bottom": "In basso",
+        "Bottom-Left": "In basso a sinistra",
+        "Bottom-Right": "In basso a destra",
+        "Medias Groups Management": "Gestione Gruppi Media",
+        "Gallery": "Galleria",
+        "Open galleries management": "Apri gestione gallerie",
+        "Mode": "Modo",
+        "Autoplay": "Riproduzione automatica",
+        "Arrows": "Frecce",
+        "Arrows position": "Posizione frecce",
+        "Preview": "Anteprima",
+        "Loop": "Ciclo",
+        "Show info": "Mostra informazioni",
+        "Pub. Date": "",
+        "Last edit": "Ultima modifica",
+        "Cover": "",
+        "Contain": "",
+        "Publications": "Pubblicazioni",
+        "Features": "Caratteristiche",
+        "Type of articles": "Tipo di articoli",
+        "Category": "Categoria",
+        "Ordered by": "Ordinato per",
+        "Feature": "Caratteristica",
+        "Css class": "Classe CSS",
+        "(Optional)": "(Opzionale)",
+        "Distance block below": "Distanza blocco sotto",
+        "Title distance": "Distanza titolo",
+        "(mobile)": "",
+        "Image fit": "Immagine adatta",
+        "Max slide in line": "Massimo diapositive in linea",
+        "Min slide in line": "Minimo diapositive in linea",
+        "Limits": "Limiti",
+        "No items": "Nessun elemento"
     },
     "components\/cms\/block\/title": {
         "Title": "Titolo",
-        "Align left": "Allinea a sinistra",
-        "Align center": "Allinea al centro",
-        "Align right": "Allinea a destra",
         "Alignment": "Allineamento",
-        "Color": "Colore",
         "Tag": "Etichetta",
+        "Color": "Colore",
         "Style": "Stile",
         "Italic": "Italico",
         "Decoration": "Decorazione",
-        "Horizontal rule": "Linea orizzontale",
-        "Underlined": "Sottolineato",
-        "Strikethrough": "Barrato",
-        "None": "Nessuno"
+        "Horizontal rule": "Linea orizzontale"
     },
     "components\/cms\/elementor": {
         "Title": "Titolo",
         "Text": "Testo",
-        "Image": "Immagine",
-        "Space": "Spazio",
         "Gallery": "Galleria",
         "Feature": "Caratteristica",
+        "Space": "Spazio",
         "Line": "Linea",
         "Button": "bottone",
         "Rich text (HTML)": "Testo ricco (HTML)",
+        "Image": "Immagine",
         "Image Text": "Testo Immagine",
         "Carousel": "Carosello",
         "Slider": "Cursore",
@@ -502,6 +454,16 @@
         "Product": "Prodotto",
         "Do you want to save your changes?": "Vuoi salvare i tuoi cambi?",
         "Do you want to abandon your changes?": "Vuoi abbandonare le tue modifiche?"
+    },
+    "components\/cms\/settings": {
+        "Title": "Titolo",
+        "Description": "Descrizione",
+        "End of publication": "Fine della pubblicazione",
+        "Start of publication": "Inizio della pubblicazione",
+        "Front Image": "Immagine Frontale",
+        "Public URL": "URL Pubblico",
+        "Tags": "Etichette",
+        "Cache": "Cache"
     },
     "components\/forum\/form": {
         "Title": "Titolo",
@@ -518,26 +480,27 @@
         "CSS code": "Codice CSS",
         "Files": "File",
         "Links": "Collegamenti",
+        "Important": "",
         "Locked": "Bloccato"
     },
     "components\/media\/form": {
         "Title": "Titolo",
         "Description": "Descrizione",
-        "Link": "Collegamento",
+        "Media": "elemento multimediale",
         "Tags": "Etichette",
         "Something went wrong while saving the media": "Qualcosa \u00e8 andato storto durante il salvataggio dell'elemento multimediale",
         "Customize titles\/descriptions": "Personalizza titoli\/descrizioni",
         "Filename": "Nome del file",
-        "Media": "elemento multimediale"
+        "Link": "Collegamento"
     },
     "components\/media\/new": {
         "Title": "Titolo",
         "Description": "Descrizione",
+        "Media": "elemento multimediale",
         "Tags": "Etichette",
         "Something went wrong while saving the media": "Qualcosa \u00e8 andato storto durante il salvataggio dell'elemento multimediale",
         "Customize titles\/descriptions": "Personalizza titoli\/descrizioni",
-        "Filename": "Nome del file",
-        "Media": "elemento multimediale"
+        "Filename": "Nome del file"
     },
     "mvc\/news": {
         "Title": "Titolo",
@@ -558,16 +521,16 @@
     "mvc\/table_notes": {
         "Title": "Titolo",
         "Text": "Testo",
+        "Last edit": "Ultima modifica",
         "Category": "Categoria",
         "Type": "Tipo",
         "Creator": "Creatore",
-        "Created": "Creata",
         "Creation": "Creazione",
+        "Created": "Creata",
         "Are you sure you want to leave this form without saving your changes?": "Sei sicuro di voler abbandonare questo modulo senza salvare le modifiche?",
         "Actions": "Azioni",
         "Resume": "Riprendi",
         "Last version user": "Ultimo editore",
-        "Last edit": "Ultima modifica",
         "Option": "Opzione",
         "Blocked": "Bloccato",
         "New Note": "Nuova Nota",
@@ -589,24 +552,24 @@
         "Folder name": "Nome della cartella",
         "Parent": "Genitore"
     },
-    "components\/cms\/block\/button": {
-        "Text": "Testo",
-        "Align left": "Allinea a sinistra",
-        "Align center": "Allinea al centro",
-        "Align right": "Allinea a destra",
-        "Alignment": "Allineamento",
-        "Link": "Collegamento",
-        "Dimensions": "Dimensioni",
-        "Default": "Predefinito",
-        "XS": "XS",
-        "S": "S",
-        "M": "M",
-        "L": "L",
-        "XL": "XL",
-        "XXL": "XXL",
-        "Space": "Spazio",
-        "No space": "Nessun spazio",
-        "Class": "Classe"
+    "components\/cms\/editor": {
+        "Save": "Salva",
+        "Preview": "Anteprima",
+        "The block doesn't exist": "",
+        "Saved": "Salvato",
+        "Are you sure?": "Sei sicuro?",
+        "Are you sure you want to delete this block and its content?": "Sei sicuro di voler eliminare questo blocco e il suo contenuto?",
+        "Page's properties": "Propriet\u00e0 della pagina",
+        "widgets": "Widget",
+        "See JSON": "",
+        "Full preview": "",
+        "Full preview in new window": "",
+        "Scroll to selected element": "",
+        "Move to start": "",
+        "Move to end": "",
+        "Create new block type": "",
+        "Delete block": "",
+        "Delete this block": "Elimina questo blocco"
     },
     "components\/bookmarks\/search": {
         "1314 links": "1314 collegamenti"
@@ -614,71 +577,12 @@
     "components\/cms\/block": {
         "Block changed": "Blocco cambiato"
     },
-    "components\/cms\/block\/align": {
-        "Align left": "Allinea a sinistra",
-        "Align center": "Allinea al centro",
-        "Align right": "Allinea a destra"
-    },
-    "components\/cms\/block\/carousel": {
-        "Align left": "Allinea a sinistra",
-        "Align center": "Allinea al centro",
-        "Align right": "Allinea a destra",
-        "Height": "Altezza",
-        "Width": "Larghezza",
-        "Alignment": "Allineamento",
-        "Link": "Collegamento",
-        "Default": "Predefinito",
-        "Top": "In alto",
-        "Top-Left": "In alto a sinistra",
-        "Top-Right": "In alto a destra",
-        "Bottom": "In basso",
-        "Bottom-Left": "In basso a sinistra",
-        "Bottom-Right": "In basso a destra",
-        "Medias Groups Management": "Gestione Gruppi Media",
-        "Gallery": "Galleria",
-        "Open galleries management": "Apri gestione gallerie",
-        "Mode": "Modo",
-        "Autoplay": "Riproduzione automatica",
-        "Arrows": "Frecce",
-        "Arrows position": "Posizione frecce",
-        "Preview": "Anteprima",
-        "Loop": "Ciclo",
-        "Show info": "Mostra informazioni",
-        "Fullscreen": "A schermo intero"
-    },
-    "components\/cms\/block\/line": {
-        "Align left": "Allinea a sinistra",
-        "Align center": "Allinea al centro",
-        "Align right": "Allinea a destra",
-        "Height": "Altezza",
-        "Width": "Larghezza",
-        "Alignment": "Allineamento",
-        "TOP": "In alto",
-        "BOTTOM": "In basso",
-        "BOTH": "ENTRAMBI",
-        "NONE": "Nessuno"
-    },
-    "components\/cms\/block\/video": {
-        "Align left": "Allinea a sinistra",
-        "Align center": "Allinea al centro",
-        "Align right": "Allinea a destra",
-        "Height": "Altezza",
-        "Width": "Larghezza",
-        "Alignment": "Allineamento",
-        "Autoplay": "Riproduzione automatica",
-        "Loop": "Ciclo",
-        "Muted": "Silenziato",
-        "Controls": "Controlli",
-        "Aspect ratio": "Proporzioni",
-        "Video source": "Sorgente video",
-        "Mute the video": "Silenzia il video"
-    },
     "components\/media\/field": {
         "Select an image": "Seleziona un'immagine",
         "Browse the images": "Sfoglia le immagini",
         "Show media information": "Mostra le informazioni dell'elemento multimediale"
     },
-    "components\/cms\/block\/slider": {
+    "components\/cms\/block\/carousel": {
         "Height": "Altezza",
         "Default": "Predefinito",
         "Top": "In alto",
@@ -690,60 +594,37 @@
         "Medias Groups Management": "Gestione Gruppi Media",
         "Gallery": "Galleria",
         "Open galleries management": "Apri gestione gallerie",
+        "Width": "Larghezza",
+        "Alignment": "Allineamento",
         "Mode": "Modo",
         "Autoplay": "Riproduzione automatica",
         "Arrows": "Frecce",
         "Arrows position": "Posizione frecce",
         "Preview": "Anteprima",
         "Loop": "Ciclo",
-        "Show info": "Mostra informazioni",
-        "Css class": "Classe CSS",
-        "(Optional)": "(Opzionale)",
-        "Type of articles": "Tipo di articoli",
-        "Category": "Categoria",
-        "Ordered by": "Ordinato per",
-        "Feature": "Caratteristica",
-        "Distance block below": "Distanza blocco sotto",
-        "Title distance": "Distanza titolo",
-        "Title distance (mobile)": "Distanza titolo (mobile)",
-        "Image fit": "Immagine adatta",
-        "Max slide in line": "Massimo diapositive in linea",
-        "Min slide in line (mobile)": "Massimo diapositive in linea (mobile)",
-        "Limits": "Limiti",
-        "No items": "Nessun elemento"
+        "Show info": "Mostra informazioni"
+    },
+    "components\/cms\/block\/line": {
+        "Height": "Altezza"
     },
     "components\/cms\/block\/slider_old_incomplete": {
         "Height": "Altezza",
         "Type of articles": "Tipo di articoli",
         "Ordered by": "Ordinato per",
         "Max slide in line": "Massimo diapositive in linea",
-        "Limits": "Limiti",
-        "Min slide in line": "Minimo diapositive in linea"
+        "Min slide in line": "Minimo diapositive in linea",
+        "Limits": "Limiti"
     },
-    "components\/cms\/block\/text": {
+    "components\/cms\/block\/video": {
+        "Height": "Altezza",
+        "Width": "Larghezza",
         "Alignment": "Allineamento",
-        "Color": "Colore"
-    },
-    "mvc\/masks": {
-        "Default": "Predefinito",
-        "ID": "ID",
-        "Version": "Versione",
-        "Modification of the standard letter": "Modifica della lettera standard",
-        "Are you sure you want to delete this standard letter?": "Sei sicuro di voler eliminare questa lettera standard?",
-        "Creation of a standard letter": "Creazione di una lettera standard",
-        "Warning on standard letters": "Avviso sulle lettere standard",
-        "Here you can modify the standard letters but they use a system of \"templates\" with which you have to be very cautious.": "Qui puoi modificare le lettere standard, ma usano un sistema di \"modelli\" con il quale devi stare molto cauto.",
-        "The best is to duplicate an existing standard letter and modify it.": "La cosa migliore \u00e8 duplicare una lettera standard esistente e modificarla.",
-        "Once finished, put it in default if it is used on a feature without choice (eg certificates), and will test it in context.": "Una volta completato, se deve essere utilizzato in funzionalit\u00e0 senza scelta (es: attestazioni), impostalo come predefinito della sua categoria e testalo nel contesto.",
-        "Then you can erase the old one or else redo it if your modification returns an error.": "Quindi puoi eliminare quello vecchio o ricominciare da capo se le tue modifiche generano un errore.",
-        "Creation of a standard letter for": "Creazione di una lettera standard per",
-        "Add a standard letter": "Aggiungi una lettera standard"
-    },
-    "components\/cms\/block\/space": {
-        "Space": "Spazio"
-    },
-    "components\/cms\/block\/container": {
-        "Click here to add a new item on this line": "Clicca qui per aggiungere un nuovo elemento in questa linea"
+        "Autoplay": "Riproduzione automatica",
+        "Loop": "Ciclo",
+        "None": "Nessuno",
+        "Aspect ratio": "Proporzioni",
+        "Muted": "Silenziato",
+        "Controls": "Controlli"
     },
     "components\/cms\/block\/product": {
         "Product Picker": "Selezionatore di prodotti",
@@ -759,18 +640,16 @@
         "Publications": "Pubblicazioni",
         "Unpublications": "Non pubblicati"
     },
-    "components\/cms\/editor": {
-        "Saved": "Salvato",
-        "Are you sure?": "Sei sicuro?",
-        "Are you sure you want to delete this block and its content?": "Sei sicuro di voler eliminare questo blocco e il suo contenuto?",
-        "Save the note": "Salva la nota",
-        "Page's properties": "Propriet\u00e0 della pagina",
-        "widgets": "Widget",
-        "Delete this block": "Elimina questo blocco",
-        "Move top": "Sposta in cima",
-        "Move up": "Sposta in alto",
-        "Move down": "Sposta in basso",
-        "Move bottom": "Sposta in fondo"
+    "components\/cms\/form\/move": {
+        "Category": "Categoria",
+        "Choose": ""
+    },
+    "components\/cms\/block\/space": {
+        "Space": "Spazio"
+    },
+    "components\/cms\/container": {
+        "Unknown": "Sconosciuto",
+        "Remove block": ""
     },
     "mvc\/form_markdown": {
         "Saved": "Salvato",
@@ -780,8 +659,7 @@
         "You can program the publication for now or the future": "Puoi programmare la pubblicazione per ora o per il futuro",
         "Publication date": "Data di pubblicazione",
         "You can (or not) end a publication": "Puoi (o meno) terminare una pubblicazione",
-        "End of publication": "Fine della pubblicazione",
-        "Confirm": "Conferma"
+        "End of publication": "Fine della pubblicazione"
     },
     "mvc\/pages\/wordpress": {
         "ID": "ID",
@@ -796,15 +674,6 @@
         "Post modified": "Pubblicazione modificata",
         "Post Status": "Stato della pubblicazione"
     },
-    "mvc\/cms": {
-        "Article": "Articolo",
-        "Home": "Accoglienza",
-        "Articles' list": "Elenco degli articoli",
-        "Settings": "Impostazioni"
-    },
-    "mvc\/cms\/cat": {
-        "Article": "Articolo"
-    },
     "components\/toolbar\/version": {
         "Version": "Versione",
         "Versions": "Versioni"
@@ -814,9 +683,8 @@
         "All rights reserved.": "Tutti i diritti riservati.",
         "Draft": "Bozza"
     },
-    "components\/cms\/list\/toolbar": {
-        "Insert Articles": "Inserisci Articoli",
-        "The Content Management System": "Il Sistema di Gestione dei Contenuti"
+    "components\/forum\/topic\/replies": {
+        "LOADING": "CARICAMENTO"
     },
     "components\/media\/block": {
         "The title must contain the extension of the file": "Il titolo deve contenere l'estensione del file",
@@ -824,52 +692,9 @@
         "Something went wrong while changing the media title": "Qualcosa \u00e8 andato storto durante la modifica del titolo dell'elemento multimediale",
         "The title must end with the same extension of the file": "Il titolo deve terminare con la stessa estensione del file"
     },
-    "components\/media\/browser": {
-        "The title must contain the extension of the file": "Il titolo deve contenere l'estensione del file",
-        "Media title successfully changed!": "Titolo dell'elemento multimediale cambiato con successo",
-        "Something went wrong while changing the media title": "Qualcosa \u00e8 andato storto durante la modifica del titolo dell'elemento multimediale",
-        "The title must end with the same extension of the file": "Il titolo deve terminare con la stessa estensione del file",
-        "Edit media": "Modifica elemento multimediale",
-        "Add new media": "Aggiungi nuovo elemento multimediale",
-        "The media you're going to delete is linked to a note, are you sure you want to remove it?": "L'elemento multimediale che stai per eliminare \u00e8 collegato a una nota, sei sicuro di volerlo rimuovere?",
-        "Are you sure you want to delete this media?": "Sei sicuro di voler eliminare questo elemento multimediale?",
-        "Media successfully deleted :)": "Elemento multimediale eliminato con successo :)",
-        "Something went wrong while deleting the media :(": "Qualcosa \u00e8 andato storto durante l'eliminazione dell'elemento multimediale :(",
-        "The extension in the title or in the filename doesn't match the extension of the file inserted!": "L'estensione nel titolo o nel nome del file non corrisponde all'estensione del file inserito!",
-        "Media successfully added to media browser": "Elemento multimediale aggiunto con successo all'esploratore degli elementi multimediali",
-        "Media successfully updated": "Elemento multimediale correttamente aggiornato",
-        "Something went wrong while adding the media to the media broser": "Qualcosa \u00e8 andato storto durante l'aggiunta dell'elemento multimediale all'esploratore degli elementi multimediali",
-        "Delete media": "Elimina elemento multimediale",
-        "Yes": "Si",
-        "No": "No"
-    },
-    "components\/media\/browser3": {
-        "The title must contain the extension of the file": "Il titolo deve contenere l'estensione del file",
-        "Media title successfully changed!": "Titolo dell'elemento multimediale cambiato con successo",
-        "Something went wrong while changing the media title": "Qualcosa \u00e8 andato storto durante la modifica del titolo dell'elemento multimediale",
-        "The title must end with the same extension of the file": "Il titolo deve terminare con la stessa estensione del file",
-        "Edit media": "Modifica elemento multimediale",
-        "Add new media": "Aggiungi nuovo elemento multimediale",
-        "The media you're going to delete is linked to a note, are you sure you want to remove it?": "L'elemento multimediale che stai per eliminare \u00e8 collegato a una nota, sei sicuro di volerlo rimuovere?",
-        "Are you sure you want to delete this media?": "Sei sicuro di voler eliminare questo elemento multimediale?",
-        "Media successfully deleted :)": "Elemento multimediale eliminato con successo :)",
-        "Something went wrong while deleting the media :(": "Qualcosa \u00e8 andato storto durante l'eliminazione dell'elemento multimediale :(",
-        "Media successfully added to media browser": "Elemento multimediale aggiunto con successo all'esploratore degli elementi multimediali",
-        "Media successfully updated": "Elemento multimediale correttamente aggiornato",
-        "Something went wrong while adding the media to the media broser": "Qualcosa \u00e8 andato storto durante l'aggiunta dell'elemento multimediale all'esploratore degli elementi multimediali",
-        "Delete media": "Elimina elemento multimediale",
-        "Yes": "Si",
-        "No": "No"
-    },
     "components\/media\/list": {
         "Edit media": "Modifica elemento multimediale",
         "Delete media": "Elimina elemento multimediale"
-    },
-    "mvc\/media": {
-        "Are you sure you want to delete this media?": "Sei sicuro di voler eliminare questo elemento multimediale?",
-        "Browser": "Navigatore",
-        "Media successfully deleted": "Elemento multimediale eliminato con successo",
-        "Something went wrong while deleting the media": "Qualcosa \u00e8 andato storto durante l'eliminazione dell'elemento multimediale"
     },
     "mvc\/cms\/settings": {
         "Name": "Nome",
@@ -891,8 +716,9 @@
     "mvc\/notes": {
         "Search": "Ricerca",
         "Write here your content": "Scrivi qui il tuo contenuto",
-        "Don't forget!": "Non dimenticare!",
-        "Add a new Post-It": "Aggiungi un nuovo Post-it"
+        "Create new folder": "",
+        "Reload the folders list": "",
+        "Don't forget!": "Non dimenticare!"
     },
     "mvc\/post-it": {
         "Search": "Ricerca"
@@ -901,35 +727,49 @@
         "Search for a note": "Ricerca per una nota"
     },
     "components\/postits": {
-        "Write here your content": "Scrivi qui il tuo contenuto",
-        "Don't forget!": "Non dimenticare!",
-        "Add a new Post-It": "Aggiungi un nuovo Post-it"
-    },
-    "components\/search\/cms": {
-        "V": "V",
-        "Version number": "Numero di versione",
-        "This is the latest version": "Questa \u00e8 l'ultima versione",
-        "This is not the latest version": "Questa non \u00e8 l'ultima versione"
-    },
-    "components\/search\/item": {
-        "V": "V",
-        "Version number": "Numero di versione",
-        "This is the latest version": "Questa \u00e8 l'ultima versione",
-        "This is not the latest version": "Questa non \u00e8 l'ultima versione"
+        "Write here your content": "Scrivi qui il tuo contenuto"
     },
     "mvc\/form_rte": {
         "Are you sure you want to leave this form without saving your changes?": "Sei sicuro di voler abbandonare questo modulo senza salvare le modifiche?"
     },
-    "mvc\/list": {
-        "All categories": "Tutte le categorie"
+    "mvc\/cms\/cat": {
+        "Article": "Articolo"
     },
-    "mvc\/cms\/square": {
-        "Add a new block to this row": "Aggiungi un nuovo blocco a questa riga",
-        "Edit blocks in this row": "Modifica blocchi di questa riga"
+    "mvc\/cms": {
+        "Settings": "Impostazioni"
+    },
+    "mvc\/masks": {
+        "Modification of the standard letter": "Modifica della lettera standard",
+        "Are you sure you want to delete this standard letter?": "Sei sicuro di voler eliminare questa lettera standard?",
+        "Creation of a standard letter": "Creazione di una lettera standard",
+        "Warning on standard letters": "Avviso sulle lettere standard",
+        "Here you can modify the standard letters but they use a system of \"templates\" with which you have to be very cautious.": "Qui puoi modificare le lettere standard, ma usano un sistema di \"modelli\" con il quale devi stare molto cauto.",
+        "The best is to duplicate an existing standard letter and modify it.": "La cosa migliore \u00e8 duplicare una lettera standard esistente e modificarla.",
+        "Once finished, put it in default if it is used on a feature without choice (eg certificates), and will test it in context.": "Una volta completato, se deve essere utilizzato in funzionalit\u00e0 senza scelta (es: attestazioni), impostalo come predefinito della sua categoria e testalo nel contesto.",
+        "Then you can erase the old one or else redo it if your modification returns an error.": "Quindi puoi eliminare quello vecchio o ricominciare da capo se le tue modifiche generano un errore.",
+        "Creation of a standard letter for": "Creazione di una lettera standard per"
+    },
+    "mvc\/media": {
+        "Media successfully deleted": "Elemento multimediale eliminato con successo",
+        "Something went wrong while deleting the media": "Qualcosa \u00e8 andato storto durante l'eliminazione dell'elemento multimediale",
+        "Are you sure you want to delete this media?": "Sei sicuro di voler eliminare questo elemento multimediale?"
+    },
+    "mvc\/cms\/import": {
+        "Select an XML file": "",
+        "Read XML file": "",
+        "Parse XML file": "",
+        "Make items": "",
+        "Import medias": "",
+        "Import categories": "",
+        "Import tags": "",
+        "Import posts": "",
+        "Are you sure you want to reset the import process?": ""
     },
     "": {
         "News": "Notizie",
         "Personal notes": "Note personali",
-        "Found in content": "Trovato nel contenuto"
+        "Found in content": "Trovato nel contenuto",
+        "Articles' contents": "",
+        "Articles' titles": ""
     }
 }

@@ -52,6 +52,7 @@
           title: '',
           content: '',
           postit: 0,
+          private: 1,
           type: this.source.id_type
         };
         this.$set(this, 'formData', obj);

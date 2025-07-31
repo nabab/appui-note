@@ -10,8 +10,7 @@
         "Edit Form": "",
         "New Form": "",
         "Edit": "",
-        "Delete": "",
-        "Open the link": ""
+        "Delete": ""
     },
     "components\/bookmarks\/list": {
         "Edit Form": "",
@@ -20,23 +19,18 @@
         "Are you sure you want to delete all your bookmarks ?": "",
         "No Bookmarks yet": ""
     },
-    "mvc\/bookmarks": {
-        "Edit Form": "",
-        "New Form": "",
-        "Edit": ""
-    },
     "components\/cms\/list": {
         "Edit": "",
         "Delete": "",
         "URL": "",
         "Title": "",
         "Category": "",
-        "Note": "",
+        "Unknown": "",
         "Excerpt": "",
         "Publication date": "",
         "End of publication": "",
+        "Post": "",
         "ID": "",
-        "Article": "",
         "Version": "",
         "Cover image": "",
         "Type": "",
@@ -44,79 +38,70 @@
         "Since": "",
         "Creator": "",
         "Number of medias associated with this entry": "",
+        "Move to another category": "",
         "Publish": "",
         "Unpublish": "",
+        "Open in a new window": "",
         "New": "",
-        "Are you sure you want to cease the publication of this note?": "",
+        "Post publication": "",
+        "Are you sure you want to cease the publication of this post?": "",
+        "Are you sure you want to cease the publication of the selected posts?": "",
         "Successfully removed from publications": "",
         "Error in this action": "",
-        "Are you sure to delete this note?": "",
+        "Are you sure you want to delete the selected posts?": "",
+        "Are you sure to delete this post?": "",
         "There is also one variant": "",
         "There are also %d variants": "",
         "and also one translation": "",
-        "and also %d translations": "",
-        "which will be deleted too": "",
         "There is also one translation": "",
+        "and also %d translations": "",
         "There are also %d translations": "",
+        "which will be deleted too": "",
         "Successfully deleted": "",
         "Error in deleting": "",
+        "Move post to another category": "",
         "Media correctly added to the note": "",
         "Something went wrong while adding the media to the note": "",
         "Currently published": "",
-        "Currently not published": "",
-        "Never published": "",
-        "Open the article in a new window": "",
-        "Number of medias directly linked to this article": "",
-        "Number of variants of this article": "",
-        "Number of translations for this article": "",
-        "Published": "",
-        "Insert Articles": ""
+        "Currently not published": ""
     },
-    "components\/forum": {
+    "components\/forum\/topic\/post": {
         "Edit": "",
         "Delete": "",
         "Unknown": "",
-        "Error while updating the data": "",
-        "Replies": "",
-        "Show full text": "",
-        "Hidden full text": "",
-        "Links:": "",
-        "Files:": "",
-        "unpin": "",
-        "pin": "",
-        "Reply": "",
-        "Created": "",
-        "Edited": "",
-        "LOADING": "",
+        "Files": "",
+        "Links": "",
+        "Created at %s": "",
+        "Updated at %s": "",
         "deleted": "",
-        "Go to the first page": "",
-        "Go to the previous page": "",
-        "Page": "",
-        "of": "",
-        "Go to the next page": "",
-        "Go to the last page": "",
-        "items per page": "",
-        "Display items": "",
-        "Total": "",
-        "items": "",
-        "No item": "",
-        "Refresh": ""
+        "Replies": "",
+        "Unpin": "",
+        "Pin": "",
+        "Reply": ""
     },
     "components\/media\/browser": {
         "Edit": "",
         "Delete": "",
         "Info": "",
-        "Edit media": "",
-        "Add new media": "",
         "Edit image": "",
         "Download": "",
+        "Edit media": "",
+        "Add new media": "",
         "Media(s) successfully added": "",
         "Media successfully edited": ""
+    },
+    "components\/cms\/list\/toolbar": {
+        "Delete": "",
+        "Move to another category": "",
+        "Publish": "",
+        "Unpublish": "",
+        "All": "",
+        "Published": "",
+        "Unpublished": ""
     },
     "components\/media\/groups": {
         "Delete": "",
         "New": "",
-        "Refresh": "",
         "Create new medias group": "",
         "Rename": "",
         "Are you sure you want to delete this medias group?": "",
@@ -127,27 +112,28 @@
         "Pick a link": "",
         "Link saved": "",
         "Name": "",
+        "Refresh": "",
         "Search": "",
-        "Select one or create new": "",
-        "Insert": ""
+        "Select one or create new": ""
     },
     "components\/media\/picker": {
         "Delete": "",
+        "Download": "",
         "Edit media": "",
-        "Add new media": "",
-        "Download": ""
+        "Add new media": ""
     },
     "components\/postit": {
         "Delete": "",
         "Version": "",
-        "Created": "",
         "Post-it saved": "",
         "Error while deleting": "",
+        "Edit Content": "",
         "Post-it configuration": "",
         "Post-it information": "",
         "Delete this post-it": "",
         "Edit Title": "",
-        "Edit Content": "",
+        "Untitled": "",
+        "Created": "",
         "Post-it color": "",
         "Pen color": "",
         "Pinned": "",
@@ -158,12 +144,12 @@
         "Delete": "",
         "Title": "",
         "Select an image": "",
-        "Move up": "",
-        "Move down": "",
         "Add a new feature": "",
         "Code": "",
         "Order": "",
         "No image": "",
+        "Move up": "",
+        "Move down": "",
         "Search for a note to feature in this category": "",
         "Pick a feature": "",
         "Random": "",
@@ -200,47 +186,24 @@
         "Remove": "",
         "Save": ""
     },
-    "mvc\/bookmarks_save": {
-        "New folder": "",
-        "Link": "",
-        "New bookmark": "",
-        "Folder": "",
-        "correctly inserted": "",
-        "Are you sure you want to delete this folder": "",
-        "and all it's content?": "",
-        "Folder successfully deleted": "",
-        "Something went wrong while deleting the folder": "",
-        "Are you sure you want to delete this link?": "",
-        "Link successfully deleted": "",
-        "Something went wrong while deleting the link": ""
-    },
-    "components\/cms\/settings": {
-        "Cancel": "",
-        "Title": "",
-        "Description": "",
-        "Save": "",
-        "Category": "",
-        "Page's properties": "",
-        "End of publication": "",
-        "Start of publication": "",
-        "Front Image": "",
-        "Public URL": "",
-        "Tags": "",
-        "Cache": "",
-        "Clear": ""
-    },
     "components\/widget\/news": {
         "Cancel": "",
         "Title": "",
         "Saved": "",
         "Enter a title for the note": "",
+        "There doesn't seem to be a 'news' type of note in the system": "",
         "Pub. date": "",
         "End date": "",
-        "Add": ""
+        "For who": "",
+        "Add": "",
+        "Here you can add": "",
+        "news or internal com": "",
+        "for all users": ""
     },
     "components\/widget\/personal": {
         "Cancel": "",
         "Title": "",
+        "Unknown": "",
         "Saved": "",
         "Add": ""
     },
@@ -248,14 +211,19 @@
         "URL": "",
         "In which file ?": "",
         "Title": "",
-        "URL's description": "",
-        "Pick a cover picture": "",
-        "a screenshot from the site": ""
+        "URL's description": ""
+    },
+    "components\/cms\/block\/download": {
+        "URL": "",
+        "Media": "",
+        "Are you sure you want to remove this file?": "",
+        "Select a media": ""
     },
     "components\/cms\/form\/insert": {
         "URL": "",
         "Title": "",
         "Note": "",
+        "New Category": "",
         "Article type": "",
         "Language": "",
         "Excerpt": ""
@@ -285,14 +253,11 @@
         "Description": "",
         "Remove": "",
         "Content": "",
-        "Dimensions": "",
         "Are you sure?": "",
         "ID": "",
         "Version": "",
         "Published": "",
         "Cache": "",
-        "Yes": "",
-        "No": "",
         "Clear all cache": "",
         "Filename": "",
         "General Information": "",
@@ -304,6 +269,7 @@
         "Copy": "",
         "Real path": "",
         "Image Information": "",
+        "Dimensions": "",
         "Thumbnails": "",
         "Show details": "",
         "Note title": "",
@@ -315,8 +281,6 @@
         "In which file ?": "",
         "Title": "",
         "URL's description": "",
-        "Pick a cover picture": "",
-        "a screenshot from the site": "",
         "Add Link": "",
         "Modify Link": "",
         "Delete Link": ""
@@ -353,7 +317,6 @@
         "Type": "",
         "Creator": "",
         "New": "",
-        "Page": "",
         "Creation": "",
         "Enter a title for the note": "",
         "Pub. date": "",
@@ -363,6 +326,7 @@
         "Date": "",
         "Date GMT": "",
         "Post Status": "",
+        "Page": "",
         "Show": "",
         "Find": "",
         "Tools": "",
@@ -377,38 +341,24 @@
     },
     "components\/cms\/block\/block\/image-text": {
         "Title": "",
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
         "Select an image": "",
         "Height": "",
-        "Content": "",
-        "Image": "",
-        "Width": "",
-        "Alignment": "",
-        "Alt": "",
-        "Link": "",
-        "Caption": "",
-        "Details": ""
+        "Content": ""
     },
     "components\/cms\/block\/gallery": {
         "Title": "",
         "Description": "",
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
         "Height": "",
-        "Width": "",
-        "Alignment": "",
-        "Link": "",
         "Medias Groups Management": "",
         "Gallery": "",
         "Open galleries management": "",
+        "Width": "",
+        "Alignment": "",
         "Mode": "",
-        "Fullscreen": "",
         "Crop Image": "",
         "Image width": "",
         "Column gap": "",
+        "Image alignment": "",
         "Scrollable": "",
         "Pageable": "",
         "Footer": "",
@@ -416,85 +366,87 @@
         "Info": "",
         "Info field": "",
         "Resizable": "",
-        "Toolbar": "",
-        "No value": ""
+        "Toolbar": ""
     },
     "components\/cms\/block\/image": {
         "Title": "",
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
         "Select an image": "",
         "Height": "",
-        "Content": "",
-        "Image": "",
-        "Width": "",
-        "Alignment": "",
-        "Alt": "",
-        "Link": "",
-        "Caption": "",
-        "Details": ""
+        "Content": ""
     },
     "components\/cms\/block\/image\/text": {
         "Title": "",
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
         "Select an image": "",
         "Height": "",
-        "Content": "",
-        "Image": "",
-        "Width": "",
-        "Alignment": "",
-        "Alt": "",
-        "Link": "",
-        "Caption": "",
-        "Details": "",
-        "Columns (Desktop)": "",
-        "Columns (Mobile)": ""
+        "Content": ""
     },
     "components\/cms\/block\/imagetext": {
         "Title": "",
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
         "Select an image": "",
         "Height": "",
-        "Content": "",
-        "Image": "",
-        "Width": "",
-        "Alignment": "",
-        "Alt": "",
-        "Link": "",
-        "Caption": "",
-        "Details": ""
+        "Content": ""
+    },
+    "components\/cms\/block\/slider": {
+        "Title": "",
+        "Height": "",
+        "Default": "",
+        "Top": "",
+        "Top-Left": "",
+        "Top-Right": "",
+        "Bottom": "",
+        "Bottom-Left": "",
+        "Bottom-Right": "",
+        "Medias Groups Management": "",
+        "Gallery": "",
+        "Open galleries management": "",
+        "Mode": "",
+        "Autoplay": "",
+        "Arrows": "",
+        "Arrows position": "",
+        "Preview": "",
+        "Loop": "",
+        "Show info": "",
+        "Pub. Date": "",
+        "Last edit": "",
+        "Cover": "",
+        "Contain": "",
+        "Publications": "",
+        "Features": "",
+        "Type of articles": "",
+        "Category": "",
+        "Ordered by": "",
+        "Feature": "",
+        "Css class": "",
+        "(Optional)": "",
+        "Distance block below": "",
+        "Title distance": "",
+        "(mobile)": "",
+        "Image fit": "",
+        "Max slide in line": "",
+        "Min slide in line": "",
+        "Limits": "",
+        "No items": ""
     },
     "components\/cms\/block\/title": {
         "Title": "",
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
         "Alignment": "",
-        "Color": "",
         "Tag": "",
+        "Color": "",
         "Style": "",
         "Italic": "",
         "Decoration": "",
-        "Horizontal rule": "",
-        "Underlined": "",
-        "Strikethrough": "",
-        "None": ""
+        "Horizontal rule": ""
     },
     "components\/cms\/elementor": {
         "Title": "",
         "Text": "",
-        "Image": "",
-        "Space": "",
         "Gallery": "",
         "Feature": "",
+        "Space": "",
         "Line": "",
         "Button": "",
         "Rich text (HTML)": "",
+        "Image": "",
         "Image Text": "",
         "Carousel": "",
         "Slider": "",
@@ -502,6 +454,16 @@
         "Product": "",
         "Do you want to save your changes?": "",
         "Do you want to abandon your changes?": ""
+    },
+    "components\/cms\/settings": {
+        "Title": "",
+        "Description": "",
+        "End of publication": "",
+        "Start of publication": "",
+        "Front Image": "",
+        "Public URL": "",
+        "Tags": "",
+        "Cache": ""
     },
     "components\/forum\/form": {
         "Title": "",
@@ -518,26 +480,27 @@
         "CSS code": "",
         "Files": "",
         "Links": "",
+        "Important": "",
         "Locked": ""
     },
     "components\/media\/form": {
         "Title": "",
         "Description": "",
-        "Link": "",
+        "Media": "",
         "Tags": "",
         "Something went wrong while saving the media": "",
         "Customize titles\/descriptions": "",
         "Filename": "",
-        "Media": ""
+        "Link": ""
     },
     "components\/media\/new": {
         "Title": "",
         "Description": "",
+        "Media": "",
         "Tags": "",
         "Something went wrong while saving the media": "",
         "Customize titles\/descriptions": "",
-        "Filename": "",
-        "Media": ""
+        "Filename": ""
     },
     "mvc\/news": {
         "Title": "",
@@ -558,16 +521,16 @@
     "mvc\/table_notes": {
         "Title": "",
         "Text": "",
+        "Last edit": "",
         "Category": "",
         "Type": "",
         "Creator": "",
-        "Created": "",
         "Creation": "",
+        "Created": "",
         "Are you sure you want to leave this form without saving your changes?": "",
         "Actions": "",
         "Resume": "",
         "Last version user": "",
-        "Last edit": "",
         "Option": "",
         "Blocked": "",
         "New Note": "",
@@ -589,24 +552,24 @@
         "Folder name": "",
         "Parent": ""
     },
-    "components\/cms\/block\/button": {
-        "Text": "",
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
-        "Alignment": "",
-        "Link": "",
-        "Dimensions": "",
-        "Default": "",
-        "XS": "",
-        "S": "",
-        "M": "",
-        "L": "",
-        "XL": "",
-        "XXL": "",
-        "Space": "",
-        "No space": "",
-        "Class": ""
+    "components\/cms\/editor": {
+        "Save": "",
+        "Preview": "",
+        "The block doesn't exist": "",
+        "Saved": "",
+        "Are you sure?": "",
+        "Are you sure you want to delete this block and its content?": "",
+        "Page's properties": "",
+        "widgets": "",
+        "See JSON": "",
+        "Full preview": "",
+        "Full preview in new window": "",
+        "Scroll to selected element": "",
+        "Move to start": "",
+        "Move to end": "",
+        "Create new block type": "",
+        "Delete block": "",
+        "Delete this block": ""
     },
     "components\/bookmarks\/search": {
         "1314 links": ""
@@ -614,71 +577,12 @@
     "components\/cms\/block": {
         "Block changed": ""
     },
-    "components\/cms\/block\/align": {
-        "Align left": "",
-        "Align center": "",
-        "Align right": ""
-    },
-    "components\/cms\/block\/carousel": {
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
-        "Height": "",
-        "Width": "",
-        "Alignment": "",
-        "Link": "",
-        "Default": "",
-        "Top": "",
-        "Top-Left": "",
-        "Top-Right": "",
-        "Bottom": "",
-        "Bottom-Left": "",
-        "Bottom-Right": "",
-        "Medias Groups Management": "",
-        "Gallery": "",
-        "Open galleries management": "",
-        "Mode": "",
-        "Autoplay": "",
-        "Arrows": "",
-        "Arrows position": "",
-        "Preview": "",
-        "Loop": "",
-        "Show info": "",
-        "Fullscreen": ""
-    },
-    "components\/cms\/block\/line": {
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
-        "Height": "",
-        "Width": "",
-        "Alignment": "",
-        "TOP": "",
-        "BOTTOM": "",
-        "BOTH": "",
-        "NONE": ""
-    },
-    "components\/cms\/block\/video": {
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
-        "Height": "",
-        "Width": "",
-        "Alignment": "",
-        "Autoplay": "",
-        "Loop": "",
-        "Muted": "",
-        "Controls": "",
-        "Aspect ratio": "",
-        "Video source": "",
-        "Mute the video": ""
-    },
     "components\/media\/field": {
         "Select an image": "",
         "Browse the images": "",
         "Show media information": ""
     },
-    "components\/cms\/block\/slider": {
+    "components\/cms\/block\/carousel": {
         "Height": "",
         "Default": "",
         "Top": "",
@@ -690,60 +594,37 @@
         "Medias Groups Management": "",
         "Gallery": "",
         "Open galleries management": "",
+        "Width": "",
+        "Alignment": "",
         "Mode": "",
         "Autoplay": "",
         "Arrows": "",
         "Arrows position": "",
         "Preview": "",
         "Loop": "",
-        "Show info": "",
-        "Css class": "",
-        "(Optional)": "",
-        "Type of articles": "",
-        "Category": "",
-        "Ordered by": "",
-        "Feature": "",
-        "Distance block below": "",
-        "Title distance": "",
-        "Title distance (mobile)": "",
-        "Image fit": "",
-        "Max slide in line": "",
-        "Min slide in line (mobile)": "",
-        "Limits": "",
-        "No items": ""
+        "Show info": ""
+    },
+    "components\/cms\/block\/line": {
+        "Height": ""
     },
     "components\/cms\/block\/slider_old_incomplete": {
         "Height": "",
         "Type of articles": "",
         "Ordered by": "",
         "Max slide in line": "",
-        "Limits": "",
-        "Min slide in line": ""
+        "Min slide in line": "",
+        "Limits": ""
     },
-    "components\/cms\/block\/text": {
+    "components\/cms\/block\/video": {
+        "Height": "",
+        "Width": "",
         "Alignment": "",
-        "Color": ""
-    },
-    "mvc\/masks": {
-        "Default": "",
-        "ID": "",
-        "Version": "",
-        "Modification of the standard letter": "",
-        "Are you sure you want to delete this standard letter?": "",
-        "Creation of a standard letter": "",
-        "Warning on standard letters": "",
-        "Here you can modify the standard letters but they use a system of \"templates\" with which you have to be very cautious.": "",
-        "The best is to duplicate an existing standard letter and modify it.": "",
-        "Once finished, put it in default if it is used on a feature without choice (eg certificates), and will test it in context.": "",
-        "Then you can erase the old one or else redo it if your modification returns an error.": "",
-        "Creation of a standard letter for": "",
-        "Add a standard letter": ""
-    },
-    "components\/cms\/block\/space": {
-        "Space": ""
-    },
-    "components\/cms\/block\/container": {
-        "Click here to add a new item on this line": ""
+        "Autoplay": "",
+        "Loop": "",
+        "None": "",
+        "Aspect ratio": "",
+        "Muted": "",
+        "Controls": ""
     },
     "components\/cms\/block\/product": {
         "Product Picker": "",
@@ -759,18 +640,16 @@
         "Publications": "",
         "Unpublications": ""
     },
-    "components\/cms\/editor": {
-        "Saved": "",
-        "Are you sure?": "",
-        "Are you sure you want to delete this block and its content?": "",
-        "Save the note": "",
-        "Page's properties": "",
-        "widgets": "",
-        "Delete this block": "",
-        "Move top": "",
-        "Move up": "",
-        "Move down": "",
-        "Move bottom": ""
+    "components\/cms\/form\/move": {
+        "Category": "",
+        "Choose": ""
+    },
+    "components\/cms\/block\/space": {
+        "Space": ""
+    },
+    "components\/cms\/container": {
+        "Unknown": "",
+        "Remove block": ""
     },
     "mvc\/form_markdown": {
         "Saved": "",
@@ -780,8 +659,7 @@
         "You can program the publication for now or the future": "",
         "Publication date": "",
         "You can (or not) end a publication": "",
-        "End of publication": "",
-        "Confirm": ""
+        "End of publication": ""
     },
     "mvc\/pages\/wordpress": {
         "ID": "",
@@ -796,15 +674,6 @@
         "Post modified": "",
         "Post Status": ""
     },
-    "mvc\/cms": {
-        "Article": "",
-        "Home": "",
-        "Articles' list": "",
-        "Settings": ""
-    },
-    "mvc\/cms\/cat": {
-        "Article": ""
-    },
     "components\/toolbar\/version": {
         "Version": "",
         "Versions": ""
@@ -814,9 +683,8 @@
         "All rights reserved.": "",
         "Draft": ""
     },
-    "components\/cms\/list\/toolbar": {
-        "Insert Articles": "",
-        "The Content Management System": ""
+    "components\/forum\/topic\/replies": {
+        "LOADING": ""
     },
     "components\/media\/block": {
         "The title must contain the extension of the file": "",
@@ -824,52 +692,9 @@
         "Something went wrong while changing the media title": "",
         "The title must end with the same extension of the file": ""
     },
-    "components\/media\/browser": {
-        "The title must contain the extension of the file": "",
-        "Media title successfully changed!": "",
-        "Something went wrong while changing the media title": "",
-        "The title must end with the same extension of the file": "",
-        "Edit media": "",
-        "Add new media": "",
-        "The media you're going to delete is linked to a note, are you sure you want to remove it?": "",
-        "Are you sure you want to delete this media?": "",
-        "Media successfully deleted :)": "",
-        "Something went wrong while deleting the media :(": "",
-        "The extension in the title or in the filename doesn't match the extension of the file inserted!": "",
-        "Media successfully added to media browser": "",
-        "Media successfully updated": "",
-        "Something went wrong while adding the media to the media broser": "",
-        "Delete media": "",
-        "Yes": "",
-        "No": ""
-    },
-    "components\/media\/browser3": {
-        "The title must contain the extension of the file": "",
-        "Media title successfully changed!": "",
-        "Something went wrong while changing the media title": "",
-        "The title must end with the same extension of the file": "",
-        "Edit media": "",
-        "Add new media": "",
-        "The media you're going to delete is linked to a note, are you sure you want to remove it?": "",
-        "Are you sure you want to delete this media?": "",
-        "Media successfully deleted :)": "",
-        "Something went wrong while deleting the media :(": "",
-        "Media successfully added to media browser": "",
-        "Media successfully updated": "",
-        "Something went wrong while adding the media to the media broser": "",
-        "Delete media": "",
-        "Yes": "",
-        "No": ""
-    },
     "components\/media\/list": {
         "Edit media": "",
         "Delete media": ""
-    },
-    "mvc\/media": {
-        "Are you sure you want to delete this media?": "",
-        "Browser": "",
-        "Media successfully deleted": "",
-        "Something went wrong while deleting the media": ""
     },
     "mvc\/cms\/settings": {
         "Name": "",
@@ -891,8 +716,9 @@
     "mvc\/notes": {
         "Search": "",
         "Write here your content": "",
-        "Don't forget!": "",
-        "Add a new Post-It": ""
+        "Create new folder": "",
+        "Reload the folders list": "",
+        "Don't forget!": ""
     },
     "mvc\/post-it": {
         "Search": ""
@@ -901,35 +727,49 @@
         "Search for a note": ""
     },
     "components\/postits": {
-        "Write here your content": "",
-        "Don't forget!": "",
-        "Add a new Post-It": ""
-    },
-    "components\/search\/cms": {
-        "V": "",
-        "Version number": "",
-        "This is the latest version": "",
-        "This is not the latest version": ""
-    },
-    "components\/search\/item": {
-        "V": "",
-        "Version number": "",
-        "This is the latest version": "",
-        "This is not the latest version": ""
+        "Write here your content": ""
     },
     "mvc\/form_rte": {
         "Are you sure you want to leave this form without saving your changes?": ""
     },
-    "mvc\/list": {
-        "All categories": ""
+    "mvc\/cms\/cat": {
+        "Article": ""
     },
-    "mvc\/cms\/square": {
-        "Add a new block to this row": "",
-        "Edit blocks in this row": ""
+    "mvc\/cms": {
+        "Settings": ""
+    },
+    "mvc\/masks": {
+        "Modification of the standard letter": "",
+        "Are you sure you want to delete this standard letter?": "",
+        "Creation of a standard letter": "",
+        "Warning on standard letters": "",
+        "Here you can modify the standard letters but they use a system of \"templates\" with which you have to be very cautious.": "",
+        "The best is to duplicate an existing standard letter and modify it.": "",
+        "Once finished, put it in default if it is used on a feature without choice (eg certificates), and will test it in context.": "",
+        "Then you can erase the old one or else redo it if your modification returns an error.": "",
+        "Creation of a standard letter for": ""
+    },
+    "mvc\/media": {
+        "Media successfully deleted": "",
+        "Something went wrong while deleting the media": "",
+        "Are you sure you want to delete this media?": ""
+    },
+    "mvc\/cms\/import": {
+        "Select an XML file": "",
+        "Read XML file": "",
+        "Parse XML file": "",
+        "Make items": "",
+        "Import medias": "",
+        "Import categories": "",
+        "Import tags": "",
+        "Import posts": "",
+        "Are you sure you want to reset the import process?": ""
     },
     "": {
         "News": "",
         "Personal notes": "",
-        "Found in content": ""
+        "Found in content": "",
+        "Articles' contents": "",
+        "Articles' titles": ""
     }
 }

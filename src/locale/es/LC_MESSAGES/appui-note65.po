@@ -1,0 +1,2011 @@
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/block/block.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/item/item.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/list/list.js
+msgid "Edit Form"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/block/block.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/item/item.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/list/list.js
+msgid "New Form"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/block/block.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/item/item.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/topic/post/post.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
+msgid "Edit"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/block/block.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/item/item.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/toolbar/toolbar.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/topic/post/post.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/picker/picker.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
+msgid "Delete"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/block/block.php
+msgid "links"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.js
+msgid "The name of the folder cannot be 'ROOT'"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.js
+msgid "The name of the folder cannot be an empty string"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
+msgid "Create the link at root"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
+msgid "Create the folder in"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
+msgid "Create the folder at root or select a folder from the tree"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
+msgid "New folder"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/personal/personal.php
+msgid "Cancel"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/folder/folder.php
+msgid "Create folder"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/download/download.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/insert/insert.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/new/new.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/popupLink/popupLink.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/formTest.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "URL"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/popupLink/popupLink.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/formTest.php
+msgid "In which file ?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/insert/insert.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/new/new.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/new/new.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/popupLink/popupLink.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/personal/personal.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/formTest.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/publications.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Title"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/popupLink/popupLink.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/formTest.php
+msgid "URL's description"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.js
+msgid "Insert the link in the folder"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
+msgid "Edit this link"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.js
+msgid "Are you sure you want to save changes?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.js
+msgid "Are you sure you want to remove this link?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
+msgid "Text"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
+msgid "Link title"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/new/new.php
+msgid "Description"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
+msgid "Url"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
+msgid "Type or paste your URL and press Enter to valid"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "Remove"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/link/link.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
+msgid "Save"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/list/list.js
+msgid "Are you sure you want to delete all your bookmarks ?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/list/list.php
+msgid "No Bookmarks yet"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/search/search.php
+msgid "1314 links"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
+msgid "Delete this link"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
+msgid "Delete this"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
+msgid "Edit this"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
+msgid "Path"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
+msgid "This folder is empty"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
+msgid "Folder name"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/bookmarks/show/show.php
+msgid "Parent"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block.js
+msgid "Block changed"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/field/field.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
+msgid "Select an image"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/line/line.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider_old_incomplete/slider.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
+msgid "Height"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/block/image-text/image-text.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/image.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/image/text/text.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/imagetext/imagetext.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Content"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+msgid "Default"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+msgid "Top"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+msgid "Top-Left"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+msgid "Top-Right"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+msgid "Bottom"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+msgid "Bottom-Left"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+msgid "Bottom-Right"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+msgid "Medias Groups Management"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+msgid "Gallery"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+msgid "Open galleries management"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
+msgid "Width"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
+msgid "Alignment"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+msgid "Mode"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
+msgid "Autoplay"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+msgid "Arrows"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+msgid "Arrows position"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
+msgid "Preview"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
+msgid "Loop"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/carousel/carousel.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+msgid "Show info"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/download/download.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/new/new.php
+msgid "Media"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/download/download.js
+msgid "Are you sure you want to remove this file?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/download/download.js
+msgid "Select a media"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+msgid "Crop Image"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+msgid "Image width"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+msgid "Column gap"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+msgid "Image alignment"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+msgid "Scrollable"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+msgid "Pageable"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+msgid "Footer"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+msgid "Zoomable"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
+msgid "Info"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+msgid "Info field"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+msgid "Resizable"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/gallery/gallery.php
+msgid "Toolbar"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
+msgid "Product Picker"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
+msgid "Show image"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
+msgid "Show price"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
+msgid "Show edition"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
+msgid "Show type"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
+msgid "Show Sold out"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
+msgid "Show 'Add to cart' button "
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/product/product.php
+msgid "Add to cart"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+msgid "Pub. Date"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/table_notes.js
+msgid "Last edit"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+msgid "Cover"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+msgid "Contain"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/dashboard/dashboard.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/publications.php
+msgid "Publications"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/features.php
+msgid "Features"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider_old_incomplete/slider.php
+msgid "Type of articles"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/move/move.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
+msgid "Category"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider_old_incomplete/slider.php
+msgid "Ordered by"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+msgid "Feature"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+msgid "Css class"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+msgid "(Optional)"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+msgid "Distance block below"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+msgid "Title distance"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+msgid "(mobile)"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+msgid "Image fit"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider_old_incomplete/slider.php
+msgid "Max slide in line"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider_old_incomplete/slider.php
+msgid "Min slide in line"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider_old_incomplete/slider.php
+msgid "Limits"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/slider/slider.php
+msgid "No items"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/space/space.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+msgid "Space"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
+msgid "Tag"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
+msgid "Color"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
+msgid "Style"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
+msgid "Italic"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
+msgid "Decoration"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/title/title.php
+msgid "Horizontal rule"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.js
+msgid "None"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
+msgid "Aspect ratio"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
+msgid "Muted"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/block/video/video.php
+msgid "Controls"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/container/container.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/topic/post/post.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/personal/personal.js
+msgid "Unknown"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/container/container.php
+msgid "Remove block"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/dashboard/dashboard.js
+msgid "Unpublications"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.js
+msgid "The block doesn't exist"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/personal/personal.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/form_markdown.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/news.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Saved"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.js
+msgid "Are you sure?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.js
+msgid "Are you sure you want to delete this block and its content?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
+msgid "Page's properties"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
+msgid "widgets"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
+msgid "See JSON"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
+msgid "Full preview"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
+msgid "Full preview in new window"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
+msgid "Scroll to selected element"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
+msgid "Move to start"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
+msgid "Move to end"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
+msgid "Create new block type"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
+msgid "Delete block"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/editor/editor.php
+msgid "Delete this block"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+msgid "Line"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+msgid "Button"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+msgid "Rich text (HTML)"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+msgid "Image"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+msgid "Image Text"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+msgid "Carousel"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+msgid "Slider"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+msgid "Video"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+msgid "Product"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+msgid "Do you want to save your changes?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/elementor/elementor.js
+msgid "Do you want to abandon your changes?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/insert/insert.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/new/new.js
+msgid "Note"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/insert/insert.js
+msgid "New Category"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/insert/insert.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/new/new.php
+msgid "Article type"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/insert/insert.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/new/new.php
+msgid "Language"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/insert/insert.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Excerpt"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/move/move.php
+msgid "Choose"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/publish/publish.php
+msgid "You can program the publication for now or the future"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/publish/publish.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
+msgid "Publication date"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/publish/publish.php
+msgid "You can (or not) end a publication"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/form/publish/publish.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
+msgid "End of publication"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Post"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "ID"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/toolbar/version/version.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Version"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Cover image"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Type"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
+msgid "Start of publication"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Since"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Creator"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Number of medias associated with this entry"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/toolbar/toolbar.js
+msgid "Move to another category"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/toolbar/toolbar.js
+msgid "Publish"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/toolbar/toolbar.js
+msgid "Unpublish"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Open in a new window"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "New"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Post publication"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Are you sure you want to cease the publication of this post?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Are you sure you want to cease the publication of the selected posts?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Successfully removed from publications"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Error in this action"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Are you sure you want to delete the selected posts?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Are you sure to delete this post?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "There is also one variant"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "There are also %d variants"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "and also one translation"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "There is also one translation"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "and also %d translations"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "There are also %d translations"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "which will be deleted too"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Successfully deleted"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Error in deleting"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Move post to another category"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Media correctly added to the note"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Something went wrong while adding the media to the note"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Currently published"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/list.js
+msgid "Currently not published"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/toolbar/toolbar.js
+msgid "All"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/toolbar/toolbar.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/preview/index.js
+msgid "Published"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/list/toolbar/toolbar.js
+msgid "Unpublished"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
+msgid "Front Image"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
+msgid "Public URL"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/new/new.php
+msgid "Tags"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/cms/settings/settings.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "Cache"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.js
+msgid "Simple text"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.js
+msgid "Rich text"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.js
+msgid "Markdown"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.js
+msgid "PHP code"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.js
+msgid "JavaScript code"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.js
+msgid "CSS code"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/topic/post/post.php
+msgid "Files"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/topic/post/post.php
+msgid "Links"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
+msgid "Important"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
+msgid "Locked"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/topic/post/post.js
+msgid "Created at %s"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/topic/post/post.js
+msgid "Updated at %s"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/topic/post/post.php
+msgid "deleted"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/topic/post/post.php
+msgid "Replies"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/topic/post/post.php
+msgid "Unpin"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/topic/post/post.php
+msgid "Pin"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/topic/post/post.php
+msgid "Reply"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/forum/topic/replies/replies.php
+msgid "LOADING"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/block/block.js
+msgid "The title must contain the extension of the file"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/block/block.js
+msgid "Media title successfully changed!"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/block/block.js
+msgid "Something went wrong while changing the media title"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/block/block.js
+msgid "The title must end with the same extension of the file"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
+msgid "Edit image"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/picker/picker.js
+msgid "Download"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/list/list.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/picker/picker.js
+msgid "Edit media"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/picker/picker.js
+msgid "Add new media"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
+msgid "Media(s) successfully added"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/browser/browser.js
+msgid "Media successfully edited"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/new/new.js
+msgid "Something went wrong while saving the media"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.php
+msgid "File"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/editor/editor.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "Clear all cache"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/field/field.php
+msgid "Browse the images"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/field/field.php
+msgid "Show media information"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/new/new.php
+msgid "Customize titles/descriptions"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/new/new.php
+msgid "Filename"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/form/form.php
+msgid "Link"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
+msgid "Create new medias group"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.php
+msgid "Rename"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
+msgid "Are you sure you want to delete this medias group?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
+msgid "Are you sure you want to remove these medias from this group?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
+msgid "Select media(s)"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
+msgid "Edit Link"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
+msgid "Insert Link"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
+msgid "Pick a link"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
+msgid "Link saved"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
+msgid "Name"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.php
+msgid "Refresh"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/notes.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/post-it.php
+msgid "Search"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/groups/groups.php
+msgid "Select one or create new"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "General Information"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "MIME type"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "User"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "Size"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "Extension"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "Internal Information"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "Copy"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "Real path"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "Image Information"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "Dimensions"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "Thumbnails"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "Show details"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "Note title"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Creation"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/info/info.php
+msgid "Note content"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/media/list/list.js
+msgid "Delete media"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/picker/picker.js
+msgid "Search for a note"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/popupLink/popupLink.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/formTest.php
+msgid "Add Link"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/popupLink/popupLink.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/formTest.php
+msgid "Modify Link"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/popupLink/popupLink.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/formTest.php
+msgid "Delete Link"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.js
+msgid "Post-it saved"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.js
+msgid "Error while deleting"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
+msgid "Edit Content"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
+msgid "Post-it configuration"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
+msgid "Post-it information"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
+msgid "Delete this post-it"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
+msgid "Edit Title"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
+msgid "Untitled"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/table_notes.js
+msgid "Created"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
+msgid "Post-it color"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
+msgid "Pen color"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
+msgid "Pinned"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
+msgid "It will be removed from the Pinned post-its panel"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postit/postit.php
+msgid "It will be added to the pinned post-its panel"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/postits/postits.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/notes.js
+msgid "Write here your content"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/toolbar/version/version.php
+msgid "Versions"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Enter a title for the note"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.js
+msgid "There doesn't seem to be a 'news' type of note in the system"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/publications.php
+msgid "Pub. date"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
+msgid "End date"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.php
+msgid "For who"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/personal/personal.php
+msgid "Add"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.php
+msgid "Here you can add"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.php
+msgid "news or internal com"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/components/widget/news/news.php
+msgid "for all users"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
+msgid "Add a new feature"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
+msgid "Code"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
+msgid "Order"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
+msgid "No image"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
+msgid "Move up"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
+msgid "Move down"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
+msgid "Search for a note to feature in this category"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/features.php
+msgid "Pick a feature"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
+msgid "Mime"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
+msgid "lang"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
+msgid "Private"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
+msgid "Start"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form.php
+msgid "End"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form_markdown.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/form_rte.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
+msgid "Are you sure you want to leave this form without saving your changes?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/news.js
+msgid "New message"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Author"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
+msgid "Creation date"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
+msgid "Start date"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
+msgid "Actions"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
+msgid "See"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/news.php
+msgid "Mod."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/publications.php
+msgid "Publications' management"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
+msgid "Resume"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
+msgid "Last version user"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
+msgid "Option"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/table_notes.php
+msgid "Blocked"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/cat.php
+msgid "Article"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
+msgid "Pick a type"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
+msgid "URL prefix"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
+msgid "Use main image"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
+msgid "Use option column"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
+msgid "Option title"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
+msgid "Option root"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
+msgid "Editor type"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
+msgid "Pick one..."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
+msgid "Select a blocktype here"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
+msgid "Leave default"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
+msgid "Set value"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/settings.php
+msgid "Let user decide"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/cms/preview/index.php
+msgid "All rights reserved."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
+msgid "Post Type"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
+msgid "Post Name"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
+msgid "Page url"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Post title"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
+msgid "Post Content"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Date"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Date GMT"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
+msgid "Post modified"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/html/pages/wordpress.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Post Status"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/cms/settings.php
+msgid "Settings"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
+msgid "Random"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
+msgid "Latest published"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
+msgid "Earliest published"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
+msgid "Manual order"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
+msgid "Add successful"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
+msgid "Remove successful"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
+msgid "Update successful"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/features.js
+msgid "New category"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
+msgid "Modification of the standard letter"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
+msgid "Are you sure you want to delete this standard letter?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
+msgid "Creation of a standard letter"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
+msgid "Warning on standard letters"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
+msgid ""
+"Here you can modify the standard letters but they use a system of \"templates\" "
+"with which you have to be very cautious."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
+msgid "The best is to duplicate an existing standard letter and modify it."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
+msgid ""
+"Once finished, put it in default if it is used on a feature without choice (eg "
+"certificates), and will test it in context."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
+msgid ""
+"Then you can erase the old one or else redo it if your modification returns an "
+"error."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/masks.js
+msgid "Creation of a standard letter for"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/media.js
+msgid "Media successfully deleted"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/media.js
+msgid "Something went wrong while deleting the media"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/media.js
+msgid "Are you sure you want to delete this media?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/news.js
+msgid "Edit message"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/news.js
+msgid "Error"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/notes.js
+msgid "Create new folder"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/notes.js
+msgid "Reload the folders list"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/notes.js
+msgid "Don't forget!"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Page"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Show"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Find"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Tools"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Import"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Export"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/table_notes.js
+msgid "New Note"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Post name"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Modified"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Are you sure you import the posts?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Import performed"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/publications.js
+msgid "Error Import"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/table_notes.js
+msgid "Click on the first column of this row to view full content"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/table_notes.js
+msgid "by"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/table_notes.js
+msgid "Unknown user"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/table_notes.js
+msgid "Editing a mailing"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/import.js
+msgid "Select an XML file"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/import.js
+msgid "Read XML file"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/import.js
+msgid "Parse XML file"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/import.js
+msgid "Make items"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/import.js
+msgid "Import medias"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/import.js
+msgid "Import categories"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/import.js
+msgid "Import tags"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/import.js
+msgid "Import posts"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/import.js
+msgid "Are you sure you want to reset the import process?"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/settings.js
+msgid "Options"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/js/cms/preview/index.js
+msgid "Draft"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/folders.php
+msgid "No text has been entered"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/actions/delete.php
+msgid "One or more posts could not be deleted"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/actions/insert.php
+msgid "Impossible to create the note"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/actions/move.php
+msgid "One or more posts could not be moved in category"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/actions/publish.php
+msgid "One or more posts could not be published"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/actions/unpublish.php
+msgid "One or more posts could not be unpublished"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/categories.php
+msgid "Deleted %d of %d categories."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/categories.php
+msgid "No bbn-cms editor"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/categories.php
+msgid "No note types option"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/categories.php
+msgid "Process launch successfully, added %d categories of %d."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/make.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/parse.php
+msgid "Process undo successfully."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/make.php
+msgid "Process launch successfully, %d posts files created."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/make.php
+msgid "Problem during the launch process"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/medias.php
+msgid "Deleted %d medias."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/medias.php
+msgid "Process launch successfully, %d medias not found vs %d found"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/parse.php
+msgid "No baseUrl"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/parse.php
+msgid "Process launch successfully, %d JSON files created."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/posts.php
+msgid "Deleted %d rows."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/posts.php
+msgid "Process launch successfully, %d posts inserted."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/read.php
+msgid "Process undo successfully, folder deleted"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/read.php
+msgid "No folder to delete"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/read.php
+msgid "Process launch successfully, %d files created"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/tags.php
+msgid "Deleted %d tags."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/cms/import/tags.php
+msgid "Process launch successfully, added %d tags of %d."
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/media/editor.php
+msgid "Editor"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/media/actions/edit.php
+msgid "Error while replacing the media"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/media/actions/edit.php
+msgid "Error while replacing the media title"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/model/media/actions/edit.php
+msgid "Error while replacing the media description"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/cms.php
+msgid "CMS"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/form.php
+msgid "Notes Form"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/form_markdown.php
+msgid "Markdown editor"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/form_rte.php
+msgid "Note Editor (Markdown)"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/list.php
+msgid "All the notes"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/media.php
+msgid "Medias"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/news.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/plugins/appui-dashboard/model/news.php
+msgid "News"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/notes.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/post-it.php
+msgid "My post-it"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/prove_notes.php
+msgid "Notes' tree"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/table_notes.php
+msgid "Notes"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/actions/get.php
+msgid "Impossible to find the note"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/cms/article.php
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/cms/editor.php
+msgid "No arguments"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/cms/cat.php
+msgid "Articles' List"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/cms/import.php
+msgid "Done"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/cms/import.php
+msgid "WP Import"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/mvc/public/editor/index.php
+msgid "Rich Text Editor frame"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/plugins/appui-dashboard/model/personal.php
+msgid "Personal notes"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/plugins/appui-search/model/cms-content.php
+msgid "Found in content"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/plugins/appui-search/model/cms-content.php
+msgid "Articles' contents"
+msgstr ""
+
+#: /home/nabab/web/_COMPOSER/dev/vendor/bbn/appui-note/src/plugins/appui-search/model/cms-title.php
+msgid "Articles' titles"
+msgstr ""

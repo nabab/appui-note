@@ -25,8 +25,7 @@
 	                 required="required"
 									 height="100%"/>
       </div>
-      <div class="bbn-w-100 bbn-r"
-					 style="margin-top: 20px">
+      <div class="bbn-w-100 bbn-r bbn-top-spadding">
         <bbn-button style="margin-right:0.5em"
                     @click="$refs.form.submit()"
 										icon="nf nf-fa-save"
@@ -38,7 +37,7 @@
 
     </bbn-form>
   </div>
-  <div bbn-else class="bbn-padding">
+  <div bbn-else>
     <ul class="bbn-no-padding bbn-no-margin"
         bbn-if="source?.items">
       <div bbn-for="item in source.items"

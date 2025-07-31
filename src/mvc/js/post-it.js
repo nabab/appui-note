@@ -26,6 +26,14 @@
           return this.source.notes;
         }
       }
+    },
+    methods: {
+      removeItem(source) {
+        const idx = bbn.fn.search(this.source.notes, {id: source.id});
+        if (this.source.notes[idx]) {
+          this.source.notes.splice(idx, 1);
+        }
+      }
     }
   }
 })();

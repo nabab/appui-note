@@ -10,20 +10,14 @@
         "Edit Form": "",
         "New Form": "",
         "Edit": "Modifier",
-        "Delete": "Supprimer",
-        "Open the link": ""
+        "Delete": "Supprimer"
     },
     "components\/bookmarks\/list": {
         "Edit Form": "",
         "New Form": "",
         "Edit": "Modifier",
-        "Are you sure you want to delete all your bookmarks ?": "",
-        "No Bookmarks yet": ""
-    },
-    "mvc\/bookmarks": {
-        "Edit Form": "",
-        "New Form": "",
-        "Edit": "Modifier"
+        "Are you sure you want to delete all your bookmarks ?": "\u00cates-vous s\u00fbr de vouloir supprimer tous vos favoris?",
+        "No Bookmarks yet": "Aucun favori"
     },
     "components\/cms\/list": {
         "Edit": "Modifier",
@@ -31,12 +25,12 @@
         "URL": "URL",
         "Title": "Titre",
         "Category": "Cat\u00e9gorie",
-        "Note": "Note",
+        "Unknown": "Inconnu",
         "Excerpt": "",
         "Publication date": "Date de publication",
         "End of publication": "",
+        "Post": "Post",
         "ID": "ID",
-        "Article": "",
         "Version": "Version",
         "Cover image": "",
         "Type": "Type",
@@ -44,79 +38,70 @@
         "Since": "",
         "Creator": "Cr\u00e9ateur",
         "Number of medias associated with this entry": "",
+        "Move to another category": "",
         "Publish": "Publier",
         "Unpublish": "",
+        "Open in a new window": "",
         "New": "Nouveau",
-        "Are you sure you want to cease the publication of this note?": "",
+        "Post publication": "",
+        "Are you sure you want to cease the publication of this post?": "",
+        "Are you sure you want to cease the publication of the selected posts?": "",
         "Successfully removed from publications": "",
         "Error in this action": "",
-        "Are you sure to delete this note?": "Are you sure to delete this note?",
+        "Are you sure you want to delete the selected posts?": "",
+        "Are you sure to delete this post?": "",
         "There is also one variant": "",
         "There are also %d variants": "",
         "and also one translation": "",
-        "and also %d translations": "",
-        "which will be deleted too": "",
         "There is also one translation": "",
+        "and also %d translations": "",
         "There are also %d translations": "",
+        "which will be deleted too": "",
         "Successfully deleted": "Suppression faite avec succ\u00e8s",
         "Error in deleting": "Erreur pendant la suppression",
+        "Move post to another category": "",
         "Media correctly added to the note": "M\u00e9dia ajout\u00e9 \u00e0 la note",
         "Something went wrong while adding the media to the note": "Quelque chose n'a pas fonctionn\u00e9 lors de l'ajout du m\u00e9dia \u00e0 la note",
         "Currently published": "",
-        "Currently not published": "",
-        "Never published": "",
-        "Open the article in a new window": "",
-        "Number of medias directly linked to this article": "",
-        "Number of variants of this article": "",
-        "Number of translations for this article": "",
-        "Published": "Publi\u00e9",
-        "Insert Articles": ""
+        "Currently not published": ""
     },
-    "components\/forum": {
+    "components\/forum\/topic\/post": {
         "Edit": "Modifier",
         "Delete": "Supprimer",
         "Unknown": "Inconnu",
-        "Error while updating the data": "Erreur pendant la mise \u00e0 jour des donn\u00e9es",
-        "Replies": "R\u00e9ponses",
-        "Show full text": "Voir tout le texte",
-        "Hidden full text": "Texte entier cach\u00e9",
-        "Links:": "Liens:",
-        "Files:": "Fichiers:",
-        "unpin": "D\u00e9s\u00e9pingler",
-        "pin": "\u00c9pingler",
-        "Reply": "R\u00e9pondre",
-        "Created": "Cr\u00e9\u00e9",
-        "Edited": "Modifi\u00e9",
-        "LOADING": "CHARGEMENT",
+        "Files": "Fichiers",
+        "Links": "Liens",
+        "Created at %s": "",
+        "Updated at %s": "",
         "deleted": "Supprim\u00e9",
-        "Go to the first page": "Aller \u00e0 la premi\u00e8re page",
-        "Go to the previous page": "Aller \u00e0 la page pr\u00e9c\u00e9dente",
-        "Page": "Page",
-        "of": "de",
-        "Go to the next page": "Aller \u00e0 la page suivante",
-        "Go to the last page": "Aller \u00e0 la derni\u00e8re page",
-        "items per page": "\u00e9l\u00e9ments par page",
-        "Display items": "Montrer les \u00e9leements",
-        "Total": "Total",
-        "items": "\u00c9l\u00e9ments",
-        "No item": "Aucun \u00e9l\u00e9ment",
-        "Refresh": "Rafra\u00eechir"
+        "Replies": "R\u00e9ponses",
+        "Unpin": "D\u00e9s\u00e9pingler",
+        "Pin": "\u00c9pingler",
+        "Reply": "R\u00e9pondre"
     },
     "components\/media\/browser": {
         "Edit": "Modifier",
         "Delete": "Supprimer",
         "Info": "Info",
-        "Edit media": "Modifier le m\u00e9dia",
-        "Add new media": "Ajouter un nouveau m\u00e9dia",
         "Edit image": "",
         "Download": "",
+        "Edit media": "Modifier le m\u00e9dia",
+        "Add new media": "Ajouter un nouveau m\u00e9dia",
         "Media(s) successfully added": "",
         "Media successfully edited": ""
+    },
+    "components\/cms\/list\/toolbar": {
+        "Delete": "Supprimer",
+        "Move to another category": "",
+        "Publish": "Publier",
+        "Unpublish": "",
+        "All": "Toutes",
+        "Published": "Publi\u00e9",
+        "Unpublished": ""
     },
     "components\/media\/groups": {
         "Delete": "Supprimer",
         "New": "Nouveau",
-        "Refresh": "Rafra\u00eechir",
         "Create new medias group": "",
         "Rename": "Renommer",
         "Are you sure you want to delete this medias group?": "",
@@ -127,27 +112,28 @@
         "Pick a link": "",
         "Link saved": "",
         "Name": "Nom",
+        "Refresh": "Rafra\u00eechir",
         "Search": "Recherche",
-        "Select one or create new": "",
-        "Insert": "Insert"
+        "Select one or create new": ""
     },
     "components\/media\/picker": {
         "Delete": "Supprimer",
+        "Download": "",
         "Edit media": "Modifier le m\u00e9dia",
-        "Add new media": "Ajouter un nouveau m\u00e9dia",
-        "Download": ""
+        "Add new media": "Ajouter un nouveau m\u00e9dia"
     },
     "components\/postit": {
         "Delete": "Supprimer",
         "Version": "Version",
-        "Created": "Cr\u00e9\u00e9",
         "Post-it saved": "",
         "Error while deleting": "Erreur pendant la suppression",
+        "Edit Content": "Modifier le contenu",
         "Post-it configuration": "",
         "Post-it information": "",
         "Delete this post-it": "",
         "Edit Title": "Modifier le titre",
-        "Edit Content": "Modifier le contenu",
+        "Untitled": "Sans titre",
+        "Created": "Cr\u00e9\u00e9",
         "Post-it color": "",
         "Pen color": "",
         "Pinned": "",
@@ -157,13 +143,13 @@
     "mvc\/features": {
         "Delete": "Supprimer",
         "Title": "Titre",
-        "Select an image": "",
-        "Move up": "",
-        "Move down": "",
+        "Select an image": "S\u00e9lectionner une image",
         "Add a new feature": "",
         "Code": "Code",
         "Order": "Ordre",
         "No image": "",
+        "Move up": "",
+        "Move down": "",
         "Search for a note to feature in this category": "",
         "Pick a feature": "",
         "Random": "",
@@ -176,7 +162,7 @@
         "New category": ""
     },
     "components\/bookmarks\/folder": {
-        "The name of the folder cannot be 'ROOT'": "Le dossier ne peut pas s'appeler 'ROOT'",
+        "The name of the folder cannot be 'ROOT'": "Le dossier ne peut pas s'appeler ROOT'",
         "The name of the folder cannot be an empty string": "Le nom du dossier ne peut pas \u00eatre vide",
         "Create the link at root": "Cr\u00e9er le lien \u00e0 la racine",
         "Create the folder in": "Cr\u00e9er le lien dans",
@@ -200,62 +186,44 @@
         "Remove": "Supprimer",
         "Save": "Sauvegarder"
     },
-    "mvc\/bookmarks_save": {
-        "New folder": "Nouveau dossier",
-        "Link": "Lien",
-        "New bookmark": "Nouveau lien",
-        "Folder": "Dossier",
-        "correctly inserted": "ins\u00e9r\u00e9 correctement",
-        "Are you sure you want to delete this folder": "\u00cates-vous s\u00fbr de vouloir supprimer ce dossier",
-        "and all it's content?": "et tout son contenu?",
-        "Folder successfully deleted": "Suppression du dossier r\u00e9ussie",
-        "Something went wrong while deleting the folder": "Quelque chose n'a pas foncitonn\u00e9 durant la suppression du dossier",
-        "Are you sure you want to delete this link?": "\u00cates-vous s\u00fbr de vouloir supprimer ce lien?",
-        "Link successfully deleted": "Suppression du lien r\u00e9ussie",
-        "Something went wrong while deleting the link": "Quelque chose n'a pas fonctionn\u00e9 durant la suppression du lien"
-    },
-    "components\/cms\/settings": {
-        "Cancel": "Annuler",
-        "Title": "Titre",
-        "Description": "Description",
-        "Save": "Sauvegarder",
-        "Category": "Cat\u00e9gorie",
-        "Page's properties": "",
-        "End of publication": "",
-        "Start of publication": "",
-        "Front Image": "",
-        "Public URL": "",
-        "Tags": "Tags",
-        "Cache": "",
-        "Clear": "Remettre \u00e0 z\u00e9ro"
-    },
     "components\/widget\/news": {
         "Cancel": "Annuler",
         "Title": "Titre",
         "Saved": "Sauvegard\u00e9",
         "Enter a title for the note": "Entrer un titre pour la note",
+        "There doesn't seem to be a 'news' type of note in the system": "",
         "Pub. date": "Publication",
         "End date": "Fin de publ.",
-        "Add": "Ajouter"
+        "For who": "",
+        "Add": "Ajouter",
+        "Here you can add": "",
+        "news or internal com": "",
+        "for all users": ""
     },
     "components\/widget\/personal": {
         "Cancel": "Annuler",
         "Title": "Titre",
+        "Unknown": "Inconnu",
         "Saved": "Sauvegard\u00e9",
         "Add": "Ajouter"
     },
     "components\/bookmarks\/form": {
         "URL": "URL",
-        "In which file ?": "",
+        "In which file ?": "dans quel fichier?",
         "Title": "Titre",
-        "URL's description": "",
-        "Pick a cover picture": "",
-        "a screenshot from the site": ""
+        "URL's description": "Description de l'URL"
+    },
+    "components\/cms\/block\/download": {
+        "URL": "URL",
+        "Media": "m\u00e9dia",
+        "Are you sure you want to remove this file?": "\u00cates-vous s\u00fbr de vouloir enlever ce fichier?",
+        "Select a media": "Choisissez un m\u00e9dia"
     },
     "components\/cms\/form\/insert": {
         "URL": "URL",
         "Title": "Titre",
         "Note": "Note",
+        "New Category": "",
         "Article type": "",
         "Language": "Langue",
         "Excerpt": ""
@@ -285,14 +253,11 @@
         "Description": "Description",
         "Remove": "Supprimer",
         "Content": "Contenu",
-        "Dimensions": "",
         "Are you sure?": "",
         "ID": "ID",
         "Version": "Version",
         "Published": "Publi\u00e9",
         "Cache": "",
-        "Yes": "Oui",
-        "No": "Non",
         "Clear all cache": "",
         "Filename": "",
         "General Information": "",
@@ -304,6 +269,7 @@
         "Copy": "Copier",
         "Real path": "Chemin du fichier",
         "Image Information": "",
+        "Dimensions": "Dimensions",
         "Thumbnails": "",
         "Show details": "",
         "Note title": "",
@@ -312,11 +278,9 @@
     },
     "components\/popupLink": {
         "URL": "URL",
-        "In which file ?": "",
+        "In which file ?": "dans quel fichier?",
         "Title": "Titre",
-        "URL's description": "",
-        "Pick a cover picture": "",
-        "a screenshot from the site": "",
+        "URL's description": "Description de l'URL",
         "Add Link": "",
         "Modify Link": "",
         "Delete Link": ""
@@ -336,9 +300,9 @@
     },
     "mvc\/formTest": {
         "URL": "URL",
-        "In which file ?": "",
+        "In which file ?": "dans quel fichier?",
         "Title": "Titre",
-        "URL's description": "",
+        "URL's description": "Description de l'URL",
         "Add Link": "",
         "Modify Link": "",
         "Delete Link": ""
@@ -353,7 +317,6 @@
         "Type": "Type",
         "Creator": "Cr\u00e9ateur",
         "New": "Nouveau",
-        "Page": "Page",
         "Creation": "Cr\u00e9ation",
         "Enter a title for the note": "Entrer un titre pour la note",
         "Pub. date": "Publication",
@@ -363,6 +326,7 @@
         "Date": "Date",
         "Date GMT": "Date GMT",
         "Post Status": "Statut de la publication",
+        "Page": "Page",
         "Show": "Montrer",
         "Find": "Trouver",
         "Tools": "Outils",
@@ -377,124 +341,112 @@
     },
     "components\/cms\/block\/block\/image-text": {
         "Title": "Titre",
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
-        "Select an image": "",
-        "Height": "",
-        "Content": "Contenu",
-        "Image": "",
-        "Width": "",
-        "Alignment": "",
-        "Alt": "",
-        "Link": "Lien",
-        "Caption": "",
-        "Details": "D\u00e9tails"
+        "Select an image": "S\u00e9lectionner une image",
+        "Height": "Hauteur",
+        "Content": "Contenu"
     },
     "components\/cms\/block\/gallery": {
         "Title": "Titre",
         "Description": "Description",
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
-        "Height": "",
-        "Width": "",
-        "Alignment": "",
-        "Link": "Lien",
-        "Medias Groups Management": "",
-        "Gallery": "",
-        "Open galleries management": "",
-        "Mode": "",
-        "Fullscreen": "",
-        "Crop Image": "",
-        "Image width": "",
-        "Column gap": "",
-        "Scrollable": "",
-        "Pageable": "",
-        "Footer": "",
-        "Zoomable": "",
+        "Height": "Hauteur",
+        "Medias Groups Management": "Gestion des groupes de m\u00e9dias",
+        "Gallery": "Gallerie",
+        "Open galleries management": "Ouvrir la gestion des galleries",
+        "Width": "Largeur",
+        "Alignment": "Alignement",
+        "Mode": "Mode",
+        "Crop Image": "Recadrer l'image",
+        "Image width": "Largeur de l'image",
+        "Column gap": "Espacement des colonnes",
+        "Image alignment": "Alignement de l'image",
+        "Scrollable": "D\u00e9filable",
+        "Pageable": "Paginable",
+        "Footer": "Pied-de-page",
+        "Zoomable": "Agrandissable",
         "Info": "Info",
-        "Info field": "",
-        "Resizable": "",
-        "Toolbar": "",
-        "No value": ""
+        "Info field": "Champ des informations",
+        "Resizable": "Redimensionnable",
+        "Toolbar": "Barre d;outils"
     },
     "components\/cms\/block\/image": {
         "Title": "Titre",
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
-        "Select an image": "",
-        "Height": "",
-        "Content": "Contenu",
-        "Image": "",
-        "Width": "",
-        "Alignment": "",
-        "Alt": "",
-        "Link": "Lien",
-        "Caption": "",
-        "Details": "D\u00e9tails"
+        "Select an image": "S\u00e9lectionner une image",
+        "Height": "Hauteur",
+        "Content": "Contenu"
     },
     "components\/cms\/block\/image\/text": {
         "Title": "Titre",
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
-        "Select an image": "",
-        "Height": "",
-        "Content": "Contenu",
-        "Image": "",
-        "Width": "",
-        "Alignment": "",
-        "Alt": "",
-        "Link": "Lien",
-        "Caption": "",
-        "Details": "D\u00e9tails",
-        "Columns (Desktop)": "",
-        "Columns (Mobile)": ""
+        "Select an image": "S\u00e9lectionner une image",
+        "Height": "Hauteur",
+        "Content": "Contenu"
     },
     "components\/cms\/block\/imagetext": {
         "Title": "Titre",
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
-        "Select an image": "",
-        "Height": "",
-        "Content": "Contenu",
-        "Image": "",
-        "Width": "",
-        "Alignment": "",
-        "Alt": "",
-        "Link": "Lien",
-        "Caption": "",
-        "Details": "D\u00e9tails"
+        "Select an image": "S\u00e9lectionner une image",
+        "Height": "Hauteur",
+        "Content": "Contenu"
+    },
+    "components\/cms\/block\/slider": {
+        "Title": "Titre",
+        "Height": "Hauteur",
+        "Default": "D\u00e9faut",
+        "Top": "Haut",
+        "Top-Left": "Haut-Gauche",
+        "Top-Right": "Haut-Droite",
+        "Bottom": "Bas",
+        "Bottom-Left": "Bas-Gauche",
+        "Bottom-Right": "Bas-Droite",
+        "Medias Groups Management": "Gestion des groupes de m\u00e9dias",
+        "Gallery": "Gallerie",
+        "Open galleries management": "Ouvrir la gestion des galleries",
+        "Mode": "Mode",
+        "Autoplay": "Lecture automatique",
+        "Arrows": "Fl\u00e8ches de navigation",
+        "Arrows position": "Position des fl\u00e8ches",
+        "Preview": "Pr\u00e9visualisation",
+        "Loop": "Boucle",
+        "Show info": "Voir les infos",
+        "Pub. Date": "Date de pub.",
+        "Last edit": "Derni\u00e8re modification",
+        "Cover": "Couverture",
+        "Contain": "Contient",
+        "Publications": "Publications",
+        "Features": "Caract\u00e9ristiques",
+        "Type of articles": "Type des articles",
+        "Category": "Cat\u00e9gorie",
+        "Ordered by": "Ordonn\u00e9 par",
+        "Feature": "Fonctionnalit\u00e9",
+        "Css class": "Classe CSS",
+        "(Optional)": "(Optionel)",
+        "Distance block below": "Distance par rapport au bloc du dessous",
+        "Title distance": "Distance du titre",
+        "(mobile)": "(portable)",
+        "Image fit": "",
+        "Max slide in line": "",
+        "Min slide in line": "",
+        "Limits": "",
+        "No items": ""
     },
     "components\/cms\/block\/title": {
         "Title": "Titre",
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
-        "Alignment": "",
-        "Color": "",
+        "Alignment": "Alignement",
         "Tag": "",
+        "Color": "",
         "Style": "",
         "Italic": "",
         "Decoration": "",
-        "Horizontal rule": "",
-        "Underlined": "",
-        "Strikethrough": "",
-        "None": "Aucun"
+        "Horizontal rule": ""
     },
     "components\/cms\/elementor": {
         "Title": "Titre",
         "Text": "Texte",
-        "Image": "",
-        "Space": "",
-        "Gallery": "",
-        "Feature": "",
+        "Gallery": "Gallerie",
+        "Feature": "Fonctionnalit\u00e9",
+        "Space": "Espace",
         "Line": "Line",
         "Button": "bouton",
         "Rich text (HTML)": "",
+        "Image": "Image",
         "Image Text": "",
         "Carousel": "",
         "Slider": "",
@@ -502,6 +454,16 @@
         "Product": "",
         "Do you want to save your changes?": "",
         "Do you want to abandon your changes?": ""
+    },
+    "components\/cms\/settings": {
+        "Title": "Titre",
+        "Description": "Description",
+        "End of publication": "",
+        "Start of publication": "",
+        "Front Image": "",
+        "Public URL": "",
+        "Tags": "Tags",
+        "Cache": ""
     },
     "components\/forum\/form": {
         "Title": "Titre",
@@ -518,26 +480,27 @@
         "CSS code": "Code CSS",
         "Files": "Fichiers",
         "Links": "Liens",
+        "Important": "",
         "Locked": "Verrouill\u00e9"
     },
     "components\/media\/form": {
         "Title": "Titre",
         "Description": "Description",
-        "Link": "Lien",
+        "Media": "m\u00e9dia",
         "Tags": "Tags",
         "Something went wrong while saving the media": "",
         "Customize titles\/descriptions": "",
         "Filename": "",
-        "Media": "m\u00e9dia"
+        "Link": "Lien"
     },
     "components\/media\/new": {
         "Title": "Titre",
         "Description": "Description",
+        "Media": "m\u00e9dia",
         "Tags": "Tags",
         "Something went wrong while saving the media": "",
         "Customize titles\/descriptions": "",
-        "Filename": "",
-        "Media": "m\u00e9dia"
+        "Filename": ""
     },
     "mvc\/news": {
         "Title": "Titre",
@@ -558,16 +521,16 @@
     "mvc\/table_notes": {
         "Title": "Titre",
         "Text": "Texte",
+        "Last edit": "Derni\u00e8re modification",
         "Category": "Cat\u00e9gorie",
         "Type": "Type",
         "Creator": "Cr\u00e9ateur",
-        "Created": "Cr\u00e9\u00e9",
         "Creation": "Cr\u00e9ation",
+        "Created": "Cr\u00e9\u00e9",
         "Are you sure you want to leave this form without saving your changes?": "\u00cates-vous s\u00fbr de vouloir quitter ce formulaire sans enregistrer vos modifications?",
         "Actions": "Actions",
         "Resume": "Reprendre la t\u00e2che",
         "Last version user": "Dernier \u00e9diteur",
-        "Last edit": "Derni\u00e8re modification",
         "Option": "Option",
         "Blocked": "Bloqu\u00e9e",
         "New Note": "Nouvelle note",
@@ -589,188 +552,104 @@
         "Folder name": "Nom du dossier",
         "Parent": "Parent"
     },
-    "components\/cms\/block\/button": {
-        "Text": "Texte",
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
-        "Alignment": "",
-        "Link": "Lien",
-        "Dimensions": "",
-        "Default": "D\u00e9faut",
-        "XS": "",
-        "S": "",
-        "M": "",
-        "L": "",
-        "XL": "",
-        "XXL": "",
-        "Space": "",
-        "No space": "",
-        "Class": ""
+    "components\/cms\/editor": {
+        "Save": "Sauvegarder",
+        "Preview": "Pr\u00e9visualisation",
+        "The block doesn't exist": "",
+        "Saved": "Sauvegard\u00e9",
+        "Are you sure?": "",
+        "Are you sure you want to delete this block and its content?": "",
+        "Page's properties": "",
+        "widgets": "Widgets",
+        "See JSON": "",
+        "Full preview": "",
+        "Full preview in new window": "",
+        "Scroll to selected element": "",
+        "Move to start": "",
+        "Move to end": "",
+        "Create new block type": "",
+        "Delete block": "",
+        "Delete this block": ""
     },
     "components\/bookmarks\/search": {
-        "1314 links": ""
+        "1314 links": "1314 liens"
     },
     "components\/cms\/block": {
-        "Block changed": ""
-    },
-    "components\/cms\/block\/align": {
-        "Align left": "",
-        "Align center": "",
-        "Align right": ""
-    },
-    "components\/cms\/block\/carousel": {
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
-        "Height": "",
-        "Width": "",
-        "Alignment": "",
-        "Link": "Lien",
-        "Default": "D\u00e9faut",
-        "Top": "",
-        "Top-Left": "",
-        "Top-Right": "",
-        "Bottom": "",
-        "Bottom-Left": "",
-        "Bottom-Right": "",
-        "Medias Groups Management": "",
-        "Gallery": "",
-        "Open galleries management": "",
-        "Mode": "",
-        "Autoplay": "",
-        "Arrows": "",
-        "Arrows position": "",
-        "Preview": "",
-        "Loop": "",
-        "Show info": "",
-        "Fullscreen": ""
-    },
-    "components\/cms\/block\/line": {
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
-        "Height": "",
-        "Width": "",
-        "Alignment": "",
-        "TOP": "",
-        "BOTTOM": "",
-        "BOTH": "",
-        "NONE": "Aucun"
-    },
-    "components\/cms\/block\/video": {
-        "Align left": "",
-        "Align center": "",
-        "Align right": "",
-        "Height": "",
-        "Width": "",
-        "Alignment": "",
-        "Autoplay": "",
-        "Loop": "",
-        "Muted": "",
-        "Controls": "",
-        "Aspect ratio": "",
-        "Video source": "",
-        "Mute the video": ""
+        "Block changed": "Bloc modifi\u00e9"
     },
     "components\/media\/field": {
-        "Select an image": "",
+        "Select an image": "S\u00e9lectionner une image",
         "Browse the images": "",
         "Show media information": ""
     },
-    "components\/cms\/block\/slider": {
-        "Height": "",
+    "components\/cms\/block\/carousel": {
+        "Height": "Hauteur",
         "Default": "D\u00e9faut",
-        "Top": "",
-        "Top-Left": "",
-        "Top-Right": "",
-        "Bottom": "",
-        "Bottom-Left": "",
-        "Bottom-Right": "",
-        "Medias Groups Management": "",
-        "Gallery": "",
-        "Open galleries management": "",
-        "Mode": "",
-        "Autoplay": "",
-        "Arrows": "",
-        "Arrows position": "",
-        "Preview": "",
-        "Loop": "",
-        "Show info": "",
-        "Css class": "",
-        "(Optional)": "",
-        "Type of articles": "",
-        "Category": "Cat\u00e9gorie",
-        "Ordered by": "",
-        "Feature": "",
-        "Distance block below": "",
-        "Title distance": "",
-        "Title distance (mobile)": "",
-        "Image fit": "",
-        "Max slide in line": "",
-        "Min slide in line (mobile)": "",
-        "Limits": "",
-        "No items": ""
+        "Top": "Haut",
+        "Top-Left": "Haut-Gauche",
+        "Top-Right": "Haut-Droite",
+        "Bottom": "Bas",
+        "Bottom-Left": "Bas-Gauche",
+        "Bottom-Right": "Bas-Droite",
+        "Medias Groups Management": "Gestion des groupes de m\u00e9dias",
+        "Gallery": "Gallerie",
+        "Open galleries management": "Ouvrir la gestion des galleries",
+        "Width": "Largeur",
+        "Alignment": "Alignement",
+        "Mode": "Mode",
+        "Autoplay": "Lecture automatique",
+        "Arrows": "Fl\u00e8ches de navigation",
+        "Arrows position": "Position des fl\u00e8ches",
+        "Preview": "Pr\u00e9visualisation",
+        "Loop": "Boucle",
+        "Show info": "Voir les infos"
+    },
+    "components\/cms\/block\/line": {
+        "Height": "Hauteur"
     },
     "components\/cms\/block\/slider_old_incomplete": {
-        "Height": "",
-        "Type of articles": "",
-        "Ordered by": "",
+        "Height": "Hauteur",
+        "Type of articles": "Type des articles",
+        "Ordered by": "Ordonn\u00e9 par",
         "Max slide in line": "",
-        "Limits": "",
-        "Min slide in line": ""
+        "Min slide in line": "",
+        "Limits": ""
     },
-    "components\/cms\/block\/text": {
-        "Alignment": "",
-        "Color": ""
-    },
-    "mvc\/masks": {
-        "Default": "D\u00e9faut",
-        "ID": "ID",
-        "Version": "Version",
-        "Modification of the standard letter": "Modification de la lettre-type",
-        "Are you sure you want to delete this standard letter?": "Souhaitez-vous vraiment supprimer cette lettre-type?",
-        "Creation of a standard letter": "Cr\u00e9ation d'une lettre-type",
-        "Warning on standard letters": "Avertissement sur les lettres types",
-        "Here you can modify the standard letters but they use a system of \"templates\" with which you have to be very cautious.": "Ici vous pouvez modifier les lettres-types, mais elles utilisent un syst\u00e8me de \"templates\" avec lequel il vous faut \u00eatre prudent.",
-        "The best is to duplicate an existing standard letter and modify it.": "Le mieux est de dupliquer une lettre-type existante et de la modifier.",
-        "Once finished, put it in default if it is used on a feature without choice (eg certificates), and will test it in context.": "Une fois termin\u00e9e, si elle doit \u00eatre utilis\u00e9e dans des fonctionnalit\u00e9s sans choix (ex: attestations), mettez-la en d\u00e9faut de sa cat\u00e9gorie, et testez-le dans le contexte.",
-        "Then you can erase the old one or else redo it if your modification returns an error.": "Alors vous pourrez supprimer l'ancienne ou repartir de z\u00e9ro si vos modifications g\u00e9n\u00e8rent une erreur.",
-        "Creation of a standard letter for": "Cr\u00e9ation d'une lettre-type",
-        "Add a standard letter": "Ajouter une lettre-type"
-    },
-    "components\/cms\/block\/space": {
-        "Space": ""
-    },
-    "components\/cms\/block\/container": {
-        "Click here to add a new item on this line": ""
+    "components\/cms\/block\/video": {
+        "Height": "Hauteur",
+        "Width": "Largeur",
+        "Alignment": "Alignement",
+        "Autoplay": "Lecture automatique",
+        "Loop": "Boucle",
+        "None": "Aucun",
+        "Aspect ratio": "",
+        "Muted": "",
+        "Controls": ""
     },
     "components\/cms\/block\/product": {
-        "Product Picker": "",
-        "Show image": "",
-        "Show price": "",
-        "Show edition": "",
-        "Show type": "",
-        "Show Sold out": "",
-        "Show 'Add to cart' button ": "",
-        "Add to cart": ""
+        "Product Picker": "S\u00e9lectionneur de produit",
+        "Show image": "Voir l'image",
+        "Show price": "Voir le prix",
+        "Show edition": "Voir l'\u00e9dition",
+        "Show type": "Voir le type",
+        "Show Sold out": "Voir \u00c9puis\u00e9",
+        "Show 'Add to cart' button ": "Voir le bouton 'Ajouter au panier'",
+        "Add to cart": "Ajouter au panier"
     },
     "components\/cms\/dashboard": {
         "Publications": "Publications",
         "Unpublications": ""
     },
-    "components\/cms\/editor": {
-        "Saved": "Sauvegard\u00e9",
-        "Are you sure?": "",
-        "Are you sure you want to delete this block and its content?": "",
-        "Save the note": "",
-        "Page's properties": "",
-        "widgets": "Widgets",
-        "Delete this block": "",
-        "Move top": "",
-        "Move up": "",
-        "Move down": "",
-        "Move bottom": ""
+    "components\/cms\/form\/move": {
+        "Category": "Cat\u00e9gorie",
+        "Choose": "Choisir"
+    },
+    "components\/cms\/block\/space": {
+        "Space": "Espace"
+    },
+    "components\/cms\/container": {
+        "Unknown": "Inconnu",
+        "Remove block": ""
     },
     "mvc\/form_markdown": {
         "Saved": "Sauvegard\u00e9",
@@ -780,8 +659,7 @@
         "You can program the publication for now or the future": "",
         "Publication date": "Date de publication",
         "You can (or not) end a publication": "",
-        "End of publication": "",
-        "Confirm": "Confirm"
+        "End of publication": ""
     },
     "mvc\/pages\/wordpress": {
         "ID": "ID",
@@ -796,15 +674,6 @@
         "Post modified": "Publication modifi\u00e9e",
         "Post Status": "Statut de la publication"
     },
-    "mvc\/cms": {
-        "Article": "",
-        "Home": "Accueil",
-        "Articles' list": "",
-        "Settings": "Param\u00e8tres"
-    },
-    "mvc\/cms\/cat": {
-        "Article": ""
-    },
     "components\/toolbar\/version": {
         "Version": "Version",
         "Versions": "Versions"
@@ -814,9 +683,8 @@
         "All rights reserved.": "Tous droits r\u00e9serv\u00e9s.",
         "Draft": "Brouillon"
     },
-    "components\/cms\/list\/toolbar": {
-        "Insert Articles": "",
-        "The Content Management System": ""
+    "components\/forum\/topic\/replies": {
+        "LOADING": "CHARGEMENT"
     },
     "components\/media\/block": {
         "The title must contain the extension of the file": "Le titre dopit contenir l'extension du fichier",
@@ -824,52 +692,9 @@
         "Something went wrong while changing the media title": "Quelque chose n'a pas fonctionn\u00e9 lors de la modification du titre du m\u00e9dia",
         "The title must end with the same extension of the file": "Le titre doit se terminer avec la m\u00eame extension que le fichier"
     },
-    "components\/media\/browser": {
-        "The title must contain the extension of the file": "Le titre dopit contenir l'extension du fichier",
-        "Media title successfully changed!": "Titre du m\u00e9dia modifi\u00e9!",
-        "Something went wrong while changing the media title": "Quelque chose n'a pas fonctionn\u00e9 lors de la modification du titre du m\u00e9dia",
-        "The title must end with the same extension of the file": "Le titre doit se terminer avec la m\u00eame extension que le fichier",
-        "Edit media": "Modifier le m\u00e9dia",
-        "Add new media": "Ajouter un nouveau m\u00e9dia",
-        "The media you're going to delete is linked to a note, are you sure you want to remove it?": "Le m\u00e9dia que vous \u00eates sur le point de supprimer est li\u00e9 \u00e0 une note, \u00eates-vous s\u00fbr de vouloir continuer?",
-        "Are you sure you want to delete this media?": "\u00cates-vous s\u00fbr de vouloir supprimer ce m\u00e9dia?",
-        "Media successfully deleted :)": "M\u00e9dia correctement supprim\u00e9",
-        "Something went wrong while deleting the media :(": "Quelque chose n'a pas fonctionn\u00e9 lors de la suppression du m\u00e9dia",
-        "The extension in the title or in the filename doesn't match the extension of the file inserted!": "",
-        "Media successfully added to media browser": "M\u00e9dia ajout\u00e9 avec succ\u00e8s",
-        "Media successfully updated": "M\u00e9dia correctement mis \u00e0 jour",
-        "Something went wrong while adding the media to the media broser": "Quelque chose n'a pas fontionn\u00e9 lors de l'ajout du m\u00e9dia dans l'explorateur",
-        "Delete media": "Supprimer le m\u00e9dia",
-        "Yes": "Oui",
-        "No": "Non"
-    },
-    "components\/media\/browser3": {
-        "The title must contain the extension of the file": "Le titre dopit contenir l'extension du fichier",
-        "Media title successfully changed!": "Titre du m\u00e9dia modifi\u00e9!",
-        "Something went wrong while changing the media title": "Quelque chose n'a pas fonctionn\u00e9 lors de la modification du titre du m\u00e9dia",
-        "The title must end with the same extension of the file": "Le titre doit se terminer avec la m\u00eame extension que le fichier",
-        "Edit media": "Modifier le m\u00e9dia",
-        "Add new media": "Ajouter un nouveau m\u00e9dia",
-        "The media you're going to delete is linked to a note, are you sure you want to remove it?": "Le m\u00e9dia que vous \u00eates sur le point de supprimer est li\u00e9 \u00e0 une note, \u00eates-vous s\u00fbr de vouloir continuer?",
-        "Are you sure you want to delete this media?": "\u00cates-vous s\u00fbr de vouloir supprimer ce m\u00e9dia?",
-        "Media successfully deleted :)": "M\u00e9dia correctement supprim\u00e9",
-        "Something went wrong while deleting the media :(": "Quelque chose n'a pas fonctionn\u00e9 lors de la suppression du m\u00e9dia",
-        "Media successfully added to media browser": "M\u00e9dia ajout\u00e9 avec succ\u00e8s",
-        "Media successfully updated": "M\u00e9dia correctement mis \u00e0 jour",
-        "Something went wrong while adding the media to the media broser": "Quelque chose n'a pas fontionn\u00e9 lors de l'ajout du m\u00e9dia dans l'explorateur",
-        "Delete media": "Supprimer le m\u00e9dia",
-        "Yes": "Oui",
-        "No": "Non"
-    },
     "components\/media\/list": {
         "Edit media": "Modifier le m\u00e9dia",
         "Delete media": "Supprimer le m\u00e9dia"
-    },
-    "mvc\/media": {
-        "Are you sure you want to delete this media?": "\u00cates-vous s\u00fbr de vouloir supprimer ce m\u00e9dia?",
-        "Browser": "Browser",
-        "Media successfully deleted": "",
-        "Something went wrong while deleting the media": ""
     },
     "mvc\/cms\/settings": {
         "Name": "Nom",
@@ -891,8 +716,9 @@
     "mvc\/notes": {
         "Search": "Recherche",
         "Write here your content": "",
-        "Don't forget!": "",
-        "Add a new Post-It": ""
+        "Create new folder": "",
+        "Reload the folders list": "",
+        "Don't forget!": ""
     },
     "mvc\/post-it": {
         "Search": "Recherche"
@@ -901,35 +727,49 @@
         "Search for a note": ""
     },
     "components\/postits": {
-        "Write here your content": "",
-        "Don't forget!": "",
-        "Add a new Post-It": ""
-    },
-    "components\/search\/cms": {
-        "V": "V",
-        "Version number": "",
-        "This is the latest version": "",
-        "This is not the latest version": ""
-    },
-    "components\/search\/item": {
-        "V": "V",
-        "Version number": "",
-        "This is the latest version": "",
-        "This is not the latest version": ""
+        "Write here your content": ""
     },
     "mvc\/form_rte": {
         "Are you sure you want to leave this form without saving your changes?": "\u00cates-vous s\u00fbr de vouloir quitter ce formulaire sans enregistrer vos modifications?"
     },
-    "mvc\/list": {
-        "All categories": ""
+    "mvc\/cms\/cat": {
+        "Article": ""
     },
-    "mvc\/cms\/square": {
-        "Add a new block to this row": "Ajouter un nouveau bloc \u00e0 cette ligne",
-        "Edit blocks in this row": "\u00c9diter les blocs de cette ligne"
+    "mvc\/cms": {
+        "Settings": "Param\u00e8tres"
+    },
+    "mvc\/masks": {
+        "Modification of the standard letter": "Modification de la lettre-type",
+        "Are you sure you want to delete this standard letter?": "Souhaitez-vous vraiment supprimer cette lettre-type?",
+        "Creation of a standard letter": "Cr\u00e9ation d'une lettre-type",
+        "Warning on standard letters": "Avertissement sur les lettres types",
+        "Here you can modify the standard letters but they use a system of \"templates\" with which you have to be very cautious.": "Ici vous pouvez modifier les lettres-types, mais elles utilisent un syst\u00e8me de \"templates\" avec lequel il vous faut \u00eatre prudent.",
+        "The best is to duplicate an existing standard letter and modify it.": "Le mieux est de dupliquer une lettre-type existante et de la modifier.",
+        "Once finished, put it in default if it is used on a feature without choice (eg certificates), and will test it in context.": "Une fois termin\u00e9e, si elle doit \u00eatre utilis\u00e9e dans des fonctionnalit\u00e9s sans choix (ex: attestations), mettez-la en d\u00e9faut de sa cat\u00e9gorie, et testez-le dans le contexte.",
+        "Then you can erase the old one or else redo it if your modification returns an error.": "Alors vous pourrez supprimer l'ancienne ou repartir de z\u00e9ro si vos modifications g\u00e9n\u00e8rent une erreur.",
+        "Creation of a standard letter for": "Cr\u00e9ation d'une lettre-type"
+    },
+    "mvc\/media": {
+        "Media successfully deleted": "",
+        "Something went wrong while deleting the media": "",
+        "Are you sure you want to delete this media?": "\u00cates-vous s\u00fbr de vouloir supprimer ce m\u00e9dia?"
+    },
+    "mvc\/cms\/import": {
+        "Select an XML file": "",
+        "Read XML file": "",
+        "Parse XML file": "",
+        "Make items": "",
+        "Import medias": "",
+        "Import categories": "",
+        "Import tags": "",
+        "Import posts": "",
+        "Are you sure you want to reset the import process?": ""
     },
     "": {
         "News": "Nouvelles",
         "Personal notes": "Notes personnelles",
-        "Found in content": "Trouv\u00e9 dans le contenu"
+        "Found in content": "Trouv\u00e9 dans le contenu",
+        "Articles' contents": "",
+        "Articles' titles": ""
     }
 }
