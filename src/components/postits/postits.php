@@ -5,6 +5,7 @@
               :modal="true"
               width="100%"
               height="100%"
+              :z-index="10"
               @close="$emit('close')"
               ref="floater"
               :scrollable="true">
