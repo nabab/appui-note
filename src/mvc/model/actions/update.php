@@ -5,7 +5,7 @@
  * Date: 20/07/17
  * Time: 17.09
  *
- * @var $model \bbn\Mvc\Model
+ * @var bbn\Mvc\Model $model
  */
 $res = [
   'success' => false

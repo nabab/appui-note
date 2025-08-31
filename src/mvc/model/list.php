@@ -1,8 +1,4 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
 
 /** @var $model \bbn\mvc\model*/
 if ($id_types = $model->inc->options->fromCode('types', 'note', 'appui')) {

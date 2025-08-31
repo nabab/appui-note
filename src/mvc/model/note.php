@@ -1,9 +1,5 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
-/** @var $this \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 if ( !empty($model->data['id_note']) ){
   $notes = new \bbn\Appui\Note($model->db);
   $note = $notes->get($model->data['id_note']);

@@ -5,7 +5,7 @@
  * Date: 08/02/17
  * Time: 11.06
  *
- * @var $ctrl \bbn\Mvc\Controller
+ * @var bbn\Mvc\Controller $ctrl
  */
 $ctrl->data = \bbn\X::mergeArrays($ctrl->data, $ctrl->post);
 

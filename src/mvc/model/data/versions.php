@@ -1,5 +1,5 @@
 <?php
-/* @var \bbn\Mvc\Model $model */
+/* @var bbn\Mvc\Model $model */
 if ( isset($model->data['id']) || isset($model->data['data']['id']) ){
   $notes = new \bbn\Appui\Note($model->db);
   $versions = $notes->getVersions($model->data['id'] ?? $model->data['data']['id']);

@@ -5,7 +5,7 @@
  * Date: 06/03/2018
  * Time: 15:36
  *
- * @var $ctrl \bbn\Mvc\Controller
+ * @var bbn\Mvc\Controller $ctrl
  */
 
 $ctrl->obj->icon = 'nf nf-fa-rss_square';

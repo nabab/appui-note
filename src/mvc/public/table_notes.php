@@ -1,5 +1,5 @@
 <?php
-/** @var \bbn\Mvc\Controller $ctrl */
+/** @var bbn\Mvc\Controller $ctrl */
 if ( !empty($ctrl->post) ){
   $ctrl->obj = $ctrl->getObjectModel($ctrl->post);
 }

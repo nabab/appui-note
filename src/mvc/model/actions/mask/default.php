@@ -1,10 +1,6 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
 
-/** @var $this \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 $masks = new \bbn\Appui\Masks($model->db);
 if ( isset($model->data['id_note']) ){
   $model->data['res']['success'] = $masks->setDefault($model->data['id_note']);

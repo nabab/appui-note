@@ -1,10 +1,6 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
 
-/** @var $this \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 if ($model->hasData(['url'])) {
   $cms = new \bbn\Appui\Cms($model->db);
   if (bbn\Str::isUid($model->data['url'])) {

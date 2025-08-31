@@ -1,5 +1,5 @@
 <?php
-/** @var \bbn\Mvc\Model $model */
+/** @var bbn\Mvc\Model $model */
 if ( !empty($model->data['title']) || !empty($model->data['content']) ){
   $res = ['success' => false];
   $note = new \bbn\Appui\Note($model->db);

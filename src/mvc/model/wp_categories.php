@@ -1,10 +1,6 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
 
-/** @var $this \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 $model->db->change('apst_web');
 $res = [
   'types' => $model->db->getColumnValues('wp_posts', 'post_type'),

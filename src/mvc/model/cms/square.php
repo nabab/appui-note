@@ -1,10 +1,6 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
 
-/** @var $this \bbn\Mvc\Model */
+/** @var bbn\Mvc\Model $model */
 //TAKES THE IMAGES OF THE GALLERY FROM THE TEST FOLDER AND RETURNS IT WELL FORMATTED FOR THE BBN-UPLOAD
 $path = $model->dataPath().'poc/images/gallery';
 $images = [];

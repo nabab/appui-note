@@ -1,10 +1,6 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
 
-/** @var $this \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 if ( isset($model->data['title'], $model->data['content'], $model->data['id_type'], $model->data['name']) ){
   $mask = new \bbn\Appui\Masks($model->db);
   if ( !empty($model->data['id_note']) ){

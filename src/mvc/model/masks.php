@@ -1,10 +1,6 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
 
-/** @var $this \bbn\Mvc\Model*/
+/** @var bbn\Mvc\Model $model */
 $masks = new \bbn\Appui\Masks($model->db);
 $all = $masks->getAll();
 $cats = $model->inc->options->options('masks', 'appui');

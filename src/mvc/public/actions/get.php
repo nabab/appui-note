@@ -1,10 +1,6 @@
 <?php
-/*
- * Describe what it does!
- *
- **/
 
-/** @var $this \bbn\Mvc\Controller */
+/** @var bbn\Mvc\Controller $ctrl */
 
 if ( $res = $ctrl->getModel($ctrl->data['root'].'note', $ctrl->post) ){
   $ctrl->obj = \bbn\X::toObject($res);

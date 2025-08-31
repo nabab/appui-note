@@ -1,7 +1,7 @@
 <?php
 use bbn\X;
 
-/** @var \bbn\Mvc\Controller $ctrl */
+/** @var bbn\Mvc\Controller $ctrl */
 if ($ctrl->hasArguments()) {
   $ctrl->addData(['data' => true])->action();
 }
