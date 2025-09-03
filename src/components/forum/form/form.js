@@ -150,9 +150,7 @@
         }
       },
       onFormSuccess(d, ev) {
-        if (this.formSuccess) {
-          this.formSuccess(d, ev);
-        }
+        this.$emit('success', d, ev);
       }
     },
     mounted(){
