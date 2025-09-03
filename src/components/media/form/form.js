@@ -75,7 +75,7 @@
       success(d){
         if (d.success && d.media) {
           let floater = this.closest('bbn-floater');
-          if (bbn.fn.isVue(floater)) {
+          if (bbn.cp.isComponent(floater)) {
             floater.$emit(this.isEdit ? 'edited' : 'added', d.media);
           }
           this.$emit(this.isEdit ? 'edited' : 'added', d.media);

@@ -50,7 +50,7 @@
       success(d){
         if (d.success && d.media) {
           let floater = this.closest('bbn-floater');
-          if (bbn.fn.isVue(floater)) {
+          if (bbn.cp.isComponent(floater)) {
             floater.$emit(this.isEdit ? 'edited' : 'added', d.media);
           }
           this.$emit(this.isEdit ? 'edited' : 'added', d.media);
@@ -73,7 +73,7 @@
               if (d.success) {
                 let form = this.getRef('form')
                 if (!!all) {
-                  if (bbn.fn.isVue(form)) {
+                  if (bbn.cp.isComponent(form)) {
                     form.originalData.cacheFiles.splice(0);
                   }
                   this.source.cacheFiles.splice(0);
@@ -81,7 +81,7 @@
                 else {
                   let idx = bbn.fn.search(this.source.cacheFiles, {file: file});
                   if (idx > -1) {
-                    if (bbn.fn.isVue(form)) {
+                    if (bbn.cp.isComponent(form)) {
                       idx = bbn.fn.search(form.originalData.cacheFiles, {file: file});
                       if (idx > -1) {
                         form.originalData.cacheFiles.splice(idx, 1);
