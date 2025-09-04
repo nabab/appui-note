@@ -19,9 +19,6 @@
       formAction: {
         type: String
       },
-      formSuccess: {
-        type: Function
-      },
       fileSave: {
         type: String
       },
