@@ -3,7 +3,7 @@
     props: ['source'],
     computed:{
       num(){
-        return bbn.fn.count(this.masks.source.categories, {id_type: this.source.id_type});
+        return bbn.fn.count(this.masks.source.list, {id_type: this.source.id_type});
       }
     },
     methods: {

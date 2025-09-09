@@ -4,10 +4,10 @@ $cats = array_map(function($a){
   $a['content'] = '';
   return $a;
 }, $masks->getAll());
-
+$mmodels = $model->getModel('./data/masks/models');
 return [
   'is_dev' => $model->inc->user->isDev(),
-  'categories' => $cats,
+  'list' => $cats,
   'emptyCategories' => $model->db->rselectAll([
     'tables' => 'bbn_options',
       'fields' => [
@@ -37,6 +37,7 @@ return [
           'value' => $model->inc->options->fromCode('options', 'masks', 'appui')
         ]]
       ]
-
-  ])
+  ]),
+  'categories' => $model->inc->options->fullOptions('options', 'masks', 'appui'),
+  'models' => !empty($mmodels['data']) ? $mmodels['data'] : []
 ];

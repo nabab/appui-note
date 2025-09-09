@@ -44,7 +44,7 @@
           componentOptions: {
             source: {
               id_type: '',
-              label: '',
+              title: '',
               content: '',
               name: ''
             },
@@ -53,27 +53,74 @@
         });
       },
       toolbar() {
-        return [{
-          text: bbn._('Insert new '),
-          action: () => {
-            this.insert();
-          },
-          icon: 'nf nf-fa-plus'
-        }]
+        const btns = [];
+        if (appui.user.isDev) {
+          btns.push({
+            label: bbn._('Insert new category'),
+            action: () => {
+              this.getPopup({
+                label: bbn._("New category of letters"),
+                width: 500,
+                component: 'appui-note-masks-type-form',
+                componentEvents: {
+                  success: () => {
+                    this.$parent.getContainer().reload();
+                  }
+                }
+              });
+            },
+            icon: 'nf nf-fa-plus'
+          });
+        }
+
+        if (this.source.emptyCategories?.length) {
+          btns.push({
+            label: bbn._('Insert new letter'),
+            action: () => {
+              this.insert();
+            },
+            icon: 'nf nf-fa-plus'
+          });
+        }
+
+        return btns;
       },
       renderButtons(row){
-        return [{
-          text: bbn._("Edit"),
+        const btns = [{
+          label: bbn._("Edit"),
           icon: "nf nf-fa-edit",
           notext: true,
           action: this.edit,
         }, {
-          text: bbn._("Delete"),
+          label: bbn._("Delete"),
           icon: "nf nf-fa-trash",
           notext: true,
           action: this.removeItem,
           disabled: !!row.default
         }];
+        if (this.hasCategoryPreview(row.id_type)) {
+          btns.push({
+            label: bbn._("Preview"),
+            icon: "nf nf-cod-preview",
+            notext: true,
+            action: () => this.preview(row),
+          });
+        }
+        return btns;
+      },
+      preview(row){
+        if (row?.id_type && this.hasCategoryPreview(row.id_type)) {
+          const modelId = this.getCategoryModelId(row.id_type);
+          this.getPopup({
+            width: 800,
+            label: bbn._("Preview letter type"),
+            component: 'appui-note-masks-preview',
+            componentOptions: {
+              source: row,
+              model: this.getCategoryModel(modelId)
+            }
+          });
+        }
       },
       renderUser(row){
         return appui.getUserName(row.id_user)
@@ -100,9 +147,9 @@
           appui.confirm(bbn._("Are you sure you want to delete this letter?"), () => {
             this.post(this.root + 'actions/masks/delete', {id_note: row.id_note}, d => {
               if (d.success) {
-								let idx = bbn.fn.search(this.source.categories, 'id_note', row.id_note);
+								let idx = bbn.fn.search(this.source.list, 'id_note', row.id_note);
 								if (idx > -1) {
-									this.source.categories.splice(idx, 1);
+									this.source.list.splice(idx, 1);
 									this.getRef('table').updateData();
 									appui.success(bbn._('Deleted'));
 								}
@@ -126,6 +173,23 @@
             doNotShowAgainValue: this.getStorage() || false
           }
         });
+      },
+      getCategoryModelId(idType){
+        if (idType) {
+          return bbn.fn.getField(this.source.categories, 'preview_model', 'id', idType) || false;
+        }
+
+        return false;
+      },
+      getCategoryModel(idModel){
+        if (idModel) {
+          return bbn.fn.getRow(this.source.models, 'id', idModel) || false;
+        }
+
+        return false;
+      },
+      hasCategoryPreview(idType){
+        return !!idType && !!bbn.fn.getField(this.source.categories, 'preview', 'id', idType);
       }
     },
     created(){
@@ -153,6 +217,9 @@
           this.showWarning()
         });
       }
+    },
+    beforeDestroy(){
+      appui.unregister('appui-note-masks');
     }
 	}
 })();

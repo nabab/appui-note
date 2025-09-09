@@ -1,23 +1,24 @@
 <bbn-table class="appui-note-masks"
-           :source="source.categories"
+           :source="source.list"
            editable="popup"
            ref="table"
            :order="[{field: 'text', dir: 'ASC'}]"
            :groupable="true"
            :group-by="3"
            uid="id_note"
-           :toolbar="source.emptyCategories?.length ? toolbar : []">
+           :toolbar="toolbar">
   <bbns-column label="<?= _("ID") ?>"
               field="id_note"
               :width="100"
               :invisible="true"/>
-  <bbns-column label="<i class='nf nf-fa-check bbn-c bbn-xl'></i>"
+  <bbns-column label="<i class='nf nf-fa-check bbn-c bbn-lg'></i>"
               flabel="<?= _("Default") ?>"
               field="default"
               :width="50"
               component="appui-note-masks-default"
               cls="bbn-c"/>
-  <bbns-column label="<?= _("Version") ?>"
+  <bbns-column label="<i class='nf nf-oct-versions bbn-c bbn-lg'></i>"
+              flabel="<?= _("Version") ?>"
               field="version"
               type="number"
               :width="50"

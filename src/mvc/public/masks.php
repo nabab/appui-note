@@ -1,4 +1,4 @@
 <?php
 
 /** @var bbn\Mvc\Controller $ctrl */
-$ctrl->combo("Lettres Types", true);
+$ctrl->setIcon('nf nf-fa-envelopes_bulk')->combo(_("Letters Types"), true);
