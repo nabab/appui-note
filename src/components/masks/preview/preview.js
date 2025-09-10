@@ -28,16 +28,23 @@
       }
     },
     methods: {
-      onSubmit(){
+      onSubmit(ev){
+        ev.preventDefault();
         this.showPreview = false;
         this.$nextTick(() => {
-          const args = {id: this.source.id_note};
+          const args = {
+            _id: this.source.id_note,
+            _type: this.source.id_type
+          };
           bbn.fn.iterate(this.inputsSource, (value, key) => {
             args[key] = value;
           });
-          this.previewUrl = this.root + 'masks/actions/preview?' + new URLSearchParams(args).toString();
+          this.previewUrl = this.root + 'actions/masks/preview?' + new URLSearchParams(args).toString();
           this.showPreview = true;
         });
+      },
+      onCancel(){
+        this.showPreview = false;
       }
     }
   }

@@ -26,16 +26,23 @@
 		computed: {
       action(){
         return this.root + 'actions/masks/' + (this.source.id_note ? 'update' : 'insert');
+      },
+      fields(){
+        if (this.source.id_type && this.masks) {
+          const model = this.masks.getCategoryModelByIdCategory(this.source.id_type);
+          return model?.fields || [];
+        }
+        return [];
       }
     },
     methods: {
       getVersion(d){
-        this.$set(this.source, 'id_note', d.id);
-        this.$set(this.source, 'id_type', d.id_type);
-        this.$set(this.source, 'title', d.title);
-        this.$set(this.source, 'content', d.content);
-        this.$set(this.source, 'creation', d.creation);
-        this.$set(this.source, 'creator', d.id_user);
+        this.source.id_note = d.id;
+        this.source.id_type = d.id_type;
+        this.source.title = d.title;
+        this.source.content = d.content;
+        this.source.creation = d.creation;
+        this.source.creator = d.id_user;
         this.$nextTick(() => {
           let editor = this.getRef('editor');
           if ( editor ){
@@ -47,21 +54,28 @@
         if (d.success) {
           const table = this.masks.getRef('table');
           if (this.source.id_note) {
-            let idx = bbn.fn.search(this.masks.source.categories, 'id_note', d.data.id_note);
+            let idx = bbn.fn.search(this.masks.source.list, 'id_note', d.data.id_note);
             if (idx > -1) {
               bbn.fn.each(d.data, (v, i) => {
                 if (i !== 'content') {
-                  this.masks.source.categories[idx][i] = v;
+                  this.masks.source.list[idx][i] = v;
                 }
               });
             }
           }
           else {
-            this.masks.source.categories.push(d.data);
+            this.masks.source.list.push(d.data);
           }
 
           table.updateData();
           appui.success(bbn._('Saved'));
+        }
+      },
+      copyField(field){
+        if (navigator?.clipboard?.writeText) {
+          navigator.clipboard.writeText(field).then(() => {
+            appui.success(bbn._('Copied to clipboard'));
+          });
         }
       }
     },

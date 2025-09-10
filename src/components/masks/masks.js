@@ -90,12 +90,12 @@
           label: bbn._("Edit"),
           icon: "nf nf-fa-edit",
           notext: true,
-          action: this.edit,
+          action: () => this.edit(row),
         }, {
           label: bbn._("Delete"),
           icon: "nf nf-fa-trash",
           notext: true,
-          action: this.removeItem,
+          action: () => this.removeItem(row),
           disabled: !!row.default
         }];
         if (this.hasCategoryPreview(row.id_type)) {
@@ -110,14 +110,13 @@
       },
       preview(row){
         if (row?.id_type && this.hasCategoryPreview(row.id_type)) {
-          const modelId = this.getCategoryModelId(row.id_type);
           this.getPopup({
             width: 800,
             label: bbn._("Preview letter type"),
             component: 'appui-note-masks-preview',
             componentOptions: {
               source: row,
-              model: this.getCategoryModel(modelId)
+              model: this.getCategoryModelByIdCategory(row.id_type)
             }
           });
         }
@@ -174,9 +173,9 @@
           }
         });
       },
-      getCategoryModelId(idType){
-        if (idType) {
-          return bbn.fn.getField(this.source.categories, 'preview_model', 'id', idType) || false;
+      getCategoryModelId(idCategory){
+        if (idCategory) {
+          return bbn.fn.getField(this.source.categories, 'preview_model', 'id', idCategory) || false;
         }
 
         return false;
@@ -188,8 +187,11 @@
 
         return false;
       },
-      hasCategoryPreview(idType){
-        return !!idType && !!bbn.fn.getField(this.source.categories, 'preview', 'id', idType);
+      getCategoryModelByIdCategory(idCategory){
+        return this.getCategoryModel(this.getCategoryModelId(idCategory));
+      },
+      hasCategoryPreview(idCategory){
+        return !!idCategory && !!bbn.fn.getField(this.source.categories, 'preview', 'id', idCategory);
       }
     },
     created(){

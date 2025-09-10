@@ -1,13 +1,14 @@
 <?php
-$masks = new \bbn\Appui\Masks($model->db);
-$cats = array_map(function($a){
-  $a['content'] = '';
-  return $a;
-}, $masks->getAll());
-$mmodels = $model->getModel('./data/masks/models');
+use bbn\Appui\Masks;
+
+$masks = new Masks($model->db);
+$models = $model->getModel('./data/masks/models');
 return [
   'is_dev' => $model->inc->user->isDev(),
-  'list' => $cats,
+  'list' => array_map(function($a){
+    $a['content'] = '';
+    return $a;
+  }, $masks->getAll()),
   'emptyCategories' => $model->db->rselectAll([
     'tables' => 'bbn_options',
       'fields' => [
@@ -39,5 +40,5 @@ return [
       ]
   ]),
   'categories' => $model->inc->options->fullOptions('options', 'masks', 'appui'),
-  'models' => !empty($mmodels['data']) ? $mmodels['data'] : []
+  'models' => !empty($models['data']) ? $models['data'] : []
 ];
