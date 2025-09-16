@@ -116,7 +116,7 @@
             component: 'appui-note-masks-preview',
             componentOptions: {
               source: row,
-              model: this.getCategoryModelByIdCategory(row.id_type)
+              inputs: this.getCategoryPreviewInputs(row.id_type)
             }
           });
         }
@@ -173,25 +173,93 @@
           }
         });
       },
-      getCategoryModelId(idCategory){
+      getCategoryPreviewMode(idCategory){
+        return idCategory ? bbn.fn.getField(this.source.categories, 'preview', 'id', idCategory) : false;
+      },
+      hasCategoryPreview(idCategory){
+        return !!this.getCategoryPreviewMode(idCategory);
+      },
+      getCategoryProperty(idCategory, property) {
+        const previewMode = this.getCategoryPreviewMode(idCategory);
+        let res = null;
+        if (previewMode) {
+          switch (previewMode) {
+            case 'model':
+              const model = this.getCategoryPreviewModelByIdCategory(idCategory);
+              if (model && (model[property] !== undefined)) {
+                res = model[property];
+              }
+
+              break;
+            case 'custom':
+              const p = bbn.fn.getField(this.source.categories, property, 'id', idCategory);
+              if (p !== undefined) {
+                res = p;
+              }
+
+              break;
+          }
+        }
+
+        return res;
+      },
+      getCategoryFields(idCategory) {
+        let res = [];
+        const fields = this.getCategoryProperty(idCategory, 'fields');
+        const getList = fields => {
+          const list = [];
+          if (bbn.fn.isArray(fields)) {
+            bbn.fn.each(fields, f => {
+              list.push({
+                field: f,
+                items: []
+              });
+            })
+          }
+          else {
+            bbn.fn.iterate(fields, (f, k) => {
+              if (bbn.fn.isNumber(k)) {
+                list.push({
+                  field: f,
+                  items: []
+                });
+              }
+              else {
+                list.push({
+                  field: k,
+                  items: getList(f)
+                });
+              }
+            });
+          }
+
+          return list;
+        };
+        if (fields) {
+          res = getList(fields)
+        }
+
+        return res;
+      },
+      getCategoryPreviewInputs(idCategory) {
+        return this.getCategoryProperty(idCategory, 'preview_inputs') || {};
+      },
+      getCategoryPreviewModelId(idCategory){
         if (idCategory) {
           return bbn.fn.getField(this.source.categories, 'preview_model', 'id', idCategory) || false;
         }
 
         return false;
       },
-      getCategoryModel(idModel){
+      getCategoryPreviewModelByIdModel(idModel){
         if (idModel) {
           return bbn.fn.getRow(this.source.models, 'id', idModel) || false;
         }
 
         return false;
       },
-      getCategoryModelByIdCategory(idCategory){
-        return this.getCategoryModel(this.getCategoryModelId(idCategory));
-      },
-      hasCategoryPreview(idCategory){
-        return !!idCategory && !!bbn.fn.getField(this.source.categories, 'preview', 'id', idCategory);
+      getCategoryPreviewModelByIdCategory(idCategory){
+        return this.getCategoryPreviewModelByIdModel(this.getCategoryPreviewModelId(idCategory));
       }
     },
     created(){

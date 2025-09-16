@@ -11,7 +11,7 @@
       <?=_("Enter the required values to make the necessary data")?>
     </div>
     <div class="bbn-grid-fields bbn-hpadding bbn-top-padding">
-      <template bbn-for="(input, field) in model.inputs">
+      <template bbn-for="(input, field) in inputs">
         <div class="bbn-label"
              bbn-html="input.label"/>
         <component :is="input.component"

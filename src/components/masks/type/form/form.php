@@ -28,6 +28,18 @@
                     :required="true"
                     source-value="id"
                     source-text="name"/>
+      <div bbn-if="formSource.preview === 'custom'"
+            class="bbn-label">
+        <?=_("Inputs")?>
+      </div>
+      <div>
+
+      </div>
+      <div bbn-if="formSource.preview === 'custom'"
+            class="bbn-label">
+        <?=_("Fields")?>
+      </div>
+      <div></div>
     </div>
   </div>
 </bbn-form>

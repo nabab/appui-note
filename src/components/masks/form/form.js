@@ -27,11 +27,11 @@
       action(){
         return this.root + 'actions/masks/' + (this.source.id_note ? 'update' : 'insert');
       },
-      fields(){
+      availableFields(){
         if (this.source.id_type && this.masks) {
-          const model = this.masks.getCategoryModelByIdCategory(this.source.id_type);
-          return model?.fields || [];
+          return this.masks.getCategoryFields(this.source.id_type);
         }
+
         return [];
       }
     },

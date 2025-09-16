@@ -12,7 +12,9 @@
           name: this.source?.name || '',
           code: this.source?.code || '',
           preview: this.source?.preview || false,
-          preview_model: this.source?.preview_model || ''
+          preview_model: this.source?.preview_model || '',
+          preview_inputs: this.source?.preview_inputs || [],
+          fields: this.source?.fields || []
         },
         previewTypes: [{
           text: bbn._('None'),

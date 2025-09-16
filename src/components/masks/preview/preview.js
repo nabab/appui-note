@@ -4,14 +4,14 @@
       source: {
         type: Object
       },
-      model: {
+      inputs: {
         type: [Object, Boolean]
       }
     },
     data(){
       const inputsSource = {};
-      if (this.model?.inputs) {
-        bbn.fn.iterate(this.model.inputs, (input, field) => {
+      if (this.inputs && Object.keys(this.inputs).length) {
+        bbn.fn.iterate(this.inputs, (input, field) => {
           inputsSource[field] = input.default !== undefined ? input.default : '';
         });
       }
@@ -24,7 +24,9 @@
     },
     computed: {
       hasInputs(){
-        return !!Object.keys(this.inputsSource).length;
+        const inputs = this.inputs ? Object.keys(this.inputs).length : 0;
+        const inpurtsSource = Object.keys(this.inputsSource).length;
+        return inputs && inpurtsSource && (inputs === inpurtsSource);
       }
     },
     methods: {

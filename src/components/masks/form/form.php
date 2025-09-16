@@ -18,12 +18,12 @@
     <bbn-input bbn-model="source.name"/>
     <label><?= _('Object') ?></label>
     <bbn-input bbn-model="source.title"/>
-    <template bbn-if="fields.length">
+    <template bbn-if="availableFields?.length">
       <label><?= _('Available fields') ?></label>
       <div class="bbn-flex-wrap bbn-grid-xxsgap">
-        <span bbn-for="f in fields"
+        <span bbn-for="f in availableFields"
               class="bbn-xspadding bbn-radius bbn-secondary bbn-light bbn-p"
-              bbn-text="f"
+              bbn-text="f.field"
               @click="copyField(f)"/>
       </div>
     </template>
