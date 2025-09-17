@@ -20,12 +20,7 @@
     <bbn-input bbn-model="source.title"/>
     <template bbn-if="availableFields?.length">
       <label><?= _('Available fields') ?></label>
-      <div class="bbn-flex-wrap bbn-grid-xxsgap">
-        <span bbn-for="f in availableFields"
-              class="bbn-xspadding bbn-radius bbn-secondary bbn-light bbn-p"
-              bbn-text="f.field"
-              @click="copyField(f)"/>
-      </div>
+      <appui-note-masks-form-fields :source="availableFields"/>
     </template>
     <label><?= _('Text') ?></label>
     <div style="height: 400px;">

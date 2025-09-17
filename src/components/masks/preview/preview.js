@@ -5,14 +5,17 @@
         type: Object
       },
       inputs: {
-        type: [Object, Boolean]
+        type: [Array, Boolean],
+        default(){
+          return [];
+        }
       }
     },
     data(){
       const inputsSource = {};
-      if (this.inputs && Object.keys(this.inputs).length) {
-        bbn.fn.iterate(this.inputs, (input, field) => {
-          inputsSource[field] = input.default !== undefined ? input.default : '';
+      if (this.inputs?.length) {
+        bbn.fn.each(this.inputs, input => {
+          inputsSource[input.field] = input.default !== undefined ? input.default : '';
         });
       }
 
@@ -24,7 +27,7 @@
     },
     computed: {
       hasInputs(){
-        const inputs = this.inputs ? Object.keys(this.inputs).length : 0;
+        const inputs = this.inputs?.length || 0;
         const inpurtsSource = Object.keys(this.inputsSource).length;
         return inputs && inpurtsSource && (inputs === inpurtsSource);
       }

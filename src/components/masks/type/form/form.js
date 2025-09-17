@@ -25,7 +25,11 @@
         }, {
           text: bbn._('Custom'),
           value: 'custom'
-        }]
+        }],
+        isAddingInput: false,
+        isEditingInput: false,
+        isAddingField: false,
+        isEditingField: false
       }
     },
     methods: {
@@ -40,6 +44,50 @@
       },
       onFailure(d){
         appui.error(d.error || bbn._('An error occurred'));
+      },
+      onInputSaved(d){
+        if (this.isAddingInput) {
+          this.formSource.preview_inputs.push(d);
+          this.isAddingInput = false;
+        }
+        else if (this.isEditingInput) {
+          bbn.fn.iterate(d, (v, i) => {
+            this.isEditingInput[i] = v;
+          });
+
+          this.isEditingInput = false;
+        }
+      },
+      onFieldSaved(d){
+        if (this.isAddingField) {
+          this.formSource.fields.push(d);
+          this.isAddingField = false;
+        }
+        else if (this.isEditingField) {
+          bbn.fn.iterate(d, (v, i) => {
+            this.isEditingField[i] = v;
+          });
+
+          this.isEditingField = false;
+        }
+      }
+    },
+    watch: {
+      previewTypes(nv){
+        switch (nv) {
+          case 'model':
+            this.formSource.preview_inputs = [];
+            this.formSource.fields = [];
+            break;
+          case 'custom':
+            this.formSource.preview_model = '';
+            break;
+          default:
+            this.formSource.preview_model = '';
+            this.formSource.preview_inputs = [];
+            this.formSource.fields = [];
+            break;
+        }
       }
     }
   }

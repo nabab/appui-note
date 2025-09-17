@@ -60,7 +60,7 @@
             action: () => {
               this.getPopup({
                 label: bbn._("New category of letters"),
-                width: 500,
+                minWidth: 500,
                 component: 'appui-note-masks-type-form',
                 componentEvents: {
                   success: () => {
@@ -210,10 +210,15 @@
           const list = [];
           if (bbn.fn.isArray(fields)) {
             bbn.fn.each(fields, f => {
-              list.push({
-                field: f,
-                items: []
-              });
+              if (bbn.fn.isObject(f)) {
+                list.push(f);
+              }
+              else {
+                list.push({
+                  field: f,
+                  items: []
+                });
+              }
             })
           }
           else {
@@ -242,7 +247,9 @@
         return res;
       },
       getCategoryPreviewInputs(idCategory) {
-        return this.getCategoryProperty(idCategory, 'preview_inputs') || {};
+        return this.getCategoryProperty(idCategory, 'preview_inputs')
+          || this.getCategoryProperty(idCategory, 'inputs')
+          || [];
       },
       getCategoryPreviewModelId(idCategory){
         if (idCategory) {
