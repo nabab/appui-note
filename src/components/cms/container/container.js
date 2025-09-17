@@ -115,7 +115,7 @@
         return this.selected === true;
       },
       currentComponent(){
-        return this.getComponentName(this.type);
+        return this.$getName(this.type);
       },
       changed(){
         return this.ready && !bbn.fn.isSame(this.initialSource, this.source);

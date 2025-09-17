@@ -11,7 +11,7 @@
         return this.$parent.escape(st);
       },
       selectImg(){
-        return this.closest(this.getComponentName('../../../')).selectImg(this.source.href)
+        return this.closest('appui-note-cms-block').selectImg(this.source.href)
       }
     },
     computed: {

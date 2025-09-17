@@ -1,7 +1,7 @@
 <div :class="[componentClass, 'bbn-margin']"
      bbn-draggable.mode.helper.container="!!drag && ready ? {mode: 'copy', helper: $el, container: $el.closest('bbn-container')} : false">
   <div :style="getStyle"
-       :class="getComponentName() + '-container bbn-shadow'">
+       :class="$getName() + '-container bbn-shadow'">
     <div class="bbn-overlay bbn-flex-height bbn-spadding">
       <div class="bbn-flex-fill bbn-top-lmargin"
            @click.stop="onClickPostIt">
@@ -21,7 +21,7 @@
     </div>
     <div class="bbn-top-left bbn-top-right">
       <div class="bbn-flex-width">
-        <div :class="getComponentName() + '-buttons'">
+        <div :class="$getName() + '-buttons'">
           <div class="bbn-block bbn-nowrap bbn-spadding">
             <i @click.stop="showCfg = !showCfg"
                ref="button"
