@@ -23,12 +23,14 @@
     methods: {
       selectField(field){
         if (navigator?.clipboard?.writeText) {
-          navigator.clipboard.writeText(field).then(() => {
+          navigator.clipboard.writeText(field.field).then(() => {
             appui.success(bbn._('Copied to clipboard'));
           });
         }
 
-        this.selected = this.selected === field ? null : field;
+        if (field?.items?.length) {
+          this.selected = this.selected === field ? null : field;
+        }
       }
     }
   }

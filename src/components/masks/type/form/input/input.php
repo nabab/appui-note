@@ -14,6 +14,9 @@
     <div class="bbn-label"><?=_("Component")?></div>
     <bbn-input bbn-model="formSource.component"
                :required="true"/>
+    <div class="bbn-label"><?=_("Options")?></div>
+    <bbn-json-editor bbn-model="formSource.componentOptions"
+                     :cfg="{search: false}"/>
     <div class="bbn-label"><?=_("Required")?></div>
     <bbn-switch bbn-model="formSource.required"
                 :value="1"

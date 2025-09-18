@@ -247,9 +247,16 @@
         return res;
       },
       getCategoryPreviewInputs(idCategory) {
-        return this.getCategoryProperty(idCategory, 'preview_inputs')
+        const inputs = this.getCategoryProperty(idCategory, 'preview_inputs')
           || this.getCategoryProperty(idCategory, 'inputs')
           || [];
+        return bbn.fn.map(inputs, i => {
+          if (i.componentOptions && bbn.fn.isString(i.componentOptions)) {
+            i.componentOptions = JSON.parse(i.componentOptions);
+          }
+
+          return i;
+        });
       },
       getCategoryPreviewModelId(idCategory){
         if (idCategory) {

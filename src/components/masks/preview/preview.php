@@ -15,6 +15,7 @@
         <div class="bbn-label"
              bbn-html="input.label"/>
         <component :is="input.component"
+                   bbn-bind="input.componentOptions"
                    bbn-model="inputsSource[input.field]"
                    :required="input.required"/>
       </template>

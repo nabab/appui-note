@@ -70,13 +70,6 @@
           table.updateData();
           appui.success(bbn._('Saved'));
         }
-      },
-      copyField(field){
-        if (navigator?.clipboard?.writeText) {
-          navigator.clipboard.writeText(field).then(() => {
-            appui.success(bbn._('Copied to clipboard'));
-          });
-        }
       }
     },
     created(){

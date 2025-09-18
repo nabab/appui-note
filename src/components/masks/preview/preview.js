@@ -15,7 +15,7 @@
       const inputsSource = {};
       if (this.inputs?.length) {
         bbn.fn.each(this.inputs, input => {
-          inputsSource[input.field] = input.default !== undefined ? input.default : '';
+          inputsSource[input.field] = input.default !== undefined ? input.default : (input.componentOptions?.default !== undefined ? input.componentOptions.default : '');
         });
       }
 
@@ -44,7 +44,7 @@
           bbn.fn.iterate(this.inputsSource, (value, key) => {
             args[key] = value;
           });
-          this.previewUrl = this.root + 'actions/masks/preview?' + new URLSearchParams(args).toString();
+          this.previewUrl = this.root + 'actions/masks/preview?hash=' + encodeURI(btoa(JSON.stringify(args)));
           this.showPreview = true;
         });
       },

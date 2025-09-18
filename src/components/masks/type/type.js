@@ -13,17 +13,22 @@
     },
     methods: {
       editCategory(){
-        this.getPopup({
-          label: bbn._("Edit category of letters"),
-          minWidth: 500,
-          component: 'appui-note-masks-type-form',
-          source: this.source,
-          componentEvents: {
-            success: () => {
-              this.masks.$parent.getContainer().reload();
-            }
+        if (this.source.id_type) {
+          const cat = bbn.fn.getRow(this.masks.source.categories, {id: this.source.id_type});
+          if (cat) {
+            this.getPopup({
+              label: bbn._("Edit category of letters"),
+              minWidth: 500,
+              component: 'appui-note-masks-type-form',
+              source: cat,
+              componentEvents: {
+                success: () => {
+                  this.masks.$parent.getContainer().reload();
+                }
+              }
+            });
           }
-        });
+        }
       },
       insert(){
         this.getPopup({

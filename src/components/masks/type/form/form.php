@@ -5,7 +5,7 @@
           :source="formSource">
   <div class="bbn-grid-fields bbn-hpadding bbn-top-padding">
     <div class="bbn-label"><?=_("Name")?></div>
-    <bbn-input bbn-model="formSource.name"
+    <bbn-input bbn-model="formSource.text"
                :required="true"/>
     <div class="bbn-label"><?=_("Code")?></div>
     <bbn-input bbn-model="formSource.code"

@@ -9,7 +9,7 @@
       return {
         formSource: {
           id: this.source?.id || '',
-          name: this.source?.name || '',
+          text: this.source?.text || '',
           code: this.source?.code || '',
           preview: this.source?.preview || false,
           preview_model: this.source?.preview_model || '',

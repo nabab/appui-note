@@ -1,13 +1,14 @@
 <?php
 
 $suc = false;
-if ($model->hasData(['name', 'code'], true)
+if ($model->inc->user->isDev()
+  && $model->hasData(['text', 'code'], true)
   && $model->hasData(['id', 'preview', 'preview_model', 'preview_inputs', 'fields'])
   && ($idOpt = $model->inc->options->fromCode('options', 'masks', 'appui'))
 ) {
   $o = [
     'id_parent' => $idOpt,
-    'text' => $model->data['name'],
+    'text' => $model->data['text'],
     'code' => $model->data['code'],
     'preview' => $model->data['preview'],
     'preview_model' => $model->data['preview'] === 'model' ? $model->data['preview_model'] : '',

@@ -1,12 +1,15 @@
 <?php
 use bbn\Appui\Note;
 use bbn\X;
-if (!empty($ctrl->get['_id'])
-  && !empty($ctrl->get['_type'])
+
+if (!empty($ctrl->get['hash'])
+  && ($params = json_decode(base64_decode($ctrl->get['hash']), true))
+  && !empty($params['_id'])
+  && !empty($params['_type'])
 ) {
-  $id = $ctrl->get['_id'];
-  $type = $ctrl->get['_type'];
-  unset($ctrl->get['_id'], $ctrl->get['_type']);
+  $id = $params['_id'];
+  $type = $params['_type'];
+  unset($params['_id'], $params['_type']);
   $noteCls = new Note($ctrl->db);
   if (($note = $noteCls->get($id))
     && !empty($note['id_type'])
@@ -20,13 +23,13 @@ if (!empty($ctrl->get['_id'])
             && ($m = $ctrl->getPluginModel($o['preview_model']))
             && is_callable($m['fn'])
           ) {
-            $data = $m['fn']($ctrl, $ctrl->get);
+            $data = $m['fn']($ctrl, $params);
           }
 
           break;
         case 'custom':
           $data = array_filter(
-            $ctrl->get,
+            $params,
             fn($f) => !is_null(X::find($o['preview_inputs'], ['field' => $f])),
             ARRAY_FILTER_USE_KEY
           );
