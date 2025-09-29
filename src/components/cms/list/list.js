@@ -223,11 +223,12 @@
           }, {
             field: "id_user",
             flabel: bbn._("Creator"),
-            label: '<<i class="nf nf-fa-user"></i>',
+            label: '<i class="nf nf-fa-user"></i>',
             cls: 'bbn-c',
             invisible: true,
             width: 50,
-            component: this.$options.components.initial
+            component: this.$options.components.initial,
+            source: bbn.fn.order(appui.users, 'text')
           }, {
             field: "num_medias",
             width: 50,
