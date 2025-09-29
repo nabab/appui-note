@@ -3,7 +3,7 @@
   <bbn-button icon="nf nf-fa-plus"
               :label="_('Insert')"
               :action="insertNote"/>
-  <div>
+  <div class="bbn-flex">
     <span :class="['bbn-leftlabel', {
             'bbn-disabled': groupActionsDisabled
           }]"
@@ -14,7 +14,7 @@
                   :disabled="groupActionsDisabled"/>
   </div>
   <template bbn-slot:right>
-    <div>
+    <div class="bbn-flex">
       <span class="bbn-leftlabel bbn-nowrap"
             bbn-text="_('Status')"/>
       <bbn-dropdown :source="statusList"
@@ -22,7 +22,8 @@
                     bbn-model="currentStatus"
                     style="width: 10rem"/>
     </div>
-    <div bbn-if="cp?.toolbarTypes">
+    <div bbn-if="cp?.toolbarTypes"
+         class="bbn-flex">
       <span class="bbn-leftlabel bbn-nowrap"
             bbn-text="_('Categories')"/>
       <bbn-dropdown :source="categories"
