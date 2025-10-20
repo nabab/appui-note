@@ -1,4 +1,4 @@
-<bbn-router :nav="true">
+<bbn-router mode="tabs">
   <bbn-container url="home"
                  fcolor="#FFF"
                  bcolor="#063B69"

@@ -2,7 +2,7 @@
 <bbn-form :source="source"
           :class="componentClass"
           :data="{
-                 ref: ref,
+                 ref,
                  action: isEdit ? 'edit' : 'insert'
                  }"
           :scrollable="false"

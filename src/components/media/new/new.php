@@ -3,7 +3,7 @@
 <div :class="componentClass">
 	<bbn-form :source="{file: files}"
 						:data="{
-							ref: ref,
+							ref,
 							id: source.id,
 							action: isEdit ? 'edit' : 'insert'
 						}"
@@ -47,7 +47,7 @@
 										@beforeRemove="onRemove"
 										:remove-url="root + 'media/actions/delete_file/'+ ref"
 										:data="{
-											ref: ref,
+											ref,
 											id: source.id
 										}"/>
 			</div>

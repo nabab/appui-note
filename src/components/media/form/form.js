@@ -60,9 +60,17 @@
         return !!this.source && !!this.source.content && bbn.fn.isString(this.source.content);
       },
       idGroup(){
-        if(this.isMediaGroup){
-          return this.closest('bbn-container').find('appui-note-media-groups').current.id
+        if (this.isMediaGroup) {
+          const ct = this.closest('bbn-container');
+          if (ct) {
+            const cp = ct.find('appui-note-media-groups');
+            if (cp && cp.current) {
+              return cp.current.id;
+            }
+          }
         }
+
+        return '';
       }
     },
     methods: {
@@ -111,8 +119,8 @@
         }
       }
     },
-    mounted(){
-      if(this.isMediaGroup){
+    mounted() {
+      if (this.isMediaGroup && this.source.link) {
         this.files[0].link = this.source.link;
       }
     }

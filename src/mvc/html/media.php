@@ -1,6 +1,6 @@
 <!-- HTML Document -->
 <bbn-router default="browser"
-            :nav="true"
+            mode="tabs"
             :autoload="true">
 	<bbn-container url="browser"
                   :label="_('Browser')"
