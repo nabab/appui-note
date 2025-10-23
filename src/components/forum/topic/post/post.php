@@ -109,7 +109,7 @@
                       style="min-width: 1.4em; max-width: 1.4em"/>
           <div class="bbn-flex-fill"
                style="overflow: hidden">
-            <div bbn-html="!contentVisible ? cutContent : source.content"
+            <div bbn-html="!contentVisible ? cutContent : bbn.fn.nl2br(source.content)"
                  :class="['bbn-background', 'bbn-text', 'bbn-radius', 'bbn-xspadding', {'bbn-ellipsis': !contentVisible}]"/>
           </div>
         </div>
