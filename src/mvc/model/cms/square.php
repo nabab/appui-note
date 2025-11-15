@@ -1,4 +1,5 @@
 <?php
+use bbn\Str;
 
 /** @var bbn\Mvc\Model $model */
 //TAKES THE IMAGES OF THE GALLERY FROM THE TEST FOLDER AND RETURNS IT WELL FORMATTED FOR THE BBN-UPLOAD
@@ -6,7 +7,7 @@ $path = $model->dataPath().'poc/images/gallery';
 $images = [];
 if ( $gallery = scandir($path) ){
   foreach ( $gallery as $image ){
-    if ( strpos($image, '.') !== 0 ){
+    if ( Str::pos($image, '.') !== 0 ){
       $img = new \bbn\File\Image($path.'/'.$image);
       $extension = '.'.$img->getExtension();
       $size = $img->getSize($path.'/'.$image);

@@ -83,9 +83,9 @@ else {
             $found++;
             $url = urldecode($media);
             if (str_starts_with($url, $cfg['baseUrl'])) {
-              $url = substr($url, strlen($cfg['baseUrl']));
-              if (strpos($url, '/') === 0) {
-                $url = substr($url, 1);
+              $url = Str::sub($url, Str::len($cfg['baseUrl']));
+              if (Str::pos($url, '/') === 0) {
+                $url = Str::sub($url, 1);
               }
             }
             $medias->setUrl($idMedia, $url);

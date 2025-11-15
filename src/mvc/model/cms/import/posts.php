@@ -2,6 +2,7 @@
 /** @var $this \bbn\mvc\model*/
 ini_set('user_agent','Mozilla/4.0 (compatible; MSIE 7.0b; Windows NT 6.0)');
 use bbn\X;
+use bbn\Str;
 use bbn\Appui\Note;
 use bbn\File\System;
 use bbn\Appui\Tag;
@@ -62,9 +63,9 @@ else {
           if (!empty($post->url)) {
             $url = $post->url;
             if (str_starts_with($url, $baseUrl)) {
-              $url = substr($url, strlen($baseUrl));
-              if (strpos($url, '/') === 0) {
-                $url = substr($url, 1);
+              $url = Str::sub($url, Str::len($baseUrl));
+              if (Str::pos($url, '/') === 0) {
+                $url = Str::sub($url, 1);
               }
             }
           }

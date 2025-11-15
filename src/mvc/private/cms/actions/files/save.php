@@ -50,7 +50,7 @@ if ( isset($ctrl->files['file'], $ctrl->arguments[0]) &&
         $img = new \bbn\File\Image($path.'/'.$f);
         if ( $img->test() && ($imgs = $img->thumbs($path)) ){
           array_push($res['imgs'], array_map(function($a) use($path){
-            return substr($a, \strlen($path)+1);
+            return Str::sub($a, Str::len($path)+1);
           }, $imgs));
         }
         $res['imgs']['length'] = \count($res['imgs']);

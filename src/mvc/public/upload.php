@@ -1,10 +1,11 @@
 <?php
+use bbn\Str;
 
 /** @var bbn\Mvc\Controller $ctrl */
 $fs = new \bbn\File\System();
 $all = $fs->scan(BBN_DATA_PATH.'users');
 $tmps = array_filter($all, function($a){
-  return substr($a, -4) === '/tmp';
+  return Str::sub($a, -4) === '/tmp';
 });
 foreach ( $tmps as $tmp ){
   $fs->delete($tmp, false);

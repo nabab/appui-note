@@ -1,5 +1,6 @@
 <?php
 use bbn\X;
+use bbn\Str;
 use bbn\File\System;
 use bbn\Util\Timer;
 /*
@@ -71,9 +72,9 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
         }
 
         if (str_starts_with($src, $baseUrl)) {
-          $src = substr($src, strlen($baseUrl));
-          if (strpos($src, '/') === 0) {
-            $src = substr($src, 1);
+          $src = Str::sub($src, Str::len($baseUrl));
+          if (Str::pos($src, '/') === 0) {
+            $src = Str::sub($src, 1);
           }
         }
       }
