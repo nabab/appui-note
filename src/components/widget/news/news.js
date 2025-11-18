@@ -65,8 +65,8 @@
           locked: 0,
           id_type,
           type: evType,
-          start: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-          end: dayjs().add(14, 'days').format('YYYY-MM-DD HH:mm:ss')
+          start: bbn.date().format('YYYY-MM-DD HH:mm:ss'),
+          end: bbn.date().add(14, 'days').format('YYYY-MM-DD HH:mm:ss')
         };
         this.$set(this, 'formData', obj);
         this.showForm = !this.showForm;

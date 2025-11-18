@@ -100,7 +100,7 @@
         }
       },
       fdatetime(d){
-        return dayjs.unix(d).format('DD/MM/YYYY HH:mm:ss')
+        return bbn.date(d).format('DD/MM/YYYY HH:mm:ss')
       }
     }
   };

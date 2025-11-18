@@ -35,7 +35,7 @@
         return bbn.fn.dateSQL(now.setFullYear(now.getFullYear() + 10));
       },
       minEnd() {
-        return bbn.fn.dateSQL(dayjs(this.formData.start).add(1, 'day').toDate());
+        return bbn.fn.dateSQL(bbn.date(this.formData.start).add(1, 'day').toDate());
       }
     },
     methods: {

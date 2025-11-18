@@ -30,7 +30,7 @@
         return bbn.fn.getField(appui.users, 'text', {value: this.source.creator});
       },
       currentDate(){
-        return dayjs(this.source.creation).format('DD/MM/YYYY HH:mm');
+        return bbn.date(this.source.creation).format('DD/MM/YYYY HH:mm');
       },
       hasVersions(){
         return this.source.hasVersions;
@@ -39,7 +39,7 @@
     methods: {
       map(v){
         return {
-          text: v.value + ' - ' + dayjs(v.creation).format('DD/MM/YYYY HH:mm'),
+          text: v.value + ' - ' + bbn.date(v.creation).format('DD/MM/YYYY HH:mm'),
           value: v.value
         }
       }
