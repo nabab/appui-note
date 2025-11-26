@@ -6,7 +6,8 @@
             class="bbn-secondary-border bbn-radius"
             :source="inputsSource"
             @submit="onSubmit"
-            @cancel="onCancel">
+            @cancel="onCancel"
+            :prefilled="true">
     <div class="bbn-radius-top bbn-secondary bbn-xspadding bbn-c bbn-m bbn-upper">
       <?=_("Enter the required values to make the necessary data")?>
     </div>

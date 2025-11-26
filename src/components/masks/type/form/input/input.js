@@ -6,7 +6,7 @@
       }
     },
     data(){
-      const fields = ['field', 'label', 'component', 'componentOptions', 'required'];
+      const fields = ['field', 'label', 'component', 'componentOptions', 'required', 'default'];
       return {
         fields,
         formSource: Object.fromEntries(fields.map(f => {
