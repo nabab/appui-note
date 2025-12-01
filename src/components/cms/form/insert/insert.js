@@ -31,7 +31,7 @@
     },
     computed:{
       date(){
-        return bbn.date(bbn.date().toISOString()).unix();
+        return bbn.dt(bbn.dt().toISOString()).unix();
       }
     },
     methods: {
@@ -75,7 +75,7 @@
         }
         else{
           if ( !this.source.start ){
-            this.source.start = bbn.date().format("YYYY/MM/DD HH:mm:ss");
+            this.source.start = bbn.dt().format("YYYY/MM/DD HH:mm:ss");
           }
         }
       }

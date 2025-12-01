@@ -110,7 +110,7 @@
         }
       },
       formatDate(d){
-        return !!d ? bbn.date(d).format('DD/MM/YYYY HH:mm:ss') : '';
+        return !!d ? bbn.dt(d).format('DD/MM/YYYY HH:mm:ss') : '';
       }
     },
     created(){

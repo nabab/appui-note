@@ -100,7 +100,7 @@
         }
       },
       fdatetime(d){
-        return bbn.date(d).format('DD/MM/YYYY HH:mm:ss')
+        return bbn.dt(d).format('DD/MM/YYYY HH:mm:ss')
       }
     }
   };

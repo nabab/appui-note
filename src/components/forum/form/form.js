@@ -61,7 +61,7 @@
           mode: 'less'
         }],
         editorType: 'bbn-rte',
-        ref: bbn.date().unix()
+        ref: bbn.dt().unix()
       }
     },
     computed: {

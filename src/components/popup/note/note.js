@@ -13,10 +13,10 @@
         return appui.getUserName(this.source.id_user);
       },
       creationDate(){
-        return bbn.date(this.source.creation).format('DD/MM/YYYY');
+        return bbn.dt(this.source.creation).format('DD/MM/YYYY');
       },
       creationTime(){
-        return bbn.date(this.source.creation).format('HH:mm');
+        return bbn.dt(this.source.creation).format('HH:mm');
       }
     }
   }

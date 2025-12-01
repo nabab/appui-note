@@ -89,7 +89,7 @@
         }
       },
       fdatetime(d){
-        return bbn.date().unix(d).format('DD/MM/YYYY HH:mm:ss')
+        return bbn.dt().unix(d).format('DD/MM/YYYY HH:mm:ss')
       }
     }
   }

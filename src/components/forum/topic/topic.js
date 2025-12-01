@@ -12,16 +12,16 @@
         return bbn.fn.fdate(d, true);
       },
       ndate(d){
-        return bbn.date(d).format('DD/MM/YYYY');
+        return bbn.dt(d).format('DD/MM/YYYY');
       },
       ndatetime(d){
-        return bbn.date(d).format('DD/MM/YYYY HH:mm');
+        return bbn.dt(d).format('DD/MM/YYYY HH:mm');
       },
       fdate(d){
         return bbn.fn.fdatetime(d, true);
       },
       hour(d){
-        return bbn.date(d).format('HH:mm')
+        return bbn.dt(d).format('HH:mm')
       },
     },
     created(){
