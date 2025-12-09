@@ -1,10 +1,5 @@
 <?php
-/*
- * Describe what it does!
- *
- * @var bbn\Mvc\Controller $ctrl 
- *
- */
+/** @var bbn\Mvc\Controller $ctrl */
 $success = false;
 if ( ($id_note = $ctrl->post['id_note']) &&
     ($id_media = $ctrl->post['id_media']) &&

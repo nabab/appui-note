@@ -1,8 +1,5 @@
 <?php
-/*
- *  Describe what it does
- *
- **/
+/** @var bbn\Mvc\Controller $ctrl */
 use bbn\X;
 
 $q = $ctrl->db->query("SELECT version, id_note, content FROM bbn_notes_versions");
