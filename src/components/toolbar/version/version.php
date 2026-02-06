@@ -15,8 +15,7 @@
                       id: data.id
                     }"
                     bbn-model="currentVersion"
-                    :map="map"
-      ></bbn-dropdown>
+                    :map="map"/>
     </div>
   </div>
 </div>

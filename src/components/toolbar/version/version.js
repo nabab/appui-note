@@ -1,5 +1,6 @@
 (() => {
   return {
+    mixins: [bbn.cp.mixins.basic],
     props: {
       source: {
         type: Object
@@ -10,7 +11,7 @@
           return {}
         }
       },
-      dataUrl: { 
+      dataUrl: {
         type: String,
         default: appui.plugins['appui-note'] + '/data/versions'
       },
@@ -42,21 +43,24 @@
           text: v.value + ' - ' + bbn.dt(v.creation).format('DD/MM/YYYY HH:mm'),
           value: v.value
         }
-      }
-    },
-    watch: {
-      currentVersion(newVal){
-        if ( this.data.id ){
+      },
+      getVersion(version){
+        if (this.data.id) {
           this.post(this.actionUrl, {
             id_note: this.data.id,
-            version: newVal
+            version: version
           }, d => {
-            if ( d.success && d.data ){
+            if (d.success && d.data) {
               this.$emit('version', d.data);
             }
           })
         }
       }
-    } 
+    },
+    watch: {
+      currentVersion(newVal){
+        this.getVersion(newVal);
+      }
+    }
   }
 })();
