@@ -2,6 +2,7 @@
 	return {
     mixins: [
       bbn.cp.mixins.basic,
+      bbn.cp.mixins.pageable,
       bbn.cp.mixins.list
     ],
 		props: {
