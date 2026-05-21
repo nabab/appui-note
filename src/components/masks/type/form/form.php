@@ -46,7 +46,7 @@
                                           @success="onInputSaved"/>
         <div bbn-elseif="formSource.preview_inputs.length"
              class="bbn-flex-wrap bbn-grid-xsgap">
-          <div bbn-for="input in formSource.preview_inputs"
+          <div bbn-for="(input, idx) in formSource.preview_inputs"
                class="bbn-spadding bbn-radius bbn-background-secondary bbn-secondary-text bbn-grid"
                style="grid-template-columns: auto max-content; align-items: center; gap: var(--xsspace)">
             <span bbn-text="input.field"/>
@@ -54,7 +54,7 @@
               <i class="nf nf-fa-pencil bbn-p bbn-alt-background bbn-alt-text bbn-radius bbn-xspadding"
                  @click="isEditingInput = input"/>
               <i class="nf nf-fa-trash bbn-p bbn-bg-red bbn-white bbn-radius bbn-xspadding"
-                 @click="isEditingInput = input"/>
+                 @click="removeInput(idx)"/>
             </div>
           </div>
         </div>
@@ -77,7 +77,7 @@
                                           @success="onFieldSaved"/>
         <div bbn-elseif="formSource.fields.length"
              class="bbn-flex-wrap bbn-grid-xsgap">
-          <div bbn-for="field in formSource.fields"
+          <div bbn-for="(field, idx) in formSource.fields"
                class="bbn-spadding bbn-radius bbn-background-secondary bbn-secondary-text bbn-grid"
                style="grid-template-columns: auto max-content; align-items: center; gap: var(--xsspace)">
             <span bbn-text="field.field"/>
@@ -85,7 +85,7 @@
               <i class="nf nf-fa-pencil bbn-p bbn-alt-background bbn-alt-text bbn-radius bbn-xspadding"
                  @click="isEditingField = field"/>
               <i class="nf nf-fa-trash bbn-p bbn-bg-red bbn-white bbn-radius bbn-xspadding"
-                 @click="isEditingField = field"/>
+                 @click="removeField(idx)"/>
             </div>
           </div>
         </div>

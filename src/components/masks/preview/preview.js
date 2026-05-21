@@ -48,8 +48,12 @@
           this.showPreview = true;
         });
       },
-      onCancel(){
-        this.showPreview = false;
+      onCancel(ev){
+        if (this.showPreview) {
+          ev.preventDefault();
+          this.showPreview = false;
+          this.getRef('form').reset();
+        }
       }
     }
   }

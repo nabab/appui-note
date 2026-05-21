@@ -70,6 +70,16 @@
 
           this.isEditingField = false;
         }
+      },
+      removeInput(index){
+        this.confirm(bbn._('Are you sure you want to delete this input?'), () => {
+          this.formSource.preview_inputs.splice(index, 1);
+        });
+      },
+      removeField(index){
+        this.confirm(bbn._('Are you sure you want to delete this field?'), () => {
+          this.formSource.fields.splice(index, 1);
+        });
       }
     },
     watch: {

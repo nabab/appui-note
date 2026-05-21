@@ -1,13 +1,14 @@
 <div class="appui-note-masks-preview bbn-padding bbn-block">
   <bbn-form bbn-if="hasInputs"
-            :windowed="false"
+            :windowed="true"
             :buttons="['cancel', 'submit']"
             mode="small"
             class="bbn-secondary-border bbn-radius"
             :source="inputsSource"
             @submit="onSubmit"
-            @cancel="onCancel"
-            :prefilled="true">
+            @beforecancel="onCancel"
+            :prefilled="true"
+            ref="form">
     <div class="bbn-radius-top bbn-secondary bbn-xspadding bbn-c bbn-m bbn-upper">
       <?=_("Enter the required values to make the necessary data")?>
     </div>
