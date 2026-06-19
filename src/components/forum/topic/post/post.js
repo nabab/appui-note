@@ -23,7 +23,7 @@
       },
       usersNumber(){
         if (this.source.users) {
-          return this.source.users.split(',').length;
+          return this.source.users.split(',').filter(u => u.toLowerCase() !== this.source.creator.toLowerCase()).length;
         }
         return 0;
       },
@@ -37,7 +37,7 @@
           u = this.source.users.split(',');
           if (u.length > 1) {
             u.forEach((v) => {
-              if (v !== this.source.creator) {
+              if (v.toLowerCase() !== this.source.creator.toLowerCase()) {
                 ret += ', ' + appui.getUserName(v.toLowerCase()) || bbn._('Unknown');
               }
             });
