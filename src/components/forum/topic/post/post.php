@@ -12,7 +12,8 @@
               bbn-text="isYou(source.creator) ? _('You') : creatorName"/>
         <span bbn-if="hasEditUsers"
               class="bbn-right-xspadding bbn-b bbn-s bbn-webblue">
-          +{{usersNumber}}
+          <span>+</span>
+          <span bbn-text="usersNumber - 1"/>
         </span>
       </span>
     </div>

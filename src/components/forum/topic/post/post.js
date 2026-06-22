@@ -23,7 +23,7 @@
       },
       usersNumber(){
         if (this.source.users) {
-          return this.source.users.split(',').filter(u => u.toLowerCase() !== this.source.creator.toLowerCase()).length;
+          return this.source.users.split(',').length;
         }
         return 0;
       },
