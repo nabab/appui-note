@@ -14,7 +14,8 @@
     data(){
       return {
         contentVisible: true,
-        hasBigContent: false
+        hasBigContent: false,
+        usersList: ''
       }
     },
     computed: {
@@ -31,19 +32,7 @@
         return this.usersNumber > 1;
       },
       usersNames(){
-        let ret = appui.getUserName(this.source.creator.toLowerCase()) || bbn._('Unknown'),
-            u;
-        if (this.source.users) {
-          u = this.source.users.split(',');
-          if (u.length > 1) {
-            u.forEach((v) => {
-              if (v.toLowerCase() !== this.source.creator.toLowerCase()) {
-                ret += ', ' + appui.getUserName(v.toLowerCase()) || bbn._('Unknown');
-              }
-            });
-          }
-        }
-        return ret;
+        return this.getUsersNames(this.source.users.split(','));
       },
       cutContent(){
         return bbn.fn.html2text(this.source.content).replace(/\n/g, ' ');
@@ -101,6 +90,30 @@
             appui.error();
           }
         })
+      },
+      getUsersNames(users){
+        let ret = appui.getUserName(this.source.creator.toLowerCase()) || bbn._('Unknown');
+        if (users?.length > 1) {
+          users.forEach((v) => {
+            if (v.toLowerCase() !== this.source.creator.toLowerCase()) {
+              ret += ', ' + appui.getUserName(v.toLowerCase()) || bbn._('Unknown');
+            }
+          });
+        }
+        return ret;
+      },
+      async getUsersList(){
+        if (!this.usersList.length) {
+          const d = await this.post(appui.plugins['appui-note'] + '/data/userslist', {
+            id: this.source.id
+          });
+          bbn.fn.log('mirko', d)
+          if (d?.data?.success && bbn.fn.isArray(d?.data?.data)) {
+            this.usersList = this.getUsersNames(d.data.data);
+          }
+        }
+
+        return this.usersList;
       }
     },
     mounted(){

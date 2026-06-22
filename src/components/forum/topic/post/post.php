@@ -11,9 +11,10 @@
         <span class="bbn-xspadding bbn-s bbn-unselectable"
               bbn-text="isYou(source.creator) ? _('You') : creatorName"/>
         <span bbn-if="hasEditUsers"
-              class="bbn-right-xspadding bbn-b bbn-s bbn-webblue">
-          <span>+</span>
-          <span bbn-text="usersNumber - 1"/>
+              class="bbn-right-xspadding bbn-b bbn-s bbn-webblue"
+              @mouseenter="getUsersList()">
+          <bbn-icon content="nf nf-md-account_multiple_plus bbn-large"
+                    :title="usersList"/>
         </span>
       </span>
     </div>
