@@ -69,7 +69,8 @@
 			return {
 			  currentUser: appui.user.id,
 				mediaFileType: appui.options.media_types.file.id,
-        mediaLinkType: appui.options.media_types.link.id
+        mediaLinkType: appui.options.media_types.link.id,
+        isScrollMounted: false
 			}
 		},
 		computed: {
@@ -140,11 +141,25 @@
         if (this.filterString.length) {
           this.filterString = '';
         }
+      },
+      onDataLoaded(){
+        this.$nextTick(() => {
+          this.getRef('scroll')?.scrollStartY();
+        });
+      },
+      onScrollMounted(){
+        if (!this.isScrollMounted) {
+          this.isScrollMounted = true;
+          this.$on('dataloaded', this.onDataLoaded)
+        }
       }
     },
     mounted(){
 			this.ready = true;
 		},
+    beforeDestroy(){
+      this.$off('dataloaded', this.onDataLoaded);
+    },
     watch: {
       filterString(newVal){
         if (this.filterable) {

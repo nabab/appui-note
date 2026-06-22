@@ -30,13 +30,16 @@
 		</div>
 		<!-- Main -->
 		<div class="bbn-w-100 bbn-flex-fill">
-			<bbn-scroll bbn-if="!isLoading && filteredData.length"
-                  axis="y">
-        <appui-note-forum-topic bbn-for="(d, i) in filteredData"
-                                :key="d.key"
-                                :source="d.data"
-                                :index="d.index"
-                                :class="{'bbn-bottom-spadding': !filteredData[i+1]}"/>
+			<bbn-scroll axis="y"
+                  ref="scroll"
+                  @hook:mounted="onScrollMounted">
+        <div>
+          <appui-note-forum-topic bbn-for="(d, i) in filteredData"
+                                  :key="d.key"
+                                  :source="d.data"
+                                  :index="d.index"
+                                  :class="{'bbn-bottom-spadding': !filteredData[i+1]}"/>
+        </div>
 			</bbn-scroll>
 		</div>
 		<!-- Footer -->
