@@ -33,7 +33,7 @@
 			<bbn-scroll axis="y"
                   ref="scroll"
                   @hook:mounted="onScrollMounted">
-        <div>
+        <div bbn-if="!isLoading && filteredData.length">
           <appui-note-forum-topic bbn-for="(d, i) in filteredData"
                                   :key="d.key"
                                   :source="d.data"
