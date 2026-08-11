@@ -24,12 +24,15 @@ else if (!empty($ctrl->post['process'])
   && !empty($ctrl->post['file']['name'])
   && is_file(APPUI_NOTE_CMS_IMPORT_PATH.$ctrl->post['file']['name'])
 ) {
-  if (!is_file($cfgFile)) {
-    file_put_contents($cfgFile, json_encode([
+
+  $fp = @fopen($cfgFile, 'x');
+  if ($fp !== false) {
+    fwrite($fp, json_encode([
       'creationDate' => date('Y-m-d H:i:s'),
       'file' => $ctrl->post['file'],
       'processes' => []
     ], JSON_PRETTY_PRINT));
+    fclose($fp);
   }
 
   /** @var array array with index creationDate and processes */
