@@ -82,12 +82,12 @@ if (defined('APPUI_NOTE_CMS_IMPORT_PATH')) {
       return $src;
     };
 
-    //$files = ['/home/thomas/domains/poc3.thomas.lan/app-ui/data/content/articles/marine-00997.html'];
+    //$files = ['/home/thomas/domains/poc3.thomas.lan/data/content/articles/marine-00997.html'];
     // check if $file is not null (When the parameter is neither an array nor an object with implemented Countable interface, 1 will be returned. There is one exception, if value is null, 0 will be returned.)
     if ( count($files) ){
       // make string array with data for each file
       foreach ( $files as $i => $f ) {
-        //if ($f === '/home/thomas/domains/poc.thomas.lan/app-ui/data/content/articles/marine-00002.html'){    $srcs = [];
+        //if ($f === '/home/thomas/domains/poc.thomas.lan/data/content/articles/marine-00002.html'){    $srcs = [];
         $st = $fs->getContents($f);
         $dom = simplexml_load_string('<?xml version="1.0" encoding="UTF-8"?>'.PHP_EOL.'<root>'.$st.'</root>', null, LIBXML_NOERROR);
         $res[$f] = [];
