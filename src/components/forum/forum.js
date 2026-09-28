@@ -6,6 +6,32 @@
       bbn.cp.mixins.list
     ],
 		props: {
+      pageable: {
+        type: Boolean,
+        default: true
+      },
+      /**
+       * Set to true allows list's columns to be sortable.
+       * @prop {Boolean} [false] sortable
+       * @memberof listComponent
+       */
+      sortable: {
+        type: Boolean,
+        default: true
+      },
+      /**
+       * Set to true allows the columns of the list to be filtered. A filter icon will appear at the top of each column.The property can be given to each column to define different behaviour.
+       * @prop {Boolean} [false] filterable
+       * @memberof listComponent
+       */
+      filterable: {
+        type: Boolean,
+        default: true
+      },
+      autobind: {
+        type: Boolean,
+        default: true
+      },
 			pinnable: {
         type: Boolean,
         default: true

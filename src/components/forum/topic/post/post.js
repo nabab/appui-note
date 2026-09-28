@@ -117,28 +117,28 @@
       }
     },
     mounted(){
-      this.$nextTick(() => {
-        setTimeout(() => {
-          if (this.isTopic
-            && (this.getRef('contentContainer').getBoundingClientRect().height > 35)
+      setTimeout(() => {
+        const container = this.getRef('contentContainer');
+        if (this.isTopic
+          && container
+          && (container.getBoundingClientRect().height > 35)
+        ) {
+          this.hasBigContent = true;
+          if (!!this.forum.autoUnfoldImportants
+            && !!this.source.important
           ) {
-            this.hasBigContent = true;
-            if (!!this.forum.autoUnfoldImportants
-              && !!this.source.important
-            ) {
-              return;
-            }
-            if (!!this.forum.autoUnfoldCats
-              && !!this.source.category
-              && bbn.fn.isArray(this.forum.autoUnfoldCats)
-              && this.forum.autoUnfoldCats.includes(this.source.category)
-            ) {
-              return;
-            }
-            this.foldContent();
+            return;
           }
-        }, 100)
-      });
+          if (!!this.forum.autoUnfoldCats
+            && !!this.source.category
+            && bbn.fn.isArray(this.forum.autoUnfoldCats)
+            && this.forum.autoUnfoldCats.includes(this.source.category)
+          ) {
+            return;
+          }
+          this.foldContent();
+        }
+      }, 100)
     }
   }
 })();
