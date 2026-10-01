@@ -60,6 +60,9 @@
         else if (!this.urlEdited) {
           this.urlEdited = true;
         }
+      },
+      pref() {
+        this.updateURL();
       }
     }
   }

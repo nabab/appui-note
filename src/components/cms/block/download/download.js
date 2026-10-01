@@ -49,8 +49,8 @@
         });
       },
       onChangeType(file){
-        this.$set(file, 'value', '');
-        this.$set(file, 'text', '');
+        file.value = '';
+        file.text = '';
         if (file.type === 'url') {
           delete file.filename;
         }
@@ -96,9 +96,9 @@
         },
         methods: {
           onSelection(media) {
-            this.$set(this.source, 'value', media.data.id);
-            this.$set(this.source, 'text', media.data.name);
-            this.$set(this.source, 'filename', media.data.name);
+            this.source.value = media.data.id;
+            this.source.text = media.data.name;
+            this.source.filename = media.data.name;
             this.getPopup().close();
           },
           onDelete(obj){

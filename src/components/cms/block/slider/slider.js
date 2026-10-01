@@ -217,15 +217,15 @@
           bbn.fn.each(data, d => {
             if (d.style?.margin === undefined) {
               if (d.style === undefined) {
-                this.$set(d, 'style', {});
+                d.style = {};
               }
-              this.$set(d.style, 'margin', this.source.margin || 0);
+              d.style.margin = this.source.margin || 0;
             }
             if (d.style?.marginMobile === undefined) {
               if (d.style === undefined) {
-                this.$set(d, 'style', {});
+                d.style = {};
               }
-              this.$set(d.style, 'marginMobile', this.source.marginMobile || 0);
+              d.style.marginMobile = this.source.marginMobile || 0;
             }
           })
         }
@@ -233,10 +233,10 @@
     },
     beforeMount(){
       if (!this.source.limit){
-        this.$set(this.source, 'limit', 10);
+        this.source.limit = 10;
       }
       if (!this.source.order){
-        this.$set(this.source, 'order', 'versions.title');
+        this.source.order = 'versions.title';
       }
       if (this.source.items !== undefined) {
         this.currentItems.splice(0, this.currentItems.length, ...this.source.items);
@@ -251,16 +251,16 @@
         delete this.source.currentItems;
       }
       if (!this.source.max){
-        this.$set(this.source, 'max', 3);
+        this.source.max = 3;
       }
       if (!this.source.min){
-        this.$set(this.source, 'min', 1);
+        this.source.min = 1;
       }
       if (!this.source.mode) {
-        this.$set(this.source, 'mode', 'publications');
+        this.source.mode = 'publications';
       }
       if (!!this.source.arrows && !this.source.arrowsPosition) {
-        this.$set(this.source, 'arrowsPosition', 'default');
+        this.source.arrowsPosition = 'default';
       }
       //to have the data recalculated in mode read and view the correct number of cols in mobile and desktop
       if ((this.mode === 'read')
@@ -296,7 +296,7 @@
             let ddSource = this.getRef('publicationdropdown').currentData;
             let idx = bbn.fn.search(ddSource, 'data.id', val);
             if ((idx > -1) && ddSource[idx].data.id_root_alias){
-              this.$set(this.source, 'id_root_alias', ddSource[idx].data.id_root_alias);
+              this.source.id_root_alias = ddSource[idx].data.id_root_alias;
               //this.showRootAlias = true;
             }
             else{

@@ -109,29 +109,29 @@
                             @click="move('start')"
                             label="<?= _("Move to start") ?>"
                             :disabled="currentEditingIndex < 1"
-                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-md-arrow_collapse_up' : 'nf nf-md-arrow_collapse_left'"/>
+                            :icon="(currentEditingParent?.source?.type !== 'container') || (currentEditingParent?.source.orientation === 'vertical') ? 'nf nf-md-arrow_collapse_up' : 'nf nf-md-arrow_collapse_left'"/>
                 <bbn-button :notext="true"
                             @click="move('before')"
-                            :label="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? _('Move up') : _('Move left')"
+                            :label="(currentEditingParent?.source?.type !== 'container') || (currentEditingParent?.source.orientation === 'vertical') ? _('Move up') : _('Move left')"
                             :disabled="!currentEditingIndex"
-                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-md-arrow_up' : 'nf nf-md-arrow_left'"/>
+                            :icon="(currentEditingParent?.source?.type !== 'container') || (currentEditingParent?.source.orientation === 'vertical') ? 'nf nf-md-arrow_up' : 'nf nf-md-arrow_left'"/>
                 <bbn-button :notext="true"
                             @click="move('after')"
-                            :label="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? _('Move down') : _('Move right')"
-                            :disabled="currentEditingIndex === (currentEditingParentItems.length - 1)"
-                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-md-arrow_down' : 'nf nf-md-arrow_right'"/>
+                            :label="(currentEditingParent?.source?.type !== 'container') || (currentEditingParent?.source.orientation === 'vertical') ? _('Move down') : _('Move right')"
+                            :disabled="currentEditingIndex === (currentEditingParentItems?.length - 1)"
+                            :icon="(currentEditingParent?.source?.type !== 'container') || (currentEditingParent?.source.orientation === 'vertical') ? 'nf nf-md-arrow_down' : 'nf nf-md-arrow_right'"/>
                 <bbn-button :notext="true"
                             @click="move('end')"
                             label="<?= _("Move to end") ?>"
-                            :disabled="currentEditingIndex === (currentEditingParentItems.length - 1)"
-                            :icon="(currentEditingParent.source?.type !== 'container') || (currentEditingParent.source.orientation === 'vertical') ? 'nf nf-md-arrow_collapse_down' : 'nf nf-md-arrow_collapse_right'"/>
+                            :disabled="currentEditingIndex === (currentEditingParentItems?.length - 1)"
+                            :icon="(currentEditingParent?.source?.type !== 'container') || (currentEditingParent?.source.orientation === 'vertical') ? 'nf nf-md-arrow_collapse_down' : 'nf nf-md-arrow_collapse_right'"/>
               </template>
             </div>
             <div class="bbn-flex-fill bbn-right-spadding"
                   style="overflow: hidden">
               <div class="bbn-100">
                 <bbn-scroll axis="y">
-                  <appui-note-cms-container bbn-if="currentEditing.type === 'container'"
+                  <appui-note-cms-container bbn-if="currentEditing?.type === 'container'"
                                             @configinit="setOriginalConfig"
                                             class="bbn-contain bbn-w-100"
                                             :source="currentEditing"
@@ -141,7 +141,7 @@
                   <appui-note-cms-block bbn-else
                                         @configinit="setOriginalConfig"
                                         :class="['bbn-contain', 'bbn-w-100', {
-                                          'bbn-overlay': currentEditing.type === 'html'
+                                          'bbn-overlay': currentEditing?.type === 'html'
                                         }]"
                                         :source="currentEditing"
                                         :cfg="currentBlockConfig"

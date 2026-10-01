@@ -148,7 +148,7 @@
       addBlock() {
         bbn.fn.log('ADDBLOCK')
         if (this.source.items === undefined) {
-          this.$set(this.source, 'items', []);
+          this.source.items = [];
         }
         this.source.items.push({
           _elementor: this.closest('appui-note-cms-editor').getElementorDefaultObj(),
@@ -231,7 +231,7 @@
               newIndex--;
             }
             if (this.source.items === undefined) {
-              this.$set(this.source, 'items', []);
+              this.source.items = [];
             }
             this.source.items.splice(newIndex, toData.replace ? 1 : 0, newSource);
           }
@@ -267,7 +267,7 @@
         ) {
           arr.splice(this.source.items.length, arr.length);
         }
-        this.$set(this, 'gridLayout', Object.assign({}, arr));
+        this.gridLayout = Object.assign({}, arr);
         return this.gridLayout;
       },
     },
@@ -276,15 +276,15 @@
     },
     mounted() {
       if (this.source.orientation === undefined) {
-        this.$set(this.source, 'orientation', 'horizontal');
+        this.source.orientation = 'horizontal';
       }
-      this.$set(this, 'editor', this.closest('appui-note-cms-editor'));
+      this.editor = this.closest('appui-note-cms-editor');
     },
     watch: {
       gridLayout: {
         deep: true,
         handler(newVal){
-          this.$set(this.source, 'layout', Object.values(newVal).join(' '));
+          this.source.layout = Object.values(newVal).join(' ');
         }
       },
       'source.items'(){

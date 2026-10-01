@@ -29,7 +29,7 @@
           return this.source.hr || null;
         },
         set(v){
-          this.$set(this.source, 'hr', v);
+          this.source.hr = v;
         }
       },
       currentStyle(){

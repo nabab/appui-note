@@ -139,10 +139,7 @@
         return isChanged;
       },
       currentEditingParentItems() {
-        if (!!this.currentEditingParent) {
-          return this.currentEditingParent.source.items;
-        }
-        return null;
+        return this.currentEditingParent?.source?.items ?? null;
       },
       currentEditingIndex() {
         if (!!this.currentEditingKey && !!this.currentEditingParentItems) {
@@ -207,7 +204,8 @@
           if ((v.type === 'container') && !!v.items) {
             this.normalizeItems(v.items);
           }
-          this.$set(items[i], '_elementor', this.getElementorDefaultObj(i));
+
+          items[i]._elementor = this.getElementorDefaultObj(i);
         });
         return items;
       },
@@ -278,10 +276,12 @@
             if (idx > -1) {
               this.currentEditingParentItems.splice(idx, 1);
             }
-            this.currentEditingKey = null;
-            this.currentEditing = null;
-            this.currentEditingParent = null;
-            this.showWidgetSettings = false;
+            this.$nextTick(() => {
+              this.currentEditingKey = null;
+              this.currentEditing = null;
+              this.currentEditingParent = null;
+              this.showWidgetSettings = false;
+            });
           }
           else {
             appui.error();
@@ -628,7 +628,7 @@
           if (cfg) {
             for (let n in cfg) {
               if ((n !== 'type') && (tmp[n] === undefined)) {
-                this.$set(tmp, n, cfg[n]);
+                tmp[n] = cfg[n];
               }
               else {
                 tmp[n] = cfg[n];

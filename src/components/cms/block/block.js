@@ -39,7 +39,6 @@
       applyDefaultConfig() {
         bbn.fn.iterate(bbn.fn.extend({}, this.defaultConfig, this.cfg || {}), (a, n) => {
           if (this.source[n] === undefined) {
-            //this.$set(this.source, n, a);
             this.source[n] = a;
           } else {
             //this.source[n] = a;
@@ -51,7 +50,7 @@
           delete this.source[prop];
         }
         else {
-          this.$set(this.source, prop, val);
+          this.source[prop] = val;
         }
       },
     },

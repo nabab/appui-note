@@ -442,7 +442,7 @@
         }
         else {
           if (idx > -1) {
-            table.$set(table.currentFilters.conditions[idx], 'value', type);
+            table.currentFilters.conditions[idx].value = type;
           }
           else {
             table.currentFilters.conditions.push({

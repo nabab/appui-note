@@ -22,7 +22,7 @@
             let obj = bbn.fn.getRow(this.types, 'id', this.source.id);
             if (obj) {
               bbn.fn.iterate(d.data, (v, k) => {
-                this.$set(obj, k, v);
+                obj[k] = v;
               });
             }
           }

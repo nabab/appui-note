@@ -59,7 +59,7 @@
 								this.productAdded = true;
 								this.quantity = 1;
 								bbn.fn.iterate(d.newCart, (v, k) => {
-									this.$root.$set(this.$root.currentCart, k, v);
+									this.$root.currentCart[k] = v;
 								});
 							}
 						});
@@ -67,16 +67,16 @@
 				}
 			},
       select(a){
-        this.$set(this.source, 'content', a.id);
+        this.source.content = a.id;
       },
       getProduct(){
-        this.$set(this, 'productData', {});
+        this.productData = {};
         this.isOk = false
         this.post(this.root + 'cms/data/product', {
           id: this.source.content
         }, d => {
           if (d.success) {
-            this.$set(this, 'productData', d.data);
+            this.productData = d.data;
             this.isOk = true;
           }
         })
@@ -84,7 +84,7 @@
     },
     beforeMount(){
       if (!this.source.content && !!this.source.id_product) {
-        //this.$set(this.source, 'content', this.source.id_product);
+        //this.source.content = this.source.id_product;
         //delete this.source.id_product;
       }
       if (this.source.content && (this.mode === 'read')){

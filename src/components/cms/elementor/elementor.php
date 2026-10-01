@@ -32,7 +32,7 @@
                               :overable="!preview"
                               :selected="itemSelected === cfg?._elementor?.key"
                               @click.stop="selectBlock(cfg?._elementor?.key, cfg, editor)"
-                              :data-index="i"
+                              :index="i"
                               bbn-draggable.data.mode="getDraggableData(i, cfg, 'cmsBlock')"
                               @dragstart="currentDragging = true"
                               @dragend="onDragEnd"
