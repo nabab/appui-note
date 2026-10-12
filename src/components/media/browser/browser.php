@@ -6,6 +6,7 @@
                :search-name="searchName"
                :pageable="pageable"
                :filterable="filterable"
+               :filters="filtersByType"
                :limit="limit"
                :zoomable="zoomable"
                :info="info"

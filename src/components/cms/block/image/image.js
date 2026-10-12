@@ -73,7 +73,8 @@
                              :upload="root + 'media/actions/save'"
                              :removed="root + 'media/actions/delete'"
                              ref="mediabrowser"
-                             @delete="onDelete"/>
+                             @delete="onDelete"
+                             media-type="image"/>
 </div>
         `,
         mixins: [bbn.cp.mixins.basic],

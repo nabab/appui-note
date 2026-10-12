@@ -142,6 +142,19 @@
           res.push(v.code.toLowerCase())
         })
         return res;
+      },
+      filtersByType() {
+        if (this.mediaType) {
+          if (this.mediaType === 'image') {
+            return {
+              conditions: [{
+                field: 'mimetype',
+                operator: 'startswith',
+                value: 'image/'
+              }]
+            }
+          }
+        }
       }
     },
     methods: {
@@ -212,11 +225,11 @@
                 multiple: false,
                 url: this.edit || this.url
               },
+              componentEvents: {
+                edited: this.onEdited
+              },
               height: '400px',
-              width: '500px',
-              onOpen: pop => {
-                pop.$on('edited', this.onEdited);
-              }
+              width: '500px'
             });
           }
         }
@@ -235,8 +248,8 @@
                 source: {},
                 url: this.upload || this.url
               },
-              onOpen: pop => {
-                pop.$on('added', this.onAdded);
+              componentEvents: {
+                added: this.onAdded
               }
             });
           }
