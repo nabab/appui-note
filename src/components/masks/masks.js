@@ -149,8 +149,10 @@
 								let idx = bbn.fn.search(this.source.list, 'id_note', row.id_note);
 								if (idx > -1) {
 									this.source.list.splice(idx, 1);
-									this.getRef('table').updateData();
-									appui.success(bbn._('Deleted'));
+                  this.$nextTick(() => {
+                    this.getRef('table').updateData();
+                    appui.success(bbn._('Deleted'));
+                  });
 								}
               }
 							else {

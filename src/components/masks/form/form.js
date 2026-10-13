@@ -33,6 +33,11 @@
         }
 
         return [];
+      },
+      currentStyle() {
+        return {
+          gridTemplateRows: 'repeat(' + (this.emptyCategories?.length ? '3' : '2') + ', max-content) auto'
+        }
       }
     },
     methods: {
@@ -66,9 +71,10 @@
           else {
             this.masks.source.list.push(d.data);
           }
-
-          table.updateData();
-          appui.success(bbn._('Saved'));
+          this.$nextTick(() => {
+            table.updateData();
+            appui.success(bbn._('Saved'));
+          });
         }
       }
     },
