@@ -43,7 +43,7 @@
         </div>
       </div>
       <div class="bbn-flex-fill">
-        <iframe bbn-if="!!fullPreview"
+        <iframe bbn-if="fullPreview"
                 :src="fullPreview"
                 class="bbn-100"/>
         <bbn-scroll bbn-else
@@ -138,7 +138,7 @@
                                             ref="blockEditor"
                                             mode="edit"
                                             :key="currentEditing._elementor.key"/>
-                  <appui-note-cms-block bbn-else
+                  <appui-note-cms-block bbn-elseif="currentEditing?.type"
                                         @configinit="setOriginalConfig"
                                         :class="['bbn-contain', 'bbn-w-100', {
                                           'bbn-overlay': currentEditing?.type === 'html'

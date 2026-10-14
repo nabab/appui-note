@@ -28,13 +28,6 @@
           visibility: this.isVisible ? 'visible' : 'hidden'
         }
       }
-    },
-    methods: {
-      onDrop(ev){
-        ev.stopImmediatePropagation();
-        ev.preventDefault();
-        this.$emit('drop', ev);
-      }
     }
   }
 })();

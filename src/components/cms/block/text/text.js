@@ -6,7 +6,10 @@
     data(){
       return {
         color: this.source.color || '#000',
-        align: this.source.align || 'left'
+        align: this.source.align || 'left',
+        defaultConfig: {
+          content: ''
+        }
       }
     },
     computed: {

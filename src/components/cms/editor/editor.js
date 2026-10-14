@@ -271,11 +271,13 @@
        */
       deleteCurrentSelected() {
         this.confirm(bbn._("Are you sure you want to delete this block and its content?"), () => {
-          if (this.currentEditingKey && !!this.currentEditingParentItems?.length) {
-            let idx = bbn.fn.search(this.currentEditingParentItems, '_elementor.key', this.currentEditingKey);
+          if (this.currentEditingKey && this.currentEditingParentItems?.length) {
+            const idx = bbn.fn.search(this.currentEditingParentItems, '_elementor.key', this.currentEditingKey);
             if (idx > -1) {
               this.currentEditingParentItems.splice(idx, 1);
+              this.currentEditingParent.source.items = bbn.fn.clone(this.currentEditingParentItems);
             }
+
             this.$nextTick(() => {
               this.currentEditingKey = null;
               this.currentEditing = null;
@@ -548,7 +550,7 @@
         }
 
         let tmp_arr = [];
-        this.source.items.map((v, idx) => {
+        bbn.fn.each(this.source.items, (v, idx) => {
           let ele = editor.getRef('block' + idx.toString());
           if (ele?.$el?.getBoundingClientRect) {
             let detail = ele.$el.getBoundingClientRect();
@@ -566,6 +568,7 @@
             bbn.fn.log('false mapper', ele, idx);
           }
         });
+        this.map = tmp_arr.slice();
       },
       /**
        * Function triggered when dragging an element
@@ -663,7 +666,7 @@
         }
       },
       showWidgetSettings(newVal) {
-        if (!!newVal) {
+        if (newVal) {
           this.showWidgets = false;
           this.showPageSettings = false;
         }

@@ -6,8 +6,7 @@
        'vertical': !!vertical
      }]"
      @mouseover="isOver = true"
-     @mouseleave="isOver = false"
-     @drop="onDrop">
+     @mouseleave="isOver = false">
   <div class="bbn-100"
        :style="currentStyle"/>
 </div>
