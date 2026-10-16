@@ -11,7 +11,7 @@
                                       @drop.prevent.stop="onDrop"/>
       <appui-note-cms-container bbn-if="cfg.type === 'container'"
                                 :source="cfg"
-                                :ref="'block' + i"
+                                :ref="cfg._elementor?.key"
                                 :selectable="!preview"
                                 :overable="!preview"
                                 :index="i"
@@ -26,7 +26,7 @@
                                 :dragging="isDragging"/>
       <appui-note-cms-block bbn-else
                             :source="cfg"
-                            :ref="'block' + i"
+                            :ref="cfg._elementor?.key"
                             :selectable="!preview"
                             :overable="!preview"
                             :selected="itemSelected === cfg?._elementor?.key"

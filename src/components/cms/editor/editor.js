@@ -67,7 +67,8 @@
         currentBlockConfig: null,
         personalizedBlocks: pblocks,
         classicBlocks: blocks,
-        isDragging: false
+        isDragging: false,
+        canMakeButtons: false,
       };
     },
     computed: {
@@ -81,8 +82,11 @@
               return txt;
             }
           }
+
           return bbn.fn.getField(this.allBlocks, 'text', {special: null, code: this.currentEditing.type});
         }
+
+        return '';
       },
       allBlocks() {
         const arr = [];
@@ -116,7 +120,18 @@
         return {};
       },
       isChanged() {
-        return JSON.stringify(this.source) !== this.oData;
+        const src = bbn.fn.clone(this.source);
+        const fn = s => {
+          if ('_elementor' in s) {
+            delete s._elementor;
+          }
+
+          if (s.items) {
+            s.items.forEach(fn);
+          }
+        };
+        fn(src);
+        return JSON.stringify(src) !== this.oData;
       },
       isConfigChanged() {
         let isChanged = false;
@@ -139,16 +154,61 @@
         return isChanged;
       },
       currentEditingParentItems() {
-        return this.currentEditingParent?.source?.items ?? null;
+        return this.currentEditingParent?.source?.items || [];
       },
       currentEditingIndex() {
-        if (!!this.currentEditingKey && !!this.currentEditingParentItems) {
-          return bbn.fn.search(this.currentEditingParentItems, '_elementor.key', this.currentEditingKey);
+        if (this.currentEditingKey && this.currentEditingParent?.source?.items?.length) {
+          return bbn.fn.search(this.currentEditingParent.source.items, '_elementor.key', this.currentEditingKey);
         }
         return -1;
       },
       showSlider() {
-        return !!this.showPageSettings || !!this.showWidgetSettings || !!this.showWidgets;
+        return this.showPageSettings
+          || this.showWidgetSettings
+          || this.showWidgets;
+      },
+      currentEditingButtons(){
+        if (this.canMakeButtons
+          && this.showWidgetSettings
+          && this.currentEditingKey
+          && this.currentEditing
+          && this.currentEditingParent
+          && (this.currentEditingIndex !== -1)
+        ) {
+          const disabled = !this.currentEditingParent?.source?.items?.length
+            || (this.currentEditingParent.source.items.length < 2);
+          const containerHorizontal = this.currentEditingParent?.source?.type === 'container'
+            && this.currentEditingParent?.source?.orientation === 'horizontal';
+          const lastParentItemIndex = (this.currentEditingParent?.source?.items?.length || 0) - 1;
+          return [{
+            label: bbn._("Scroll to selected element"),
+            icon: 'nf nf-md-target',
+            action: () => this.scrollToSelected(),
+            disabled: disabled
+          }, {
+            label: bbn._("Move to start"),
+            icon: containerHorizontal ? 'nf nf-md-arrow_collapse_left' : 'nf nf-md-arrow_collapse_up',
+            action: () => this.move('start'),
+            disabled: disabled || (this.currentEditingIndex === 0)
+          }, {
+            label: containerHorizontal ? bbn._('Move left') : bbn._('Move up'),
+            icon: containerHorizontal ? 'nf nf-md-arrow_left' : 'nf nf-md-arrow_up',
+            action: () => this.move('before'),
+            disabled: disabled || (this.currentEditingIndex === 0)
+          }, {
+            label: containerHorizontal ? bbn._('Move right') : bbn._('Move down'),
+            icon: containerHorizontal ? 'nf nf-md-arrow_right' : 'nf nf-md-arrow_down',
+            action: () => this.move('after'),
+            disabled: disabled || (this.currentEditingIndex === lastParentItemIndex)
+          }, {
+            label: bbn._("Move to end"),
+            icon: containerHorizontal ? 'nf nf-md-arrow_collapse_right' : 'nf nf-md-arrow_collapse_down',
+            action: () => this.move('end'),
+            disabled: disabled || (this.currentEditingIndex === lastParentItemIndex)
+          }];
+        }
+
+        return [];
       }
     },
     methods: {
@@ -260,10 +320,21 @@
        */
       handleSelected(key, source, parent) {
         if (this.currentEditingKey !== key) {
-          this.currentEditingKey = key;
-          this.currentEditing = source;
-          this.currentEditingParent = parent;
-          this.showWidgetSettings = true;
+          this.canMakeButtons = false;
+          this.currentEditingParent = null;
+          this.currentEditingKey = null;
+          this.currentEditing = null;
+          this.$nextTick(() => {
+            setTimeout(() => {
+              this.currentEditingParent = parent;
+              this.currentEditingKey = key;
+              this.currentEditing = source;
+              this.$nextTick(() => {
+                  this.canMakeButtons = true;
+                  this.showWidgetSettings = true;
+              });
+            }, 100);
+          });
         }
       },
       /**
@@ -384,8 +455,8 @@
        * @param {String} dir the given direction
        */
       move(dir) {
-        if (!!this.currentEditingKey && !!this.currentEditingParentItems) {
-          let currentIdx = bbn.fn.search(this.currentEditingParentItems, '_elementor.key', this.currentEditingKey);
+        if (this.currentEditingKey && this.currentEditingParent?.source?.items?.length) {
+          let currentIdx = bbn.fn.search(this.currentEditingParent.source.items, '_elementor.key', this.currentEditingKey);
           if (currentIdx > -1) {
             let newIdx;
             switch (dir) {
@@ -398,16 +469,16 @@
                 }
                 break;
               case 'after':
-                if (currentIdx < (this.currentEditingParentItems.length - 1)) {
+                if (currentIdx < (this.currentEditingParent.source.items.length - 1)) {
                   newIdx = currentIdx + 1;
                 }
                 break;
               case 'end':
-                newIdx = this.currentEditingParentItems.length - 1;
+                newIdx = this.currentEditingParent.source.items.length - 1;
                 break;
             }
-            if (this.currentEditingParentItems[newIdx]) {
-              bbn.fn.move(this.currentEditingParentItems, currentIdx, newIdx);
+            if (this.currentEditingParent.source.items[newIdx]) {
+              bbn.fn.move(this.currentEditingParent.source.items, currentIdx, newIdx);
             }
           }
         }

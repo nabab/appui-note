@@ -37,13 +37,14 @@
     },
     methods: {
       applyDefaultConfig() {
-        bbn.fn.iterate(bbn.fn.extend({}, this.defaultConfig, this.cfg || {}), (a, n) => {
-          if (this.source[n] === undefined) {
-            this.source[n] = a;
-          } else {
-            //this.source[n] = a;
+        bbn.fn.iterate(
+          bbn.fn.extend({}, this.defaultConfig || {}, this.cfg || {}),
+          (a, n) => {
+            if (this.source[n] === undefined) {
+              this.source[n] = a;
+            }
           }
-        });
+        );
       },
       setSource(prop, val) {
         if (!val) {
@@ -83,7 +84,9 @@
       this.$emit('configinit', config);
     },
     mounted() {
-      this.ready = true;
+      this.$nextTick(() => {
+        this.ready = true;
+      });
     }
   };
   bbn.cp.addUrlAsPrefix(
@@ -139,6 +142,9 @@
         type: String,
         default: 'read'
       },
+      ekey: {
+        type: String
+      },
     },
     data(){
       return {
@@ -149,7 +155,7 @@
         width: '100',
         height: '100',
         //ready is important for the component template to be defined
-        ready: true,
+        ready: false,
         initialSource: bbn.fn.clone(this.source),
         currentClass: 'bbn-w-100'
       };
@@ -250,14 +256,22 @@
       }
     },
     mounted(){
-      this.ready = true;
+      this.$nextTick(() => {
+        this.ready = true;
+      });
     },
     watch: {
+      ekey(n, o){
+        this.ready = false;
+        this.$nextTick(() => {
+          this.ready = true;
+        });
+      },
       currentComponent(v) {
         this.ready = false;
-        setTimeout(() => {
+        this.$nextTick(() => {
           this.ready = true;
-        }, 100)
+        })
       }
     }
   };

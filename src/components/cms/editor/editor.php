@@ -95,37 +95,18 @@
               bbn-text="_('Page Settings')"/>
       </h2>
       <div class="bbn-flex-fill">
-        <div bbn-if="showWidgetSettings && currentEditing"
+        <div bbn-if="showWidgetSettings && currentEditing?.type && currentEditing?._elementor?.key"
               class="bbn-flex-height">
           <div class="bbn-flex-fill bbn-flex-width">
-            <div class="bbn-spadding appui-note-cms-editor-position">
-              <bbn-button :notext="true"
-                          @click="scrollToSelected"
-                          label="<?= _("Scroll to selected element") ?>"
-                          icon="nf nf-md-target"/>
-              <template bbn-if="!!currentEditingParent && (currentEditingParentItems?.length > 1)"
-                        class="bbn-padding appui-note-cms-editor-position">
-                <bbn-button :notext="true"
-                            @click="move('start')"
-                            label="<?= _("Move to start") ?>"
-                            :disabled="currentEditingIndex < 1"
-                            :icon="(currentEditingParent?.source?.type !== 'container') || (currentEditingParent?.source.orientation === 'vertical') ? 'nf nf-md-arrow_collapse_up' : 'nf nf-md-arrow_collapse_left'"/>
-                <bbn-button :notext="true"
-                            @click="move('before')"
-                            :label="(currentEditingParent?.source?.type !== 'container') || (currentEditingParent?.source.orientation === 'vertical') ? _('Move up') : _('Move left')"
-                            :disabled="!currentEditingIndex"
-                            :icon="(currentEditingParent?.source?.type !== 'container') || (currentEditingParent?.source.orientation === 'vertical') ? 'nf nf-md-arrow_up' : 'nf nf-md-arrow_left'"/>
-                <bbn-button :notext="true"
-                            @click="move('after')"
-                            :label="(currentEditingParent?.source?.type !== 'container') || (currentEditingParent?.source.orientation === 'vertical') ? _('Move down') : _('Move right')"
-                            :disabled="currentEditingIndex === (currentEditingParentItems?.length - 1)"
-                            :icon="(currentEditingParent?.source?.type !== 'container') || (currentEditingParent?.source.orientation === 'vertical') ? 'nf nf-md-arrow_down' : 'nf nf-md-arrow_right'"/>
-                <bbn-button :notext="true"
-                            @click="move('end')"
-                            label="<?= _("Move to end") ?>"
-                            :disabled="currentEditingIndex === (currentEditingParentItems?.length - 1)"
-                            :icon="(currentEditingParent?.source?.type !== 'container') || (currentEditingParent?.source.orientation === 'vertical') ? 'nf nf-md-arrow_collapse_down' : 'nf nf-md-arrow_collapse_right'"/>
-              </template>
+            <div bbn-if="currentEditingButtons?.length"
+                 class="bbn-spadding appui-note-cms-editor-position">
+              <bbn-button bbn-for="(btn, ibtn) in currentEditingButtons"
+                          :key="ibtn"
+                          :notext="true"
+                          :action="btn.action"
+                          :label="btn.label"
+                          :icon="btn.icon"
+                          :disabled="btn.disabled"/>
             </div>
             <div class="bbn-flex-fill bbn-right-spadding"
                   style="overflow: hidden">
@@ -147,6 +128,7 @@
                                         :cfg="currentBlockConfig"
                                         ref="blockEditor"
                                         mode="edit"
+                                        :ekey="currentEditing._elementor.key"
                                         :key="currentEditing._elementor.key"/>
                 </bbn-scroll>
               </div>
