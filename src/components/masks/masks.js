@@ -35,23 +35,6 @@
       }
     },
     methods: {
-      insert(){
-        this.getPopup({
-          label: bbn._("New letter type"),
-          width: 800,
-          height: '90%',
-          component: 'appui-note-masks-form',
-          componentOptions: {
-            source: {
-              id_type: '',
-              title: '',
-              content: '',
-              name: ''
-            },
-            emptyCategories: this.source.emptyCategories
-          }
-        });
-      },
       toolbar() {
         const btns = [];
         if (appui.user.isDev) {
@@ -124,6 +107,37 @@
       renderUser(row){
         return appui.getUserName(row.id_user)
       },
+      insert(idType){
+        const componentOptions = {
+          source: {
+            id_type: '',
+            label: '',
+            content: '',
+            name: ''
+          }
+        };
+        if (bbn.fn.isUid(idType)) {
+          componentOptions.source.id_type = idType;
+          componentOptions.emptyCategories = this.source.emptyCategories
+        }
+
+        this.getPopup({
+          label: bbn._("New letter type"),
+          width: 800,
+          height: '90%',
+          component: 'appui-note-masks-form',
+          componentOptions,
+          componentEvents: {
+            saved: e => {
+              appui.success(bbn._('Saved'));
+              this.$parent.getContainer().reload();
+            },
+            error: () => {
+              appui.error(bbn._('Error'));
+            }
+          }
+        });
+      },
       edit(row){
         this.post(this.root + 'actions/masks/get', {
           id_note: row.id_note,
@@ -132,11 +146,22 @@
           if (d.success && d.data) {
             d.data.hasVersions = d.data.version > 1;
             this.getPopup({
+              label: bbn._("Edit letter type"),
               width: 800,
               height: '90%',
               component: 'appui-note-masks-form',
-              source: d.data,
-              label: bbn._("Edit letter type")
+              componentOptions: {
+                source: d.data
+              },
+              componentEvents: {
+                saved: e => {
+                  appui.success(bbn._('Saved'));
+                  this.$parent.getContainer().reload();
+                },
+                error: () => {
+                  appui.error(bbn._('Error'));
+                }
+              }
             })
           }
         })

@@ -56,25 +56,11 @@
         });
       },
       success(d){
-        if (d.success) {
-          const table = this.masks.getRef('table');
-          if (this.source.id_note) {
-            let idx = bbn.fn.search(this.masks.source.list, 'id_note', d.data.id_note);
-            if (idx > -1) {
-              bbn.fn.each(d.data, (v, i) => {
-                if (i !== 'content') {
-                  this.masks.source.list[idx][i] = v;
-                }
-              });
-            }
-          }
-          else {
-            this.masks.source.list.push(d.data);
-          }
-          this.$nextTick(() => {
-            table.updateData();
-            appui.success(bbn._('Saved'));
-          });
+        if (d.success && d.data) {
+          this.$emit('saved', d.data);
+        }
+        else {
+          this.$emit('error');
         }
       }
     },

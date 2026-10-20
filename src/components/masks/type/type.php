@@ -3,7 +3,7 @@
     <span bbn-text="source.type"/>
     (<span bbn-text="num"/>)
   </div>
-  <div>
+  <div class="bbn-vspadding">
     <bbn-button bbn-if="isDev"
                 @click="editCategory"
                 icon="nf nf-fa-edit"

@@ -31,18 +31,7 @@
         }
       },
       insert(){
-        this.getPopup({
-          width: 800,
-          height: '90%',
-          component: 'appui-note-masks-form',
-          source: {
-            id_type: this.source.id_type,
-            label: '',
-            content: '',
-            name: ''
-          },
-          label: bbn._("New letter type")
-        });
+        this.masks.insert(this.source.id_type);
       }
     }
   }
