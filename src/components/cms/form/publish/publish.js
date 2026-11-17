@@ -31,11 +31,10 @@
           return this.formData.end;
         }
 
-        let now = new Date();
-        return bbn.fn.dateSQL(now.setFullYear(now.getFullYear() + 10));
+        return bbn.dt(this.now).add(10, 'year').datetime();
       },
       minEnd() {
-        return bbn.fn.dateSQL(bbn.dt(this.formData.start).add(1, 'day').toDate());
+        return bbn.dt(this.formData.start).add(1, 'day').datetime();
       }
     },
     methods: {
