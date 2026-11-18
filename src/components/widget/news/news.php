@@ -1,6 +1,4 @@
-<?php
-use bbn\X;
-?><div class="appui-note-widget-news bbn-w-100"
+<div class="appui-note-widget-news"
        style="min-height: 150px">
   <div bbn-if="showForm">
     <bbn-form :buttons="[]"
@@ -11,7 +9,7 @@ use bbn\X;
               :validation="validForm"
               :action="notesRoot + '/actions/insert'"
               @success="afterSubmit">
-      <div class="bbn-grid-fields" 
+      <div class="bbn-grid-fields"
            style="margin-bottom: 10px; padding: 0">
         <div><?= _('Title') ?></div>
         <bbn-input bbn-model="formData.title"
@@ -55,29 +53,26 @@ use bbn\X;
       </div>
     </bbn-form>
   </div>
-  <div bbn-elseif="source?.items?.length">
-    <ul class="bbn-no-padding bbn-no-margin"
-        bbn->
-      <div bbn-for="item in source.items"
-           style="padding: 0.4em 0.6em"
-           class="bbn-vmiddle">
-        <bbn-initial width="20"
-                     height="20"
-                     :user-id="item.id_user"
-                     :user-name="userName(item.id_user)"/>
-        <span bbn-text="shorten(item.title, 50)"
-              :title="item.title"
-              @click="openNote(item)"
-              class="bbn-p"
-              style="margin-left: 5px"/>
-      </div>
-    </ul>
-  </div>
-  <div bbn-else class="bbn-overlay bbn-middle">
+  <bbn-list :source="source"
+            :component="$options.components.item"
+            @select="openNote"
+            :pageable="true"
+            ref="list"
+            :data="currentPostData"
+            :limit="currentLimit"
+            :limits="[]"
+            @hook:mounted="onListMounted"/>
+  <div bbn-if="isPagerVisible && hasListData"
+        class="bbn-bottom-lpadding"/>
+  <bbn-pager bbn-if="isPagerVisible && hasListData"
+              :element="$refs.list"
+              class="bbn-bottom-left bbn-bottom-radius bbn-no-border"/>
+  <div bbn-if="!hasListData"
+       class="bbn-middle">
     <div class="bbn-block bbn-m bbn-i bbn-c">
-      <?= X::_("Here you can add") ?><br>
-      <?= X::_("news or internal com") ?><br>
-      <?= X::_("for all users") ?>
+      <?= _("Here you can add") ?><br>
+      <?= _("news or internal com") ?><br>
+      <?= _("for all users") ?>
     </div>
   </div>
 </div>
