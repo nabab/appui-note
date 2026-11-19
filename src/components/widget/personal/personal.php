@@ -10,7 +10,7 @@
               @success="afterSubmit">
       <bbn-input bbn-model="formData.title"
                  placeholder="<?= _('Title') ?>"
-                 style="margin-bottom: 10px; width: 100%"/>
+                 class="bbn-bottom-sspace bbn-w-100"/>
       <!--<div class="bbn-c"
            style="margin-bottom: 10px"
       >
@@ -20,45 +20,40 @@
                       label="<i class='nf nf-fa-eye_slash'></i> <?/*=_('Post-it')*/?>"
         ></bbn-checkbox>
       </div>-->
-      <div class="bbn-w-100" style="width: 100%; height: 400px">
+      <div class="bbn-w-100"
+           style="height: 400px">
 					<bbn-rte bbn-model="formData.content"
 	                 required="required"
 									 height="100%"/>
       </div>
       <div class="bbn-w-100 bbn-r bbn-top-spadding">
-        <bbn-button style="margin-right:0.5em"
+        <bbn-button class="bbn-right-sspace"
                     @click="$refs.form.submit()"
 										icon="nf nf-fa-save"
-        ><?= _('Add') ?></bbn-button>
+                    :label="_('Add')"/>
         <bbn-button @click="closeForm"
 										icon="nf nf-fa-times"
-				><?= _('Cancel') ?></bbn-button>
+                    :label="_('Cancel')"/>
       </div>
-
     </bbn-form>
   </div>
-  <div bbn-else>
-    <ul class="bbn-no-padding bbn-no-margin"
-        bbn-if="source?.items">
-      <div bbn-for="item in source.items"
-           style="padding: 0.4em 0.6em"
-           class="bbn-vmiddle">
-        <bbn-initial width="20"
-                     height="20"
-                     :user-id="item.id_user"
-                     :user-name="userName(item.id_user)"/>
-        <span bbn-if="shorten(item.title, 50)"
-              bbn-text="item.title"
-              title="item.title"
-              @click="openNote(item)"
-              class="bbn-p"
-              style="margin-left: 5px"/>
-        <span bbn-else
-              bbn-text="html2text(shorten(item.content, 50))"
-              @click="openNote(item)"
-              class="bbn-p"
-              style="margin-left: 5px"/>
-      </div>
-    </ul>
-  </div>
+  <template bbn-else>
+    <bbn-list :source="source"
+              :component="$options.components.item"
+              @select="openNote"
+              :pageable="true"
+              ref="list"
+              :data="currentPostData"
+              :limit="currentLimit"
+              :limits="[]"
+              @hook:mounted="onListMounted"/>
+    <div bbn-if="isPagerVisible && hasListData"
+          class="bbn-bottom-lpadding"/>
+    <bbn-pager bbn-if="isPagerVisible && hasListData"
+                :element="$refs.list"
+                class="bbn-bottom-left bbn-bottom-radius bbn-no-border"/>
+    <div bbn-if="!hasListData"
+         class="bbn-middle"
+         bbn-text="_('No data') + '...'"/>
+  </template>
 </div>

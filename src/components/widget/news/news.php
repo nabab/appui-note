@@ -42,37 +42,37 @@
         </div>
         <div class="bbn-grid-full bbn-r">
           <bbn-button @click="$refs.form.submit()"
-                      icon="nf nf-fa-save">
-            <?= _('Add') ?>
-          </bbn-button>
+                      icon="nf nf-fa-save"
+                      :label="_('Add')"/>
           <bbn-button @click="closeForm"
-                      icon="nf nf-fa-times">
-            <?= _('Cancel') ?>
-          </bbn-button>
+                      icon="nf nf-fa-times"
+                      :label="_('Cancel')"/>
         </div>
       </div>
     </bbn-form>
   </div>
-  <bbn-list :source="source"
-            :component="$options.components.item"
-            @select="openNote"
-            :pageable="true"
-            ref="list"
-            :data="currentPostData"
-            :limit="currentLimit"
-            :limits="[]"
-            @hook:mounted="onListMounted"/>
-  <div bbn-if="isPagerVisible && hasListData"
-        class="bbn-bottom-lpadding"/>
-  <bbn-pager bbn-if="isPagerVisible && hasListData"
-              :element="$refs.list"
-              class="bbn-bottom-left bbn-bottom-radius bbn-no-border"/>
-  <div bbn-if="!hasListData"
-       class="bbn-middle">
-    <div class="bbn-block bbn-m bbn-i bbn-c">
-      <?= _("Here you can add") ?><br>
-      <?= _("news or internal com") ?><br>
-      <?= _("for all users") ?>
+  <template bbn-else>
+    <bbn-list :source="source"
+              :component="$options.components.item"
+              @select="openNote"
+              :pageable="true"
+              ref="list"
+              :data="currentPostData"
+              :limit="currentLimit"
+              :limits="[]"
+              @hook:mounted="onListMounted"/>
+    <div bbn-if="isPagerVisible && hasListData"
+          class="bbn-bottom-lpadding"/>
+    <bbn-pager bbn-if="isPagerVisible && hasListData"
+                :element="$refs.list"
+                class="bbn-bottom-left bbn-bottom-radius bbn-no-border"/>
+    <div bbn-if="!hasListData"
+         class="bbn-middle">
+      <div class="bbn-block bbn-m bbn-i bbn-c">
+        <?= _("Here you can add") ?><br>
+        <?= _("news or internal com") ?><br>
+        <?= _("for all users") ?>
+      </div>
     </div>
-  </div>
+  </template>
 </div>

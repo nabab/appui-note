@@ -128,7 +128,7 @@
             <bbn-initial width="20px" height="20px"
                          :user-id="source.id_user"
                          :user-name="userName(source.id_user)"/>
-            <span bbn-text="shorten(source.title, 50)"
+            <span bbn-text="text"
                   :title="source.title"
                   class="bbn-ellipsis"/>
           </div>
@@ -139,8 +139,13 @@
             required: true
           }
         },
+        data(){
+          return {
+            text: bbn.fn.shorten(this.source.title, 50)
+            || bbn.fn.html2text(bbn.fn.shorten(this.source.content, 50))
+          }
+        },
         methods: {
-          shorten: bbn.fn.shorten,
           userName(usr){
             return usr && appui.getUserName ? appui.getUserName(usr) : '';
           }
