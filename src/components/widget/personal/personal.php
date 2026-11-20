@@ -46,14 +46,23 @@
               :data="currentPostData"
               :limit="currentLimit"
               :limits="[]"
-              @hook:mounted="onListMounted"/>
-    <div bbn-if="isPagerVisible && hasListData"
+              @hook:mounted="onListMounted"
+              :autobind="false"
+              @startloading="isLoading = true"
+              @dataloaded="isLoading = false"/>
+    <div bbn-if="isPagerVisible && hasListData && !isLoading"
           class="bbn-bottom-lpadding"/>
     <bbn-pager bbn-if="isPagerVisible && hasListData"
                 :element="$refs.list"
                 class="bbn-bottom-left bbn-bottom-radius bbn-no-border"/>
-    <div bbn-if="!hasListData"
+    <div bbn-if="!hasListData && !isLoading"
          class="bbn-middle"
          bbn-text="_('No data') + '...'"/>
+    <div bbn-if="isLoading"
+       class="bbn-w-100"
+       style="min-height: 170px">
+      <bbn-loader type="swing"
+                  style="opacity: 0.5"/>
+    </div>
   </template>
 </div>

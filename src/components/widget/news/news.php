@@ -60,19 +60,28 @@
               :data="currentPostData"
               :limit="currentLimit"
               :limits="[]"
-              @hook:mounted="onListMounted"/>
-    <div bbn-if="isPagerVisible && hasListData"
+              @hook:mounted="onListMounted"
+              :autobind="false"
+              @startloading="isLoading = true"
+              @dataloaded="isLoading = false"/>
+    <div bbn-if="isPagerVisible && hasListData && !isLoading"
           class="bbn-bottom-lpadding"/>
-    <bbn-pager bbn-if="isPagerVisible && hasListData"
+    <bbn-pager bbn-if="isPagerVisible && hasListData && !isLoading"
                 :element="$refs.list"
                 class="bbn-bottom-left bbn-bottom-radius bbn-no-border"/>
-    <div bbn-if="!hasListData"
+    <div bbn-if="!hasListData && !isLoading"
          class="bbn-middle">
       <div class="bbn-block bbn-m bbn-i bbn-c">
         <?= _("Here you can add") ?><br>
         <?= _("news or internal com") ?><br>
         <?= _("for all users") ?>
       </div>
+    </div>
+    <div bbn-if="isLoading"
+       class="bbn-w-100"
+       style="min-height: 170px">
+      <bbn-loader type="swing"
+                  style="opacity: 0.5"/>
     </div>
   </template>
 </div>

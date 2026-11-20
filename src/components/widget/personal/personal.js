@@ -20,7 +20,8 @@
         currentPostData: {},
         isPagerVisible: false,
         listWatcher: null,
-        hasListData: false
+        hasListData: false,
+        isLoading: false
       }
     },
     methods: {
@@ -70,9 +71,20 @@
         }
         this.currentPostData = data;
         this.currentLimit = limit;
-        this.getRef('list')?.updateData();
+        this.$nextTick(() => {
+          const list = this.getRef('list');
+          if (list) {
+            list.updateData();
+          }
+          else {
+            this.$once('listMounted', () => {
+              this.getRef('list').updateData();
+            });
+          }
+        });
       },
       onListMounted(){
+        this.$emit('listMounted');
         this.listWatcher = this.getRef('list').$watch('currentTotal', newVal => {
           this.isPagerVisible = newVal > this.currentLimit;
           this.hasListData = !!newVal;
